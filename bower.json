@@ -1,0 +1,16 @@
+{
+  "name": "mattan-website",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "latest",
+    "angular-animate": "latest",
+    "angular-cookies": "latest",
+    "angular-resource": "latest",
+    "angular-route": "latest",
+    "angular-sanitize": "latest",
+    "bourbon": "latest",
+    "json3": "latest",
+    "normalize.css": "~3.0.2"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,622 @@
+/*
+Mattan Ingram Test Site
+Version 0.0.1
+*/
+/* __________________________ IMPORTS ___________________________ */
+/* line 3, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
+html, body {
+  color: white;
+  font-family: "ratio", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300; }
+
+/* line 1, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+html {
+  background-color: #1f232b; }
+
+/* line 8, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.center-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+/* line 20, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.my-name {
+  text-align: center;
+  font-weight: 300; }
+
+/* line 25, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.main-content {
+  position: relative;
+  z-index: 10; }
+
+/* line 30, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.menu-overlay {
+  background-color: rgba(0, 0, 0, 0.5); }
+
+/* line 34, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-wrap {
+  width: 300px;
+  height: 300px;
+  display: block;
+  position: relative; }
+
+/* line 45, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0; }
+
+/* line 53, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-red, .m-blue {
+  fill-opacity: 0;
+  fill: white;
+  position: relative; }
+
+/* line 59, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke {
+  fill: none;
+  stroke: white;
+  stroke-width: 0.5; }
+
+/* line 65, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-red {
+  -webkit-animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
+          animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
+
+/* line 69, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-blue {
+  -webkit-animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
+          animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
+
+/* line 74, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke-blue.m-logo-stroke-across {
+  -webkit-animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards;
+          animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards; }
+/* line 78, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke-blue.m-logo-stroke-diag {
+  -webkit-animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards;
+          animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards; }
+/* line 82, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke-blue.m-logo-stroke-up {
+  -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards;
+          animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards; }
+
+/* line 89, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke-red.m-logo-stroke-diag {
+  -webkit-animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards;
+          animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards; }
+/* line 93, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+.m-logo-stroke-red.m-logo-stroke-up {
+  -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards;
+          animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards; }
+
+@-webkit-keyframes pulseLogoWhiteRed {
+  /* line 104, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  50% {
+    fill: white;
+    fill-opacity: 1; }
+
+  /* line 108, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    fill: #ed2332;
+    fill-opacity: 0.5; } }
+
+@keyframes pulseLogoWhiteRed {
+  /* line 104, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  50% {
+    fill: white;
+    fill-opacity: 1; }
+
+  /* line 108, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    fill: #ed2332;
+    fill-opacity: 0.5; } }
+
+@-webkit-keyframes pulseLogoWhiteBlue {
+  /* line 115, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  50% {
+    fill: white;
+    fill-opacity: 1; }
+
+  /* line 119, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    fill: #0096aa;
+    fill-opacity: 0.5; } }
+
+@keyframes pulseLogoWhiteBlue {
+  /* line 115, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  50% {
+    fill: white;
+    fill-opacity: 1; }
+
+  /* line 119, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    fill: #0096aa;
+    fill-opacity: 0.5; } }
+
+@-webkit-keyframes fadeInShrink {
+  /* line 128, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3, 3);
+            transform: scale(3, 3); }
+
+  /* line 132, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); } }
+
+@keyframes fadeInShrink {
+  /* line 128, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3, 3);
+            transform: scale(3, 3); }
+
+  /* line 132, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); } }
+
+@-webkit-keyframes fadeOutShrink {
+  /* line 139, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  /* line 143, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); } }
+
+@keyframes fadeOutShrink {
+  /* line 139, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  /* line 143, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); } }
+
+@-webkit-keyframes fadeInDown {
+  /* line 152, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+            transform: translateY(300px); }
+
+  /* line 156, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+
+@keyframes fadeInDown {
+  /* line 152, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+            transform: translateY(300px); }
+
+  /* line 156, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+
+@-webkit-keyframes fadeOutDown {
+  /* line 163, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  /* line 167, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+            transform: translateY(300px); } }
+
+@keyframes fadeOutDown {
+  /* line 163, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+
+  /* line 167, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(300px);
+            transform: translateY(300px); } }
+
+@-webkit-keyframes fadeInUp {
+  /* line 176, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px); }
+
+  /* line 180, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+
+@keyframes fadeInUp {
+  /* line 176, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px); }
+
+  /* line 180, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); } }
+
+@-webkit-keyframes fadeOutUp {
+  /* line 187, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px); }
+
+  /* line 191, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px); } }
+
+@keyframes fadeOutUp {
+  /* line 187, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px); }
+
+  /* line 191, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-300px);
+            transform: translateY(-300px); } }
+
+@-webkit-keyframes fadeInLeft {
+  /* line 200, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+            transform: translateX(-300px); }
+
+  /* line 204, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@keyframes fadeInLeft {
+  /* line 200, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+            transform: translateX(-300px); }
+
+  /* line 204, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@-webkit-keyframes fadeOutLeft {
+  /* line 211, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px); }
+
+  /* line 215, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+            transform: translateX(-300px); } }
+
+@keyframes fadeOutLeft {
+  /* line 211, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px); }
+
+  /* line 215, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+            transform: translateX(-300px); } }
+
+@-webkit-keyframes fadeInRight {
+  /* line 224, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+            transform: translateX(300px); }
+
+  /* line 228, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@keyframes fadeInRight {
+  /* line 224, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+            transform: translateX(300px); }
+
+  /* line 228, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@-webkit-keyframes fadeOutRight {
+  /* line 235, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+
+  /* line 239, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+            transform: translateX(300px); } }
+
+@keyframes fadeOutRight {
+  /* line 235, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+
+  /* line 239, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+            transform: translateX(300px); } }
+
+@-webkit-keyframes fadeInUpRight {
+  /* line 248, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(300px, -300px);
+            transform: translate(300px, -300px); }
+
+  /* line 252, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@keyframes fadeInUpRight {
+  /* line 248, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(300px, -300px);
+            transform: translate(300px, -300px); }
+
+  /* line 252, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@-webkit-keyframes fadeOutUpRight {
+  /* line 259, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 263, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(300px, -300px);
+            transform: translate(300px, -300px); } }
+
+@keyframes fadeOutUpRight {
+  /* line 259, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 263, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(300px, -300px);
+            transform: translate(300px, -300px); } }
+
+@-webkit-keyframes fadeInUpLeft {
+  /* line 272, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, -300px);
+            transform: translate(-300px, -300px); }
+
+  /* line 276, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@keyframes fadeInUpLeft {
+  /* line 272, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, -300px);
+            transform: translate(-300px, -300px); }
+
+  /* line 276, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@-webkit-keyframes fadeOutUpLeft {
+  /* line 283, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 287, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, -300px);
+            transform: translate(-300px, -300px); } }
+
+@keyframes fadeOutUpLeft {
+  /* line 283, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 287, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, -300px);
+            transform: translate(-300px, -300px); } }
+
+@-webkit-keyframes fadeInDownRight {
+  /* line 296, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(300px, 300px);
+            transform: translate(300px, 300px); }
+
+  /* line 300, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@keyframes fadeInDownRight {
+  /* line 296, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(300px, 300px);
+            transform: translate(300px, 300px); }
+
+  /* line 300, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@-webkit-keyframes fadeOutDownRight {
+  /* line 307, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 311, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(300px, 300px);
+            transform: translate(300px, 300px); } }
+
+@keyframes fadeOutDownRight {
+  /* line 307, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 311, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(300px, 300px);
+            transform: translate(300px, 300px); } }
+
+@-webkit-keyframes fadeInDownLeft {
+  /* line 320, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, 300px);
+            transform: translate(-300px, 300px); }
+
+  /* line 324, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@keyframes fadeInDownLeft {
+  /* line 320, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, 300px);
+            transform: translate(-300px, 300px); }
+
+  /* line 324, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); } }
+
+@-webkit-keyframes fadeOutDownLeft {
+  /* line 331, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 335, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, 300px);
+            transform: translate(-300px, 300px); } }
+
+@keyframes fadeOutDownLeft {
+  /* line 331, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+  /* line 335, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+  100% {
+    opacity: 0;
+    -webkit-transform: translate(-300px, 300px);
+            transform: translate(-300px, 300px); } }
+
+
+/*# sourceMappingURL=styles/style.css.map */
