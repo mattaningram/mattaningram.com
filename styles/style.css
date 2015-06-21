@@ -613,46 +613,51 @@ html {
   left: 0;
   bottom: 0; }
 
-/* line 55, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 2, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-random-line */
+.m-logo-random-line line {
+  stroke: #fff;
+  stroke-width: 1; }
+
+/* line 1, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-red, .m-blue {
   fill-opacity: 0;
   fill: white;
   position: relative; }
 
-/* line 61, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 7, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke {
   fill: none;
   stroke: white;
   stroke-width: 0.5; }
 
-/* line 67, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 13, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-red {
   -webkit-animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 71, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 17, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-blue {
   -webkit-animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 76, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 22, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke-blue.m-logo-stroke-across {
   -webkit-animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards;
           animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards; }
-/* line 80, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 26, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke-blue.m-logo-stroke-diag {
   -webkit-animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards;
           animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards; }
-/* line 84, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 30, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke-blue.m-logo-stroke-up {
   -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards;
           animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards; }
 
-/* line 91, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 37, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke-red.m-logo-stroke-diag {
   -webkit-animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards;
           animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards; }
-/* line 95, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
+/* line 41, /Users/mattaningram/Projects/mattan-website/styles/scss/logo-red-blue */
 .m-logo-stroke-red.m-logo-stroke-up {
   -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards;
           animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards; }

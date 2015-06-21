@@ -10,7 +10,8 @@
     "angular-sanitize": "latest",
     "bourbon": "latest",
     "json3": "latest",
-    "normalize.css": "~3.0.2"
+    "normalize.css": "~3.0.2",
+    "velocity": "latest"
   },
   "devDependencies": {}
 }
