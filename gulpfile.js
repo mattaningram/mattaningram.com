@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('sass', function () {
-  gulp.src('styles/scss/*.scss')
+  gulp.src('styles/scss/**/*.scss')
   .pipe(sass({
     includePaths: require('node-bourbon').includePaths,
     style: 'compressed',
@@ -39,6 +39,6 @@ gulp.task('reload', function () {
 
 gulp.task('default', function() {
   livereload.listen();
-  gulp.watch('styles/scss/*.scss', ['sass']);
+  gulp.watch('styles/scss/**/*.scss', ['sass']);
   gulp.watch('*.{html,js}', ['reload']);
 });

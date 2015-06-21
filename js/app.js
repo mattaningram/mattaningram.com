@@ -1,8 +1,6 @@
-(function(){
-  var app = angular.module('website', []);
+angular.module('website', ['ngAnimate', 'website.controllers', 'website.directives', 'website.services', 'website.filters']);
 
-  app.controller('websiteController', function(){
-
-  });
-
-})();
+angular.module('website.controllers', []);
+angular.module('website.directives', []);
+angular.module('website.services', []);
+angular.module('website.filters', []);
