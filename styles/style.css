@@ -9,6 +9,12 @@ html, body {
   font-family: "ratio", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300; }
 
+/* line 9, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+.footer-text {
+  font-size: 0.85em;
+  line-height: 40px;
+  opacity: 0.65; }
+
 @-webkit-keyframes pulseLogoWhiteRed {
   /* line 6, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
   50% {
@@ -561,27 +567,45 @@ html, body {
 html {
   background-color: #1f232b; }
 
-/* line 8, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
-.center-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/* line 5, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+body {
+  margin: 0; }
+
+/* line 9, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+.site-content {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  margin: 0;
+  min-height: 100vh;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+/* line 16, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+.center-wrap {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column; }
+          justify-content: center; }
 
-/* line 20, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 34, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+.main-footer {
+  text-align: center; }
+
+/* line 38, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
 .my-name {
   text-align: center;
   font-weight: 300;
@@ -589,23 +613,24 @@ html {
   -webkit-animation: fadeIn 0.75s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: fadeIn 0.75s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 27, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 45, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
 .main-content {
   position: relative;
   z-index: 10; }
 
-/* line 32, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 50, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
 .menu-overlay {
   background-color: rgba(0, 0, 0, 0.5); }
 
-/* line 36, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 54, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
 .m-logo-wrap {
   width: 300px;
   height: 300px;
+  margin: 0 auto;
   display: block;
   position: relative; }
 
-/* line 47, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 66, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
 .m-logo {
   position: absolute;
   top: 0;
