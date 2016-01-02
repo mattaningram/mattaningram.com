@@ -1,9 +1,19 @@
-$headerFontFamily:    "ratio", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// $headerFontFamily:    "effra", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$bodyFontFamily:    "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 
 html, body {
   color: white;
-  font-family: $headerFontFamily;
+  font-family: $bodyFontFamily;
   font-weight: 300;
+}
+
+h1, h2, h3, h4 {
+  font-family: $bodyFontFamily;
+}
+
+.my-name {
+  letter-spacing: 0.05em;
 }
 
 .footer-text {

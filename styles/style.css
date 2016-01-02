@@ -3,13 +3,21 @@ Mattan Ingram Test Site
 Version 0.0.1
 */
 /* __________________________ IMPORTS ___________________________ */
-/* line 3, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 5, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
 html, body {
   color: white;
-  font-family: "ratio", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300; }
 
-/* line 9, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 11, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+h1, h2, h3, h4 {
+  font-family: "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* line 15, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+.my-name {
+  letter-spacing: 0.05em; }
+
+/* line 19, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
 .footer-text {
   font-size: 0.85em;
   line-height: 40px;
