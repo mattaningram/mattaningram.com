@@ -10,14 +10,21 @@ html, body {
   font-weight: 300; }
 
 /* line 11, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+a {
+  color: white; }
+  /* line 13, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+  a:hover {
+    color: #7fcad4; }
+
+/* line 18, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
 h1, h2, h3, h4 {
   font-family: "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-/* line 15, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 22, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
 .my-name {
-  letter-spacing: 0.05em; }
+  letter-spacing: 0.025em; }
 
-/* line 19, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 26, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
 .footer-text {
   font-size: 0.85em;
   line-height: 40px;

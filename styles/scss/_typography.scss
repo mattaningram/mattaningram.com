@@ -8,12 +8,19 @@ html, body {
   font-weight: 300;
 }
 
+a {
+  color: white;
+  &:hover {
+    color: tint($logo-blue, 50%);
+  }
+}
+
 h1, h2, h3, h4 {
   font-family: $bodyFontFamily;
 }
 
 .my-name {
-  letter-spacing: 0.05em;
+  letter-spacing: 0.025em;
 }
 
 .footer-text {
