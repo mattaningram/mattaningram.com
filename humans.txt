@@ -4,10 +4,11 @@
 # TEAM
 
     Mattan Ingram -- Person -- @mattaningram
+    Miles Ingram -- My brother
 
 # THANKS
 
-    Miles Ingram - My brother
+    
 
 # TECHNOLOGY COLOPHON
 

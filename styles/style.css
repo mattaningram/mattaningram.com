@@ -3,583 +3,587 @@ Mattan Ingram Test Site
 Version 0.0.1
 */
 /* __________________________ IMPORTS ___________________________ */
-/* line 5, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 5, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
 html, body {
   color: white;
   font-family: "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300; }
 
-/* line 11, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 11, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
+a {
+  color: white; }
+
+/* line 15, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
 h1, h2, h3, h4 {
   font-family: "source-sans-pro", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-/* line 15, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 19, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
 .my-name {
   letter-spacing: 0.05em; }
 
-/* line 19, /Users/mattan/Projects/mattaningram.github.io/styles/scss/typography */
+/* line 23, /Users/mattaningram/Projects/mattan-website/styles/scss/typography */
 .footer-text {
   font-size: 0.85em;
   line-height: 40px;
   opacity: 0.65; }
 
 @-webkit-keyframes pulseLogoWhiteRed {
-  /* line 6, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 6, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   50% {
     fill: white;
     fill-opacity: 1; }
 
-  /* line 10, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 10, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     fill: #ed2332;
     fill-opacity: 0.5; } }
 
 @keyframes pulseLogoWhiteRed {
-  /* line 6, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 6, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   50% {
     fill: white;
     fill-opacity: 1; }
 
-  /* line 10, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 10, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     fill: #ed2332;
     fill-opacity: 0.5; } }
 
 @-webkit-keyframes pulseLogoWhiteBlue {
-  /* line 17, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 17, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   50% {
     fill: white;
     fill-opacity: 1; }
 
-  /* line 21, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 21, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     fill: #0096aa;
     fill-opacity: 0.5; } }
 
 @keyframes pulseLogoWhiteBlue {
-  /* line 17, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 17, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   50% {
     fill: white;
     fill-opacity: 1; }
 
-  /* line 21, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 21, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     fill: #0096aa;
     fill-opacity: 0.5; } }
 
 @-webkit-keyframes fadeIn {
-  /* line 30, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 30, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0; }
 
-  /* line 33, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 33, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1; } }
 
 @keyframes fadeIn {
-  /* line 30, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 30, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0; }
 
-  /* line 33, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 33, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1; } }
 
 @-webkit-keyframes fadeOut {
-  /* line 39, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 39, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1; }
 
-  /* line 42, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 42, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0; } }
 
 @keyframes fadeOut {
-  /* line 39, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 39, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1; }
 
-  /* line 42, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 42, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0; } }
 
 @-webkit-keyframes fadeInShrink {
-  /* line 50, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 50, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: scale(3, 3);
             transform: scale(3, 3); }
 
-  /* line 54, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 54, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: scale(1, 1);
             transform: scale(1, 1); } }
 
 @keyframes fadeInShrink {
-  /* line 50, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 50, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: scale(3, 3);
             transform: scale(3, 3); }
 
-  /* line 54, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 54, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: scale(1, 1);
             transform: scale(1, 1); } }
 
 @-webkit-keyframes fadeOutShrink {
-  /* line 61, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 61, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: scale(1, 1);
             transform: scale(1, 1); }
 
-  /* line 65, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 65, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: scale(0, 0);
             transform: scale(0, 0); } }
 
 @keyframes fadeOutShrink {
-  /* line 61, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 61, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: scale(1, 1);
             transform: scale(1, 1); }
 
-  /* line 65, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 65, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: scale(0, 0);
             transform: scale(0, 0); } }
 
 @-webkit-keyframes fadeInDown {
-  /* line 74, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 74, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); }
 
-  /* line 78, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 78, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); } }
 
 @keyframes fadeInDown {
-  /* line 74, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 74, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); }
 
-  /* line 78, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 78, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); } }
 
 @-webkit-keyframes fadeOutDown {
-  /* line 85, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 85, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); }
 
-  /* line 89, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 89, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); } }
 
 @keyframes fadeOutDown {
-  /* line 85, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 85, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); }
 
-  /* line 89, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 89, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateY(100%);
             transform: translateY(100%); } }
 
 @-webkit-keyframes fadeInUp {
-  /* line 98, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 98, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateY(-100%);
             transform: translateY(-100%); }
 
-  /* line 102, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 102, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); } }
 
 @keyframes fadeInUp {
-  /* line 98, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 98, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateY(-100%);
             transform: translateY(-100%); }
 
-  /* line 102, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 102, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); } }
 
 @-webkit-keyframes fadeOutUp {
-  /* line 109, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 109, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0px);
             transform: translateY(0px); }
 
-  /* line 113, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 113, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-100%);
             transform: translateY(-100%); } }
 
 @keyframes fadeOutUp {
-  /* line 109, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 109, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0px);
             transform: translateY(0px); }
 
-  /* line 113, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 113, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-100%);
             transform: translateY(-100%); } }
 
 @-webkit-keyframes fadeInLeft {
-  /* line 122, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 122, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
             transform: translateX(-100%); }
 
-  /* line 126, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 126, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
 @keyframes fadeInLeft {
-  /* line 122, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 122, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
             transform: translateX(-100%); }
 
-  /* line 126, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 126, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
 @-webkit-keyframes fadeOutLeft {
-  /* line 133, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 133, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateX(0px);
             transform: translateX(0px); }
 
-  /* line 137, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 137, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
             transform: translateX(-100%); } }
 
 @keyframes fadeOutLeft {
-  /* line 133, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 133, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateX(0px);
             transform: translateX(0px); }
 
-  /* line 137, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 137, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateX(-100%);
             transform: translateX(-100%); } }
 
 @-webkit-keyframes fadeInRight {
-  /* line 146, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 146, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateX(100%);
             transform: translateX(100%); }
 
-  /* line 150, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 150, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
 @keyframes fadeInRight {
-  /* line 146, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 146, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translateX(100%);
             transform: translateX(100%); }
 
-  /* line 150, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 150, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
 @-webkit-keyframes fadeOutRight {
-  /* line 157, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 157, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); }
 
-  /* line 161, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 161, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateX(100%);
             transform: translateX(100%); } }
 
 @keyframes fadeOutRight {
-  /* line 157, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 157, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); }
 
-  /* line 161, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 161, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translateX(100%);
             transform: translateX(100%); } }
 
 @-webkit-keyframes fadeInUpRight {
-  /* line 170, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 170, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(100%, -100%);
             transform: translate(100%, -100%); }
 
-  /* line 174, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 174, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @keyframes fadeInUpRight {
-  /* line 170, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 170, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(100%, -100%);
             transform: translate(100%, -100%); }
 
-  /* line 174, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 174, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @-webkit-keyframes fadeOutUpRight {
-  /* line 181, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 181, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 185, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 185, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(100%, -100%);
             transform: translate(100%, -100%); } }
 
 @keyframes fadeOutUpRight {
-  /* line 181, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 181, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 185, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 185, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(100%, -100%);
             transform: translate(100%, -100%); } }
 
 @-webkit-keyframes fadeInUpLeft {
-  /* line 194, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 194, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(-100%, -100%);
             transform: translate(-100%, -100%); }
 
-  /* line 198, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 198, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @keyframes fadeInUpLeft {
-  /* line 194, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 194, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(-100%, -100%);
             transform: translate(-100%, -100%); }
 
-  /* line 198, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 198, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @-webkit-keyframes fadeOutUpLeft {
-  /* line 205, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 205, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 209, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 209, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(-100%, -100%);
             transform: translate(-100%, -100%); } }
 
 @keyframes fadeOutUpLeft {
-  /* line 205, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 205, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 209, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 209, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(-100%, -100%);
             transform: translate(-100%, -100%); } }
 
 @-webkit-keyframes fadeInDownRight {
-  /* line 218, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 218, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(100%, 100%);
             transform: translate(100%, 100%); }
 
-  /* line 222, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 222, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @keyframes fadeInDownRight {
-  /* line 218, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 218, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(100%, 100%);
             transform: translate(100%, 100%); }
 
-  /* line 222, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 222, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @-webkit-keyframes fadeOutDownRight {
-  /* line 229, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 229, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 233, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 233, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(100%, 100%);
             transform: translate(100%, 100%); } }
 
 @keyframes fadeOutDownRight {
-  /* line 229, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 229, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 233, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 233, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(100%, 100%);
             transform: translate(100%, 100%); } }
 
 @-webkit-keyframes fadeInDownLeft {
-  /* line 242, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 242, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%); }
 
-  /* line 246, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 246, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @keyframes fadeInDownLeft {
-  /* line 242, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 242, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 0;
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%); }
 
-  /* line 246, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 246, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); } }
 
 @-webkit-keyframes fadeOutDownLeft {
-  /* line 253, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 253, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 257, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 257, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%); } }
 
 @keyframes fadeOutDownLeft {
-  /* line 253, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 253, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   0% {
     opacity: 1;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0); }
 
-  /* line 257, /Users/mattan/Projects/mattaningram.github.io/styles/scss/animations */
+  /* line 257, /Users/mattaningram/Projects/mattan-website/styles/scss/animations */
   100% {
     opacity: 0;
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%); } }
 
-/* line 1, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 1, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 html {
   background-color: #1f232b; }
 
-/* line 5, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 5, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 body {
   margin: 0; }
 
-/* line 9, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 9, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .site-content {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -590,7 +594,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column; }
 
-/* line 16, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 16, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .center-wrap {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
@@ -609,11 +613,11 @@ body {
       -ms-flex-pack: center;
           justify-content: center; }
 
-/* line 34, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 34, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .main-footer {
   text-align: center; }
 
-/* line 38, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 38, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .my-name {
   text-align: center;
   font-weight: 300;
@@ -621,16 +625,16 @@ body {
   -webkit-animation: fadeIn 0.75s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: fadeIn 0.75s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 45, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 45, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .main-content {
   position: relative;
   z-index: 10; }
 
-/* line 50, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 50, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .menu-overlay {
   background-color: rgba(0, 0, 0, 0.5); }
 
-/* line 54, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 54, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .m-logo-wrap {
   width: 300px;
   height: 300px;
@@ -638,7 +642,7 @@ body {
   display: block;
   position: relative; }
 
-/* line 66, /Users/mattan/Projects/mattaningram.github.io/styles/scss/main */
+/* line 66, /Users/mattaningram/Projects/mattan-website/styles/scss/main */
 .m-logo {
   position: absolute;
   top: 0;
@@ -646,7 +650,7 @@ body {
   left: 0;
   bottom: 0; }
 
-/* line 2, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRandomLine */
+/* line 2, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRandomLine */
 .m-logo-random-line line {
   stroke: white;
   stroke-width: 1;
@@ -656,55 +660,55 @@ body {
           animation: dashOffset 1.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
 
 @-webkit-keyframes dashOffset {
-  /* line 13, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRandomLine */
+  /* line 13, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRandomLine */
   to {
     stroke-dashoffset: 0; } }
 
 @keyframes dashOffset {
-  /* line 13, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRandomLine */
+  /* line 13, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRandomLine */
   to {
     stroke-dashoffset: 0; } }
 
-/* line 1, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 1, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-red, .m-blue {
   fill-opacity: 0;
   fill: white;
   position: relative; }
 
-/* line 7, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 7, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke {
   fill: none;
   stroke: white;
   stroke-width: 0.5; }
 
-/* line 13, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 13, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-red {
   -webkit-animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: pulseLogoWhiteRed 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 17, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 17, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-blue {
   -webkit-animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards;
           animation: pulseLogoWhiteBlue 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.5s forwards; }
 
-/* line 22, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 22, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke-blue.m-logo-stroke-across {
   -webkit-animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards;
           animation: fadeInLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both, fadeOutRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.5s forwards; }
-/* line 26, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 26, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke-blue.m-logo-stroke-diag {
   -webkit-animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards;
           animation: fadeInUpLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s both, fadeOutDownRight 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.8s forwards; }
-/* line 30, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 30, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke-blue.m-logo-stroke-up {
   -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards;
           animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.4s forwards; }
 
-/* line 37, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 37, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke-red.m-logo-stroke-diag {
   -webkit-animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards;
           animation: fadeInUpRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s both, fadeOutDownLeft 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.7s forwards; }
-/* line 41, /Users/mattan/Projects/mattaningram.github.io/styles/scss/m-logos/mLogoRedBlue */
+/* line 41, /Users/mattaningram/Projects/mattan-website/styles/scss/m-logos/mLogoRedBlue */
 .m-logo-stroke-red.m-logo-stroke-up {
   -webkit-animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards;
           animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both, fadeOutDown 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1.6s forwards; }
