@@ -20,6 +20,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://mattaningram.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mattaningram
 github_username:  mattaningram
+repository: mattaningram/mattaningram.github.io
 
 #Serve settings
 host: 0.0.0.0
@@ -28,7 +29,7 @@ host: 0.0.0.0
 markdown: kramdown
 sass:
   style: compressed
-  
+
 # theme: minima
 gems:
   - jekyll-feed
@@ -38,3 +39,4 @@ exclude:
   - Gemfile.lock
 collections:
   - mlogos
+  - work

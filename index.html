@@ -12,3 +12,14 @@ layout: default
   </div>
 
 </div>
+
+<div class="work-wrap">
+  <h2 class="section-header-title">Work</h2>
+  <div class="work-items">
+    {% for work in site.work limit:6 %}
+      <div class="work-item">
+        <h3>{{ work.title }}</h3>
+      </div>
+    {% endfor %}
+  </div>
+</div>
