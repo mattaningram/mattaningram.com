@@ -6,6 +6,12 @@ body {
   margin: 0;
 }
 
+svg {
+  width: 100%;
+  display: block;
+  overflow: visible;
+}
+
 .page-content {
   display: flex;
   margin: 0;
@@ -58,4 +64,63 @@ body {
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+//MAIN PAGE CONTENT
+
+.section-wrap {
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  width: 640px;
+  max-width: 100%;
+}
+
+.work-item {
+  display: block;
+  background-image: linear-gradient(to left top, rgb(0,139,206), rgb(48, 188, 174));
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.work-item-title {
+  font-size: 2em;
+  text-align: center;
+}
+
+
+//FOOTER
+
+.main-footer {
+  padding: 20px;
+}
+
+.footer-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer-icon {
+  width: 20px;
+  display: inline-block;
+  opacity: .7;
+  transition: all .2s ease-out;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+  .icon-fill {
+    fill: white;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.footer-text {
+  opacity: 0.7;
+  font-size: .85em;
 }
