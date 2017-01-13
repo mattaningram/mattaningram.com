@@ -38,7 +38,8 @@ svg {
   opacity: 0;
   animation: fadeIn .75s $ease-in-quad .5s forwards;
   text-align: center;
-  font-weight: 300;
+  letter-spacing: 0.025em;
+  margin-bottom: 15px;
 }
 
 .my-description {
@@ -46,7 +47,6 @@ svg {
   animation: fadeIn .75s $ease-in-quad .7s forwards;
   text-align: center;
   color: rgba(255,255,255,0.75);
-  font-weight: 300;
   font-size: 1.1em;
 }
 
@@ -71,10 +71,6 @@ svg {
   bottom: 0;
 }
 
-.my-name {
-  letter-spacing: 0.025em;
-}
-
 //MAIN PAGE CONTENT
 
 .section-header-title {
@@ -94,64 +90,38 @@ svg {
 
 .work-item {
   display: block;
-  // background-color: linear-gradient(to left top, rgb(0,139,206), rgb(48, 188, 174));
-  background-color: $bg-color;
+  background-image: linear-gradient(to left top, rgb(0,139,206), rgb(48, 188, 174));
   text-align: center;
   padding: 10px;
-  // border-radius: 5px;
   text-decoration: none;
   position: relative;
-  // &:before, &:after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   left: 0;
-  //   background-color: rgba(255,255,255,0.65);
-  //   transition: all .2s ease-in;
-  //   z-index: -1;
-  // }
-  // &:before {
-  //   transform: translate3d(5px, 5px, 0);
-  // }
-  // &:after {
-  //   transform: translate3d(-5px, -5px, 0);
-  // }
-}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,139,206,.75);
+    transform: translate3d(7px, 7px, 0);
+    transition: all .2s ease-in;
+    z-index: -1;
+  }
 
-.item-edge {
-  background-color: rgba(255,255,255,0.5);
-  position: absolute;
-  z-index: -1;
-  width: 30px;
-  height: 30px;
-}
-
-.item-edge-tl {
-  top: -2px;
-  left: -2px;
-}
-
-.item-edge-tr {
-  top: -2px;
-  right: -2px;
-}
-
-.item-edge-bl {
-  bottom: -2px;
-  left: -2px;
-}
-
-.item-edge-br {
-  bottom: -2px;
-  right: -2px;
 }
 
 .work-item-title {
-  font-size: 2em;
-  font-weight: 400;
+  font-size: 1.8em;
+  font-weight: 300;
   text-align: center;
+}
+
+.work-item-year {
+  color: rgba(255,255,255,0.75);
 }
 
 
