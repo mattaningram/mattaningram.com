@@ -63,14 +63,6 @@ svg {
   position: relative;
 }
 
-.m-logo {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
 //MAIN PAGE CONTENT
 
 .section-header-title {
@@ -98,7 +90,9 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100px;
+  margin-left: -4px;
   &:after {
     content: "";
     position: absolute;
@@ -107,11 +101,21 @@ svg {
     right: 0;
     left: 0;
     background-color: rgba(0,139,206,.75);
-    transform: translate3d(7px, 7px, 0);
+    transform: translate3d(8px, 8px, 0);
     transition: all .2s ease-in;
     z-index: -1;
   }
+  &:hover {
+    &:after {
+      background-color: white;
+    }
+  }
+}
 
+.work-item-logo {
+  max-width: 180px;
+  max-height: 40px;
+  margin-bottom: 5px;
 }
 
 .work-item-title {
@@ -122,6 +126,12 @@ svg {
 
 .work-item-year {
   color: rgba(255,255,255,0.75);
+}
+
+.canvs-work-item {
+  .work-item-logo {
+    width: 140px;
+  }
 }
 
 

@@ -1,3 +1,14 @@
+$logo-blue:               rgb(0, 180, 204);
+$logo-red:                rgb(237, 35, 50);
+
+.m-logo-red, .m-logo-blue {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
 .m-red, .m-blue {
   fill-opacity: 0;
   fill: white;

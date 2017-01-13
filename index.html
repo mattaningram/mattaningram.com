@@ -16,8 +16,9 @@ layout: default
   <h2 class="section-header-title">Work</h2>
   <div class="work-items">
     {% for work in site.work limit:6 %}
-      <a class="work-item" href="{{ work.url }}">
-        <h3 class="work-item-title">{{ work.title }}</h3>
+      <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}">
+        <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
+        <!-- <h3 class="work-item-title">{{ work.title }}</h3> -->
         <span class="work-item-year">{{ work.year }}</span>
       </a>
     {% endfor %}
