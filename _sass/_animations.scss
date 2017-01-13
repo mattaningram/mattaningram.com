@@ -1,29 +1,5 @@
 //KEYFRAMES
 
-//PULSE LOGO
-
-@keyframes pulseLogoWhiteRed {
-  50% {
-    fill: white;
-    fill-opacity: 1;
-  }
-  100% {
-    fill: $logo-red;
-    fill-opacity: 0.5;
-  }
-}
-
-@keyframes pulseLogoWhiteBlue {
-  50% {
-    fill: white;
-    fill-opacity: 1;
-  }
-  100% {
-    fill: $logo-blue;
-    fill-opacity: 0.5;
-  }
-}
-
 //FADE
 
 @keyframes fadeIn {
@@ -97,7 +73,7 @@
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(100%);
   }
   100% {
     opacity: 1;
@@ -108,7 +84,7 @@
 @keyframes fadeOutUp {
   0% {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;

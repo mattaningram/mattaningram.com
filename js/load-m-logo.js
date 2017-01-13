@@ -4,5 +4,5 @@ function generateRandomM() {
 }
 
 $(document).ready(function() {
-    setTimeout(generateRandomM, 1000);
+    setTimeout(generateRandomM, 750);
 });

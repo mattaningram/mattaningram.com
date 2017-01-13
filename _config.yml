@@ -33,6 +33,7 @@ sass:
 # theme: minima
 gems:
   - jekyll-feed
+  - jekyll-autoprefixer
   # - bourbon
 exclude:
   - Gemfile
