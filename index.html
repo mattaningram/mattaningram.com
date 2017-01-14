@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="center-wrap">
-  <div class="m-logo-section">  
+  <div class="m-logo-section">
     <div class="m-logo-wrap"></div>
 
     <script src="/js/load-m-logo.js"></script>
@@ -13,15 +13,18 @@ layout: default
   </div>
 </div>
 
-<div class="section-wrap work-wrap">
+<!-- <div class="section-wrap work-wrap">
   <h2 class="section-header-title">Work</h2>
   <div class="work-items">
     {% for work in site.work limit:6 %}
       <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}">
-        <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
-        <!-- <h3 class="work-item-title">{{ work.title }}</h3> -->
+        {% if work.logo %}
+          <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
+        {% else %}
+          <h3 class="work-item-title">{{ work.title }}</h3>
+        {% endif %}
         <span class="work-item-year">{{ work.year }}</span>
       </a>
     {% endfor %}
   </div>
-</div>
+</div> -->
