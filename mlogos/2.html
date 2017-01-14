@@ -1,0 +1,32 @@
+<svg class="m-logo m-logo-random-line" x="0px" y="0px" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="m-logo-random-line-clip">
+      <polygon points="7.143,100 7.143,0 50,47.619 92.857,0 92.857,100 78.571,100 78.571,40 50,70.167 21.429,38.81 21.429,100 "/>
+    </clipPath>
+  </defs>
+  <g class="m-logo-random-lines" clip-path="url(#m-logo-random-line-clip)">
+  </g>
+</svg>
+
+<script>
+
+  jQuery(document).ready(function(){
+    var numLines = 240;
+    var radius = 75;
+    var lineWrap = $(".m-logo-random-lines");
+
+    for (var i = 0; i < numLines; i++) {
+      var rand1 = -Math.PI + Math.random() * Math.PI * 2;
+      var rand2 = -Math.PI + Math.random() * Math.PI * 2;
+      $(document.createElementNS('http://www.w3.org/2000/svg','line')).attr({
+        x1: 50 + radius * Math.cos(rand1),
+        y1: 50 + radius * Math.sin(rand1),
+        x2: 50 + radius * Math.cos(rand2),
+        y2: 50 + radius * Math.sin(rand2),
+        'vector-effect': 'non-scaling-stroke',
+        style: 'animation-delay: ' +  (Math.random() * 1.5) + 's; opacity: ' + (0.1 + Math.random() * 0.9) + ';'
+      }).appendTo(".m-logo-random-lines");
+    }
+  })
+
+</script>
