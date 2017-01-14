@@ -152,6 +152,27 @@ svg {
   }
 }
 
+//PAGE HEADER
+
+.page-header {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  .m-logo-wrap {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+  }
+}
+
+//PAGE CONTENT
+
+.page-wrap {
+  width: 640px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 
 //FOOTER
 
