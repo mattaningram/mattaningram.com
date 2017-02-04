@@ -77,24 +77,23 @@ svg {
 .section-wrap {
   margin: 0 auto;
   margin-bottom: 40px;
-  padding: 0 20px;
   width: 640px;
   max-width: 100%;
 }
 
 .work-item {
   display: block;
+  height: 100px;
+  padding: 10px;
+  margin: 0 20px;
   background-image: linear-gradient(to left top, rgb(0,139,206), rgb(48, 188, 174));
   text-align: center;
-  padding: 10px;
   text-decoration: none;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  margin-left: -4px;
   transition: all .25s ease-in;
   &:before, &:after {
     content: "";
@@ -103,7 +102,7 @@ svg {
     bottom: 0;
     right: 0;
     left: 0;
-    opacity: .4;
+    opacity: .5;
     z-index: -1;
     transition: all .25s ease-in;
   }
@@ -116,15 +115,12 @@ svg {
     transform: translate3d(4px, 4px, 0);
   }
   &:hover {
-    // &:before, &:after {
-    //   opacity: .4;
-    // }
     &:before {
-      opacity: .3;
+      opacity: .4;
       transform: translate3d(4px, 4px, 0);
     }
     &:after {
-      opacity: .2;
+      opacity: .3;
       transform: translate3d(8px, 8px, 0);
     }
   }
@@ -154,7 +150,7 @@ svg {
 
 //PAGE HEADER
 
-.page-header {
+.site-header {
   padding-top: 10px;
   padding-bottom: 30px;
   .m-logo-wrap {
@@ -167,12 +163,21 @@ svg {
 //PAGE CONTENT
 
 .page-wrap {
-  width: 640px;
-  max-width: 100%;
+  max-width: 640px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+.page-logo {
+  width: 240px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.page-description {
+  text-align: center;
+}
 
 //FOOTER
 
