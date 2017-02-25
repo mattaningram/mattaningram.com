@@ -16,14 +16,20 @@ layout: home
 <div class="section-wrap work-wrap">
   <h2 class="section-header-title">Work</h2>
   <div class="work-items">
-    {% for work in site.work limit:6 %}
-      <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}">
-        {% if work.logo %}
-          <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
-        {% else %}
-          <h3 class="work-item-title">{{ work.title }}</h3>
-        {% endif %}
-        <span class="work-item-year">{{ work.year }}</span>
+    {% for work in site.work limit:5 %}
+      <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}"
+      style="background-image: -webkit-linear-gradient(right bottom, {{ work.color1 }}, {{ work.color2 }});
+              background-image: linear-gradient(to left top, {{ work.color1 }}, {{ work.color2 }});">
+        <div class="work-item-contents">
+          {% if work.logo %}
+            <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
+          {% else %}
+            <h3 class="work-item-title">{{ work.title }}</h3>
+          {% endif %}
+          <span class="work-item-year">{{ work.year }}</span>
+        </div>
+        <div class="item-shadow-1" style="background-color: {{ work.color1 }};"></div>
+        <div class="item-shadow-2" style="background-color: {{ work.color1 }};"></div>
       </a>
     {% endfor %}
   </div>
