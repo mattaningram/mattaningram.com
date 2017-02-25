@@ -136,6 +136,7 @@ svg {
   width: 100%;
   max-width: 180px;
   max-height: 40px;
+  margin: 0 auto;
   margin-bottom: 5px;
 }
 
@@ -146,7 +147,7 @@ svg {
   text-align: center;
 }
 
-.work-item-year {
+.work-item-details {
   display: block;
   color: rgba(255,255,255,0.75);
 }
