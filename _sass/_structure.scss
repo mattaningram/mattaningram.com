@@ -12,6 +12,10 @@ svg {
   overflow: visible;
 }
 
+svg:not(:root) {
+  overflow: visible;
+}
+
 .page-content {
   display: flex;
   margin: 0;
