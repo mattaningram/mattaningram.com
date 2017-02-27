@@ -22,13 +22,14 @@ svg:not(:root) {
 }
 
 .left-content-wrap {
-  width: 65%;
+  width: 100%;
   height: 100vh;
-  float: left;
   padding: 0 20px;
   display: flex;
-  flex-direction: column;
   position: relative;
+  @include mq($until: tablet) {
+    height: calc(100vh - 80px);
+  }
 }
 
 .m-center-wrap {
@@ -39,13 +40,16 @@ svg:not(:root) {
   flex-grow: 1;
 }
 
-.m-logo-section {
-}
-
 .right-menu-wrap {
-  width: 35%;
-  // min-width: 400px;
-  float: left;
+  width: 33.333vh;
+  position: absolute;
+  right: 0;
+  top: 0;
+  @include mq($until: tablet) {
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
 }
 
 .main-menu {
@@ -53,6 +57,10 @@ svg:not(:root) {
   display: flex;
   flex-direction: column;
   list-style: none;
+  @include mq($until: tablet) {
+    flex-direction: row;
+    height: 80px;
+  }
 }
 
 .main-menu-item {
@@ -77,12 +85,25 @@ svg:not(:root) {
       50% { background-position: 130% 50% }
       100% { background-position: 0% 50% }
     }
+    @include mq($until: tablet) {
+      transform: scale(.6, 0.75);
+    }
   }
   &:hover {
     z-index: 1;
     &:after {
       transform: scale(0.9, 0.8);
       opacity: 1;
+      @include mq($until: tablet) {
+        transform: scale(0.8, 0.9);
+      }
+    }
+    .main-menu-text {
+      opacity: 1;
+      transform: scale(1) translateX(-35%);
+      @include mq($until: tablet) {
+        transform: scale(1) translateY(-35%);
+      }
     }
   }
 }
@@ -90,16 +111,27 @@ svg:not(:root) {
 .main-menu-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-end;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 20px;
   text-decoration: none;
   font-size: 1.8em;
   background-color: $bg-color;
+  @include mq($until: tablet) {
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1.4em;
+  }
+}
+
+.main-menu-text {
+  opacity: 0.7;
+  transform: scale(.75);
+  transition: all .3s $ease-out-back;
 }
 
 .main-footer {
@@ -108,6 +140,10 @@ svg:not(:root) {
   left: 0;
   right: 0;
   bottom: 0;
+  @include mq($until: tablet) {
+    top: 0;
+    bottom: auto;
+  }
 }
 
 .my-name {
