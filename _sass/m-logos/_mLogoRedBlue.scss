@@ -1,5 +1,5 @@
-$logo-blue:               rgb(0, 180, 204);
-$logo-red:                rgb(237, 35, 50);
+$logo-blue:   $primaryBlue;
+$logo-red:    $primaryRed;
 
 .m-logo-red, .m-logo-blue {
   position: absolute;

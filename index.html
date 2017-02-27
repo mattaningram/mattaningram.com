@@ -2,35 +2,31 @@
 layout: home
 ---
 
-<div class="center-wrap">
-  <div class="m-logo-section">
-    <div class="m-logo-wrap"></div>
+<div class="left-content-wrap">
+  <div class="m-center-wrap">
+    <div class="m-logo-section">
+      <div class="m-logo-wrap"></div>
 
-    <script src="/js/load-m-logo.js"></script>
+      <script src="/js/load-m-logo.js"></script>
 
-    <h1 class="my-name">Mattan Ingram</h1>
-    <h2 class="my-description">Solving design problems, coding websites, visualizing data.</h2>
+      <h1 class="my-name">Mattan Ingram</h1>
+      <h2 class="my-description">Design • Code • Data</h2>
+    </div>
   </div>
+
+  {% include footer.html %}
 </div>
 
-<div class="section-wrap work-wrap">
-  <h2 class="section-header-title">Work</h2>
-  <div class="work-items">
-    {% for work in site.work limit:5 %}
-      <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}"
-      style="background-image: -webkit-linear-gradient(right bottom, {{ work.color1 }}, {{ work.color2 }});
-              background-image: linear-gradient(to left top, {{ work.color1 }}, {{ work.color2 }});">
-        <div class="work-item-contents">
-          {% if work.logo %}
-            <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
-          {% else %}
-            <h3 class="work-item-title">{{ work.title }}</h3>
-          {% endif %}
-          <span class="work-item-details">{{ work.position }} • {{ work.year }}</span>
-        </div>
-        <div class="item-shadow-1" style="background-color: {{ work.color1 }};"></div>
-        <div class="item-shadow-2" style="background-color: {{ work.color1 }};"></div>
-      </a>
-    {% endfor %}
-  </div>
+<div class="right-menu-wrap">
+  <ul class="main-menu">
+    <li class="main-menu-item">
+      <a class="main-menu-link" href="/about"><h2>About</h2></a>
+    </li>
+    <li class="main-menu-item">
+      <a class="main-menu-link" href="/work"><h2>Work</h2></a>
+    </li>
+    <li class="main-menu-item">
+      <a class="main-menu-link" href="/travel"><h2>Travel</h2></a>
+    </li>
+  </ul>
 </div>

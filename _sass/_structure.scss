@@ -17,26 +17,97 @@ svg:not(:root) {
 }
 
 .page-content {
-  display: flex;
   margin: 0;
   min-height: 100vh;
-  flex-direction: column;
 }
 
-.center-wrap {
-  flex-grow: 1;
-  overflow: hidden;
+.left-content-wrap {
+  width: 65%;
+  height: 100vh;
+  float: left;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.m-center-wrap {
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 95vh;
-  min-height: 500px;
-  padding: 0 20px;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.m-logo-section {
+}
+
+.right-menu-wrap {
+  width: 35%;
+  // min-width: 400px;
+  float: left;
+}
+
+.main-menu {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.main-menu-item {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: linear-gradient(300deg, $primaryRed, $primaryBlue);
+    filter: blur(30px);
+    transform: scale(.75, 0.6);
+    transition: all .5s ease-out;
+    background-size: 200% 200%;
+    animation: animateGlow 5s ease infinite; //http://codepen.io/georgehastings/pen/xgwxgo
+    @keyframes animateGlow {
+      0% { background-position: 0% 50% }
+      50% { background-position: 130% 50% }
+      100% { background-position: 0% 50% }
+    }
+  }
+  &:hover {
+    z-index: 1;
+    &:after {
+      transform: scale(0.9, 0.8);
+      opacity: 1;
+    }
+  }
+}
+
+.main-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-decoration: none;
+  font-size: 1.8em;
+  background-color: $bg-color;
 }
 
 .main-footer {
   text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .my-name {
@@ -61,10 +132,10 @@ svg:not(:root) {
 }
 
 .m-logo-wrap {
-  width: 300px;
-  height: 300px;
+  width: 240px;
+  height: 240px;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: block;
   position: relative;
 }
@@ -118,7 +189,7 @@ svg:not(:root) {
   }
   &:hover {
     .work-item-contents {
-      transform: scale(1.05);
+      // transform: scale(1.05);
     }
     .item-shadow-1 {
       opacity: .4;
@@ -197,14 +268,13 @@ svg:not(:root) {
 //FOOTER
 
 .main-footer {
-  padding: 20px;
 }
 
 .footer-icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   height: 40px;
 }
 
