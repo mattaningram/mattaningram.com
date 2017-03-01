@@ -52,98 +52,12 @@ svg:not(:root) {
   }
 }
 
-.main-menu {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  @include mq($until: tablet) {
-    flex-direction: row;
-    height: 80px;
-  }
-}
-
-.main-menu-item {
-  flex-grow: 1;
-  width: 100%;
-  position: relative;
-  &:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background: linear-gradient(300deg, $primaryRed, $primaryBlue);
-    filter: blur(30px);
-    transform: scale(.75, 0.6);
-    transition: all .5s ease-out;
-    background-size: 200% 200%;
-    animation: animateGlow 5s ease infinite; //http://codepen.io/georgehastings/pen/xgwxgo
-    @keyframes animateGlow {
-      0% { background-position: 0% 50% }
-      50% { background-position: 130% 50% }
-      100% { background-position: 0% 50% }
-    }
-    @include mq($until: tablet) {
-      transform: scale(.6, 0.75);
-    }
-  }
-  &:hover {
-    z-index: 1;
-    &:after {
-      transform: scale(0.9, 0.8);
-      opacity: 1;
-      @include mq($until: tablet) {
-        transform: scale(0.8, 0.9);
-      }
-    }
-    .main-menu-text {
-      opacity: 1;
-      transform: scale(1) translateX(-35%);
-      @include mq($until: tablet) {
-        transform: scale(1) translateY(-35%);
-      }
-    }
-  }
-}
-
-.main-menu-link {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  text-decoration: none;
-  font-size: 1.8em;
-  background-color: $bg-color;
-  @include mq($until: tablet) {
-    justify-content: center;
-    align-items: flex-end;
-    font-size: 1.4em;
-  }
-}
-
-.main-menu-text {
-  opacity: 0.7;
-  transform: scale(.75);
-  transition: all .3s $ease-out-back;
-}
-
 .main-footer {
   text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  @include mq($until: tablet) {
-    top: 0;
-    bottom: auto;
-  }
+  position: relative;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .my-name {
@@ -161,6 +75,12 @@ svg:not(:root) {
   text-align: center;
   color: rgba(255,255,255,0.75);
   font-size: 1.1em;
+  margin-bottom: 15px;
+}
+
+.social-links-wrap {
+  opacity: 0;
+  animation: fadeIn .75s $ease-in-quad .9s forwards;
 }
 
 .menu-overlay {
@@ -303,18 +223,15 @@ svg:not(:root) {
 
 //FOOTER
 
-.main-footer {
-}
-
-.footer-icon-wrap {
+.social-icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   // margin-bottom: 10px;
-  height: 40px;
+  height: 30px;
 }
 
-.footer-icon {
+.social-icon {
   width: 20px;
   display: inline-block;
   opacity: .7;
@@ -329,9 +246,4 @@ svg:not(:root) {
     opacity: 1;
     width: 25px;
   }
-}
-
-.footer-text {
-  opacity: 0.7;
-  font-size: .85em;
 }

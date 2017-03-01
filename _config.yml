@@ -40,6 +40,7 @@ exclude:
   - Gemfile.lock
 collections:
   mlogos:
+    output: true
   work:
     output: true
     permalink: /work/:path/

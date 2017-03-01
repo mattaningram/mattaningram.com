@@ -1,6 +1,9 @@
 function generateRandomM() {
-    var min = 1, max = 2;
-    $(".m-logo-wrap").load("/mlogos/" + Math.floor (Math.random() * (max - min + 1) + min) + ".html");
+  $.getJSON("/assets/m-search.json", function (data) {
+
+    var randIndex = Math.floor( Math.random() * data.length );
+    $(".m-logo-wrap").load(data[randIndex].url);
+  });
 }
 
 $(document).ready(function() {
@@ -8,5 +11,10 @@ $(document).ready(function() {
 
     $( ".m-logo-wrap" ).click(function() {
       generateRandomM();
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'mLogo',
+        eventAction: 'Clicked'
+      });
     });
 });
