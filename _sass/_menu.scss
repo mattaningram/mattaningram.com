@@ -13,6 +13,7 @@
   flex-grow: 1;
   width: 100%;
   position: relative;
+  z-index: 10;
   &:after {
     content: "";
     position: absolute;
@@ -22,7 +23,7 @@
     right: 0;
     opacity: 0;
     transform: scale(.5, .25);
-    transition: all .5s ease-out;
+    transition: transform .5s ease-out;
     background: linear-gradient(45deg, $primaryBlue, $primaryRed);
     background-size: 200% 200%;
     filter: blur(30px);
@@ -42,7 +43,7 @@
     }
   }
   &:hover {
-    z-index: 1;
+    z-index: 10;
     &:after {
       transform: scale(0.75, .5);
       opacity: 1;

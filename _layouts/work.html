@@ -2,14 +2,17 @@
 layout: page
 ---
 
-<div class="page-header">
-  {% if page.logo %}
-    <img class="page-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
-  {% else %}
-    <h1 class="page-title">{{ page.title }}</h1>
-  {% endif %}
-  <h2 class="page-description">{{ page.year }}</h2>
+<div class="work-page-wrap">
+  <div class="page-header">
+    {% if page.logo %}
+      <img class="page-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
+    {% else %}
+      <h1 class="page-title">{{ page.title }}</h1>
+    {% endif %}
+    <h2 class="page-description">{{ page.position }} • {{ page.year }}</h2>
+  </div>
+
+  <p class="job-description">{{ page.description }}</p>
+
+  {{ content }}
 </div>
-
-
-{{ content }}

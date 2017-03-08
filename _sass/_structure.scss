@@ -101,7 +101,7 @@ svg:not(:root) {
 .section-header-title {
   margin-bottom: 30px;
   line-height: 1;
-  font-size: 3em;
+  font-size: 2.2em;
   text-align: center;
 }
 
@@ -173,7 +173,7 @@ svg:not(:root) {
 
 .work-item-title {
   display: block;
-  font-size: 1.8em;
+  font-size: 1.6em;
   font-weight: 300;
   text-align: center;
 }
@@ -192,22 +192,20 @@ svg:not(:root) {
 //PAGE HEADER
 
 .site-header {
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding: 30px;
   .m-logo-wrap {
+    margin: 0;
     width: 40px;
     height: 40px;
-    margin-bottom: 0;
   }
 }
 
 //PAGE CONTENT
 
 .page-wrap {
-  width: 640px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .page-logo {
@@ -217,8 +215,25 @@ svg:not(:root) {
   display: block;
 }
 
+.page-header {
+  margin-bottom: 30px;
+}
+
 .page-description {
   text-align: center;
+}
+
+.job-description {
+  font-size: 1.1em;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-copy {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 //FOOTER
