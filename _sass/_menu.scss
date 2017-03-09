@@ -14,49 +14,47 @@
   width: 100%;
   position: relative;
   z-index: 10;
+  overflow: hidden;
   &:after {
     content: "";
     position: absolute;
     z-index: -1;
-    width: 65%;
-    height: 100%;
-    right: 0;
+    width: 50px;
+    height: 80%;
+    bottom: 10%;
+    right: -35px;
+    transform: translateX(25px);
     opacity: 0;
-    transform: scale(.5, .25);
-    transition: transform .5s ease-out;
+    border-radius: 50%;
+    transition: all .3s $ease-out-back;
     background: linear-gradient(45deg, $primaryBlue, $primaryRed);
     background-size: 200% 200%;
-    filter: blur(30px);
     animation: animateGlow 5s ease infinite; //http://codepen.io/georgehastings/pen/xgwxgo
-    animation-play-state: paused;
     @keyframes animateGlow {
       0% { background-position: 0% 50% }
       50% { background-position: 100% 50% }
       100% { background-position: 0% 50% }
     }
     @include mq($until: tablet) {
-      width: 100%;
-      bottom: 0;
-      right: auto;
-      transform: scale(.25, .5);
-      filter: blur(15px);
+      width: 80%;
+      height: 50px;
+      bottom: -35px;
+      right: 10%;
+      transform: translateX(0);
+      transform: translateY(25px);
     }
   }
   &:hover {
     z-index: 10;
     &:after {
-      transform: scale(0.75, .5);
+      transform: translateX(0) translateY(0);
       opacity: 1;
-      animation-play-state: running;
-      @include mq($until: tablet) {
-        transform: scale(0.75, .5);
-      }
     }
     .main-menu-text {
       opacity: 1;
-      transform: scale(1) translateX(-35%);
+      transform: scale(1) translateX(-20%);
       @include mq($until: tablet) {
-        transform: scale(1) translateY(-35%);
+        transform: scale(1) translateY(-20%);
       }
     }
   }
