@@ -40,18 +40,6 @@ svg:not(:root) {
   flex-grow: 1;
 }
 
-.right-menu-wrap {
-  width: 33.333vh;
-  position: absolute;
-  right: 0;
-  top: 0;
-  @include mq($until: tablet) {
-    position: relative;
-    top: auto;
-    width: 100%;
-  }
-}
-
 .main-footer {
   text-align: center;
   position: relative;

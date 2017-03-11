@@ -1,3 +1,15 @@
+.main-menu-wrap {
+  width: 200px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  @include mq($until: tablet) {
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+}
+
 .main-menu {
   height: 100vh;
   display: flex;
@@ -27,13 +39,13 @@
     opacity: 0;
     border-radius: 50%;
     transition: all .3s $ease-out-back;
-    background: linear-gradient(45deg, $primaryBlue, $primaryRed);
+    background: linear-gradient($primaryBlue, $primaryRed);
     background-size: 200% 200%;
-    animation: animateGlow 5s ease infinite; //http://codepen.io/georgehastings/pen/xgwxgo
-    @keyframes animateGlow {
-      0% { background-position: 0% 50% }
-      50% { background-position: 100% 50% }
-      100% { background-position: 0% 50% }
+    animation: backgroundShift 5s ease infinite;
+    @keyframes backgroundShift {
+      0% { background-position: 50% 0% }
+      50% { background-position: 50% 100% }
+      100% { background-position: 50% 0% }
     }
     @include mq($until: tablet) {
       width: 80%;
@@ -42,6 +54,13 @@
       right: 10%;
       transform: translateX(0);
       transform: translateY(25px);
+      background: linear-gradient(90deg, $primaryBlue, $primaryRed);
+      background-size: 200% 200%;
+      @keyframes backgroundShift {
+        0% { background-position: 0% 50% }
+        50% { background-position: 100% 50% }
+        100% { background-position: 0% 50% }
+      }
     }
   }
   &:hover {
@@ -59,6 +78,8 @@
     }
   }
 }
+
+
 
 .main-menu-link {
   display: flex;
