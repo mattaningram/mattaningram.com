@@ -3,7 +3,6 @@
 .page-wrap {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .page-logo {
@@ -35,6 +34,37 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+//ABOUT PAGE
+
+.about-wrap {
+  width: 720px;
+  padding: 0 20px;
+  .section-header-title {
+    margin-bottom: 40px;
+  }
+}
+
+.about-sections-wrap {
+  @include clearfix;
+}
+
+.about-section {
+  width: 50%;
+  float: left;
+  &:first-child {
+    padding-right: 15px;
+  }
+  &:last-child {
+    padding-left: 15px;
+  }
+  @include mq($until: tablet) {
+    width: auto;
+    &:first-child, &:last-child {
+      padding: 0;
+    }
+  }
 }
 
 //WORK PAGE
