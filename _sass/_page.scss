@@ -5,18 +5,46 @@
   margin: 0 auto;
 }
 
-.page-title-wrap {
-  height: 25vh;
-  padding-top: 5vh;
+.page-header {
+  height: 300px;
+  padding-top: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.header-background-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.header-background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+}
+
+.header-background-gradient-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-image: linear-gradient(to bottom, transparentize($bg-color, .25), $bg-color);
 }
 
 .page-title {
   font-size: 2.2em;
   font-weight: 600;
   text-align: center;
+  opacity: 0;
+  animation: fadeInUp .5s $ease-out-quad .4s forwards;
 }
 
 .page-logo {
@@ -24,14 +52,45 @@
   margin: 0 auto;
   margin-bottom: 20px;
   display: block;
-}
-
-.page-header {
-  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeInUp .4s $ease-out-quad .4s forwards;
 }
 
 .page-description {
   text-align: center;
+  opacity: 0;
+  animation: fadeInUp .5s $ease-out-quad .6s forwards;
+}
+
+.grab-copy-wrap {
+  min-height: 50vh;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInUpText .6s $ease-out-quad .8s forwards;
+  @keyframes fadeInUpText {
+    from {
+      opacity: 0;
+      line-height: 2;
+      transform: translate3d(0, 30px, 0);
+    }
+    to {
+      line-height: inherit;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.grab-copy {
+  font-size: 1.8em;
+  padding: 0 20px;
+  margin-bottom: 0;
+  @include mq($until: tablet) {
+    font-size: 1.4em;
+  }
 }
 
 .page-copy-section {
@@ -42,21 +101,6 @@
   margin-bottom: 15px;
   font-weight: 500;
   letter-spacing: .025em;
-}
-
-.grab-copy-wrap {
-  min-height: 60vh;
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.grab-copy {
-  font-size: 2em;
-  @include mq($until: tablet) {
-    font-size: 1.4em;
-  }
 }
 
 .page-copy {

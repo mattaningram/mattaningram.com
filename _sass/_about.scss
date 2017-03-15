@@ -1,20 +1,9 @@
 //ABOUT PAGE
 
 .about-wrap {
-  .page-title-wrap {
+  .page-header {
+    height: 30vh;
     visibility: hidden;
-  }
-}
-
-.about-sections-wrap {
-  @include clearfix;
-}
-
-.about-section {
-  width: 80%;
-  float: left;
-  @include mq($until: tablet) {
-    width: auto;
   }
 }
 
@@ -29,3 +18,5 @@
   left: 70%;
   transform: translateX(-50%);
 }
+
+//ABOUT SECTION

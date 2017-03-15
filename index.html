@@ -2,42 +2,54 @@
 layout: home
 ---
 
-<div class="left-content-wrap">
-  <div class="m-center-wrap">
-    <div class="m-logo-section">
-      <div class="m-logo-wrap"></div>
+<div class="m-center-wrap">
+  <div class="m-logo-section">
+    <div class="m-logo-wrap"></div>
 
-      <script src="/js/load-m-logo.js"></script>
+    <script src="/js/load-m-logo.js"></script>
 
-      <h1 class="my-name">Mattan Ingram</h1>
-      <h2 class="my-description">Product &amp; Web Designer</h2>
-      <div class="social-links-wrap">
-        {% include social-links.html %}
-      </div>
+    <h1 class="my-name">Mattan Ingram</h1>
+    <h2 class="my-description">Product &amp; Web Designer</h2>
+    <div class="social-links-wrap">
+      {% include social-links.html %}
     </div>
   </div>
-
 </div>
 
-<div class="main-menu-wrap">
-  <ul class="main-menu">
-    <li class="main-menu-item">
-      <a class="main-menu-link" href="/about">
-        <h2 class="main-menu-text">About
-        </h2>
+<div class="about-section section-wrap">
+  <!-- <div class="section-header">
+    <h1 class="section-title">About</h1>
+  </div> -->
+
+  <div class="grab-copy-wrap">
+    <p class="grab-copy">I'm a digital product designer, interface junkie, and sci-fi enthusiast. Born in NYC and raised on the 1984 Macintosh, I like to solve interesting problems by designing simple solutions that look good. Take me to your startup, I'll improve your digital stuff.</p>
+  </div>
+</div>
+
+<div class="work-section section-wrap">
+  <div class="section-header">
+    <h1 class="section-title">Work</h1>
+  </div>
+
+  <div class="work-item-list">
+    {% for work in site.work limit:5 %}
+      <a class="work-item-wrap" href="{{ work.url }}" style="color: {{ work.color2 }};">
+        <div class="work-item-stack"></div>
+        <div class="work-item-stack"></div>
+        <div class="work-item-stack"></div>
+        <div class="work-item-stack"></div>
+        <div class="work-item {{ work.title | downcase }}-work-item" style="background-image: -webkit-linear-gradient(right bottom, {{ work.color1 }}, {{ work.color2 }}); background-image: linear-gradient(to right bottom, {{ work.color1 }}, {{ work.color2 }});">
+          <div class="work-item-contents">
+            {% if work.logo %}
+              <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
+            {% else %}
+              <h3 class="work-item-title">{{ work.title }}</h3>
+            {% endif %}
+            <!-- <span class="work-item-details">{{ work.position }} • {{ work.year }}</span> -->
+          </div>
+        </div>
       </a>
-    </li>
-    <li class="main-menu-item">
-      <a class="main-menu-link" href="/work">
-        <h2 class="main-menu-text">Work
-        </h2>
-      </a>
-    </li>
-    <!-- <li class="main-menu-item">
-      <a class="main-menu-link" href="/travel">
-        <h2 class="main-menu-text">Travel
-        </h2>
-      </a>
-    </li> -->
-  </ul>
+
+    {% endfor %}
+  </div>
 </div>

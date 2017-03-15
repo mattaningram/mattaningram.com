@@ -31,27 +31,27 @@ $logo-red:    $primaryRed;
 
 .m-logo-stroke-blue {
   &.m-logo-stroke-across {
-    animation: fadeInLeft .3s $ease-out-back .1s both,
-               fadeOutRight .3s $ease-in-back 1.5s forwards;
+    animation: fadeInLeft100 .3s $ease-out-back .1s both,
+               fadeOutRight100 .3s $ease-in-back 1.5s forwards;
   }
   &.m-logo-stroke-diag {
-    animation: fadeInUpLeft .3s $ease-out-back .4s both,
-               fadeOutDownRight .3s $ease-in-back 1.8s forwards;
+    animation: fadeInUpLeft100 .3s $ease-out-back .4s both,
+               fadeOutDownRight100 .3s $ease-in-back 1.8s forwards;
   }
   &.m-logo-stroke-up {
-    animation: fadeInUp .3s $ease-out-back both,
-               fadeOutDown .3s $ease-in-back 1.4s forwards;
+    animation: fadeInUp100 .3s $ease-out-back both,
+               fadeOutDown100 .3s $ease-in-back 1.4s forwards;
   }
 }
 
 .m-logo-stroke-red {
   &.m-logo-stroke-diag {
-    animation: fadeInUpRight .3s $ease-out-back .3s both,
-               fadeOutDownLeft .3s $ease-in-back 1.7s forwards;
+    animation: fadeInUpRight100 .3s $ease-out-back .3s both,
+               fadeOutDownLeft100 .3s $ease-in-back 1.7s forwards;
   }
   &.m-logo-stroke-up {
-    animation: fadeInUp .3s $ease-out-back .2s both,
-               fadeOutDown .3s $ease-in-back 1.6s forwards;
+    animation: fadeInUp100 .3s $ease-out-back .2s both,
+               fadeOutDown100 .3s $ease-in-back 1.6s forwards;
   }
 }
 

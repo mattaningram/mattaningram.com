@@ -1,0 +1,24 @@
+---
+layout: page
+---
+
+<div class="header-background-wrap">
+  <div class="header-background-gradient" style="background-image: -webkit-linear-gradient(left top, {{ page.color1 }}, {{ page.color2 }}); background-image: linear-gradient(to left top, {{ page.color1 }}, {{ page.color2 }});">
+  </div>
+  <div class="header-background-gradient-cover"></div>
+</div>
+
+<div class="page-header">
+  {% if page.logo %}
+    <img class="page-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
+  {% else %}
+    <h1 class="page-title">{{ page.title }}</h1>
+  {% endif %}
+  <span class="page-description">{{ page.position }} • {{ page.year }}</span>
+</div>
+
+<div class="grab-copy-wrap">
+  <p class="job-description grab-copy">{{ page.description }}</p>
+</div>
+
+{{ content }}
