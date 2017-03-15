@@ -45,7 +45,7 @@ svg:not(:root) {
   position: relative;
   margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .my-name {
@@ -84,25 +84,17 @@ svg:not(:root) {
   position: relative;
 }
 
-//MAIN PAGE CONTENT
-
-.section-header-title {
-  margin-bottom: 30px;
-  line-height: 1;
-  font-size: 2.2em;
-  text-align: center;
-}
-
 .section-wrap {
   margin: 0 auto;
   margin-bottom: 40px;
-  width: 640px;
-  max-width: 100%;
 }
 
 //PAGE HEADER
 
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   padding: 20px;
   .m-logo-wrap {
     margin: 0;

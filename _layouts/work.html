@@ -9,10 +9,10 @@ layout: page
     {% else %}
       <h1 class="page-title">{{ page.title }}</h1>
     {% endif %}
-    <h2 class="page-description">{{ page.position }} • {{ page.year }}</h2>
+    <span class="page-description">{{ page.position }} • {{ page.year }}</span>
   </div>
 
-  <p class="job-description page-copy">{{ page.description }}</p>
+  <p class="job-description grab-copy">{{ page.description }}</p>
 
   {{ content }}
 </div>

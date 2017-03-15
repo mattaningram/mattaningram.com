@@ -1,0 +1,31 @@
+//ABOUT PAGE
+
+.about-wrap {
+  .page-title-wrap {
+    visibility: hidden;
+  }
+}
+
+.about-sections-wrap {
+  @include clearfix;
+}
+
+.about-section {
+  width: 80%;
+  float: left;
+  @include mq($until: tablet) {
+    width: auto;
+  }
+}
+
+.about-image {
+  max-width: 700px;
+  width: 70%;
+  height: auto;
+  position: fixed;
+  bottom: 0;
+  opacity: 0.15;
+  z-index: -1;
+  left: 70%;
+  transform: translateX(-50%);
+}

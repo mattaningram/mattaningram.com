@@ -1,12 +1,16 @@
 ---
 layout: page
+title: work
 permalink: work/
 ---
 
-<div class="section-wrap work-wrap">
-  <h2 class="section-header-title">Work</h2>
-  <div class="work-items">
-    {% for work in site.work limit:5 %}
+<div class="page-title-wrap">
+  <h1 class="page-title">Work</h1>
+</div>
+
+<div class="work-item-list">
+  {% for work in site.work limit:5 %}
+    <div class="work-item-wrap">
       <a class="work-item {{ work.title | downcase }}-work-item" href="{{ work.url }}"
       style="background-image: -webkit-linear-gradient(right bottom, {{ work.color1 }}, {{ work.color2 }});
               background-image: linear-gradient(to left top, {{ work.color1 }}, {{ work.color2 }});">
@@ -21,6 +25,7 @@ permalink: work/
         <div class="item-shadow-1" style="background-color: {{ work.color1 }};"></div>
         <div class="item-shadow-2" style="background-color: {{ work.color1 }};"></div>
       </a>
-    {% endfor %}
-  </div>
+    </div>
+
+  {% endfor %}
 </div>

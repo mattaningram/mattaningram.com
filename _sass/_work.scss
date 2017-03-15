@@ -1,11 +1,37 @@
+
+
+.job-description {
+  font-size: 1.1em;
+}
+
+.work-item-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.work-item-wrap {
+  flex-grow: 1;
+  min-width: 300px;
+  min-height: 200px;
+  margin: 0 15px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
 .work-item {
   display: block;
-  height: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 10px;
-  margin-bottom: 30px;
   text-align: center;
   text-decoration: none;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

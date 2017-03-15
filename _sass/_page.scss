@@ -5,6 +5,20 @@
   margin: 0 auto;
 }
 
+.page-title-wrap {
+  height: 25vh;
+  padding-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-title {
+  font-size: 2.2em;
+  font-weight: 600;
+  text-align: center;
+}
+
 .page-logo {
   width: 240px;
   margin: 0 auto;
@@ -30,45 +44,23 @@
   letter-spacing: .025em;
 }
 
+.grab-copy-wrap {
+  min-height: 60vh;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.grab-copy {
+  font-size: 2em;
+  @include mq($until: tablet) {
+    font-size: 1.4em;
+  }
+}
+
 .page-copy {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-}
-
-//ABOUT PAGE
-
-.about-wrap {
-  width: 720px;
-  padding: 0 20px;
-  .section-header-title {
-    margin-bottom: 40px;
-  }
-}
-
-.about-sections-wrap {
-  @include clearfix;
-}
-
-.about-section {
-  width: 50%;
-  float: left;
-  &:first-child {
-    padding-right: 15px;
-  }
-  &:last-child {
-    padding-left: 15px;
-  }
-  @include mq($until: tablet) {
-    width: auto;
-    &:first-child, &:last-child {
-      padding: 0;
-    }
-  }
-}
-
-//WORK PAGE
-
-.job-description {
-  font-size: 1.1em;
 }
