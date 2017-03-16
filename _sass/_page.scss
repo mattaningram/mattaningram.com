@@ -7,11 +7,14 @@
 
 .page-header {
   height: 300px;
-  padding-top: 40px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @include mq($until: tablet) {
+    padding-top: 40px;
+  }
 }
 
 .header-background-wrap {
@@ -107,4 +110,28 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+//Image Carousel
+
+.image-carousel {
+  list-style: none;
+  overflow-x: scroll;
+  padding: 30px 20px;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-item {
+  display: inline-block;
+  max-width: 300px;
+  height: auto;
+  vertical-align: top;
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+.carousel-image {
+  width: 100%;
 }
