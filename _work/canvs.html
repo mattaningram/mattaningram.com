@@ -10,18 +10,31 @@ description: Canvs is an industry leading emotion measurement and analysis compa
 ---
 
 <div class="image-carousel-wrap">
-  <ul class="image-carousel">
+  <ul class="image-carousel" style="color: {{ page.color1 }};">
     <li class="carousel-item">
-      <img class="carousel-image" src="/assets/images/canvs/canvs-series-page-1.jpg" />
+      <a class="no-outline" data-fancybox="canvs1" href="/assets/images/canvs/canvs-series-page-1.jpg">
+        <img class="carousel-image" src="/assets/images/canvs/canvs-series-page-1-thumb.jpg" />
+      </a>
     </li>
     <li class="carousel-item">
-      <img class="carousel-image" src="/assets/images/canvs/canvs-old-home-page.jpg" />
+      <a class="no-outline" data-fancybox="canvs1" href="/assets/images/canvs/canvs-compare-page.jpg">
+        <img class="carousel-image" src="/assets/images/canvs/canvs-compare-page-thumb.jpg" />
+      </a>
     </li>
     <li class="carousel-item">
-      <img class="carousel-image" src="/assets/images/canvs/canvs-search.jpg" />
+      <a class="no-outline" data-fancybox="canvs1" href="/assets/images/canvs/canvs-search.jpg">
+        <img class="carousel-image" src="/assets/images/canvs/canvs-search-thumb.jpg" />
+      </a>
     </li>
     <li class="carousel-item">
-      <img class="carousel-image" src="/assets/images/canvs/canvs-compare-page.jpg" />
+      <a class="no-outline" data-fancybox="canvs1" href="/assets/images/canvs/canvs-old-home-page.jpg">
+        <img class="carousel-image" src="/assets/images/canvs/canvs-old-home-page-thumb.jpg" />
+      </a>
+    </li>
+    <li class="carousel-item">
+      <a class="no-outline" class="canvs-lightbox-1" href="/assets/images/canvs/canvs-old-series-page.jpg">
+        <img class="carousel-image" src="/assets/images/canvs/canvs-old-series-page-thumb.jpg" />
+      </a>
     </li>
   </ul>
 </div>
@@ -31,3 +44,17 @@ description: Canvs is an industry leading emotion measurement and analysis compa
 <p class="page-copy">Everything starts with a sketch, followed by more sketches, iterating towards a solution. Whether it's a new data-insight component or an interactive D3 generated chart, my goal is to communicate to my fellow designers and team leads what problem we are trying to solve, how we might solve it, and the benefits or downsides of each approach. In short order a clear direction emerges.</p>
 
 <p class="page-copy">Once everyone involved was on the same page, I jumped to prototyping the feature in HTML/CSS while one of my talented designers developed its aesthetics and details in Sketch. In a startup of less than 30 people with limited resources, the typical user interface development process is compressed and overlaps.</p>
+
+<script>
+  function canvsLoaded() {
+    $('[data-fancybox="canvs1"]').fancybox({
+      infobar : false,
+    	slideShow  : false,
+    	fullScreen : false,
+    	thumbs     : false,
+    	closeBtn   : true,
+    });
+  }
+
+  window.onload = canvsLoaded;
+</script>

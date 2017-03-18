@@ -114,6 +114,10 @@
 
 //Image Carousel
 
+.image-carousel-wrap {
+  margin-bottom: 40px;
+}
+
 .image-carousel {
   list-style: none;
   overflow-x: scroll;
@@ -127,8 +131,22 @@
   max-width: 300px;
   height: auto;
   vertical-align: top;
+  line-height: 0;
+  position: relative;
   &:not(:last-child) {
     margin-right: 30px;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 90%;
+    height: 100%;
+    top: 0;
+    left: 5%;
+    opacity: .5;
+    background-color: currentColor;
+    box-shadow: 0 10px 15px currentColor;
   }
 }
 
