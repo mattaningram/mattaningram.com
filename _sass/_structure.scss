@@ -4,6 +4,7 @@ html {
 
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 svg {
@@ -100,11 +101,20 @@ a.no-outline:focus {
   z-index: 100;
   top: 0;
   left: 0;
-  padding: 20px;
+  padding: $paddingMd;
+  transition: all .15s $ease-out-quad;
   .m-logo-wrap {
+    transition: all .15s $ease-out-quad;
     margin: 0;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+  }
+  @include mq($until: tablet) {
+    padding: $paddingSm;
+    .m-logo-wrap {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
 
@@ -112,12 +122,12 @@ a.no-outline:focus {
 
 .section-wrap {
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: $marginLg;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: $marginLg;
 }
 
 .section-title {
