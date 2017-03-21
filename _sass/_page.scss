@@ -194,10 +194,14 @@
   padding: $paddingMd $paddingSm;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .carousel-item {
   display: inline-block;
+  min-width: 300px;
   max-width: 300px;
   height: auto;
   vertical-align: top;

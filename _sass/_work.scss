@@ -120,24 +120,34 @@
 
 //CANVS
 
+.canvs-image-row-1 {
+  @include mq($until: 1660px) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
 .canvs-page-copy-1 {
   .page-copy-image {
     &:nth-child(1) {
       top: 20%;
       left: 0;
       width: 45vw;
+      max-width: 600px;
     }
     &:nth-child(2) {
-      top: 40%;
+      bottom: 0;
       left: 20%;
       width: 40vw;
       z-index: -1;
+      max-width: 600px;
     }
     &:nth-child(3) {
-      top: -10%;
       left: 50%;
       width: 40vw;
       z-index: -2;
+      max-width: 600px;
     }
   }
   @include mq($until: tablet) {
