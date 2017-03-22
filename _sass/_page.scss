@@ -30,7 +30,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 500px;
 }
 
 .header-background-gradient-cover {
@@ -38,7 +38,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 500px;
   background-image: linear-gradient(to bottom, transparentize($bg-color, .25), $bg-color);
 }
 
@@ -58,6 +58,10 @@
   display: block;
   opacity: 0;
   animation: fadeInUp .4s $ease-out-quad .4s both;
+}
+
+.grab-copy, .page-copy, .page-copy-header {
+  color: white;
 }
 
 .page-description {
@@ -100,18 +104,46 @@
   margin-bottom: 15px;
   font-weight: 500;
   letter-spacing: .025em;
+  align-self: flex-start;
 }
 
 .page-copy-section {
   max-width: 900px;
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: $marginLg;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
+  @include mq($until: tablet) {
+    margin-bottom: $marginLg * 2;
+  }
+  .page-copy-wrap {
+    margin-bottom: 0;
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      opacity: 0.15;
+      top: -40px;
+      left: -10px;
+      bottom: -40px;
+      right: -10px;
+      background-color: currentColor;
+      @include mq($until: tablet) {
+        top: -30px;
+        bottom: -100px;
+      }
+    }
+  }
   &.page-copy-right, &.page-copy-left {
     justify-content: flex-start;
+    .page-copy {
+      max-width: 400px;
+    }
+    @include mq($from: tablet) {
+      min-height: 100vh;
+    }
     @include mq($until: tablet) {
       .page-copy {
         margin-right: 0;
@@ -123,12 +155,17 @@
       }
     }
   }
-  @include mq($from: tablet) {
-    min-height: 100vh;
-  }
 }
 
 .page-copy-left {
+  .page-copy-wrap {
+    &:before {
+      right: -50%;
+      @include mq($until: tablet) {
+        right: -10px;
+      }
+    }
+  }
   .page-copy-image-wrap {
     margin-left: 10%;
   }
@@ -138,6 +175,14 @@
 }
 
 .page-copy-right {
+  .page-copy-wrap {
+    &:before {
+      left: -50%;
+      @include mq($until: tablet) {
+        left: -10px;
+      }
+    }
+  }
   .page-copy-image-wrap {
     margin-right: 10%;
   }
@@ -147,19 +192,17 @@
 }
 
 .page-copy-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   padding: 0 $paddingMd;
+  margin-bottom: $marginLg;
   .page-copy {
     padding: 0;
     margin: 0;
-    margin-bottom: 40px;
   }
 }
 
 .page-copy {
-  width: 400px;
+  max-width: 700px;
   @include mq($until: tablet) {
     min-width: 100%;
     padding: 0 $paddingSm;
@@ -169,6 +212,7 @@
 .page-copy-image-wrap {
   position: relative;
   flex-grow: 1;
+  align-self: stretch;
 }
 
 .page-copy-image {
@@ -251,13 +295,6 @@
   @include mq($until: desktop) {
     flex-wrap: wrap;
   }
-}
-
-.image-grid-section {
-  display: flex;
-  // @include mq($until: tablet) {
-  //   display: block;
-  // }
 }
 
 .image-grid-item {
