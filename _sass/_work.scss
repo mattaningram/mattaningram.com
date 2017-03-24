@@ -153,17 +153,18 @@
   @include mq($until: tablet) {
     .page-copy-image {
       &:nth-child(1) {
-        left: 60%;
+        left: -25%;
         width: 60%;
       }
       &:nth-child(2) {
         left: 20%;
+        top: 0;
         margin-top: -25%;
         width: 60%;
         max-height: initial;
       }
       &:nth-child(3) {
-        left: -15%;
+        left: 68%;
         margin-top: -92%;
         width: 50%;
       }
@@ -194,24 +195,13 @@
       right: 50%;
       max-width: 400px;
     }
-    // &:nth-child(5) {
-    //   top: 40%;
-    //   right: 0;
-    //   max-width: 400px;
-    // }
-    // &:nth-child(6) {
-    //   bottom: 0;
-    //   right: 5%;
-    //   max-width: 640px;
-    //   z-index: -1;
-    // }
   }
   @include mq($until: tablet) {
     .page-copy-image {
       &:nth-child(1) {
       }
       &:nth-child(2) {
-        margin-top: -230px;
+        margin-top: -210px;
         margin-left: 70vw;
         right: auto;
         width: 250px;
@@ -227,9 +217,19 @@
         left: 10%;
         right: auto;
         margin-top: -25%;
-        max-width: 50vw;
+        max-width: 60vw;
         z-index: 1;
       }
+    }
+  }
+}
+
+//MECHOSYSTEMS
+
+.mecho-image-row-1 {
+  @include mq($until: 1660px) {
+    .image-carousel {
+      display: block;
     }
   }
 }
