@@ -108,12 +108,28 @@
   margin: 0 auto;
 }
 
+.page-section {
+  padding: 0 $paddingLg / 2;
+  @include mq($until: desktop) {
+    padding: 0 $paddingMd / 2;
+  }
+  @include mq($until: tablet) {
+    padding: 0 $paddingSm / 2;
+  }
+}
+
 .page-section-item {
-  padding: $paddingSm;
-  margin-bottom: $marginLg;
   flex-grow: 1;
-  margin: $marginSm;
-  margin-top: 0;
+  padding: $paddingLg;
+  margin: $marginLg / 2;
+  @include mq($until: desktop) {
+    padding: $paddingMd;
+    margin: $marginMd / 2;
+  }
+  @include mq($until: tablet) {
+    padding: $paddingSm;
+    margin: $marginSm / 2;
+  }
 }
 
 .page-section-item-themed {
@@ -127,20 +143,46 @@
   align-self: flex-start;
 }
 
+.page-copy-wrap {
+  position: relative;
+  padding: $paddingLg;
+  margin: $marginLg / 2;
+  margin-top: 0;
+  .page-copy {
+    padding: 0;
+    margin: 0;
+  }
+  @include mq($until: desktop) {
+    padding: $paddingMd;
+    margin: $marginMd / 2;
+    margin-top: 0;
+  }
+  @include mq($until: tablet) {
+    padding: $paddingSm;
+    margin: $marginSm / 2;
+    margin-top: 0;
+  }
+}
+
+.page-copy {
+  @include mq($until: tablet) {
+    min-width: 100%;
+    padding: 0 $paddingSm;
+  }
+}
+
 .page-section {
   max-width: 900px;
   margin: 0 auto;
   margin-bottom: $marginLg;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
   @include mq($until: tablet) {
-    justify-content: space-between;
     margin-bottom: $marginLg * 2;
   }
   .page-copy-wrap {
-    margin-bottom: 0;
     &:before {
       content: "";
       position: absolute;
@@ -153,8 +195,11 @@
     }
   }
   &.page-copy-left, &.page-copy-right {
+    .page-copy-wrap {
+      margin-bottom: 0;
+    }
     .page-copy {
-      max-width: 400px;
+      max-width: 440px;
     }
     @include mq($from: tablet) {
       min-height: 100vh;
@@ -203,6 +248,7 @@
 
 .page-copy-top {
   .page-copy-wrap {
+    margin-bottom: 0;
     &:before {
       bottom: -40px;
     }
@@ -211,6 +257,7 @@
 
 .page-copy-bottom {
   .page-copy-wrap {
+    margin-top: 0;
     &:before {
       top: -40px;
     }
@@ -246,30 +293,6 @@
   }
   @include mq($from: tablet) {
     flex-direction: row-reverse;
-  }
-}
-
-.page-copy-wrap {
-  position: relative;
-  padding: $paddingLg;
-  // margin: 0 $marginSm;
-  margin-bottom: $marginLg;
-  .page-copy {
-    padding: 0;
-    margin: 0;
-  }
-  @include mq($until: desktop) {
-    padding: $paddingMd;
-  }
-  @include mq($until: mobile) {
-    padding: $paddingSm;
-  }
-}
-
-.page-copy {
-  @include mq($until: tablet) {
-    min-width: 100%;
-    padding: 0 $paddingSm;
   }
 }
 
