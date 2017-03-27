@@ -15,8 +15,8 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
 
-  <script src="//use.typekit.net/jnf8fnh.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+  <script src="https://use.typekit.net/jnf8fnh.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
   {% if jekyll.environment == 'production' %}
     {% include google-analytics.html %}

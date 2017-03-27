@@ -100,14 +100,6 @@
   }
 }
 
-.page-section-item-wrap {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
 .page-section {
   padding: 0 $paddingLg / 2;
   @include mq($until: desktop) {
@@ -172,7 +164,7 @@
 }
 
 .page-section {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
   margin-bottom: $marginLg;
   display: flex;
@@ -248,6 +240,7 @@
 
 .page-copy-top {
   .page-copy-wrap {
+    width: 100%;
     margin-bottom: 0;
     &:before {
       bottom: -40px;
@@ -257,6 +250,7 @@
 
 .page-copy-bottom {
   .page-copy-wrap {
+    width: 100%;
     margin-top: 0;
     &:before {
       top: -40px;
@@ -310,6 +304,23 @@
     position: relative;
     float: left;
   }
+}
+
+.page-copy-video-wrap {
+  margin: 0 $marginLg / -2;
+  @include mq($until: desktop) {
+    margin: 0 $marginMd / -2;
+  }
+  @include mq($until: tablet) {
+    margin: 0 $marginSm / -2;
+  }
+}
+
+.page-copy-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: $shadowMd;
 }
 
 .copy-list-header {
@@ -400,18 +411,15 @@
 }
 
 .image-grid-item {
-  margin: 0 20px;
-  margin-bottom: 20px;
+  margin: 20px;
+  margin-top: 0;
   display: flex;
   justify-content: center;
-  @include mq($until: desktop) {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 }
 
 .grid-image {
-  max-height: 200px;
+  display: block;
+  height: 200px;
   width: auto;
   box-shadow: $shadowMd;
 }
