@@ -1,0 +1,29 @@
+.parallaxM__yellowM, .parallaxM__purpleRect, .parallaxM__whiteDot {
+  transform-origin: center center;
+  transition: opacity .3s linear;
+}
+
+.animated {
+  .parallaxM__yellowM {
+    animation: fadeInShrink .3s $ease-out-back both;
+  }
+
+  .parallaxM__purpleRect {
+    animation: fadeInPurpleRect .3s $ease-out-back .25s both;
+  }
+
+  .parallaxM__whiteDot {
+    animation: fadeInGrow .3s $ease-out-back .5s both;
+  }
+}
+
+@keyframes fadeInPurpleRect {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 0.65;
+    transform: none;
+  }
+}
