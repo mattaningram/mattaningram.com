@@ -1,9 +1,19 @@
-function generateRandomM() {
-  $.getJSON("/assets/m-search.json", function (data) {
+var mLogos;
+var mLogosRemaining;
 
-    var randIndex = Math.floor( Math.random() * data.length );
-    $(".m-logo-wrap").load(data[randIndex].url);
-  });
+$.getJSON("/assets/m-search.json", function (data) {
+  mLogos = data;
+  mLogosRemaining = data.slice();
+});
+
+function generateRandomM() {
+  var randIndex = Math.floor( Math.random() * mLogosRemaining.length );
+  $(".m-logo-wrap").load(mLogosRemaining[randIndex].url);
+  mLogosRemaining.splice(randIndex, 1);
+
+  if ( mLogosRemaining.length === 0 ) {
+    mLogosRemaining = mLogos.slice();
+  }
 }
 
 $(document).ready(function() {
