@@ -112,6 +112,7 @@
 
 .page-section-item {
   flex-grow: 1;
+  width: 300px;
   padding: $paddingLg;
   margin: $marginLg / 2;
   @include mq($until: desktop) {
@@ -218,7 +219,7 @@
 .page-copy-top, .page-copy-bottom, .page-copy-alone {
   .page-copy {
     column-width: 300px;
-    column-gap: 40px;
+    column-gap: $marginLg;
   }
 }
 
@@ -286,19 +287,22 @@
   box-shadow: $shadowMd;
 }
 
-.copy-list-header {
-  margin-bottom: $marginSm;
+.list-header {
+  margin-bottom: 15px;
 }
 
-.copy-list {
-  width: 250px;
+.skill-list {
   max-width: 100%;
-  padding-left: 20px;
+  list-style: none;
 }
 
-.copy-list-item {
-  margin-bottom: .6em;
-  line-height: 1.3;
+.skill-list-item {
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 0 5px;
+  background-color: currentColor;
+  font-size: 0.8em;
 }
 
 //Image Carousel
