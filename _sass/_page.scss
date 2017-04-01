@@ -112,6 +112,7 @@
 
 .page-section-item {
   flex-grow: 1;
+  width: 300px;
   padding: $paddingLg;
   margin: $marginLg / 2;
   @include mq($until: desktop) {
@@ -218,7 +219,7 @@
 .page-copy-top, .page-copy-bottom, .page-copy-alone {
   .page-copy {
     column-width: 300px;
-    column-gap: 40px;
+    column-gap: $marginLg;
   }
 }
 
@@ -287,7 +288,7 @@
 }
 
 .list-header {
-  margin-bottom: $marginSm;
+  margin-bottom: 15px;
 }
 
 .skill-list {
@@ -297,13 +298,12 @@
 }
 
 .skill-list-item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-  background-color: currentColor;
-  display: inline-block;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
   padding: 0 5px;
-  font-size: 0.9em;
-  // border-radius: 4px;
+  background-color: currentColor;
+  font-size: 0.8em;
 }
 
 //Image Carousel
