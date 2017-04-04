@@ -6,7 +6,7 @@
 
 .work-item-list {
   margin: 0 auto;
-  padding: 0 calc((100% - 930px) / 2);
+  max-width: 900px;
   padding-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
@@ -21,14 +21,13 @@
   max-width: 400px;
   min-width: 300px;
   height: 200px;
-  margin: 0 40px;
-  margin-bottom: 40px;
+  margin: 0 $marginSm;
+  margin-bottom: $marginLg;
   position: relative;
   transform-style: preserve-3d;
   @include mq($until: tablet) {
-    margin: 0 20px;
-    margin-bottom: 40px;
-    min-width: 280px;
+    margin: 0 $marginMd;
+    margin-bottom: $marginLg;
   }
   &:hover {
     .work-item {

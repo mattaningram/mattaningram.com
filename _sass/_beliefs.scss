@@ -7,8 +7,10 @@
 }
 
 .belief-item {
-  padding: $marginMd;
-  padding-top: 0;
+  padding: 0 $marginMd;
+  &:not(:last-child) {
+    margin-bottom: $marginLg;
+  }
   width: 280px;
   flex-grow: 1;
 }
@@ -20,4 +22,5 @@
 
 .belief-item-copy {
   font-size: 0.8em;
+  margin: 0;
 }

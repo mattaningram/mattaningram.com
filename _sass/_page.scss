@@ -94,9 +94,11 @@
   font-size: 1.8em;
   padding: 0 $paddingMd;
   margin-bottom: 0;
-  @include mq($until: tablet) {
-    padding: 0 $paddingSm;
+  @include mq($until: desktop) {
     font-size: 1.4em;
+  }
+  @include mq($until: tablet) {
+    font-size: 1.2em;
   }
 }
 
