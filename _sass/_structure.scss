@@ -163,7 +163,7 @@ a.no-outline:focus {
   position: relative;
   &:before {
     content: "";
-    background-color: transparentize($primaryRed, .75);
+    background-color: transparentize($primaryRed, .6);
     position: absolute;
     z-index: -1;
     bottom: .15em;
@@ -175,6 +175,7 @@ a.no-outline:focus {
   &:hover {
     &:before {
       height: 1em;
+      background-color: transparentize($primaryRed, .75);
     }
     .gif-hover-image {
       animation: tvOn .4s ease-in-out both;
