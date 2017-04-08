@@ -152,3 +152,53 @@ a.no-outline:focus {
     transform: scale(1.25);
   }
 }
+
+//HOVER GIFS
+
+.gif-hover {
+  cursor: pointer;
+  position: relative;
+  &:before {
+    content: "";
+    background-color: transparentize($primaryRed, .75);
+    position: absolute;
+    z-index: -1;
+    bottom: .15em;
+    left: 0;
+    right: 0;
+    height: .25em;
+    transition: all .15s ease-out;
+  }
+  &:hover {
+    &:before {
+      height: 1em;
+    }
+    .gif-hover-image {
+      animation: tvOn .4s ease-in-out both;
+    }
+  }
+}
+
+.gif-hover-image {
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+
+@keyframes tvOn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0, 0);
+  }
+  65% {
+    opacity: .5;
+    transform: translate(-50%, -50%) scale(1, .05);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+}
