@@ -5,6 +5,9 @@ html {
 body {
   margin: 0;
   overflow: hidden;
+  @include mq($until: tablet) {
+    cursor: pointer;
+  }
 }
 
 svg {
