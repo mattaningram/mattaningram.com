@@ -65,7 +65,77 @@ a.no-outline:focus {
   color: rgba(255,255,255,0.75);
   font-size: 1.1em;
   font-weight: 200;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.my-email {
+  display: block;
+  text-align: center;
+  width: 180px;
+  padding: 10px;
+  margin: 0 auto;
+  text-decoration: none;
+  font-weight: 400;
+  position: relative;
+  opacity: 1;
+  background-color: transparent;
+  box-shadow: 0 0 0 transparent;
+  transition: all .2s ease-out;
+  &:before, &:after {
+    content: "";
+    background-color: currentColor;
+    opacity: 0.25;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all .2s $ease-out-back;
+  }
+  &:after {
+    opacity: 0;
+  }
+  &:hover {
+    background-color: currentColor;
+    &:before {
+      opacity: .15;
+      left: 16px;
+      right: 16px;
+      transform: translate(0, 16px);
+    }
+    &:after {
+      opacity: 0.35;
+      left: 8px;
+      right: 8px;
+      transform: translate(0, 8px);
+    }
+    .my-email-text {
+      color: $bg-color;
+    }
+  }
+  &:active {
+    &:before {
+      top: -16px;
+      left: -16px;
+      right: -16px;
+      bottom: -16px;
+      transform: translate(0, 0);
+    }
+    &:after {
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      transform: translate(0, 0);
+    }
+  }
+}
+
+.my-email-text {
+  color: currentColor;
+  transition: all .2s ease-out;
+  z-index: 10;
+  position: relative;
 }
 
 .social-links-wrap {
