@@ -4,6 +4,7 @@ var jobTitles = [ 'UX Designer',
                   'Visual Designer',
                   'Digital Designer',
                   'Product Designer',
+                  'Data Visualizer',
                   'Digital Product Designer',
                   'Front End Designer',
                   'Web Designer'];
