@@ -5,6 +5,9 @@ html {
 body {
   margin: 0;
   overflow: hidden;
+  @include mq($until: tablet) {
+    cursor: pointer;
+  }
 }
 
 svg {
@@ -128,6 +131,12 @@ a.no-outline:focus {
 
 //FOOTER
 
+.footer-text {
+  font-size: .8em;
+  opacity: 0.75;
+  color: white;
+}
+
 .social-icon-wrap {
   display: flex;
   align-items: center;
@@ -152,3 +161,93 @@ a.no-outline:focus {
     transform: scale(1.25);
   }
 }
+
+//HOVER GIFS
+
+.gif-hover {
+  cursor: pointer;
+  position: relative;
+  &:before {
+    content: "";
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1, 0);
+    transition: all .2s $ease-out-back;
+  }
+  &:after {
+    content: "";
+    background-color: transparentize($primaryRed, .6);
+    position: absolute;
+    z-index: -1;
+    bottom: .15em;
+    left: 0;
+    right: 0;
+    height: .25em;
+    transition: all .15s ease-out;
+  }
+  &:hover {
+    &:before {
+      content: "";
+      width: 388px;
+      height: 291px;
+      background-image: url("/assets/gifs/1984mac.gif");
+      position: absolute;
+      z-index: -2;
+      opacity: 1;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1, 1);
+      pointer-events: none;
+    }
+    &:after {
+      height: 1em;
+      background-color: transparentize($primaryRed, .75);
+    }
+    // .gif-hover-image {
+    //   animation: tvOn .4s ease-in-out both;
+    // }
+  }
+}
+
+.gif-hover-topgun {
+  &:hover {
+    &:before {
+      width: 480px;
+      height: 241px;
+      background-image: url("/assets/gifs/topgun.gif");
+    }
+  }
+}
+
+.gif-hover-sesame {
+  &:hover {
+    &:before {
+      width: 480px;
+      height: 360px;
+      background-image: url("/assets/gifs/sesame.gif");
+    }
+  }
+}
+
+.gif-hover-image {
+  position: absolute;
+  z-index: -2;
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+
+// @keyframes tvOn {
+//   0% {
+//     opacity: 0;
+//     transform: translate(-50%, -50%) scale(0, 0);
+//   }
+//   65% {
+//     opacity: .5;
+//     transform: translate(-50%, -50%) scale(1, .05);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translate(-50%, -50%) scale(1, 1);
+//   }
+// }
