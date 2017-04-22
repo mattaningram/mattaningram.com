@@ -72,48 +72,44 @@ a.no-outline:focus {
   display: block;
   text-align: center;
   width: 180px;
-  padding: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   text-decoration: none;
   font-weight: 400;
   position: relative;
-  opacity: 1;
-  background-color: transparent;
+  background-color: currentColor;
   box-shadow: 0 0 0 transparent;
-  transition: all .2s ease-out;
+  transition: all .25s ease-out;
+  .my-email-text {
+    color: $bg-color;
+    font-size: 0.85em;
+  }
   &:before, &:after {
     content: "";
     background-color: currentColor;
-    opacity: 0.25;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    transition: all .2s $ease-out-back;
+    transition: all .25s $ease-out-back;
+  }
+  &:before {
+    opacity: 0.15;
+    left: 16px;
+    right: 16px;
+    transform: translate(0, 10px);
   }
   &:after {
-    opacity: 0;
+    opacity: 0.35;
+    left: 8px;
+    right: 8px;
+    transform: translate(0, 5px);
   }
   &:hover {
-    background-color: currentColor;
-    &:before {
-      opacity: .15;
-      left: 16px;
-      right: 16px;
-      transform: translate(0, 16px);
-    }
-    &:after {
-      opacity: 0.35;
-      left: 8px;
-      right: 8px;
-      transform: translate(0, 8px);
-    }
-    .my-email-text {
-      color: $bg-color;
-    }
-  }
-  &:active {
     &:before {
       top: -16px;
       left: -16px;
@@ -126,6 +122,22 @@ a.no-outline:focus {
       left: -8px;
       right: -8px;
       bottom: -8px;
+      transform: translate(0, 0);
+    }
+  }
+  &:active {
+    &:before {
+      top: -32px;
+      left: -32px;
+      right: -32px;
+      bottom: -32px;
+      transform: translate(0, 0);
+    }
+    &:after {
+      top: -16px;
+      left: -16px;
+      right: -16px;
+      bottom: -16px;
       transform: translate(0, 0);
     }
   }
@@ -218,7 +230,6 @@ a.no-outline:focus {
 .social-icon {
   width: 20px;
   display: inline-block;
-  opacity: .7;
   transition: all .2s ease-out;
   &:not(:last-child) {
     margin-right: 10px;
@@ -227,7 +238,6 @@ a.no-outline:focus {
     fill: currentColor;
   }
   &:hover {
-    opacity: 1;
     transform: scale(1.25);
   }
 }
@@ -237,6 +247,7 @@ a.no-outline:focus {
 .gif-hover {
   cursor: pointer;
   position: relative;
+  white-space: nowrap;
   &:before {
     content: "";
     opacity: 0;
@@ -245,7 +256,7 @@ a.no-outline:focus {
   }
   &:after {
     content: "";
-    background-color: transparentize($primaryRed, .6);
+    background-color: transparentize($primaryBlue, .6);
     position: absolute;
     z-index: -1;
     bottom: .15em;
@@ -267,14 +278,12 @@ a.no-outline:focus {
       top: 50%;
       transform: translate(-50%, -50%) scale(1, 1);
       pointer-events: none;
+      box-shadow: inset 0 0 50px 30px $bg-color;
+      border-radius: 20px;
     }
     &:after {
       height: 1em;
-      background-color: transparentize($primaryRed, .75);
     }
-    // .gif-hover-image {
-    //   animation: tvOn .4s ease-in-out both;
-    // }
   }
 }
 
@@ -297,27 +306,3 @@ a.no-outline:focus {
     }
   }
 }
-
-.gif-hover-image {
-  position: absolute;
-  z-index: -2;
-  opacity: 0;
-  left: 50%;
-  top: 50%;
-  pointer-events: none;
-}
-
-// @keyframes tvOn {
-//   0% {
-//     opacity: 0;
-//     transform: translate(-50%, -50%) scale(0, 0);
-//   }
-//   65% {
-//     opacity: .5;
-//     transform: translate(-50%, -50%) scale(1, .05);
-//   }
-//   100% {
-//     opacity: 1;
-//     transform: translate(-50%, -50%) scale(1, 1);
-//   }
-// }

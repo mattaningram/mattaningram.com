@@ -7,7 +7,6 @@ layout: home
     <div class="m-logo-wrap"></div>
     <h1 class="my-name">Mattan Ingram</h1>
     <h2 class="my-description">Digital Product Designer</h2>
-    <a href="mailto:mattaningram@gmail.com" class="my-email" target="_blank"><span class="my-email-text">Say Hi</span></a>
   </div>
 </div>
 
@@ -56,12 +55,13 @@ layout: home
 
   <div class="work-item-list">
     {% for work in site.work limit:5 %}
-      <a class="work-item-wrap" href="{{ work.url }}" style="color: {{ work.color2 }};">
+      <a class="work-item-wrap" href="{{ work.url }}" style="color: {{ work.color }};">
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
-        <div class="work-item {{ work.title | downcase }}-work-item" style="background-image: -webkit-linear-gradient(right bottom, {{ work.color1 }}, {{ work.color2 }}); background-image: linear-gradient(to right bottom, {{ work.color1 }}, {{ work.color2 }});">
+        <div class="work-item {{ work.title | downcase }}-work-item" style="background-color: {{ work.color }};">
+          <img class="work-item-image" src="/assets/images/{{ work.title | downcase }}/{{ work.image }}" />
           <div class="work-item-contents">
             {% if work.logo %}
               <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />

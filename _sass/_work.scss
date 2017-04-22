@@ -82,7 +82,48 @@
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
+  overflow: hidden;
   transition: all .3s $ease-out-back;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    background: radial-gradient(at 15% 0%, transparent, rgba(0,0,0,0.15));
+    transition: all .5s $ease-out-quad;
+  }
+  &:after {
+    opacity: 0;
+    background: radial-gradient(at 15% 0%, rgba(255,255,255,0.25), transparent);
+  }
+  &:hover {
+    &:before {
+      opacity: 0;
+    }
+    &:after {
+      opacity: 1;
+    }
+    .work-item-image {
+      opacity: 0.2;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+}
+
+.work-item-image {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform-origin: 50% 50%;
+  transform: translateY(-50%) scale(1.15);
+  z-index: -2;
+  opacity: 0;
+  transition: all .4s ease-out;
 }
 
 .work-item-contents {
