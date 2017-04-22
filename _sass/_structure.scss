@@ -76,7 +76,8 @@ a.no-outline:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: $marginSm auto;
+  margin-top: 15px;
   text-decoration: none;
   font-weight: 400;
   position: relative;
