@@ -139,6 +139,13 @@
 .invision-frame-wrap {
   display: block;
   margin: 0 auto;
+  width: 375px;
+  height: 667px;
+  overflow: hidden;
+  iframe {
+    margin-top: -106px;
+    margin-left: -31px;
+  }
 }
 
 //CANVS
