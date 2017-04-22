@@ -20,7 +20,8 @@
   transform-style: preserve-3d;
   @include mq($until: tablet) {
     margin: 0 $marginMd;
-    margin-bottom: $marginLg;
+    margin-bottom: $marginMd;
+    height: 150px;
   }
   &:hover {
     .work-item {

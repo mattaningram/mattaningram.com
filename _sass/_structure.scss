@@ -169,6 +169,51 @@ a.no-outline:focus {
   position: relative;
 }
 
+.m-center-wrap {
+  .m-logo-wrap {
+    animation: logoWiggle 5s linear 4s infinite;
+  }
+}
+
+@keyframes logoWiggle {
+  2.5% {
+    transform: scale(1.075);
+  }
+  5% {
+    transform: scale(1.075) rotate(3deg);
+  }
+  7.5% {
+    transform: scale(1.075) rotate(-3deg);
+  }
+  10% {
+    transform: scale(1.075) rotate(3deg);
+  }
+  12.5% {
+    transform: scale(1.075) rotate(-3deg);
+  }
+  15% {
+    transform: scale(1.075) rotate(3deg);
+  }
+  17.5% {
+    transform: scale(1.075) rotate(-3deg);
+  }
+  20% {
+    transform: scale(1.075);
+  }
+  22.5% {
+    transform: scale(1.075);
+  }
+  25% {
+    transform: scale(0.975);
+  }
+  27.5% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 
 //PAGE HEADER
@@ -278,7 +323,7 @@ a.no-outline:focus {
       top: 50%;
       transform: translate(-50%, -50%) scale(1, 1);
       pointer-events: none;
-      box-shadow: inset 0 0 50px 30px $bg-color;
+      box-shadow: inset 0 0 50px 30px $bg-color, inset 0 0 0 5px $bg-color;
       border-radius: 20px;
     }
     &:after {

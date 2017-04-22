@@ -4,15 +4,24 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  @include mq($until: tablet) {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .belief-item {
-  padding: 0 $marginMd;
+  padding: 0 $paddingMd;
   &:not(:last-child) {
     margin-bottom: $marginLg;
   }
   width: 280px;
   flex-grow: 1;
+  @include mq($until: tablet) {
+    min-width: 320px;
+    padding: 0 $paddingSm;
+  }
 }
 
 .belief-item-header {
