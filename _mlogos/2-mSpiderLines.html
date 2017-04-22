@@ -17,19 +17,23 @@ layout: null
     var numLines = 240;
     var radius = 75;
     var lineWrap = $(".m-logo-random-lines");
+    var lines = [];
 
     for (var i = 0; i < numLines; i++) {
       var rand1 = -Math.PI + Math.random() * Math.PI * 2;
       var rand2 = -Math.PI + Math.random() * Math.PI * 2;
-      $(document.createElementNS('http://www.w3.org/2000/svg','line')).attr({
+      var line = $(document.createElementNS('http://www.w3.org/2000/svg','line')).attr({
         x1: 50 + radius * Math.cos(rand1),
         y1: 50 + radius * Math.sin(rand1),
         x2: 50 + radius * Math.cos(rand2),
         y2: 50 + radius * Math.sin(rand2),
         'vector-effect': 'non-scaling-stroke',
         style: 'animation-delay: ' +  (Math.random() * 1.5) + 's; opacity: ' + (0.1 + Math.random() * 0.9) + ';'
-      }).appendTo(".m-logo-random-lines");
+      });
+      lines.push(line);
     }
+
+    lineWrap.append(lines);
   })
 
 </script>

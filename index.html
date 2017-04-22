@@ -61,7 +61,6 @@ layout: home
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
         <div class="work-item {{ work.title | downcase }}-work-item" style="background-color: {{ work.color }};">
-          <img class="work-item-image" src="/assets/images/{{ work.title | downcase }}/{{ work.image }}" />
           <div class="work-item-contents">
             {% if work.logo %}
               <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />

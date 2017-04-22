@@ -107,23 +107,7 @@
     &:after {
       opacity: 1;
     }
-    .work-item-image {
-      opacity: 0.2;
-      transform: translateY(-50%) scale(1);
-    }
   }
-}
-
-.work-item-image {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  transform-origin: 50% 50%;
-  transform: translateY(-50%) scale(1.15);
-  z-index: -2;
-  opacity: 0;
-  transition: all .4s ease-out;
 }
 
 .work-item-contents {
