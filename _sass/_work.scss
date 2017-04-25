@@ -151,7 +151,7 @@
 //CANVS
 
 .canvs-image-row-1 {
-  @include mq($until: 1660px) {
+  @include mq($until: call(carousel-center, 5) ) {
     .image-carousel {
       display: block;
     }
@@ -265,6 +265,16 @@
 
 .mecho-image-row-1 {
   @include mq($until: 1660px) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//TALLY
+
+.tally-image-row-1 {
+  @include mq($until: call(carousel-center, 7) ) {
     .image-carousel {
       display: block;
     }

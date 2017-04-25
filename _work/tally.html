@@ -5,11 +5,133 @@ position: Product Designer
 logo: tally_logo_white.svg
 layout: work
 color: rgb(58, 122, 219)
-description: Tally's goal is to provide useful information about political representatives that are not limited to ideological beliefs or political sides. Tally scores representatives based on their job performance rather than their beliefs.
+description: Tally is an app that teaches you about your government representatives and their job performance. Instead of focusing just on beliefs or party, Tally scores your representatives by non-ideological factors like attendance, vote participation, and bill creation.
 ---
 
-<div class="page-section">
-  <div class="invision-frame-wrap">
-    <iframe width="438" height="930" src="//invis.io/8EAX2XU54" frameborder="0" allowfullscreen></iframe>
+<div class="tab-section-wrap">
+  <div class="tab-button-wrap" data-tabgroup="tally-demo-tabs">
+    <div class="tab-button active">
+      <a class="tab-button-link" href="#tally-invision">Interactive</a>
+    </div>
+    <div class="tab-button">
+      <a class="tab-button-link" href="#tally-slides">Slides</a>
+    </div>
+  </div>
+  <div id="tally-demo-tabs" class="tab-panel-wrap">
+    <div id="tally-invision" class="invision-frame-wrap tab-panel">
+      <iframe width="438" height="930" src="//invis.io/8EAX2XU54" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div id="tally-slides" class="image-carousel-wrap tab-panel tally-image-row-1">
+      <ul class="image-carousel">
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-reps.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rank.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-search.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-search.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-stats.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-beliefs.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-money.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-contact.jpg">
+            <img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" />
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
+
+<div class="page-section">
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Pixels</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">Sketch</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Adobe Illustrator</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">InVision</span>
+      </li>
+    </ul>
+  </div>
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Code</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">HTML</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">SASS/CSS</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">JavaScript</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">SVG</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">React</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">GitHub</span>
+      </li>
+    </ul>
+  </div>
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Web</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">Responsive Design</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Animations</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">BEM + OOCSS</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Flexbox</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<script>
+  function canvsLoaded() {
+    $('[data-fancybox="tally1"]').fancybox({
+      infobar    : false,
+    	slideShow  : false,
+    	fullScreen : false,
+    	thumbs     : false,
+    	closeBtn   : true,
+    });
+  }
+
+  window.onload = canvsLoaded;
+</script>
