@@ -264,7 +264,7 @@
 //MECHOSYSTEMS
 
 .mecho-image-row-1 {
-  @include mq($until: 1660px) {
+  @include mq($until: call(carousel-center, 5) ) {
     .image-carousel {
       display: block;
     }
@@ -275,6 +275,16 @@
 
 .tally-image-row-1 {
   @include mq($until: call(carousel-center, 7) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//TOOLSHARE
+
+.toolshare-image-row-1 {
+  @include mq($until: call(carousel-center, 6) ) {
     .image-carousel {
       display: block;
     }

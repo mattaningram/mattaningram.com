@@ -7,9 +7,55 @@ layout: work
 color: rgb(255, 194, 46)
 description: ToolShare is a design experiment given to me while interviewing with a company. My task was to create a UI and flow for a powertool sharing service in less than 8 hours.
 ---
-<div class="page-section">
-  <div class="invision-frame-wrap">
-    <iframe width="438" height="930" src="//invis.io/HDBEQ6Y36" frameborder="0" allowfullscreen></iframe>
+<div class="tab-section-wrap">
+  <div class="tab-button-wrap" data-tabgroup="toolshare-demo-tabs">
+    <div class="tab-button active">
+      <a class="tab-button-link" href="#toolshare-invision">Interactive</a>
+    </div>
+    <div class="tab-button">
+      <a class="tab-button-link" href="#toolshare-slides">Slides</a>
+    </div>
+  </div>
+
+  <div id="toolshare-demo-tabs" class="tab-panel-wrap">
+    <div id="toolshare-invision" class="invision-frame-wrap tab-panel">
+      <iframe width="438" height="930" src="//invis.io/HDBEQ6Y36" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div id="toolshare-slides" class="image-carousel-wrap tab-panel toolshare-image-row-1">
+      <ul class="image-carousel">
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-home.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-home.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-search.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-search.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-item.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-item.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-tools.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-tools.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-lend.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-lend.jpg" />
+          </a>
+        </li>
+        <li class="carousel-item">
+          <a class="no-outline" data-fancybox="toolshare1" href="/assets/images/toolshare/toolshare-cart.jpg">
+            <img class="carousel-image" src="/assets/images/toolshare/toolshare-cart.jpg" />
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -26,3 +72,17 @@ description: ToolShare is a design experiment given to me while interviewing wit
     </ul>
   </div>
 </div>
+
+<script>
+  function canvsLoaded() {
+    $('[data-fancybox="toolshare1"]').fancybox({
+      infobar    : false,
+    	slideShow  : false,
+    	fullScreen : false,
+    	thumbs     : false,
+    	closeBtn   : true,
+    });
+  }
+
+  window.onload = canvsLoaded;
+</script>
