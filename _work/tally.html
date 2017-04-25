@@ -17,10 +17,16 @@ description: Tally is an app that teaches you about your government representati
       <a class="tab-button-link" href="#tally-slides">Slides</a>
     </div>
   </div>
-  
+
   <div id="tally-demo-tabs" class="tab-panel-wrap">
-    <div id="tally-invision" class="invision-frame-wrap tab-panel">
-      <iframe width="438" height="930" src="//invis.io/8EAX2XU54" frameborder="0" allowfullscreen></iframe>
+    <div id="tally-invision" class="invision-demo-wrap tab-panel">
+      <div class="invision-frame-wrap">
+        <iframe id="tally-invision-demo" width="438" height="930" data-src="https://invis.io/8EAX2XU54" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <a class="invision-demo-link" href="https://invis.io/PGB1PTJYE#/224329090_Reps" target="_blank">
+        <img class="invision-link-screenshot" src="/assets/images/tally/tally-reps.jpg" />
+        <span class="invision-link-text">Open Interactive Demo</span>
+      </a>
     </div>
 
     <div id="tally-slides" class="image-carousel-wrap tab-panel tally-image-row-1">
@@ -135,4 +141,20 @@ description: Tally is an app that teaches you about your government representati
   }
 
   window.onload = canvsLoaded;
+</script>
+
+<script>
+  window.onresize = loadDemo;
+  window.onload = loadDemo;
+
+  var frameFrame = document.getElementById("tally-invision-demo");
+  var frameSrc = frameFrame.dataset.src;
+
+  function loadDemo() {
+    myWidth = window.innerWidth;
+    if (myWidth > 740) {
+      frameFrame.setAttribute("src", frameSrc);
+      window.onresize = null;
+    };
+  };
 </script>

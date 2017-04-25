@@ -146,6 +146,51 @@
     margin-top: -106px;
     margin-left: -31px;
   }
+  @include mq($until: tablet) {
+    display: none;
+  }
+}
+
+.invision-demo-link {
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: currentColor;
+    opacity: 0.5;
+  }
+  @include mq($from: tablet) {
+    display: none;
+  }
+}
+
+.invision-link-screenshot {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.65;
+}
+
+.invision-link-text {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 
 //CANVS
