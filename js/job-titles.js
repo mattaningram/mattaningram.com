@@ -15,17 +15,19 @@ function randomTitle() {
   var randIndex = Math.floor( Math.random() * jobTitles.length );
   var myDescription = document.getElementsByClassName('my-description')[0];
 
-  if (myDescription.innerText) {
-    myDescription.innerText = jobTitles[randIndex];
-  }
-  else if (myDescription.textContent) {
-    myspan.textContent = jobTitles[randIndex];
-  }
+  if (!!myDescription) {
+    if (myDescription.innerText) {
+      myDescription.innerText = jobTitles[randIndex];
+    }
+    else if (myDescription.textContent) {
+      myspan.textContent = jobTitles[randIndex];
+    }
 
-  titlesRemaining.splice(randIndex, 1);
+    titlesRemaining.splice(randIndex, 1);
 
-  if ( titlesRemaining.length === 0 ) {
-    titlesRemaining = jobTitles.slice();
+    if ( titlesRemaining.length === 0 ) {
+      titlesRemaining = jobTitles.slice();
+    }
   }
 }
 
