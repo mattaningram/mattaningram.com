@@ -330,6 +330,7 @@
   width: 240px;
   border: 1px solid;
   position: relative;
+  transition: background-color .2s ease-out;
   &:before {
     content: '';
     position: absolute;
