@@ -5,7 +5,7 @@ position: Product Designer
 logo: toolshare_logo_white.svg
 layout: work
 color: rgb(255, 194, 46)
-description: ToolShare is a design experiment to create a UI and basic user flow for a powertool sharing service in less than 8 hours.
+description: ToolShare is a design experiment to create a UI and basic user flow for a powertool sharing service in less than 8 hours. I had to balance my time between building out the interface and creating an appropriate aesthetic.
 ---
 <div class="tab-section-wrap">
   <div class="tab-button-wrap" data-tabgroup="toolshare-demo-tabs">
@@ -18,8 +18,15 @@ description: ToolShare is a design experiment to create a UI and basic user flow
   </div>
 
   <div id="toolshare-demo-tabs" class="tab-panel-wrap">
-    <div id="toolshare-invision" class="invision-frame-wrap tab-panel">
-      <iframe width="438" height="930" src="//invis.io/HDBEQ6Y36" frameborder="0" allowfullscreen></iframe>
+    <div id="toolshare-invision" class="invision-demo-wrap tab-panel">
+      <div class="invision-frame-wrap">
+        <iframe id="toolshare-invision-demo" width="438" height="930" data-src="https://invis.io/HDBEQ6Y36" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <a class="invision-demo-link" href="https://invis.io/AJBA7AQGE#/228779216_Home" target="_blank">
+        <img class="invision-link-screenshot" src="/assets/images/toolshare/toolshare-home.jpg" />
+        <span class="invision-link-text">Open Interactive Demo</span>
+      </a>
+
     </div>
 
     <div id="toolshare-slides" class="image-carousel-wrap tab-panel toolshare-image-row-1">
@@ -69,6 +76,9 @@ description: ToolShare is a design experiment to create a UI and basic user flow
       <li class="skill-list-item">
         <span class="list-item-text">InVision</span>
       </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Coolors</span>
+      </li>
     </ul>
   </div>
 </div>
@@ -85,4 +95,20 @@ description: ToolShare is a design experiment to create a UI and basic user flow
   }
 
   window.onload = canvsLoaded;
+</script>
+
+<script>
+  window.onresize = loadDemo;
+  window.onload = loadDemo;
+
+  var frameFrame = document.getElementById("toolshare-invision-demo");
+  var frameSrc = frameFrame.dataset.src;
+
+  function loadDemo() {
+    myWidth = window.innerWidth;
+    if (myWidth > 740) {
+      frameFrame.setAttribute("src", frameSrc);
+      window.onresize = null;
+    };
+  };
 </script>

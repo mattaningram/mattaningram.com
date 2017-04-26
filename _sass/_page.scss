@@ -31,6 +31,7 @@
   left: 0;
   right: 0;
   height: 500px;
+  background-color: currentColor;
 }
 
 .header-background-gradient-cover {
@@ -320,7 +321,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: $marginLg;
-  padding: 0 $paddingMd;
+  padding: 0 $paddingSm;
 }
 
 .tab-button {
