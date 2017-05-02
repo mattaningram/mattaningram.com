@@ -1,0 +1,30 @@
+---
+# prepare:
+#   fetch:
+#     - url: https://raw.githubusercontent.com/codeclimate/styleguide/master/sass/.scss-lint.yml
+#       path: .scss-lint.yml
+
+engines:
+  bundler-audit:
+    enabled: true
+  csslint:
+    enabled: false
+  scss-lint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.scss"
+  - "**.js"
+  - "**.jsx"
+exclude_paths: ["assets/", "_site/", "_sass/plugins/"]
