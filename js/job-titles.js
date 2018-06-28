@@ -34,5 +34,5 @@ function randomTitle() {
 $(document).ready(function() {
   setInterval(function() {
     randomTitle();
-  }, 5000);
+  }, 3000);
 });

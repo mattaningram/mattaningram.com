@@ -41,6 +41,34 @@ a.no-outline:focus {
   flex-direction: column;
 }
 
+.m-logo-section {
+  position: relative;
+}
+
+.instructions-wrap {
+  position: relative;
+  top: -10vh;
+  text-align: center;
+}
+
+.m-instructions {
+  opacity: .35;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .075rem;
+  cursor: pointer;
+}
+
+.m-logo-wrap {
+  width: 240px;
+  height: 240px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  display: block;
+  position: relative;
+}
+
 .main-footer {
   text-align: center;
   position: relative;
@@ -55,7 +83,7 @@ a.no-outline:focus {
   text-align: center;
   font-weight: 300;
   letter-spacing: 0.025em;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .my-description {
@@ -63,7 +91,6 @@ a.no-outline:focus {
   animation: fadeIn .75s $ease-in-quad .7s forwards;
   text-align: center;
   color: rgba(255,255,255,0.75);
-  font-size: 1.1em;
   font-weight: 200;
   margin-bottom: 20px;
 }
@@ -155,63 +182,6 @@ a.no-outline:focus {
   opacity: 0;
   animation: fadeIn .75s $ease-in-quad .9s forwards;
 }
-
-.m-logo-wrap {
-  width: 240px;
-  height: 240px;
-  cursor: pointer;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  display: block;
-  position: relative;
-}
-
-.m-center-wrap {
-  .m-logo-wrap {
-    animation: logoWiggle 5s linear 4s infinite;
-  }
-}
-
-@keyframes logoWiggle {
-  2.5% {
-    transform: scale(1.075);
-  }
-  5% {
-    transform: scale(1.075) rotate(3deg);
-  }
-  7.5% {
-    transform: scale(1.075) rotate(-3deg);
-  }
-  10% {
-    transform: scale(1.075) rotate(3deg);
-  }
-  12.5% {
-    transform: scale(1.075) rotate(-3deg);
-  }
-  15% {
-    transform: scale(1.075) rotate(3deg);
-  }
-  17.5% {
-    transform: scale(1.075) rotate(-3deg);
-  }
-  20% {
-    transform: scale(1.075);
-  }
-  22.5% {
-    transform: scale(1.075);
-  }
-  25% {
-    transform: scale(0.975);
-  }
-  27.5% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-
 
 //PAGE HEADER
 

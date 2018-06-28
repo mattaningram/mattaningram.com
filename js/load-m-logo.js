@@ -19,7 +19,7 @@ function generateRandomM() {
 $(document).ready(function() {
     setTimeout(generateRandomM, 750);
 
-    $( ".m-homepage-wrap" ).click(function() {
+    $( ".m-logo-section" ).click(function() {
       generateRandomM();
       ga('send', {
         hitType: 'event',
