@@ -409,29 +409,7 @@
   &:not(:last-child) {
     margin-right: $marginMd;
   }
-  // &:after {
-  //   content: "+";
-  //   font-size: 20px;
-  //   position: absolute;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   width: 40px;
-  //   height: 40px;
-  //   border-radius: 50%;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform:  scale(0.7) translateX(-50%) translateY(-50%);
-  //   opacity: 0;
-  //   color: white;
-  //   background-color: currentColor;
-  //   transition: all .15s ease-out;
-  // }
-  &:hover {
-    // &:after {
-    //   opacity: 1;
-    //   transform:  scale(1) translateX(-50%) translateY(-50%);
-    // }
+  &:hover, &:focus {
     transform: translate3d(0, -15px, 0);
     box-shadow: 0 0 0 5px currentColor;
   }
