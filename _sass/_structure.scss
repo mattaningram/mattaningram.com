@@ -53,7 +53,7 @@ a.no-outline:focus {
 
 .m-instructions {
   opacity: .35;
-  font-size: 12px;
+  font-size: .75rem;
   text-transform: uppercase;
   letter-spacing: .075rem;
   cursor: pointer;
@@ -91,30 +91,30 @@ a.no-outline:focus {
   animation: fadeIn .75s $ease-in-quad .7s forwards;
   text-align: center;
   color: rgba(255,255,255,0.75);
-  font-weight: 200;
+  font-size:1.2rem;
+  font-weight:300;
   margin-bottom: 20px;
 }
 
-.my-email {
+.button--themed {
+  position: relative;
+  z-index: 1;
   display: block;
   text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
   width: 180px;
   height: 40px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: $marginSm auto;
-  margin-top: 15px;
-  text-decoration: none;
-  font-weight: 400;
   position: relative;
   background-color: currentColor;
   box-shadow: 0 0 0 transparent;
   transition: all .25s ease-out;
-  .my-email-text {
-    color: $bg-color;
-    font-size: 0.85em;
-  }
+
   &:before, &:after {
     content: "";
     background-color: currentColor;
@@ -125,18 +125,21 @@ a.no-outline:focus {
     bottom: 0;
     transition: all .25s $ease-out-back;
   }
+
   &:before {
     opacity: 0.15;
     left: 16px;
     right: 16px;
     transform: translate(0, 10px);
   }
+
   &:after {
     opacity: 0.35;
     left: 8px;
     right: 8px;
     transform: translate(0, 5px);
   }
+
   &:hover {
     &:before {
       top: -16px;
@@ -145,6 +148,7 @@ a.no-outline:focus {
       bottom: -16px;
       transform: translate(0, 0);
     }
+
     &:after {
       top: -8px;
       left: -8px;
@@ -153,6 +157,7 @@ a.no-outline:focus {
       transform: translate(0, 0);
     }
   }
+
   &:active {
     &:before {
       top: -32px;
@@ -161,6 +166,7 @@ a.no-outline:focus {
       bottom: -32px;
       transform: translate(0, 0);
     }
+
     &:after {
       top: -16px;
       left: -16px;
@@ -169,18 +175,14 @@ a.no-outline:focus {
       transform: translate(0, 0);
     }
   }
-}
 
-.my-email-text {
-  color: currentColor;
-  transition: all .2s ease-out;
-  z-index: 10;
-  position: relative;
-}
-
-.social-links-wrap {
-  opacity: 0;
-  animation: fadeIn .75s $ease-in-quad .9s forwards;
+  .button__text {
+    color: $bg-color;
+    font-size: 0.85em;
+    transition: all .2s ease-out;
+    z-index: 10;
+    position: relative;
+  }
 }
 
 //PAGE HEADER
@@ -224,6 +226,16 @@ a.no-outline:focus {
 }
 
 //FOOTER
+
+.social-links-wrap {
+  opacity: 0;
+  animation: fadeIn .75s $ease-in-quad .9s forwards;
+}
+
+.email-me {
+  margin: 1.25rem auto;
+  margin-top: 1rem;
+}
 
 .footer-text {
   font-size: .8em;

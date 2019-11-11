@@ -61,11 +61,17 @@
   animation: fadeInUp .4s $ease-out-quad .4s both;
 }
 
-.grab-copy, .page-copy, .list-item-text {
+.grab-copy, .page-copy {
   color: white;
 }
 
+.list-item-text {
+  color: $bg-color;
+  font-weight: 400;
+}
+
 .page-description {
+  font-size:1.2rem;
   text-align: center;
   opacity: 0;
   animation: fadeInUp .5s $ease-out-quad .6s both;
@@ -92,14 +98,14 @@
 }
 
 .grab-copy {
-  font-size: 1.8em;
+  font-size: 2.25rem;
   padding: 0 $paddingMd;
   margin-bottom: 0;
   @include mq($until: desktop) {
-    font-size: 1.4em;
+    font-size: 1.6rem;
   }
   @include mq($until: tablet) {
-    font-size: 1.2em;
+    font-size: 1.3rem;
   }
 }
 
@@ -299,17 +305,20 @@
 }
 
 .skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
   max-width: 100%;
   list-style: none;
+  padding: 0;
 }
 
 .skill-list-item {
-  float: left;
   margin-right: 5px;
   margin-bottom: 5px;
   padding: 0 5px;
   background-color: currentColor;
-  font-size: 0.8em;
 }
 
 //Tabs

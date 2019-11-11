@@ -1,0 +1,150 @@
+---
+title: Code Climate
+order: 3
+year: 2017 to 2018
+position: Lead Product Designer
+logo: codeclimate_logo_white.svg
+workUrl: https://codeclimate.com
+layout: work
+color: rgb(69, 210, 152)
+description: ToolShare is a design experiment to create a UI and basic user flow for a powertool sharing service in less than 8 hours. I had to balance my time between building out the interface and creating an appropriate aesthetic.
+---
+<div class="image-carousel-wrap tab-panel codeclimate-image-row-1">
+  <ul class="image-carousel">
+    <li class="carousel-item">
+      <a class="no-outline" data-fancybox="codeclimate1" href="/assets/images/toolshare/toolshare-home.jpg">
+        <img class="carousel-image" src="/assets/images/toolshare/toolshare-home.jpg" />
+      </a>
+    </li>
+    <li class="carousel-item">
+      <a class="no-outline" data-fancybox="codeclimate1" href="/assets/images/toolshare/toolshare-search.jpg">
+        <img class="carousel-image" src="/assets/images/toolshare/toolshare-search.jpg" />
+      </a>
+    </li>
+    <li class="carousel-item">
+      <a class="no-outline" data-fancybox="codeclimate1" href="/assets/images/toolshare/toolshare-item.jpg">
+        <img class="carousel-image" src="/assets/images/toolshare/toolshare-item.jpg" />
+      </a>
+    </li>
+    <li class="carousel-item">
+      <a class="no-outline" data-fancybox="codeclimate1" href="/assets/images/toolshare/toolshare-tools.jpg">
+        <img class="carousel-image" src="/assets/images/toolshare/toolshare-tools.jpg" />
+      </a>
+    </li>
+    <li class="carousel-item">
+      <a class="no-outline" data-fancybox="codeclimate1" href="/assets/images/toolshare/toolshare-lend.jpg">
+        <img class="carousel-image" src="/assets/images/toolshare/toolshare-lend.jpg" />
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="page-section codeclimate-skills">
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Pixels</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">Sketch</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Adobe AI PS IN AE</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">InVision</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Code</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">HTML/HAML</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">SASS/CSS</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">JavaScript</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">SVG</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Ruby</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">HighCharts</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">GitHub</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">CircleCI</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Web</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">Responsive Design</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">BEM Naming</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Flexbox</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-section-item page-section-item-themed">
+    <h3 class="list-header">Analytics</h3>
+    <ul class="skill-list">
+      <li class="skill-list-item">
+        <span class="list-item-text">Google Analytics</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Mixpanel</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">FullStory</span>
+      </li>
+      <li class="skill-list-item">
+        <span class="list-item-text">Intercom/Drift</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<script>
+  function codeclimateLoaded() {
+    $('[data-fancybox="codeclimate1"]').fancybox({
+      infobar    : false,
+    	slideShow  : false,
+    	fullScreen : false,
+    	thumbs     : false,
+    	closeBtn   : true,
+    });
+  }
+  window.onload = codeclimateLoaded;
+</script>
+
+<script>
+  window.onresize = loadDemo;
+  window.onload = loadDemo;
+
+  var frameFrame = document.getElementById("toolshare-invision-demo");
+  var frameSrc = frameFrame.dataset.src;
+
+  function loadDemo() {
+    myWidth = window.innerWidth;
+    if (myWidth > 740) {
+      frameFrame.setAttribute("src", frameSrc);
+      window.onresize = null;
+    };
+  };
+</script>

@@ -1,3 +1,10 @@
+.work-link {
+  height: 3rem;
+  background-color: currentColor;
+  text-decoration: none;
+  margin-top: 2rem;
+}
+
 .work-item-list {
   margin: 0 auto;
   max-width: 900px;
@@ -118,10 +125,9 @@
 .work-item-logo {
   display: block;
   width: 100%;
-  max-width: 180px;
+  max-width: 240px;
   max-height: 40px;
   margin: 0 auto;
-  margin-bottom: 5px;
 }
 
 .work-item-title {
@@ -192,6 +198,16 @@
   color: white;
   font-size: 1.2em;
   font-weight: 400;
+}
+
+//CODECLIMATE
+
+.codeclimate-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
 }
 
 //CANVS

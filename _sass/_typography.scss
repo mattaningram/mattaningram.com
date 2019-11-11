@@ -6,7 +6,7 @@ html, body {
   color: white;
   font-family: $fontBody;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -25,17 +25,18 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 1.8em;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 1.4em;
+  font-size: 1.6rem;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.3rem;
 }
 
 p {
-  margin-bottom: 20px;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
 }
