@@ -109,9 +109,8 @@ description: YaHerd helps you share the when and where for any get together. Sim
   </div>
 </div>
 
-
 <script>
-  function codeclimateLoaded() {
+  function yaherdLoaded() {
     $('[data-fancybox="yaherd1"]').fancybox({
       buttons: [
         "zoom",
@@ -124,21 +123,5 @@ description: YaHerd helps you share the when and where for any get together. Sim
       ],
     });
   }
-  window.onload = codeclimateLoaded;
-</script>
-
-<script>
-  window.onresize = loadDemo;
-  window.onload = loadDemo;
-
-  var frameFrame = document.getElementById("toolshare-invision-demo");
-  var frameSrc = frameFrame.dataset.src;
-
-  function loadDemo() {
-    myWidth = window.innerWidth;
-    if (myWidth > 740) {
-      frameFrame.setAttribute("src", frameSrc);
-      window.onresize = null;
-    };
-  };
+  window.onload = yaherdLoaded;
 </script>

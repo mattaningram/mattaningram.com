@@ -5,6 +5,7 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
+
   @include mq($until: tablet) {
     cursor: pointer;
   }
@@ -243,7 +244,7 @@ a.no-outline:focus {
   color: white;
 }
 
-.social-icon-wrap {
+.link-icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +252,7 @@ a.no-outline:focus {
   height: 30px;
 }
 
-.social-icon {
+.link-icon {
   width: 20px;
   display: inline-block;
   transition: all .2s ease-out;
