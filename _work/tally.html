@@ -134,11 +134,15 @@ description: Tally is an app that teaches you about your government representati
 <script>
   function canvsLoaded() {
     $('[data-fancybox="tally1"]').fancybox({
-      infobar    : false,
-    	slideShow  : false,
-    	fullScreen : false,
-    	thumbs     : false,
-    	closeBtn   : true,
+      buttons: [
+        "zoom",
+        //"share",
+        // "slideShow",
+        //"fullScreen",
+        //"download",
+        // "thumbs",
+        "close"
+      ],
     });
   }
 

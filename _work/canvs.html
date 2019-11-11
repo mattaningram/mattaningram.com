@@ -205,11 +205,15 @@ description: Canvs is an industry leading emotion measurement and analysis compa
 <script>
   function canvsLoaded() {
     $('[data-fancybox="canvs1"]').fancybox({
-      infobar    : false,
-    	slideShow  : false,
-    	fullScreen : false,
-    	thumbs     : false,
-    	closeBtn   : true,
+      buttons: [
+        "zoom",
+        //"share",
+        // "slideShow",
+        //"fullScreen",
+        //"download",
+        // "thumbs",
+        "close"
+      ],
     });
   }
 

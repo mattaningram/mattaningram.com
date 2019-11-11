@@ -92,11 +92,15 @@ description: MechoSystems is a world leading designer of energy-saving shading t
 <script>
   function mechoLoaded() {
     $('[data-fancybox="mecho1"]').fancybox({
-      infobar : false,
-    	slideShow  : false,
-    	fullScreen : false,
-    	thumbs     : false,
-    	closeBtn   : true,
+      buttons: [
+        "zoom",
+        //"share",
+        // "slideShow",
+        //"fullScreen",
+        //"download",
+        // "thumbs",
+        "close"
+      ],
     });
   }
 

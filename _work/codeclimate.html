@@ -123,11 +123,15 @@ description: Code Climate builds tools to make engineering teams better by analy
 <script>
   function codeclimateLoaded() {
     $('[data-fancybox="codeclimate1"]').fancybox({
-      infobar    : false,
-    	slideShow  : false,
-    	fullScreen : false,
-    	thumbs     : false,
-    	closeBtn   : true,
+      buttons: [
+        "zoom",
+        //"share",
+        // "slideShow",
+        //"fullScreen",
+        //"download",
+        // "thumbs",
+        "close"
+      ],
     });
   }
   window.onload = codeclimateLoaded;
