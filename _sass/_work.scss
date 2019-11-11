@@ -200,6 +200,16 @@
   font-weight: 400;
 }
 
+//YAHERD
+
+.yaherd-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
 //CODECLIMATE
 
 .codeclimate-image-row-1 {

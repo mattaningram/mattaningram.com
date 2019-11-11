@@ -8,7 +8,9 @@ layout: page
 </div>
 
 <div class="page-header">
-  {% if page.logo %}
+  {% if page.logoOpen %}
+    <img class="page-logo" src="/assets/logos/{{ page.logoOpen }}" title="{{ page.title }} Logo" />
+  {% elsif page.logo %}
     <img class="page-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
   {% else %}
     <h1 class="page-title">{{ page.title }}</h1>

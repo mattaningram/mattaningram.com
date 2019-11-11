@@ -52,8 +52,10 @@
 }
 
 .page-logo {
-  width: 240px;
-  max-width: 50vw;
+  height: auto;
+  width: auto;
+  max-width: 85vw;
+  max-height: 80px;
   margin: 0 auto;
   margin-bottom: 20px;
   display: block;
@@ -67,11 +69,12 @@
 
 .list-item-text {
   color: $bg-color;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .page-description {
-  font-size:1.2rem;
+  font-size: 1.2rem;
+  font-weight: 400;
   text-align: center;
   opacity: 0;
   animation: fadeInUp .5s $ease-out-quad .6s both;
