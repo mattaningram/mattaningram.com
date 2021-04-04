@@ -2,7 +2,7 @@
 layout: home
 ---
 
-<div class="m-center-wrap">
+<header class="m-center-wrap">
   <div class="m-logo-section">
     <div class="instructions-wrap">
       <span class="m-instructions">Click me</span>
@@ -11,18 +11,18 @@ layout: home
   </div>
   <h1 class="my-name">Mattan Ingram</h1>
   <div class="my-description">Digital Product Designer</div>
-</div>
+</header>
 
-<div class="about-section section-wrap">
+<section class="about-section section-wrap">
   <div class="grab-copy-wrap">
     <p class="grab-copy">Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>, <span class="gif-hover gif-hover-topgun">Top Gun</span>, and <span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by combining design, development, and analytics. Take me to your startup, I'll make your users happy.</p>
   </div>
-</div>
+</section>
 
-<div class="beliefs-section section-wrap">
-  <div class="section-header">
+<section class="beliefs-section section-wrap">
+  <header class="section-header">
     <h1 class="section-title">Beliefs</h1>
-  </div>
+  </header>
   <div class="beliefs-list-wrap">
     <div class="belief-item">
       <h3 class="belief-item-header">Join Forces</h3>
@@ -49,12 +49,12 @@ layout: home
       <p class="belief-item-copy">When communicating something, be it a team meeting or introducing a new feature, explaining the why and how always improves how things play out.</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="work-section section-wrap">
-  <div class="section-header">
+<section class="work-section section-wrap">
+  <header class="section-header">
     <h1 class="section-title">Work</h1>
-  </div>
+  </header>
 
   <div class="work-item-list">
     {% assign workSorted = site.work | sort: 'order' | reverse %}
@@ -78,4 +78,4 @@ layout: home
 
     {% endfor %}
   </div>
-</div>
+</section>

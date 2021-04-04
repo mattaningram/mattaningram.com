@@ -141,7 +141,9 @@ a.no-outline:focus {
     transform: translate(0, 5px);
   }
 
-  &:hover {
+  &:hover, &:focus {
+    outline: 0;
+
     &:before {
       top: -16px;
       left: -16px;
@@ -223,7 +225,8 @@ a.no-outline:focus {
 }
 
 .section-title {
-  font-weight: 300;
+  font-size: 2.5rem;
+  font-weight: 400;
 }
 
 //FOOTER
@@ -248,7 +251,6 @@ a.no-outline:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  // margin-bottom: 10px;
   height: 30px;
 }
 
@@ -256,14 +258,22 @@ a.no-outline:focus {
   width: 20px;
   display: inline-block;
   transition: all .2s ease-out;
+
   &:not(:last-child) {
     margin-right: 10px;
   }
+
   .icon-fill {
     fill: currentColor;
   }
-  &:hover {
+
+  &:hover, &:focus {
     transform: scale(1.25);
+  }
+
+  &:focus {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
   }
 }
 

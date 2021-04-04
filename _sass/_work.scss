@@ -128,6 +128,11 @@
   max-width: 240px;
   max-height: 40px;
   margin: 0 auto;
+
+  .animxyz-work-item &,
+  .artemis-work-item & {
+    max-height: 100px;
+  }
 }
 
 .work-item-title {
@@ -347,16 +352,6 @@
 
 .tally-image-row-1 {
   @include mq($until: call(carousel-center, 7) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//TOOLSHARE
-
-.toolshare-image-row-1 {
-  @include mq($until: call(carousel-center, 6) ) {
     .image-carousel {
       display: block;
     }

@@ -4,9 +4,9 @@
   .color200{fill: white; opacity: 0.825;}
   .color300{fill: white; opacity: 0.75;}
   .color400{fill: white; opacity: 0.675;}
-  .color500{fill: white; opacity: 0.5;}
-  .color600{fill: white; opacity: 0.4;}
-  .color700{fill: white; opacity: 0.3;}
+  .color500{fill: white; opacity: 0.55;}
+  .color600{fill: white; opacity: 0.5;}
+  .color700{fill: white; opacity: 0.25;}
   .color800{fill: white; opacity: 0.2;}
   .color900{fill: white; opacity: 0.1;}
 </style>
