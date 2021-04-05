@@ -22,25 +22,12 @@
   top: 0;
   left: 0;
   right: 0;
+  height: 500px;
   z-index: -1;
-}
-
-.header-background-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 500px;
-  background-color: currentColor;
-}
-
-.header-background-gradient-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 500px;
-  background-image: linear-gradient(to bottom, transparentize($bg-color, .25), $bg-color);
+  opacity: 0.25;
+  background-image: radial-gradient(circle at top, currentColor, $bg-color 65%);
+  background-size: 100% 300%;
+  background-position-y: 50%;
 }
 
 .page-title {
