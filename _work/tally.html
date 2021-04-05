@@ -34,37 +34,37 @@ description: Tally is an app that teaches you about your government representati
     <div id="tally-slides" class="image-carousel-wrap tab-panel tally-image-row-1">
       <ul class="image-carousel">
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-reps.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-reps.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rank.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rank.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-search.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-search.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-search.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-stats.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-stats.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-beliefs.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-beliefs.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-money.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-money.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-contact.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-contact.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" />
           </a>
         </li>
@@ -129,38 +129,3 @@ description: Tally is an app that teaches you about your government representati
     </ul>
   </div>
 </div>
-
-
-<script>
-  function canvsLoaded() {
-    $('[data-fancybox="tally1"]').fancybox({
-      buttons: [
-        "zoom",
-        //"share",
-        // "slideShow",
-        //"fullScreen",
-        //"download",
-        // "thumbs",
-        "close"
-      ],
-    });
-  }
-
-  window.onload = canvsLoaded;
-</script>
-
-<script>
-  window.onresize = loadDemo;
-  window.onload = loadDemo;
-
-  var frameFrame = document.getElementById("tally-invision-demo");
-  var frameSrc = frameFrame.dataset.src;
-
-  function loadDemo() {
-    myWidth = window.innerWidth;
-    if (myWidth > 740) {
-      frameFrame.setAttribute("src", frameSrc);
-      window.onresize = null;
-    };
-  };
-</script>

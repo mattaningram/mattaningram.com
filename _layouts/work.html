@@ -25,3 +25,16 @@ layout: page
 
   {{ content }}
 </main>
+
+<script>
+  function startFancybox() {
+    $('[data-fancybox]').fancybox({
+      buttons: [
+        "zoom",
+        "close"
+      ],
+    });
+  }
+
+  window.onload = startFancybox;
+</script>
