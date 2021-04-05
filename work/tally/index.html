@@ -81,23 +81,23 @@
 
 <div class="page-wrap work-wrap tally-wrap" style="color: rgb(58, 122, 219);">
   <div class="header-background-wrap">
-  <div class="header-background-gradient"></div>
-  <div class="header-background-gradient-cover"></div>
 </div>
 
-<div class="page-header">
-  
-    <img class="page-logo" src="/assets/logos/tally_logo_white.svg" title="Tally Logo" />
-  
-  <span class="page-description">Product Designer &ndash; 2017</span>
-  <a class="work-link button--themed" href="https://www.tally.us.com/" target="_blank"><span class="button__text">View website</span></a>
-</div>
+<main>
+  <header class="page-header">
+    
+      <img class="page-logo" src="/assets/logos/tally_logo_white.svg" title="Tally Logo" />
+    
+    <span class="page-description">Product Designer &ndash; 2017</span>
+    <a class="work-link button--themed" href="https://www.tally.us.com/" target="_blank"><span class="button__text">View website</span></a>
+  </header>
 
-<div class="grab-copy-wrap">
-  <p class="grab-copy">Tally is an app that teaches you about your government representatives and their job performance. Instead of focusing just on beliefs or party, Tally scores your representatives by non-ideological factors like attendance, vote participation, and bill creation.</p>
-</div>
 
-<div class="tab-section-wrap">
+  <div class="grab-copy-wrap">
+    <p class="grab-copy">Tally is an app that teaches you about your government representatives and their job performance. Instead of focusing just on beliefs or party, Tally scores your representatives by non-ideological factors like attendance, vote participation, and bill creation.</p>
+  </div>
+
+  <div class="tab-section-wrap">
   <div class="tab-button-wrap" data-tabgroup="tally-demo-tabs">
     <div class="tab-button active">
       <a class="tab-button-link" href="#tally-invision">Interactive</a>
@@ -121,37 +121,37 @@
     <div id="tally-slides" class="image-carousel-wrap tab-panel tally-image-row-1">
       <ul class="image-carousel">
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-reps.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-reps.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rank.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rank.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-search.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-search.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-search.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-stats.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-stats.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-beliefs.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-beliefs.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-money.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-money.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" />
           </a>
         </li>
         <li class="carousel-item">
-          <a class="no-outline" data-fancybox="tally1" href="/assets/images/tally/tally-rep-contact.jpg">
+          <a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-contact.jpg">
             <img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" />
           </a>
         </li>
@@ -217,42 +217,20 @@
   </div>
 </div>
 
+</main>
 
 <script>
-  function canvsLoaded() {
-    $('[data-fancybox="tally1"]').fancybox({
+  function startFancybox() {
+    $('[data-fancybox]').fancybox({
       buttons: [
         "zoom",
-        //"share",
-        // "slideShow",
-        //"fullScreen",
-        //"download",
-        // "thumbs",
         "close"
       ],
     });
   }
 
-  window.onload = canvsLoaded;
+  window.onload = startFancybox;
 </script>
-
-<script>
-  window.onresize = loadDemo;
-  window.onload = loadDemo;
-
-  var frameFrame = document.getElementById("tally-invision-demo");
-  var frameSrc = frameFrame.dataset.src;
-
-  function loadDemo() {
-    myWidth = window.innerWidth;
-    if (myWidth > 740) {
-      frameFrame.setAttribute("src", frameSrc);
-      window.onresize = null;
-    };
-  };
-</script>
-
-
 
   <footer class="main-footer">
   <div class="footer-text">
@@ -266,12 +244,6 @@
 </a>
   <a class="link-icon" href="http://twitter.com/mattaningram" onclick="trackOutboundLink('http://twitter.com/mattaningram'); return false;" title="Twitter" target="_blank"><svg class="icon-twitter" viewBox="0 0 16 16">
   <path class="icon-fill icon-twitter-fill" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
-</svg>
-</a>
-  <a class="link-icon" href="http://facebook.com/mattaningram" onclick="trackOutboundLink('http://facebook.com/mattaningram'); return false;" title="Facebook" target="_blank"><svg class="icon-facebook" viewBox="0 0 266.9 266.9">
-  <path class="icon-fill icon-facebook-fill" d="M252.2,0H14.7C6.6,0,0,6.6,0,14.7v237.4c0,8.1,6.6,14.7,14.7,14.7h127.8V163.5h-34.8v-40.3h34.8
-	V93.6c0-34.5,21.1-53.2,51.8-53.2c14.7,0,27.4,1.1,31.1,1.6v36l-21.3,0c-16.7,0-20,7.9-20,19.6v25.7H224l-5.2,40.3h-34.7v103.4h68
-	c8.1,0,14.7-6.6,14.7-14.7V14.7C266.9,6.6,260.3,0,252.2,0z"/>
 </svg>
 </a>
   <a class="link-icon" href="http://instagram.com/mattaningram" onclick="trackOutboundLink('http://instagram.com/mattaningram'); return false;" title="Instagram" target="_blank"><svg class="icon-facebook" viewBox="0 0 512 512">
