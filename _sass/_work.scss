@@ -205,6 +205,16 @@
   font-weight: 400;
 }
 
+//ANIMXYZ
+
+.animxyz-images {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
 //YAHERD
 
 .yaherd-image-row-1 {
