@@ -33,8 +33,9 @@ sass:
 # theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-autoprefixer
   # - bourbon
+gems:
+  - octopress-autoprefixer
 exclude:
   - Gemfile
   - Gemfile.lock
