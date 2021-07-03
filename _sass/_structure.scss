@@ -83,8 +83,7 @@ a.no-outline:focus {
   opacity: 0;
   animation: fadeIn .75s $ease-in-quad .5s forwards;
   text-align: center;
-  font-weight: 300;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.03em;
   margin-bottom: 8px;
 }
 
@@ -92,7 +91,7 @@ a.no-outline:focus {
   opacity: 0;
   animation: fadeIn .75s $ease-in-quad .7s forwards;
   text-align: center;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.65);
   font-size: 1.2rem;
   font-weight: 300;
   margin-bottom: 20px;
