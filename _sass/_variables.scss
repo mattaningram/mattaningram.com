@@ -1,0 +1,54 @@
+$primaryBlue:             rgb(0, 180, 204);
+$primaryRed:              rgb(237, 35, 50);
+$bg-color:                rgb(34, 45, 56);
+
+
+// Grays
+// -------------------------
+$black:                   rgb(0, 0, 0);
+
+$white:                   rgb(255, 255, 255);
+
+
+//Translucents
+
+$translucent-white:       rgba(255,255,255,0.85);
+$translucent-black:       rgba(0,0,0,0.85);
+
+
+// Default colors
+// -------------------------
+
+
+// Links
+// -------------------------
+// $linkColor:         $teal;
+
+
+// PADDINGS & MARGINS
+
+$marginSm:    20px;
+$paddingSm:   $marginSm;
+
+$marginMd:    30px;
+$paddingMd:   $marginMd;
+
+$marginLg:    40px;
+$paddingLg:   $marginLg;
+
+
+// Z-Indices
+// -------------------------
+$zSVG:              50;
+$zStandard:         100;
+$zMiddle:           500;
+$zBelowNav:					999;
+$zNav:              1000;
+$zMainNav:          1001;
+$zTop:              9999;
+
+
+// Shadows
+
+$shadowSm:   0 5px 15px rgba(0,0,0,.50);
+$shadowMd:   0 5px 30px rgba(0,0,0,.50);

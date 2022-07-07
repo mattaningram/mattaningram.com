@@ -1,0 +1,357 @@
+.work-header {
+  height: 300px;
+  padding: 0 20px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include mq($until: tablet) {
+    padding-top: 40px;
+  }
+}
+
+.work-header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 500px;
+  z-index: -1;
+  opacity: 0.25;
+  background-image: radial-gradient(circle at top, currentColor, $bg-color 65%);
+  background-size: 100% 300%;
+  background-position-y: 60%;
+}
+
+.work-title {
+  font-size: 2.2em;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp .5s $ease-out-quad .4s both;
+}
+
+.work-logo {
+  height: auto;
+  width: auto;
+  max-width: 85vw;
+  max-height: 80px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0;
+  animation: fadeInUp .4s $ease-out-quad .4s both;
+}
+
+.work-link {
+  height: 3rem;
+  background-color: currentColor;
+  text-decoration: none;
+  margin-top: 2rem;
+  animation: fadeInUp .4s $ease-out-quad .7s both;
+}
+
+.work-item-list {
+  margin: 0 auto;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.work-item-wrap {
+  flex-grow: 1;
+  max-width: 400px;
+  min-width: 300px;
+  height: 200px;
+  margin: 0 $marginSm;
+  margin-bottom: $marginLg;
+  position: relative;
+  perspective: 600px;
+  perspective-origin: 50% 200%;
+  transform-style: preserve-3d;
+  @include mq($until: tablet) {
+    margin: 0 $marginMd;
+    margin-bottom: $marginMd;
+    height: 150px;
+  }
+  &:hover {
+    .work-item {
+      transform: translate3d(0, 0, 20px);
+    }
+    .work-item-stack {
+      background-color: currentColor;
+      &:nth-child(1) {
+        opacity: .1;
+        transform: translate3d(0, 0, -60px);
+      }
+      &:nth-child(2) {
+        opacity: .2;
+        transform: translate3d(0, 0, -40px);
+      }
+      &:nth-child(3) {
+        opacity: .3;
+        transform: translate3d(0, 0, -20px);
+      }
+      &:nth-child(4) {
+        opacity: .4;
+        transform: translate3d(0, 0, 0px);
+      }
+    }
+  }
+}
+
+.work-item-stack {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  background-color: currentColor;
+  transform-origin: 50% 100%;
+  transition: all .3s $ease-out-back;
+  &:nth-child(1) {
+    opacity: .2;
+    transform: translate3d(0, 0, -30px);
+  }
+  &:nth-child(2) {
+    opacity: .4;
+    transform: translate3d(0, 0, -15px);
+  }
+}
+
+.work-item {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  transition: all .3s $ease-out-back;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    background: radial-gradient(at 15% 0%, transparent, rgba(0,0,0,0.15));
+    transition: all .5s $ease-out-quad;
+  }
+  &:after {
+    opacity: 0;
+    background: radial-gradient(at 15% 0%, rgba(255,255,255,0.25), transparent);
+  }
+  &:hover {
+    &:before {
+      opacity: 0;
+    }
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+.work-item-contents {
+  transition: all .2s ease-in;
+}
+
+.work-item-logo {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  max-height: 40px;
+  margin: 0 auto;
+
+  .animxyz-work-item &,
+  .artemis-work-item & {
+    max-height: 100px;
+  }
+}
+
+.work-item-title {
+  display: block;
+  font-size: 1.6em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.work-item-details {
+  display: block;
+  color: rgba(255,255,255,0.75);
+}
+
+//ANIMXYZ
+
+.animxyz-images {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//YAHERD
+
+.yaherd-image-row-1 {
+  @include mq($until: call(carousel-center, 7) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//CODECLIMATE
+
+.codeclimate-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//CANVS
+
+.canvs-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+.canvs-responsibilities {
+  .page-copy-image {
+    &:nth-child(1) {
+      top: 5%;
+      left: 50px;
+      width: 400px;
+    }
+    &:nth-child(2) {
+      top: 10%;
+      left: 200px;
+      max-height: 80%;
+      max-width: 640px;
+      z-index: 1;
+    }
+    &:nth-child(3) {
+      bottom: 5%;
+      left: 0;
+      max-height: 60%;
+      max-width: 640px;
+    }
+  }
+  @include mq($until: tablet) {
+    .page-copy-image {
+      &:nth-child(1) {
+        top: 0;
+        left: -25%;
+        width: 300px;
+      }
+      &:nth-child(2) {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        height: 340px;
+        width: auto;
+        max-height: initial;
+      }
+      &:nth-child(3) {
+        top: 0;
+        bottom: auto;
+        left: auto;
+        right: -90px;
+      }
+    }
+  }
+}
+
+.canvs-process {
+  .page-copy-image {
+    &:nth-child(1) {
+      top: 5%;
+      right: 0;
+      width: 200px;
+    }
+    &:nth-child(2) {
+      top: 10%;
+      right: 150px;
+      width: 300px;
+    }
+    &:nth-child(3) {
+      bottom: 10%;
+      right: 50px;
+      max-height: 60vh;
+      max-width: 460px;
+    }
+    &:nth-child(4) {
+      bottom: 5%;
+      right: 200px;
+      width: 400px;
+    }
+  }
+  @include mq($until: tablet) {
+    .page-copy-image {
+      &:nth-child(1) {
+        top: 0;
+        right: auto;
+        left: -10px;
+        width: 150px;
+      }
+      &:nth-child(2) {
+        top: 0;
+        right: -10px;
+        width: 150px;
+      }
+      &:nth-child(3) {
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        max-height: initial;
+        height: 300px;
+        bottom: 7%;
+        z-index: 1;
+      }
+      &:nth-child(4) {
+        left: 5%;
+        bottom: 5%;
+        right: auto;
+        width: 240px;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+//MECHOSYSTEMS
+
+.mecho-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
+//TALLY
+
+.tally-image-row-1 {
+  @include mq($until: call(carousel-center, 7) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}

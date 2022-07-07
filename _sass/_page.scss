@@ -1,0 +1,334 @@
+//PAGE CONTENT
+
+.page-wrap {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.grab-copy, .page-copy {
+  color: white;
+}
+
+.list-item-text {
+  color: $bg-color;
+  font-weight: 600;
+}
+
+.work-description {
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp .5s $ease-out-quad .6s both;
+}
+
+.grab-copy-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 10vh;
+  opacity: 0;
+  animation: fadeInUpText .6s $ease-out-quad .8s both;
+  @keyframes fadeInUpText {
+    from {
+      opacity: 0;
+      line-height: 2;
+      transform: translate3d(0, 30px, 0);
+    }
+    to {
+      line-height: inherit;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.grab-copy {
+  font-size: 2.25rem;
+  padding: 0 $paddingMd;
+  margin-bottom: 0;
+  @include mq($until: desktop) {
+    font-size: 1.6rem;
+  }
+  @include mq($until: tablet) {
+    font-size: 1.3rem;
+  }
+}
+
+.page-section {
+  padding: 0 $paddingLg / 2;
+  @include mq($until: desktop) {
+    padding: 0 $paddingMd / 2;
+  }
+  @include mq($until: tablet) {
+    padding: 0 $paddingSm / 2;
+  }
+}
+
+.page-section-item {
+  flex-grow: 1;
+  width: 300px;
+  padding: $paddingLg;
+  margin: $marginLg / 2;
+  @include mq($until: desktop) {
+    padding: $paddingMd;
+    margin: $marginMd / 2;
+  }
+  @include mq($until: tablet) {
+    padding: $paddingSm;
+    margin: $marginSm / 2;
+  }
+}
+
+.page-section-item-themed {
+  border: 1px solid currentColor;
+}
+
+.page-copy-header {
+  margin-bottom: 15px;
+  letter-spacing: .025em;
+  align-self: flex-start;
+}
+
+.page-copy-wrap {
+  padding: $paddingLg;
+  margin: $marginLg / 2;
+  margin-top: 0;
+  .page-copy {
+    padding: 0;
+    margin: 0;
+  }
+  @include mq($until: desktop) {
+    padding: $paddingMd;
+    margin: $marginMd / 2;
+    margin-top: 0;
+  }
+  @include mq($until: tablet) {
+    padding: $paddingSm;
+    margin: $marginSm / 2;
+    margin-top: 0;
+  }
+}
+
+.page-copy {
+  @include mq($until: tablet) {
+    min-width: 100%;
+    padding: 0 $paddingSm;
+  }
+}
+
+.page-section {
+  max-width: 920px;
+  margin: 0 auto;
+  margin-bottom: $marginLg;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  @include mq($until: tablet) {
+    margin-bottom: $marginLg * 2;
+  }
+  .page-copy-wrap {
+    border: 1px solid currentColor;
+    flex-grow: 1;
+  }
+  &.page-copy-left, &.page-copy-right {
+    @include mq($from: tablet) {
+      min-height: 100vh;
+      .page-copy-content {
+        max-width: 440px;
+      }
+      .page-copy-wrap {
+        margin-bottom: 0;
+      }
+    }
+    @include mq($until: tablet) {
+      .page-copy {
+        margin-right: 0;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.page-section-column {
+  flex-direction: column;
+}
+
+.page-copy-left, .page-copy-right {
+  justify-content: center;
+  align-items: center;
+  @include mq($from: tablet) {
+    justify-content: flex-start;
+  }
+  @include mq($until: tablet) {
+    .page-copy-wrap {
+      margin-bottom: -$marginSm;
+      padding-bottom: $marginSm * 2;
+    }
+    .page-copy-image-wrap {
+      margin: 0;
+      width: 100%;
+      height: 340px;
+    }
+  }
+}
+
+.page-copy-top, .page-copy-bottom, .page-copy-alone {
+  .page-copy {
+    column-width: 300px;
+    column-gap: $marginLg;
+  }
+}
+
+.page-copy-top {
+  .page-copy-wrap {
+    width: 100%;
+    margin-bottom: -$marginLg;
+    padding-bottom: $marginLg * 2;
+  }
+}
+
+.page-copy-bottom {
+  .page-copy-wrap {
+    width: 100%;
+    margin-top: -$marginLg;
+    padding-top: $marginLg * 2;
+  }
+}
+
+.page-copy-left {
+  @include mq($from: tablet) {
+    flex-direction: row;
+    .page-copy-image-wrap {
+      left: -30%;
+    }
+  }
+}
+
+.page-copy-right {
+  .page-copy-content {
+    float: right;
+  }
+  @include mq($from: tablet) {
+    flex-direction: row-reverse;
+    .page-copy-image-wrap {
+      right: -30%;
+    }
+  }
+}
+
+.page-copy-image-wrap {
+  position: relative;
+  align-self: stretch;
+}
+
+.page-copy-image {
+  position: absolute;
+  box-shadow: $shadowMd;
+}
+
+.page-copy-video-wrap {
+  margin: 0 $marginLg / -2;
+  @include mq($until: desktop) {
+    margin: 0 $marginMd / -2;
+  }
+  @include mq($until: tablet) {
+    margin: 0 $marginSm / -2;
+  }
+}
+
+.page-copy-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: $shadowMd;
+}
+
+.list-header {
+  margin-bottom: 15px;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.skill-list-item {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 0 5px;
+  background-color: currentColor;
+}
+
+//Image Carousel
+
+@function carousel-center($items) {
+  @return ($items * 300 + 40 + (($items - 1) * 30))
+}
+
+.image-carousel-wrap {
+  margin-bottom: $marginLg;
+}
+
+.image-carousel {
+  list-style: none;
+  overflow-x: scroll;
+  padding: $paddingMd $paddingSm;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.carousel-item {
+  display: inline-block;
+  min-width: 300px;
+  max-width: 300px;
+  height: auto;
+  vertical-align: top;
+  line-height: 0;
+  position: relative;
+  box-shadow: $shadowMd;
+  transition: transform .15s ease-out, box-shadow .15s ease-out;
+  &:not(:last-child) {
+    margin-right: $marginMd;
+  }
+  &:hover, &:focus-within {
+    transform: translate3d(0, -15px, 0);
+    box-shadow: 0 0 0 5px currentColor;
+  }
+}
+
+.carousel-image {
+  width: 100%;
+}
+
+//IMAGE GRID
+
+.image-grid {
+  display: flex;
+  justify-content: center;
+  @include mq($until: desktop) {
+    flex-wrap: wrap;
+  }
+}
+
+.image-grid-item {
+  margin: 20px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.grid-image {
+  display: block;
+  height: 200px;
+  width: auto;
+  box-shadow: $shadowMd;
+}
