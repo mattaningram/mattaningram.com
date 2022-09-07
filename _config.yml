@@ -17,9 +17,9 @@ title: Mattan Ingram
 email: mattaningram@gmail.com
 description: Mattan Ingram's personal website and portfolio.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://mattaningram.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://mattaningram.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: mattaningram
-github_username:  mattaningram
+github_username: mattaningram
 repository: mattaningram/mattaningram.github.io
 
 #Serve settings
