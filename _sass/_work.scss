@@ -193,6 +193,27 @@
   color: rgba(255,255,255,0.75);
 }
 
+//ARTEMIS
+
+.artemis-splash-image {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 1024px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.artemis-images {
+  @include mq($until: call(carousel-center, 8) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}
+
 //ANIMXYZ
 
 .animxyz-images {
