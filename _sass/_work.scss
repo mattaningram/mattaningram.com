@@ -193,6 +193,20 @@
   color: rgba(255,255,255,0.75);
 }
 
+//VISIBLE
+
+.visible-splash-video {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 1024px;
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
 //ARTEMIS
 
 .artemis-splash-image {
