@@ -195,7 +195,7 @@ a.no-outline:focus {
   z-index: 100;
   top: 0;
   left: 0;
-  padding: $paddingMd;
+  padding: $spacingMd;
   transition: all .15s $ease-out-quad;
   .m-logo-wrap {
     transition: all .15s $ease-out-quad;
@@ -204,7 +204,7 @@ a.no-outline:focus {
     height: 50px;
   }
   @include mq($until: tablet) {
-    padding: $paddingSm;
+    padding: $spacingSm;
     .m-logo-wrap {
       width: 40px;
       height: 40px;
@@ -216,12 +216,12 @@ a.no-outline:focus {
 
 .section-wrap {
   margin: 0 auto;
-  margin-bottom: $marginLg * 2;
+  margin-bottom: $spacingLg * 2;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: $marginLg;
+  margin-bottom: $spacingLg;
 }
 
 .section-title {

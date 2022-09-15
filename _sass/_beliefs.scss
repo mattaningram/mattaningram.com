@@ -12,15 +12,15 @@
 }
 
 .belief-item {
-  padding: 0 $paddingMd;
+  padding: 0 $spacingMd;
   &:not(:last-child) {
-    margin-bottom: $marginLg;
+    margin-bottom: $spacingLg;
   }
   width: 280px;
   flex-grow: 1;
   @include mq($until: tablet) {
     min-width: 320px;
-    padding: 0 $paddingSm;
+    padding: 0 $spacingSm;
   }
 }
 

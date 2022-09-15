@@ -65,15 +65,15 @@
   max-width: 400px;
   min-width: 300px;
   height: 200px;
-  margin: 0 $marginSm;
-  margin-bottom: $marginLg;
+  margin: 0 $spacingSm;
+  margin-bottom: $spacingLg;
   position: relative;
   perspective: 600px;
   perspective-origin: 50% 200%;
   transform-style: preserve-3d;
   @include mq($until: tablet) {
-    margin: 0 $marginMd;
-    margin-bottom: $marginMd;
+    margin: 0 $spacingMd;
+    margin-bottom: $spacingMd;
     height: 150px;
   }
   &:hover {
@@ -191,6 +191,25 @@
 .work-item-details {
   display: block;
   color: rgba(255,255,255,0.75);
+}
+
+//VISIBLE
+
+.visible-splash-video {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 900px;
+  padding: 0 $spacingMd;
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  @include mq($until: tablet) {
+    padding: 0 $spacingSm;
+  }
 }
 
 //ARTEMIS
