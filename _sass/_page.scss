@@ -44,7 +44,7 @@
 
 .grab-copy {
   font-size: 2rem;
-  padding: 0 $paddingMd;
+  padding: 0 $spacingMd;
   margin-bottom: 0;
   @include mq($until: desktop) {
     font-size: 1.6rem;
@@ -55,27 +55,27 @@
 }
 
 .page-section {
-  padding: 0 $paddingLg / 2;
+  padding: 0 $spacingLg / 2;
   @include mq($until: desktop) {
-    padding: 0 $paddingMd / 2;
+    padding: 0 $spacingMd / 2;
   }
   @include mq($until: tablet) {
-    padding: 0 $paddingSm / 2;
+    padding: 0 $spacingSm / 2;
   }
 }
 
 .page-section-item {
   flex-grow: 1;
   width: 300px;
-  padding: $paddingLg;
-  margin: $marginLg / 2;
+  padding: $spacingLg;
+  margin: $spacingLg / 2;
   @include mq($until: desktop) {
-    padding: $paddingMd;
-    margin: $marginMd / 2;
+    padding: $spacingMd;
+    margin: $spacingMd / 2;
   }
   @include mq($until: tablet) {
-    padding: $paddingSm;
-    margin: $marginSm / 2;
+    padding: $spacingSm;
+    margin: $spacingSm / 2;
   }
 }
 
@@ -90,21 +90,21 @@
 }
 
 .page-copy-wrap {
-  padding: $paddingLg;
-  margin: $marginLg / 2;
+  padding: $spacingLg;
+  margin: $spacingLg / 2;
   margin-top: 0;
   .page-copy {
     padding: 0;
     margin: 0;
   }
   @include mq($until: desktop) {
-    padding: $paddingMd;
-    margin: $marginMd / 2;
+    padding: $spacingMd;
+    margin: $spacingMd / 2;
     margin-top: 0;
   }
   @include mq($until: tablet) {
-    padding: $paddingSm;
-    margin: $marginSm / 2;
+    padding: $spacingSm;
+    margin: $spacingSm / 2;
     margin-top: 0;
   }
 }
@@ -112,20 +112,20 @@
 .page-copy {
   @include mq($until: tablet) {
     min-width: 100%;
-    padding: 0 $paddingSm;
+    padding: 0 $spacingSm;
   }
 }
 
 .page-section {
   max-width: 920px;
   margin: 0 auto;
-  margin-bottom: $marginLg;
+  margin-bottom: $spacingLg;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
   @include mq($until: tablet) {
-    margin-bottom: $marginLg * 2;
+    margin-bottom: $spacingLg * 2;
   }
   .page-copy-wrap {
     border: 1px solid currentColor;
@@ -162,8 +162,8 @@
   }
   @include mq($until: tablet) {
     .page-copy-wrap {
-      margin-bottom: -$marginSm;
-      padding-bottom: $marginSm * 2;
+      margin-bottom: -$spacingSm;
+      padding-bottom: $spacingSm * 2;
     }
     .page-copy-image-wrap {
       margin: 0;
@@ -176,23 +176,23 @@
 .page-copy-top, .page-copy-bottom, .page-copy-alone {
   .page-copy {
     column-width: 300px;
-    column-gap: $marginLg;
+    column-gap: $spacingLg;
   }
 }
 
 .page-copy-top {
   .page-copy-wrap {
     width: 100%;
-    margin-bottom: -$marginLg;
-    padding-bottom: $marginLg * 2;
+    margin-bottom: -$spacingLg;
+    padding-bottom: $spacingLg * 2;
   }
 }
 
 .page-copy-bottom {
   .page-copy-wrap {
     width: 100%;
-    margin-top: -$marginLg;
-    padding-top: $marginLg * 2;
+    margin-top: -$spacingLg;
+    padding-top: $spacingLg * 2;
   }
 }
 
@@ -228,12 +228,12 @@
 }
 
 .page-copy-video-wrap {
-  margin: 0 $marginLg / -2;
+  margin: 0 $spacingLg / -2;
   @include mq($until: desktop) {
-    margin: 0 $marginMd / -2;
+    margin: 0 $spacingMd / -2;
   }
   @include mq($until: tablet) {
-    margin: 0 $marginSm / -2;
+    margin: 0 $spacingSm / -2;
   }
 }
 
@@ -272,13 +272,13 @@
 }
 
 .image-carousel-wrap {
-  margin-bottom: $marginLg;
+  margin-bottom: $spacingLg;
 }
 
 .image-carousel {
   list-style: none;
   overflow-x: scroll;
-  padding: $paddingMd $paddingSm;
+  padding: $spacingMd $spacingSm;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   display: flex;
@@ -297,7 +297,7 @@
   box-shadow: $shadowMd;
   transition: transform .15s ease-out, box-shadow .15s ease-out;
   &:not(:last-child) {
-    margin-right: $marginMd;
+    margin-right: $spacingMd;
   }
   &:hover, &:focus-within {
     transform: translate3d(0, -15px, 0);

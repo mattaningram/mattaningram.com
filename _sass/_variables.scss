@@ -10,7 +10,7 @@ $black:                   rgb(0, 0, 0);
 $white:                   rgb(255, 255, 255);
 
 
-//Translucents
+//Translucent
 
 $translucent-white:       rgba(255,255,255,0.85);
 $translucent-black:       rgba(0,0,0,0.85);
@@ -27,14 +27,9 @@ $translucent-black:       rgba(0,0,0,0.85);
 
 // PADDINGS & MARGINS
 
-$marginSm:    20px;
-$paddingSm:   $marginSm;
-
-$marginMd:    30px;
-$paddingMd:   $marginMd;
-
-$marginLg:    40px;
-$paddingLg:   $marginLg;
+$spacingSm:    1.25rem;
+$spacingMd:    2rem;
+$spacingLg:    2.5rem;
 
 
 // Z-Indices
