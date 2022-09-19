@@ -56,9 +56,11 @@
 
 .page-section {
   padding: 0 $spacingLg / 2;
+
   @include mq($until: desktop) {
     padding: 0 $spacingMd / 2;
   }
+
   @include mq($until: tablet) {
     padding: 0 $spacingSm / 2;
   }
@@ -69,10 +71,12 @@
   width: 300px;
   padding: $spacingLg;
   margin: $spacingLg / 2;
+
   @include mq($until: desktop) {
     padding: $spacingMd;
     margin: $spacingMd / 2;
   }
+
   @include mq($until: tablet) {
     padding: $spacingSm;
     margin: $spacingSm / 2;
@@ -93,15 +97,18 @@
   padding: $spacingLg;
   margin: $spacingLg / 2;
   margin-top: 0;
+
   .page-copy {
     padding: 0;
     margin: 0;
   }
+
   @include mq($until: desktop) {
     padding: $spacingMd;
     margin: $spacingMd / 2;
     margin-top: 0;
   }
+
   @include mq($until: tablet) {
     padding: $spacingSm;
     margin: $spacingSm / 2;
@@ -124,23 +131,29 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
+
   @include mq($until: tablet) {
     margin-bottom: $spacingLg * 2;
   }
+
   .page-copy-wrap {
     border: 1px solid currentColor;
     flex-grow: 1;
   }
+
   &.page-copy-left, &.page-copy-right {
     @include mq($from: tablet) {
       min-height: 100vh;
+    
       .page-copy-content {
         max-width: 440px;
       }
+    
       .page-copy-wrap {
         margin-bottom: 0;
       }
     }
+  
     @include mq($until: tablet) {
       .page-copy {
         margin-right: 0;
@@ -157,14 +170,17 @@
 .page-copy-left, .page-copy-right {
   justify-content: center;
   align-items: center;
+
   @include mq($from: tablet) {
     justify-content: flex-start;
   }
+
   @include mq($until: tablet) {
     .page-copy-wrap {
       margin-bottom: -$spacingSm;
       padding-bottom: $spacingSm * 2;
     }
+  
     .page-copy-image-wrap {
       margin: 0;
       width: 100%;
@@ -199,6 +215,7 @@
 .page-copy-left {
   @include mq($from: tablet) {
     flex-direction: row;
+  
     .page-copy-image-wrap {
       left: -30%;
     }
@@ -209,8 +226,10 @@
   .page-copy-content {
     float: right;
   }
+
   @include mq($from: tablet) {
     flex-direction: row-reverse;
+
     .page-copy-image-wrap {
       right: -30%;
     }
@@ -229,9 +248,11 @@
 
 .page-copy-video-wrap {
   margin: 0 $spacingLg / -2;
+
   @include mq($until: desktop) {
     margin: 0 $spacingMd / -2;
   }
+
   @include mq($until: tablet) {
     margin: 0 $spacingSm / -2;
   }

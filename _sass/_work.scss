@@ -53,7 +53,7 @@
 
 .work-item-list {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: $centerMaxWidth;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -198,7 +198,7 @@
 .visible-splash-video {
   margin: 0 auto;
   max-width: 100%;
-  width: 900px;
+  width: $centerMaxWidth;
   padding: 0 $spacingMd;
 
   video {
@@ -215,12 +215,19 @@
 //ARTEMIS
 
 .artemis-splash-image {
-  margin: 0 auto;
   max-width: 100%;
-  width: 1024px;
+  padding: 0 $spacingMd;
+  margin-bottom: $spacingLg;
+
+  @include mq($until: tablet) {
+    padding: 0 $spacingSm;
+  }
 
   img {
-    width: 100%;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1024px;
     height: auto;
   }
 }
