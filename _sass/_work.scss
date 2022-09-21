@@ -19,7 +19,7 @@
   height: 500px;
   z-index: -1;
   opacity: 0.25;
-  background-image: radial-gradient(circle at top, currentColor, $bg-color 65%);
+  background-image: radial-gradient(circle at top, var(--page-color), $bg-color 65%);
   background-size: 100% 300%;
   background-position-y: 60%;
 }
@@ -45,7 +45,7 @@
 
 .work-link {
   height: 3rem;
-  background-color: currentColor;
+  background-color: var(--page-color);
   text-decoration: none;
   margin-top: 2rem;
   animation: fadeInUp .4s $ease-out-quad .7s both;
@@ -81,7 +81,7 @@
       transform: translate3d(0, 0, 20px);
     }
     .work-item-stack {
-      background-color: currentColor;
+      background-color: var(--page-color);
       &:nth-child(1) {
         opacity: .1;
         transform: translate3d(0, 0, -60px);
@@ -109,13 +109,15 @@
   right: 0;
   left: 0;
   opacity: 0;
-  background-color: currentColor;
+  background-color: var(--page-color);
   transform-origin: 50% 100%;
   transition: all .3s $ease-out-back;
+
   &:nth-child(1) {
     opacity: .2;
     transform: translate3d(0, 0, -30px);
   }
+
   &:nth-child(2) {
     opacity: .4;
     transform: translate3d(0, 0, -15px);
@@ -123,6 +125,7 @@
 }
 
 .work-item {
+  background-color: var(--page-color);
   display: block;
   position: absolute;
   top: 0;
@@ -138,6 +141,7 @@
   transform-style: preserve-3d;
   overflow: hidden;
   transition: all .3s $ease-out-back;
+
   &:before, &:after {
     content: '';
     position: absolute;
@@ -150,14 +154,17 @@
     background: radial-gradient(at 15% 0%, transparent, rgba(0,0,0,0.15));
     transition: all .5s $ease-out-quad;
   }
+
   &:after {
     opacity: 0;
     background: radial-gradient(at 15% 0%, rgba(255,255,255,0.25), transparent);
   }
+
   &:hover {
     &:before {
       opacity: 0;
     }
+  
     &:after {
       opacity: 1;
     }
@@ -191,214 +198,4 @@
 .work-item-details {
   display: block;
   color: rgba(255,255,255,0.75);
-}
-
-//VISIBLE
-
-.visible-splash-video {
-  margin: 0 auto;
-  max-width: 100%;
-  width: $centerMaxWidth;
-  padding: 0 $spacingMd;
-
-  video {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-
-  @include mq($until: tablet) {
-    padding: 0 $spacingSm;
-  }
-}
-
-//ARTEMIS
-
-.artemis-splash-image {
-  max-width: 100%;
-  padding: 0 $spacingMd;
-  margin-bottom: $spacingLg;
-
-  @include mq($until: tablet) {
-    padding: 0 $spacingSm;
-  }
-
-  img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    width: 1024px;
-    height: auto;
-  }
-}
-
-.artemis-images {
-  @include mq($until: call(carousel-center, 8) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//ANIMXYZ
-
-.animxyz-images {
-  @include mq($until: call(carousel-center, 5) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//YAHERD
-
-.yaherd-image-row-1 {
-  @include mq($until: call(carousel-center, 7) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//CODECLIMATE
-
-.codeclimate-image-row-1 {
-  @include mq($until: call(carousel-center, 5) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//CANVS
-
-.canvs-image-row-1 {
-  @include mq($until: call(carousel-center, 5) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-.canvs-responsibilities {
-  .page-copy-image {
-    &:nth-child(1) {
-      top: 5%;
-      left: 50px;
-      width: 400px;
-    }
-    &:nth-child(2) {
-      top: 10%;
-      left: 200px;
-      max-height: 80%;
-      max-width: 640px;
-      z-index: 1;
-    }
-    &:nth-child(3) {
-      bottom: 5%;
-      left: 0;
-      max-height: 60%;
-      max-width: 640px;
-    }
-  }
-  @include mq($until: tablet) {
-    .page-copy-image {
-      &:nth-child(1) {
-        top: 0;
-        left: -25%;
-        width: 300px;
-      }
-      &:nth-child(2) {
-        left: 50%;
-        transform: translateX(-50%);
-        top: 0;
-        height: 340px;
-        width: auto;
-        max-height: initial;
-      }
-      &:nth-child(3) {
-        top: 0;
-        bottom: auto;
-        left: auto;
-        right: -90px;
-      }
-    }
-  }
-}
-
-.canvs-process {
-  .page-copy-image {
-    &:nth-child(1) {
-      top: 5%;
-      right: 0;
-      width: 200px;
-    }
-    &:nth-child(2) {
-      top: 10%;
-      right: 150px;
-      width: 300px;
-    }
-    &:nth-child(3) {
-      bottom: 10%;
-      right: 50px;
-      max-height: 60vh;
-      max-width: 460px;
-    }
-    &:nth-child(4) {
-      bottom: 5%;
-      right: 200px;
-      width: 400px;
-    }
-  }
-  @include mq($until: tablet) {
-    .page-copy-image {
-      &:nth-child(1) {
-        top: 0;
-        right: auto;
-        left: -10px;
-        width: 150px;
-      }
-      &:nth-child(2) {
-        top: 0;
-        right: -10px;
-        width: 150px;
-      }
-      &:nth-child(3) {
-        left: 50%;
-        transform: translateX(-50%);
-        width: auto;
-        max-height: initial;
-        height: 300px;
-        bottom: 7%;
-        z-index: 1;
-      }
-      &:nth-child(4) {
-        left: 5%;
-        bottom: 5%;
-        right: auto;
-        width: 240px;
-        z-index: 1;
-      }
-    }
-  }
-}
-
-//MECHOSYSTEMS
-
-.mecho-image-row-1 {
-  @include mq($until: call(carousel-center, 5) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}
-
-//TALLY
-
-.tally-image-row-1 {
-  @include mq($until: call(carousel-center, 7) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
 }

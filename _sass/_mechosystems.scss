@@ -1,0 +1,9 @@
+//MECHOSYSTEMS
+
+.mecho-image-row-1 {
+  @include mq($until: call(carousel-center, 5) ) {
+    .image-carousel {
+      display: block;
+    }
+  }
+}

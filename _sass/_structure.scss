@@ -27,6 +27,7 @@ a.no-outline:focus {
 }
 
 .page-content {
+  --page-color: white;
   margin: 0;
   min-height: 100vh;
 }
@@ -112,13 +113,13 @@ a.no-outline:focus {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: currentColor;
+  background-color: var(--page-color);
   box-shadow: 0 0 0 transparent;
   transition: all .25s ease-out;
 
   &:before, &:after {
     content: "";
-    background-color: currentColor;
+    background-color: var(--page-color);
     position: absolute;
     top: 0;
     left: 0;
@@ -264,7 +265,7 @@ a.no-outline:focus {
   }
 
   .icon-fill {
-    fill: currentColor;
+    fill: var(--page-color);
   }
 
   &:hover, &:focus {
@@ -272,7 +273,7 @@ a.no-outline:focus {
   }
 
   &:focus {
-    outline: 1px solid currentColor;
+    outline: 1px solid var(--page-color);
     outline-offset: 2px;
   }
 }

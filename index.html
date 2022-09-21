@@ -59,12 +59,12 @@ layout: home
   <div class="work-item-list">
     {% assign workSorted = site.work | sort: 'order' | reverse %}
     {% for work in workSorted %}
-      <a class="work-item-wrap" href="{{ work.url }}" style="color: {{ work.color }};">
+      <a class="work-item-wrap" href="{{ work.url }}" style="--page-color: {{ work.color }};">
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
         <div class="work-item-stack"></div>
-        <div class="work-item {{ work.title | downcase }}-work-item" style="background-color: {{ work.color }};">
+        <div class="work-item {{ work.title | downcase }}-work-item">
           <div class="work-item-contents">
             {% if work.logo %}
               <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />

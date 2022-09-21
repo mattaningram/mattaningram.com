@@ -84,7 +84,7 @@
 }
 
 .page-section-item-themed {
-  border: 1px solid currentColor;
+  border: 1px solid var(--page-color);
 }
 
 .page-copy-header {
@@ -137,7 +137,7 @@
   }
 
   .page-copy-wrap {
-    border: 1px solid currentColor;
+    border: 1px solid var(--page-color);
     flex-grow: 1;
   }
 
@@ -266,6 +266,7 @@
 }
 
 .list-header {
+  color: var(--page-color);
   margin-bottom: 15px;
 }
 
@@ -283,7 +284,7 @@
   margin-right: 5px;
   margin-bottom: 5px;
   padding: 0 5px;
-  background-color: currentColor;
+  background-color: var(--page-color);
 }
 
 //Image Carousel
@@ -322,7 +323,7 @@
   }
   &:hover, &:focus-within {
     transform: translate3d(0, -15px, 0);
-    box-shadow: 0 0 0 5px currentColor;
+    box-shadow: 0 0 0 5px var(--page-color);
   }
 }
 

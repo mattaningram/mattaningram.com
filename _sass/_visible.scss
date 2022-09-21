@@ -1,0 +1,116 @@
+//VISIBLE
+
+.visible-splash-video {
+  margin: 0 auto;
+  max-width: 100%;
+  width: $centerMaxWidth;
+  padding: 0 $spacingMd;
+	margin-bottom: $spacingLg;
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  @include mq($until: tablet) {
+    padding: 0 $spacingSm;
+  }
+}
+
+.visible-icons {
+	background-color: $bg-color;
+	background-image: url("/assets/images/visible/visible-icons.svg");
+	background-repeat: repeat;
+	border: 2px solid var(--page-color);
+	border-radius: 8px;
+	width: 32rem;
+	height: 24rem;
+	animation: icon-scroll 24s infinite linear;
+	margin-top: $spacingLg;
+}
+
+@keyframes icon-scroll {
+	100% {
+		background-position: -480px -384px;
+	}
+}
+
+.visible-wrap {
+	.work-page-section {
+		width: $centerMaxWidth;
+		margin: 25vh auto;
+	}
+
+	.section-content {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.section-text,
+	.section-image {
+		flex-shrink: 0;
+	}
+
+	.section-text {
+		width: 30rem;
+		border-radius: 8px;
+		background-color: $bg-dark;
+		padding: $spacingMd;
+		padding-right: $spacingLg * 2;
+		margin-right: -$spacingMd;
+
+		h2 {
+			margin-bottom: $spacingMd;
+		}
+
+		p {
+			color: white;
+		}
+	}
+
+	.section-tabs {
+		display: flex;
+		gap: $spacingMd;
+	}
+
+		
+
+	label {
+		display: inline-flex;
+		margin-right: 0.5rem;
+		align-items: center;
+		height: 2rem;
+		color: white;
+		cursor: pointer;
+		padding: 0 0.5rem;
+		border-radius: 2px;
+		font-weight: 600;
+	}
+
+	input {
+		@include visually-hidden;
+	}
+
+	input:checked {
+		+ label {
+			background-color: var(--page-color);
+		}
+	}
+
+	.tab-content {
+		display: none;
+	}
+}
+
+#icons-tab:checked ~ .icons-content {
+	display: flex;
+}
+
+#colors-tab:checked ~ .colors-content {
+	display: flex;
+}
+
+#components-tab:checked ~ .components-content {
+	display: flex;
+}
