@@ -1,356 +1,366 @@
 //PAGE CONTENT
 
 .page-wrap {
-  max-width: 100%;
-  margin: 0 auto;
+	max-width: 100%;
+	margin: 0 auto;
 }
 
-.grab-copy, .page-copy {
-  color: white;
-}
+// .grab-copy,
+// .page-copy {
+// 	color: white;
+// }
 
 .list-item-text {
-  color: $bg-color;
-  font-weight: 600;
+	color: $bg-color;
+	font-weight: 600;
 }
 
 .work-description {
-  font-size: 1.2rem;
-  font-weight: 400;
-  text-align: center;
-  opacity: 0;
-  animation: fadeInUp .5s $ease-out-quad .6s both;
+	font-size: 1.2rem;
+	font-weight: 400;
+	text-align: center;
+	opacity: 0;
+	animation: fadeInUp 0.5s $ease-out-quad 0.6s both;
 }
 
 .grab-copy-wrap {
-  max-width: $centerMaxWidth;
-  margin: 0 auto;
-  margin-bottom: 10vh;
-  opacity: 0;
-  animation: fadeInUpText .6s $ease-out-quad .8s both;
-  @keyframes fadeInUpText {
-    from {
-      opacity: 0;
-      line-height: 2;
-      transform: translate3d(0, 30px, 0);
-    }
-    to {
-      line-height: inherit;
-      opacity: 1;
-      transform: none;
-    }
-  }
+	max-width: $centerMaxWidth;
+	margin: 0 auto;
+	margin-bottom: 10vh;
+	opacity: 0;
+	animation: fadeInUpText 0.6s $ease-out-quad 0.8s both;
+}
+
+@keyframes fadeInUpText {
+	from {
+		opacity: 0;
+		line-height: 2;
+		transform: translate3d(0, 30px, 0);
+	}
+	to {
+		line-height: inherit;
+		opacity: 1;
+		transform: none;
+	}
 }
 
 .grab-copy {
-  font-size: 2rem;
-  padding: 0 $spacingMd;
-  margin-bottom: 0;
-  @include mq($until: desktop) {
-    font-size: 1.6rem;
-  }
-  @include mq($until: tablet) {
-    font-size: 1.3rem;
-  }
+	font-size: 2rem;
+	padding: 0 $spacing-10;
+	margin-bottom: 0;
+
+	@include mq($until: desktop) {
+		font-size: 1.6rem;
+	}
+
+	@include mq($until: tablet) {
+		font-size: 1.3rem;
+	}
 }
 
 .page-section {
-  padding: 0 $spacingLg / 2;
+	padding: 0 $spacing-11 / 2;
 
-  @include mq($until: desktop) {
-    padding: 0 $spacingMd / 2;
-  }
+	@include mq($until: desktop) {
+		padding: 0 $spacing-10 / 2;
+	}
 
-  @include mq($until: tablet) {
-    padding: 0 $spacingSm / 2;
-  }
+	@include mq($until: tablet) {
+		padding: 0 $spacing-7 / 2;
+	}
 }
 
 .page-section-item {
-  flex-grow: 1;
-  width: 300px;
-  padding: $spacingLg;
-  margin: $spacingLg / 2;
+	flex-grow: 1;
+	width: 300px;
+	padding: $spacing-11;
+	margin: $spacing-11 / 2;
 
-  @include mq($until: desktop) {
-    padding: $spacingMd;
-    margin: $spacingMd / 2;
-  }
+	@include mq($until: desktop) {
+		padding: $spacing-10;
+		margin: $spacing-10 / 2;
+	}
 
-  @include mq($until: tablet) {
-    padding: $spacingSm;
-    margin: $spacingSm / 2;
-  }
+	@include mq($until: tablet) {
+		padding: $spacing-7;
+		margin: $spacing-7 / 2;
+	}
 }
 
 .page-section-item-themed {
-  border: 1px solid var(--page-color);
+	border: 1px solid var(--page-color);
 }
 
 .page-copy-header {
-  margin-bottom: 15px;
-  letter-spacing: .025em;
-  align-self: flex-start;
+	margin-bottom: 15px;
+	letter-spacing: 0.025em;
+	align-self: flex-start;
 }
 
 .page-copy-wrap {
-  padding: $spacingLg;
-  margin: $spacingLg / 2;
-  margin-top: 0;
+	padding: $spacing-11;
+	margin: $spacing-11 / 2;
+	margin-top: 0;
 
-  .page-copy {
-    padding: 0;
-    margin: 0;
-  }
+	.page-copy {
+		padding: 0;
+		margin: 0;
+	}
 
-  @include mq($until: desktop) {
-    padding: $spacingMd;
-    margin: $spacingMd / 2;
-    margin-top: 0;
-  }
+	@include mq($until: desktop) {
+		padding: $spacing-10;
+		margin: $spacing-10 / 2;
+		margin-top: 0;
+	}
 
-  @include mq($until: tablet) {
-    padding: $spacingSm;
-    margin: $spacingSm / 2;
-    margin-top: 0;
-  }
+	@include mq($until: tablet) {
+		padding: $spacing-7;
+		margin: $spacing-7 / 2;
+		margin-top: 0;
+	}
 }
 
 .page-copy {
-  @include mq($until: tablet) {
-    min-width: 100%;
-    padding: 0 $spacingSm;
-  }
+	@include mq($until: tablet) {
+		min-width: 100%;
+		padding: 0 $spacing-7;
+	}
 }
 
 .page-section {
-  max-width: 920px;
-  margin: 0 auto;
-  margin-bottom: $spacingLg;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
+	max-width: 920px;
+	margin: 0 auto;
+	margin-bottom: $spacing-11;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
 
-  @include mq($until: tablet) {
-    margin-bottom: $spacingLg * 2;
-  }
+	@include mq($until: tablet) {
+		margin-bottom: $spacing-11 * 2;
+	}
 
-  .page-copy-wrap {
-    border: 1px solid var(--page-color);
-    flex-grow: 1;
-  }
+	.page-copy-wrap {
+		border: 1px solid var(--page-color);
+		flex-grow: 1;
+	}
 
-  &.page-copy-left, &.page-copy-right {
-    @include mq($from: tablet) {
-      min-height: 100vh;
-    
-      .page-copy-content {
-        max-width: 440px;
-      }
-    
-      .page-copy-wrap {
-        margin-bottom: 0;
-      }
-    }
-  
-    @include mq($until: tablet) {
-      .page-copy {
-        margin-right: 0;
-        margin-left: 0;
-      }
-    }
-  }
+	&.page-copy-left,
+	&.page-copy-right {
+		@include mq($from: tablet) {
+			min-height: 100vh;
+
+			.page-copy-content {
+				max-width: 440px;
+			}
+
+			.page-copy-wrap {
+				margin-bottom: 0;
+			}
+		}
+
+		@include mq($until: tablet) {
+			.page-copy {
+				margin-right: 0;
+				margin-left: 0;
+			}
+		}
+	}
 }
 
 .page-section-column {
-  flex-direction: column;
+	flex-direction: column;
 }
 
-.page-copy-left, .page-copy-right {
-  justify-content: center;
-  align-items: center;
+.page-copy-left,
+.page-copy-right {
+	justify-content: center;
+	align-items: center;
 
-  @include mq($from: tablet) {
-    justify-content: flex-start;
-  }
+	@include mq($from: tablet) {
+		justify-content: flex-start;
+	}
 
-  @include mq($until: tablet) {
-    .page-copy-wrap {
-      margin-bottom: -$spacingSm;
-      padding-bottom: $spacingSm * 2;
-    }
-  
-    .page-copy-image-wrap {
-      margin: 0;
-      width: 100%;
-      height: 340px;
-    }
-  }
+	@include mq($until: tablet) {
+		.page-copy-wrap {
+			margin-bottom: -$spacing-7;
+			padding-bottom: $spacing-7 * 2;
+		}
+
+		.page-copy-image-wrap {
+			margin: 0;
+			width: 100%;
+			height: 340px;
+		}
+	}
 }
 
-.page-copy-top, .page-copy-bottom, .page-copy-alone {
-  .page-copy {
-    column-width: 300px;
-    column-gap: $spacingLg;
-  }
+.page-copy-top,
+.page-copy-bottom,
+.page-copy-alone {
+	.page-copy {
+		column-width: 300px;
+		column-gap: $spacing-11;
+	}
 }
 
 .page-copy-top {
-  .page-copy-wrap {
-    width: 100%;
-    margin-bottom: -$spacingLg;
-    padding-bottom: $spacingLg * 2;
-  }
+	.page-copy-wrap {
+		width: 100%;
+		margin-bottom: -$spacing-11;
+		padding-bottom: $spacing-11 * 2;
+	}
 }
 
 .page-copy-bottom {
-  .page-copy-wrap {
-    width: 100%;
-    margin-top: -$spacingLg;
-    padding-top: $spacingLg * 2;
-  }
+	.page-copy-wrap {
+		width: 100%;
+		margin-top: -$spacing-11;
+		padding-top: $spacing-11 * 2;
+	}
 }
 
 .page-copy-left {
-  @include mq($from: tablet) {
-    flex-direction: row;
-  
-    .page-copy-image-wrap {
-      left: -30%;
-    }
-  }
+	@include mq($from: tablet) {
+		flex-direction: row;
+
+		.page-copy-image-wrap {
+			left: -30%;
+		}
+	}
 }
 
 .page-copy-right {
-  .page-copy-content {
-    float: right;
-  }
+	.page-copy-content {
+		float: right;
+	}
 
-  @include mq($from: tablet) {
-    flex-direction: row-reverse;
+	@include mq($from: tablet) {
+		flex-direction: row-reverse;
 
-    .page-copy-image-wrap {
-      right: -30%;
-    }
-  }
+		.page-copy-image-wrap {
+			right: -30%;
+		}
+	}
 }
 
 .page-copy-image-wrap {
-  position: relative;
-  align-self: stretch;
+	position: relative;
+	align-self: stretch;
 }
 
 .page-copy-image {
-  position: absolute;
-  box-shadow: $shadowMd;
+	position: absolute;
+	box-shadow: $shadowMd;
 }
 
 .page-copy-video-wrap {
-  margin: 0 $spacingLg / -2;
+	margin: 0 $spacing-11 / -2;
 
-  @include mq($until: desktop) {
-    margin: 0 $spacingMd / -2;
-  }
+	@include mq($until: desktop) {
+		margin: 0 $spacing-10 / -2;
+	}
 
-  @include mq($until: tablet) {
-    margin: 0 $spacingSm / -2;
-  }
+	@include mq($until: tablet) {
+		margin: 0 $spacing-7 / -2;
+	}
 }
 
 .page-copy-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  box-shadow: $shadowMd;
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: $shadowMd;
 }
 
 .list-header {
-  color: var(--page-color);
-  margin-bottom: 15px;
+	color: var(--page-color);
+	margin-bottom: 15px;
 }
 
 .skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 100%;
-  list-style: none;
-  padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	max-width: 100%;
+	list-style: none;
+	padding: 0;
 }
 
 .skill-list-item {
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding: 0 5px;
-  background-color: var(--page-color);
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 0 5px;
+	background-color: var(--page-color);
 }
 
 //Image Carousel
 
 @function carousel-center($items) {
-  @return ($items * 300 + 40 + (($items - 1) * 30))
+	@return ($items * 300 + 40 + (($items - 1) * 30));
 }
 
 .image-carousel-wrap {
-  margin-bottom: $spacingLg;
+	margin-bottom: $spacing-11;
 }
 
 .image-carousel {
-  list-style: none;
-  overflow-x: scroll;
-  padding: $spacingMd $spacingSm;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+	list-style: none;
+	overflow-x: scroll;
+	padding: $spacing-10 $spacing-7;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .carousel-item {
-  display: inline-block;
-  min-width: 300px;
-  max-width: 300px;
-  height: auto;
-  vertical-align: top;
-  line-height: 0;
-  position: relative;
-  box-shadow: $shadowMd;
-  transition: transform .15s ease-out, box-shadow .15s ease-out;
-  &:not(:last-child) {
-    margin-right: $spacingMd;
-  }
-  &:hover, &:focus-within {
-    transform: translate3d(0, -15px, 0);
-    box-shadow: 0 0 0 5px var(--page-color);
-  }
+	display: inline-block;
+	min-width: 300px;
+	max-width: 300px;
+	height: auto;
+	vertical-align: top;
+	line-height: 0;
+	position: relative;
+	box-shadow: $shadowMd;
+	transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+	&:not(:last-child) {
+		margin-right: $spacing-10;
+	}
+	&:hover,
+	&:focus-within {
+		transform: translate3d(0, -15px, 0);
+		box-shadow: 0 0 0 5px var(--page-color);
+	}
 }
 
 .carousel-image {
-  width: 100%;
+	width: 100%;
 }
 
 //IMAGE GRID
 
 .image-grid {
-  display: flex;
-  justify-content: center;
-  @include mq($until: desktop) {
-    flex-wrap: wrap;
-  }
+	display: flex;
+	justify-content: center;
+
+	@include mq($until: desktop) {
+		flex-wrap: wrap;
+	}
 }
 
 .image-grid-item {
-  margin: 20px;
-  margin-top: 0;
-  display: flex;
-  justify-content: center;
+	margin: 20px;
+	margin-top: 0;
+	display: flex;
+	justify-content: center;
 }
 
 .grid-image {
-  display: block;
-  height: 200px;
-  width: auto;
-  box-shadow: $shadowMd;
+	display: block;
+	height: 200px;
+	width: auto;
+	box-shadow: $shadowMd;
 }

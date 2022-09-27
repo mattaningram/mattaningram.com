@@ -1,201 +1,202 @@
 .work-header {
-  height: 300px;
-  padding: 0 20px;
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  @include mq($until: tablet) {
-    padding-top: 40px;
-  }
+	height: 300px;
+	padding: 0 20px;
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	@include mq($until: tablet) {
+		padding-top: 40px;
+	}
 }
 
 .work-header-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 500px;
-  z-index: -1;
-  opacity: 0.25;
-  background-image: radial-gradient(circle at top, var(--page-color), $bg-color 65%);
-  background-size: 100% 300%;
-  background-position-y: 60%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 500px;
+	z-index: -1;
+	opacity: 0.25;
+	background-image: radial-gradient(circle at top, var(--page-color), $bg-color 65%);
+	background-size: 100% 300%;
+	background-position-y: 60%;
 }
 
 .work-title {
-  font-size: 2.2em;
-  text-align: center;
-  opacity: 0;
-  animation: fadeInUp .5s $ease-out-quad .4s both;
+	font-size: 2.2em;
+	text-align: center;
+	opacity: 0;
+	animation: fadeInUp 0.5s $ease-out-quad 0.4s both;
 }
 
 .work-logo {
-  height: auto;
-  width: auto;
-  max-width: 85vw;
-  max-height: 80px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  display: block;
-  opacity: 0;
-  animation: fadeInUp .4s $ease-out-quad .4s both;
+	height: auto;
+	width: auto;
+	max-width: 85vw;
+	max-height: 80px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	display: block;
+	opacity: 0;
+	animation: fadeInUp 0.4s $ease-out-quad 0.4s both;
 }
 
 .work-link {
-  height: 3rem;
-  background-color: var(--page-color);
-  text-decoration: none;
-  margin-top: 2rem;
-  animation: fadeInUp .4s $ease-out-quad .7s both;
+	height: 3rem;
+	background-color: var(--page-color);
+	text-decoration: none;
+	margin-top: 2rem;
+	animation: fadeInUp 0.4s $ease-out-quad 0.7s both;
 }
 
 .work-item-list {
-  margin: 0 auto;
-  max-width: $centerMaxWidth;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+	margin: 0 auto;
+	max-width: $centerMaxWidth;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
 }
 
 .work-item-wrap {
-  flex-grow: 1;
-  max-width: 400px;
-  min-width: 300px;
-  height: 200px;
-  margin: 0 $spacingSm;
-  margin-bottom: $spacingLg;
-  position: relative;
-  perspective: 600px;
-  perspective-origin: 50% 200%;
-  transform-style: preserve-3d;
-  @include mq($until: tablet) {
-    margin: 0 $spacingMd;
-    margin-bottom: $spacingMd;
-    height: 150px;
-  }
-  &:hover {
-    .work-item {
-      transform: translate3d(0, 0, 20px);
-    }
-    .work-item-stack {
-      background-color: var(--page-color);
-      &:nth-child(1) {
-        opacity: .1;
-        transform: translate3d(0, 0, -60px);
-      }
-      &:nth-child(2) {
-        opacity: .2;
-        transform: translate3d(0, 0, -40px);
-      }
-      &:nth-child(3) {
-        opacity: .3;
-        transform: translate3d(0, 0, -20px);
-      }
-      &:nth-child(4) {
-        opacity: .4;
-        transform: translate3d(0, 0, 0px);
-      }
-    }
-  }
+	flex-grow: 1;
+	max-width: 400px;
+	min-width: 300px;
+	height: 200px;
+	margin: 0 $spacing-7;
+	margin-bottom: $spacing-11;
+	position: relative;
+	perspective: 600px;
+	perspective-origin: 50% 200%;
+	transform-style: preserve-3d;
+	@include mq($until: tablet) {
+		margin: 0 $spacing-10;
+		margin-bottom: $spacing-10;
+		height: 150px;
+	}
+	&:hover {
+		.work-item {
+			transform: translate3d(0, 0, 20px);
+		}
+		.work-item-stack {
+			background-color: var(--page-color);
+			&:nth-child(1) {
+				opacity: 0.1;
+				transform: translate3d(0, 0, -60px);
+			}
+			&:nth-child(2) {
+				opacity: 0.2;
+				transform: translate3d(0, 0, -40px);
+			}
+			&:nth-child(3) {
+				opacity: 0.3;
+				transform: translate3d(0, 0, -20px);
+			}
+			&:nth-child(4) {
+				opacity: 0.4;
+				transform: translate3d(0, 0, 0px);
+			}
+		}
+	}
 }
 
 .work-item-stack {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  opacity: 0;
-  background-color: var(--page-color);
-  transform-origin: 50% 100%;
-  transition: all .3s $ease-out-back;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	opacity: 0;
+	background-color: var(--page-color);
+	transform-origin: 50% 100%;
+	transition: all 0.3s $ease-out-back;
 
-  &:nth-child(1) {
-    opacity: .2;
-    transform: translate3d(0, 0, -30px);
-  }
+	&:nth-child(1) {
+		opacity: 0.2;
+		transform: translate3d(0, 0, -30px);
+	}
 
-  &:nth-child(2) {
-    opacity: .4;
-    transform: translate3d(0, 0, -15px);
-  }
+	&:nth-child(2) {
+		opacity: 0.4;
+		transform: translate3d(0, 0, -15px);
+	}
 }
 
 .work-item {
-  background-color: var(--page-color);
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform-style: preserve-3d;
-  overflow: hidden;
-  transition: all .3s $ease-out-back;
+	background-color: var(--page-color);
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform-style: preserve-3d;
+	overflow: hidden;
+	transition: all 0.3s $ease-out-back;
 
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 1;
-    background: radial-gradient(at 15% 0%, transparent, rgba(0,0,0,0.15));
-    transition: all .5s $ease-out-quad;
-  }
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		opacity: 1;
+		background: radial-gradient(at 15% 0%, transparent, rgba(0, 0, 0, 0.15));
+		transition: all 0.5s $ease-out-quad;
+	}
 
-  &:after {
-    opacity: 0;
-    background: radial-gradient(at 15% 0%, rgba(255,255,255,0.25), transparent);
-  }
+	&:after {
+		opacity: 0;
+		background: radial-gradient(at 15% 0%, rgba(255, 255, 255, 0.25), transparent);
+	}
 
-  &:hover {
-    &:before {
-      opacity: 0;
-    }
-  
-    &:after {
-      opacity: 1;
-    }
-  }
+	&:hover {
+		&:before {
+			opacity: 0;
+		}
+
+		&:after {
+			opacity: 1;
+		}
+	}
 }
 
 .work-item-contents {
-  transition: all .2s ease-in;
+	transition: all 0.2s ease-in;
 }
 
 .work-item-logo {
-  display: block;
-  width: 100%;
-  max-width: 240px;
-  max-height: 48px;
-  margin: 0 auto;
+	display: block;
+	width: 100%;
+	max-width: 240px;
+	max-height: 48px;
+	margin: 0 auto;
 
-  .animxyz-work-item &,
-  .artemis-work-item & {
-    max-height: 100px;
-  }
+	.animxyz-work-item &,
+	.artemis-work-item & {
+		max-height: 100px;
+	}
 }
 
 .work-item-title {
-  display: block;
-  font-size: 1.6em;
-  font-weight: 300;
-  text-align: center;
+	display: block;
+	font-size: 1.6em;
+	font-weight: 300;
+	text-align: center;
 }
 
 .work-item-details {
-  display: block;
-  color: rgba(255,255,255,0.75);
+	display: block;
+	color: rgba(255, 255, 255, 0.75);
 }

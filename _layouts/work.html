@@ -2,40 +2,38 @@
 layout: page
 ---
 
-<div class="work-header-background">
-</div>
+<div class="work-header-background"></div>
 
 <main>
-  <header class="work-header">
-    {% if page.logoOpen %}
-      <img class="work-logo" src="/assets/logos/{{ page.logoOpen }}" title="{{ page.title }} Logo" />
-    {% elsif page.logo %}
-      <img class="work-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
-    {% else %}
-      <h1 class="work-title">{{ page.title }}</h1>
-    {% endif %}
-    <span class="work-description">{{ page.position }} &ndash; {{ page.year }}</span>
-    {% if page.workUrl %}
-      <a class="work-link button--themed" href="{{ page.workUrl }}" target="_blank"><span class="button__text">View website</span></a>
-    {% endif %}
-  </header>
+	<header class="work-header">
+		{% if page.logoOpen %}
+		<img class="work-logo" src="/assets/logos/{{ page.logoOpen }}" title="{{ page.title }} Logo" />
+		{% elsif page.logo %}
+		<img class="work-logo" src="/assets/logos/{{ page.logo }}" title="{{ page.title }} Logo" />
+		{% else %}
+		<h1 class="work-title">{{ page.title }}</h1>
+		{% endif %}
+		<span class="work-description">{{ page.position }} &ndash; {{ page.year }}</span>
+		{% if page.workUrl %}
+		<a class="work-link button--themed" href="{{ page.workUrl }}" target="_blank"
+			><span class="button__text">View website</span></a
+		>
+		{% endif %}
+	</header>
 
+	<div class="grab-copy-wrap">
+		<p class="grab-copy">{{ page.description }}</p>
+	</div>
 
-  <div class="grab-copy-wrap">
-    <p class="grab-copy">{{ page.description }}</p>
-  </div>
-
-  {{ content }}
+	{{ content }}
 </main>
 
 <script>
-  function startFancybox() {
-    $('[data-fancybox]').fancybox({
-      buttons: [
-        "close"
-      ],
-    });
-  }
+	function startFancybox() {
+		$('[data-fancybox]').fancybox({
+			buttons: ['close'],
+		})
+	}
 
-  window.onload = startFancybox;
+	window.onload = startFancybox
 </script>
