@@ -1,17 +1,37 @@
+.work-header-wrap {
+	width: $centerMaxWidth;
+	max-width: 100%;
+	margin: 10vh auto;
+	padding: 0 $spacing-10;
+}
+
 .work-header {
-	height: 300px;
-	padding: 0 20px;
-	padding-top: 20px;
+	background-color: $bg-dark;
+	border: 1px solid var(--page-color);
+}
+
+.work-header-top {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	gap: $spacing-8;
+	padding: $spacing-8;
+	border-bottom: 1px solid var(--page-color);
+
 	@include mq($until: tablet) {
-		padding-top: 40px;
+		flex-direction: column;
 	}
 }
 
-.work-header-background {
+.work-header-bottom {
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-bottom: -1px;
+	margin-right: -1px;
+}
+
+.work-background {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -24,31 +44,50 @@
 	background-position-y: 60%;
 }
 
+.work-title-wrap {
+	// width: 100%;
+	// max-width: 15rem;
+	// max-height: 3rem;
+}
+
 .work-title {
 	font-size: 2.2em;
 	text-align: center;
-	opacity: 0;
-	animation: fadeInUp 0.5s $ease-out-quad 0.4s both;
 }
 
 .work-logo {
-	height: auto;
-	width: auto;
-	max-width: 85vw;
-	max-height: 80px;
-	margin: 0 auto;
-	margin-bottom: 20px;
+	width: 100%;
+	max-width: 240px;
+	max-height: 48px;
 	display: block;
-	opacity: 0;
-	animation: fadeInUp 0.4s $ease-out-quad 0.4s both;
 }
 
 .work-link {
 	height: 3rem;
-	background-color: var(--page-color);
+	width: 8rem;
+	margin: 0;
 	text-decoration: none;
-	margin-top: 2rem;
-	animation: fadeInUp 0.4s $ease-out-quad 0.7s both;
+}
+
+.work-detail {
+	background-color: $bg-color;
+	height: 3rem;
+	display: flex;
+	justify-content: center;
+	width: fit-content;
+	align-items: center;
+	border-bottom: 1px solid var(--page-color);
+	border-right: 1px solid var(--page-color);
+	padding: 0 $spacing-8;
+	color: var(--page-color);
+	font-size: 0.875rem;
+	font-weight: 400;
+	text-align: center;
+
+	@include mq($until: tablet) {
+		flex-grow: 1;
+		padding: 0 $spacing-5;
+	}
 }
 
 .work-item-list {
@@ -183,7 +222,6 @@
 	max-height: 48px;
 	margin: 0 auto;
 
-	.animxyz-work-item &,
 	.artemis-work-item & {
 		max-height: 100px;
 	}
@@ -199,4 +237,36 @@
 .work-item-details {
 	display: block;
 	color: rgba(255, 255, 255, 0.75);
+}
+
+.skill-list-header {
+	padding: $spacing-8;
+	color: var(--page-color);
+}
+
+.skill-list {
+	display: flex;
+	flex-wrap: wrap-reverse;
+	justify-content: flex-start;
+	align-items: flex-start;
+	max-width: 100%;
+	list-style: none;
+	padding: 0;
+	margin-top: auto;
+}
+
+.skill-list-item {
+	background: $bg-color;
+	display: flex;
+	align-items: center;
+	height: 2rem;
+	padding: 0 $spacing-5;
+	border: 1px solid var(--page-color);
+	margin-left: -1px;
+	margin-bottom: -1px;
+}
+
+.skill-list-item-text {
+	color: var(--page-color);
+	font-weight: 500;
 }

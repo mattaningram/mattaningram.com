@@ -3,79 +3,101 @@ layout: home
 ---
 
 <header class="m-center-wrap">
-  <div class="m-logo-section">
-    <div class="instructions-wrap">
-      <span class="m-instructions">Click me</span>
-    </div>
-    <div class="m-logo-wrap m-homepage-wrap"></div>
-  </div>
-  <h1 class="my-name">Mattan Ingram</h1>
-  <div class="my-description">Product Designer</div>
+	<div class="m-logo-section">
+		<div class="instructions-wrap">
+			<span class="m-instructions">Click me</span>
+		</div>
+		<div class="m-logo-wrap m-homepage-wrap"></div>
+	</div>
+	<h1 class="my-name">Mattan Ingram</h1>
+	<div class="my-description">Product Designer</div>
 </header>
 
 <section class="about-section section-wrap">
-  <div class="grab-copy-wrap">
-    <p class="grab-copy">Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>, <span class="gif-hover gif-hover-topgun">Top Gun</span>, and <span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by combining design, development, and analytics. Take me to your startup, I'll make your users happy.</p>
-  </div>
+	<div class="grab-copy-wrap">
+		<p class="grab-copy">
+			Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>,
+			<span class="gif-hover gif-hover-topgun">Top Gun</span>, and
+			<span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by combining
+			design, development, and analytics. Take me to your startup, I'll make your users happy.
+		</p>
+	</div>
 </section>
 
 <section class="beliefs-section section-wrap">
-  <header class="section-header">
-    <h1 class="section-title">Beliefs</h1>
-  </header>
-  <div class="beliefs-list-wrap">
-    <div class="belief-item">
-      <h3 class="belief-item-header">Join Forces</h3>
-      <p class="belief-item-copy">Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography. Breaking down silos breeds unicorns.</p>
-    </div>
-    <div class="belief-item">
-      <h3 class="belief-item-header">Read the Manual</h3>
-      <p class="belief-item-copy">Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to know the basics first. It will save time in the end.</p>
-    </div>
-    <div class="belief-item">
-      <h3 class="belief-item-header">Best Practices</h3>
-      <p class="belief-item-copy">Just about everything has been tried on the web. It's worth the time to look up how other people have done something and learn from their successes and mistakes.</p>
-    </div>
-    <div class="belief-item">
-      <h3 class="belief-item-header">Be the User</h3>
-      <p class="belief-item-copy">Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to test a feature but to let my experience drive me as well.</p>
-    </div>
-    <div class="belief-item">
-      <h3 class="belief-item-header">Why not Both?</h3>
-      <p class="belief-item-copy">Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the features save them enough time to enjoy it.</p>
-    </div>
-    <div class="belief-item">
-      <h3 class="belief-item-header">Explain Why</h3>
-      <p class="belief-item-copy">When communicating something, be it a team meeting or introducing a new feature, explaining the why and how always improves how things play out.</p>
-    </div>
-  </div>
+	<header class="section-header">
+		<h1 class="section-title">Beliefs</h1>
+	</header>
+	<div class="beliefs-list-wrap">
+		<div class="belief-item">
+			<h3 class="belief-item-header">Join Forces</h3>
+			<p class="belief-item-copy">
+				Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
+				Breaking down silos breeds unicorns.
+			</p>
+		</div>
+		<div class="belief-item">
+			<h3 class="belief-item-header">Read the Manual</h3>
+			<p class="belief-item-copy">
+				Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
+				know the basics first. It will save time in the end.
+			</p>
+		</div>
+		<div class="belief-item">
+			<h3 class="belief-item-header">Best Practices</h3>
+			<p class="belief-item-copy">
+				Just about everything has been tried on the web. It's worth the time to look up how other people have done
+				something and learn from their successes and mistakes.
+			</p>
+		</div>
+		<div class="belief-item">
+			<h3 class="belief-item-header">Be the User</h3>
+			<p class="belief-item-copy">
+				Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to test
+				a feature but to let my experience drive me as well.
+			</p>
+		</div>
+		<div class="belief-item">
+			<h3 class="belief-item-header">Why not Both?</h3>
+			<p class="belief-item-copy">
+				Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the features
+				save them enough time to enjoy it.
+			</p>
+		</div>
+		<div class="belief-item">
+			<h3 class="belief-item-header">Explain Why</h3>
+			<p class="belief-item-copy">
+				When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
+				always improves how things play out.
+			</p>
+		</div>
+	</div>
 </section>
 
 <section class="work-section section-wrap">
-  <header class="section-header">
-    <h1 class="section-title">Work</h1>
-  </header>
+	<header class="section-header">
+		<h1 class="section-title">Work</h1>
+	</header>
 
-  <div class="work-item-list">
-    {% assign workSorted = site.work | sort: 'order' | reverse %}
-    {% for work in workSorted %}
-      <a class="work-item-wrap" href="{{ work.url }}" style="--page-color: {{ work.color }};">
-        <div class="work-item-stack"></div>
-        <div class="work-item-stack"></div>
-        <div class="work-item-stack"></div>
-        <div class="work-item-stack"></div>
-        <div class="work-item {{ work.title | downcase }}-work-item">
-          <div class="work-item-contents">
-            {% if work.logo %}
-              <img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
-            {% else %}
-              <h3 class="work-item-title">{{ work.title }}</h3>
-            {% endif %}
-            <!-- <span class="work-item-details">{{ work.position }} • {{ work.year }}</span> -->
-          </div>
-        </div>
-      </a>
+	<div class="work-item-list">
+		{% assign workSorted = site.work | sort: 'order' | reverse %} {% for work in workSorted %}
+		<a class="work-item-wrap" href="{{ work.url }}" style="--page-color: {{ work.color }};">
+			<div class="work-item-stack"></div>
+			<div class="work-item-stack"></div>
+			<div class="work-item-stack"></div>
+			<div class="work-item-stack"></div>
+			<div class="work-item {{ work.title | downcase }}-work-item">
+				<div class="work-item-contents">
+					{% if work.logo %}
+					<img class="work-item-logo" src="/assets/logos/{{ work.logo }}" title="{{ work.title }} Logo" />
+					{% else %}
+					<h3 class="work-item-title">{{ work.title }}</h3>
+					{% endif %}
+					<!-- <span class="work-item-details">{{ work.position }} • {{ work.year }}</span> -->
+				</div>
+			</div>
+		</a>
 
-    {% endfor %}
-  </div>
+		{% endfor %}
+	</div>
 </section>

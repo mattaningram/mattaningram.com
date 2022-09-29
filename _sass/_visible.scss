@@ -21,7 +21,7 @@
 .visible-wrap {
 	.work-page-section {
 		width: $centerMaxWidth;
-		margin: 25vh auto;
+		margin: 0 auto;
 	}
 
 	.section-header {
@@ -30,7 +30,7 @@
 		font-size: 6rem;
 		font-weight: 900;
 		line-height: 1;
-		margin-bottom: $spacing-11;
+		margin-top: $spacing-20;
 	}
 
 	.section-content {
@@ -44,7 +44,6 @@
 	}
 
 	.section-text {
-		border-radius: 8px;
 		background-color: $bg-dark;
 		padding: $spacing-10;
 		padding-right: $spacing-11 * 2;
@@ -65,19 +64,6 @@
 		top: 50%;
 		transform: translateY(-50%);
 	}
-
-	.tab-buttons {
-		display: flex;
-		gap: $spacing-2;
-		margin-bottom: $spacing-12;
-	}
-
-	.tab-button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 8rem;
-	}
 }
 
 .visible-icons {
@@ -85,8 +71,7 @@
 	background-color: $bg-color;
 	background-image: url('/assets/images/visible/visible-icons.svg');
 	background-repeat: repeat;
-	border: 2px solid var(--page-color);
-	border-radius: 8px;
+	border: 1px solid var(--page-color);
 	animation: icon-scroll 24s infinite linear;
 }
 
