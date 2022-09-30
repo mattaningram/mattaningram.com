@@ -47,4 +47,8 @@ p {
 	& + & {
 		margin-bottom: 1.25rem;
 	}
+
+	@include mq($until: tablet) {
+		font-size: 1rem;
+	}
 }

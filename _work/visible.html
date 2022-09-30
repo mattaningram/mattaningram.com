@@ -17,85 +17,55 @@ description: It's clear the web is missing a key tool when everyone is sharing a
 	</video>
 </div>
 
-<div class="work-page-section">
-	<h2 class="section-header">Design System</h2>
+<div class="page-section page-section--row page-section--left">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Icons</h2>
+			<p class="section-copy">
+				It's the little things that make the personality of an interface distinct. For Visible I created a fully custom
+				set of SVG icons powered by our design system CSS variables giving us full control over every property like
+				stroke weight and fill opacities.
+			</p>
+		</div>
+	</div>
+	<div class="section-image-wrap">
+		<div class="section-image visible-icons"></div>
+	</div>
 </div>
 
-<div class="work-page-section tabbed-section">
-	<div class="tab-buttons">
-		<button class="tab-button active" data-id="icons-tab">Icons</button>
-		<button class="tab-button" data-id="colors-tab">Colors</button>
-		<button class="tab-button" data-id="components-tab">Components</button>
-	</div>
-
-	<div class="tab-contents">
-		<div class="section-content tab-content active" id="icons-tab">
-			<div class="section-text">
-				<p>
-					It's the little things that make the personality of an interface distinct. For Visible I created a fully
-					custom set of SVG icons powered by our design system CSS variables giving us full control over every property
-					like stroke weight and fill opacities.
-				</p>
-			</div>
-			<div class="section-figure-wrap">
-				<div class="section-figure visible-icons"></div>
-			</div>
-		</div>
-		<div class="section-content tab-content" id="colors-tab">
-			<div class="section-text">
-				<p>
-					Consistency is key, and design system tokens help insure that colors throughout Visible are accessible,
-					responsive to dark/light modes, and can be easily updated or refactored.
-				</p>
-			</div>
-			<div class="section-figure-wrap visible-colors">
-				<!-- <img src="/assets/images/visible/visible-colors.png" width="1152" height="424" /> -->
-				<ul class="section-figure visible-color-circle">
-					{% for color in site.data.visible-theme.theme.color.primary %}
-					<li class="color-block" style="background-color: {{ color[1] }};">
-						<div class="color-name">primary{{ color[0] }}</div>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div class="section-content tab-content" id="components-tab">
-			<div class="section-text">
-				<p>
-					Combining icons, colors, other tokens we created a component system that let us rapidly develop new features
-					and iterate on improving the user-experience.
-				</p>
-			</div>
-			<div class="section-figure-wrap visible-components">
-				<img class="section-figure" src="/assets/images/visible/visible-components.png" width="1500" height="1834" />
-			</div>
+<div class="page-section page-section--row page-section--right">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Colors</h2>
+			<p class="section-copy">
+				Consistency is key, and design system tokens help insure that colors throughout Visible are accessible,
+				responsive to dark/light modes, and can be easily updated or refactored.
+			</p>
 		</div>
 	</div>
-
-	<div class="work-page-section">
-		<h2 class="section-header">Features</h2>
+	<div class="section-image-wrap visible-colors">
+		<div class="section-image visible-color-circle-fill"></div>
+		<ul class="section-image visible-color-circle">
+			{% for color in site.data.visible-theme.theme.color.primary %}
+			<li class="color-block" style="background-color: {{ color[1] }};">
+				<div class="color-name">primary{{ color[0] }}</div>
+			</li>
+			{% endfor %}
+		</ul>
 	</div>
+</div>
 
-	<script>
-		const section = document.querySelector('.tabbed-section')
-		const tabButton = document.querySelectorAll('.tab-button')
-		const contents = document.querySelectorAll('.tab-content')
-
-		section.onclick = (e) => {
-			const id = e.target.dataset.id
-
-			if (id) {
-				tabButton.forEach((btn) => {
-					btn.classList.remove('active')
-				})
-				e.target.classList.add('active')
-
-				contents.forEach((content) => {
-					content.classList.remove('active')
-				})
-				const element = document.getElementById(id)
-				element.classList.add('active')
-			}
-		}
-	</script>
+<div class="page-section page-section--row page-section--left">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Components</h2>
+			<p class="section-copy">
+				Combining icons, colors, other tokens we created a component system that let us rapidly develop new features and
+				iterate on improving the user-experience.
+			</p>
+		</div>
+	</div>
+	<div class="section-image-wrap visible-components">
+		<img class="section-image" src="/assets/images/visible/visible-components.png" width="1500" height="1834" />
+	</div>
 </div>

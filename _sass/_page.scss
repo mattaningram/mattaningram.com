@@ -7,6 +7,7 @@
 
 .grab-copy-wrap {
 	max-width: $centerMaxWidth;
+	padding: 0 $spacing-10;
 	margin: 0 auto;
 	margin-bottom: 10vh;
 	opacity: 0;
@@ -27,207 +28,142 @@
 }
 
 .grab-copy {
-	font-size: 2rem;
-	padding: 0 $spacing-10;
+	font-size: 1.75rem;
 	margin-bottom: 0;
 
 	@include mq($until: desktop) {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 	}
 
 	@include mq($until: tablet) {
-		font-size: 1.3rem;
+		font-size: 1.25rem;
 	}
 }
 
-.section-panel {
-	background-color: $bg-dark;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	width: 20rem;
-}
-
-.section-panel--themed {
-	border: 1px solid var(--page-color);
-}
-
-.page-copy-header {
+.section-header {
+	font-size: 2rem;
 	color: var(--page-color);
 	margin-bottom: $spacing-8;
 	letter-spacing: 0.025em;
 	align-self: flex-start;
 }
 
-.page-copy-wrap {
+.section-text-wrap {
+	display: flex;
+	flex-grow: 1;
 	background: $bg-dark;
 	padding: $spacing-11;
-	margin: $spacing-11 / 2;
-	margin-top: 0;
-
-	.page-copy {
-		padding: 0;
-		margin: 0;
-	}
+	border: 1px solid var(--page-color);
 
 	@include mq($until: desktop) {
 		padding: $spacing-10;
-		margin: $spacing-10 / 2;
-		margin-top: 0;
 	}
 
 	@include mq($until: tablet) {
 		padding: $spacing-7;
-		margin: $spacing-7 / 2;
-		margin-top: 0;
-	}
-}
-
-.page-copy {
-	@include mq($until: tablet) {
-		min-width: 100%;
-		padding: 0 $spacing-7;
 	}
 }
 
 .page-section {
-	max-width: $centerMaxWidth;
-	margin: 0 auto;
-	margin-bottom: $spacing-10;
 	display: flex;
-	gap: $spacing-10;
+	align-items: center;
 	justify-content: center;
-	flex-wrap: wrap;
-	flex-direction: row;
-	padding: 0 $spacing-10;
+	max-width: $centerMaxWidth;
+	padding: 0 $spacing-11;
+	margin: 0 auto;
+	margin-block: $spacing-20;
 
 	@include mq($until: desktop) {
 		padding: 0 $spacing-7;
 	}
 
 	@include mq($until: tablet) {
-		padding: 0 $spacing-4;
-		margin-bottom: $spacing-8;
-	}
-
-	.page-copy-wrap {
-		border: 1px solid var(--page-color);
-		flex-grow: 1;
-	}
-
-	&.page-copy-left,
-	&.page-copy-right {
-		@include mq($from: tablet) {
-			min-height: 100vh;
-
-			.page-copy-content {
-				max-width: 440px;
-			}
-
-			.page-copy-wrap {
-				margin-bottom: 0;
-			}
-		}
-
-		@include mq($until: tablet) {
-			.page-copy {
-				margin-right: 0;
-				margin-left: 0;
-			}
-		}
+		padding: 0 $spacing-5;
+		margin-bottom: $spacing-16;
 	}
 }
 
-.page-section-column {
+.page-section--column {
 	flex-direction: column;
 }
 
-.page-copy-left,
-.page-copy-right {
-	justify-content: center;
+.page-section--row {
 	align-items: center;
+	justify-content: flex-start;
 
-	@include mq($from: tablet) {
-		justify-content: flex-start;
+	.section-text {
+		max-width: 27rem;
 	}
 
 	@include mq($until: tablet) {
-		.page-copy-wrap {
+		display: block;
+
+		.section-text-wrap {
 			margin-bottom: -$spacing-7;
-			padding-bottom: $spacing-7 * 2;
+			padding-bottom: $spacing-11;
 		}
 
-		.page-copy-image-wrap {
-			margin: 0;
-			width: 100%;
-			height: 340px;
+		.section-text {
+			max-width: 100%;
+		}
+
+		.section-image-wrap {
+			margin: 0 (-$spacing-7);
+			height: 21rem;
 		}
 	}
 }
 
-.page-copy-top {
-	.page-copy-wrap {
+.page-section--top {
+	display: block;
+
+	.section-text-wrap {
 		width: 100%;
-		margin-bottom: -$spacing-11;
-		padding-bottom: $spacing-11 * 2;
+		margin-bottom: -$spacing-7;
+		padding-bottom: $spacing-11;
 	}
 }
 
-.page-copy-bottom {
-	.page-copy-wrap {
-		width: 100%;
-		margin-top: -$spacing-11;
-		padding-top: $spacing-11 * 2;
-	}
-}
-
-.page-copy-left {
+.page-section--left {
 	@include mq($from: tablet) {
-		flex-direction: row;
-
-		.page-copy-image-wrap {
+		.section-image-wrap {
 			left: -30%;
 		}
 	}
 }
 
-.page-copy-right {
-	.page-copy-content {
-		float: right;
-	}
-
+.page-section--right {
 	@include mq($from: tablet) {
 		flex-direction: row-reverse;
 
-		.page-copy-image-wrap {
+		.section-text-wrap {
+			justify-content: flex-end;
+		}
+
+		.section-image-wrap {
 			right: -30%;
 		}
 	}
 }
 
-.page-copy-image-wrap {
-	position: relative;
+.section-image-wrap {
 	align-self: stretch;
+	position: relative;
 }
 
-.page-copy-image {
+.section-image {
 	position: absolute;
-	box-shadow: $shadowMd;
 }
 
-.page-copy-video-wrap {
-	margin: 0 $spacing-11 / -2;
-
-	@include mq($until: desktop) {
-		margin: 0 $spacing-10 / -2;
-	}
+.section-video-wrap {
+	margin: 0 (-$spacing-7);
 
 	@include mq($until: tablet) {
-		margin: 0 $spacing-7 / -2;
+		margin: 0 (-$spacing-5);
 	}
 }
 
-.page-copy-video {
+.page-video {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -287,6 +223,7 @@
 .image-grid {
 	display: flex;
 	justify-content: center;
+	gap: $spacing-10;
 
 	@include mq($until: desktop) {
 		flex-wrap: wrap;
@@ -294,8 +231,6 @@
 }
 
 .image-grid-item {
-	margin: 20px;
-	margin-top: 0;
 	display: flex;
 	justify-content: center;
 }

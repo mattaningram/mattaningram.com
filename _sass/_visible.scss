@@ -1,78 +1,48 @@
 //VISIBLE
 
 .visible-splash-video {
-	margin: 0 auto;
-	max-width: 100%;
-	width: $centerMaxWidth;
+	max-width: $centerMaxWidth;
 	padding: 0 $spacing-10;
-	margin-bottom: $spacing-11;
+	margin: 0 auto;
 
 	video {
 		width: 100%;
 		height: auto;
-		border-radius: 8px;
+	}
+
+	@include mq($until: desktop) {
+		padding: 0 $spacing-7;
 	}
 
 	@include mq($until: tablet) {
-		padding: 0 $spacing-7;
+		padding: 0;
 	}
 }
 
 .visible-wrap {
-	.work-page-section {
-		width: $centerMaxWidth;
-		margin: 0 auto;
-	}
-
-	.section-header {
-		text-align: left;
-		color: transparentize(white, 0.55);
-		font-size: 6rem;
-		font-weight: 900;
-		line-height: 1;
-		margin-top: $spacing-20;
-	}
-
-	.section-content {
-		position: relative;
-	}
-
-	.section-text,
-	.section-figure-wrap {
-		flex-shrink: 0;
-		width: 30rem;
-	}
-
-	.section-text {
-		background-color: $bg-dark;
-		padding: $spacing-10;
-		padding-right: $spacing-11 * 2;
-		margin-right: -$spacing-10;
-
-		h2 {
-			margin-bottom: $spacing-7;
+	.page-section {
+		@include mq($from: tablet) {
+			min-height: 50vh;
 		}
-
-		p {
-			color: white;
-		}
-	}
-
-	.section-figure {
-		position: absolute;
-		height: 24rem;
-		top: 50%;
-		transform: translateY(-50%);
 	}
 }
 
 .visible-icons {
 	width: 30rem;
-	background-color: $bg-color;
+	height: 24rem;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: white;
 	background-image: url('/assets/images/visible/visible-icons.svg');
 	background-repeat: repeat;
-	border: 1px solid var(--page-color);
 	animation: icon-scroll 24s infinite linear;
+
+	@include mq($until: tablet) {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		transform: initial;
+	}
 }
 
 @keyframes icon-scroll {
@@ -83,6 +53,22 @@
 
 .visible-colors {
 	position: relative;
+	right: 0 !important;
+}
+
+.visible-color-circle-fill {
+	background-color: $bg-color;
+	border-radius: 50%;
+	width: 22rem;
+	height: 22rem;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	@include mq($until: tablet) {
+		width: 16rem;
+		height: 16rem;
+	}
 }
 
 .visible-color-circle {
@@ -94,6 +80,7 @@
 
 .color-block {
 	--color-block__size: 6rem;
+	--color-block__offset: 12rem;
 	position: absolute;
 	top: calc(50% - var(--color-block__size) / 2);
 	left: calc(50% - var(--color-block__size) / 2);
@@ -110,18 +97,32 @@
 
 	@for $i from 1 through 16 {
 		&:nth-child(#{$i}) {
-			transform: rotate((360 / 16 * $i) + deg) translate(0, 12rem) rotate((-360 / 16 * $i) + deg);
+			transform: rotate((360 / 16 * $i) + deg) translate(0, var(--color-block__offset)) rotate((-360 / 16 * $i) + deg);
 		}
 	}
 
 	&:nth-child(-n + 8) {
 		color: #f7faff;
 	}
+
+	@include mq($until: tablet) {
+		--color-block__offset: 8rem;
+	}
 }
 
 .visible-components {
-	.section-figure {
+	.section-image {
 		width: 500px;
 		height: auto;
+		top: 50%;
+		transform: translateY(-50%);
+
+		@include mq($until: tablet) {
+			height: 21rem;
+			width: auto;
+			top: initial;
+			left: 50%;
+			transform: translateX(-50%);
+		}
 	}
 }

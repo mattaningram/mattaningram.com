@@ -45,9 +45,8 @@
 }
 
 .work-title-wrap {
-	// width: 100%;
-	// max-width: 15rem;
-	// max-height: 3rem;
+	height: 3rem;
+	max-width: 15rem;
 }
 
 .work-title {
@@ -56,10 +55,10 @@
 }
 
 .work-logo {
-	width: 100%;
+	display: block;
+	height: 100%;
 	max-width: 240px;
 	max-height: 48px;
-	display: block;
 }
 
 .work-link {
@@ -212,19 +211,16 @@
 }
 
 .work-item-contents {
+	width: 100%;
 	transition: all 0.2s ease-in;
 }
 
 .work-item-logo {
 	display: block;
 	width: 100%;
-	max-width: 240px;
-	max-height: 48px;
+	max-width: 15rem;
+	max-height: 3rem;
 	margin: 0 auto;
-
-	.artemis-work-item & {
-		max-height: 100px;
-	}
 }
 
 .work-item-title {
@@ -237,6 +233,26 @@
 .work-item-details {
 	display: block;
 	color: rgba(255, 255, 255, 0.75);
+}
+
+.skill-section {
+	align-items: stretch;
+	flex-wrap: wrap;
+	gap: $spacing-10;
+	margin-block: $spacing-20;
+
+	@include mq($until: tablet) {
+		gap: $spacing-8;
+	}
+
+	.skill-panel {
+		background-color: $bg-dark;
+		border: 1px solid var(--page-color);
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		width: 20rem;
+	}
 }
 
 .skill-list-header {
