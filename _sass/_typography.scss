@@ -1,42 +1,54 @@
-$fontBody:    "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$fontHead:    "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$fontBody: 'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+	Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+$fontHead: 'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+	Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
 
-
-html, body {
-  color: white;
-  font-family: $fontBody;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.5;
+html,
+body {
+	color: white;
+	font-family: $fontBody;
+	font-weight: 300;
+	line-height: 1.5;
 }
 
 a {
-  color: currentColor;
+	color: var(--page-color);
+	font-weight: bolder;
 }
 
 .text-white {
-  color: white;
+	color: white;
 }
 
-h1, h2, h3, h4 {
-  font-family: $fontHead;
-  font-weight: 600;
-  line-height: 1.2;
+h1,
+h2,
+h3,
+h4 {
+	font-family: $fontHead;
+	font-weight: 600;
+	line-height: 1.2;
 }
 
 h1 {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 h2 {
-  font-size: 1.6rem;
+	font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1.3rem;
+	font-size: 1.25rem;
 }
 
 p {
-  font-size: 1.25rem;
-  margin-bottom: 1.25rem;
+	font-size: 1.25rem;
+
+	& + & {
+		margin-bottom: 1.25rem;
+	}
+
+	@include mq($until: tablet) {
+		font-size: 1rem;
+	}
 }

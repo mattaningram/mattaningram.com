@@ -8,21 +8,64 @@ logoOpen: visible_logo_color.svg
 workUrl: https://visible.page
 layout: work
 color: rgb(56, 123, 249)
-description: It's clear the web is missing a key tool when everyone is sharing addresses, dates, media and more in static text docs like it's still 2010. Visible lets anyone create interactive and shareable maps, calendars, galleries, and more to communicate information the way it was meant to be seen. More than a knowledge-base or fancy spreadsheet, Visible is a new lens on information combining all the powers of the modern web in one place.
+description: It's clear the web is missing a key tool when everyone is sharing addresses, dates, media and more in static text docs like it's still 2010. Visible lets you transform that content into interactive and shareable maps, calendars, galleries, and more to communicate information the way it was meant to be seen. More than a knowledge-base or fancy spreadsheet, Visible is a new lens on information combining all the powers of the modern web in one place.
 ---
 
 <div class="visible-splash-video">
 	<video autoplay loop muted playsinline width="1440" height="900">
-		<source src="/assets/images/visible/visible-landing-demo.mp4" type="video/mp4">
+		<source src="/assets/images/visible/visible-landing-demo.mp4" type="video/mp4" />
 	</video>
 </div>
 
-<!-- <div class="work-section">
-	<div class="work-section-text">
-		<h2>Visible</h2>
-		<p>It's clear the web is missing a key tool when everyone is sharing addresses, dates, media and more in static text docs like it's still 2010. Visible lets anyone create interactive and shareable maps, calendars, galleries, and more to communicate information the way it was meant to be seen. More than a knowledge-base or fancy spreadsheet, Visible is a new lens on information combining all the powers of the modern web in one place.</p>
+<div class="page-section page-section--row page-section--left">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Icons</h2>
+			<p class="section-copy">
+				It's the little things that make the personality of an interface distinct. For Visible I created a fully custom
+				set of SVG icons powered by our design system CSS variables giving us full control over every property like
+				stroke weight and fill opacities.
+			</p>
+		</div>
 	</div>
-	<div class="work-section-image">
-		<img src="/assets/images/visible/visible-landing.png" alt="Visible">
+	<div class="section-image-wrap">
+		<div class="section-image visible-icons"></div>
 	</div>
-</div> -->
+</div>
+
+<div class="page-section page-section--row page-section--right">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Colors</h2>
+			<p class="section-copy">
+				Consistency is key, and design system tokens help insure that colors throughout Visible are accessible,
+				responsive to dark/light modes, and can be easily updated or refactored.
+			</p>
+		</div>
+	</div>
+	<div class="section-image-wrap visible-colors">
+		<div class="section-image visible-color-circle-fill"></div>
+		<ul class="section-image visible-color-circle">
+			{% for color in site.data.visible-theme.theme.color.primary %}
+			<li class="color-block" style="background-color: {{ color[1] }};">
+				<div class="color-name">primary{{ color[0] }}</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+
+<div class="page-section page-section--row page-section--left">
+	<div class="section-text-wrap">
+		<div class="section-text">
+			<h2 class="section-header">Components</h2>
+			<p class="section-copy">
+				Combining icons, colors, other tokens we created a component system that let us rapidly develop new features and
+				iterate on improving the user-experience.
+			</p>
+		</div>
+	</div>
+	<div class="section-image-wrap visible-components">
+		<img class="section-image" src="/assets/images/visible/visible-components.png" width="1500" height="1834" />
+	</div>
+</div>

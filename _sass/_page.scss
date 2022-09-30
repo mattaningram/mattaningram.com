@@ -1,355 +1,243 @@
 //PAGE CONTENT
 
 .page-wrap {
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.grab-copy, .page-copy {
-  color: white;
-}
-
-.list-item-text {
-  color: $bg-color;
-  font-weight: 600;
-}
-
-.work-description {
-  font-size: 1.2rem;
-  font-weight: 400;
-  text-align: center;
-  opacity: 0;
-  animation: fadeInUp .5s $ease-out-quad .6s both;
+	max-width: 100%;
+	margin: 0 auto;
 }
 
 .grab-copy-wrap {
-  max-width: $centerMaxWidth;
-  margin: 0 auto;
-  margin-bottom: 10vh;
-  opacity: 0;
-  animation: fadeInUpText .6s $ease-out-quad .8s both;
-  @keyframes fadeInUpText {
-    from {
-      opacity: 0;
-      line-height: 2;
-      transform: translate3d(0, 30px, 0);
-    }
-    to {
-      line-height: inherit;
-      opacity: 1;
-      transform: none;
-    }
-  }
+	max-width: $centerMaxWidth;
+	padding: 0 $spacing-10;
+	margin: 0 auto;
+	margin-bottom: 10vh;
+	opacity: 0;
+	animation: fadeInUpText 0.6s $ease-out-quad 0.8s both;
+}
+
+@keyframes fadeInUpText {
+	from {
+		opacity: 0;
+		line-height: 2;
+		transform: translate3d(0, 30px, 0);
+	}
+	to {
+		line-height: inherit;
+		opacity: 1;
+		transform: none;
+	}
 }
 
 .grab-copy {
-  font-size: 2rem;
-  padding: 0 $spacingMd;
-  margin-bottom: 0;
-  @include mq($until: desktop) {
-    font-size: 1.6rem;
-  }
-  @include mq($until: tablet) {
-    font-size: 1.3rem;
-  }
+	font-size: 1.75rem;
+	margin-bottom: 0;
+
+	@include mq($until: desktop) {
+		font-size: 1.5rem;
+	}
+
+	@include mq($until: tablet) {
+		font-size: 1.25rem;
+	}
+}
+
+.section-header {
+	font-size: 2rem;
+	color: var(--page-color);
+	margin-bottom: $spacing-8;
+	letter-spacing: 0.025em;
+	align-self: flex-start;
+}
+
+.section-text-wrap {
+	display: flex;
+	flex-grow: 1;
+	background: $bg-dark;
+	padding: $spacing-11;
+	border: 1px solid var(--page-color);
+
+	@include mq($until: desktop) {
+		padding: $spacing-10;
+	}
+
+	@include mq($until: tablet) {
+		padding: $spacing-7;
+	}
 }
 
 .page-section {
-  padding: 0 $spacingLg / 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: $centerMaxWidth;
+	padding: 0 $spacing-11;
+	margin: 0 auto;
+	margin-block: $spacing-20;
 
-  @include mq($until: desktop) {
-    padding: 0 $spacingMd / 2;
-  }
+	@include mq($until: desktop) {
+		padding: 0 $spacing-7;
+	}
 
-  @include mq($until: tablet) {
-    padding: 0 $spacingSm / 2;
-  }
+	@include mq($until: tablet) {
+		padding: 0 $spacing-5;
+		margin-bottom: $spacing-16;
+	}
 }
 
-.page-section-item {
-  flex-grow: 1;
-  width: 300px;
-  padding: $spacingLg;
-  margin: $spacingLg / 2;
-
-  @include mq($until: desktop) {
-    padding: $spacingMd;
-    margin: $spacingMd / 2;
-  }
-
-  @include mq($until: tablet) {
-    padding: $spacingSm;
-    margin: $spacingSm / 2;
-  }
+.page-section--column {
+	flex-direction: column;
 }
 
-.page-section-item-themed {
-  border: 1px solid currentColor;
+.page-section--row {
+	align-items: center;
+	justify-content: flex-start;
+
+	.section-text {
+		max-width: 27rem;
+	}
+
+	@include mq($until: tablet) {
+		display: block;
+
+		.section-text-wrap {
+			margin-bottom: -$spacing-7;
+			padding-bottom: $spacing-11;
+		}
+
+		.section-text {
+			max-width: 100%;
+		}
+
+		.section-image-wrap {
+			margin: 0 (-$spacing-7);
+			height: 21rem;
+		}
+	}
 }
 
-.page-copy-header {
-  margin-bottom: 15px;
-  letter-spacing: .025em;
-  align-self: flex-start;
+.page-section--top {
+	display: block;
+
+	.section-text-wrap {
+		width: 100%;
+		margin-bottom: -$spacing-7;
+		padding-bottom: $spacing-11;
+	}
 }
 
-.page-copy-wrap {
-  padding: $spacingLg;
-  margin: $spacingLg / 2;
-  margin-top: 0;
-
-  .page-copy {
-    padding: 0;
-    margin: 0;
-  }
-
-  @include mq($until: desktop) {
-    padding: $spacingMd;
-    margin: $spacingMd / 2;
-    margin-top: 0;
-  }
-
-  @include mq($until: tablet) {
-    padding: $spacingSm;
-    margin: $spacingSm / 2;
-    margin-top: 0;
-  }
+.page-section--left {
+	@include mq($from: tablet) {
+		.section-image-wrap {
+			left: -30%;
+		}
+	}
 }
 
-.page-copy {
-  @include mq($until: tablet) {
-    min-width: 100%;
-    padding: 0 $spacingSm;
-  }
+.page-section--right {
+	@include mq($from: tablet) {
+		flex-direction: row-reverse;
+
+		.section-text-wrap {
+			justify-content: flex-end;
+		}
+
+		.section-image-wrap {
+			right: -30%;
+		}
+	}
 }
 
-.page-section {
-  max-width: 920px;
-  margin: 0 auto;
-  margin-bottom: $spacingLg;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-
-  @include mq($until: tablet) {
-    margin-bottom: $spacingLg * 2;
-  }
-
-  .page-copy-wrap {
-    border: 1px solid currentColor;
-    flex-grow: 1;
-  }
-
-  &.page-copy-left, &.page-copy-right {
-    @include mq($from: tablet) {
-      min-height: 100vh;
-    
-      .page-copy-content {
-        max-width: 440px;
-      }
-    
-      .page-copy-wrap {
-        margin-bottom: 0;
-      }
-    }
-  
-    @include mq($until: tablet) {
-      .page-copy {
-        margin-right: 0;
-        margin-left: 0;
-      }
-    }
-  }
+.section-image-wrap {
+	align-self: stretch;
+	position: relative;
 }
 
-.page-section-column {
-  flex-direction: column;
+.section-image {
+	position: absolute;
 }
 
-.page-copy-left, .page-copy-right {
-  justify-content: center;
-  align-items: center;
+.section-video-wrap {
+	margin: 0 (-$spacing-7);
 
-  @include mq($from: tablet) {
-    justify-content: flex-start;
-  }
-
-  @include mq($until: tablet) {
-    .page-copy-wrap {
-      margin-bottom: -$spacingSm;
-      padding-bottom: $spacingSm * 2;
-    }
-  
-    .page-copy-image-wrap {
-      margin: 0;
-      width: 100%;
-      height: 340px;
-    }
-  }
+	@include mq($until: tablet) {
+		margin: 0 (-$spacing-5);
+	}
 }
 
-.page-copy-top, .page-copy-bottom, .page-copy-alone {
-  .page-copy {
-    column-width: 300px;
-    column-gap: $spacingLg;
-  }
-}
-
-.page-copy-top {
-  .page-copy-wrap {
-    width: 100%;
-    margin-bottom: -$spacingLg;
-    padding-bottom: $spacingLg * 2;
-  }
-}
-
-.page-copy-bottom {
-  .page-copy-wrap {
-    width: 100%;
-    margin-top: -$spacingLg;
-    padding-top: $spacingLg * 2;
-  }
-}
-
-.page-copy-left {
-  @include mq($from: tablet) {
-    flex-direction: row;
-  
-    .page-copy-image-wrap {
-      left: -30%;
-    }
-  }
-}
-
-.page-copy-right {
-  .page-copy-content {
-    float: right;
-  }
-
-  @include mq($from: tablet) {
-    flex-direction: row-reverse;
-
-    .page-copy-image-wrap {
-      right: -30%;
-    }
-  }
-}
-
-.page-copy-image-wrap {
-  position: relative;
-  align-self: stretch;
-}
-
-.page-copy-image {
-  position: absolute;
-  box-shadow: $shadowMd;
-}
-
-.page-copy-video-wrap {
-  margin: 0 $spacingLg / -2;
-
-  @include mq($until: desktop) {
-    margin: 0 $spacingMd / -2;
-  }
-
-  @include mq($until: tablet) {
-    margin: 0 $spacingSm / -2;
-  }
-}
-
-.page-copy-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  box-shadow: $shadowMd;
-}
-
-.list-header {
-  margin-bottom: 15px;
-}
-
-.skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 100%;
-  list-style: none;
-  padding: 0;
-}
-
-.skill-list-item {
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding: 0 5px;
-  background-color: currentColor;
+.page-video {
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: $shadowMd;
 }
 
 //Image Carousel
 
 @function carousel-center($items) {
-  @return ($items * 300 + 40 + (($items - 1) * 30))
+	@return ($items * 300 + 40 + (($items - 1) * 30));
 }
 
 .image-carousel-wrap {
-  margin-bottom: $spacingLg;
+	margin-bottom: $spacing-11;
 }
 
 .image-carousel {
-  list-style: none;
-  overflow-x: scroll;
-  padding: $spacingMd $spacingSm;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+	--xyz-delay: 1s;
+	list-style: none;
+	overflow-x: scroll;
+	padding: $spacing-10 $spacing-7;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .carousel-item {
-  display: inline-block;
-  min-width: 300px;
-  max-width: 300px;
-  height: auto;
-  vertical-align: top;
-  line-height: 0;
-  position: relative;
-  box-shadow: $shadowMd;
-  transition: transform .15s ease-out, box-shadow .15s ease-out;
-  &:not(:last-child) {
-    margin-right: $spacingMd;
-  }
-  &:hover, &:focus-within {
-    transform: translate3d(0, -15px, 0);
-    box-shadow: 0 0 0 5px currentColor;
-  }
+	display: inline-block;
+	min-width: 300px;
+	max-width: 300px;
+	height: auto;
+	vertical-align: top;
+	line-height: 0;
+	position: relative;
+	box-shadow: $shadowMd;
+	transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+
+	&:not(:last-child) {
+		margin-right: $spacing-10;
+	}
+
+	&:hover,
+	&:focus-within {
+		transform: translate3d(0, -15px, 0);
+		box-shadow: 0 0 0 5px var(--page-color);
+	}
 }
 
 .carousel-image {
-  width: 100%;
+	width: 100%;
 }
 
 //IMAGE GRID
 
 .image-grid {
-  display: flex;
-  justify-content: center;
-  @include mq($until: desktop) {
-    flex-wrap: wrap;
-  }
+	display: flex;
+	justify-content: center;
+	gap: $spacing-10;
+
+	@include mq($until: desktop) {
+		flex-wrap: wrap;
+	}
 }
 
 .image-grid-item {
-  margin: 20px;
-  margin-top: 0;
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .grid-image {
-  display: block;
-  height: 200px;
-  width: auto;
-  box-shadow: $shadowMd;
+	display: block;
+	height: 200px;
+	width: auto;
+	box-shadow: $shadowMd;
 }
