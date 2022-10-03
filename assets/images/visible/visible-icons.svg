@@ -1,7 +1,7 @@
 <svg fill="none" height="384" viewBox="0 0 480 384" width="480" xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink">
 	<mask id="a" height="16" maskUnits="userSpaceOnUse" width="12" x="113" y="304">
-		<path d="m113 304h12v16h-12z" fill="#30323e" />
+		<path d="m113 304h12v16h-12z" fill="white" />
 	</mask>
 	<g fill="#30323e">
 		<path d="m14.209 30h3.2256v-5.1064h5.0537v5.1064h3.2168v-12.6826h-3.2168v4.9834h-5.0537v-4.9834h-3.2256z" />
