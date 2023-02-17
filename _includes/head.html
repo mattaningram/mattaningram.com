@@ -22,5 +22,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..700&display=swap" rel="stylesheet" />
 
-	{% if jekyll.environment == 'production' %} {% include google-analytics.html %} {% endif %}
+	{% if jekyll.environment == 'production' %} {% include google-analytics.html %}
+	<script
+		src="https://beamanalytics.b-cdn.net/beam.min.js"
+		data-token="d87546f1-7825-45bb-9a4e-7fbb12ed65b4"
+		async
+	></script>
+	{% endif %}
 </head>
