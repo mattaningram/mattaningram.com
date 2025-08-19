@@ -1,9 +1,0 @@
-//ANIMXYZ
-
-.animxyz-images {
-  @include mq($until: call(carousel-center, 5) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}

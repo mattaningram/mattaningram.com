@@ -177,6 +177,8 @@
 }
 
 .image-carousel-wrap {
+	display: flex;
+	justify-content: center;
 	margin-bottom: $spacing-11;
 }
 
@@ -186,10 +188,9 @@
 	overflow-x: scroll;
 	padding: $spacing-10 $spacing-7;
 	white-space: nowrap;
-	-webkit-overflow-scrolling: touch;
 	display: flex;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 .carousel-item {

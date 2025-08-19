@@ -1,9 +1,0 @@
-//TALLY
-
-.tally-image-row-1 {
-  @include mq($until: call(carousel-center, 7) ) {
-    .image-carousel {
-      display: block;
-    }
-  }
-}

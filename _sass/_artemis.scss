@@ -17,11 +17,3 @@
 		height: auto;
 	}
 }
-
-.artemis-images {
-	@include mq($until: call(carousel-center, 8)) {
-		.image-carousel {
-			display: block;
-		}
-	}
-}
