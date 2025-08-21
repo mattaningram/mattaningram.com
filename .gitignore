@@ -1,6 +1,18 @@
-_site
-.sass-cache
-.jekyll-metadata
-.jekyll-cache
-**/.DS_Store
-node_modules
+# build output
+dist/
+
+# cache files
+.eslintcache
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+package-lock.json
+
+# macOS-specific files
+.DS_Store
+
+# jekyll stuff
+jekyll/
