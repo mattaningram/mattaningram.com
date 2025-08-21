@@ -1,0 +1,68 @@
+---
+export interface Props {
+	title?: string
+	description?: string
+	pageColor?: string
+}
+
+const {
+	title = 'Mattan Ingram - Design Engineer',
+	description = 'I am a product designer with over a decade of experience building interfaces for tech startups.',
+	pageColor = 'white',
+} = Astro.props
+
+import '../styles/main.css'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Reset CSS -->
+		<link rel="stylesheet" href="https://cdn.rawgit.com/filipelinhares/ress/master/dist/ress.min.css" />
+
+		<!-- AnimXYZ -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core" />
+
+		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..700&display=swap" rel="stylesheet" />
+
+		<!-- Analytics -->
+		<script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="d87546f1-7825-45bb-9a4e-7fbb12ed65b4" async
+		></script>
+	</head>
+
+	<body>
+		<div class="page-content" style={`--page-color: ${pageColor}`} aria-label="Content">
+			<slot />
+		</div>
+
+		<!-- Scripts -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script> -->
+		<script is:inline src="/js/load-m-logo.js"></script>
+	</body>
+</html>
+
+<style>
+	:root {
+		--page-color: white;
+	}
+</style>

@@ -1,0 +1,112 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 3,
+	title: 'Code Climate',
+	year: '2017 to 2018',
+	position: 'Lead Product Designer',
+	logo: 'codeclimate_logo_white.svg',
+	workUrl: 'https://codeclimate.com',
+	color: 'rgb(69, 210, 152)',
+	description: `Code Climate builds tools to make engineering teams better by analyzing code quality and improving development efficiency. I helped guide Code Climate design through marketing sites, product redesigns, and design system refinements, as well as hiring a new designer and managing remote contractors.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="image-carousel-wrap codeclimate-image-row-1">
+		<ul class="image-carousel xyz-in" data-xyz="fade down ease-out-back">
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="codeclimate" href="/assets/images/codeclimate/cc-checkout-redesign.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-checkout-redesign-thumb.jpg"
+						alt="Checkout Redesign"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="codeclimate" href="/assets/images/codeclimate/cc-issues-refinement.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-issues-refinement-thumb.jpg"
+						alt="Issues Refinement"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a
+					class="no-outline"
+					data-fancybox="codeclimate"
+					href="/assets/images/codeclimate/cc-repo-overview-redesign.jpg"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-repo-overview-redesign-thumb.jpg"
+						alt="Repo Overview Redesign"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="codeclimate" href="/assets/images/codeclimate/velocity-info-page.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/velocity-info-page-thumb.jpg"
+						alt="Velocity Info Page"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a
+					class="no-outline"
+					data-fancybox="codeclimate"
+					href="/assets/images/codeclimate/cc-repositories-redesign.jpg"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-repositories-redesign-thumb.jpg"
+						alt="Repositories Redesign"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="page-section skill-section">
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Pixels</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Sketch</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Adobe AI PS IN AE</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">InVision</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Code</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Ruby</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Rails</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">HAML</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SASS/CSS</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">GitHub</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</WorkLayout>

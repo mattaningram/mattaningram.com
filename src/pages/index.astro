@@ -1,0 +1,93 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro'
+
+const allWork = import.meta.glob('../work/*.astro')
+const workItems = Object.values(allWork)
+
+// Sort the workItems array based on the "order" frontmatter key
+workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
+---
+
+<HomeLayout>
+	<header class="m-center-wrap">
+		<div class="m-logo-section">
+			<div class="instructions-wrap">
+				<span class="m-instructions">Click me</span>
+			</div>
+			<div class="m-logo-wrap m-homepage-wrap"></div>
+		</div>
+		<h1 class="my-name">Mattan Ingram</h1>
+		<div class="my-description">Design Engineer</div>
+	</header>
+
+	<section class="about-section section-wrap">
+		<div class="grab-copy-wrap">
+			<p class="grab-copy">
+				Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>,
+				<span class="gif-hover gif-hover-topgun">Top Gun</span>, and
+				<span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by
+				combining design, development, and analytics. Take me to your startup, I'll make your users happy.
+			</p>
+		</div>
+	</section>
+
+	<section class="beliefs-section section-wrap">
+		<header class="landing-section-header">
+			<h1 class="section-title">Beliefs</h1>
+		</header>
+		<div class="beliefs-list-wrap">
+			<div class="belief-item">
+				<h3 class="belief-item-header">Join Forces</h3>
+				<p class="belief-item-copy">
+					Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
+					Breaking down silos breeds unicorns.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-header">Read the Manual</h3>
+				<p class="belief-item-copy">
+					Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
+					know the basics first. It will save time in the end.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-header">Best Practices</h3>
+				<p class="belief-item-copy">
+					Just about everything has been tried on the web. It's worth the time to look up how other people have done
+					something and learn from their successes and mistakes.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-header">Keep Learning</h3>
+				<p class="belief-item-copy">
+					If everything was exactly the same as last year, we'd all be out of jobs. The tools are always improving and
+					changing, which means staying curious is required.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-header">Prototype Early</h3>
+				<p class="belief-item-copy">
+					Don't spend weeks talking about how something might work. Build something quick and test it out. You'll learn
+					more in an hour of using something than a week of talking about it.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-header">Don't Rush It</h3>
+				<p class="belief-item-copy">
+					The easiest way to introduce bugs is to rush the development process. Better to do it right the first time
+					than to have to come back and fix it later.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="work-section section-wrap">
+		<header class="landing-section-header">
+			<h1 class="section-title">Work</h1>
+		</header>
+
+		<div class="work-list-wrap">
+			{workItems.map((item) => <div>{item.frontmatter.title}</div>)}
+		</div>
+	</section>
+</HomeLayout>

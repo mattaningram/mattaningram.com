@@ -1,9 +1,0 @@
----
----
-[
-  {% for logo in site.mlogos %}
-    {
-      "url" : "{{ logo.url }}"
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
-]

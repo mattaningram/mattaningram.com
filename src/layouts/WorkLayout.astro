@@ -1,0 +1,70 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+	year: string;
+	position: string;
+	logo?: string;
+	logoOpen?: string;
+	workUrl?: string;
+	color: string;
+	description: string;
+}
+
+const { title, year, position, logo, logoOpen, workUrl, color, description } = Astro.props;
+---
+
+<BaseLayout title={title} pageColor={color}>
+	<div class="work-background"></div>
+
+	<main>
+		<div class="work-header-wrap">
+			<header class="work-header xyz-in" data-xyz="fade down duration-5 ease-out-back">
+				<div class="work-header-top">
+					<div class="work-title-wrap xyz-in" data-xyz="fade left delay-4 ease-out-back">
+						{
+							logoOpen ? (
+								<img class="work-logo" src={`/assets/logos/${logoOpen}`} alt={`${title} Logo`} />
+							) : logo ? (
+								<img class="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
+							) : (
+								<h1 class="work-title">{title}</h1>
+							)
+						}
+					</div>
+					{
+						workUrl && (
+							<a href={workUrl} class="work-link button--themed" target="_blank">
+								<span class="button__text">Visit</span>
+							</a>
+						)
+					}
+				</div>
+				<div class="work-header-bottom">
+					<div class="work-detail">{year}</div>
+					<div class="work-detail">{position}</div>
+				</div>
+			</header>
+		</div>
+
+		<div class="page-section page-section--top xyz-in" data-xyz="fade down delay-10">
+			<div class="section-text-wrap">
+				<div class="section-text">
+					<p class="section-copy" set:html={description} />
+				</div>
+			</div>
+		</div>
+
+		<slot />
+	</main>
+
+	<Footer />
+</BaseLayout>
+
+<style define:vars={{ pageColor: color }}>
+	:root {
+		--page-color: var(--pageColor);
+	}
+</style>

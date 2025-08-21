@@ -1,0 +1,247 @@
+//PAGE CONTENT
+
+.page-wrap {
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.grab-copy-wrap {
+	max-width: $centerMaxWidth;
+	padding: 0 $spacing-10;
+	margin: 0 auto;
+	margin-bottom: 10vh;
+	opacity: 0;
+	animation: fadeInUpText 0.6s $ease-out-quad 0.8s both;
+}
+
+@keyframes fadeInUpText {
+	from {
+		opacity: 0;
+		line-height: 2;
+		transform: translate3d(0, 30px, 0);
+	}
+	to {
+		line-height: inherit;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.grab-copy {
+	font-size: 1.75rem;
+	margin-bottom: 0;
+
+	@include mq($until: desktop) {
+		font-size: 1.5rem;
+	}
+
+	@include mq($until: tablet) {
+		font-size: 1.25rem;
+	}
+}
+
+.section-header {
+	font-size: 2rem;
+	color: var(--page-color);
+	margin-bottom: $spacing-8;
+	letter-spacing: 0.025em;
+	align-self: flex-start;
+}
+
+.section-text-wrap {
+	display: flex;
+	flex-grow: 1;
+	background: $bg-dark;
+	padding: $spacing-11;
+	border: 1px solid var(--page-color);
+
+	@include mq($until: desktop) {
+		padding: $spacing-10;
+	}
+
+	@include mq($until: tablet) {
+		padding: $spacing-7;
+	}
+}
+
+.page-section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: $centerMaxWidth;
+	padding: 0 $spacing-11;
+	margin: 0 auto;
+	margin-block: $spacing-20;
+
+	@include mq($until: desktop) {
+		padding: 0 $spacing-7;
+	}
+
+	@include mq($until: tablet) {
+		padding: 0 $spacing-5;
+		margin-bottom: $spacing-16;
+	}
+}
+
+.page-section--column {
+	flex-direction: column;
+}
+
+.page-section--row {
+	align-items: center;
+	justify-content: flex-start;
+
+	.section-text {
+		max-width: 27rem;
+	}
+
+	@include mq($until: tablet) {
+		display: block;
+
+		.section-text-wrap {
+			margin-bottom: -$spacing-7;
+			padding-bottom: $spacing-11;
+		}
+
+		.section-text {
+			max-width: 100%;
+		}
+
+		.section-image-wrap {
+			margin: 0 (-$spacing-7);
+			height: 21rem;
+		}
+	}
+}
+
+.page-section--top {
+	display: block;
+
+	.section-text-wrap {
+		width: 100%;
+		margin-bottom: -$spacing-7;
+		padding-bottom: $spacing-13;
+	}
+}
+
+.page-section--left {
+	@include mq($from: tablet) {
+		.section-image-wrap {
+			left: -30%;
+		}
+	}
+}
+
+.page-section--right {
+	@include mq($from: tablet) {
+		flex-direction: row-reverse;
+
+		.section-text-wrap {
+			justify-content: flex-end;
+		}
+
+		.section-image-wrap {
+			right: -30%;
+		}
+	}
+}
+
+.section-image-wrap {
+	align-self: stretch;
+	position: relative;
+}
+
+.section-image {
+	position: absolute;
+}
+
+.section-content-block {
+	margin: 0 (-$spacing-7);
+
+	@include mq($until: tablet) {
+		margin: 0 (-$spacing-5);
+	}
+}
+
+.page-video {
+	display: block;
+	width: 100%;
+	height: auto;
+	box-shadow: $shadowMd;
+}
+
+//Image Carousel
+
+@function carousel-center($items) {
+	@return ($items * 300 + 40 + (($items - 1) * 30));
+}
+
+.image-carousel-wrap {
+	display: flex;
+	justify-content: center;
+	margin-bottom: $spacing-11;
+}
+
+.image-carousel {
+	--xyz-delay: 1s;
+	list-style: none;
+	overflow-x: scroll;
+	padding: $spacing-10 $spacing-7;
+	white-space: nowrap;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.carousel-item {
+	display: inline-block;
+	min-width: 300px;
+	max-width: 300px;
+	height: auto;
+	vertical-align: top;
+	line-height: 0;
+	position: relative;
+
+	&:not(:last-child) {
+		margin-right: $spacing-10;
+	}
+}
+
+.carousel-image {
+	width: 100%;
+}
+
+.gallery-item {
+	box-shadow: $shadowMd;
+	transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+
+	&:hover,
+	&:focus-within {
+		transform: translate3d(0, -15px, 0);
+		box-shadow: 0 0 0 5px var(--page-color);
+	}
+}
+
+//IMAGE GRID
+
+.image-grid {
+	display: flex;
+	justify-content: center;
+	gap: $spacing-10;
+
+	@include mq($until: desktop) {
+		flex-wrap: wrap;
+	}
+}
+
+.image-grid-item {
+	display: flex;
+	justify-content: center;
+}
+
+.grid-image {
+	display: block;
+	height: 200px;
+	width: auto;
+	box-shadow: $shadowMd;
+}

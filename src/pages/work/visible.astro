@@ -1,0 +1,59 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 7,
+	title: 'Visible',
+	year: '2021 to Present',
+	position: 'Cofounder',
+	logo: 'visible_logo_white.svg',
+	logoOpen: 'visible_logo_color.svg',
+	workUrl: 'https://visible.page',
+	color: 'rgb(56, 123, 249)',
+	description: `It's clear the web is missing a key tool when everyone is sharing addresses, dates, media and more in static text docs like it's still 2010. <a href="https://milesingram.me" target="_blank">Miles Ingram</a> and I created a web app that lets you transform that content into interactive and shareable maps, calendars, galleries, and more to communicate information the way it was meant to be seen.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="page-section">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Product from scratch</h2>
+				<p class="section-copy">
+					After creating <a href="https://yaherd.co">YaHerd</a> and <a href="https://animxyz.com">AnimXYZ</a>, Miles and
+					I had a good foundation for creating fairly complex projects that had scalable and easy to use design and
+					development systems. Within 6 months we had created a multiplayer information page creator that had features
+					comparable to Notion, Craft, and other popular information tools.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<video
+				class="page-video"
+				width="1440"
+				height="900"
+				poster="/assets/images/canvs/canvs-video-poster.jpg"
+				autoplay
+				loop
+				muted
+				playsinline
+			>
+				<source src="/assets/images/visible/visible-landing-demo.mp4" type="video/mp4" />
+			</video>
+		</div>
+	</div>
+
+	<div class="page-section visible-features">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Feature Presentation</h2>
+				<p class="section-copy">
+					We have big plans for Visible, but we needed to start with a solid foundation of features that solved some key
+					use cases and gave us a platform to build upon. In addition to designing and helping develop complex views
+					like custom maps, calendars, and slideshows, I created a custom landing page to describe Visible to the world
+					and gather sign-ups for our beta.
+				</p>
+			</div>
+		</div>
+	</div>
+</WorkLayout>

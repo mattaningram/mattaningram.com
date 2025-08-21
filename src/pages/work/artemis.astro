@@ -1,0 +1,109 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 5,
+	title: 'Artemis',
+	year: '2018 to 2021',
+	position: 'Lead Product Designer',
+	logo: 'artemis_logo_white.svg',
+	logoOpen: 'artemis_logo_color.svg',
+	workUrl: 'https://artemisag.com',
+	color: 'rgb(255, 64, 22)',
+	description: `Artemis makes software to help farms grow. We helped simplify the complex management of people, plants, process, and legal compliance all in one place. At Artemis I was the lead designer through a significant redesign and refactor of the web and native apps to better serve large enterprise farms.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="artemis-splash-image">
+		<img
+			src="/assets/images/artemis/artemis-splash-image.png"
+			width="2048"
+			height="1280"
+			alt="Artemis task timeline on a laptop and iPhone"
+		/>
+	</div>
+
+	<div class="image-carousel-wrap artemis-images">
+		<ul class="image-carousel xyz-in" data-xyz="fade down ease-out-back">
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/prod-timeline.png">
+					<img class="carousel-image" src="/assets/images/artemis/prod-timeline-thumb.png" alt="Production Timeline" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/prod-table.png">
+					<img class="carousel-image" src="/assets/images/artemis/prod-table.png" alt="Production Table" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/yield-report.png">
+					<img class="carousel-image" src="/assets/images/artemis/yield-report-thumb.png" alt="Yield Report" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/task-calendar.png">
+					<img class="carousel-image" src="/assets/images/artemis/task-calendar-thumb.png" alt="Task Calendar" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/batch-page.png">
+					<img class="carousel-image" src="/assets/images/artemis/batch-page-thumb.png" alt="Batch Page" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/multi-batch.png">
+					<img class="carousel-image" src="/assets/images/artemis/multi-batch-thumb.png" alt="Multi Batch" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/template-edit.png">
+					<img class="carousel-image" src="/assets/images/artemis/template-edit-thumb.png" alt="Template Edit" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="artemis" href="/assets/images/artemis/zone-metrics.png">
+					<img class="carousel-image" src="/assets/images/artemis/zone-metrics-thumb.png" alt="Zone Metrics" />
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="page-section skill-section">
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Pixels</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Figma</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Adobe Suite</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Affinity Designer</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Code</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">React</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Ruby</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SASS/CSS</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SVG</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">GitHub</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</WorkLayout>

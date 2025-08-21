@@ -1,0 +1,149 @@
+/* Base Structure & Layout Styles */
+
+html {
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+svg {
+  width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+svg:not(:root) {
+  overflow: visible;
+}
+
+a.no-outline:focus {
+  outline: none;
+}
+
+.page-content {
+  --page-color: white;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.main-footer {
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding-bottom: 10px;
+}
+
+.my-name {
+  opacity: 0;
+  animation: fadeIn 0.75s var(--ease-in-quad) 0.5s forwards;
+  text-align: center;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+
+.my-description {
+  opacity: 0;
+  animation: fadeIn 0.75s var(--ease-in-quad) 0.7s forwards;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.button--themed {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bg-color);
+  text-decoration: none;
+  width: 180px;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: var(--page-color);
+  box-shadow: 0 0 0 transparent;
+  transition: all 0.25s ease-out;
+}
+
+.button--themed:before,
+.button--themed:after {
+  content: '';
+  background-color: var(--page-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.25s var(--ease-out-back);
+}
+
+.button--themed:before {
+  opacity: 0.15;
+  left: 16px;
+  right: 16px;
+  transform: translate(0, 10px);
+}
+
+.button--themed:after {
+  opacity: 0.35;
+  left: 8px;
+  right: 8px;
+  transform: translate(0, 5px);
+}
+
+.button--themed:hover:before {
+  transform: translate(0, 15px);
+}
+
+.button--themed:hover:after {
+  transform: translate(0, 10px);
+}
+
+/* Utility Classes */
+
+/* Visually Hidden - replaces @include visually-hidden mixin */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* Center wrapper utility */
+.m-center-wrap {
+  max-width: var(--center-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+/* Section wrapper */
+.section-wrap {
+  max-width: var(--center-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-6);
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .m-center-wrap,
+  .section-wrap {
+    padding: 0 var(--spacing-4);
+  }
+}

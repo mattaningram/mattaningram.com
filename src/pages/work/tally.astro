@@ -1,0 +1,87 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 2,
+	title: 'Tally',
+	year: '2017',
+	position: 'Product Designer',
+	logo: 'tally_logo_white.svg',
+	color: 'rgb(58, 122, 219)',
+	description: `Tally is an app that teaches you about your government representatives and their job performance. Instead of focusing just on beliefs or party, Tally scores your representatives by non-ideological factors like attendance, vote participation, and bill creation.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div id="tally-slides" class="image-carousel-wrap tally-image-row-1">
+		<ul class="image-carousel xyz-in" data-xyz="fade down ease-out-back">
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-reps.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" alt="Tally Representatives" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rank.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" alt="Tally Rank" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-search.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-search.jpg" alt="Tally Search" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-stats.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" alt="Tally Rep Stats" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-beliefs.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" alt="Tally Rep Beliefs" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-money.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" alt="Tally Rep Money" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="tally" href="/assets/images/tally/tally-rep-contact.jpg">
+					<img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" alt="Tally Rep Contact" />
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="page-section skill-section">
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Pixels</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Sketch</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Adobe Illustrator</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Adobe Photoshop</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Code</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">React Native</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SASS/CSS</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">GitHub</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</WorkLayout>

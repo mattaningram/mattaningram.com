@@ -1,0 +1,63 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 8,
+	title: 'Revel',
+	year: '2022 to 2025',
+	position: 'Lead Product Designer',
+	logo: 'revel_logo_white.svg',
+	logoOpen: 'revel_logo_color.svg',
+	workUrl: 'https://gorevel.com',
+	color: 'rgb(1, 185, 242)',
+	description: `Revel builds electric transportation and infrastructure. I led design for the full internal product stack, building web and native apps to manage thousands of drivers, passengers, and operations efficiently.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="image-carousel-wrap revel-images">
+		<ul class="image-carousel xyz-in" data-xyz="fade down ease-out-back">
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="revel" href="/assets/images/revel/revel-ride-details.png">
+					<img
+						class="carousel-image"
+						src="/assets/images/revel/revel-ride-details-thumb.png"
+						alt="Revel Ride Details"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="revel" href="/assets/images/revel/revel-rides-list.png">
+					<img class="carousel-image" src="/assets/images/revel/revel-rides-list-thumb.png" alt="Revel Rides List" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="revel" href="/assets/images/revel/revel-schedule-concepts.png">
+					<img
+						class="carousel-image"
+						src="/assets/images/revel/revel-schedule-concepts-thumb.png"
+						alt="Revel Schedule Concepts"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="revel" href="/assets/images/revel/revel-shift-timeline.png">
+					<img
+						class="carousel-image"
+						src="/assets/images/revel/revel-shift-timeline-thumb.png"
+						alt="Revel Shift Timeline"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="revel" href="/assets/images/revel/revel-components-cluster.png">
+					<img
+						class="carousel-image"
+						src="/assets/images/revel/revel-components-cluster-thumb.png"
+						alt="Revel Components Cluster"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</WorkLayout>

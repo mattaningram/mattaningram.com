@@ -3,9 +3,5 @@
 
 ### Using:
 
-- Jekyll
+- Astro
 - Netlify
-- SASS
-- [Bourbon](http://bourbon.io/)
-- [RESS](https://github.com/filipelinhares/ress)
-- [Sass MQ](http://sass-mq.github.io/sass-mq/)

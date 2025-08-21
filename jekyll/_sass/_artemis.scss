@@ -1,0 +1,19 @@
+//ARTEMIS
+
+.artemis-splash-image {
+	max-width: 100%;
+	padding: 0 $spacing-10;
+	margin-bottom: $spacing-11;
+
+	@include mq($until: tablet) {
+		padding: 0 $spacing-7;
+	}
+
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+		width: 1024px;
+		height: auto;
+	}
+}

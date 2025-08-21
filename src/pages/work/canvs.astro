@@ -1,0 +1,124 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+const frontmatter = {
+	order: 1,
+	title: 'Canvs',
+	year: '2011 to 2016',
+	position: 'Lead Product Designer',
+	logo: 'canvs_logo_white.svg',
+	workUrl: 'https://canvs.ai',
+	color: 'rgb(48, 188, 174)',
+	description: `Canvs is an industry leading emotion measurement and analysis company used by top media and advertising brands such as HBO, NBC, Fox, and Sony. As one of Canvs' first employees I helped develop it from a scrappy startup into an acclaimed technology platform.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="image-carousel-wrap canvs-image-row-1">
+		<ul class="image-carousel xyz-in" data-xyz="fade down ease-out-back">
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="canvs" href="/assets/images/canvs/canvs-series-page-1.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/canvs/canvs-series-page-1-thumb.jpg"
+						alt="Canvs Series Page"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="canvs" href="/assets/images/canvs/canvs-compare-page.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/canvs/canvs-compare-page-thumb.jpg"
+						alt="Canvs Compare Page"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="canvs" href="/assets/images/canvs/canvs-search.jpg">
+					<img class="carousel-image" src="/assets/images/canvs/canvs-search-thumb.jpg" alt="Canvs Search" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="canvs" href="/assets/images/canvs/canvs-old-home-page.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/canvs/canvs-old-home-page-thumb.jpg"
+						alt="Canvs Old Home Page"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item">
+				<a class="no-outline" data-fancybox="canvs" href="/assets/images/canvs/canvs-old-series-page.jpg">
+					<img
+						class="carousel-image"
+						src="/assets/images/canvs/canvs-old-series-page-thumb.jpg"
+						alt="Canvs Old Series Page"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="page-section page-section--top canvs-building">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Building Insights</h2>
+				<p class="section-copy">
+					As Canvs grew from idea, to prototype, to a fully-fledged service, I made sure that every decision we made
+					maintained our vision of providing our users with useful insights from complex data. We built a team that was
+					dedicated to bringing the polish and elegance of consumer app experiences to the data-heavy and tedious
+					dashboards of analytics and marketing.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<video
+				class="page-video"
+				width="1280"
+				height="720"
+				poster="/assets/images/canvs/canvs-video-poster.jpg"
+				autoplay
+				loop
+				muted
+				playsinline
+			>
+				<source src="/assets/videos/canvs/canvs-demo.mp4" type="video/mp4" />
+			</video>
+		</div>
+	</div>
+
+	<div class="page-section page-section--row page-section--left canvs-responsibilities">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Designing a Startup</h2>
+				<p class="section-copy">
+					The limited resources of a growing company meant my job covered more than just pushing pixels in Sketch. I
+					prototyped directly in the browser with production ready code, built out our user analytics services with the
+					customer success team, and debated data structures with the backend developers. This workflow was crucial in
+					designing the best possible experience for Canvs users.
+				</p>
+			</div>
+		</div>
+		<div class="section-image-wrap">
+			<img class="section-image" src="/assets/images/canvs/canvs-code-sample.jpg" alt="Code Sample" />
+			<img class="section-image" src="/assets/images/canvs/canvs-series-page-beta.jpg" alt="Series Page Beta" />
+			<img class="section-image" src="/assets/images/canvs/canvs-old-timeline.jpg" alt="Old Timeline" />
+		</div>
+	</div>
+
+	<div class="page-section page-section--row page-section--right canvs-process">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Process and Progress</h2>
+				<p class="section-copy">
+					Creating a new feature, designing an interactive D3 chart, or improving the user flow always starts with a
+					sketch. On paper I can insure that everyone involved from designer, to developer, to sales understand the
+					problem we are trying to solve and how we would like to solve it. Making sure design and development happened
+					hand-in-hand, rather than passed back and forth between silos, allowed us to create and iterate on new
+					features quickly.
+				</p>
+			</div>
+		</div>
+	</div>
+</WorkLayout>
