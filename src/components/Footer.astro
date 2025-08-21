@@ -48,3 +48,60 @@
 		</a>
 	</div>
 </footer>
+
+<style lang="scss">
+	.main-footer {
+		text-align: center;
+		position: relative;
+		margin: 0 auto;
+		margin-top: 30px;
+		padding-bottom: 10px;
+	}
+
+	.social-links-wrap {
+		opacity: 0;
+		animation: fadeIn 0.75s var(--ease-in-quad) 0.9s forwards;
+	}
+
+	.email-me {
+		margin: 1.25rem auto;
+		margin-top: 1rem;
+	}
+
+	.footer-text {
+		font-size: 0.8em;
+		opacity: 0.75;
+		color: white;
+	}
+
+	.link-icon-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 30px;
+	}
+
+	.link-icon {
+		width: 20px;
+		display: inline-block;
+		transition: all 0.2s ease-out;
+
+		&:not(:last-child) {
+			margin-right: 10px;
+		}
+
+		.icon-fill {
+			fill: var(--page-color);
+		}
+
+		&:hover,
+		&:focus {
+			transform: scale(1.25);
+		}
+
+		&:focus {
+			outline: 1px solid var(--page-color);
+			outline-offset: 2px;
+		}
+	}
+</style>

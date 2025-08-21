@@ -26,7 +26,7 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 				Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>,
 				<span class="gif-hover gif-hover-topgun">Top Gun</span>, and
 				<span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by
-				combining design, development, and analytics. Take me to your startup, I'll make your users happy.
+				combining design, development, and analytics.
 			</p>
 		</div>
 	</section>
@@ -58,24 +58,24 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 				</p>
 			</div>
 			<div class="belief-item">
-				<h3 class="belief-item-header">Keep Learning</h3>
+				<h3 class="belief-item-header">Be the User</h3>
 				<p class="belief-item-copy">
-					If everything was exactly the same as last year, we'd all be out of jobs. The tools are always improving and
-					changing, which means staying curious is required.
+					Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to
+					test a feature but to let my experience drive me as well.
 				</p>
 			</div>
 			<div class="belief-item">
-				<h3 class="belief-item-header">Prototype Early</h3>
+				<h3 class="belief-item-header">Why not Both?</h3>
 				<p class="belief-item-copy">
-					Don't spend weeks talking about how something might work. Build something quick and test it out. You'll learn
-					more in an hour of using something than a week of talking about it.
+					Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the
+					features save them enough time to enjoy it.
 				</p>
 			</div>
 			<div class="belief-item">
-				<h3 class="belief-item-header">Don't Rush It</h3>
+				<h3 class="belief-item-header">Explain Why</h3>
 				<p class="belief-item-copy">
-					The easiest way to introduce bugs is to rush the development process. Better to do it right the first time
-					than to have to come back and fix it later.
+					When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
+					always improves how things play out.
 				</p>
 			</div>
 		</div>
@@ -91,3 +91,77 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 		</div>
 	</section>
 </HomeLayout>
+
+<style lang="scss">
+	.gif-hover {
+		cursor: pointer;
+		position: relative;
+		white-space: nowrap;
+		font-weight: 500;
+
+		&:before {
+			position: absolute;
+			content: '';
+			opacity: 0;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%) scale(1, 0);
+			box-shadow:
+				inset 0 0 50px 30px var(--bg-color),
+				inset 0 0 0 5px var(--bg-color);
+			border-radius: 20px;
+			transition: all 0.35s var(--ease-out-back);
+			z-index: -2;
+			pointer-events: none;
+		}
+
+		&:after {
+			content: '';
+			// background-color: transparentize(var(--primary-blue), 0.6);
+			background-color: rgb(from var(--primary-blue) r g b / 0.4);
+			position: absolute;
+			z-index: -1;
+			bottom: 0.15em;
+			left: 0;
+			right: 0;
+			height: 0.25em;
+			transition: all 0.15s ease-out;
+		}
+
+		&:hover {
+			&:before {
+				opacity: 1;
+				transform: translate(-50%, -50%) scale(1, 1);
+				transition-duration: 0.2s;
+			}
+
+			&:after {
+				height: 1em;
+			}
+		}
+	}
+
+	.gif-hover-mac {
+		&:before {
+			width: 388px;
+			height: 291px;
+			background-image: url('/assets/gifs/1984mac.gif');
+		}
+	}
+
+	.gif-hover-topgun {
+		&:before {
+			width: 480px;
+			height: 241px;
+			background-image: url('/assets/gifs/topgun.gif');
+		}
+	}
+
+	.gif-hover-sesame {
+		&:before {
+			width: 480px;
+			height: 360px;
+			background-image: url('/assets/gifs/sesame.gif');
+		}
+	}
+</style>

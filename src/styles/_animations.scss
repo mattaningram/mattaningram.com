@@ -1,0 +1,130 @@
+/* Animation Keyframes and Utilities */
+
+/* FADE ANIMATIONS */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+/* SHRINK ANIMATIONS */
+@keyframes fadeInShrink {
+	from {
+		opacity: 0;
+		transform: scale(3, 3);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1, 1);
+	}
+}
+
+@keyframes fadeOutShrink {
+	from {
+		opacity: 1;
+		transform: scale(1, 1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0, 0);
+	}
+}
+
+/* GROW ANIMATIONS */
+@keyframes fadeInGrow {
+	from {
+		opacity: 0;
+		transform: scale(0, 0);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1, 1);
+	}
+}
+
+@keyframes fadeOutGrow {
+	from {
+		opacity: 1;
+		transform: scale(1, 1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(3, 3);
+	}
+}
+
+/* SLIDE ANIMATIONS */
+@keyframes slideInUp {
+	from {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* BOUNCE ANIMATIONS */
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+	70% {
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
