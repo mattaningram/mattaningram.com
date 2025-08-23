@@ -1,0 +1,31 @@
+---
+//M Logo Component
+const files = import.meta.glob('/public/assets/mLogos/**/*.{svg,html}', {
+	eager: true,
+	as: 'url',
+})
+const urls = Object.values(files)
+---
+
+<div class="m-logo-wrap"></div>
+
+<style lang="scss"></style>
+
+<script define:vars={{ urls }}>
+	// Inject the URL list at render time
+	const URLS = JSON.parse(`{${urls.map((u, i) => `"${i}":"${u}"`).join(',')}}`)
+	const list = Object.values(URLS)
+	console.log(list)
+
+	async function renderRandom() {
+		const pick = list[Math.floor(Math.random() * list.length)]
+		const res = await fetch(pick)
+		const html = await res.text()
+		const el = document.querySelector('.m-logo-wrap')
+		el.innerHTML = html // trust only if files are yours. Otherwise sanitize.
+	}
+
+	renderRandom()
+	// Optional: refresh every N seconds
+	setInterval(renderRandom, 3000)
+</script>

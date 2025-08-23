@@ -1,11 +1,12 @@
 ---
 import HomeLayout from '../layouts/HomeLayout.astro'
+import MLogo from '../components/MLogo.astro'
 
 const allWork = import.meta.glob('../work/*.astro')
 const workItems = Object.values(allWork)
 
 // Sort the workItems array based on the "order" frontmatter key
-workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
+// workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 ---
 
 <HomeLayout>
@@ -14,7 +15,7 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 			<div class="instructions-wrap">
 				<span class="m-instructions">Click me</span>
 			</div>
-			<div class="m-logo-wrap m-homepage-wrap"></div>
+			<MLogo />
 		</div>
 		<h1 class="my-name">Mattan Ingram</h1>
 		<div class="my-description">Design Engineer</div>
@@ -87,7 +88,7 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 		</header>
 
 		<div class="work-list-wrap">
-			{workItems.map((item) => <div>{item.frontmatter.title}</div>)}
+			<!-- {workItems.map((item) => <div>{item.frontmatter.title}</div>)} -->
 		</div>
 	</section>
 </HomeLayout>
@@ -117,8 +118,7 @@ workItems.sort((a, b) => a.frontmatter.order - b.frontmatter.order)
 
 		&:after {
 			content: '';
-			// background-color: transparentize(var(--primary-blue), 0.6);
-			background-color: rgb(from var(--primary-blue) r g b / 0.4);
+			background-color: rgb(from var(--primary-blue) r g b / 0.6);
 			position: absolute;
 			z-index: -1;
 			bottom: 0.15em;
