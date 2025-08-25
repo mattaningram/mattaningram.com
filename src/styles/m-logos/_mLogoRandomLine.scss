@@ -1,8 +1,23 @@
-/* M Logo Random Line Animation */
-
-/* Placeholder for M Logo Random Line styles */
-/* Original mixins would be included as comments here */
-
 .m-logo-random-line {
-  /* Add M Logo Random Line styles here */
+	line {
+		stroke: white;
+		stroke-width: 2;
+		stroke-dasharray: 500;
+		stroke-dashoffset: 500;
+		animation: dashOffset 2s var(--ease-in-quad) forwards;
+	}
+}
+
+.site-header {
+	.m-logo-random-line {
+		line {
+			stroke-width: 0.5;
+		}
+	}
+}
+
+@keyframes dashOffset {
+	to {
+		stroke-dashoffset: 0;
+	}
 }

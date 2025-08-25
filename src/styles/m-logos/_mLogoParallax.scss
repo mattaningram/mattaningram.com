@@ -1,8 +1,31 @@
-/* M Logo Parallax Animation */
+.parallaxM__yellowM,
+.parallaxM__purpleRect,
+.parallaxM__whiteDot {
+	transform-origin: 50% 50%;
+	transition: opacity 0.3s linear;
+}
 
-/* Placeholder for M Logo Parallax styles */
-/* Original mixins would be included as comments here */
+.animated {
+	.parallaxM__yellowM {
+		animation: fadeInShrink 0.3s var(--ease-out-back) both;
+	}
 
-.m-logo-parallax {
-  /* Add M Logo Parallax styles here */
+	.parallaxM__purpleRect {
+		animation: fadeInPurpleRect 0.3s var(--ease-out-back) 0.25s both;
+	}
+
+	.parallaxM__whiteDot {
+		animation: fadeInGrow 0.3s var(--ease-out-back) 0.5s both;
+	}
+}
+
+@keyframes fadeInPurpleRect {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -100%, 0);
+	}
+	to {
+		opacity: 0.65;
+		transform: none;
+	}
 }

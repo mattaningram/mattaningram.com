@@ -4,28 +4,71 @@ const files = import.meta.glob('/public/assets/mLogos/**/*.{svg,html}', {
 	eager: true,
 	as: 'url',
 })
-const urls = Object.values(files)
+const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 ---
 
 <div class="m-logo-wrap"></div>
 
-<style lang="scss"></style>
+<script type="module" define:vars={{ urls }}>
+	const logoWrap = document.querySelector('.m-logo-wrap')
+	let logoList = shuffle([...urls])
+	let currentIndex = 0
 
-<script define:vars={{ urls }}>
-	// Inject the URL list at render time
-	const URLS = JSON.parse(`{${urls.map((u, i) => `"${i}":"${u}"`).join(',')}}`)
-	const list = Object.values(URLS)
-	console.log(list)
-
-	async function renderRandom() {
-		const pick = list[Math.floor(Math.random() * list.length)]
-		const res = await fetch(pick)
-		const html = await res.text()
-		const el = document.querySelector('.m-logo-wrap')
-		el.innerHTML = html // trust only if files are yours. Otherwise sanitize.
+	function shuffle(array) {
+		let m = array.length,
+			t,
+			i
+		while (m) {
+			i = Math.floor(Math.random() * m--)
+			t = array[m]
+			array[m] = array[i]
+			array[i] = t
+		}
+		return array
 	}
 
-	renderRandom()
-	// Optional: refresh every N seconds
-	setInterval(renderRandom, 3000)
+	//SPIDER LINES FUNCTION
+	function runSpiderLines() {
+		var numLines = 240
+		var radius = 75
+		var lineWrap = document.querySelector('.m-logo-random-lines')
+		if (!lineWrap) return
+		var lines = document.createDocumentFragment()
+		console.log(lineWrap)
+
+		for (var i = 0; i < numLines; i++) {
+			var rand1 = -Math.PI + Math.random() * Math.PI * 2
+			var rand2 = -Math.PI + Math.random() * Math.PI * 2
+			var line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+			line.setAttribute('x1', 50 + radius * Math.cos(rand1))
+			line.setAttribute('y1', 50 + radius * Math.sin(rand1))
+			line.setAttribute('x2', 50 + radius * Math.cos(rand2))
+			line.setAttribute('y2', 50 + radius * Math.sin(rand2))
+			line.setAttribute('vector-effect', 'non-scaling-stroke')
+			line.setAttribute(
+				'style',
+				'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.1 + Math.random() * 0.9) + ';'
+			)
+			lines.appendChild(line)
+		}
+		lineWrap.appendChild(lines)
+	}
+
+	async function renderLogo(index) {
+		const url = logoList[index]
+		const res = await fetch(url)
+		const html = await res.text()
+		logoWrap.innerHTML = html
+		if (url.includes('mSpiderLines')) {
+			runSpiderLines()
+		}
+	}
+
+	logoWrap.addEventListener('click', () => {
+		currentIndex = (currentIndex + 1) % logoList.length
+		renderLogo(currentIndex)
+	})
+
+	// Initial render
+	renderLogo(currentIndex)
 </script>
