@@ -1,8 +1,19 @@
-/* Artemis project specific styles */
+//ARTEMIS
 
-/* Placeholder for Artemis project styles */
-/* Original mixins would be included as comments here */
+.artemis-splash-image {
+	max-width: 100%;
+	padding: 0 var(--spacing-10);
+	margin-bottom: var(--spacing-11);
 
-.artemis-specific-class {
-  /* Add Artemis project specific styles here */
+	@media (max-width: $breakpoint-tablet) {
+		padding: 0 var(--spacing-7);
+	}
+
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+		width: 1024px;
+		height: auto;
+	}
 }
