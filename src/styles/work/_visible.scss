@@ -119,7 +119,7 @@
 	justify-content: center;
 	font-family: monospace;
 	font-size: 0.75rem;
-	color: #071226;
+	color: rgba(0, 0, 0, 0.9);
 	transform: rotate(calc(360deg / var(--color-block__number) * var(--visible-color-index)))
 		translate(0, var(--color-block__offset))
 		rotate(calc(-360deg / var(--color-block__number) * var(--visible-color-index)));
@@ -131,18 +131,33 @@
 
 #visible-color-primary {
 	.color-block {
+		font-size: 1rem;
+		font-weight: 600;
 		&:nth-child(-n + 8) {
-			color: white;
+			color: rgba(255, 255, 255, 0.9);
 		}
 	}
 }
 
-#visible-color-picker {
-	.color-block {
-		color: white;
-		--color-block__number: 6;
-		--color-block__size: 4rem;
-		--color-block__offset: 4rem;
+.color-picker-button {
+	color: rgba(255, 255, 255, 0.9);
+	opacity: 0.75;
+	--color-block__number: 6;
+	--color-block__size: 4rem;
+	--color-block__offset: 4rem;
+	transition: 0.2s var(--ease-out-back);
+	transition-property: opacity, transform, width, height, top, left;
+
+	&:hover,
+	&:focus {
+		opacity: 1;
+	}
+
+	&[data-selected='true'] {
+		opacity: 1;
+		--color-block__offset: 0;
+		--color-block__size: 5rem;
+		z-index: 2;
 	}
 }
 

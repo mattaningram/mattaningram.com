@@ -220,11 +220,15 @@ const visibleThemeColors = {
 		</div>
 		<div class="section-image-wrap visible-colors">
 			<div class="section-image visible-color-circle-fill"></div>
-			<ul class="section-image visible-color-circle" id="visible-color-primary" xyz="fade small-50% stagger-0.5">
+			<ul
+				class="section-image visible-color-circle"
+				id="visible-color-primary"
+				xyz="fade small-50% stagger-0.5 ease-out-back"
+			>
 				{
 					Object.entries(visibleThemeColors.blue).map(([key, value]) => (
 						<li class="color-block xyz-in" style={`background-color: ${value}; --visible-color-index: ${key}`}>
-							<div class="color-name">blue{key}</div>
+							<div class="color-name">{key}</div>
 						</li>
 					))
 				}
@@ -232,13 +236,14 @@ const visibleThemeColors = {
 			<ul class="section-image visible-color-circle" id="visible-color-picker">
 				{
 					Object.keys(visibleThemeColors).map((colorName, i) => (
-						<li
-							class="color-block"
+						<button
+							class="color-block color-picker-button"
+							data-selected={colorName === 'blue'}
 							data-color={colorName}
 							style={`background-color: ${visibleThemeColors[colorName]['6']}; --visible-color-index: ${i}`}
 						>
 							<div class="color-name">{colorName}</div>
-						</li>
+						</button>
 					))
 				}
 			</ul>
@@ -265,22 +270,22 @@ const visibleThemeColors = {
 	const colorPrimary = document.getElementById('visible-color-primary')
 	const colorPicker = document.getElementById('visible-color-picker')
 
-	console.log(colorPrimary, colorPicker)
-
 	colorPicker.addEventListener('click', (e) => {
-		const li = e.target.closest('.color-block')
+		const colorOption = e.target.closest('.color-block')
 
-		if (!li) return
-		const colorName = li.getAttribute('data-color')
-		console.log(li, colorName)
+		if (!colorOption) return
+		const colorName = colorOption.getAttribute('data-color')
 		if (!colorName || !visibleThemeColors[colorName]) return
+
+		colorPicker.querySelectorAll('.color-block').forEach((btn) => btn.setAttribute('data-selected', 'false'))
+		colorOption.setAttribute('data-selected', 'true')
 
 		// Replace the color-primary circle with the selected color's palette
 		colorPrimary.innerHTML = Object.entries(visibleThemeColors[colorName])
 			.map(
 				([key, value]) =>
 					`<li class="color-block xyz-in" style="background-color: ${value}; --visible-color-index: ${key}">
-            <div class="color-name">${colorName}${key}</div>
+            <div class="color-name">${key}</div>
           </li>`
 			)
 			.join('')
