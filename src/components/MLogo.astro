@@ -34,7 +34,6 @@ const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 		var lineWrap = document.querySelector('.m-logo-random-lines')
 		if (!lineWrap) return
 		var lines = document.createDocumentFragment()
-		console.log(lineWrap)
 
 		for (var i = 0; i < numLines; i++) {
 			var rand1 = -Math.PI + Math.random() * Math.PI * 2

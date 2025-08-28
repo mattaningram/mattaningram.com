@@ -1,5 +1,5 @@
 <svg class="m-logo m-logo-parallax animated" x="0px" y="0px" viewBox="0 0 300 300">
-	<style type="text/css">
+	<style>
 		.parallaxM__yellowM {
 			position: relative;
 			opacity: 1;
@@ -24,19 +24,3 @@
 	<rect class="layer parallaxM__purpleRect" data-depth="0.60" x="220" width="80" height="300" />
 	<circle class="layer parallaxM__whiteDot" data-depth="0.90" cx="260" cy="40" r="30" />
 </svg>
-
-<script>
-	var parallaxUrl = 'https://cdnjs.cloudflare.com/ajax/libs/parallax/2.1.3/jquery.parallax.min.js'
-
-	function makeParallax() {
-		$.getScript(parallaxUrl, function () {
-			$('.m-logo-parallax').removeClass('animated')
-			$('.m-logo-parallax').parallax({
-				invertX: false,
-				invertY: false,
-			})
-		})
-	}
-
-	setTimeout(makeParallax, 1000)
-</script>
