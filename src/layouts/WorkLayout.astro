@@ -43,10 +43,20 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 						)
 					}
 				</div>
-				<div class="work-header-bottom">
-					<div class="work-detail">{year}</div>
-					<div class="work-detail">{position}</div>
-					{details && details.map((detail) => <div class="work-detail">{detail}</div>)}
+				<div class="work-header-bottom" xyz="fade narrow stagger delay-8 origin-left">
+					<div class="work-detail xyz-in">
+						<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">{position} &ndash; {year}</span>
+					</div>
+					{
+						details &&
+							details.map((detail) => (
+								<div class="work-detail xyz-in">
+									<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">
+										{detail}
+									</span>
+								</div>
+							))
+					}
 				</div>
 			</header>
 		</div>
