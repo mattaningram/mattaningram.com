@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 
 export interface Props {
@@ -19,6 +20,8 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 <BaseLayout title={title} pageColor={color} class={`${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
 	<div class="work-background"></div>
+
+	<Header />
 
 	<main>
 		<div class="work-header-wrap">
