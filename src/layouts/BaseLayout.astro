@@ -50,10 +50,8 @@ import '../styles/main.scss'
 		></script>
 	</head>
 
-	<body>
-		<div class={`page-content ${className}`} style={`--page-color: ${pageColor}`} aria-label="Content">
-			<slot />
-		</div>
+	<body class:list={className} style={`--page-color: ${pageColor}`}>
+		<slot />
 	</body>
 </html>
 
