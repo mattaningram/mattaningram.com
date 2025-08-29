@@ -25,6 +25,7 @@
 .grab-copy {
 	font-size: 1.75rem;
 	margin-bottom: 0;
+	text-wrap: balance;
 
 	@media (max-width: $breakpoint-desktop) {
 		font-size: 1.5rem;

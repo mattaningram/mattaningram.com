@@ -9,8 +9,13 @@ const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 
 <div class="m-logo-wrap"></div>
 
-<script type="module" define:vars={{ urls }}>
-	const logoWrap = document.querySelector('.m-logo-wrap')
+<script is:inline define:vars={{ urls }}>
+	// Scope to this component instance by using the adjacent wrapper element
+	const logoWrap = document.currentScript?.previousElementSibling
+	if (!(logoWrap instanceof HTMLElement)) {
+		console.warn('[Logo] Wrapper element not found; skipping init')
+		return
+	}
 	let logoList = shuffle([...urls])
 	let currentIndex = 0
 
@@ -65,6 +70,14 @@ const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 
 	logoWrap.addEventListener('click', () => {
 		currentIndex = (currentIndex + 1) % logoList.length
+		renderLogo(currentIndex)
+	})
+
+	// Allow external triggers via CustomEvent on this instance
+	logoWrap.addEventListener('m-logo:next', (ev) => {
+		const detail = /** @type {CustomEvent | undefined} */ (ev)?.detail
+		const nextIndex = typeof detail?.index === 'number' ? detail.index : (currentIndex + 1)
+		currentIndex = ((nextIndex % logoList.length) + logoList.length) % logoList.length
 		renderLogo(currentIndex)
 	})
 

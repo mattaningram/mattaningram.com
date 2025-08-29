@@ -8,7 +8,7 @@ import WorkList from '../components/WorkList.astro'
 	<section class="m-center-wrap">
 		<div class="m-logo-section">
 			<div class="instructions-wrap">
-				<span class="m-instructions">Click me</span>
+				<button class="m-instructions">Click me</button>
 			</div>
 			<Logo />
 		</div>
@@ -84,6 +84,14 @@ import WorkList from '../components/WorkList.astro'
 
 		<WorkList />
 	</section>
+
+	<script is:inline>
+		const btn = document.querySelector('.m-instructions')
+		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
+		btn?.addEventListener('click', () => {
+			logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+		})
+	</script>
 
 	<style lang="scss">
 		.gif-hover {
