@@ -187,24 +187,19 @@
 	list-style: none;
 	overflow-x: scroll;
 	padding: var(--spacing-10) var(--spacing-7);
-	white-space: nowrap;
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
+	gap: var(--spacing-10);
 }
 
 .carousel-item {
-	display: inline-block;
-	min-width: 300px;
-	max-width: 300px;
+	width: 300px;
+	flex-shrink: 0;
 	height: auto;
 	vertical-align: top;
 	line-height: 0;
 	position: relative;
-
-	&:not(:last-child) {
-		margin-right: var(--spacing-10);
-	}
 }
 
 .carousel-image {
