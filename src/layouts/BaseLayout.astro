@@ -52,11 +52,45 @@ import '../styles/main.scss'
 
 	<body class:list={className} style={`--page-color: ${pageColor}`}>
 		<slot />
+
+		<script is:inline>
+			// Track pointer and expose normalized CSS variables
+			(() => {
+				const root = document.documentElement
+				let raf = 0
+				let x = window.innerWidth / 2
+				let y = window.innerHeight / 2
+
+				const update = () => {
+					raf = 0
+					const w = Math.max(window.innerWidth, 1)
+					const h = Math.max(window.innerHeight, 1)
+					// Normalize to -1..1 from center
+					const nx = (x / w) * 2 - 1
+					const ny = (y / h) * 2 - 1
+					root.style.setProperty('--mouse-x', nx.toFixed(5))
+					root.style.setProperty('--mouse-y', ny.toFixed(5))
+				}
+
+				const onMove = (e) => {
+					x = e.clientX
+					y = e.clientY
+					if (!raf) raf = requestAnimationFrame(update)
+				}
+
+				window.addEventListener('pointermove', onMove, { passive: true })
+				// Initialize once
+				update()
+			})()
+		</script>
 	</body>
 </html>
 
 <style>
 	:root {
 		--page-color: white;
+		/* Global pointer variables for parallax (normalized -1..1) */
+		--mouse-x: 0;
+		--mouse-y: 0;
 	}
 </style>

@@ -1,26 +1,62 @@
-<svg class="m-logo m-logo-parallax animated" x="0px" y="0px" viewBox="0 0 300 300">
-	<style>
-		.parallaxM__yellowM {
-			position: relative;
-			opacity: 1;
-			fill: url(#yellowMGradient);
-		}
-		.parallaxM__purpleRect {
-			position: relative;
-			opacity: 0.65;
-			fill: #7700ff;
-		}
-		.parallaxM__whiteDot {
-			position: relative;
-			opacity: 0.9;
-			fill: #ffffff;
-		}
-	</style>
-	<linearGradient id="yellowMGradient" gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="280">
+<svg class="m-logo m-logo-parallax" x="0px" y="0px" viewBox="0 0 300 300">
+	<linearGradient id="MGradient" gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="280">
 		<stop offset="0" style="stop-color: #17ffb1" />
 		<stop offset="1" style="stop-color: #17ffb1" stop-opacity="0" />
 	</linearGradient>
-	<polygon class="layer parallaxM__yellowM" data-depth="0.30" points="20,280 20,20 150,133.8 280,20 280,280 	" />
-	<rect class="layer parallaxM__purpleRect" data-depth="0.60" x="220" width="80" height="300" />
-	<circle class="layer parallaxM__whiteDot" data-depth="0.90" cx="260" cy="40" r="30" />
+	<polygon class="layer parallax__M xyz-in" xyz="fade" points="20,280 20,20 150,133.8 280,20 280,280 	" />
+	<rect class="layer parallax__rectangle xyz-in" xyz="fade" x="220" width="80" height="300" />
+	<circle class="layer parallax__dot xyz-in" xyz="fade small-100%" cx="260" cy="40" r="30" />
 </svg>
+
+<style>
+	/* Base range in px the layers can travel at depth=1 */
+	.m-logo-parallax {
+		--parallax-strength: 40px;
+	}
+
+	/* Shared layer behavior */
+	.m-logo-parallax .layer:not(.xyz-in) {
+		transform: translate(
+			calc(var(--mouse-x) * var(--parallax-strength) * var(--depth, 0)),
+			calc(var(--mouse-y) * var(--parallax-strength) * var(--depth, 0))
+		);
+		transition: transform 120ms linear;
+		will-change: transform;
+		transform-origin: center;
+		transform-box: fill-box;
+	}
+
+	.layer {
+		--xyz-duration: 0.3s;
+		--xyz-ease: var(--ease-out-back);
+		transform-origin: 50% 50%;
+		transition: opacity 0.3s linear;
+	}
+
+	.parallax__M {
+		--depth: 0.3;
+		--xyz-scale-x: 3;
+		--xyz-scale-y: 3;
+		position: relative;
+		opacity: 1;
+		fill: url(#MGradient);
+	}
+
+	.parallax__rectangle {
+		--depth: 0.6;
+		--xyz-translate-y: -100%;
+		--xyz-delay: 0.25s;
+		position: relative;
+		opacity: 0.65;
+		fill: #7700ff;
+	}
+
+	.parallax__dot {
+		--depth: 0.9;
+		--xyz-delay: 0.5s;
+		position: relative;
+		opacity: 0.9;
+		fill: #ffffff;
+	}
+</style>
+

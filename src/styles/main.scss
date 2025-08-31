@@ -11,13 +11,10 @@
 @import 'page';
 @import 'work';
 
+/* Logo Components */
+@import 'mLogos';
+
 /* Work Styles */
 @import 'work/visible';
 @import 'work/artemis';
 @import 'work/canvs';
-
-/* Logo Components */
-@import 'm-logos/mLogos';
-@import 'm-logos/mLogoRandomLine';
-@import 'm-logos/mLogoRedBlue';
-@import 'm-logos/mLogoParallax';

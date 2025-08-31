@@ -24,3 +24,86 @@
 		<line x1="0" y1="100" x2="0" y2="0" />
 	</g>
 </svg>
+
+<style>
+	.m-logo {
+		--logo-blue: var(--primary-blue);
+		--logo-red: var(--primary-red);
+	}
+
+	.m-logo-red,
+	.m-logo-blue {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+
+	.m-red,
+	.m-blue {
+		fill-opacity: 0;
+		fill: white;
+		position: relative;
+	}
+
+	.m-logo-stroke {
+		fill: none;
+		stroke: white;
+		stroke-width: 0.5;
+	}
+
+	.m-red {
+		animation: pulseLogoWhiteRed 1s var(--ease-in-quad) 0.5s forwards;
+	}
+
+	.m-blue {
+		animation: pulseLogoWhiteBlue 1s var(--ease-in-quad) 0.5s forwards;
+	}
+
+	.m-logo-stroke-blue {
+		&.m-logo-stroke-across {
+			animation: fadeInLeft100 0.3s var(--ease-out-back) 0.1s both,
+				fadeOutRight100 0.3s var(--ease-in-back) 1.5s forwards;
+		}
+		&.m-logo-stroke-diag {
+			animation: fadeInUpLeft100 0.3s var(--ease-out-back) 0.4s both,
+				fadeOutDownRight100 0.3s var(--ease-in-back) 1.8s forwards;
+		}
+		&.m-logo-stroke-up {
+			animation: fadeInUp100 0.3s var(--ease-out-back) both, fadeOutDown100 0.3s var(--ease-in-back) 1.4s forwards;
+		}
+	}
+
+	.m-logo-stroke-red {
+		&.m-logo-stroke-diag {
+			animation: fadeInUpRight100 0.3s var(--ease-out-back) 0.3s both,
+				fadeOutDownLeft100 0.3s var(--ease-in-back) 1.7s forwards;
+		}
+		&.m-logo-stroke-up {
+			animation: fadeInUp100 0.3s var(--ease-out-back) 0.2s both, fadeOutDown100 0.3s var(--ease-in-back) 1.6s forwards;
+		}
+	}
+
+	@keyframes pulseLogoWhiteRed {
+		50% {
+			fill: white;
+			fill-opacity: 1;
+		}
+		100% {
+			fill: var(--logo-red);
+			fill-opacity: 0.75;
+		}
+	}
+
+	@keyframes pulseLogoWhiteBlue {
+		50% {
+			fill: white;
+			fill-opacity: 1;
+		}
+		100% {
+			fill: var(--logo-blue);
+			fill-opacity: 0.65;
+		}
+	}
+</style>

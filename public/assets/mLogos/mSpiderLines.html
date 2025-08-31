@@ -9,29 +9,28 @@
 	<g class="m-logo-random-lines" clip-path="url(#m-logo-random-line-clip)"></g>
 </svg>
 
-<script is:inline>
-	document.addEventListener('DOMContentLoaded', function () {
-		var numLines = 240
-		var radius = 75
-		var lineWrap = document.querySelector('.m-logo-random-lines')
-		var lines = document.createDocumentFragment()
-
-		for (var i = 0; i < numLines; i++) {
-			var rand1 = -Math.PI + Math.random() * Math.PI * 2
-			var rand2 = -Math.PI + Math.random() * Math.PI * 2
-			var line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-			line.setAttribute('x1', 50 + radius * Math.cos(rand1))
-			line.setAttribute('y1', 50 + radius * Math.sin(rand1))
-			line.setAttribute('x2', 50 + radius * Math.cos(rand2))
-			line.setAttribute('y2', 50 + radius * Math.sin(rand2))
-			line.setAttribute('vector-effect', 'non-scaling-stroke')
-			line.setAttribute(
-				'style',
-				'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.1 + Math.random() * 0.9) + ';'
-			)
-			lines.appendChild(line)
+<style>
+	.m-logo-random-line {
+		line {
+			stroke: white;
+			stroke-width: 2;
+			stroke-dasharray: 500;
+			stroke-dashoffset: 500;
+			animation: dashOffset 2s var(--ease-in-quad) forwards;
 		}
+	}
 
-		lineWrap.appendChild(lines)
-	})
-</script>
+	.site-header {
+		.m-logo-random-line {
+			line {
+				stroke-width: 0.5;
+			}
+		}
+	}
+
+	@keyframes dashOffset {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+</style>
