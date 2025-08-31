@@ -19,10 +19,28 @@ import WorkList from '../components/WorkList.astro'
 	<section class="about-section section-wrap">
 		<div class="grab-copy-wrap">
 			<p class="grab-copy">
-				Born in NYC and raised on the <span class="gif-hover gif-hover-mac">1984 Macintosh</span>,
-				<span class="gif-hover gif-hover-topgun">Top Gun</span>, and
-				<span class="gif-hover gif-hover-sesame">Sesame Street</span>. I believe in building better products by
-				combining design, development, and analytics.
+				Born in NYC and raised on the
+				<span class="gif-hover"
+					>1984 Mac<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/1984mac.webm" type="video/webm" />
+						</video>
+					</span>
+				</span>,
+				<span class="gif-hover"
+					>Top Gun<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/topgun.webm" type="video/webm" />
+						</video>
+					</span></span
+				>, and
+				<span class="gif-hover"
+					>Sesame Street<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/sesame.webm" type="video/webm" />
+						</video>
+					</span></span
+				>. I believe in building better products by combining design, development, and analytics.
 			</p>
 		</div>
 	</section>
@@ -100,20 +118,32 @@ import WorkList from '../components/WorkList.astro'
 			white-space: nowrap;
 			font-weight: 500;
 
-			&:before {
+			.gif-video-wrap {
 				position: absolute;
-				content: '';
+				display: block;
 				opacity: 0;
 				left: 50%;
 				top: 50%;
 				transform: translate(-50%, -50%) scale(1, 0);
-				box-shadow:
-					inset 0 0 50px 30px var(--bg-color),
-					inset 0 0 0 5px var(--bg-color);
 				border-radius: 20px;
+				overflow: hidden;
 				transition: all 0.35s var(--ease-out-back);
 				z-index: -2;
 				pointer-events: none;
+
+				video {
+					display: block;
+				}
+
+				&:before {
+					content: '';
+					position: absolute;
+					inset: 0;
+					width: 100%;
+					height: 100%;
+					box-shadow: inset 0 0 50px 30px var(--bg-color);
+					z-index: 1;
+				}
 			}
 
 			&:after {
@@ -129,7 +159,7 @@ import WorkList from '../components/WorkList.astro'
 			}
 
 			&:hover {
-				&:before {
+				.gif-video-wrap {
 					opacity: 1;
 					transform: translate(-50%, -50%) scale(1, 1);
 					transition-duration: 0.2s;
@@ -141,28 +171,28 @@ import WorkList from '../components/WorkList.astro'
 			}
 		}
 
-		.gif-hover-mac {
-			&:before {
-				width: 388px;
-				height: 291px;
-				background-image: url('/assets/gifs/1984mac.gif');
-			}
-		}
+		// .gif-hover-mac {
+		// 	&:before {
+		// 		width: 388px;
+		// 		height: 291px;
+		// 		background-image: url('/assets/gifs/1984mac.gif');
+		// 	}
+		// }
 
-		.gif-hover-topgun {
-			&:before {
-				width: 480px;
-				height: 241px;
-				background-image: url('/assets/gifs/topgun.gif');
-			}
-		}
+		// .gif-hover-topgun {
+		// 	&:before {
+		// 		width: 480px;
+		// 		height: 241px;
+		// 		background-image: url('/assets/gifs/topgun.gif');
+		// 	}
+		// }
 
-		.gif-hover-sesame {
-			&:before {
-				width: 480px;
-				height: 360px;
-				background-image: url('/assets/gifs/sesame.gif');
-			}
-		}
+		// .gif-hover-sesame {
+		// 	&:before {
+		// 		width: 480px;
+		// 		height: 360px;
+		// 		background-image: url('/assets/gifs/sesame.gif');
+		// 	}
+		// }
 	</style>
 </HomeLayout>
