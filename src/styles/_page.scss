@@ -1,73 +1,10 @@
-//PAGE CONTENT
-
-.grab-copy-wrap {
-	max-width: var(--center-max-width);
-	padding: 0 var(--spacing-10);
-	margin: 0 auto;
-	margin-bottom: 10vh;
-	opacity: 0;
-	animation: fadeInUpText 0.6s var(--ease-out-quad) 0.8s both;
-}
-
-@keyframes fadeInUpText {
-	from {
-		opacity: 0;
-		line-height: 2;
-		transform: translate3d(0, 30px, 0);
-	}
-	to {
-		line-height: inherit;
-		opacity: 1;
-		transform: none;
-	}
-}
-
-.grab-copy {
-	font-size: 1.75rem;
-	margin-bottom: 0;
-	text-wrap: balance;
-
-	@media (max-width: $breakpoint-desktop) {
-		font-size: 1.5rem;
-	}
-
-	@media (max-width: $breakpoint-tablet) {
-		font-size: 1.25rem;
-	}
-}
-
-.section-header {
-	font-size: 2rem;
-	color: var(--page-color);
-	margin-bottom: var(--spacing-8);
-	letter-spacing: 0.025em;
-	align-self: flex-start;
-}
-
-.section-text-wrap {
-	display: flex;
-	flex-grow: 1;
-	background: var(--bg-dark);
-	padding: var(--spacing-11);
-	border: 1px solid var(--page-color);
-
-	@media (max-width: $breakpoint-desktop) {
-		padding: var(--spacing-10);
-	}
-
-	@media (max-width: $breakpoint-tablet) {
-		padding: var(--spacing-7);
-	}
-}
-
 .page-section {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	max-width: var(--center-max-width);
-	padding: 0 var(--spacing-11);
-	margin: 0 auto;
-	margin-block: var(--spacing-20);
+	padding: 0 var(--spacing-10);
+	margin: var(--spacing-20) auto;
 
 	@media (max-width: $breakpoint-desktop) {
 		padding: 0 var(--spacing-7);
@@ -179,7 +116,8 @@
 }
 
 .image-carousel {
-	--xyz-delay: 1s;
+	--xyz-delay: 0.8s;
+	--xyz-stagger: 0.1s;
 	list-style: none;
 	overflow-x: scroll;
 	padding: var(--spacing-10) var(--spacing-7);

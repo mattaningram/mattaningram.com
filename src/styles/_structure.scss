@@ -41,24 +41,6 @@ a.no-outline:focus {
 	padding-bottom: 10px;
 }
 
-.my-name {
-	opacity: 0;
-	animation: fadeIn 0.75s var(--ease-in-quad) 0.5s forwards;
-	text-align: center;
-	letter-spacing: 0.03em;
-	margin-bottom: 8px;
-}
-
-.my-description {
-	opacity: 0;
-	animation: fadeIn 0.75s var(--ease-in-quad) 0.7s forwards;
-	text-align: center;
-	color: rgba(255, 255, 255, 0.65);
-	font-size: 1.2rem;
-	font-weight: 300;
-	margin-bottom: 20px;
-}
-
 .button--themed {
 	position: relative;
 	z-index: 1;
@@ -191,5 +173,5 @@ a.no-outline:focus {
 
 .section-title {
 	font-size: 2.5rem;
-	font-weight: 700;
+	font-weight: 600;
 }

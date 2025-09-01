@@ -35,15 +35,15 @@ h4 {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 2.5rem;
 }
 
 h2 {
-	font-size: 1.5rem;
+	font-size: 2rem;
 }
 
 h3 {
-	font-size: 1.25rem;
+	font-size: 1.5rem;
 }
 
 p {
@@ -58,5 +58,41 @@ p + p {
 @media (max-width: $breakpoint-tablet) {
 	p {
 		font-size: 1rem;
+	}
+}
+
+.grab-copy-wrap {
+	max-width: var(--center-max-width);
+	padding: 0 var(--spacing-10);
+	margin: 0 auto;
+	margin-bottom: 10vh;
+	opacity: 0;
+	animation: fadeInUpText 0.5s var(--ease-out-quad) 0.5s both;
+}
+
+@keyframes fadeInUpText {
+	from {
+		opacity: 0;
+		line-height: 2;
+		transform: translate3d(0, 1em, 0);
+	}
+	to {
+		line-height: inherit;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.grab-copy {
+	font-size: 1.75rem;
+	margin-bottom: 0;
+	text-wrap: balance;
+
+	@media (max-width: $breakpoint-desktop) {
+		font-size: 1.5rem;
+	}
+
+	@media (max-width: $breakpoint-tablet) {
+		font-size: 1.25rem;
 	}
 }
