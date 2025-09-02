@@ -15,8 +15,6 @@
     "photoswipe": "^5.4.4",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
-  },
-  "devDependencies": {
     "sass": "^1.90.0"
-  }
+  },
 }
