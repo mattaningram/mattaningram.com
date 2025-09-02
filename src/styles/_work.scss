@@ -18,7 +18,7 @@
 	padding: var(--spacing-8);
 	border-bottom: 1px solid var(--page-color);
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-tablet) {
 		flex-direction: column;
 	}
 }
@@ -83,7 +83,7 @@
 	font-weight: 400;
 	text-align: center;
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-tablet) {
 		flex-grow: 1;
 		padding: 0 var(--spacing-5);
 	}
@@ -108,7 +108,7 @@
 		padding: var(--spacing-10);
 	}
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-tablet) {
 		padding: var(--spacing-7);
 	}
 }
@@ -256,7 +256,7 @@
 	max-height: 3rem;
 	margin: 0 auto;
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-tablet) {
 		max-width: 12rem;
 		max-height: 2.5rem;
 	}
@@ -280,7 +280,7 @@
 	gap: var(--spacing-10);
 	margin-block: var(--spacing-20);
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-tablet) {
 		gap: var(--spacing-8);
 	}
 
