@@ -2,7 +2,7 @@
 
 .visible-wrap {
 	.page-section {
-		@media (min-width: $breakpoint-tablet) {
+		@media (width >= $breakpoint-tablet) {
 			min-height: 50vh;
 		}
 	}
@@ -62,7 +62,7 @@
 	background-repeat: repeat;
 	animation: icon-scroll 24s infinite linear;
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		width: 100%;
 		height: 100%;
 		top: 0;
@@ -90,7 +90,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		width: 16rem;
 		height: 16rem;
 	}
@@ -124,7 +124,7 @@
 		translate(0, var(--color-block__offset))
 		rotate(calc(-360deg / var(--color-block__number) * var(--visible-color-index)));
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		--color-block__offset: 8rem;
 	}
 }
@@ -168,7 +168,7 @@
 		top: 50%;
 		transform: translateY(-50%);
 
-		@media (max-width: $breakpoint-tablet) {
+		@media (width < $breakpoint-tablet) {
 			height: 21rem;
 			width: auto;
 			top: initial;

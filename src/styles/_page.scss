@@ -6,11 +6,11 @@
 	padding: 0 var(--spacing-10);
 	margin: var(--spacing-20) auto;
 
-	@media (max-width: $breakpoint-desktop) {
+	@media (width < $breakpoint-desktop) {
 		padding: 0 var(--spacing-7);
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		padding: 0 var(--spacing-5);
 		margin-bottom: var(--spacing-16);
 	}
@@ -28,7 +28,7 @@
 		max-width: 27rem;
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		display: block;
 
 		.section-text-wrap {
@@ -58,7 +58,7 @@
 }
 
 .page-section--left {
-	@media (min-width: $breakpoint-tablet) {
+	@media (width >= $breakpoint-tablet) {
 		.section-image-wrap {
 			left: -30%;
 		}
@@ -66,7 +66,7 @@
 }
 
 .page-section--right {
-	@media (min-width: $breakpoint-tablet) {
+	@media (width >= $breakpoint-tablet) {
 		flex-direction: row-reverse;
 
 		.section-text-wrap {
@@ -91,7 +91,7 @@
 .section-content-block {
 	margin: 0 calc(-1 * var(--spacing-7));
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		margin: 0 calc(-1 * var(--spacing-5));
 	}
 }
@@ -158,7 +158,7 @@
 	justify-content: center;
 	gap: var(--spacing-10);
 
-	@media (max-width: $breakpoint-desktop) {
+	@media (width < $breakpoint-desktop) {
 		flex-wrap: wrap;
 	}
 }

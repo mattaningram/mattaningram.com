@@ -32,7 +32,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: $breakpoint-tablet) {
+@media (width < $breakpoint-tablet) {
 	.beliefs-list-wrap {
 		flex-wrap: nowrap;
 		overflow-x: scroll;

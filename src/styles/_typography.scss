@@ -55,7 +55,7 @@ p + p {
 }
 
 /* Responsive typography */
-@media (max-width: $breakpoint-tablet) {
+@media (width < $breakpoint-tablet) {
 	p {
 		font-size: 1rem;
 	}
@@ -88,11 +88,11 @@ p + p {
 	margin-bottom: 0;
 	text-wrap: balance;
 
-	@media (max-width: $breakpoint-desktop) {
+	@media (width < $breakpoint-desktop) {
 		font-size: 1.5rem;
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		font-size: 1.25rem;
 	}
 }

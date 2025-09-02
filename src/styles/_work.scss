@@ -104,7 +104,7 @@
 	padding: var(--spacing-11);
 	border: 1px solid var(--page-color);
 
-	@media (max-width: $breakpoint-desktop) {
+	@media (width < $breakpoint-desktop) {
 		padding: var(--spacing-10);
 	}
 

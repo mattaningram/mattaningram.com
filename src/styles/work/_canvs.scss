@@ -2,7 +2,7 @@
 
 .canvs-wrap {
 	.page-section--row {
-		@media (min-width: $breakpoint-tablet) {
+		@media (width >= $breakpoint-tablet) {
 			justify-content: flex-start;
 			min-height: 100vh;
 		}
@@ -37,7 +37,7 @@
 		}
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		.section-image {
 			&:nth-child(1) {
 				top: 0;
@@ -92,7 +92,7 @@
 		}
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		.section-image {
 			&:nth-child(1) {
 				top: 0;
