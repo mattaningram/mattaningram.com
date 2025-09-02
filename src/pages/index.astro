@@ -1,0 +1,178 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro'
+import Logo from '../components/Logo.astro'
+import WorkList from '../components/WorkList.astro'
+---
+
+<HomeLayout>
+	<section class="m-center-wrap">
+		<div class="m-logo-section">
+			<div class="instructions-wrap">
+				<button class="m-instructions">Click me</button>
+			</div>
+			<Logo />
+		</div>
+		<h1 class="my-name xyz-in" xyz="fade duration-5 delay-7">Mattan Ingram</h1>
+	</section>
+
+	<section class="about-section section-wrap">
+		<div class="grab-copy-wrap">
+			<p class="grab-copy">
+				Design engineer and CSS nerd raised on the
+				<span class="gif-hover"
+					>1984 Mac<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/1984mac.webm" type="video/webm" />
+						</video>
+					</span>
+				</span>,
+				<span class="gif-hover"
+					>Top Gun<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/topgun.webm" type="video/webm" />
+						</video>
+					</span></span
+				>, and
+				<span class="gif-hover"
+					>Sesame Street<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/sesame.webm" type="video/webm" />
+						</video>
+					</span></span
+				>. I help teams build better products through, development, research, and data.
+			</p>
+		</div>
+	</section>
+
+	<section class="beliefs-section section-wrap">
+		<header class="landing-section-header">
+			<h2 class="section-title">Beliefs</h2>
+		</header>
+		<div class="beliefs-list-wrap">
+			<div class="belief-item">
+				<h3 class="belief-item-title">Join Forces</h3>
+				<p class="belief-item-copy">
+					Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
+					Breaking down silos breeds unicorns.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-title">Read the Manual</h3>
+				<p class="belief-item-copy">
+					Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
+					know the basics first. It will save time in the end.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-title">Best Practices</h3>
+				<p class="belief-item-copy">
+					Just about everything has been tried on the web. It's worth the time to look up how other people have done
+					something and learn from their successes and mistakes.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-title">Be the User</h3>
+				<p class="belief-item-copy">
+					Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to
+					test a feature but to let my experience drive me as well.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-title">Why not Both?</h3>
+				<p class="belief-item-copy">
+					Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the
+					features save them enough time to enjoy it.
+				</p>
+			</div>
+			<div class="belief-item">
+				<h3 class="belief-item-title">Explain Why</h3>
+				<p class="belief-item-copy">
+					When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
+					always improves how things play out.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="work-section section-wrap">
+		<header class="landing-section-header">
+			<h2 class="section-title">Work</h2>
+		</header>
+
+		<WorkList />
+	</section>
+
+	<script is:inline>
+		const btn = document.querySelector('.m-instructions')
+		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
+		btn?.addEventListener('click', () => {
+			logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+		})
+	</script>
+
+	<style lang="scss">
+		.my-name {
+			text-align: center;
+			letter-spacing: 0.03em;
+			margin-top: var(--spacing-6);
+		}
+		.gif-hover {
+			cursor: pointer;
+			position: relative;
+			white-space: nowrap;
+			font-weight: 500;
+
+			.gif-video-wrap {
+				position: absolute;
+				display: block;
+				opacity: 0;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%) scale(1, 0);
+				border-radius: 20px;
+				overflow: hidden;
+				transition: all 0.35s var(--ease-out-back);
+				z-index: -2;
+				pointer-events: none;
+
+				video {
+					display: block;
+				}
+
+				&:before {
+					content: '';
+					position: absolute;
+					inset: 0;
+					width: 100%;
+					height: 100%;
+					box-shadow: inset 0 0 50px 30px var(--bg-color);
+					z-index: 1;
+				}
+			}
+
+			&:after {
+				content: '';
+				background-color: rgb(from var(--primary-blue) r g b / 0.6);
+				position: absolute;
+				z-index: -1;
+				bottom: 0.15em;
+				left: 0;
+				right: 0;
+				height: 0.25em;
+				transition: all 0.15s ease-out;
+			}
+
+			&:hover {
+				.gif-video-wrap {
+					opacity: 1;
+					transform: translate(-50%, -50%) scale(1, 1);
+					transition-duration: 0.2s;
+				}
+
+				&:after {
+					height: 1em;
+				}
+			}
+		}
+	</style>
+</HomeLayout>

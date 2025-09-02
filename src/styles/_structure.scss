@@ -1,0 +1,177 @@
+html {
+	background-color: var(--bg-color);
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex-grow: 1;
+}
+
+svg {
+	width: 100%;
+	display: block;
+	overflow: visible;
+}
+
+svg:not(:root) {
+	overflow: visible;
+}
+
+a.no-outline:focus {
+	outline: none;
+}
+
+.page-content {
+	--page-color: white;
+}
+
+.main-footer {
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 30px;
+	padding-bottom: 10px;
+}
+
+.button--themed {
+	position: relative;
+	z-index: 1;
+	display: block;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--bg-color);
+	text-decoration: none;
+	width: 180px;
+	height: 40px;
+	margin: 0 auto;
+	padding: 0 var(--spacing-8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	background-color: var(--page-color);
+	box-shadow: 0 0 0 transparent;
+	transition: all 0.25s ease-out;
+
+	&:before,
+	&:after {
+		content: '';
+		background-color: var(--page-color);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: all 0.25s var(--ease-out-back);
+	}
+
+	&:before {
+		opacity: 0.15;
+		left: 16px;
+		right: 16px;
+		transform: translate(0, 10px);
+	}
+
+	&:after {
+		opacity: 0.35;
+		left: 8px;
+		right: 8px;
+		transform: translate(0, 5px);
+	}
+
+	&:hover,
+	&:focus {
+		outline: 0;
+
+		&:before {
+			top: -16px;
+			left: -16px;
+			right: -16px;
+			bottom: -16px;
+			transform: translate(0, 0);
+		}
+
+		&:after {
+			top: -8px;
+			left: -8px;
+			right: -8px;
+			bottom: -8px;
+			transform: translate(0, 0);
+		}
+	}
+
+	&:active {
+		&:before {
+			top: -32px;
+			left: -32px;
+			right: -32px;
+			bottom: -32px;
+			transform: translate(0, 0);
+		}
+
+		&:after {
+			top: -16px;
+			left: -16px;
+			right: -16px;
+			bottom: -16px;
+			transform: translate(0, 0);
+		}
+	}
+
+	.button__text {
+		z-index: 10;
+		position: relative;
+	}
+}
+
+//PAGE HEADER
+
+.site-header {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	padding: var(--spacing-10);
+	transition: all 0.15s var(--ease-out-quad);
+
+	.m-logo-wrap {
+		transition: all 0.15s var(--ease-out-quad);
+		margin: 0;
+		width: 50px;
+		height: 50px;
+	}
+
+	@media (max-width: $breakpoint-tablet) {
+		padding: var(--spacing-7);
+		.m-logo-wrap {
+			width: 40px;
+			height: 40px;
+		}
+	}
+}
+
+//SECTIONS
+
+.section-wrap {
+	margin: 0 auto;
+	margin-bottom: calc(var(--spacing-11) * 2);
+}
+
+.landing-section-header {
+	text-align: center;
+	margin-bottom: var(--spacing-11);
+}
+
+.section-title {
+	font-size: 2.5rem;
+	font-weight: 600;
+}

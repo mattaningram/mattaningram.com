@@ -1,0 +1,41 @@
+---
+const allWork = import.meta.glob('/src/pages/work/*.astro')
+
+const workPaths = Object.keys(allWork).map(
+	(path) =>
+		// Extract the slug from './work/slug.astro'
+		'/work/' + (path.match(/\/work\/(.*)\.astro$/)?.[1] ?? '')
+)
+
+const workModules = await Promise.all(Object.values(allWork).map((loader) => loader()))
+
+const workItems = workModules
+	.map((item, i) => ({
+		...item.frontmatter,
+		url: workPaths[i],
+		component: item.default,
+	}))
+	.sort((a, b) => b.order - a.order)
+---
+
+<div class="work-list-wrap">
+	{
+		workItems.map((item) => (
+			<a href={item.url} class="work-item-wrap" style={`--page-color: ${item.color};`}>
+				<div class="work-item-stack" />
+				<div class="work-item-stack" />
+				<div class="work-item-stack" />
+				<div class="work-item-stack" />
+				<div class="work-item">
+					<div class="work-item-contents">
+						{item.logo ? (
+							<img class="work-item-logo" src={`/assets/logos/${item.logo}`} title={`${item.title} Logo`} />
+						) : (
+							<h3 class="work-item-title">{item.title}</h3>
+						)}
+					</div>
+				</div>
+			</a>
+		))
+	}
+</div>

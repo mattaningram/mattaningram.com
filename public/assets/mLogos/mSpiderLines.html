@@ -1,0 +1,36 @@
+<svg class="m-logo m-logo-random-line" x="0px" y="0px" viewBox="0 0 100 100">
+	<defs>
+		<clipPath id="m-logo-random-line-clip">
+			<polygon
+				points="7.143,100 7.143,0 50,47.619 92.857,0 92.857,100 78.571,100 78.571,40 50,70.167 21.429,38.81 21.429,100 "
+			/>
+		</clipPath>
+	</defs>
+	<g class="m-logo-random-lines" clip-path="url(#m-logo-random-line-clip)"></g>
+</svg>
+
+<style>
+	.m-logo-random-line {
+		line {
+			stroke: white;
+			stroke-width: 2;
+			stroke-dasharray: 500;
+			stroke-dashoffset: 500;
+			animation: dashOffset 2s var(--ease-in-quad) forwards;
+		}
+	}
+
+	.site-header {
+		.m-logo-random-line {
+			line {
+				stroke-width: 0.5;
+			}
+		}
+	}
+
+	@keyframes dashOffset {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+</style>

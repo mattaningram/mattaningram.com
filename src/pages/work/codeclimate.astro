@@ -1,0 +1,176 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+export const frontmatter = {
+	order: 3,
+	title: 'Code Climate',
+	year: '2017 to 2018',
+	position: 'Lead Product Designer',
+	logo: 'codeclimate_logo_white.svg',
+	workUrl: 'https://codeclimate.com',
+	color: 'rgb(69, 210, 152)',
+	description: `Code Climate builds tools to make engineering teams better by analyzing code quality and improving development efficiency. I helped guide Code Climate design through marketing sites, product redesigns, and design system refinements, as well as hiring a new designer and managing remote contractors.`,
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="image-carousel-wrap">
+		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					target="_blank"
+					href="/assets/images/codeclimate/cc-checkout-redesign.jpg"
+					data-pswp-width="1280"
+					data-pswp-height="1200"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-checkout-redesign-thumb.jpg"
+						alt="Checkout Redesign"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					target="_blank"
+					href="/assets/images/codeclimate/cc-issues-refinement.jpg"
+					data-pswp-width="1280"
+					data-pswp-height="1469"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-issues-refinement-thumb.jpg"
+						alt="Issues Refinement"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					target="_blank"
+					href="/assets/images/codeclimate/cc-repo-overview-redesign.jpg"
+					data-pswp-width="1280"
+					data-pswp-height="1400"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-repo-overview-redesign-thumb.jpg"
+						alt="Repo Overview Redesign"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					target="_blank"
+					href="/assets/images/codeclimate/velocity-info-page.jpg"
+					data-pswp-width="1280"
+					data-pswp-height="4075"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/velocity-info-page-thumb.jpg"
+						alt="Velocity Info Page"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					target="_blank"
+					href="/assets/images/codeclimate/cc-repositories-redesign.jpg"
+					data-pswp-width="1440"
+					data-pswp-height="1050"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/codeclimate/cc-repositories-redesign-thumb.jpg"
+						alt="Repositories Redesign"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="page-section skill-section">
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Pixels</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Sketch</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Adobe AI PS IN AE</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">InVision</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Code</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">HTML/HAML</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SASS/CSS</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">JavaScript</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">SVG</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Ruby</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">HighCharts</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">GitHub</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">CircleCI</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Web</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Responsive Design</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">BEM Naming</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Flexbox</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skill-panel">
+			<h3 class="skill-list-header">Analytics</h3>
+			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Google Analytics</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Mixpanel</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">FullStory</span>
+				</li>
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Intercom/Drift</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</WorkLayout>

@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon/components'
+---
+
+<footer class="main-footer">
+	<div class="footer-text">I made this.</div>
+	<a href="mailto:mattaningram@gmail.com" class="button--themed email-me" target="_blank">
+		<span class="button__text">Say Hi</span>
+	</a>
+
+	<div class="link-icon-wrap">
+		<a class="link-icon" href="https://github.com/mattaningram" title="Github" target="_blank">
+			<Icon name="github-white" />
+		</a>
+
+		<a class="link-icon" href="https://x.com/mattaningram" title="X" target="_blank">
+			<Icon name="x-white" />
+		</a>
+
+		<a class="link-icon" href="https://instagram.com/mattaningram" title="Instagram" target="_blank">
+			<Icon name="instagram-white" />
+		</a>
+
+		<a class="link-icon" href="https://open.spotify.com/user/mattaningram" title="Spotify" target="_blank">
+			<Icon name="spotify-white" />
+		</a>
+	</div>
+</footer>
+
+<style lang="scss">
+	.main-footer {
+		text-align: center;
+		position: relative;
+		margin: 0 auto;
+		margin-top: 30px;
+		padding-bottom: 10px;
+	}
+
+	.social-links-wrap {
+		opacity: 0;
+		animation: fadeIn 0.75s var(--ease-in-quad) 0.9s forwards;
+	}
+
+	.email-me {
+		margin: 1.25rem auto;
+		margin-top: 1rem;
+	}
+
+	.footer-text {
+		font-size: 0.8em;
+		opacity: 0.75;
+		color: white;
+	}
+
+	.link-icon-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--spacing-4);
+		gap: var(--spacing-6);
+	}
+
+	.link-icon {
+		font-size: 1.125rem;
+		color: var(--page-color);
+		transition: all 0.2s ease-out;
+
+		&:hover,
+		&:focus {
+			transform: scale(1.25);
+		}
+
+		&:focus {
+			outline: 1px solid var(--page-color);
+			outline-offset: 2px;
+		}
+	}
+</style>

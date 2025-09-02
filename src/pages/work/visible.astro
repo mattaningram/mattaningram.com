@@ -1,0 +1,317 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+export const frontmatter = {
+	order: 7,
+	title: 'Visible',
+	year: '2021',
+	position: 'Cocreator',
+	logo: 'visible_logo_white.svg',
+	logoOpen: 'visible_logo_color.svg',
+	workUrl: 'https://visible.page',
+	color: 'rgb(56, 123, 249)',
+	description: `It's clear the web is missing a key tool when everyone is sharing addresses, dates, media and more in static text docs like it's still 2010. <a href="https://milesingram.me" target="_blank">Miles Ingram</a> and I created a web app that lets you transform that content into interactive and shareable maps, calendars, galleries, and more to communicate information the way it was meant to be seen.`,
+}
+
+const visibleThemeColors = {
+	blue: {
+		'0': '#071226',
+		'1': '#0d2145',
+		'2': '#133064',
+		'3': '#1a3e83',
+		'4': '#214da1',
+		'5': '#285dbf',
+		'6': '#306cdc',
+		'7': '#387bf9',
+		'8': '#4f8bfb',
+		'9': '#669afc',
+		'10': '#7daafe',
+		'11': '#95bafe',
+		'12': '#adcaff',
+		'13': '#c5d9ff',
+		'14': '#deeaff',
+		'15': '#f7faff',
+	},
+	gray: {
+		'0': '#121318',
+		'1': '#21232b',
+		'2': '#30323e',
+		'3': '#3e4251',
+		'4': '#4d5164',
+		'5': '#5c6177',
+		'6': '#6b7089',
+		'7': '#7a809c',
+		'8': '#8a8fa8',
+		'9': '#999eb4',
+		'10': '#a9adc0',
+		'11': '#b9bccc',
+		'12': '#c9cbd7',
+		'13': '#d8dae3',
+		'14': '#e8e9ef',
+		'15': '#f8f9fa',
+	},
+	green: {
+		'0': '#04170f',
+		'1': '#072a1b',
+		'2': '#0b3c28',
+		'3': '#0e4e34',
+		'4': '#126040',
+		'5': '#16714c',
+		'6': '#1b8358',
+		'7': '#1f9464',
+		'8': '#39a277',
+		'9': '#54af89',
+		'10': '#6ebc9c',
+		'11': '#89c9af',
+		'12': '#a4d6c1',
+		'13': '#bfe2d4',
+		'14': '#daefe6',
+		'15': '#f6fbf9',
+	},
+	purple: {
+		'0': '#160e24',
+		'1': '#281941',
+		'2': '#3a255e',
+		'3': '#4c307b',
+		'4': '#5e3c97',
+		'5': '#7049b3',
+		'6': '#8255cf',
+		'7': '#9462eb',
+		'8': '#a174ee',
+		'9': '#ad86f1',
+		'10': '#ba98f4',
+		'11': '#c6abf6',
+		'12': '#d3bef9',
+		'13': '#e0d0fb',
+		'14': '#ede4fd',
+		'15': '#faf7fe',
+	},
+	yellow: {
+		'0': '#181302',
+		'1': '#362c04',
+		'2': '#544507',
+		'3': '#725d0a',
+		'4': '#8f750d',
+		'5': '#ac8d11',
+		'6': '#c9a515',
+		'7': '#e5bc1a',
+		'8': '#e8c435',
+		'9': '#ebcc4f',
+		'10': '#eed36a',
+		'11': '#f1db85',
+		'12': '#f4e39f',
+		'13': '#f7ebba',
+		'14': '#faf3d4',
+		'15': '#fdfaef',
+	},
+	red: {
+		'0': '#24080b',
+		'1': '#400e15',
+		'2': '#5c151f',
+		'3': '#781c28',
+		'4': '#942432',
+		'5': '#af2c3d',
+		'6': '#ca3447',
+		'7': '#e53c52',
+		'8': '#e95266',
+		'9': '#ed697a',
+		'10': '#f07f8e',
+		'11': '#f496a3',
+		'12': '#f7aeb7',
+		'13': '#f9c5cc',
+		'14': '#fcdde1',
+		'15': '#fef5f6',
+	},
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="page-section page-section--top xyz-in" xyz="fade down delay-10">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Product from scratch</h2>
+				<p class="section-copy">
+					After creating <a href="https://yaherd.co">YaHerd</a> and <a href="https://animxyz.com">AnimXYZ</a>, Miles and
+					I had a good foundation for creating fairly complex projects that had scalable and easy to use design and
+					development systems. Within 6 months we had created a multiplayer information page creator that had features
+					comparable to Notion, Craft, and other popular information tools.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<video
+				class="page-video"
+				width="1440"
+				height="900"
+				poster="/assets/images/canvs/canvs-video-poster.jpg"
+				autoplay
+				loop
+				muted
+				playsinline
+			>
+				<source src="/assets/images/visible/visible-landing-demo.mp4" type="video/mp4" />
+			</video>
+		</div>
+	</div>
+
+	<div class="page-section page-section--top visible-features">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Feature Presentation</h2>
+				<p class="section-copy">
+					We have big plans for Visible, but we needed to start with a solid foundation of features that solved some key
+					use cases and gave us a platform to build upon. In addition to designing and helping develop complex views
+					like custom maps, calendars, and slideshows, I created a custom landing page to describe Visible to the world
+					and gather sign-ups for our beta.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block section-gallery-wrap">
+			<div class="section-gallery" id="photoswipe-gallery">
+				<div class="gallery-item">
+					<a
+						class="gallery-item-link"
+						target="_blank"
+						href="/assets/images/visible/visible-landing.jpg"
+						data-pswp-width="1440"
+						data-pswp-height="3873"
+					>
+						<img src="/assets/images/visible/visible-landing-thumb.jpg" />
+					</a>
+				</div>
+				<div class="gallery-item">
+					<a
+						class="gallery-item-link"
+						target="_blank"
+						href="/assets/images/visible/favorite-places-map.jpg"
+						data-pswp-width="2160"
+						data-pswp-height="1350"
+					>
+						<img src="/assets/images/visible/favorite-places-map-thumb.jpg" />
+					</a>
+				</div>
+				<div class="gallery-item">
+					<a
+						class="gallery-item-link"
+						target="_blank"
+						href="/assets/images/visible/italy-trip-calendar.jpg"
+						data-pswp-width="2880"
+						data-pswp-height="1800"
+					>
+						<img src="/assets/images/visible/italy-trip-calendar-crop.jpg" />
+					</a>
+				</div>
+				<div class="gallery-item">
+					<a
+						class="gallery-item-link"
+						target="_blank"
+						href="/assets/images/visible/apartment-hunt-gallery.jpg"
+						data-pswp-width="2880"
+						data-pswp-height="1800"
+					>
+						<img src="/assets/images/visible/apartment-hunt-gallery-crop.jpg" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page-section page-section--row page-section--left">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Icons</h2>
+				<p class="section-copy">
+					It's the little things that make the personality of an interface distinct. For Visible I created a fully
+					custom set of SVG icons powered by our design system CSS variables giving us full control over every property
+					like stroke weight and fill opacities.
+				</p>
+			</div>
+		</div>
+		<div class="section-image-wrap">
+			<div class="section-image visible-icons"></div>
+		</div>
+	</div>
+
+	<div class="page-section page-section--row page-section--right">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Colors</h2>
+				<p class="section-copy">
+					Consistency is key, and design system tokens help insure that colors throughout Visible are accessible,
+					responsive to dark/light modes, and can be easily updated or refactored.
+				</p>
+			</div>
+		</div>
+		<div class="section-image-wrap visible-colors">
+			<div class="section-image visible-color-circle-fill"></div>
+			<ul
+				class="section-image visible-color-circle"
+				id="visible-color-primary"
+				xyz="fade small-50% stagger-0.5 ease-out-back"
+			>
+				{
+					Object.entries(visibleThemeColors.blue).map(([key, value]) => (
+						<li class="color-block xyz-in" style={`background-color: ${value}; --visible-color-index: ${key}`}>
+							<div class="color-name">{key}</div>
+						</li>
+					))
+				}
+			</ul>
+			<ul class="section-image visible-color-circle" id="visible-color-picker">
+				{
+					Object.keys(visibleThemeColors).map((colorName, i) => (
+						<button
+							class="color-block color-picker-button"
+							data-selected={colorName === 'blue'}
+							data-color={colorName}
+							style={`background-color: ${visibleThemeColors[colorName]['6']}; --visible-color-index: ${i}`}
+						>
+							<div class="color-name">{colorName}</div>
+						</button>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+
+	<div class="page-section page-section--row page-section--left">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Components</h2>
+				<p class="section-copy">
+					Combining icons, colors, and other design system tokens, we created a component system that let us rapidly
+					develop new features and iterate on them as we got feedback on different aspects of the user experience.
+				</p>
+			</div>
+		</div>
+		<div class="section-image-wrap visible-components">
+			<img class="section-image" src="/assets/images/visible/visible-components.png" width="1500" height="1834" />
+		</div>
+	</div>
+</WorkLayout>
+
+<script type="module" define:vars={{ visibleThemeColors }}>
+	const colorPrimary = document.getElementById('visible-color-primary')
+	const colorPicker = document.getElementById('visible-color-picker')
+
+	colorPicker.addEventListener('click', (e) => {
+		const colorOption = e.target.closest('.color-block')
+
+		if (!colorOption) return
+		const colorName = colorOption.getAttribute('data-color')
+		if (!colorName || !visibleThemeColors[colorName]) return
+
+		colorPicker.querySelectorAll('.color-block').forEach((btn) => btn.setAttribute('data-selected', 'false'))
+		colorOption.setAttribute('data-selected', 'true')
+
+		// Replace the color-primary circle with the selected color's palette
+		colorPrimary.innerHTML = Object.entries(visibleThemeColors[colorName])
+			.map(
+				([key, value]) =>
+					`<li class="color-block xyz-in" style="background-color: ${value}; --visible-color-index: ${key}">
+            <div class="color-name">${key}</div>
+          </li>`
+			)
+			.join('')
+	})
+</script>

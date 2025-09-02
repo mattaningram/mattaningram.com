@@ -1,0 +1,93 @@
+---
+import WorkLayout from '../../layouts/WorkLayout.astro'
+
+export const frontmatter = {
+	order: 6,
+	title: 'AnimXYZ',
+	year: '2020',
+	position: 'Co-Creator',
+	logo: 'animxyz_logo_color.svg',
+	workUrl: 'https://animxyz.com',
+	color: 'rgb(99, 114, 165)',
+	description: `I worked closely with my brother <a href="https://milesingram.me">Miles Ingram</a> to build the first fully composable and customizable CSS animation toolkit. AnimXYZ helps you create, customize, and compose animations for your website. Powered by CSS variables to allow a nearly limitless number of unique animations without writing a single keyframe.`,
+	details: ['Open Source', '2k Stars on GitHub', 'Featured on PodRocket'],
+}
+---
+
+<WorkLayout {...frontmatter}>
+	<div class="image-carousel-wrap">
+		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					href="/assets/images/animxyz/animxyz-sandbox.png"
+					target="_blank"
+					data-pswp-width="2880"
+					data-pswp-height="1800"
+				>
+					<img class="carousel-image" src="/assets/images/animxyz/animxyz-sandbox-thumb.png" alt="AnimXYZ Sandbox" />
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					href="/assets/images/animxyz/animxyz-landing-dark.png"
+					target="_blank"
+					data-pswp-width="2880"
+					data-pswp-height="1800"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/animxyz/animxyz-landing-dark-thumb.png"
+						alt="AnimXYZ Landing Dark"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					href="/assets/images/animxyz/animxyz-docs-light.png"
+					target="_blank"
+					data-pswp-width="2876"
+					data-pswp-height="1800"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/animxyz/animxyz-docs-light-thumb.png"
+						alt="AnimXYZ Docs Light"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					href="/assets/images/animxyz/animxyz-docs-dark.png"
+					target="_blank"
+					data-pswp-width="2876"
+					data-pswp-height="1800"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/animxyz/animxyz-docs-dark-thumb.png"
+						alt="AnimXYZ Docs Dark"
+					/>
+				</a>
+			</li>
+			<li class="carousel-item gallery-item xyz-nested">
+				<a
+					class="no-outline"
+					href="/assets/images/animxyz/animxyz-docs-xray1.png"
+					target="_blank"
+					data-pswp-width="3840"
+					data-pswp-height="1888"
+				>
+					<img
+						class="carousel-image"
+						src="/assets/images/animxyz/animxyz-docs-xray1-thumb.png"
+						alt="AnimXYZ Docs X-Ray"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</WorkLayout>
