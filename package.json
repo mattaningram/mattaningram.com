@@ -12,11 +12,11 @@
   "dependencies": {
     "astro": "^5.0.0",
     "astro-icon": "^1.1.5",
-    "photoswipe": "^5.4.4"
-  },
-  "devDependencies": {
+    "photoswipe": "^5.4.4",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
+  },
+  "devDependencies": {
     "sass": "^1.90.0"
   }
 }
