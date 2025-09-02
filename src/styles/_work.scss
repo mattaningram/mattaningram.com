@@ -18,7 +18,7 @@
 	padding: var(--spacing-8);
 	border-bottom: 1px solid var(--page-color);
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-mobile) {
 		flex-direction: column;
 	}
 }
@@ -83,7 +83,7 @@
 	font-weight: 400;
 	text-align: center;
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-mobile) {
 		flex-grow: 1;
 		padding: 0 var(--spacing-5);
 	}
@@ -108,7 +108,7 @@
 		padding: var(--spacing-10);
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-mobile) {
 		padding: var(--spacing-7);
 	}
 }
@@ -116,27 +116,35 @@
 .work-list-wrap {
 	margin: 0 auto;
 	max-width: var(--center-max-width);
+	padding: 0 var(--spacing-10);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: stretch;
 	gap: var(--spacing-11);
+
+	@media (width < $breakpoint-tablet) {
+		gap: var(--spacing-10);
+		padding: 0 var(--spacing-6);
+	}
+
+	@media (width < $breakpoint-mobile) {
+		gap: var(--spacing-8);
+	}
 }
 
 .work-item-wrap {
 	flex-grow: 1;
 	max-width: 400px;
 	min-width: 300px;
-	height: 200px;
+	height: 11rem;
 	position: relative;
 	perspective: 600px;
 	perspective-origin: 50% 200%;
 	transform-style: preserve-3d;
 
-	@media (max-width: $breakpoint-tablet) {
-		margin: 0 var(--spacing-10);
-		margin-bottom: var(--spacing-10);
-		height: 150px;
+	@media (width < $breakpoint-mobile) {
+		height: 9rem;
 	}
 
 	&:hover {
@@ -247,6 +255,11 @@
 	max-width: 15rem;
 	max-height: 3rem;
 	margin: 0 auto;
+
+	@media (width < $breakpoint-mobile) {
+		max-width: 12rem;
+		max-height: 2.5rem;
+	}
 }
 
 .work-item-title {
@@ -267,7 +280,7 @@
 	gap: var(--spacing-10);
 	margin-block: var(--spacing-20);
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-mobile) {
 		gap: var(--spacing-8);
 	}
 
