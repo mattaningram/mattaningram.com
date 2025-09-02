@@ -150,7 +150,7 @@ a.no-outline:focus {
 		height: 50px;
 	}
 
-	@media (max-width: $breakpoint-tablet) {
+	@media (width < $breakpoint-tablet) {
 		padding: var(--spacing-7);
 		.m-logo-wrap {
 			width: 40px;

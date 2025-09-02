@@ -13,6 +13,8 @@ const {
 	class: className,
 } = Astro.props
 
+import 'ress/dist/ress.min.css'
+import '@animxyz/core/dist/animxyz.min.css'
 import '../styles/main.scss'
 ---
 
@@ -32,12 +34,6 @@ import '../styles/main.scss'
 		<title>{title}</title>
 		<meta name="description" content={description} />
 
-		<!-- Reset CSS -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/filipelinhares/ress/master/dist/ress.min.css" />
-
-		<!-- AnimXYZ -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core" />
-
 		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
 		<!-- Fonts -->
@@ -54,8 +50,7 @@ import '../styles/main.scss'
 		<slot />
 
 		<script is:inline>
-			// Track pointer and expose normalized CSS variables
-			(() => {
+			;(() => {
 				const root = document.documentElement
 				let raf = 0
 				let x = window.innerWidth / 2
