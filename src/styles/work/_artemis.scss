@@ -5,7 +5,7 @@
 	padding: 0 var(--spacing-10);
 	margin-bottom: var(--spacing-11);
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		padding: 0 var(--spacing-7);
 	}
 

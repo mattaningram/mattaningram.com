@@ -18,7 +18,7 @@ export interface Props {
 const { title, year, position, logo, logoOpen, workUrl, color, description, details } = Astro.props
 ---
 
-<BaseLayout title={title} pageColor={color} class={`${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
+<BaseLayout title={title} pageColor={color} class={`work-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
 	<div class="work-background"></div>
 
 	<Header />
@@ -72,12 +72,6 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 	</main>
 
 	<Footer />
-
-	<style define:vars={{ pageColor: color }}>
-		:root {
-			--page-color: var(--pageColor);
-		}
-	</style>
 </BaseLayout>
 
 <script>

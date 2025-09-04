@@ -48,22 +48,20 @@ h3 {
 
 p {
 	font-size: 1.25rem;
-}
 
-p + p {
-	margin-bottom: 1.25rem;
-}
-
-/* Responsive typography */
-@media (width < $breakpoint-tablet) {
-	p {
-		font-size: 1rem;
+	@media (width < $breakpoint-md) {
+		font-size: 1.125rem;
 	}
 }
 
+p + p {
+	margin-bottom: 1.25em;
+}
+
 .grab-copy-wrap {
-	max-width: var(--center-max-width);
-	padding: 0 var(--spacing-10);
+	width: var(--center-max-width);
+	max-width: 100%;
+	padding: 0 var(--page-gutter, var(--spacing-10));
 	margin: 0 auto;
 	margin-bottom: 10vh;
 	opacity: 0;
@@ -85,14 +83,13 @@ p + p {
 
 .grab-copy {
 	font-size: 1.75rem;
-	margin-bottom: 0;
 	text-wrap: balance;
 
-	@media (width < $breakpoint-desktop) {
+	@media (width < $breakpoint-md) {
 		font-size: 1.5rem;
 	}
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-sm) {
 		font-size: 1.25rem;
 	}
 }

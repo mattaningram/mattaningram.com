@@ -3,5 +3,12 @@ import Logo from './Logo.astro'
 ---
 
 <header class="site-header">
-	<a class="m-logo-wrap" href="/"><Logo /></a>
+	<a class="m-logo-link" href="/"><Logo size="3rem" /></a>
 </header>
+
+<style lang="scss">
+	.m-logo-link {
+		display: block;
+		width: fit-content;
+	}
+</style>

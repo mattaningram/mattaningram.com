@@ -1,6 +1,9 @@
-$breakpoint-mobile: 375px;
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1024px;
+$breakpoint-xs: 375px;
+$breakpoint-sm: 560px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-xxl: 1440px;
 
 /* CSS Custom Properties (Variables) */
 :root {
@@ -9,14 +12,6 @@ $breakpoint-desktop: 1024px;
 	--primary-red: rgb(237, 35, 50);
 	--bg-color: rgb(34, 45, 56);
 	--bg-dark: rgb(23, 31, 38);
-
-	/* Grays */
-	--black: rgb(0, 0, 0);
-	--white: rgb(255, 255, 255);
-
-	/* Translucent */
-	--translucent-white: rgba(255, 255, 255, 0.85);
-	--translucent-black: rgba(0, 0, 0, 0.85);
 
 	/* Spacings */
 	--spacing-1: 0.125rem;
@@ -45,17 +40,14 @@ $breakpoint-desktop: 1024px;
 
 	/* Breakpoints */
 
-	--breakpoint-mobile: $breakpoint-mobile;
-	--breakpoint-tablet: $breakpoint-tablet;
-	--breakpoint-desktop: $breakpoint-desktop;
+	--breakpoint-xs: $breakpoint-xs;
+	--breakpoint-sm: $breakpoint-sm;
+	--breakpoint-md: $breakpoint-md;
+	--breakpoint-lg: $breakpoint-lg;
+	--breakpoint-xl: $breakpoint-xl;
+	--breakpoint-xxl: $breakpoint-xxl;
 
 	/* Z-Indices */
-	--z-svg: 50;
-	--z-standard: 100;
-	--z-middle: 500;
-	--z-below-nav: 999;
-	--z-nav: 1000;
-	--z-main-nav: 1001;
 	--z-top: 9999;
 
 	/* Shadows */
