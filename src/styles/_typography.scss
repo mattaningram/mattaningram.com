@@ -59,9 +59,9 @@ p + p {
 }
 
 .grab-copy-wrap {
-	width: var(--center-max-width);
+	width: var(--page-content-width);
+	padding: var(--page-gutter);
 	max-width: 100%;
-	padding: 0 var(--page-gutter, var(--spacing-10));
 	margin: 0 auto;
 	margin-bottom: 10vh;
 	opacity: 0;

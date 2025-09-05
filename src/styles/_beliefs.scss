@@ -1,22 +1,28 @@
 /* Beliefs Section Styles */
 
 .beliefs-list-wrap {
-	width: $breakpoint-lg;
-	max-width: 100%;
 	margin: 0 auto;
-	padding: 0 var(--spacing-10);
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--spacing-12);
+
+	@media (width < $breakpoint-md) {
+		flex-wrap: nowrap;
+		overflow-x: scroll;
+		gap: var(--spacing-10);
+		padding: var(--page-gutter);
+		padding-top: 0;
+		margin: 0 calc(var(--page-gutter) * -1);
+	}
 }
 
 .belief-item {
 	width: 280px;
 	flex-grow: 1;
-}
 
-.belief-item:not(:last-child) {
-	margin-bottom: var(--spacing-11);
+	@media (width < $breakpoint-md) {
+		min-width: max(15rem, 50vw);
+	}
 }
 
 .belief-item-title {
@@ -29,16 +35,4 @@
 	margin: 0;
 	opacity: 0.85;
 	text-wrap: balance;
-}
-
-/* Responsive Styles */
-@media (width < $breakpoint-md) {
-	.beliefs-list-wrap {
-		flex-wrap: nowrap;
-		overflow-x: scroll;
-	}
-
-	.belief-item {
-		min-width: max(15rem, 50vw);
-	}
 }
