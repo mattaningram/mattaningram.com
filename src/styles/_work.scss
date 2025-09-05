@@ -1,13 +1,5 @@
-.work-layout {
-	--page-gutter: var(--spacing-10);
-
-	@media (width < $breakpoint-md) {
-		--page-gutter: var(--spacing-8);
-	}
-}
-
 .work-header-wrap {
-	width: var(--center-max-width);
+	width: var(--page-content-width);
 	max-width: 100%;
 	margin: 0 auto;
 	margin-bottom: 10vh;
@@ -126,38 +118,51 @@
 	}
 }
 
-.work-list-wrap {
-	margin: 0 auto;
-	max-width: var(--center-max-width);
-	padding: 0 var(--spacing-10);
+.work-section {
 	display: flex;
-	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--spacing-12);
+
+	@media (width < $breakpoint-lg) {
+		gap: var(--spacing-10);
+	}
+
+	@media (width < $breakpoint-sm) {
+		gap: var(--spacing-8);
+	}
+}
+
+.work-stack {
+	flex-grow: 1;
+	flex-basis: 0;
+	max-width: 25rem;
+}
+
+.work-list-wrap {
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: stretch;
 	gap: var(--spacing-11);
 
 	@media (width < $breakpoint-md) {
 		gap: var(--spacing-10);
-		padding: 0 var(--spacing-6);
 	}
 
-	@media (width < $breakpoint-xs) {
+	@media (width < $breakpoint-sm) {
 		gap: var(--spacing-8);
 	}
 }
 
 .work-item-wrap {
-	flex-grow: 1;
-	max-width: 400px;
-	min-width: 300px;
 	height: 11rem;
 	position: relative;
 	perspective: 600px;
 	perspective-origin: 50% 200%;
 	transform-style: preserve-3d;
 
-	@media (width < $breakpoint-xs) {
-		height: 9rem;
+	@media (width < $breakpoint-sm) {
+		height: 8rem;
 	}
 
 	&:hover {
@@ -272,6 +277,11 @@
 	@media (width < $breakpoint-md) {
 		max-width: 12rem;
 		max-height: 2.5rem;
+	}
+
+	@media (width < $breakpoint-sm) {
+		max-width: 10rem;
+		max-height: 2rem;
 	}
 }
 

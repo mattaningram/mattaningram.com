@@ -3,93 +3,103 @@ import WorkLayout from '../../layouts/WorkLayout.astro'
 
 export const frontmatter = {
 	order: 2,
-	title: 'Tally',
-	year: '2017',
-	position: 'Product Designer',
-	logo: 'tally_logo_white.svg',
-	color: 'rgb(58, 122, 219)',
-	description: `Tally is an app that teaches you about your government representatives and their job performance. Instead of focusing just on beliefs or party, Tally scores your representatives by non-ideological factors like attendance, vote participation, and bill creation.`,
+	title: 'YaHerd',
+	year: '2019',
+	position: 'Co-Creator',
+	logo: 'yaherd_logo_white.svg',
+	logoOpen: 'yaherd_logo_purple.svg',
+	workUrl: 'https://yaherd.co',
+	color: 'rgb(147, 38, 255)',
+	description: `YaHerd helps you share the when and where for any get together. Simple event invites, no accounts necessary. From a party to a protest, YaHerd makes getting people together as easy as pasting a link, with no ads, no tracking, and totally free.`,
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div id="tally-slides" class="image-carousel-wrap">
+	<div class="image-carousel-wrap">
 		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-reps.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
+					href="/assets/images/yaherd/yaherd-homepage.png"
+					data-pswp-width="1440"
+					data-pswp-height="1812"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" alt="Tally Representatives" />
+					<img class="carousel-image" src="/assets/images/yaherd/yaherd-homepage-thumb.jpg" alt="YaHerd Homepage" />
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-rank.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
+					href="/assets/images/yaherd/yaherd-demo-gif.gif"
+					data-pswp-width="375"
+					data-pswp-height="667"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" alt="Tally Rank" />
+					<img class="carousel-image" src="/assets/images/yaherd/yaherd-demo-gif.gif" alt="YaHerd Demo" />
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-search.jpg"
+					href="/assets/images/yaherd/yaherd-event-details.png"
 					data-pswp-width="750"
-					data-pswp-height="1334"
+					data-pswp-height="1624"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-search.jpg" alt="Tally Search" />
+					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-details.png" alt="YaHerd Event Details" />
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-rep-stats.jpg"
+					href="/assets/images/yaherd/yaherd-event-chat.png"
 					data-pswp-width="750"
-					data-pswp-height="1334"
+					data-pswp-height="1624"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" alt="Tally Rep Stats" />
+					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-chat.png" alt="YaHerd Event Chat" />
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-rep-beliefs.jpg"
+					href="/assets/images/yaherd/yaherd-event-people.png"
 					data-pswp-width="750"
-					data-pswp-height="1334"
+					data-pswp-height="1624"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" alt="Tally Rep Beliefs" />
+					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-people.png" alt="YaHerd Event People" />
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-rep-money.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
+					href="/assets/images/yaherd/yaherd-event-desktop.png"
+					data-pswp-width="2880"
+					data-pswp-height="1800"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" alt="Tally Rep Money" />
+					<img
+						class="carousel-image"
+						src="/assets/images/yaherd/yaherd-event-desktop-thumb.jpg"
+						alt="YaHerd Event Desktop"
+					/>
 				</a>
 			</li>
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
 					class="no-outline"
 					target="_blank"
-					href="/assets/images/tally/tally-rep-contact.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
+					href="/assets/images/yaherd/yaherd-events-desktop.png"
+					data-pswp-width="2880"
+					data-pswp-height="1800"
 				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" alt="Tally Rep Contact" />
+					<img
+						class="carousel-image"
+						src="/assets/images/yaherd/yaherd-events-desktop-thumb.jpg"
+						alt="YaHerd Events Desktop"
+					/>
 				</a>
 			</li>
 		</ul>
@@ -103,16 +113,20 @@ export const frontmatter = {
 					<span class="skill-list-item-text">Sketch</span>
 				</li>
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">Adobe Illustrator</span>
+					<span class="skill-list-item-text">Figma</span>
 				</li>
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">InVision</span>
+					<span class="skill-list-item-text">Adobe Illustrator</span>
 				</li>
 			</ul>
 		</div>
+
 		<div class="skill-panel">
 			<h3 class="skill-list-header">Code</h3>
 			<ul class="skill-list">
+				<li class="skill-list-item">
+					<span class="skill-list-item-text">Vue</span>
+				</li>
 				<li class="skill-list-item">
 					<span class="skill-list-item-text">HTML</span>
 				</li>
@@ -126,27 +140,25 @@ export const frontmatter = {
 					<span class="skill-list-item-text">SVG</span>
 				</li>
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">React</span>
+					<span class="skill-list-item-text">AnimeJS</span>
 				</li>
 				<li class="skill-list-item">
 					<span class="skill-list-item-text">GitHub</span>
 				</li>
 			</ul>
 		</div>
+
 		<div class="skill-panel">
 			<h3 class="skill-list-header">Web</h3>
 			<ul class="skill-list">
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">Responsive Design</span>
+					<span class="skill-list-item-text">CSS Variables</span>
 				</li>
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">Animations</span>
+					<span class="skill-list-item-text">CSS Grid</span>
 				</li>
 				<li class="skill-list-item">
-					<span class="skill-list-item-text">BEM + OOCSS</span>
-				</li>
-				<li class="skill-list-item">
-					<span class="skill-list-item-text">Flexbox</span>
+					<span class="skill-list-item-text">Scoped Styles</span>
 				</li>
 			</ul>
 		</div>

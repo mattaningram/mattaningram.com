@@ -1,18 +1,22 @@
 ---
-const allWork = import.meta.glob('/src/pages/work/*.astro')
+const { folder = 'work' } = Astro.props
 
-const workPaths = Object.keys(allWork).map(
-	(path) =>
-		// Extract the slug from './work/slug.astro'
-		'/work/' + (path.match(/\/work\/(.*)\.astro$/)?.[1] ?? '')
-)
+// Preload both collections; choose one based on the `folder` prop.
+const collections = {
+	work: import.meta.glob('/src/pages/work/*.astro'),
+	projects: import.meta.glob('/src/pages/projects/*.astro'),
+} as const
 
-const workModules = await Promise.all(Object.values(allWork).map((loader) => loader()))
+const selected = collections[folder] ?? {}
 
-const workItems = workModules
+const itemPaths = Object.keys(selected).map((path) => `/${folder}/` + (path.match(new RegExp(`/${folder}/(.*)\\.astro$`))?.[1] ?? ''))
+
+const itemModules = await Promise.all(Object.values(selected).map((loader) => loader()))
+
+const items = itemModules
 	.map((item, i) => ({
 		...item.frontmatter,
-		url: workPaths[i],
+		url: itemPaths[i],
 		component: item.default,
 	}))
 	.sort((a, b) => b.order - a.order)
@@ -20,7 +24,7 @@ const workItems = workModules
 
 <div class="work-list-wrap">
 	{
-		workItems.map((item) => (
+		items.map((item) => (
 			<a href={item.url} class="work-item-wrap" style={`--page-color: ${item.color};`}>
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />

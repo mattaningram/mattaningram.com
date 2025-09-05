@@ -13,39 +13,35 @@ import WorkList from '../components/WorkList.astro'
 		<button class="m-logo-click-me xyz-in" xyz="fade small-2 duration-5 delay-8">Click me</button>
 	</section>
 
-	<section class="about-section home-section">
-		<div class="grab-copy-wrap">
-			<p class="grab-copy">
-				Design engineer and CSS nerd raised on the
-				<span class="gif-hover"
-					>1984 Mac<span class="gif-video-wrap">
-						<video autoplay loop muted playsinline>
-							<source src="assets/videos/1984mac.webm" type="video/webm" />
-						</video>
-					</span>
-				</span>,
-				<span class="gif-hover"
-					>Top Gun<span class="gif-video-wrap">
-						<video autoplay loop muted playsinline>
-							<source src="assets/videos/topgun.webm" type="video/webm" />
-						</video>
-					</span></span
-				>, and
-				<span class="gif-hover"
-					>Sesame Street<span class="gif-video-wrap">
-						<video autoplay loop muted playsinline>
-							<source src="assets/videos/sesame.webm" type="video/webm" />
-						</video>
-					</span></span
-				>. I help teams build better products through, development, research, and data.
-			</p>
-		</div>
+	<section class="grab-copy-wrap home-section">
+		<p class="grab-copy">
+			Design engineer and CSS nerd raised on the
+			<span class="gif-hover"
+				>1984 Mac<span class="gif-video-wrap">
+					<video autoplay loop muted playsinline>
+						<source src="assets/videos/1984mac.webm" type="video/webm" />
+					</video>
+				</span>
+			</span>,
+			<span class="gif-hover"
+				>Top Gun<span class="gif-video-wrap">
+					<video autoplay loop muted playsinline>
+						<source src="assets/videos/topgun.webm" type="video/webm" />
+					</video>
+				</span></span
+			>, and
+			<span class="gif-hover"
+				>Sesame Street<span class="gif-video-wrap">
+					<video autoplay loop muted playsinline>
+						<source src="assets/videos/sesame.webm" type="video/webm" />
+					</video>
+				</span></span
+			>. I help teams build better products through, development, research, and data.
+		</p>
 	</section>
 
 	<section class="beliefs-section home-section">
-		<header class="home-section-header">
-			<h2 class="home-section-title">Beliefs</h2>
-		</header>
+		<h2 class="home-section-title">Beliefs</h2>
 		<div class="beliefs-list-wrap">
 			<div class="belief-item">
 				<h3 class="belief-item-title">Join Forces</h3>
@@ -93,11 +89,14 @@ import WorkList from '../components/WorkList.astro'
 	</section>
 
 	<section class="work-section home-section">
-		<header class="home-section-header">
+		<div class="work-stack">
 			<h2 class="home-section-title">Work</h2>
-		</header>
-
-		<WorkList />
+			<WorkList folder="work" />
+		</div>
+		<div class="work-stack">
+			<h2 class="home-section-title">Projects</h2>
+			<WorkList folder="projects" />
+		</div>
 	</section>
 
 	<script is:inline>
@@ -110,15 +109,15 @@ import WorkList from '../components/WorkList.astro'
 
 	<style lang="scss">
 		.m-center-wrap {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			width: 100%;
 			height: 90vh;
 			min-height: 26rem;
 			max-height: 48rem;
-			padding: 0 20px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
+			padding: 0 var(--spacing-10);
 		}
 
 		.m-logo-section {
