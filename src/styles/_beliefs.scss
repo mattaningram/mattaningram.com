@@ -1,7 +1,7 @@
 /* Beliefs Section Styles */
 
 .beliefs-list-wrap {
-	width: $breakpoint-desktop;
+	width: $breakpoint-lg;
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 0 var(--spacing-10);
@@ -32,7 +32,7 @@
 }
 
 /* Responsive Styles */
-@media (width < $breakpoint-tablet) {
+@media (width < $breakpoint-md) {
 	.beliefs-list-wrap {
 		flex-wrap: nowrap;
 		overflow-x: scroll;

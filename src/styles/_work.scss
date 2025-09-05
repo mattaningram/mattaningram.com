@@ -1,8 +1,17 @@
+.work-layout {
+	--page-gutter: var(--spacing-10);
+
+	@media (width < $breakpoint-md) {
+		--page-gutter: var(--spacing-8);
+	}
+}
+
 .work-header-wrap {
 	width: var(--center-max-width);
 	max-width: 100%;
-	margin: 10vh auto;
-	padding: 0 var(--spacing-10);
+	margin: 0 auto;
+	margin-bottom: 10vh;
+	padding: 0 var(--page-gutter);
 }
 
 .work-header {
@@ -15,10 +24,10 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--spacing-8);
-	padding: var(--spacing-8);
+	padding: var(--spacing-10);
 	border-bottom: 1px solid var(--page-color);
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		flex-direction: column;
 	}
 }
@@ -83,7 +92,7 @@
 	font-weight: 400;
 	text-align: center;
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		flex-grow: 1;
 		padding: 0 var(--spacing-5);
 	}
@@ -95,6 +104,10 @@
 	margin-bottom: var(--spacing-8);
 	letter-spacing: 0.025em;
 	align-self: flex-start;
+
+	@media (width < $breakpoint-md) {
+		margin-bottom: var(--spacing-6);
+	}
 }
 
 .section-text-wrap {
@@ -104,12 +117,12 @@
 	padding: var(--spacing-11);
 	border: 1px solid var(--page-color);
 
-	@media (width < $breakpoint-desktop) {
+	@media (width < $breakpoint-lg) {
 		padding: var(--spacing-10);
 	}
 
-	@media (width < $breakpoint-tablet) {
-		padding: var(--spacing-7);
+	@media (width < $breakpoint-md) {
+		padding: var(--spacing-8);
 	}
 }
 
@@ -123,12 +136,12 @@
 	align-items: stretch;
 	gap: var(--spacing-11);
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		gap: var(--spacing-10);
 		padding: 0 var(--spacing-6);
 	}
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-xs) {
 		gap: var(--spacing-8);
 	}
 }
@@ -143,7 +156,7 @@
 	perspective-origin: 50% 200%;
 	transform-style: preserve-3d;
 
-	@media (width < $breakpoint-mobile) {
+	@media (width < $breakpoint-xs) {
 		height: 9rem;
 	}
 
@@ -256,7 +269,7 @@
 	max-height: 3rem;
 	margin: 0 auto;
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		max-width: 12rem;
 		max-height: 2.5rem;
 	}
@@ -280,7 +293,7 @@
 	gap: var(--spacing-10);
 	margin-block: var(--spacing-20);
 
-	@media (width < $breakpoint-tablet) {
+	@media (width < $breakpoint-md) {
 		gap: var(--spacing-8);
 	}
 

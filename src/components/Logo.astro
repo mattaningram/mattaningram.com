@@ -5,9 +5,21 @@ const files = import.meta.glob('/public/assets/mLogos/**/*.{svg,html}', {
 	as: 'url',
 })
 const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
+
+const { size } = Astro.props
 ---
 
 <div class="m-logo-wrap"></div>
+
+<style lang="scss" define:vars={{ size }}>
+	.m-logo-wrap {
+		width: var(--m-logo-size, var(--size));
+		height: var(--m-logo-size, var(--size));
+		cursor: pointer;
+		margin: 0 auto;
+		position: relative;
+	}
+</style>
 
 <script is:inline define:vars={{ urls }}>
 	// Scope to this component instance by using the adjacent wrapper element
