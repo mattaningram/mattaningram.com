@@ -79,8 +79,10 @@ const { size } = Astro.props
 			runSpiderLines()
 		}
 
-		// After injecting the logo HTML, remove `xyz-in` once its intro animation finishes
-		xyzCleanup(logoWrap)
+		if (url.includes('parallaxM')) {
+			// After injecting the logo HTML, remove `xyz-in` once its intro animation finishes
+			xyzCleanup(logoWrap)
+		}
 	}
 
 	function xyzCleanup(root) {

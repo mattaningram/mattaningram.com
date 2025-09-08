@@ -1,0 +1,99 @@
+<div class="m-logo m-logo-cube xyz-in" xyz="fade origin-bottom stagger">
+	<!-- Single definition of the M shape; reused via <use> on each face -->
+	<svg
+		class="m-cube-defs"
+		aria-hidden="true"
+		focusable="false"
+		width="0"
+		height="0"
+		style="position: absolute; width: 0; height: 0; overflow: hidden"
+	>
+		<defs>
+			<symbol id="mCube-shape" viewBox="0 0 100 100">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M50 50L100 0V100H0V0L50 50Z" />
+			</symbol>
+		</defs>
+	</svg>
+
+	<div class="cube">
+		<div class="face face--front xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div>
+		<div class="face face--left xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div>
+		<div class="face face--back xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div>
+		<div class="face face--right xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div>
+		<!-- <div class="face face--top xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div> -->
+		<!-- <div class="face face--bottom xyz-nested">
+			<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mCube-shape" class="m-shape" /></svg>
+		</div> -->
+	</div>
+</div>
+
+<style lang="scss">
+	.m-logo-cube {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-items: center;
+		perspective: 900px;
+		--cubeSize: calc(var(--m-logo-size, var(--size, 12rem)) * 0.75);
+		--face-offset: calc(var(--cubeSize) / 2);
+
+		.cube {
+			width: var(--cubeSize);
+			height: var(--cubeSize);
+			rotate: x calc(-15deg + var(--mouse-y) * -30deg);
+			position: relative;
+			transform-style: preserve-3d;
+			animation: cube-rotate 8s linear infinite;
+		}
+
+		.face {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			background: transparent;
+			opacity: 0.8;
+			transform-origin: bottom;
+		}
+
+		.m-shape {
+			fill: currentColor;
+		}
+
+		.face--front {
+			color: #3a7adb;
+			transform: translateZ(var(--face-offset));
+		}
+		.face--back {
+			--xyz-rotate-y: 180deg;
+			color: #00cc7a;
+			transform: rotateY(180deg) translateZ(var(--face-offset));
+		}
+		.face--right {
+			--xyz-rotate-y: 90deg;
+			color: #ffd400;
+			transform: rotateY(90deg) translateZ(var(--face-offset));
+		}
+		.face--left {
+			--xyz-rotate-y: -90deg;
+			color: #ff3b3b;
+			transform: rotateY(-90deg) translateZ(var(--face-offset));
+		}
+	}
+
+	@keyframes cube-rotate {
+		100% {
+			transform: rotateY(-1turn);
+		}
+	}
+</style>
