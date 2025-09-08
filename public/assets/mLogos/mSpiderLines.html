@@ -11,21 +11,41 @@
 
 <style>
 	.m-logo-random-line {
+		--logo-red: var(--primary-red);
+		--logo-green: #00cc7a;
+		--logo-blue: var(--primary-blue);
+
 		line {
-			stroke: white;
-			stroke-width: 2;
+			stroke-width: calc(var(--m-logo-size, var(--size, 12rem)) / 4);
 			stroke-dasharray: 500;
 			stroke-dashoffset: 500;
+			mix-blend-mode: plus-lighter;
 			animation: dashOffset 2s var(--ease-in-quad) forwards;
 		}
 	}
 
-	.site-header {
-		.m-logo-random-line {
-			line {
-				stroke-width: 0.5;
-			}
+	.random-line--red {
+		line {
+			stroke: var(--logo-red);
 		}
+		/* Also support class applied directly on the line */
+		stroke: var(--logo-red);
+	}
+
+	.random-line--green {
+		line {
+			stroke: var(--logo-green);
+		}
+		/* Also support class applied directly on the line */
+		stroke: var(--logo-green);
+	}
+
+	.random-line--blue {
+		line {
+			stroke: var(--logo-blue);
+		}
+		/* Also support class applied directly on the line */
+		stroke: var(--logo-blue);
 	}
 
 	@keyframes dashOffset {

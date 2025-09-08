@@ -46,16 +46,23 @@ const { size } = Astro.props
 
 	//SPIDER LINES FUNCTION
 	function runSpiderLines() {
-		var numLines = 240
+		var numLines = 40
 		var radius = 75
 		var lineWrap = document.querySelector('.m-logo-random-lines')
 		if (!lineWrap) return
+
 		var lines = document.createDocumentFragment()
+		var svgNS = 'http://www.w3.org/2000/svg'
+		var colorClasses = ['random-line--red', 'random-line--green', 'random-line--blue']
 
 		for (var i = 0; i < numLines; i++) {
 			var rand1 = -Math.PI + Math.random() * Math.PI * 2
 			var rand2 = -Math.PI + Math.random() * Math.PI * 2
-			var line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+
+			// Evenly distribute color classes across generated lines
+			var colorIndex = Math.floor((i * colorClasses.length) / numLines)
+			var line = document.createElementNS(svgNS, 'line')
+			line.setAttribute('class', colorClasses[colorIndex])
 			line.setAttribute('x1', 50 + radius * Math.cos(rand1))
 			line.setAttribute('y1', 50 + radius * Math.sin(rand1))
 			line.setAttribute('x2', 50 + radius * Math.cos(rand2))
@@ -63,8 +70,9 @@ const { size } = Astro.props
 			line.setAttribute('vector-effect', 'non-scaling-stroke')
 			line.setAttribute(
 				'style',
-				'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.1 + Math.random() * 0.9) + ';'
+				'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.2 + Math.random() * 0.8) + ';'
 			)
+
 			lines.appendChild(line)
 		}
 		lineWrap.appendChild(lines)
