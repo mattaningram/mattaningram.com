@@ -7,6 +7,22 @@ import Logo from './Logo.astro'
 </header>
 
 <style lang="scss">
+	@use '../styles/_scssVariables' as *;
+	.site-header {
+		position: sticky;
+		z-index: 100;
+		top: 0;
+		left: 0;
+		padding: var(--page-gutter);
+		transition: all 0.15s var(--ease-out-quad);
+
+		@media (width < $breakpoint-sm) {
+			padding: var(--page-gutter);
+			:global(.m-logo-wrap) {
+				--m-logo-size: 2.5rem;
+			}
+		}
+	}
 	.m-logo-link {
 		display: block;
 		width: fit-content;

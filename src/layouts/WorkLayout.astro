@@ -89,3 +89,99 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 	lightbox.init()
 </script>
+
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
+
+	.work-header-wrap {
+		width: var(--page-content-width);
+		max-width: 100%;
+		margin: 0 auto;
+		margin-bottom: 10vh;
+		padding: 0 var(--page-gutter);
+	}
+
+	.work-header {
+		background-color: var(--bg-dark);
+		border: 1px solid var(--page-color);
+	}
+
+	.work-header-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--spacing-8);
+		padding: var(--spacing-10);
+		border-bottom: 1px solid var(--page-color);
+
+		@media (width < $breakpoint-md) {
+			flex-direction: column;
+		}
+	}
+
+	.work-header-bottom {
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		margin-bottom: -1px;
+		margin-right: -1px;
+	}
+
+	.work-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		z-index: -1;
+		opacity: 0.25;
+		background-image: radial-gradient(circle at top, var(--page-color), var(--bg-color) 65%);
+		background-size: 100% 300%;
+		background-position-y: 60%;
+	}
+
+	.work-title-wrap {
+		height: 3rem;
+		max-width: 15rem;
+	}
+
+	.work-title {
+		font-size: 2.2em;
+		text-align: center;
+	}
+
+	.work-logo {
+		display: block;
+		height: 100%;
+		max-width: 240px;
+		max-height: 48px;
+	}
+
+	.work-link {
+		height: 3rem;
+		width: 8rem;
+		margin: 0;
+		text-decoration: none;
+	}
+
+	.work-detail {
+		background-color: var(--bg-color);
+		height: 3rem;
+		display: flex;
+		justify-content: center;
+		width: fit-content;
+		align-items: center;
+		border-bottom: 1px solid var(--page-color);
+		border-right: 1px solid var(--page-color);
+		padding: 0 var(--spacing-8);
+		color: var(--page-color);
+		font-size: 0.875rem;
+		font-weight: 400;
+		text-align: center;
+
+		@media (width < $breakpoint-md) {
+			flex-grow: 1;
+			padding: 0 var(--spacing-5);
+		}
+	}
+</style>

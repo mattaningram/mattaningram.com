@@ -9,7 +9,9 @@ const collections = {
 
 const selected = collections[folder] ?? {}
 
-const itemPaths = Object.keys(selected).map((path) => `/${folder}/` + (path.match(new RegExp(`/${folder}/(.*)\\.astro$`))?.[1] ?? ''))
+const itemPaths = Object.keys(selected).map(
+	(path) => `/${folder}/` + (path.match(new RegExp(`/${folder}/(.*)\\.astro$`))?.[1] ?? '')
+)
 
 const itemModules = await Promise.all(Object.values(selected).map((loader) => loader()))
 
@@ -43,3 +45,165 @@ const items = itemModules
 		))
 	}
 </div>
+
+<style lang="scss">
+	@use '../styles/_scssVariables' as *;
+	.work-list-wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
+		gap: var(--spacing-11);
+
+		@media (width < $breakpoint-md) {
+			gap: var(--spacing-10);
+		}
+
+		@media (width < $breakpoint-sm) {
+			gap: var(--spacing-8);
+		}
+	}
+
+	.work-item-wrap {
+		height: 11rem;
+		position: relative;
+		perspective: 600px;
+		perspective-origin: 50% 200%;
+		transform-style: preserve-3d;
+
+		@media (width < $breakpoint-sm) {
+			height: 8rem;
+		}
+
+		&:hover {
+			.work-item {
+				transform: translate3d(0, 0, 20px);
+			}
+
+			.work-item-stack {
+				background-color: var(--page-color);
+				&:nth-child(1) {
+					opacity: 0.1;
+					transform: translate3d(0, 0, -60px);
+				}
+				&:nth-child(2) {
+					opacity: 0.2;
+					transform: translate3d(0, 0, -40px);
+				}
+				&:nth-child(3) {
+					opacity: 0.3;
+					transform: translate3d(0, 0, -20px);
+				}
+				&:nth-child(4) {
+					opacity: 0.4;
+					transform: translate3d(0, 0, 0px);
+				}
+			}
+		}
+	}
+
+	.work-item-stack {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		opacity: 0;
+		background-color: var(--page-color);
+		transform-origin: 50% 100%;
+		transition: all 0.3s var(--ease-out-back);
+
+		&:nth-child(1) {
+			opacity: 0.2;
+			transform: translate3d(0, 0, -30px);
+		}
+
+		&:nth-child(2) {
+			opacity: 0.4;
+			transform: translate3d(0, 0, -15px);
+		}
+	}
+
+	.work-item {
+		background-color: var(--page-color);
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 10px;
+		text-align: center;
+		text-decoration: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transform-style: preserve-3d;
+		overflow: hidden;
+		transition: all 0.3s var(--ease-out-back);
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			opacity: 1;
+			background: radial-gradient(at 15% 0%, transparent, rgba(0, 0, 0, 0.15));
+			transition: all 0.5s var(--ease-out-quad);
+		}
+
+		&:after {
+			opacity: 0;
+			background: radial-gradient(at 15% 0%, rgba(255, 255, 255, 0.25), transparent);
+		}
+
+		&:hover {
+			&:before {
+				opacity: 0;
+			}
+
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	.work-item-contents {
+		width: 100%;
+		transition: all 0.2s ease-in;
+	}
+
+	.work-item-logo {
+		display: block;
+		width: 100%;
+		max-width: 15rem;
+		max-height: 3rem;
+		margin: 0 auto;
+
+		@media (width < $breakpoint-md) {
+			max-width: 12rem;
+			max-height: 2.5rem;
+		}
+
+		@media (width < $breakpoint-sm) {
+			max-width: 10rem;
+			max-height: 2rem;
+		}
+	}
+
+	.work-item-title {
+		display: block;
+		font-size: 1.6em;
+		font-weight: 300;
+		text-align: center;
+	}
+
+	.work-item-details {
+		display: block;
+		color: rgba(255, 255, 255, 0.75);
+	}
+</style>

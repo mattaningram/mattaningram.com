@@ -1,15 +1,8 @@
 /* Base Styles */
-@import 'variables';
-@import 'typography';
-@import 'animations';
-@import 'structure';
+@use 'variables';
+@use 'typography';
+@use 'animations';
+@use 'structure';
 
 /* Component Styles */
-@import 'beliefs';
-@import 'page';
-@import 'work';
-
-/* Work Styles */
-@import 'work/visible';
-@import 'work/artemis';
-@import 'work/canvs';
+@use 'work';
