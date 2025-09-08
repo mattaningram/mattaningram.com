@@ -1,3 +1,5 @@
+@use 'scssVariables' as *;
+
 .work-header-wrap {
 	width: var(--page-content-width);
 	max-width: 100%;

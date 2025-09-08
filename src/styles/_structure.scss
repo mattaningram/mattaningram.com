@@ -1,3 +1,5 @@
+@use 'scssVariables' as *;
+
 html {
 	background-color: var(--bg-color);
 	overflow-x: hidden;
