@@ -398,4 +398,26 @@ export const frontmatter = {
 			}
 		}
 	}
+
+	.image-grid {
+		display: flex;
+		justify-content: center;
+		gap: var(--spacing-10);
+
+		@media (width < $breakpoint-lg) {
+			flex-wrap: wrap;
+		}
+	}
+
+	.image-grid-item {
+		display: flex;
+		justify-content: center;
+	}
+
+	.grid-image {
+		display: block;
+		height: 200px;
+		width: auto;
+		box-shadow: var(--shadow-md);
+	}
 </style>
