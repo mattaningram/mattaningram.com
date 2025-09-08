@@ -273,17 +273,15 @@ export const frontmatter = {
 <style lang="scss">
 	@use '../../styles/scssVariables' as *;
 
-	.canvs-wrap {
-		.page-section--row {
-			@media (width >= $breakpoint-md) {
-				justify-content: flex-start;
-				min-height: 100vh;
-			}
+	.page-section--row {
+		@media (width >= $breakpoint-md) {
+			justify-content: flex-start;
+			min-height: 100vh;
 		}
+	}
 
-		.section-image {
-			box-shadow: var(--shadow-md);
-		}
+	.section-image {
+		box-shadow: var(--shadow-md);
 	}
 
 	.canvs-responsibilities {
