@@ -9,20 +9,24 @@ import { Icon } from 'astro-icon/components'
 	</a>
 
 	<div class="link-icon-wrap">
-		<a class="link-icon" href="https://github.com/mattaningram" title="Github" target="_blank">
-			<Icon name="github-white" />
+		<a class="link-icon" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
+			<Icon name="github-solid" />
 		</a>
 
-		<a class="link-icon" href="https://x.com/mattaningram" title="X" target="_blank">
-			<Icon name="x-white" />
+		<a class="link-icon" href="https://www.linkedin.com/in/mattaningram" aria-label="LinkedIn" target="_blank">
+			<Icon name="linkedin-solid" />
 		</a>
 
-		<a class="link-icon" href="https://instagram.com/mattaningram" title="Instagram" target="_blank">
-			<Icon name="instagram-white" />
+		<a class="link-icon" href="https://x.com/mattaningram" aria-label="X" target="_blank">
+			<Icon name="x-solid" />
 		</a>
 
-		<a class="link-icon" href="https://open.spotify.com/user/mattaningram" title="Spotify" target="_blank">
-			<Icon name="spotify-white" />
+		<a class="link-icon" href="https://instagram.com/mattaningram" aria-label="Instagram" target="_blank">
+			<Icon name="instagram-solid" />
+		</a>
+
+		<a class="link-icon" href="https://open.spotify.com/user/mattaningram" aria-label="Spotify" target="_blank">
+			<Icon name="spotify-solid" />
 		</a>
 	</div>
 </footer>
@@ -47,9 +51,8 @@ import { Icon } from 'astro-icon/components'
 	}
 
 	.footer-text {
-		font-size: 0.8em;
-		opacity: 0.75;
-		color: white;
+		font-size: 0.875rem;
+		color: var(--page-color);
 	}
 
 	.link-icon-wrap {
@@ -65,12 +68,12 @@ import { Icon } from 'astro-icon/components'
 		color: var(--page-color);
 		transition: all 0.2s ease-out;
 
-		&:hover,
-		&:focus {
+		&:hover {
 			transform: scale(1.25);
 		}
 
-		&:focus {
+		&:focus-visible {
+			transform: scale(1.25);
 			outline: 1px solid var(--page-color);
 			outline-offset: 2px;
 		}
