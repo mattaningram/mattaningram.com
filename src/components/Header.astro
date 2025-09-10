@@ -3,7 +3,7 @@ import Logo from './Logo.astro'
 ---
 
 <header class="site-header">
-	<a class="m-logo-link" href="/"><Logo size="3rem" /></a>
+	<a class="m-logo-link" href="/" aria-label="Home"><Logo size="3rem" /></a>
 </header>
 
 <style lang="scss">
@@ -26,5 +26,9 @@ import Logo from './Logo.astro'
 	.m-logo-link {
 		display: block;
 		width: fit-content;
+
+		&:focus-visible {
+			outline: 2px solid var(--page-color);
+		}
 	}
 </style>
