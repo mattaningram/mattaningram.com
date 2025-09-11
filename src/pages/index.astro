@@ -1,270 +1,212 @@
 ---
 import HomeLayout from '../layouts/HomeLayout.astro'
 import Logo from '../components/Logo.astro'
+import Beliefs from '../components/Beliefs.astro'
 import WorkList from '../components/WorkList.astro'
+import Footer from '../components/Footer.astro'
 ---
 
 <HomeLayout>
-	<section class="m-center-wrap">
-		<div class="m-logo-section">
-			<Logo size="15rem" />
+	<div class="container">
+		<div class="sidebar">
+			<section class="m-center-wrap">
+				<div class="m-logo-section">
+					<Logo size="10rem" />
+				</div>
+				<h1 class="my-name xyz-in" xyz="fade small-2 duration-5 delay-7">Mattan Ingram</h1>
+				<button class="m-logo-click-me xyz-in" xyz="fade small-2 duration-5 delay-8">Click me</button>
+			</section>
+
+			<p class="sidebar-copy">
+				Design engineer and CSS nerd raised on the
+				<span class="gif-hover"
+					>1984 Mac<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/1984mac.webm" type="video/webm" />
+						</video>
+					</span>
+				</span>,
+				<span class="gif-hover"
+					>Top Gun<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/topgun.webm" type="video/webm" />
+						</video>
+					</span></span
+				>, and
+				<span class="gif-hover"
+					>Sesame Street<span class="gif-video-wrap">
+						<video autoplay loop muted playsinline>
+							<source src="assets/videos/sesame.webm" type="video/webm" />
+						</video>
+					</span></span
+				>. I help teams build better products through, development, research, and data.
+			</p>
+
+			<Beliefs />
+
+			<Footer />
 		</div>
-		<h1 class="my-name xyz-in" xyz="fade small-2 duration-5 delay-7">Mattan Ingram</h1>
-		<button class="m-logo-click-me xyz-in" xyz="fade small-2 duration-5 delay-8">Click me</button>
-	</section>
 
-	<section class="grab-copy-wrap home-section">
-		<p class="grab-copy">
-			Design engineer and CSS nerd raised on the
-			<span class="gif-hover"
-				>1984 Mac<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/1984mac.webm" type="video/webm" />
-					</video>
-				</span>
-			</span>,
-			<span class="gif-hover"
-				>Top Gun<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/topgun.webm" type="video/webm" />
-					</video>
-				</span></span
-			>, and
-			<span class="gif-hover"
-				>Sesame Street<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/sesame.webm" type="video/webm" />
-					</video>
-				</span></span
-			>. I help teams build better products through, development, research, and data.
-		</p>
-	</section>
-
-	<section class="beliefs-section home-section">
-		<h2 class="home-section-title">Beliefs</h2>
-		<div class="beliefs-list-wrap">
-			<div class="belief-item">
-				<h3 class="belief-item-title">Join Forces</h3>
-				<p class="belief-item-copy">
-					Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
-					Breaking down silos breeds unicorns.
-				</p>
-			</div>
-			<div class="belief-item">
-				<h3 class="belief-item-title">Read the Manual</h3>
-				<p class="belief-item-copy">
-					Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
-					know the basics first. It will save time in the end.
-				</p>
-			</div>
-			<div class="belief-item">
-				<h3 class="belief-item-title">Best Practices</h3>
-				<p class="belief-item-copy">
-					Just about everything has been tried on the web. It's worth the time to look up how other people have done
-					something and learn from their successes and mistakes.
-				</p>
-			</div>
-			<div class="belief-item">
-				<h3 class="belief-item-title">Be the User</h3>
-				<p class="belief-item-copy">
-					Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to
-					test a feature but to let my experience drive me as well.
-				</p>
-			</div>
-			<div class="belief-item">
-				<h3 class="belief-item-title">Why not Both?</h3>
-				<p class="belief-item-copy">
-					Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the
-					features save them enough time to enjoy it.
-				</p>
-			</div>
-			<div class="belief-item">
-				<h3 class="belief-item-title">Explain Why</h3>
-				<p class="belief-item-copy">
-					When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
-					always improves how things play out.
-				</p>
-			</div>
+		<div class="main-content">
+			<section class="work-section home-section">
+				<div class="work-stack">
+					<h2 class="home-section-title">Work</h2>
+					<WorkList folder="work" />
+				</div>
+				<div class="work-stack">
+					<h2 class="home-section-title">Projects</h2>
+					<WorkList folder="projects" />
+				</div>
+			</section>
 		</div>
-	</section>
+	</div>
+</HomeLayout>
 
-	<section class="work-section home-section">
-		<div class="work-stack">
-			<h2 class="home-section-title">Work</h2>
-			<WorkList folder="work" />
-		</div>
-		<div class="work-stack">
-			<h2 class="home-section-title">Projects</h2>
-			<WorkList folder="projects" />
-		</div>
-	</section>
+<script is:inline>
+	const btn = document.querySelector('.m-logo-click-me')
+	const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
+	btn?.addEventListener('click', () => {
+		logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+	})
+</script>
 
-	<script is:inline>
-		const btn = document.querySelector('.m-logo-click-me')
-		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
-		btn?.addEventListener('click', () => {
-			logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
-		})
-	</script>
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
 
-	<style lang="scss">
-		@use '../styles/scssVariables' as *;
+	.container {
+		display: grid;
+		height: 100vh;
+		grid-template-columns: 24rem 1fr;
+	}
 
-		.m-center-wrap {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			height: 90svh;
-			min-height: 26rem;
-			max-height: 48rem;
-			padding: 0 var(--spacing-10);
+	.sidebar {
+		position: sticky;
+		top: 0;
+		min-height: 100vh;
+		padding: var(--page-gutter);
+		background: var(--bg-color);
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.m-center-wrap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 30rem;
+	}
+
+	.m-logo-section {
+		position: relative;
+	}
+
+	.my-name {
+		text-align: center;
+		letter-spacing: 0.03em;
+		margin-block: var(--spacing-8);
+	}
+
+	.m-logo-click-me {
+		color: white;
+		opacity: 0.75;
+		font-size: 0.75rem;
+		padding: var(--spacing-2);
+		text-transform: uppercase;
+		letter-spacing: 0.075rem;
+		cursor: pointer;
+		transition: 0.15s var(--ease-out);
+		transition-property: scale, opacity;
+		&:hover {
+			opacity: 0.85;
+			scale: 1.05;
 		}
-
-		.m-logo-section {
-			position: relative;
+		&:active {
+			opacity: 1;
+			scale: 0.95;
 		}
+	}
 
-		.my-name {
-			text-align: center;
-			letter-spacing: 0.03em;
-			margin-block: var(--spacing-8);
-		}
+	.sidebar-copy {
+		text-wrap: balance;
+	}
 
-		.m-logo-click-me {
-			color: white;
-			opacity: 0.75;
-			font-size: 0.75rem;
-			padding: var(--spacing-2);
-			text-transform: uppercase;
-			letter-spacing: 0.075rem;
-			cursor: pointer;
-			transition: 0.15s var(--ease-out);
-			transition-property: scale, opacity;
-			&:hover {
-				opacity: 0.85;
-				scale: 1.05;
-			}
-			&:active {
-				opacity: 1;
-				scale: 0.95;
-			}
-		}
-		.gif-hover {
-			cursor: pointer;
-			position: relative;
-			white-space: nowrap;
-			font-weight: 500;
+	.gif-hover {
+		cursor: pointer;
+		position: relative;
+		white-space: nowrap;
+		font-weight: 500;
 
-			.gif-video-wrap {
-				position: absolute;
+		.gif-video-wrap {
+			position: absolute;
+			display: block;
+			opacity: 0;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%) scale(1, 0);
+			border-radius: 20px;
+			overflow: hidden;
+			transition: all 0.35s var(--ease-out-back);
+			z-index: -2;
+			pointer-events: none;
+
+			video {
 				display: block;
-				opacity: 0;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%) scale(1, 0);
-				border-radius: 20px;
-				overflow: hidden;
-				transition: all 0.35s var(--ease-out-back);
-				z-index: -2;
-				pointer-events: none;
+			}
 
-				video {
-					display: block;
-				}
+			&:before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				box-shadow: inset 0 0 50px 30px var(--bg-color);
+				z-index: 1;
+			}
+		}
 
-				&:before {
-					content: '';
-					position: absolute;
-					inset: 0;
-					width: 100%;
-					height: 100%;
-					box-shadow: inset 0 0 50px 30px var(--bg-color);
-					z-index: 1;
-				}
+		&:after {
+			content: '';
+			background-color: rgb(from var(--primary-blue) r g b / 0.6);
+			position: absolute;
+			z-index: -1;
+			bottom: 0.15em;
+			left: 0;
+			right: 0;
+			height: 0.25em;
+			transition: all 0.15s ease-out;
+		}
+
+		&:hover {
+			.gif-video-wrap {
+				opacity: 1;
+				transform: translate(-50%, -50%) scale(1, 1);
+				transition-duration: 0.2s;
 			}
 
 			&:after {
-				content: '';
-				background-color: rgb(from var(--primary-blue) r g b / 0.6);
-				position: absolute;
-				z-index: -1;
-				bottom: 0.15em;
-				left: 0;
-				right: 0;
-				height: 0.25em;
-				transition: all 0.15s ease-out;
-			}
-
-			&:hover {
-				.gif-video-wrap {
-					opacity: 1;
-					transform: translate(-50%, -50%) scale(1, 1);
-					transition-duration: 0.2s;
-				}
-
-				&:after {
-					height: 1em;
-				}
+				height: 1em;
 			}
 		}
+	}
 
-		.home-section {
-			width: var(--page-content-width);
-			max-width: 100%;
-			margin: 0 auto;
-			margin-bottom: 10vh;
-			padding: var(--page-gutter);
+	.home-section {
+		width: var(--page-content-width);
+		max-width: 100%;
+		margin: 0 auto;
+		margin-bottom: 10vh;
+		padding: var(--page-gutter);
+	}
+
+	.home-section-title {
+		opacity: 0.6;
+		font-size: 2.5rem;
+		font-weight: 400;
+		margin-bottom: var(--spacing-12);
+
+		@media (width < $breakpoint-sm) {
+			font-size: 2rem;
+			margin-bottom: var(--spacing-8);
 		}
-
-		.home-section-title {
-			opacity: 0.6;
-			font-size: 2.5rem;
-			font-weight: 400;
-			margin-bottom: var(--spacing-12);
-
-			@media (width < $breakpoint-sm) {
-				font-size: 2rem;
-				margin-bottom: var(--spacing-8);
-			}
-		}
-
-		.beliefs-list-wrap {
-			margin: 0 auto;
-			display: flex;
-			flex-wrap: wrap;
-			gap: var(--spacing-12);
-
-			@media (width < $breakpoint-md) {
-				flex-wrap: nowrap;
-				overflow-x: scroll;
-				gap: var(--spacing-10);
-				padding: var(--page-gutter);
-				padding-top: 0;
-				margin: 0 calc(var(--page-gutter) * -1);
-			}
-		}
-
-		.belief-item {
-			width: 280px;
-			flex-grow: 1;
-
-			@media (width < $breakpoint-md) {
-				min-width: max(15rem, 50vw);
-			}
-		}
-
-		.belief-item-title {
-			font-size: 1.25rem;
-			margin-bottom: var(--spacing-6);
-		}
-
-		.belief-item-copy {
-			font-size: 1rem;
-			margin: 0;
-			opacity: 0.85;
-			text-wrap: balance;
-		}
-	</style>
-</HomeLayout>
+	}
+</style>

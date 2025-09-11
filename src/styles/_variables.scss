@@ -2,10 +2,22 @@
 
 :root {
 	/* Colors */
+	--gray-0: #090514;
+	--gray-1: #120f1b;
+	--gray-2: #211e2c;
+	--gray-3: #322e41;
+	--gray-4: #48445a;
+	--gray-5: #605c72;
+	--gray-6: #7e7a8f;
+	--gray-7: #9b96ac;
+	--gray-8: #b8b4c8;
+	--gray-9: #d6d2e5;
+	--gray-10: #f2efff;
+
 	--primary-blue: rgb(0, 180, 204);
 	--primary-red: rgb(237, 35, 50);
-	--bg-color: rgb(34, 45, 56);
-	--bg-dark: rgb(23, 31, 38);
+	--bg-color: var(--gray-1);
+	--bg-dark: var(--gray-0);
 
 	/* Spacings */
 	--spacing-1: 0.125rem;
