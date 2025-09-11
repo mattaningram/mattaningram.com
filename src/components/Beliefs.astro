@@ -1,82 +1,149 @@
-<div class="beliefs-section">
-	<h2 class="home-section-title">Beliefs</h2>
-	<div class="beliefs-list-wrap">
-		<div class="belief-item">
-			<h3 class="belief-item-title">Join Forces</h3>
-			<p class="belief-item-copy">
-				Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
-				Breaking down silos breeds unicorns.
-			</p>
-		</div>
-		<div class="belief-item">
-			<h3 class="belief-item-title">Read the Manual</h3>
-			<p class="belief-item-copy">
-				Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
-				know the basics first. It will save time in the end.
-			</p>
-		</div>
-		<div class="belief-item">
-			<h3 class="belief-item-title">Best Practices</h3>
-			<p class="belief-item-copy">
-				Just about everything has been tried on the web. It's worth the time to look up how other people have done
-				something and learn from their successes and mistakes.
-			</p>
-		</div>
-		<div class="belief-item">
-			<h3 class="belief-item-title">Be the User</h3>
-			<p class="belief-item-copy">
-				Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to test
-				a feature but to let my experience drive me as well.
-			</p>
-		</div>
-		<div class="belief-item">
-			<h3 class="belief-item-title">Why not Both?</h3>
-			<p class="belief-item-copy">
-				Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the features
-				save them enough time to enjoy it.
-			</p>
-		</div>
-		<div class="belief-item">
-			<h3 class="belief-item-title">Explain Why</h3>
-			<p class="belief-item-copy">
-				When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
-				always improves how things play out.
-			</p>
-		</div>
+<div class="beliefs-wrap">
+	<h2 class="beliefs-title">Beliefs</h2>
+	<div class="beliefs-accordion" role="list">
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Join Forces</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					Design and development don't need to be awkward partners. Let designers learn CSS and devs learn typography.
+					Breaking down silos breeds unicorns.
+				</p>
+			</div>
+		</details>
+
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Read the Manual</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					Documentation, ReadMe, StackOverflow, Google. Trial by fire is great, but when doing something new I want to
+					know the basics first. It will save time in the end.
+				</p>
+			</div>
+		</details>
+
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Best Practices</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					Just about everything has been tried on the web. It's worth the time to look up how other people have done
+					something and learn from their successes and mistakes.
+				</p>
+			</div>
+		</details>
+
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Be the User</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					Empathy alone is not enough to improve user experience. I want to use the product I'm building, not just to
+					test a feature but to let my experience drive me as well.
+				</p>
+			</div>
+		</details>
+
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Why not Both?</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the
+					features save them enough time to enjoy it.
+				</p>
+			</div>
+		</details>
+
+		<details class="belief" role="listitem">
+			<summary class="belief-summary">
+				<h3 class="belief-item-title">Explain Why</h3>
+			</summary>
+			<div class="belief-content">
+				<p class="belief-item-copy">
+					When communicating something, be it a team meeting or introducing a new feature, explaining the why and how
+					always improves how things play out.
+				</p>
+			</div>
+		</details>
 	</div>
 </div>
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;
 
-	.beliefs-list-wrap {
-		margin: 0 auto;
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-12);
+	.beliefs-title {
+		font-size: 1.25rem;
+		font-weight: 500;
+		margin-bottom: var(--spacing-4);
+	}
 
-		@media (width < $breakpoint-md) {
-			flex-wrap: nowrap;
-			overflow-x: scroll;
-			gap: var(--spacing-10);
-			padding: var(--page-gutter);
-			padding-top: 0;
-			margin: 0 calc(var(--page-gutter) * -1);
+	.beliefs-accordion {
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+		border: 1px solid var(--gray-3);
+	}
+
+	.belief {
+		&:not(:nth-child(-n + 2)) {
+			border-top: 1px solid var(--gray-3);
+		}
+
+		&:nth-child(odd) {
+			border-right: 1px solid var(--gray-3);
 		}
 	}
 
-	.belief-item {
-		width: 280px;
-		flex-grow: 1;
+	/* Remove default marker so we can style our own */
+	.belief-summary::-webkit-details-marker {
+		display: none;
+	}
+	.belief-summary::marker {
+		content: '';
+	}
 
-		@media (width < $breakpoint-md) {
-			min-width: max(15rem, 50vw);
-		}
+	.belief-summary {
+		list-style: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--spacing-6);
+		padding: var(--spacing-6);
+		outline: none;
+	}
+
+	/* Disclosure caret */
+	.belief-summary::after {
+		content: '';
+		inline-size: 0.5rem;
+		block-size: 0.5rem;
+		border-inline-end: 2px solid var(--gray-8);
+		border-block-end: 2px solid var(--gray-8);
+		transform: rotate(-45deg);
+		transition: transform 0.2s var(--ease-out-quad);
+	}
+
+	.belief[open] .belief-summary::after {
+		transform: rotate(45deg);
 	}
 
 	.belief-item-title {
 		font-size: 1.25rem;
-		margin-bottom: var(--spacing-6);
+		margin: 0;
+	}
+
+	.belief-content {
+		padding: 0 var(--spacing-6) var(--spacing-6);
+		color: var(--gray-10);
 	}
 
 	.belief-item-copy {

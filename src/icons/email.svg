@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<style>
+		.icon-stroke {
+			stroke: var(--icon__color, currentColor);
+			stroke-width: var(--icon__stroke-width, 1.5);
+		}
+
+		.icon-fill {
+			fill: var(--icon__color, currentColor);
+			opacity: var(--icon__opacity, 0.4);
+		}
+	</style>
+	<path d="M3 6L12 14L21 6V18H3V6Z" class="icon-fill" />
+	<rect x="3" y="6" width="18" height="12" rx="1" class="icon-stroke" />
+	<path d="M3.5 6.5L11.3384 13.4162C11.7164 13.7498 12.2836 13.7498 12.6616 13.4162L20.5 6.5" class="icon-stroke" />
+</svg>

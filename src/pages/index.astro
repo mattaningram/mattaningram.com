@@ -11,13 +11,17 @@ import Footer from '../components/Footer.astro'
 		<div class="sidebar">
 			<section class="m-center-wrap">
 				<div class="m-logo-section">
-					<Logo size="10rem" />
+					<Logo size="12rem" />
 				</div>
 				<h1 class="my-name xyz-in" xyz="fade small-2 duration-5 delay-7">Mattan Ingram</h1>
 				<button class="m-logo-click-me xyz-in" xyz="fade small-2 duration-5 delay-8">Click me</button>
 			</section>
 
-			<p class="sidebar-copy">
+			<Footer />
+		</div>
+
+		<div class="main-content">
+			<p class="main-copy home-section">
 				Design engineer and CSS nerd raised on the
 				<span class="gif-hover"
 					>1984 Mac<span class="gif-video-wrap">
@@ -42,12 +46,6 @@ import Footer from '../components/Footer.astro'
 				>. I help teams build better products through, development, research, and data.
 			</p>
 
-			<Beliefs />
-
-			<Footer />
-		</div>
-
-		<div class="main-content">
 			<section class="work-section home-section">
 				<div class="work-stack">
 					<h2 class="home-section-title">Work</h2>
@@ -58,6 +56,10 @@ import Footer from '../components/Footer.astro'
 					<WorkList folder="projects" />
 				</div>
 			</section>
+
+			<div class="beliefs-section home-section">
+				<Beliefs />
+			</div>
 		</div>
 	</div>
 </HomeLayout>
@@ -76,17 +78,26 @@ import Footer from '../components/Footer.astro'
 	.container {
 		display: grid;
 		height: 100vh;
-		grid-template-columns: 24rem 1fr;
+		grid-template-columns: minmax(24rem, 1fr) 3fr;
 	}
 
 	.sidebar {
 		position: sticky;
 		top: 0;
-		min-height: 100vh;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: var(--page-gutter);
 		padding: var(--page-gutter);
 		background: var(--bg-color);
 		overflow-x: hidden;
 		overflow-y: auto;
+	}
+
+	.main-content {
+		overflow-x: hidden;
+		overflow-y: auto;
+		padding-top: 10vh;
 	}
 
 	.m-center-wrap {
@@ -94,7 +105,7 @@ import Footer from '../components/Footer.astro'
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: 30rem;
+		flex-grow: 1;
 	}
 
 	.m-logo-section {
@@ -127,7 +138,8 @@ import Footer from '../components/Footer.astro'
 		}
 	}
 
-	.sidebar-copy {
+	.main-copy {
+		font-size: 1.75rem;
 		text-wrap: balance;
 	}
 
@@ -190,6 +202,9 @@ import Footer from '../components/Footer.astro'
 		}
 	}
 
+	.beliefs-section {
+		margin-top: auto;
+	}
 	.home-section {
 		width: var(--page-content-width);
 		max-width: 100%;

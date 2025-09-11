@@ -3,11 +3,6 @@ import { Icon } from 'astro-icon/components'
 ---
 
 <footer class="main-footer">
-	<div class="footer-text">I made this.</div>
-	<a href="mailto:mattaningram@gmail.com" class="button--themed email-me" target="_blank">
-		<span class="button__text">Say Hi</span>
-	</a>
-
 	<div class="link-icon-wrap">
 		<a class="link-icon" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
 			<Icon name="github-solid" />
@@ -29,15 +24,17 @@ import { Icon } from 'astro-icon/components'
 			<Icon name="spotify-solid" />
 		</a>
 	</div>
+
+	<a href="mailto:mattaningram@gmail.com" class="email-link" target="_blank"><Icon name="email" size={24} /> Say Hi </a>
 </footer>
 
 <style lang="scss">
 	.main-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		text-align: center;
 		position: relative;
-		margin: 0 auto;
-		margin-top: 30px;
-		padding-bottom: 10px;
 	}
 
 	.social-links-wrap {
@@ -45,16 +42,30 @@ import { Icon } from 'astro-icon/components'
 		animation: fadeIn 0.75s var(--ease-in-quad) 0.9s forwards;
 	}
 
-	.email-me {
-		margin: 1.25rem auto;
-		margin-top: 1rem;
-	}
-
-	.footer-text {
-		font-size: 0.875rem;
+	.email-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-4);
 		color: var(--page-color);
-	}
+		text-decoration: none;
+		padding: var(--spacing-2);
+		padding-right: var(--spacing-4);
+		text-wrap: nowrap;
+		flex-wrap: nowrap;
 
+		&:hover {
+			background: var(--page-color);
+			color: var(--bg-color);
+			transform: scale(1.05);
+		}
+
+		&:focus-visible {
+			outline: 1px solid var(--page-color);
+			outline-offset: 2px;
+			transform: scale(1.05);
+		}
+	}
 	.link-icon-wrap {
 		display: flex;
 		align-items: center;
