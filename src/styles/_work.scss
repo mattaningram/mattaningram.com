@@ -131,7 +131,8 @@
 
 .gallery-item {
 	box-shadow: var(--shadow-md);
-	transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+	transition: 0.2s var(--ease-out-quad);
+	transition-property: transform, box-shadow;
 
 	&:hover,
 	&:focus-within {
