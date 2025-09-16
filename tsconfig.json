@@ -5,7 +5,8 @@
 			"@layouts/*": ["src/layouts/*"],
 			"@components/*": ["src/components/*"],
 			"@styles/*": ["src/styles/*"],
-			"@images/*": ["src/images/*"]
+			"@images/*": ["src/images/*"],
+			"@utils/*": ["src/utils/*"]
 		}
 	},
 	"exclude": ["node_modules", "dist", "public"]

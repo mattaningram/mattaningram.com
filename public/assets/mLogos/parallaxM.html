@@ -1,11 +1,11 @@
-<svg class="m-logo m-logo-parallax" x="0px" y="0px" viewBox="0 0 300 300">
+<svg class="m-logo m-logo-parallax xyz-in" x="0px" y="0px" viewBox="0 0 300 300">
 	<linearGradient id="MGradient" gradientUnits="userSpaceOnUse" x1="150" y1="20" x2="150" y2="280">
 		<stop offset="0" style="stop-color: #17ffb1" />
 		<stop offset="1" style="stop-color: #17ffb1" stop-opacity="0" />
 	</linearGradient>
-	<polygon class="parallax-item parallax__M xyz-in" xyz="fade" points="20,280 20,20 150,133.8 280,20 280,280 	" />
-	<rect class="parallax-item parallax__rectangle xyz-in" xyz="fade" x="220" width="80" height="300" />
-	<circle class="parallax-item parallax__dot xyz-in" xyz="fade small-100%" cx="260" cy="40" r="30" />
+	<polygon class="parallax-item parallax__M xyz-nested" xyz="fade" points="20,280 20,20 150,133.8 280,20 280,280 	" />
+	<rect class="parallax-item parallax__rectangle xyz-nested" xyz="fade" x="220" width="80" height="300" />
+	<circle class="parallax-item parallax__dot xyz-nested" xyz="fade small-100%" cx="260" cy="40" r="30" />
 </svg>
 
 <style>
@@ -15,11 +15,9 @@
 	}
 
 	/* Shared layer behavior */
-	.m-logo-parallax .parallax-item:not(.xyz-in) {
-		transform: translate(
-			calc(var(--mouse-x) * var(--parallax-strength) * var(--depth, 0)),
-			calc(var(--mouse-y) * var(--parallax-strength) * var(--depth, 0))
-		);
+	.m-logo-parallax:not(.xyz-in) .parallax-item {
+		translate: calc(var(--mouse-x) * var(--parallax-strength) * var(--depth, 0))
+			calc(var(--mouse-y) * var(--parallax-strength) * var(--depth, 0));
 		will-change: transform;
 	}
 
@@ -27,7 +25,7 @@
 		--xyz-duration: 0.3s;
 		--xyz-ease: var(--ease-out-back);
 		transform-origin: 50% 50%;
-		transition: transform 0.15s linear;
+		transition: translate 0.3s var(--ease-out-back);
 	}
 
 	.parallax__M {
@@ -42,7 +40,7 @@
 	.parallax__rectangle {
 		--depth: 0.6;
 		--xyz-translate-y: -100%;
-		--xyz-delay: 0.25s;
+		--xyz-delay: 0.2s;
 		position: relative;
 		opacity: 0.65;
 		fill: #7700ff;
@@ -50,7 +48,7 @@
 
 	.parallax__dot {
 		--depth: 0.9;
-		--xyz-delay: 0.5s;
+		--xyz-delay: 0.4s;
 		position: relative;
 		opacity: 0.9;
 		fill: #ffffff;

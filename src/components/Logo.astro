@@ -89,30 +89,8 @@ const { size } = Astro.props
 
 		if (url.includes('parallaxM')) {
 			// After injecting the logo HTML, remove `xyz-in` once its intro animation finishes
-			xyzCleanup(logoWrap)
+			window?.MI?.xyzCleanup?.(logoWrap)
 		}
-	}
-
-	function xyzCleanup(root) {
-		if (!(root instanceof HTMLElement)) return
-		const elements = root.querySelectorAll('.xyz-in')
-		elements.forEach((el) => {
-			const removeClass = () => el.classList.remove('xyz-in')
-			el.addEventListener('animationend', removeClass, { once: true })
-			// Fallback timer using computed animation duration + delay
-			const cs = getComputedStyle(el)
-			const toMs = (v) => {
-				const s = String(v).trim()
-				if (s.endsWith('ms')) return parseFloat(s) || 0
-				return (parseFloat(s) || 0) * 1000
-			}
-			const durations = cs.animationDuration.split(',').map(toMs)
-			const delays = cs.animationDelay.split(',').map(toMs)
-			const maxMs = durations.reduce((acc, d, i) => Math.max(acc, d + (delays[i] || 0)), 0)
-			if (maxMs > 0) {
-				setTimeout(removeClass, maxMs + 50)
-			}
-		})
 	}
 
 	logoWrap.addEventListener('click', () => {

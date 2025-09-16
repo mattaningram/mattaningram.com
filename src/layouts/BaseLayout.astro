@@ -15,7 +15,7 @@ const {
 
 import 'ress/dist/ress.min.css'
 import '@animxyz/core/dist/animxyz.min.css'
-import '../styles/main.scss'
+import '@styles/main.scss'
 ---
 
 <!doctype html>
@@ -48,6 +48,8 @@ import '../styles/main.scss'
 
 	<body class:list={className} style={`--page-color: ${pageColor}`}>
 		<slot />
+
+		<script src="@utils/xyzCleanup.js"></script>
 
 		<script is:inline>
 			;(() => {
