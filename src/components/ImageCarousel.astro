@@ -3,19 +3,31 @@ import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
 
 interface Props {
-	imagePath?: string
+	folder?: string
 	altText?: string
 	width?: number
 }
 
 const images = import.meta.glob<{ default: ImageMetadata }>('@images/**/*.{jpg,jpeg,png,webp,gif}')
 
-const { imagePath, altText, width = 300 } = Astro.props
+const { folder: folderProp, altText, width = 300 } = Astro.props as Props
+
+// Normalize provided folder path (strip leading/trailing slashes)
+const folder = folderProp?.replace(/^\/+|\/+$/g, '')
+
+// Build a filtered, stably-ordered list of image loaders
+let entries = Object.entries(images)
+if (folder) {
+	// Match only images inside the specified subfolder of src/images
+	const segment = `/images/${folder}/`
+	entries = entries.filter(([p]) => p.includes(segment))
+}
+entries.sort(([a], [b]) => a.localeCompare(b))
 ---
 
 <ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
 	{
-		Object.entries(images).map(async ([_path, image], index) => {
+		entries.map(async ([_path, image], index) => {
 			const { default: imageData } = await image()
 			return (
 				<li class="carousel-item gallery-item xyz-nested">
