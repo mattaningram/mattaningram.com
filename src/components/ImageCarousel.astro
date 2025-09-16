@@ -1,0 +1,57 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface Props {
+	imagePath?: string
+	altText?: string
+	width?: number
+}
+
+const images = import.meta.glob<{ default: ImageMetadata }>('@images/**/*.{jpg,jpeg,png,webp,gif}')
+
+const { imagePath, altText, width = 300 } = Astro.props
+---
+
+<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
+	{
+		Object.entries(images).map(async ([_path, image], index) => {
+			const { default: imageData } = await image()
+			return (
+				<li class="carousel-item gallery-item xyz-nested">
+					<a
+						class="no-outline"
+						href={imageData.src}
+						data-pswp-width={imageData.width}
+						data-pswp-height={imageData.height}
+						target="_blank"
+					>
+						<Image
+							class="carousel-image"
+							layout="fixed"
+							src={imageData}
+							alt=""
+							width={width}
+							fit="scale-down"
+							loading={index < 20 ? 'eager' : 'lazy'}
+						/>
+					</a>
+				</li>
+			)
+		})
+	}
+</ul>
+
+<style lang="scss">
+	.gallery-item {
+		box-shadow: var(--shadow-md);
+		transition: 0.2s var(--ease-out-quad);
+		transition-property: transform, box-shadow;
+
+		&:hover,
+		&:focus-within {
+			transform: translate3d(0, -16px, 0);
+			box-shadow: 0 0 0 4px var(--page-color);
+		}
+	}
+</style>

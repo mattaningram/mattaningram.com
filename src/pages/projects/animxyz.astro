@@ -1,5 +1,6 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
+import ImageCarousel from '@components/ImageCarousel.astro'
 
 export const frontmatter = {
 	order: 3,
@@ -15,7 +16,8 @@ export const frontmatter = {
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="image-carousel-wrap">
+	<ImageCarousel />
+	<!-- <div class="image-carousel-wrap">
 		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
 			<li class="carousel-item gallery-item xyz-nested">
 				<a
@@ -89,5 +91,5 @@ export const frontmatter = {
 				</a>
 			</li>
 		</ul>
-	</div>
+	</div> -->
 </WorkLayout>
