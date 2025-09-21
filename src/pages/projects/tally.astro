@@ -1,5 +1,6 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
+import ImageCarousel from '@components/ImageCarousel.astro'
 
 export const frontmatter = {
 	order: 1,
@@ -14,85 +15,7 @@ export const frontmatter = {
 
 <WorkLayout {...frontmatter}>
 	<div id="tally-slides" class="image-carousel-wrap">
-		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-reps.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-reps.jpg" alt="Tally Representatives" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-rank.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rank.jpg" alt="Tally Rank" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-search.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-search.jpg" alt="Tally Search" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-rep-stats.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-stats.jpg" alt="Tally Rep Stats" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-rep-beliefs.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-beliefs.jpg" alt="Tally Rep Beliefs" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-rep-money.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-money.jpg" alt="Tally Rep Money" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/tally/tally-rep-contact.jpg"
-					data-pswp-width="750"
-					data-pswp-height="1334"
-				>
-					<img class="carousel-image" src="/assets/images/tally/tally-rep-contact.jpg" alt="Tally Rep Contact" />
-				</a>
-			</li>
-		</ul>
+		<ImageCarousel folder="tally" />
 	</div>
 
 	<div class="page-section skill-section">

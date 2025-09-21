@@ -1,5 +1,10 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
+import { Image } from 'astro:assets'
+import visibleLanding from '@images/visible/features/visible-landing.jpg'
+import favoritePlacesMap from '@images/visible/features/favorite-places-map.jpg'
+import italyTripCalendar from '@images/visible/features/italy-trip-calendar.jpg'
+import apartmentHuntGallery from '@images/visible/features/apartment-hunt-gallery.jpg'
 
 export const frontmatter = {
 	order: 4,
@@ -167,49 +172,47 @@ const visibleThemeColors = {
 			</div>
 		</div>
 		<div class="section-content-block section-gallery-wrap">
-			<div class="section-gallery" id="photoswipe-gallery">
+			<div class="photoswipe-gallery section-gallery">
 				<div class="gallery-item">
 					<a
 						class="gallery-item-link"
-						target="_blank"
-						href="/assets/images/visible/visible-landing.jpg"
-						data-pswp-width="1440"
-						data-pswp-height="3873"
+						href={visibleLanding.src}
+						data-pswp-width={visibleLanding.width}
+						data-pswp-height={visibleLanding.height}
 					>
-						<img src="/assets/images/visible/visible-landing-thumb.jpg" />
+						<Image src={visibleLanding} width="256" layout="constrained" alt="Visible landing page" />
 					</a>
 				</div>
 				<div class="gallery-item">
 					<a
 						class="gallery-item-link"
-						target="_blank"
-						href="/assets/images/visible/favorite-places-map.jpg"
-						data-pswp-width="2160"
-						data-pswp-height="1350"
+						href={favoritePlacesMap.src}
+						data-pswp-width={favoritePlacesMap.width}
+						data-pswp-height={favoritePlacesMap.height}
 					>
-						<img src="/assets/images/visible/favorite-places-map-thumb.jpg" />
+						<Image src={favoritePlacesMap} width="536" layout="constrained" alt="Favorite places map" />
 					</a>
 				</div>
 				<div class="gallery-item">
 					<a
 						class="gallery-item-link"
-						target="_blank"
-						href="/assets/images/visible/italy-trip-calendar.jpg"
-						data-pswp-width="2880"
-						data-pswp-height="1800"
+						href={italyTripCalendar.src}
+						data-pswp-width={italyTripCalendar.width}
+						data-pswp-height={italyTripCalendar.height}
+						data-cropped
 					>
-						<img src="/assets/images/visible/italy-trip-calendar-crop.jpg" />
+						<Image src={italyTripCalendar} width="536" layout="constrained" alt="Italy trip calendar" />
 					</a>
 				</div>
 				<div class="gallery-item">
 					<a
 						class="gallery-item-link"
-						target="_blank"
-						href="/assets/images/visible/apartment-hunt-gallery.jpg"
-						data-pswp-width="2880"
-						data-pswp-height="1800"
+						href={apartmentHuntGallery.src}
+						data-pswp-width={apartmentHuntGallery.width}
+						data-pswp-height={apartmentHuntGallery.height}
+						data-cropped
 					>
-						<img src="/assets/images/visible/apartment-hunt-gallery-crop.jpg" />
+						<Image src={apartmentHuntGallery} width="536" layout="constrained" alt="Apartment hunt gallery" />
 					</a>
 				</div>
 			</div>
@@ -331,8 +334,8 @@ const visibleThemeColors = {
 		.section-gallery {
 			display: grid;
 			width: 100%;
-			grid-template-columns: 1fr 1fr 1fr;
-			grid-template-rows: 1fr auto;
+			grid-template-columns: auto 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
 			gap: var(--spacing-8);
 		}
 
@@ -348,15 +351,6 @@ const visibleThemeColors = {
 			&:nth-child(1) {
 				grid-column: 1 / 2;
 				grid-row: 1 / 3;
-
-				a {
-					height: 100%;
-				}
-
-				img {
-					height: 100%;
-					object-fit: cover;
-				}
 			}
 
 			&:nth-child(2) {
@@ -368,6 +362,17 @@ const visibleThemeColors = {
 		.gallery-item-link {
 			display: block;
 			position: relative;
+
+			&[data-cropped] {
+				height: 100%;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: right;
+				}
+			}
 		}
 	}
 

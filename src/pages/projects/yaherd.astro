@@ -1,5 +1,6 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
+import ImageCarousel from '@components/ImageCarousel.astro'
 
 export const frontmatter = {
 	order: 2,
@@ -16,93 +17,7 @@ export const frontmatter = {
 
 <WorkLayout {...frontmatter}>
 	<div class="image-carousel-wrap">
-		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-homepage.png"
-					data-pswp-width="1440"
-					data-pswp-height="1812"
-				>
-					<img class="carousel-image" src="/assets/images/yaherd/yaherd-homepage-thumb.jpg" alt="YaHerd Homepage" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-demo-gif.gif"
-					data-pswp-width="375"
-					data-pswp-height="667"
-				>
-					<img class="carousel-image" src="/assets/images/yaherd/yaherd-demo-gif.gif" alt="YaHerd Demo" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-event-details.png"
-					data-pswp-width="750"
-					data-pswp-height="1624"
-				>
-					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-details.png" alt="YaHerd Event Details" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-event-chat.png"
-					data-pswp-width="750"
-					data-pswp-height="1624"
-				>
-					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-chat.png" alt="YaHerd Event Chat" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-event-people.png"
-					data-pswp-width="750"
-					data-pswp-height="1624"
-				>
-					<img class="carousel-image" src="/assets/images/yaherd/yaherd-event-people.png" alt="YaHerd Event People" />
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-event-desktop.png"
-					data-pswp-width="2880"
-					data-pswp-height="1800"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/yaherd/yaherd-event-desktop-thumb.jpg"
-						alt="YaHerd Event Desktop"
-					/>
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/yaherd/yaherd-events-desktop.png"
-					data-pswp-width="2880"
-					data-pswp-height="1800"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/yaherd/yaherd-events-desktop-thumb.jpg"
-						alt="YaHerd Events Desktop"
-					/>
-				</a>
-			</li>
-		</ul>
+		<ImageCarousel folder="yaherd" width={300} />
 	</div>
 
 	<div class="page-section skill-section">

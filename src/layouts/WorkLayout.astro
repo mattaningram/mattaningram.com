@@ -76,16 +76,19 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 <script>
 	import PhotoSwipeLightbox from 'photoswipe/lightbox'
+	// import ObjectPosition from '/Users/mattaningram/Code/mattaningram.com/node_modules/@vovayatsyuk/photoswipe-object-position/photoswipe-object-position.js'
 	import 'photoswipe/style.css'
 
 	const lightbox = new PhotoSwipeLightbox({
-		gallery: '#photoswipe-gallery',
+		gallery: '.photoswipe-gallery',
 		children: 'a',
 		pswpModule: () => import('photoswipe'),
 		zoom: false,
 		counter: false,
 		padding: { top: 24, bottom: 24, left: 24, right: 24 },
 	})
+
+	// new ObjectPosition(lightbox)
 
 	lightbox.init()
 </script>

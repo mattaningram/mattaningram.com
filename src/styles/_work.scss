@@ -117,16 +117,11 @@
 }
 
 .carousel-item {
-	width: 300px;
+	display: block;
 	flex-shrink: 0;
 	height: auto;
 	vertical-align: top;
-	line-height: 0;
 	position: relative;
-}
-
-.carousel-image {
-	width: 100%;
 }
 
 .gallery-item {

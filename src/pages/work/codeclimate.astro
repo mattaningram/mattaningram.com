@@ -1,5 +1,6 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
+import ImageCarousel from '@components/ImageCarousel.astro'
 
 export const frontmatter = {
 	order: 2,
@@ -15,83 +16,7 @@ export const frontmatter = {
 
 <WorkLayout {...frontmatter}>
 	<div class="image-carousel-wrap">
-		<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/codeclimate/cc-checkout-redesign.jpg"
-					data-pswp-width="1280"
-					data-pswp-height="1200"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/codeclimate/cc-checkout-redesign-thumb.jpg"
-						alt="Checkout Redesign"
-					/>
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/codeclimate/cc-issues-refinement.jpg"
-					data-pswp-width="1280"
-					data-pswp-height="1469"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/codeclimate/cc-issues-refinement-thumb.jpg"
-						alt="Issues Refinement"
-					/>
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/codeclimate/cc-repo-overview-redesign.jpg"
-					data-pswp-width="1280"
-					data-pswp-height="1400"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/codeclimate/cc-repo-overview-redesign-thumb.jpg"
-						alt="Repo Overview Redesign"
-					/>
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/codeclimate/velocity-info-page.jpg"
-					data-pswp-width="1280"
-					data-pswp-height="4075"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/codeclimate/velocity-info-page-thumb.jpg"
-						alt="Velocity Info Page"
-					/>
-				</a>
-			</li>
-			<li class="carousel-item gallery-item xyz-nested">
-				<a
-					class="no-outline"
-					target="_blank"
-					href="/assets/images/codeclimate/cc-repositories-redesign.jpg"
-					data-pswp-width="1440"
-					data-pswp-height="1050"
-				>
-					<img
-						class="carousel-image"
-						src="/assets/images/codeclimate/cc-repositories-redesign-thumb.jpg"
-						alt="Repositories Redesign"
-					/>
-				</a>
-			</li>
-		</ul>
+		<ImageCarousel folder="codeclimate" width={300} />
 	</div>
 
 	<div class="page-section skill-section">

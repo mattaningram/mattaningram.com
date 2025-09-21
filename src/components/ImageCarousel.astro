@@ -4,13 +4,12 @@ import { Image } from 'astro:assets'
 
 interface Props {
 	folder?: string
-	altText?: string
 	width?: number
 }
 
 const images = import.meta.glob<{ default: ImageMetadata }>('@images/**/*.{jpg,jpeg,png,webp,gif}')
 
-const { folder: folderProp, altText, width = 300 } = Astro.props as Props
+const { folder: folderProp, width = 300 } = Astro.props as Props
 
 // Normalize provided folder path (strip leading/trailing slashes)
 const folder = folderProp?.replace(/^\/+|\/+$/g, '')
@@ -25,24 +24,31 @@ if (folder) {
 entries.sort(([a], [b]) => a.localeCompare(b))
 ---
 
-<ul class="image-carousel xyz-in" xyz="fade down ease-out-back" id="photoswipe-gallery">
+<ul class="photoswipe-gallery image-carousel xyz-in" xyz="fade down ease-out-back">
 	{
 		entries.map(async ([_path, image], index) => {
 			const { default: imageData } = await image()
+			const altText =
+				_path
+					.split('/')
+					.pop()
+					?.replace(/\.[^.]+$/, '')
+					?.replace(/^\d+\./, '')
+					?.replace(/-/g, ' ')
+					?.trim() ?? ''
 			return (
 				<li class="carousel-item gallery-item xyz-nested">
 					<a
-						class="no-outline"
+						class="carousel-link no-outline"
 						href={imageData.src}
 						data-pswp-width={imageData.width}
 						data-pswp-height={imageData.height}
-						target="_blank"
 					>
 						<Image
 							class="carousel-image"
 							layout="fixed"
 							src={imageData}
-							alt=""
+							alt={altText}
 							width={width}
 							fit="scale-down"
 							loading={index < 20 ? 'eager' : 'lazy'}
@@ -65,5 +71,14 @@ entries.sort(([a], [b]) => a.localeCompare(b))
 			transform: translate3d(0, -16px, 0);
 			box-shadow: 0 0 0 4px var(--page-color);
 		}
+	}
+
+	.carousel-link {
+		display: block;
+	}
+
+	.carousel-image {
+		width: 100%;
+		display: block;
 	}
 </style>
