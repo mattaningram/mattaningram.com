@@ -5,7 +5,7 @@
 			"@layouts/*": ["src/layouts/*"],
 			"@components/*": ["src/components/*"],
 			"@styles/*": ["src/styles/*"],
-			"@images/*": ["src/images/*"],
+			"@media/*": ["src/media/*"],
 			"@utils/*": ["src/utils/*"]
 		}
 	},

@@ -13,6 +13,34 @@
 	}
 }
 
+.section-header {
+	font-size: 2rem;
+	color: var(--page-color);
+	margin-bottom: var(--spacing-8);
+	letter-spacing: 0.025em;
+	align-self: flex-start;
+
+	@media (width < $breakpoint-md) {
+		margin-bottom: var(--spacing-6);
+	}
+}
+
+.section-text-wrap {
+	display: flex;
+	flex-grow: 1;
+	background: var(--bg-dark);
+	padding: var(--spacing-11);
+	border: 1px solid var(--page-color);
+
+	@media (width < $breakpoint-lg) {
+		padding: var(--spacing-10);
+	}
+
+	@media (width < $breakpoint-md) {
+		padding: var(--spacing-8);
+	}
+}
+
 .page-section--row {
 	align-items: center;
 	justify-content: flex-start;
@@ -92,11 +120,7 @@
 	box-shadow: var(--shadow-md);
 }
 
-//Image Carousel
-
-@function carousel-center($items) {
-	@return ($items * 300 + 40 + (($items - 1) * 30));
-}
+//IMAGE CAROUSEL
 
 .image-carousel-wrap {
 	display: flex;
@@ -104,85 +128,7 @@
 	margin-bottom: var(--spacing-11);
 }
 
-.image-carousel {
-	--xyz-delay: 0.8s;
-	--xyz-stagger: 0.1s;
-	list-style: none;
-	overflow-x: scroll;
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	gap: var(--spacing-10);
-	padding: var(--spacing-10) var(--page-gutter);
-}
-
-.carousel-item {
-	display: block;
-	flex-shrink: 0;
-	height: auto;
-	vertical-align: top;
-	position: relative;
-}
-
-.gallery-item {
-	box-shadow: var(--shadow-md);
-	transition: 0.2s var(--ease-out-quad);
-	transition-property: transform, box-shadow;
-
-	&:hover,
-	&:focus-within {
-		transform: translate3d(0, -15px, 0);
-		box-shadow: 0 0 0 5px var(--page-color);
-	}
-}
-
-.section-header {
-	font-size: 2rem;
-	color: var(--page-color);
-	margin-bottom: var(--spacing-8);
-	letter-spacing: 0.025em;
-	align-self: flex-start;
-
-	@media (width < $breakpoint-md) {
-		margin-bottom: var(--spacing-6);
-	}
-}
-
-.section-text-wrap {
-	display: flex;
-	flex-grow: 1;
-	background: var(--bg-dark);
-	padding: var(--spacing-11);
-	border: 1px solid var(--page-color);
-
-	@media (width < $breakpoint-lg) {
-		padding: var(--spacing-10);
-	}
-
-	@media (width < $breakpoint-md) {
-		padding: var(--spacing-8);
-	}
-}
-
-.work-section {
-	display: flex;
-	justify-content: center;
-	gap: var(--spacing-12);
-
-	@media (width < $breakpoint-lg) {
-		gap: var(--spacing-10);
-	}
-
-	@media (width < $breakpoint-sm) {
-		gap: var(--spacing-8);
-	}
-}
-
-.work-stack {
-	flex-grow: 1;
-	flex-basis: 0;
-	max-width: 25rem;
-}
+//SKILL SECTION
 
 .skill-section {
 	align-items: stretch;

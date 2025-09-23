@@ -7,7 +7,7 @@ interface Props {
 	width?: number
 }
 
-const images = import.meta.glob<{ default: ImageMetadata }>('@images/**/*.{jpg,jpeg,png,webp,gif}')
+const images = import.meta.glob<{ default: ImageMetadata }>('@media/**/*.{jpg,jpeg,png,webp,gif}')
 
 const { folder: folderProp, width = 300 } = Astro.props as Props
 
@@ -17,8 +17,8 @@ const folder = folderProp?.replace(/^\/+|\/+$/g, '')
 // Build a filtered, stably-ordered list of image loaders
 let entries = Object.entries(images)
 if (folder) {
-	// Match only images inside the specified subfolder of src/images
-	const segment = `/images/${folder}/`
+	// Match only images inside the specified subfolder of src/media
+	const segment = `/${folder}/`
 	entries = entries.filter(([p]) => p.includes(segment))
 }
 entries.sort(([a], [b]) => a.localeCompare(b))
@@ -61,6 +61,18 @@ entries.sort(([a], [b]) => a.localeCompare(b))
 </ul>
 
 <style lang="scss">
+	.image-carousel {
+		--xyz-delay: 0.8s;
+		--xyz-stagger: 0.1s;
+		list-style: none;
+		overflow-x: scroll;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		gap: var(--spacing-10);
+		padding: var(--spacing-10) var(--page-gutter);
+	}
+
 	.gallery-item {
 		box-shadow: var(--shadow-md);
 		transition: 0.2s var(--ease-out-quad);
@@ -71,6 +83,14 @@ entries.sort(([a], [b]) => a.localeCompare(b))
 			transform: translate3d(0, -16px, 0);
 			box-shadow: 0 0 0 4px var(--page-color);
 		}
+	}
+
+	.carousel-item {
+		display: block;
+		flex-shrink: 0;
+		height: auto;
+		vertical-align: top;
+		position: relative;
 	}
 
 	.carousel-link {

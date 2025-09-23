@@ -1,6 +1,16 @@
 ---
+import { Image } from 'astro:assets'
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
+
+import canvsCodeSample from '@media/canvs/canvs-code-sample.jpg'
+import canvsSeriesPageBeta from '@media/canvs/canvs-series-page-beta.jpg'
+import canvsOldTimeline from '@media/canvs/canvs-old-timeline.jpg'
+
+import canvsSketch1 from '@media/canvs/canvs-sketches-1.jpg'
+import canvsSketch2 from '@media/canvs/canvs-sketches-2.jpg'
+import canvsSketch3 from '@media/canvs/canvs-sketches-3.jpg'
+import canvsSketch4 from '@media/canvs/canvs-sketches-4.jpg'
 
 export const frontmatter = {
 	order: 1,
@@ -60,9 +70,9 @@ export const frontmatter = {
 			</div>
 		</div>
 		<div class="section-image-wrap">
-			<img class="section-image" src="/assets/images/canvs/canvs-code-sample.jpg" />
-			<img class="section-image" src="/assets/images/canvs/canvs-series-page-beta.jpg" />
-			<img class="section-image" src="/assets/images/canvs/canvs-old-timeline.jpg" />
+			<Image class="section-image" src={canvsCodeSample} alt="Canvs Code Sample" layout="constrained" />
+			<Image class="section-image" src={canvsSeriesPageBeta} alt="Canvs Series Page" layout="constrained" />
+			<Image class="section-image" src={canvsOldTimeline} alt="Canvs Timeline" layout="constrained" />
 		</div>
 	</div>
 
@@ -80,10 +90,10 @@ export const frontmatter = {
 			</div>
 		</div>
 		<div class="section-image-wrap">
-			<img class="section-image" src="/assets/images/canvs/canvs-sketches-1-thumb.jpg" />
-			<img class="section-image" src="/assets/images/canvs/canvs-sketches-2-thumb.jpg" />
-			<img class="section-image" src="/assets/images/canvs/canvs-sketches-3-thumb.jpg" />
-			<img class="section-image" src="/assets/images/canvs/canvs-sketches-4-thumb.jpg" />
+			<Image class="section-image" src={canvsSketch1} alt="Canvs Sketch 1" layout="constrained" />
+			<Image class="section-image" src={canvsSketch2} alt="Canvs Sketch 2" layout="constrained" />
+			<Image class="section-image" src={canvsSketch3} alt="Canvs Sketch 3" layout="constrained" />
+			<Image class="section-image" src={canvsSketch4} alt="Canvs Sketch 4" layout="constrained" />
 		</div>
 	</div>
 
@@ -231,6 +241,8 @@ export const frontmatter = {
 
 	.canvs-responsibilities {
 		.section-image {
+			height: auto;
+
 			&:nth-child(1) {
 				top: 5%;
 				left: 50px;
@@ -240,25 +252,26 @@ export const frontmatter = {
 			&:nth-child(2) {
 				top: 10%;
 				left: 200px;
-				max-height: 80%;
-				max-width: 640px;
+				height: 80%;
+				width: auto;
 				z-index: 1;
 			}
 
 			&:nth-child(3) {
 				bottom: 5%;
 				left: 0;
-				max-height: 60%;
-				max-width: 640px;
+				height: 30%;
+				width: auto;
 			}
 		}
 
 		@media (width < $breakpoint-md) {
 			.section-image {
 				&:nth-child(1) {
-					top: 0;
-					left: -25%;
-					width: 300px;
+					top: 10px;
+					left: auto;
+					right: 50%;
+					width: 40%;
 				}
 
 				&:nth-child(2) {
@@ -266,15 +279,13 @@ export const frontmatter = {
 					transform: translateX(-50%);
 					top: 0;
 					height: 21rem;
-					width: auto;
-					max-height: initial;
 				}
 
 				&:nth-child(3) {
-					top: 0;
+					top: 10px;
 					bottom: auto;
-					left: auto;
-					right: -90px;
+					left: 50%;
+					height: 60%;
 				}
 			}
 		}
@@ -282,6 +293,8 @@ export const frontmatter = {
 
 	.canvs-process {
 		.section-image {
+			height: auto;
+
 			&:nth-child(1) {
 				top: 5%;
 				right: 0;

@@ -266,5 +266,25 @@ import WorkList from '@components/WorkList.astro'
 			opacity: 0.85;
 			text-wrap: balance;
 		}
+
+		.work-section {
+			display: flex;
+			justify-content: center;
+			gap: var(--spacing-12);
+
+			@media (width < $breakpoint-lg) {
+				gap: var(--spacing-10);
+			}
+
+			@media (width < $breakpoint-sm) {
+				gap: var(--spacing-6);
+			}
+		}
+
+		.work-stack {
+			flex-grow: 1;
+			flex-basis: 0;
+			max-width: 25rem;
+		}
 	</style>
 </HomeLayout>
