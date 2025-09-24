@@ -161,7 +161,7 @@ const visibleThemeColors = {
 		</div>
 	</div>
 
-	<div class="page-section page-section--top visible-features">
+	<div class="page-section page-section--top visible-features-section">
 		<div class="section-text-wrap">
 			<div class="section-text">
 				<h2 class="section-header">Feature Presentation</h2>
@@ -223,7 +223,7 @@ const visibleThemeColors = {
 		</div>
 	</div>
 
-	<div class="page-section page-section--row page-section--left">
+	<div class="page-section page-section--row page-section--left visible-icons-section">
 		<div class="section-text-wrap">
 			<div class="section-text">
 				<h2 class="section-header">Icons</h2>
@@ -235,11 +235,11 @@ const visibleThemeColors = {
 			</div>
 		</div>
 		<div class="section-image-wrap">
-			<div class="section-image visible-icons" style={`background-image: url(${visibleIcons.src});`}></div>
+			<div class="section-image visible-icons-scroller" style={`background-image: url(${visibleIcons.src});`}></div>
 		</div>
 	</div>
 
-	<div class="page-section page-section--row page-section--right">
+	<div class="page-section page-section--row page-section--right visible-colors-section">
 		<div class="section-text-wrap">
 			<div class="section-text">
 				<h2 class="section-header">Colors</h2>
@@ -249,13 +249,9 @@ const visibleThemeColors = {
 				</p>
 			</div>
 		</div>
-		<div class="section-image-wrap visible-colors">
-			<div class="section-image visible-color-circle-fill"></div>
-			<ul
-				class="section-image visible-color-circle"
-				id="visible-color-primary"
-				xyz="fade small-50% stagger-0.5 ease-out-back"
-			>
+		<div class="visible-colors-vis">
+			<div class="visible-color-circle-fill"></div>
+			<ul class="visible-color-circle" id="visible-color-primary" xyz="fade small-50% stagger-0.5 ease-out-back">
 				{
 					Object.entries(visibleThemeColors.blue).map(([key, value]) => (
 						<li class="color-block xyz-in" style={`background-color: ${value}; --visible-color-index: ${key}`}>
@@ -264,7 +260,7 @@ const visibleThemeColors = {
 					))
 				}
 			</ul>
-			<ul class="section-image visible-color-circle" id="visible-color-picker">
+			<ul class="visible-color-circle" id="visible-color-picker">
 				{
 					Object.keys(visibleThemeColors).map((colorName, i) => (
 						<button
@@ -341,7 +337,7 @@ const visibleThemeColors = {
 		}
 	}
 
-	.visible-features {
+	.visible-features-section {
 		.section-gallery {
 			display: grid;
 			width: 100%;
@@ -396,19 +392,18 @@ const visibleThemeColors = {
 		}
 	}
 
-	.visible-icons {
+	.visible-icons-scroller {
 		width: 30rem;
 		height: 24rem;
 		top: 50%;
 		transform: translateY(-50%);
 		background-color: white;
-		// background-image: url('/assets/images/visible/visible-icons.svg');
 		background-repeat: repeat;
 		animation: icon-scroll 24s infinite linear;
 
 		@media (width < $breakpoint-md) {
+			position: relative;
 			width: 100%;
-			height: 100%;
 			top: 0;
 			transform: initial;
 		}
@@ -420,27 +415,29 @@ const visibleThemeColors = {
 		}
 	}
 
-	.visible-colors {
+	.visible-colors-vis {
 		position: relative;
-		right: 0 !important;
-	}
-
-	.visible-color-circle-fill {
-		background-color: var(--bg-color);
-		border-radius: 50%;
-		width: 22rem;
-		height: 22rem;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		right: 0;
 
 		@media (width < $breakpoint-md) {
-			width: 16rem;
-			height: 16rem;
+			height: 22rem;
 		}
 	}
 
+	.visible-color-circle-fill {
+		position: absolute;
+		background-color: var(--bg-color);
+		border-radius: 50%;
+		width: 20rem;
+		height: 20rem;
+		aspect-ratio: 1 / 1;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
 	.visible-color-circle {
+		position: absolute;
 		list-style: none;
 		top: 50%;
 		left: 50%;
@@ -469,7 +466,7 @@ const visibleThemeColors = {
 			rotate(calc(-360deg / var(--color-block__number) * var(--visible-color-index)));
 
 		@media (width < $breakpoint-md) {
-			--color-block__offset: 8rem;
+			--color-block__offset: 9rem;
 		}
 	}
 
@@ -529,11 +526,11 @@ const visibleThemeColors = {
 			transform: translateY(-50%);
 
 			@media (width < $breakpoint-md) {
-				height: 21rem;
-				width: auto;
+				max-width: 100%;
+				position: initial;
 				top: initial;
-				left: 50%;
-				transform: translateX(-50%);
+				transform: initial;
+				margin: 0 auto;
 			}
 		}
 	}

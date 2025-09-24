@@ -12,6 +12,10 @@ import canvsSketch2 from '@media/canvs/canvs-sketches-2.jpg'
 import canvsSketch3 from '@media/canvs/canvs-sketches-3.jpg'
 import canvsSketch4 from '@media/canvs/canvs-sketches-4.jpg'
 
+import canvsNewClusters from '@media/canvs/canvs-new-clusters.gif'
+import canvsSearch from '@media/canvs/canvs-search.gif'
+import canvsDateSelector from '@media/canvs/canvs-date-selector.gif'
+
 export const frontmatter = {
 	order: 1,
 	title: 'Canvs',
@@ -26,7 +30,7 @@ export const frontmatter = {
 
 <WorkLayout {...frontmatter}>
 	<div class="image-carousel-wrap">
-		<ImageCarousel folder="canvs" />
+		<ImageCarousel folder="canvs/gallery" />
 	</div>
 
 	<div class="page-section page-section--top canvs-building">
@@ -110,19 +114,12 @@ export const frontmatter = {
 				</p>
 			</div>
 		</div>
-		<div class="image-grid">
-			<div class="image-grid-item">
-				<img class="grid-image" src="/assets/images/canvs/canvs-new-clusters.gif" />
-			</div>
-			<div class="image-grid-item">
-				<img class="grid-image" src="/assets/images/canvs/canvs-search.gif" />
-			</div>
-			<div class="image-grid-item">
-				<img class="grid-image" src="/assets/images/canvs/canvs-settings-toggle.gif" />
-			</div>
-			<div class="image-grid-item">
-				<img class="grid-image" src="/assets/images/canvs/canvs-date-selector.gif" />
-			</div>
+		<div class="image-grid section-content-block">
+			<Image class="image-grid-item" src={canvsDateSelector} alt="Canvs date selector design iterations" />
+
+			<Image class="image-grid-item" src={canvsSearch} alt="Canvs search interaction" />
+
+			<Image class="image-grid-item" src={canvsNewClusters} alt="Canvs emotion cluster visualization" />
 		</div>
 	</div>
 
@@ -251,7 +248,7 @@ export const frontmatter = {
 
 			&:nth-child(2) {
 				top: 10%;
-				left: 200px;
+				left: min(12vw, 200px);
 				height: 80%;
 				width: auto;
 				z-index: 1;
@@ -259,7 +256,7 @@ export const frontmatter = {
 
 			&:nth-child(3) {
 				bottom: 5%;
-				left: 0;
+				left: 20px;
 				height: 30%;
 				width: auto;
 			}
@@ -271,21 +268,24 @@ export const frontmatter = {
 					top: 10px;
 					left: auto;
 					right: 50%;
-					width: 40%;
+					width: 50%;
 				}
 
 				&:nth-child(2) {
+					position: relative;
 					left: 50%;
 					transform: translateX(-50%);
 					top: 0;
-					height: 21rem;
+					height: 24rem;
 				}
 
 				&:nth-child(3) {
 					top: 10px;
 					bottom: auto;
-					left: 50%;
-					height: 60%;
+					left: auto;
+					right: 0;
+					width: 40%;
+					height: auto;
 				}
 			}
 		}
@@ -296,26 +296,27 @@ export const frontmatter = {
 			height: auto;
 
 			&:nth-child(1) {
-				top: 5%;
+				bottom: calc(50% + 10vh);
 				right: 0;
 				width: 200px;
 			}
 
 			&:nth-child(2) {
-				top: 10%;
-				right: 150px;
+				bottom: calc(50% - 10px);
+				right: 160px;
 				width: 300px;
+				z-index: 1;
 			}
 
 			&:nth-child(3) {
-				bottom: 10%;
+				top: calc(50% - 5vh);
 				right: 50px;
 				max-height: 60vh;
 				max-width: 460px;
 			}
 
 			&:nth-child(4) {
-				bottom: 5%;
+				top: calc(50% + 15vh);
 				right: 200px;
 				width: 400px;
 			}
@@ -324,33 +325,33 @@ export const frontmatter = {
 		@media (width < $breakpoint-md) {
 			.section-image {
 				&:nth-child(1) {
-					top: 0;
+					top: 10px;
 					right: auto;
 					left: -10px;
-					width: 150px;
+					width: 30%;
 				}
 
 				&:nth-child(2) {
-					top: 0;
+					top: 15px;
 					right: -10px;
-					width: 150px;
+					width: 35%;
 				}
 
 				&:nth-child(3) {
+					position: relative;
 					left: 50%;
 					transform: translateX(-50%);
 					width: auto;
-					max-height: initial;
-					height: 300px;
-					bottom: 7%;
+					max-width: 60%;
+					max-height: 24rem;
 					z-index: 1;
 				}
 
 				&:nth-child(4) {
-					left: 5%;
+					top: initial;
+					right: 5%;
 					bottom: 5%;
-					right: auto;
-					width: 240px;
+					width: 45%;
 					z-index: 1;
 				}
 			}
@@ -360,22 +361,20 @@ export const frontmatter = {
 	.image-grid {
 		display: flex;
 		justify-content: center;
-		gap: var(--spacing-10);
+		gap: var(--spacing-8);
+		flex-wrap: wrap;
 
-		@media (width < $breakpoint-lg) {
-			flex-wrap: wrap;
+		@media (width < $breakpoint-md) {
+			gap: var(--spacing-6);
 		}
 	}
 
 	.image-grid-item {
-		display: flex;
-		justify-content: center;
-	}
-
-	.grid-image {
 		display: block;
-		height: 200px;
+		height: auto;
 		width: auto;
+		max-height: 200px;
+		max-width: 100%;
 		box-shadow: var(--shadow-md);
 	}
 </style>

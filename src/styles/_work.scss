@@ -63,7 +63,6 @@
 
 		.section-image-wrap {
 			margin: 0 calc(-1 * var(--page-gutter));
-			height: 21rem;
 		}
 	}
 }
@@ -107,6 +106,7 @@
 
 .section-image {
 	position: absolute;
+	display: block;
 }
 
 .section-content-block {
