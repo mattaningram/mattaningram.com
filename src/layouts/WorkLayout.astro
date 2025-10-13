@@ -100,7 +100,6 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		width: var(--page-content-width);
 		max-width: 100%;
 		margin: 0 auto;
-		margin-bottom: 10vh;
 		padding: 0 var(--page-gutter);
 	}
 
@@ -117,7 +116,11 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		padding: var(--spacing-10);
 		border-bottom: 1px solid var(--page-color);
 
-		@media (width < $breakpoint-md) {
+		@media (width < $breakpoint-sm) {
+			padding: var(--spacing-8);
+		}
+
+		@media (width < $breakpoint-xs) {
 			flex-direction: column;
 		}
 	}
@@ -143,11 +146,6 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		background-position-y: 60%;
 	}
 
-	.work-title-wrap {
-		height: 3rem;
-		max-width: 15rem;
-	}
-
 	.work-title {
 		font-size: 2.2em;
 		text-align: center;
@@ -155,9 +153,15 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 	.work-logo {
 		display: block;
-		height: 100%;
+		width: 100%;
+
 		max-width: 240px;
 		max-height: 48px;
+
+		@media (width < $breakpoint-sm) {
+			max-width: 180px;
+			max-height: 36px;
+		}
 	}
 
 	.work-link {
@@ -165,6 +169,11 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		width: 8rem;
 		margin: 0;
 		text-decoration: none;
+
+		@media (width < $breakpoint-sm) {
+			height: 2.5rem;
+			width: 7rem;
+		}
 	}
 
 	.work-detail {

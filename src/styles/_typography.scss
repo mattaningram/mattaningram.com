@@ -59,10 +59,10 @@ p + p {
 
 .grab-copy-wrap {
 	width: var(--page-content-width);
-	padding: var(--page-gutter);
+	padding-inline: var(--page-gutter);
 	max-width: 100%;
 	margin: 0 auto;
-	margin-bottom: 10vh;
+	margin-block: var(--page-section-margin);
 	opacity: 0;
 	animation: fadeInUpText 0.5s var(--ease-out-quad) 0.5s both;
 }
@@ -81,14 +81,15 @@ p + p {
 }
 
 .grab-copy {
-	font-size: 1.75rem;
+	font-size: 2rem;
+	line-height: 1.65;
 	text-wrap: balance;
 
 	@media (width < $breakpoint-md) {
-		font-size: 1.5rem;
+		font-size: 1.75rem;
 	}
 
 	@media (width < $breakpoint-sm) {
-		font-size: 1.25rem;
+		font-size: 1.5rem;
 	}
 }

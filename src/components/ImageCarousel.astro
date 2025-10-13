@@ -73,7 +73,12 @@ entries.sort(([a], [b]) => a.localeCompare(b))
 		padding: var(--spacing-10) var(--page-gutter);
 	}
 
-	.gallery-item {
+	.carousel-item {
+		display: block;
+		flex-shrink: 0;
+		height: auto;
+		vertical-align: top;
+		position: relative;
 		box-shadow: var(--shadow-md);
 		transition: 0.2s var(--ease-out-quad);
 		transition-property: transform, box-shadow;
@@ -83,14 +88,6 @@ entries.sort(([a], [b]) => a.localeCompare(b))
 			transform: translate3d(0, -16px, 0);
 			box-shadow: 0 0 0 4px var(--page-color);
 		}
-	}
-
-	.carousel-item {
-		display: block;
-		flex-shrink: 0;
-		height: auto;
-		vertical-align: top;
-		position: relative;
 	}
 
 	.carousel-link {

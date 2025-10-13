@@ -47,7 +47,7 @@ export const frontmatter = {
 		</div>
 		<div class="section-content-block">
 			<video
-				class="page-video"
+				class="section-video"
 				width="1280"
 				height="720"
 				poster="/assets/images/canvs/canvs-video-poster.jpg"
@@ -73,7 +73,7 @@ export const frontmatter = {
 				</p>
 			</div>
 		</div>
-		<div class="section-image-wrap">
+		<div class="section-content-block">
 			<Image class="section-image" src={canvsCodeSample} alt="Canvs Code Sample" layout="constrained" />
 			<Image class="section-image" src={canvsSeriesPageBeta} alt="Canvs Series Page" layout="constrained" />
 			<Image class="section-image" src={canvsOldTimeline} alt="Canvs Timeline" layout="constrained" />
@@ -93,7 +93,7 @@ export const frontmatter = {
 				</p>
 			</div>
 		</div>
-		<div class="section-image-wrap">
+		<div class="section-content-block">
 			<Image class="section-image" src={canvsSketch1} alt="Canvs Sketch 1" layout="constrained" />
 			<Image class="section-image" src={canvsSketch2} alt="Canvs Sketch 2" layout="constrained" />
 			<Image class="section-image" src={canvsSketch3} alt="Canvs Sketch 3" layout="constrained" />
@@ -296,7 +296,7 @@ export const frontmatter = {
 			height: auto;
 
 			&:nth-child(1) {
-				bottom: calc(50% + 10vh);
+				bottom: calc(50% + var(--page-section-margin));
 				right: 0;
 				width: 200px;
 			}

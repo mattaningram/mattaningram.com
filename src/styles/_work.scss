@@ -1,16 +1,14 @@
 @use 'scssVariables' as *;
 
 .page-section {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	max-width: var(--page-content-width);
 	padding: 0 var(--page-gutter);
-	margin: var(--spacing-20) auto;
-
-	@media (width < $breakpoint-md) {
-		margin-bottom: var(--spacing-16);
-	}
+	margin-inline: auto;
+	margin-top: var(--page-section-margin);
 }
 
 .section-header {
@@ -61,7 +59,7 @@
 			max-width: 100%;
 		}
 
-		.section-image-wrap {
+		.section-content-block {
 			margin: 0 calc(-1 * var(--page-gutter));
 		}
 	}
@@ -73,13 +71,17 @@
 	.section-text-wrap {
 		width: 100%;
 		margin-bottom: calc(-1 * var(--spacing-7));
-		padding-bottom: var(--spacing-12);
+		padding-bottom: var(--spacing-14);
+	}
+
+	.section-content-block {
+		margin: 0 calc(-1 * var(--page-gutter));
 	}
 }
 
 .page-section--left {
 	@media (width >= $breakpoint-md) {
-		.section-image-wrap {
+		.section-content-block {
 			left: -30%;
 		}
 	}
@@ -93,13 +95,13 @@
 			justify-content: flex-end;
 		}
 
-		.section-image-wrap {
+		.section-content-block {
 			right: -30%;
 		}
 	}
 }
 
-.section-image-wrap {
+.section-content-block {
 	align-self: stretch;
 	position: relative;
 }
@@ -107,13 +109,10 @@
 .section-image {
 	position: absolute;
 	display: block;
+	max-width: initial;
 }
 
-.section-content-block {
-	margin: 0 calc(-1 * var(--page-gutter));
-}
-
-.page-video {
+.section-video {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -125,7 +124,7 @@
 .image-carousel-wrap {
 	display: flex;
 	justify-content: center;
-	margin-bottom: var(--spacing-11);
+	margin-bottom: var(--page-section-margin);
 }
 
 //SKILL SECTION
@@ -134,7 +133,7 @@
 	align-items: stretch;
 	flex-wrap: wrap;
 	gap: var(--spacing-10);
-	margin-block: var(--spacing-20);
+	margin-top: var(--page-section-margin);
 
 	@media (width < $breakpoint-md) {
 		gap: var(--spacing-8);
