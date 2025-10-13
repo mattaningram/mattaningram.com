@@ -2,6 +2,21 @@
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
 
+import { Image } from 'astro:assets'
+import RevelTeslaSide from '@media/revel/revel-tesla-side.png'
+import RevelMoped from '@media/revel/revel-moped.png'
+import RevelCharger from '@media/revel/revel-charger.png'
+
+import AcceptRideImage from '@media/revel/revel-accept-ride.png'
+import DemandMapImage from '@media/revel/revel-demand-map.png'
+import CarControlsImage from '@media/revel/revel-car-controls.png'
+import DriverLanding from '@media/revel/revel-driver-landing.png'
+
+import RideDetailsImage from '@media/revel/revel-ride-details.png'
+import RidesListImage from '@media/revel/revel-rides-list.png'
+import ShiftTimelineImage from '@media/revel/revel-shift-timeline.png'
+import OpenShiftsImage from '@media/revel/revel-open-shifts.png'
+
 export const frontmatter = {
 	order: 4,
 	title: 'Revel',
@@ -11,12 +26,327 @@ export const frontmatter = {
 	logoOpen: 'revel_logo_color.svg',
 	workUrl: 'https://gorevel.com',
 	color: 'rgb(1, 185, 242)',
-	description: `Revel builds electric transportation and infrastructure. I led design for the full internal product stack, building web and native apps to manage thousands of drivers, passengers, and operations efficiently.`,
+	description: `Revel builds electric transit and infrastructure. I led design for the full internal product stack, creating web and native apps to efficiently manage thousands of drivers, passengers, and operations.`,
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="image-carousel-wrap revel-images">
-		<ImageCarousel folder="revel" />
+	<div id="revel-products" class="page-section page-section--row page-section--left xyz-in" xyz="fade down delay-10">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Scooters and taxis and chargers, oh my!</h2>
+				<p class="section-copy">
+					When I joined Revel, its rapid growth and various services had led to fragmented design and implementation
+					across products. I helped lead the design and engineering teams to unify under a cohesive design system,
+					simplifying our product surface area and letting us iterate faster.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<div class="image-circle">
+				<div class="revel-products-image">
+					<Image
+						src={RevelTeslaSide}
+						width="400"
+						height="400"
+						alt="Revel Tesla Side View"
+						class="revel-tesla-side"
+						layout="constrained"
+						fit="contain"
+					/>
+				</div>
+				<div class="revel-products-image">
+					<Image
+						src={RevelMoped}
+						width="400"
+						height="400"
+						alt="Revel Moped"
+						class="revel-moped"
+						layout="constrained"
+						fit="contain"
+					/>
+				</div>
+				<div class="revel-products-image">
+					<Image
+						src={RevelCharger}
+						width="400"
+						height="400"
+						alt="Revel Charger"
+						class="revel-charger"
+						layout="constrained"
+						fit="contain"
+					/>
+				</div>
+			</div>
+		</div>
 	</div>
+	<div id="revel-drivers" class="page-section page-section--top xyz-in" xyz="fade down delay-10">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Drivers on the go</h2>
+				<p class="section-copy">
+					Revel's driver app is the hub for everything a driver needs to do their job. From accepting rides, to
+					navigation, to managing their vehicle, I worked with drivers to ensure the app was intuitive and easy to use
+					while on the road. Features like real-time demand maps and in-app support helped drivers maximize their
+					earnings and stay safe.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<div class="image-gallery photoswipe-gallery">
+				<a
+					class="gallery-item-link"
+					href={DriverLanding.src}
+					data-pswp-width={DriverLanding.width}
+					data-pswp-height={DriverLanding.height}
+				>
+					<Image
+						src={DriverLanding}
+						width="200"
+						alt="Revel Driver Landing Screen"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+				<a
+					class="gallery-item-link"
+					href={AcceptRideImage.src}
+					data-pswp-width={AcceptRideImage.width}
+					data-pswp-height={AcceptRideImage.height}
+				>
+					<Image
+						src={AcceptRideImage}
+						width="200"
+						alt="Revel Driver Accept Ride Screen"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+				<a
+					class="gallery-item-link"
+					href={DemandMapImage.src}
+					data-pswp-width={DemandMapImage.width}
+					data-pswp-height={DemandMapImage.height}
+				>
+					<Image
+						src={DemandMapImage}
+						width="200"
+						alt="Revel Driver Demand Map Screen"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+				<a
+					class="gallery-item-link"
+					href={CarControlsImage.src}
+					data-pswp-width={CarControlsImage.width}
+					data-pswp-height={CarControlsImage.height}
+				>
+					<Image
+						src={CarControlsImage}
+						width="200"
+						alt="Revel Driver Car Controls Screen"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="revel-ops" class="page-section page-section--top xyz-in" xyz="fade down delay-10">
+		<div class="section-text-wrap">
+			<div class="section-text">
+				<h2 class="section-header">Operator please</h2>
+				<p class="section-copy">
+					Managing thousands of drivers and shifts a day requires robust processes and efficient tools that make sure
+					nothing behind the scenes impacts the experiences of our drivers and customers.
+				</p>
+			</div>
+		</div>
+		<div class="section-content-block">
+			<div class="image-gallery photoswipe-gallery">
+				<a
+					class="gallery-item-link"
+					href={RideDetailsImage.src}
+					data-pswp-width={RideDetailsImage.width}
+					data-pswp-height={RideDetailsImage.height}
+				>
+					<Image
+						src={RideDetailsImage}
+						width="400"
+						alt="Revel Ride Details"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+				<a
+					class="gallery-item-link"
+					href={RidesListImage.src}
+					data-pswp-width={RidesListImage.width}
+					data-pswp-height={RidesListImage.height}
+				>
+					<Image src={RidesListImage} width="400" alt="Revel Ride List" class="gallery-image" layout="constrained" />
+				</a>
+				<a
+					class="gallery-item-link"
+					href={ShiftTimelineImage.src}
+					data-pswp-width={ShiftTimelineImage.width}
+					data-pswp-height={ShiftTimelineImage.height}
+				>
+					<Image
+						src={ShiftTimelineImage}
+						width="400"
+						alt="Revel Shift Timeline"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+				<a
+					class="gallery-item-link"
+					href={OpenShiftsImage.src}
+					data-pswp-width={OpenShiftsImage.width}
+					data-pswp-height={OpenShiftsImage.height}
+				>
+					<Image
+						src={OpenShiftsImage}
+						width="400"
+						alt="Revel Shift Timeline"
+						class="gallery-image"
+						layout="constrained"
+					/>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- 
+	<div class="image-carousel-wrap revel-images">
+		<ImageCarousel folder="revel/gallery" />
+	</div> -->
+
+	<style lang="scss">
+		@use '../../styles/_scssVariables' as *;
+
+		@keyframes revelProductFade {
+			0% {
+				opacity: 0;
+				transform: scale(0.9) translateX(6rem);
+				filter: blur(24px);
+			}
+
+			5%,
+			30% {
+				opacity: 1;
+				transform: scale(1);
+				filter: blur(0);
+			}
+
+			35%,
+			100% {
+				opacity: 0;
+				transform: scale(0.9) translateX(-6rem);
+				filter: blur(24px);
+			}
+		}
+
+		.gallery-item-link {
+			display: block;
+
+			img {
+				display: block;
+				box-shadow: var(--shadow-md);
+				transition: 0.2s var(--ease-out-quad);
+				transition-property: transform, box-shadow;
+			}
+
+			&:hover,
+			&:focus {
+				img {
+					transform: translate3d(0, -16px, 0);
+					box-shadow: 0 0 0 4px var(--page-color);
+				}
+			}
+		}
+
+		#revel-products {
+			.image-circle {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 40vw;
+				max-width: 32rem;
+				aspect-ratio: 1 / 1;
+				background-color: rgb(from var(--page-color) r g b / 0.15);
+				border-radius: 100%;
+				display: grid;
+				backdrop-filter: blur(8px);
+				overflow: hidden;
+
+				@media (width < $breakpoint-md) {
+					width: 100%;
+					position: relative;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+
+				@media (width < $breakpoint-sm) {
+					width: 105vw;
+				}
+			}
+
+			.revel-products-image {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				grid-area: 1 / 1;
+				aspect-ratio: 1 / 1;
+				animation: revelProductFade 9s var(--ease-out-quad) infinite;
+				opacity: 0;
+				transform: scale(0.9);
+				filter: blur(14px);
+				will-change: opacity, transform, filter;
+
+				&:nth-child(2) {
+					animation-delay: 3s;
+				}
+
+				&:nth-child(3) {
+					animation-delay: 6s;
+				}
+
+				img {
+					width: 75%;
+					height: 75%;
+				}
+			}
+		}
+
+		#revel-drivers {
+			.image-gallery {
+				display: flex;
+				gap: var(--spacing-6);
+				margin: 0 auto;
+
+				@media (width < $breakpoint-sm) {
+					gap: var(--spacing-4);
+				}
+			}
+
+			.gallery-item-link {
+				min-width: 0;
+			}
+		}
+
+		#revel-ops {
+			.image-gallery {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: var(--spacing-6);
+
+				@media (width < $breakpoint-sm) {
+					gap: var(--spacing-4);
+				}
+			}
+		}
+	</style>
 </WorkLayout>
