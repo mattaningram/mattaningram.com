@@ -107,10 +107,18 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		lightbox.init()
 	}
 
+	const disableWorkHeaderTransition = () => {
+		const header = document.querySelector('.work-header')
+		if (!(header instanceof HTMLElement)) return
+		header.style.setProperty('view-transition-name', 'none')
+	}
+
 	document.addEventListener('astro:before-swap', () => {
 		lightbox?.destroy()
 		lightbox = undefined
 	})
+
+	document.addEventListener('astro:before-preparation', disableWorkHeaderTransition)
 
 	document.addEventListener('astro:page-load', initLightbox)
 
