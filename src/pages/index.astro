@@ -56,15 +56,27 @@ import WorkList from '@components/WorkList.astro'
 			<WorkList folder="projects" />
 		</div>
 	</section>
+</HomeLayout>
 
-	<script is:inline>
+<script is:inline>
+	const initLogoButton = () => {
 		const btn = document.querySelector('.m-logo-click-me')
 		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
-		btn?.addEventListener('click', () => {
-			logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
-		})
-	</script>
-</HomeLayout>
+
+		if (!btn || !logoWrap || btn.dataset.logoClickBound === 'true') {
+			return
+		}
+
+		const handleClick = () => {
+			logoWrap.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+		}
+
+		btn.addEventListener('click', handleClick)
+		btn.dataset.logoClickBound = 'true'
+	}
+
+	document.addEventListener('astro:page-load', initLogoButton)
+</script>
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;

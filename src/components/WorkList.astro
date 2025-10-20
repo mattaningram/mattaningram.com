@@ -27,7 +27,12 @@ const items = itemModules
 <div class="work-list-wrap">
 	{
 		items.map((item) => (
-			<a href={item.url} class="work-item-wrap" style={`--page-color: ${item.color};`}>
+			<a
+				href={item.url}
+				class="work-item-wrap"
+				style={`--page-color: ${item.color};`}
+				transition:name={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
+			>
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />

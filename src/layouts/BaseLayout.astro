@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions'
 export interface Props {
 	title?: string
 	description?: string
@@ -44,6 +45,8 @@ import '@styles/main.scss'
 		<!-- Analytics -->
 		<script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="d87546f1-7825-45bb-9a4e-7fbb12ed65b4" async
 		></script>
+
+		<ClientRouter />
 	</head>
 
 	<body class:list={className} style={`--page-color: ${pageColor}`}>
@@ -51,7 +54,7 @@ import '@styles/main.scss'
 
 		<script src="@utils/xyzCleanup.js"></script>
 
-		<script is:inline>
+		<script is:inline data-astro-rerun>
 			;(() => {
 				const root = document.documentElement
 				let raf = 0

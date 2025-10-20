@@ -9,7 +9,7 @@ const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 const { size } = Astro.props
 ---
 
-<div class="m-logo-wrap"></div>
+<div class="m-logo-wrap" transition:name="logo"></div>
 
 <style lang="scss" define:vars={{ size }}>
 	.m-logo-wrap {
@@ -21,7 +21,7 @@ const { size } = Astro.props
 	}
 </style>
 
-<script is:inline define:vars={{ urls }}>
+<script is:inline define:vars={{ urls }} data-astro-rerun>
 	// Scope to this component instance by using the adjacent wrapper element
 	const logoWrap = document.currentScript?.previousElementSibling
 	if (!(logoWrap instanceof HTMLElement)) {

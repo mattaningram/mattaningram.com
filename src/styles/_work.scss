@@ -119,12 +119,31 @@
 	box-shadow: var(--shadow-md);
 }
 
-//IMAGE CAROUSEL
+//IMAGES
 
 .image-carousel-wrap {
 	display: flex;
 	justify-content: center;
 	margin-bottom: var(--page-section-margin);
+}
+
+.gallery-item-link {
+	display: block;
+
+	img {
+		display: block;
+		box-shadow: var(--shadow-md);
+		transition: 0.2s var(--ease-out-quad);
+		transition-property: transform, box-shadow;
+	}
+
+	&:hover,
+	&:focus {
+		img {
+			transform: translate3d(0, -16px, 0);
+			box-shadow: 0 0 0 4px var(--page-color);
+		}
+	}
 }
 
 //SKILL SECTION

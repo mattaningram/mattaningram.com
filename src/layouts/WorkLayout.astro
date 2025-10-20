@@ -25,7 +25,11 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 	<main>
 		<div class="work-header-wrap">
-			<header class="work-header xyz-in" xyz="fade down duration-5 ease-out-back">
+			<header
+				class="work-header xyz-in"
+				xyz="fade down duration-5 ease-out-back"
+				transition:name={`work-${title.toLowerCase().replace(/\s+/g, '-')}-hero`}
+			>
 				<div class="work-header-top">
 					<div class="work-title-wrap xyz-in" xyz="fade left delay-4 ease-out-back">
 						{
@@ -76,21 +80,41 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 
 <script>
 	import PhotoSwipeLightbox from 'photoswipe/lightbox'
-	// import ObjectPosition from '/Users/mattaningram/Code/mattaningram.com/node_modules/@vovayatsyuk/photoswipe-object-position/photoswipe-object-position.js'
 	import 'photoswipe/style.css'
 
-	const lightbox = new PhotoSwipeLightbox({
-		gallery: '.photoswipe-gallery',
-		children: 'a',
-		pswpModule: () => import('photoswipe'),
-		zoom: false,
-		counter: false,
-		padding: { top: 24, bottom: 24, left: 24, right: 24 },
+	let lightbox
+
+	const initLightbox = () => {
+		const galleries = document.querySelectorAll('.photoswipe-gallery')
+
+		// Clean up any previous instance before wiring up new DOM
+		lightbox?.destroy()
+		lightbox = undefined
+
+		if (!galleries.length) {
+			return
+		}
+
+		lightbox = new PhotoSwipeLightbox({
+			gallery: '.photoswipe-gallery',
+			children: 'a',
+			pswpModule: () => import('photoswipe'),
+			zoom: false,
+			counter: false,
+			padding: { top: 24, bottom: 24, left: 24, right: 24 },
+		})
+
+		lightbox.init()
+	}
+
+	document.addEventListener('astro:before-swap', () => {
+		lightbox?.destroy()
+		lightbox = undefined
 	})
 
-	// new ObjectPosition(lightbox)
+	document.addEventListener('astro:page-load', initLightbox)
 
-	lightbox.init()
+	initLightbox()
 </script>
 
 <style lang="scss">
