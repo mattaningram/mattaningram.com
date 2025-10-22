@@ -124,7 +124,7 @@
 	// Run on page load for any pre-rendered `.xyz-in` elements
 	if (typeof document !== 'undefined') {
 		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', () => xyzCleanup(document), { once: true })
+			document.addEventListener('astro:page-load', () => xyzCleanup(document), { once: true })
 		} else {
 			xyzCleanup(document)
 		}

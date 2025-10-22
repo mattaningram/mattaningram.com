@@ -14,7 +14,7 @@ import WorkList from '@components/WorkList.astro'
 		<button class="m-logo-click-me xyz-in" xyz="fade small-2 duration-5 delay-8">Click me</button>
 	</section>
 
-	<section class="grab-copy-wrap home-section">
+	<section class="grab-copy-wrap home-section xyz-in" xyz="fade down duration-5 delay-8">
 		<p class="grab-copy">
 			NYC product designer and CSS nerd raised on the
 			<span class="gif-hover"
@@ -37,7 +37,7 @@ import WorkList from '@components/WorkList.astro'
 						<source src="assets/videos/sesame.webm" type="video/webm" />
 					</video>
 				</span></span
-			>. <br /> Making glowing rectangles do cool stuff.
+			>. Making glowing rectangles do cool stuff.
 		</p>
 	</section>
 
@@ -56,15 +56,27 @@ import WorkList from '@components/WorkList.astro'
 			<WorkList folder="projects" />
 		</div>
 	</section>
+</HomeLayout>
 
-	<script is:inline>
+<script is:inline>
+	const initLogoButton = () => {
 		const btn = document.querySelector('.m-logo-click-me')
 		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
-		btn?.addEventListener('click', () => {
-			logoWrap?.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
-		})
-	</script>
-</HomeLayout>
+
+		if (!btn || !logoWrap || btn.dataset.logoClickBound === 'true') {
+			return
+		}
+
+		const handleClick = () => {
+			logoWrap.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+		}
+
+		btn.addEventListener('click', handleClick)
+		btn.dataset.logoClickBound = 'true'
+	}
+
+	document.addEventListener('astro:page-load', initLogoButton)
+</script>
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;

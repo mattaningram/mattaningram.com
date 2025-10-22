@@ -63,26 +63,11 @@ p + p {
 	max-width: 100%;
 	margin: 0 auto;
 	margin-block: var(--page-section-margin);
-	opacity: 0;
-	animation: fadeInUpText 0.5s var(--ease-out-quad) 0.5s both;
-}
-
-@keyframes fadeInUpText {
-	from {
-		opacity: 0;
-		line-height: 2;
-		transform: translate3d(0, 1em, 0);
-	}
-	to {
-		line-height: inherit;
-		opacity: 1;
-		transform: none;
-	}
 }
 
 .grab-copy {
 	font-size: 2rem;
-	line-height: 1.65;
+	line-height: 1.5;
 	text-wrap: balance;
 
 	@media (width < $breakpoint-md) {
