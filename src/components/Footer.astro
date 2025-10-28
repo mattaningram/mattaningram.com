@@ -3,29 +3,28 @@ import { Icon } from 'astro-icon/components'
 ---
 
 <footer class="main-footer" transition:name="footer">
-	<div class="footer-text">I made this.</div>
 	<a href="mailto:mattaningram@gmail.com" class="button--themed email-me">
 		<span class="button__text">Say Hi</span>
 	</a>
 
-	<div class="link-icon-wrap">
-		<a class="link-icon" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
+	<div class="social-links-wrap">
+		<a class="social-link" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
 			<Icon name="github-solid" />
 		</a>
 
-		<a class="link-icon" href="https://www.linkedin.com/in/mattaningram" aria-label="LinkedIn" target="_blank">
+		<a class="social-link" href="https://www.linkedin.com/in/mattaningram" aria-label="LinkedIn" target="_blank">
 			<Icon name="linkedin-solid" />
 		</a>
 
-		<a class="link-icon" href="https://x.com/mattaningram" aria-label="X" target="_blank">
+		<a class="social-link" href="https://x.com/mattaningram" aria-label="X" target="_blank">
 			<Icon name="x-solid" />
 		</a>
 
-		<a class="link-icon" href="https://instagram.com/mattaningram" aria-label="Instagram" target="_blank">
+		<a class="social-link" href="https://instagram.com/mattaningram" aria-label="Instagram" target="_blank">
 			<Icon name="instagram-solid" />
 		</a>
 
-		<a class="link-icon" href="https://open.spotify.com/user/mattaningram" aria-label="Spotify" target="_blank">
+		<a class="social-link" href="https://open.spotify.com/user/mattaningram" aria-label="Spotify" target="_blank">
 			<Icon name="spotify-solid" />
 		</a>
 	</div>
@@ -33,49 +32,45 @@ import { Icon } from 'astro-icon/components'
 
 <style lang="scss">
 	.main-footer {
+		display: grid;
+		gap: var(--spacing-4);
 		text-align: center;
 		position: relative;
 		margin: 0 auto;
 		margin-top: var(--page-section-margin);
-		margin-bottom: var(--spacing-12);
 	}
 
 	.social-links-wrap {
-		opacity: 0;
-		animation: fadeIn 0.75s var(--ease-in-quad) 0.9s forwards;
-	}
-
-	.email-me {
-		margin: 1.25rem auto;
-		margin-top: 1rem;
-	}
-
-	.footer-text {
-		font-size: 0.875rem;
-		color: var(--page-color);
-	}
-
-	.link-icon-wrap {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: var(--spacing-4);
-		gap: var(--spacing-6);
+		margin: var(--spacing-8) auto;
 	}
 
-	.link-icon {
-		font-size: 1.125rem;
+	.social-link {
+		width: 2.5rem;
+		height: 2rem;
+		font-size: 1.25rem;
+		display: flex;
+		place-items: center;
 		color: var(--page-color);
-		transition: all 0.2s ease-out;
+
+		[data-icon] {
+			transition: scale 0.15s var(--ease-out-quad);
+		}
 
 		&:hover {
-			transform: scale(1.25);
+			[data-icon] {
+				scale: 1.25;
+			}
 		}
 
 		&:focus-visible {
-			transform: scale(1.25);
-			outline: 1px solid var(--page-color);
-			outline-offset: 2px;
+			[data-icon] {
+				scale: 1.25;
+				outline: 1px solid var(--page-color);
+				outline-offset: 2px;
+			}
 		}
 	}
 </style>
