@@ -24,12 +24,12 @@ const items = itemModules
 	.sort((a, b) => b.order - a.order)
 ---
 
-<div class="work-list-wrap">
+<div class="work-list-wrap" xyz="fade stagger-1 delay-10 down-2 small-2">
 	{
 		items.map((item) => (
 			<a
 				href={item.url}
-				class="work-item-wrap"
+				class="work-item-wrap xyz-in"
 				style={`--page-color: ${item.color};`}
 				transition:name={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
 			>
@@ -54,6 +54,7 @@ const items = itemModules
 <style lang="scss">
 	@use '../styles/_scssVariables' as *;
 	.work-list-wrap {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

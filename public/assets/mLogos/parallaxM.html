@@ -18,7 +18,7 @@
 	.m-logo-parallax:not(.xyz-in) .parallax-item {
 		translate: calc(var(--mouse-x) * var(--parallax-strength) * var(--depth, 0))
 			calc(var(--mouse-y) * var(--parallax-strength) * var(--depth, 0));
-		will-change: transform;
+		will-change: translate;
 	}
 
 	.parallax-item {

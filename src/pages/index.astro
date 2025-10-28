@@ -46,13 +46,13 @@ import WorkList from '@components/WorkList.astro'
 		<Beliefs />
 	</section> -->
 
-	<section class="work-section home-section xyz-in" xyz="fade down-2 duration-5 delay-8">
+	<section class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
 		<div class="work-stack">
-			<h2 class="home-section-title">Work</h2>
+			<h2 class="home-section-title xyz-nested xyz-in">Work</h2>
 			<WorkList folder="work" />
 		</div>
 		<div class="work-stack">
-			<h2 class="home-section-title">Projects</h2>
+			<h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
 			<WorkList folder="projects" />
 		</div>
 	</section>
@@ -216,6 +216,8 @@ import WorkList from '@components/WorkList.astro'
 	}
 
 	.work-stack {
+		display: grid;
+		justify-items: start;
 		flex-grow: 1;
 		flex-basis: 0;
 	}
