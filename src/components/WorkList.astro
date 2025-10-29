@@ -38,13 +38,15 @@ const items = itemModules
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />
 				<div class="work-item">
-					<div class="work-item-contents">
-						{item.logo ? (
-							<img class="work-item-logo" src={`/assets/logos/${item.logo}`} title={`${item.title} Logo`} />
-						) : (
-							<h3 class="work-item-title">{item.title}</h3>
-						)}
-					</div>
+					{item.logo ? (
+						<img
+							class="work-item-logo"
+							src={`/assets/logos/${item.logoOpen ?? item.logo}`}
+							title={`${item.title} Logo`}
+						/>
+					) : (
+						<h3 class="work-item-title">{item.title}</h3>
+					)}
 				</div>
 			</a>
 		))
@@ -83,109 +85,92 @@ const items = itemModules
 
 		&:hover {
 			.work-item {
-				transform: translate3d(0, 0, 20px);
+				--work-item-stack-lightness: 60%;
+				transform: translate3d(0, 0, 25px);
+				border-width: 2px;
 			}
 
 			.work-item-stack {
-				background-color: var(--page-color);
 				&:nth-child(1) {
-					opacity: 0.1;
-					transform: translate3d(0, 0, -60px);
+					--work-item-stack-lightness: 10%;
+					transform: translate3d(0, 0, -75px);
 				}
 				&:nth-child(2) {
-					opacity: 0.2;
-					transform: translate3d(0, 0, -40px);
+					--work-item-stack-lightness: 20%;
+					transform: translate3d(0, 0, -50px);
 				}
 				&:nth-child(3) {
-					opacity: 0.3;
-					transform: translate3d(0, 0, -20px);
+					transform: translate3d(0, 0, -25px);
 				}
 				&:nth-child(4) {
-					opacity: 0.4;
 					transform: translate3d(0, 0, 0px);
 				}
 			}
 		}
 	}
 
-	.work-item-stack {
+	.work-item-stack,
+	.work-item {
+		--work-item-stack-lightness: 50%;
+		border: 1px solid hsl(from var(--page-color) h s var(--work-item-stack-lightness));
 		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		opacity: 0;
-		background-color: var(--page-color);
+		inset: 0;
+		transition: 0.3s var(--ease-out-back);
+		transition-property: transform, background-color;
+	}
+
+	.work-item-stack {
+		background-color: var(--bg-color);
 		transform-origin: 50% 100%;
-		transition: all 0.3s var(--ease-out-back);
 
 		&:nth-child(1) {
-			opacity: 0.2;
-			transform: translate3d(0, 0, -30px);
+			transform: translate3d(0, 0, -50px);
+			--work-item-stack-lightness: 20%;
 		}
-
 		&:nth-child(2) {
-			opacity: 0.4;
-			transform: translate3d(0, 0, -15px);
+			transform: translate3d(0, 0, -25px);
+			--work-item-stack-lightness: 30%;
+		}
+		&:nth-child(3) {
+			--work-item-stack-lightness: 40%;
+		}
+		&:nth-child(4) {
+			--work-item-stack-lightness: 45%;
 		}
 	}
 
 	.work-item {
-		background-color: var(--page-color);
+		background-color: hsl(from var(--page-color) h s 7%);
+
 		display: block;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 10px;
 		text-align: center;
 		text-decoration: none;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		display: grid;
+		place-content: center;
 		transform-style: preserve-3d;
 		overflow: hidden;
-		transition: all 0.3s var(--ease-out-back);
 
-		&:before,
 		&:after {
 			content: '';
 			position: absolute;
+			inset: 0;
 			z-index: -1;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			opacity: 1;
-			background: radial-gradient(at 15% 0%, transparent, rgba(0, 0, 0, 0.15));
-			transition: all 0.5s var(--ease-out-quad);
-		}
-
-		&:after {
 			opacity: 0;
-			background: radial-gradient(at 15% 0%, rgba(255, 255, 255, 0.25), transparent);
+			background: radial-gradient(at 15% 0%, hsl(from var(--page-color) h s l / 60%), transparent);
+			transition: opacity 0.5s var(--ease-out-quad);
 		}
 
 		&:hover {
-			&:before {
-				opacity: 0;
-			}
-
 			&:after {
 				opacity: 1;
 			}
 		}
 	}
 
-	.work-item-contents {
-		width: 100%;
-		transition: all 0.2s ease-in;
-	}
-
 	.work-item-logo {
 		display: block;
 		width: 100%;
+		height: auto;
 		max-width: 15rem;
 		max-height: 3rem;
 		margin: 0 auto;
