@@ -52,13 +52,13 @@
 		const removeParentClass = () => {
 			const now = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()
 			const actual = Math.max(0, Math.round(now - startTime))
-			// if (typeof console !== 'undefined' && console.log) {
-			// 	console.log(
-			// 		`[xyzCleanup] done -> ${describe(parent)} after ${actual}ms (expected ~${Math.round(
-			// 			expectedOverallMs
-			// 		)}ms)`
-			// 	)
-			// }
+
+			if (typeof console !== 'undefined' && console.log) {
+				console.log(
+					`[xyzCleanup] done -> ${describe(parent)} after ${actual}ms (expected ~${Math.round(expectedOverallMs)}ms)`
+				)
+			}
+
 			parent.classList.remove('xyz-in')
 		}
 
@@ -97,11 +97,12 @@
 		if (typeof console !== 'undefined' && console.log) {
 			const breakdown = []
 			perElMeta.forEach((meta, el) => breakdown.push(`${describe(el)} ~${Math.round(meta.maxMs)}ms`))
-			// console.log(
-			// 	`[xyzCleanup] waiting ~${Math.round(expectedOverallMs)}ms for ${describe(parent)}; targets: ${
-			// 		perElMeta.size
-			// 	} -> ${breakdown.join(', ')}`
-			// )
+
+			console.log(
+				`[xyzCleanup] waiting ~${Math.round(expectedOverallMs)}ms for ${describe(parent)}; targets: ${
+					perElMeta.size
+				} -> ${breakdown.join(', ')}`
+			)
 		}
 
 		// If nothing to wait for (no animations detected), remove immediately
@@ -123,10 +124,25 @@
 
 	// Run on page load for any pre-rendered `.xyz-in` elements
 	if (typeof document !== 'undefined') {
-		if (document.readyState === 'loading') {
-			document.addEventListener('astro:page-load', () => xyzCleanup(document), { once: true })
-		} else {
+		let hasRunInitialCleanup = false
+
+		const runCleanup = () => {
 			xyzCleanup(document)
+			hasRunInitialCleanup = true
+		}
+
+		document.addEventListener('astro:page-load', runCleanup)
+
+		if (document.readyState === 'loading') {
+			document.addEventListener(
+				'DOMContentLoaded',
+				() => {
+					if (!hasRunInitialCleanup) runCleanup()
+				},
+				{ once: true }
+			)
+		} else {
+			runCleanup()
 		}
 	}
 })()
