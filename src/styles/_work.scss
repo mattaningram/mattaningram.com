@@ -19,6 +19,7 @@
 	align-self: flex-start;
 
 	@media (width < $breakpoint-md) {
+		font-size: 1.75rem;
 		margin-bottom: var(--spacing-6);
 	}
 }
