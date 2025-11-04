@@ -51,6 +51,10 @@ p {
 	@media (width < $breakpoint-md) {
 		font-size: 1.125rem;
 	}
+
+	@media (width < $breakpoint-sm) {
+		font-size: 1rem;
+	}
 }
 
 p + p {
