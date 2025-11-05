@@ -1,0 +1,241 @@
+---
+import StudyLayout from '@layouts/StudyLayout.astro'
+
+import { Image } from 'astro:assets'
+
+import DriverLanding from '@media/revel/revel-driver-landing.png'
+import DriverMarketing from '@media/revel/onboarding/driver-marketing.png'
+import ApplicationSignup from '@media/revel/onboarding/application-signup.png'
+import MarketingSignup from '@media/revel/onboarding/marketing-signup.jpg'
+import OriginalOnboarding from '@media/revel/onboarding/driver-onboarding-incomplete.png'
+import SimplerOnboarding from '@media/revel/onboarding/driver-onboarding-improved.png'
+import ExampleLicenses from '@media/revel/onboarding/example-licenses.jpg'
+import ThanksHireMe from '@media/revel/onboarding/thanks-hire-me.png'
+
+export const frontmatter = {
+	title: 'Driver Onboarding',
+	logo: 'revel_logo_color.svg',
+	logoUrl: '/work/revel',
+	color: 'rgb(1, 185, 242)',
+}
+---
+
+<StudyLayout {...frontmatter}>
+	<div class="study-section">
+		<div class="section-text">
+			<h2 class="section-header">Not enough drivers</h2>
+			<p class="section-copy">
+				We had thousands of people applying to drive with Revel, but only a small percentage of them were eligible to
+				drive or didn't fully complete the application process. Additionally once an applicant got initial approval, the
+				onboarding process was complex and confusing, leading to very long completion times.
+			</p>
+			<p class="section-copy">
+				We were trying to grow our driver supply rapidly, so tackling this bottleneck was critical. Addressing complex
+				problems requires more than a fancy redesign, so I worked with marketing, analytics, engineering, and operations
+				to understand the root causes and solve them.
+			</p>
+		</div>
+		<div class="section-content">
+			<div class="image-scroll">
+				<Image
+					src={DriverLanding}
+					width="320"
+					alt="Revel Driver Landing Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+				<Image
+					src={DriverMarketing}
+					width="320"
+					alt="Revel Driver Landing Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="study-section">
+		<div class="section-text">
+			<h2 class="section-header">Discovery vs completion</h2>
+			<p class="section-copy">
+				Applicants could discover the application on our marketing site or in our app, but the pages had been built
+				separately and presented inconsistent experiences. I also noticed in our analytics that a majority of applicants
+				would start from the marketing site, but far fewer would complete it than those who started in the app.
+			</p>
+			<p class="section-copy">
+				To address this, I worked closely with our engineering and marketing teams to combine the two pages into a
+				single experience that would be presented in both places. This allowed for a more consistent experience, while
+				also equalizing the completion rates between the two channels.
+			</p>
+		</div>
+		<div class="section-content">
+			<div class="image-scroll">
+				<Image
+					src={ApplicationSignup}
+					width="320"
+					alt="Revel Driver Landing Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+				<Image
+					src={MarketingSignup}
+					width="285"
+					alt="Revel Marketing Application Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="study-section">
+		<div class="section-text">
+			<h2 class="section-header">Automate, simplify, reduce</h2>
+			<p class="section-copy">
+				Originally a driver would have to painstakingly type a lot of information in addition to uploading their
+				licenses, then operations would individually submit that information to insurance providers, the TLC, and other
+				services that confirm eligibility.
+			</p>
+			<p class="section-copy">
+				An engineer on the team saw there were APIs we could use to automate this process, and a lot of the manually
+				input data could be taken directly from the driver's licenses and TLC database. This allowed me to remove a lot
+				of the eligibility questions and data inputs from the form, resulting in a 50% reduced time to check
+				eligibility.
+			</p>
+		</div>
+		<div class="section-content">
+			<div class="image-scroll">
+				<Image
+					src={OriginalOnboarding}
+					width="320"
+					alt="Revel Original Driver Onboarding Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+				<Image
+					src={SimplerOnboarding}
+					width="320"
+					alt="Revel Simplified Driver Onboarding Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="study-section">
+		<div class="section-text">
+			<h2 class="section-header">Leading by example</h2>
+			<p class="section-copy">
+				We saw there was a significant dropoff in completion rates at the step where drivers upload their licenses. From
+				interviews with new drivers and operations it was clear drivers were either getting their licenses confused,
+				taking poor photos, or often just losing track of the application when they didn't have their licenses on hand.
+			</p>
+			<p class="section-copy">
+				To address this I provided examples of the correct licenses at the relevant steps, as well as clear instructions
+				on how to take a clean photo of them. Once a photo was taken, I simplified the process of reviewing the photo
+				and optionally taking a new one which previously was not as obvious. Finally we addressed "lost" applications by
+				saving their state and sending a link to applicants so they could pick it up from the same point later.
+			</p>
+		</div>
+		<div class="section-content">
+			<div class="image-scroll">
+				<Image
+					src={ExampleLicenses}
+					width="600"
+					alt="Revel Original Driver Onboarding Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="study-section">
+		<div class="section-text">
+			<h2 class="section-header">Results, results, results</h2>
+			<p class="section-copy">
+				The insights from analytics, partnering with marketing, and close pairing with engineers allowed me to
+				significantly rework and refactor the driver application and onboarding experience in a targeted and intentional
+				manner. Not just A/B testing designs, but having a clear idea of the root issues at each step and addressing
+				them directly.
+			</p>
+			<p class="section-copy">
+				In total, the reduction of failed marketing site applications, doubling the efficiency of eligibility checking,
+				and reducing license upload dropoff by 18% lead to a 15% overall improvement in drivers successfully completing
+				applications per week, as well as a 40-50% reduction in average completion time.
+			</p>
+		</div>
+		<div class="section-content">
+			<div class="image-scroll">
+				<Image
+					src={ThanksHireMe}
+					width="320"
+					alt="Revel Original Driver Onboarding Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+			</div>
+		</div>
+	</div>
+</StudyLayout>
+
+<style lang="scss">
+	@use '../../../styles/_scssVariables' as *;
+
+	.study-section {
+		display: grid;
+		grid-template-columns: 2fr 3fr;
+		width: 100vw;
+		min-height: 100vh;
+
+		@media (width < $breakpoint-xl) {
+			grid-template-columns: 1fr;
+			min-height: auto;
+		}
+
+		& + & {
+			margin-top: var(--page-section-margin);
+		}
+	}
+
+	.section-text {
+		display: grid;
+		max-width: 48ch;
+		margin: auto;
+		text-wrap: balance;
+		padding: var(--spacing-12);
+	}
+
+	.section-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--spacing-12);
+
+		@media (width < $breakpoint-xl) {
+			align-items: flex-start;
+			padding: 0;
+			width: 100vw;
+		}
+
+		img {
+			min-width: 320px;
+		}
+	}
+
+	.image-scroll {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-8);
+
+		@media (width < $breakpoint-xl) {
+			justify-content: flex-start;
+			align-items: flex-start;
+			overflow-x: auto;
+			padding: 0 var(--spacing-8);
+		}
+	}
+</style>

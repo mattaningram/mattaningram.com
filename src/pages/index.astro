@@ -17,21 +17,21 @@ import WorkList from '@components/WorkList.astro'
 	<section class="grab-copy-wrap home-section xyz-in" xyz="fade down duration-5 delay-8">
 		<p class="grab-copy">
 			NYC product designer and CSS nerd raised on the
-			<span class="gif-hover"
+			<span class="gif-hover link-hover"
 				>1984 Mac<span class="gif-video-wrap">
 					<video autoplay loop muted playsinline>
 						<source src="assets/videos/1984mac.webm" type="video/webm" />
 					</video>
 				</span>
 			</span>,
-			<span class="gif-hover"
+			<span class="gif-hover link-hover"
 				>Top Gun<span class="gif-video-wrap">
 					<video autoplay loop muted playsinline>
 						<source src="assets/videos/topgun.webm" type="video/webm" />
 					</video>
 				</span></span
 			>, and
-			<span class="gif-hover"
+			<span class="gif-hover link-hover"
 				>Sesame Street<span class="gif-video-wrap">
 					<video autoplay loop muted playsinline>
 						<source src="assets/videos/sesame.webm" type="video/webm" />
@@ -123,50 +123,11 @@ import WorkList from '@components/WorkList.astro'
 		}
 	}
 	.gif-hover {
+		--hover-color: var(--primary-blue);
 		cursor: pointer;
 		position: relative;
 		white-space: nowrap;
 		font-weight: 500;
-
-		.gif-video-wrap {
-			position: absolute;
-			display: block;
-			opacity: 0;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%) scale(1, 0);
-			border-radius: 20px;
-			overflow: hidden;
-			transition: all 0.35s var(--ease-out-back);
-			z-index: -2;
-			pointer-events: none;
-
-			video {
-				display: block;
-			}
-
-			&:before {
-				content: '';
-				position: absolute;
-				inset: 0;
-				width: 100%;
-				height: 100%;
-				box-shadow: inset 0 0 50px 30px var(--bg-color);
-				z-index: 1;
-			}
-		}
-
-		&:after {
-			content: '';
-			background-color: rgb(from var(--primary-blue) r g b / 0.6);
-			position: absolute;
-			z-index: -1;
-			bottom: 0.15em;
-			left: 0;
-			right: 0;
-			height: 0.25em;
-			transition: all 0.15s ease-out;
-		}
 
 		&:hover {
 			.gif-video-wrap {
@@ -174,10 +135,34 @@ import WorkList from '@components/WorkList.astro'
 				transform: translate(-50%, -50%) scale(1, 1);
 				transition-duration: 0.2s;
 			}
+		}
+	}
 
-			&:after {
-				height: 1em;
-			}
+	.gif-video-wrap {
+		position: absolute;
+		display: block;
+		opacity: 0;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%) scale(1, 0);
+		border-radius: 20px;
+		overflow: hidden;
+		transition: all 0.35s var(--ease-out-back);
+		z-index: -2;
+		pointer-events: none;
+
+		video {
+			display: block;
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: inset 0 0 50px 30px var(--bg-color);
+			z-index: 1;
 		}
 	}
 
