@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+
+export interface Props {
+	title: string
+	logo?: string
+	logoUrl?: string
+	color: string
+}
+
+const { title, logo, logoUrl, color } = Astro.props
+---
+
+<BaseLayout title={title} pageColor={color} class={`study-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
+	<div class="study-background"></div>
+
+	<Header />
+
+	<main>
+		<div class="study-header-wrap">
+			<a href={logoUrl} class="study-logo-link">
+				<img class="study-logo" transition:name="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
+			</a>
+			<h1 class="study-title">{title}</h1>
+		</div>
+	</main>
+	<slot />
+</BaseLayout>
+
+<Footer />
+
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
+
+	.study-background {
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		opacity: 0.25;
+		background-image: radial-gradient(circle at top, var(--page-color), var(--bg-color) 65%);
+		background-size: 100% 300%;
+		background-position-y: 60%;
+	}
+
+	.study-header-wrap {
+		display: grid;
+		justify-items: center;
+		gap: var(--spacing-8);
+		width: var(--page-content-width);
+		max-width: 100%;
+		margin: 0 auto;
+		padding: 0 var(--page-gutter);
+	}
+
+	.study-logo-link {
+		display: block;
+	}
+
+	.study-logo {
+		display: block;
+		width: 100%;
+		max-width: 240px;
+		max-height: 48px;
+	}
+
+	.study-title {
+		font-size: 3rem;
+		text-align: center;
+	}
+</style>

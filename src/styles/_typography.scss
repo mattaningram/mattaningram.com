@@ -16,8 +16,32 @@ body {
 }
 
 a {
-	color: var(--page-color);
 	font-weight: bolder;
+	text-decoration: none;
+}
+
+.link-hover {
+	color: var(--page-color);
+	position: relative;
+
+	&:after {
+		content: '';
+		background-color: rgb(from var(--hover-color, var(--page-color)) r g b / 0.6);
+		position: absolute;
+		z-index: -1;
+		bottom: 0.1em;
+		left: 0;
+		right: 0;
+		height: 0.25em;
+		transition: height 0.15s ease-out;
+	}
+
+	&:hover,
+	&:focus-visible {
+		&:after {
+			height: 1em;
+		}
+	}
 }
 
 .text-white {
@@ -45,7 +69,8 @@ h3 {
 	font-size: 1.5rem;
 }
 
-p {
+p,
+a {
 	font-size: 1.25rem;
 
 	@media (width < $breakpoint-md) {
@@ -55,10 +80,6 @@ p {
 	@media (width < $breakpoint-sm) {
 		font-size: 1rem;
 	}
-}
-
-p + p {
-	margin-bottom: 1.25em;
 }
 
 .grab-copy-wrap {
