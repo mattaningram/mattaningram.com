@@ -20,8 +20,11 @@ a {
 	text-decoration: none;
 }
 
-.link-hover {
+p > a {
 	font-size: inherit;
+}
+
+.link-hover {
 	color: var(--page-color);
 	position: relative;
 
@@ -29,7 +32,7 @@ a {
 		content: '';
 		background-color: hsl(from var(--hover-color, var(--page-color)) h 90% 60% / 0.35);
 		position: absolute;
-		z-index: -1;
+		z-index: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;

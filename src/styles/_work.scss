@@ -41,6 +41,7 @@
 
 .section-text {
 	display: grid;
+	justify-items: start;
 	gap: var(--spacing-8);
 
 	@media (width < $breakpoint-md) {
