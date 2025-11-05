@@ -21,25 +21,26 @@ a {
 }
 
 .link-hover {
+	font-size: inherit;
 	color: var(--page-color);
 	position: relative;
 
 	&:after {
 		content: '';
-		background-color: rgb(from var(--hover-color, var(--page-color)) r g b / 0.6);
+		background-color: hsl(from var(--hover-color, var(--page-color)) h 90% 60% / 0.35);
 		position: absolute;
 		z-index: -1;
-		bottom: 0.1em;
+		bottom: 0;
 		left: 0;
 		right: 0;
-		height: 0.25em;
+		height: 0.15em;
 		transition: height 0.15s ease-out;
 	}
 
 	&:hover,
 	&:focus-visible {
 		&:after {
-			height: 1em;
+			height: 1.2em;
 		}
 	}
 }
