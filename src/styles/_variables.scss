@@ -47,12 +47,12 @@
 
 	/* Breakpoints */
 
-	--breakpoint-xs: $breakpoint-xs;
-	--breakpoint-sm: $breakpoint-sm;
-	--breakpoint-md: $breakpoint-md;
-	--breakpoint-lg: $breakpoint-lg;
-	--breakpoint-xl: $breakpoint-xl;
-	--breakpoint-xxl: $breakpoint-xxl;
+	--breakpoint-xs: #{$breakpoint-xs};
+	--breakpoint-sm: #{$breakpoint-sm};
+	--breakpoint-md: #{$breakpoint-md};
+	--breakpoint-lg: #{$breakpoint-lg};
+	--breakpoint-xl: #{$breakpoint-xl};
+	--breakpoint-xxl: #{$breakpoint-xxl};
 
 	/* Z-Indices */
 	--z-top: 9999;
