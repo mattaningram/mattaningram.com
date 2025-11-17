@@ -123,11 +123,19 @@ import WorkList from '@components/WorkList.astro'
 		}
 	}
 	.gif-hover {
-		--hover-color: var(--primary-blue);
+		--hover-color: var(--primary-red);
 		cursor: pointer;
 		position: relative;
 		white-space: nowrap;
 		font-weight: 500;
+
+		&:nth-child(2) {
+			--hover-color: var(--primary-blue);
+		}
+
+		&:nth-child(3) {
+			--hover-color: var(--primary-yellow);
+		}
 
 		&:hover {
 			.gif-video-wrap {

@@ -18,6 +18,10 @@ body {
 a {
 	font-weight: bolder;
 	text-decoration: none;
+
+	&:visited {
+		color: inherit;
+	}
 }
 
 p > a {
