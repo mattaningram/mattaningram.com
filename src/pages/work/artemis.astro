@@ -2,6 +2,10 @@
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
 import artemisSplashImage from '@media/artemis/artemis-splash-image.png'
+import taskCalendarImage from '@media/artemis/gallery/task-calendar.png'
+import prodTimelineImage from '@media/artemis/gallery/prod-timeline.png'
+import yieldReportImage from '@media/artemis/gallery/yield-report.png'
+import zoneMetricsImage from '@media/artemis/gallery/zone-metrics.png'
 import { Image } from 'astro:assets'
 
 export const frontmatter = {
@@ -13,12 +17,13 @@ export const frontmatter = {
 	logoOpen: 'artemis_logo_color.svg',
 	workUrl: 'https://artemisag.com',
 	color: 'rgb(255, 64, 22)',
+	details: ['Acquired by IUNU'],
 	description: `Artemis makes software to help farms grow. We helped simplify the complex management of people, plants, process, and legal compliance all in one place. At Artemis I was the lead designer through a significant redesign and refactor of the web and native apps to better serve large enterprise farms.`,
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="artemis-splash-image xyz-in" xyz="fade down duration-5 delay-8">
+	<div class="artemis-splash-image xyz-in" xyz="fade down duration-5 delay-7">
 		<Image
 			src={artemisSplashImage}
 			width={artemisSplashImage.width}
@@ -27,9 +32,94 @@ export const frontmatter = {
 		/>
 	</div>
 
-	<div class="image-carousel-wrap">
-		<ImageCarousel folder="artemis/gallery" width={300} />
+	<div class="artemis-carousel-section">
+		<div class="carousel-controls">
+			<a class="carousel-link" href="#artemisCalendar">
+				<h3 class="carousel-link-title">Coordinated Tasking</h3>
+				<p>
+					We mapped multi-week crop plans directly to actionable tasks so farm managers could keep people, plants, and
+					schedules aligned.
+				</p>
+			</a>
+
+			<a class="carousel-link" href="#artemisTimeline">
+				<h3 class="carousel-link-title">Production Visibility</h3>
+				<p>
+					A single timeline blended greenhouse zones, crop health checks, and harvest timeframes so operations could
+					react to change quickly.
+				</p>
+			</a>
+
+			<a class="carousel-link" href="#artemisReports">
+				<h3 class="carousel-link-title">Compliance Reporting</h3>
+				<p>
+					Detailed yield and batch reports pulled every activity into an audit-friendly trail, helping farms stay
+					compliant without extra work.
+				</p>
+			</a>
+
+			<a class="carousel-link" href="#artemisData">
+				<h3 class="carousel-link-title">Real-Time Monitoring</h3>
+				<p>
+					Zone metrics dashboards surfaced live climate and irrigation data so growers could correct issues before they
+					impacted output.
+				</p>
+			</a>
+		</div>
+		<div class="artemis-carousel xyz-in" xyz="stagger-1 fade small-3 down-2 delay-9">
+			<article class="artemis-card xyz-nested" id="artemisCalendar">
+				<div class="artemis-card-image">
+					<Image
+						src={taskCalendarImage}
+						width={taskCalendarImage.width}
+						height={taskCalendarImage.height}
+						alt="Artemis task calendar showing planned work"
+						loading="lazy"
+					/>
+				</div>
+			</article>
+
+			<article class="artemis-card xyz-nested" id="artemisTimeline">
+				<div class="artemis-card-image">
+					<Image
+						src={prodTimelineImage}
+						width={prodTimelineImage.width}
+						height={prodTimelineImage.height}
+						alt="Artemis production timeline view"
+						loading="lazy"
+					/>
+				</div>
+			</article>
+
+			<article class="artemis-card xyz-nested" id="artemisReports">
+				<div class="artemis-card-image">
+					<Image
+						src={yieldReportImage}
+						width={yieldReportImage.width}
+						height={yieldReportImage.height}
+						alt="Artemis yield report chart"
+						loading="lazy"
+					/>
+				</div>
+			</article>
+
+			<article class="artemis-card xyz-nested" id="artemisData">
+				<div class="artemis-card-image">
+					<Image
+						src={zoneMetricsImage}
+						width={zoneMetricsImage.width}
+						height={zoneMetricsImage.height}
+						alt="Artemis zone metrics dashboard"
+						loading="lazy"
+					/>
+				</div>
+			</article>
+		</div>
 	</div>
+
+	<!-- <div class="image-carousel-wrap">
+		<ImageCarousel folder="artemis/gallery" width={300} />
+	</div> -->
 
 	<div class="page-section skill-section">
 		<div class="skill-panel">
@@ -67,6 +157,87 @@ export const frontmatter = {
 			margin: 0 auto;
 			max-width: 100%;
 			width: 1024px;
+			height: auto;
+		}
+	}
+
+	.artemis-carousel-section {
+		margin-block: var(--page-section-margin);
+	}
+
+	.carousel-controls {
+		display: grid;
+		grid-auto-flow: column;
+		align-items: stretch;
+		max-width: var(--page-content-width);
+		padding: 0 var(--page-gutter);
+		margin-inline: auto;
+		margin-bottom: var(--spacing-8);
+	}
+
+	.carousel-link {
+		background-color: var(--bg-dark);
+		border: 1px solid var(--page-color);
+		padding: var(--spacing-6);
+		box-shadow: var(--shadow-md);
+		display: grid;
+		gap: var(--spacing-6);
+		align-content: start;
+
+		p {
+			font-size: 1rem;
+		}
+
+		& + & {
+			border-left: 0;
+		}
+
+		&:hover {
+			background-color: hsl(from var(--page-color) h s l / 0.1);
+		}
+	}
+
+	.carousel-link-title {
+		font-size: 1.125rem;
+		color: var(--page-color);
+	}
+
+	.artemis-carousel {
+		width: 100%;
+		display: grid;
+		grid-auto-flow: column;
+		margin-inline: auto;
+		padding-inline: var(--page-gutter);
+		padding-bottom: var(--page-gutter);
+		gap: var(--spacing-10);
+		overflow-x: scroll;
+		overflow-y: clip;
+		scroll-behavior: smooth;
+		scroll-snap-type: x mandatory;
+
+		&::before,
+		&::after {
+			content: '';
+			display: block;
+			width: 50vw;
+		}
+	}
+
+	.artemis-card {
+		width: 70vw;
+		max-width: $breakpoint-xl;
+		background-color: var(--bg-dark);
+		position: relative;
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
+	}
+
+	.artemis-card-image {
+		width: 100%;
+
+		img {
+			display: block;
+			width: 100%;
 			height: auto;
 		}
 	}
