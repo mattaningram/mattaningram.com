@@ -53,11 +53,11 @@
 			const now = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now()
 			const actual = Math.max(0, Math.round(now - startTime))
 
-			if (typeof console !== 'undefined' && console.log) {
-				console.log(
-					`[xyzCleanup] done -> ${describe(parent)} after ${actual}ms (expected ~${Math.round(expectedOverallMs)}ms)`
-				)
-			}
+			// if (typeof console !== 'undefined' && console.log) {
+			// 	console.log(
+			// 		`[xyzCleanup] done -> ${describe(parent)} after ${actual}ms (expected ~${Math.round(expectedOverallMs)}ms)`
+			// 	)
+			// }
 
 			parent.classList.remove('xyz-in')
 		}
@@ -94,16 +94,16 @@
 		})
 
 		// Logging for this parent: predicted wait time and per-target breakdown
-		if (typeof console !== 'undefined' && console.log) {
-			const breakdown = []
-			perElMeta.forEach((meta, el) => breakdown.push(`${describe(el)} ~${Math.round(meta.maxMs)}ms`))
+		// if (typeof console !== 'undefined' && console.log) {
+		// 	const breakdown = []
+		// 	perElMeta.forEach((meta, el) => breakdown.push(`${describe(el)} ~${Math.round(meta.maxMs)}ms`))
 
-			console.log(
-				`[xyzCleanup] waiting ~${Math.round(expectedOverallMs)}ms for ${describe(parent)}; targets: ${
-					perElMeta.size
-				} -> ${breakdown.join(', ')}`
-			)
-		}
+		// 	console.log(
+		// 		`[xyzCleanup] waiting ~${Math.round(expectedOverallMs)}ms for ${describe(parent)}; targets: ${
+		// 			perElMeta.size
+		// 		} -> ${breakdown.join(', ')}`
+		// 	)
+		// }
 
 		// If nothing to wait for (no animations detected), remove immediately
 		if (remaining === 0) removeParentClass()
