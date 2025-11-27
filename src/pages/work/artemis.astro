@@ -314,9 +314,9 @@ export const frontmatter = {
 		font-weight: 600;
 		color: var(--page-color);
 		transition:
-			background-color 200ms ease,
-			color 200ms ease,
-			box-shadow 200ms ease;
+			background-color 200ms ease-out,
+			color 200ms ease-out,
+			box-shadow 200ms ease-out;
 
 		&:hover {
 			background-color: hsl(from var(--page-color) h s l / 0.1);
@@ -324,10 +324,10 @@ export const frontmatter = {
 
 		&[data-active='true'] {
 			background-color: var(--page-color);
-			color: var(--text-color);
+			color: var(--bg-dark);
 
 			+ .carousel-link {
-				background-color: hsl(from var(--page-color) h s l / 0.2);
+				background-color: hsl(from var(--page-color) h s l / 0.15);
 
 				+ .carousel-link {
 					background-color: hsl(from var(--page-color) h s l / 0.05);
@@ -336,7 +336,7 @@ export const frontmatter = {
 		}
 
 		&:has(+ [data-active='true']) {
-			background-color: hsl(from var(--page-color) h s l / 0.2);
+			background-color: hsl(from var(--page-color) h s l / 0.15);
 		}
 
 		&:has(+ .carousel-link + [data-active='true']) {
