@@ -3,10 +3,47 @@ import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
 import artemisSplashImage from '@media/artemis/artemis-splash-image.png'
 import taskCalendarImage from '@media/artemis/gallery/task-calendar.png'
-import prodTimelineImage from '@media/artemis/gallery/prod-timeline.png'
+import templateEditImage from '@media/artemis/gallery/template-edit.png'
 import yieldReportImage from '@media/artemis/gallery/yield-report.png'
 import zoneMetricsImage from '@media/artemis/gallery/zone-metrics.png'
 import { Image } from 'astro:assets'
+
+const getControlId = (id) => `carousel-link-${id}`
+
+const carouselSlides = [
+	{
+		id: 'artemisCalendar',
+		title: 'Scheduling',
+		description:
+			'We mapped multi-week crop plans directly to actionable tasks so farm managers could keep people, plants, and schedules aligned.',
+		asset: taskCalendarImage,
+		alt: 'Artemis task calendar showing planned work',
+	},
+	{
+		id: 'artemisTemplate',
+		title: 'Planning',
+		description:
+			'The template editor allowed complex multi-step processes to be mapped out, automated, and adjusted to adapt to the latest metrics.',
+		asset: templateEditImage,
+		alt: 'Artemis crop template editor',
+	},
+	{
+		id: 'artemisReports',
+		title: 'Reporting',
+		description:
+			'Detailed yield and batch reports pulled every activity into an audit-friendly trail, helping farms stay compliant without extra work.',
+		asset: yieldReportImage,
+		alt: 'Artemis yield report chart',
+	},
+	{
+		id: 'artemisData',
+		title: 'Monitoring',
+		description:
+			'Zone metrics dashboards surfaced live climate and irrigation data so growers could correct issues before they impacted output.',
+		asset: zoneMetricsImage,
+		alt: 'Artemis zone metrics dashboard',
+	},
+]
 
 export const frontmatter = {
 	order: 3,
@@ -32,88 +69,57 @@ export const frontmatter = {
 		/>
 	</div>
 
-	<div class="artemis-carousel-section">
-		<div class="carousel-controls">
-			<a class="carousel-link" href="#artemisCalendar">
-				<h3 class="carousel-link-title">Coordinated Tasking</h3>
-				<p>
-					We mapped multi-week crop plans directly to actionable tasks so farm managers could keep people, plants, and
-					schedules aligned.
-				</p>
-			</a>
-
-			<a class="carousel-link" href="#artemisTimeline">
-				<h3 class="carousel-link-title">Production Visibility</h3>
-				<p>
-					A single timeline blended greenhouse zones, crop health checks, and harvest timeframes so operations could
-					react to change quickly.
-				</p>
-			</a>
-
-			<a class="carousel-link" href="#artemisReports">
-				<h3 class="carousel-link-title">Compliance Reporting</h3>
-				<p>
-					Detailed yield and batch reports pulled every activity into an audit-friendly trail, helping farms stay
-					compliant without extra work.
-				</p>
-			</a>
-
-			<a class="carousel-link" href="#artemisData">
-				<h3 class="carousel-link-title">Real-Time Monitoring</h3>
-				<p>
-					Zone metrics dashboards surfaced live climate and irrigation data so growers could correct issues before they
-					impacted output.
-				</p>
-			</a>
+	<div class="artemis-carousel-section" data-carousel="artemis">
+		<div class="carousel-controls" role="tablist">
+			{
+				carouselSlides.map((slide, index) => (
+					<button
+						type="button"
+						class="carousel-link"
+						data-slide-id={slide.id}
+						data-index={index}
+						id={getControlId(slide.id)}
+						aria-controls={slide.id}
+						role="tab"
+						aria-selected="false"
+					>
+						{slide.title}
+					</button>
+				))
+			}
 		</div>
-		<div class="artemis-carousel xyz-in" xyz="stagger-1 fade small-3 down-2 delay-9">
-			<article class="artemis-card xyz-nested" id="artemisCalendar">
-				<div class="artemis-card-image">
-					<Image
-						src={taskCalendarImage}
-						width={taskCalendarImage.width}
-						height={taskCalendarImage.height}
-						alt="Artemis task calendar showing planned work"
-						loading="lazy"
-					/>
-				</div>
-			</article>
-
-			<article class="artemis-card xyz-nested" id="artemisTimeline">
-				<div class="artemis-card-image">
-					<Image
-						src={prodTimelineImage}
-						width={prodTimelineImage.width}
-						height={prodTimelineImage.height}
-						alt="Artemis production timeline view"
-						loading="lazy"
-					/>
-				</div>
-			</article>
-
-			<article class="artemis-card xyz-nested" id="artemisReports">
-				<div class="artemis-card-image">
-					<Image
-						src={yieldReportImage}
-						width={yieldReportImage.width}
-						height={yieldReportImage.height}
-						alt="Artemis yield report chart"
-						loading="lazy"
-					/>
-				</div>
-			</article>
-
-			<article class="artemis-card xyz-nested" id="artemisData">
-				<div class="artemis-card-image">
-					<Image
-						src={zoneMetricsImage}
-						width={zoneMetricsImage.width}
-						height={zoneMetricsImage.height}
-						alt="Artemis zone metrics dashboard"
-						loading="lazy"
-					/>
-				</div>
-			</article>
+		<div class="carousel-stage">
+			<button type="button" class="carousel-nav-button" data-direction="prev" aria-label="Show previous slide">
+				<span aria-hidden="true">←</span>
+			</button>
+			<div class="artemis-carousel xyz-in" xyz="stagger-1 fade small-3 down-2 delay-9">
+				{
+					carouselSlides.map((slide) => (
+						<article
+							class="carousel-item xyz-nested"
+							id={slide.id}
+							data-slide-id={slide.id}
+							role="tabpanel"
+							aria-labelledby={getControlId(slide.id)}
+						>
+							<Image
+								class="carousel-item-image"
+								src={slide.asset}
+								width={slide.asset.width}
+								height={slide.asset.height}
+								alt={slide.alt}
+								loading="lazy"
+							/>
+							<div class="carousel-item-caption">
+								<p>{slide.description}</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+			<button type="button" class="carousel-nav-button" data-direction="next" aria-label="Show next slide">
+				<span aria-hidden="true">→</span>
+			</button>
 		</div>
 	</div>
 
@@ -144,6 +150,119 @@ export const frontmatter = {
 	</div>
 </WorkLayout>
 
+<script>
+	const initCarousel = () => {
+		const carouselRoot = document.querySelector('[data-carousel="artemis"]')
+		// Avoid double-binding during Astro client-side transitions
+		if (!carouselRoot || carouselRoot.dataset.carouselInitialized === 'true') return
+		carouselRoot.dataset.carouselInitialized = 'true'
+
+		// 1. Select Elements
+		const container = carouselRoot.querySelector('.artemis-carousel')
+		const slides = Array.from(container.querySelectorAll('.carousel-item'))
+		const controls = Array.from(carouselRoot.querySelectorAll('.carousel-link'))
+		const prevBtn = carouselRoot.querySelector('[data-direction="prev"]')
+		const nextBtn = carouselRoot.querySelector('[data-direction="next"]')
+
+		if (!container || slides.length === 0) return
+
+		// 2. State Management
+		// We map IDs to indices for O(1) lookups during interaction
+		const slideMap = new Map(slides.map((slide, i) => [slide.id, i]))
+		let currentIndex = 0
+
+		// 3. Update UI (Tabs, Slides, Arrows)
+		const updateActiveState = (index) => {
+			currentIndex = index
+
+			// Update Slides (for the scale/opacity CSS effect)
+			slides.forEach((slide, i) => {
+				slide.dataset.active = i === index ? 'true' : 'false'
+			})
+
+			// Update Tab Controls (highlight the active title)
+			controls.forEach((control, i) => {
+				const isActive = i === index
+				control.dataset.active = isActive ? 'true' : 'false'
+				control.setAttribute('aria-selected', isActive ? 'true' : 'false')
+			})
+
+			// Update Navigation Buttons (hide at start/end)
+			if (prevBtn) {
+				const shouldHide = index === 0
+				prevBtn.classList.toggle('is-hidden', shouldHide)
+				prevBtn.setAttribute('aria-hidden', String(shouldHide))
+			}
+
+			if (nextBtn) {
+				const shouldHide = index === slides.length - 1
+				nextBtn.classList.toggle('is-hidden', shouldHide)
+				nextBtn.setAttribute('aria-hidden', String(shouldHide))
+			}
+		}
+
+		// 4. The IntersectionObserver (The "Magic" Logic)
+		// Triggers only when a slide moves > 55% into view.
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const index = slideMap.get(entry.target.id)
+						// Only update if we have a valid index
+						if (index !== undefined) {
+							updateActiveState(index)
+						}
+					}
+				})
+			},
+			{
+				root: container,
+				threshold: 0.55, // Trigger when 55% of the slide is visible
+			}
+		)
+
+		// Start watching all slides
+		slides.forEach((slide) => observer.observe(slide))
+
+		// 5. Click Interactions
+		const scrollToSlide = (index) => {
+			const slide = slides[index]
+			if (!slide) return
+
+			// CSS Scroll Snap handles the physics, we just point to the location
+			slide.scrollIntoView({
+				behavior: 'smooth',
+				block: 'nearest',
+				inline: 'center',
+			})
+		}
+
+		// Tab Clicks
+		controls.forEach((control) => {
+			control.addEventListener('click', () => {
+				const targetId = control.dataset.slideId
+				const index = slideMap.get(targetId)
+				if (index !== undefined) scrollToSlide(index)
+			})
+		})
+
+		// Arrow Clicks
+		prevBtn?.addEventListener('click', () => scrollToSlide(currentIndex - 1))
+		nextBtn?.addEventListener('click', () => scrollToSlide(currentIndex + 1))
+
+		// Initial check to set state on load
+		updateActiveState(0)
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initCarousel)
+	} else {
+		initCarousel()
+	}
+
+	document.addEventListener('astro:page-load', initCarousel)
+</script>
+
 <style lang="scss">
 	@use '../../styles/_scssVariables' as *;
 
@@ -165,9 +284,15 @@ export const frontmatter = {
 		margin-block: var(--page-section-margin);
 	}
 
+	.carousel-stage {
+		width: 100%;
+		position: relative;
+	}
+
 	.carousel-controls {
 		display: grid;
 		grid-auto-flow: column;
+		grid-auto-columns: 1fr;
 		align-items: stretch;
 		max-width: var(--page-content-width);
 		padding: 0 var(--page-gutter);
@@ -176,30 +301,93 @@ export const frontmatter = {
 	}
 
 	.carousel-link {
-		background-color: var(--bg-dark);
-		border: 1px solid var(--page-color);
+		text-align: left;
+		// background-color: var(--bg-dark);
 		padding: var(--spacing-6);
-		box-shadow: var(--shadow-md);
 		display: grid;
 		gap: var(--spacing-6);
 		align-content: start;
-
-		p {
-			font-size: 1rem;
-		}
-
-		& + & {
-			border-left: 0;
-		}
+		cursor: pointer;
+		text-align: center;
+		font-size: 1.125rem;
+		line-height: 1.25;
+		font-weight: 600;
+		color: var(--page-color);
+		transition:
+			background-color 200ms ease,
+			color 200ms ease,
+			box-shadow 200ms ease;
 
 		&:hover {
 			background-color: hsl(from var(--page-color) h s l / 0.1);
 		}
+
+		&[data-active='true'] {
+			background-color: var(--page-color);
+			color: var(--text-color);
+
+			+ .carousel-link {
+				background-color: hsl(from var(--page-color) h s l / 0.2);
+
+				+ .carousel-link {
+					background-color: hsl(from var(--page-color) h s l / 0.05);
+				}
+			}
+		}
+
+		&:has(+ [data-active='true']) {
+			background-color: hsl(from var(--page-color) h s l / 0.2);
+		}
+
+		&:has(+ .carousel-link + [data-active='true']) {
+			background-color: hsl(from var(--page-color) h s l / 0.05);
+		}
+
+		@media (width < $breakpoint-lg) {
+			font-size: 1rem;
+			padding-inline: var(--spacing-4);
+		}
+
+		@media (width < $breakpoint-md) {
+			font-size: 0.875rem;
+		}
 	}
 
-	.carousel-link-title {
-		font-size: 1.125rem;
-		color: var(--page-color);
+	.carousel-nav-button {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 3rem;
+		height: 3rem;
+		border-radius: 999px;
+		border: 1px solid var(--page-color);
+		background-color: var(--bg-dark);
+		color: var(--text-light);
+		display: grid;
+		place-items: center;
+		cursor: pointer;
+		font-size: 1.25rem;
+		line-height: 1;
+		z-index: 1;
+		transition: 200ms ease-out;
+		transition-property: background-color, color, border;
+
+		&[data-direction='prev'] {
+			left: var(--spacing-8);
+		}
+
+		&[data-direction='next'] {
+			right: var(--spacing-8);
+		}
+
+		&:hover {
+			color: var(--page-color);
+			border-width: 2px;
+		}
+
+		&.is-hidden {
+			display: none;
+		}
 	}
 
 	.artemis-carousel {
@@ -207,13 +395,13 @@ export const frontmatter = {
 		display: grid;
 		grid-auto-flow: column;
 		margin-inline: auto;
-		padding-inline: var(--page-gutter);
 		padding-bottom: var(--page-gutter);
 		gap: var(--spacing-10);
 		overflow-x: scroll;
 		overflow-y: clip;
 		scroll-behavior: smooth;
 		scroll-snap-type: x mandatory;
+		scrollbar-width: 0;
 
 		&::before,
 		&::after {
@@ -221,24 +409,75 @@ export const frontmatter = {
 			display: block;
 			width: 50vw;
 		}
+
+		@media (width < $breakpoint-lg) {
+			gap: var(--spacing-4);
+		}
 	}
 
-	.artemis-card {
+	.carousel-item {
 		width: 70vw;
 		max-width: $breakpoint-xl;
-		background-color: var(--bg-dark);
 		position: relative;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
+
+		&[data-active='true'] {
+			.carousel-item-image {
+				scale: 1;
+				filter: saturate(100%) opacity(100%);
+			}
+
+			.carousel-item-caption {
+				opacity: 1;
+				translate: -50% 0;
+
+				@media (width < $breakpoint-lg) {
+					translate: 0;
+				}
+			}
+		}
+
+		@media (width < $breakpoint-lg) {
+			width: 85vw;
+		}
 	}
 
-	.artemis-card-image {
+	.carousel-item-image {
+		display: block;
 		width: 100%;
+		height: auto;
+		transition: 250ms ease-out;
+		transition-property: scale, filter;
+		scale: 0.95;
+		filter: saturate(50%) opacity(25%);
+	}
 
-		img {
-			display: block;
+	.carousel-item-caption {
+		position: absolute;
+		bottom: calc(var(--spacing-6) * -1);
+		left: 50%;
+		background-color: var(--bg-dark);
+		padding: var(--spacing-8);
+		border: 1px solid var(--page-color);
+		width: 32rem;
+		opacity: 0;
+		translate: -50% 24px;
+		transition: 250ms ease-out 250ms;
+		transition-property: opacity, translate;
+
+		p {
+			color: var(--text-color);
+			font-size: 1rem;
+		}
+
+		@media (width < $breakpoint-lg) {
+			position: relative;
+			left: initial;
+			bottom: initial;
+			translate: 0 24px;
 			width: 100%;
-			height: auto;
+			transition-delay: 0;
 		}
 	}
 </style>
