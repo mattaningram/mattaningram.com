@@ -1,0 +1,10 @@
+<svg viewBox="0 0 24 24" width="24" height="24">
+	<style>
+		.stroke {
+			stroke: var(--icon__color, currentColor);
+			stroke-width: var(--icon__stroke-width, 1.5);
+		}
+	</style>
+	<path class="stroke" d="M15 17L20 12L15 7" stroke-linecap="round" />
+	<path class="stroke" d="M20 12L4 12" stroke-linecap="round" />
+</svg>

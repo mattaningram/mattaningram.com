@@ -7,6 +7,7 @@ import templateEditImage from '@media/artemis/gallery/template-edit.png'
 import yieldReportImage from '@media/artemis/gallery/yield-report.png'
 import zoneMetricsImage from '@media/artemis/gallery/zone-metrics.png'
 import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
 
 const getControlId = (id) => `carousel-link-${id}`
 
@@ -90,7 +91,10 @@ export const frontmatter = {
 		</div>
 		<div class="carousel-stage">
 			<button type="button" class="carousel-nav-button" data-direction="prev" aria-label="Show previous slide">
-				<span aria-hidden="true">←</span>
+				<Icon name="arrow-left" size="28" />
+			</button>
+			<button type="button" class="carousel-nav-button" data-direction="next" aria-label="Show next slide">
+				<Icon name="arrow-right" size="28" />
 			</button>
 			<div class="artemis-carousel xyz-in" xyz="stagger-1 fade small-3 down-2 delay-9">
 				{
@@ -117,9 +121,6 @@ export const frontmatter = {
 					))
 				}
 			</div>
-			<button type="button" class="carousel-nav-button" data-direction="next" aria-label="Show next slide">
-				<span aria-hidden="true">→</span>
-			</button>
 		</div>
 	</div>
 
@@ -359,8 +360,7 @@ export const frontmatter = {
 		transform: translateY(-50%);
 		width: 3rem;
 		height: 3rem;
-		border-radius: 999px;
-		border: 1px solid var(--page-color);
+		box-shadow: 0 0 0 1px var(--page-color);
 		background-color: var(--bg-dark);
 		color: var(--text-light);
 		display: grid;
@@ -370,19 +370,22 @@ export const frontmatter = {
 		line-height: 1;
 		z-index: 1;
 		transition: 200ms ease-out;
-		transition-property: background-color, color, border;
+		transition-property: background-color, color, box-shadow;
 
 		&[data-direction='prev'] {
-			left: var(--spacing-8);
+			left: 0;
+			border-left: 0;
 		}
 
 		&[data-direction='next'] {
-			right: var(--spacing-8);
+			right: 0;
+			border-right: 0;
 		}
 
 		&:hover {
 			color: var(--page-color);
-			border-width: 2px;
+			box-shadow: 0 0 0 2px var(--page-color);
+			--icon__stroke-width: 2;
 		}
 
 		&.is-hidden {
