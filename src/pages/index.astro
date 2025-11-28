@@ -37,7 +37,7 @@ import WorkList from '@components/WorkList.astro'
 						<source src="assets/videos/sesame.webm" type="video/webm" />
 					</video>
 				</span></span
-			>Making glowing rectangles do cool stuff.
+			> Making glowing rectangles do cool stuff.
 		</p>
 	</section>
 
@@ -123,11 +123,19 @@ import WorkList from '@components/WorkList.astro'
 		}
 	}
 	.gif-hover {
-		--hover-color: var(--primary-blue);
+		--hover-color: var(--primary-red);
 		cursor: pointer;
 		position: relative;
 		white-space: nowrap;
 		font-weight: 500;
+
+		&:nth-child(2) {
+			--hover-color: var(--primary-blue);
+		}
+
+		&:nth-child(3) {
+			--hover-color: var(--primary-yellow);
+		}
 
 		&:hover {
 			.gif-video-wrap {
@@ -196,7 +204,7 @@ import WorkList from '@components/WorkList.astro'
 		}
 
 		@media (width < $breakpoint-sm) {
-			gap: var(--spacing-6);
+			gap: var(--spacing-7);
 		}
 	}
 
