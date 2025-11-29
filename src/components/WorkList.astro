@@ -86,24 +86,24 @@ const items = itemModules
 		&:hover {
 			.work-item {
 				--work-item-stack-lightness: 60%;
-				transform: translate3d(0, 0, 25px);
+				translate: 0 0 25px;
 				border-width: 2px;
 			}
 
 			.work-item-stack {
 				&:nth-child(1) {
 					--work-item-stack-lightness: 10%;
-					transform: translate3d(0, 0, -75px);
+					translate: 0 0 -75px;
 				}
 				&:nth-child(2) {
 					--work-item-stack-lightness: 20%;
-					transform: translate3d(0, 0, -50px);
+					translate: 0 0 -50px;
 				}
 				&:nth-child(3) {
-					transform: translate3d(0, 0, -25px);
+					translate: 0 0 -25px;
 				}
 				&:nth-child(4) {
-					transform: translate3d(0, 0, 0px);
+					translate: 0 0 0;
 				}
 			}
 		}
@@ -116,7 +116,7 @@ const items = itemModules
 		position: absolute;
 		inset: 0;
 		transition: 0.3s var(--ease-out-back);
-		transition-property: transform, background-color;
+		transition-property: translate, background-color;
 	}
 
 	.work-item-stack {
@@ -124,11 +124,11 @@ const items = itemModules
 		transform-origin: 50% 100%;
 
 		&:nth-child(1) {
-			transform: translate3d(0, 0, -50px);
+			translate: 0 0 -50px;
 			--work-item-stack-lightness: 20%;
 		}
 		&:nth-child(2) {
-			transform: translate3d(0, 0, -25px);
+			translate: 0 0 -25px;
 			--work-item-stack-lightness: 30%;
 		}
 		&:nth-child(3) {
