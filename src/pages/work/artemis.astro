@@ -356,40 +356,45 @@ export const frontmatter = {
 
 	.carousel-nav-button {
 		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		width: 3rem;
-		height: 3rem;
-		box-shadow: 0 0 0 1px var(--page-color);
-		background-color: var(--bg-dark);
-		color: var(--text-light);
+		top: 0;
+		bottom: 0;
+		width: 15vw;
+		color: var(--page-color);
 		display: grid;
 		place-items: center;
 		cursor: pointer;
-		font-size: 1.25rem;
-		line-height: 1;
 		z-index: 1;
 		transition: 200ms ease-out;
-		transition-property: background-color, color, box-shadow;
+		transition-property: background-color, color;
+
+		[data-icon] {
+			--icon__stroke-width: 0.5;
+			opacity: 0;
+			transition: 200ms ease-out;
+			transition-property: opacity, stroke-width;
+		}
 
 		&[data-direction='prev'] {
 			left: 0;
-			border-left: 0;
 		}
 
 		&[data-direction='next'] {
 			right: 0;
-			border-right: 0;
 		}
 
 		&:hover {
-			color: var(--page-color);
-			box-shadow: 0 0 0 2px var(--page-color);
-			--icon__stroke-width: 2;
+			[data-icon] {
+				--icon__stroke-width: 2;
+				opacity: 1;
+			}
 		}
 
 		&.is-hidden {
 			display: none;
+		}
+
+		@media (width < $breakpoint-lg) {
+			width: 10vw;
 		}
 	}
 
@@ -428,7 +433,7 @@ export const frontmatter = {
 		&[data-active='true'] {
 			.carousel-item-image {
 				scale: 1;
-				filter: saturate(100%) opacity(100%);
+				filter: saturate(100%) brightness(100%);
 			}
 
 			.carousel-item-caption {
@@ -442,7 +447,7 @@ export const frontmatter = {
 		}
 
 		@media (width < $breakpoint-lg) {
-			width: 85vw;
+			width: 80vw;
 		}
 	}
 
@@ -450,10 +455,10 @@ export const frontmatter = {
 		display: block;
 		width: 100%;
 		height: auto;
+		scale: 0.95;
+		filter: saturate(50%) brightness(25%);
 		transition: 250ms ease-out;
 		transition-property: scale, filter;
-		scale: 0.95;
-		filter: saturate(50%) opacity(25%);
 	}
 
 	.carousel-item-caption {
@@ -478,9 +483,14 @@ export const frontmatter = {
 			position: relative;
 			left: initial;
 			bottom: initial;
-			translate: 0 24px;
-			width: 100%;
-			transition-delay: 0;
+			translate: 0 -10%;
+			transform-origin: center top;
+			padding-top: calc(var(--spacing-8) + var(--spacing-6));
+			margin-top: calc(var(--spacing-6) * -1);
+			margin-inline: auto;
+			width: 90%;
+			transition-delay: 100ms;
+			z-index: -1;
 		}
 	}
 </style>
