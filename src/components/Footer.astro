@@ -1,11 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components'
+import Button from '@components/Button.astro'
 ---
 
 <footer class="main-footer" transition:name="footer">
-	<a href="mailto:mattaningram@gmail.com" class="button--themed email-me">
-		<span class="button__text">Say Hi</span>
-	</a>
+	<Button href="mailto:mattaningram@gmail.com"> Say Hi </Button>
 
 	<div class="contact-links-wrap">
 		<a class="contact-link" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
@@ -38,6 +37,8 @@ import { Icon } from 'astro-icon/components'
 		position: relative;
 		margin: 0 auto;
 		margin-top: var(--page-section-margin);
+		perspective: 800px;
+		transform-style: preserve-3d;
 	}
 
 	.contact-links-wrap {

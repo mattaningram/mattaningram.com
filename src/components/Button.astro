@@ -1,0 +1,84 @@
+---
+const { href, class: className, ...props } = Astro.props
+
+const Element = href ? 'a' : 'button'
+---
+
+<Element href={href} class:list={['button', className]} {...props}>
+	<div class="button__shadow" data-shadow="back"></div>
+	<div class="button__shadow" data-shadow="front"></div>
+	<slot />
+</Element>
+
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
+
+	.button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--bg-color);
+		text-decoration: none;
+		min-width: 180px;
+		min-height: 40px;
+		margin: 0 auto;
+		padding: var(--spacing-4) var(--spacing-8);
+		background-color: var(--page-color);
+		transform-style: preserve-3d;
+
+		&:hover,
+		&:focus {
+			outline: 0;
+
+			[data-shadow='back'] {
+				inset: -16px;
+				transform: translate(0, 0);
+			}
+
+			[data-shadow='front'] {
+				inset: -8px;
+				transform: translate(0, 0);
+			}
+		}
+
+		&:active {
+			[data-shadow='back'] {
+				inset: -32px;
+				transform: translate(0, 0);
+			}
+
+			[data-shadow='front'] {
+				inset: -16px;
+				transform: translate(0, 0);
+			}
+		}
+	}
+
+	.button__shadow {
+		content: '';
+		background-color: var(--page-color);
+		position: absolute;
+		inset: 0;
+		transition: 0.25s var(--ease-out-back);
+		transition-property: top, left, right, bottom, opacity;
+	}
+
+	[data-shadow='back'] {
+		opacity: 0.15;
+		left: 16px;
+		right: 16px;
+		transform: translate(0, 10px);
+	}
+
+	[data-shadow='front'] {
+		opacity: 0.35;
+		left: 8px;
+		right: 8px;
+		transform: translate(0, 5px);
+	}
+</style>
