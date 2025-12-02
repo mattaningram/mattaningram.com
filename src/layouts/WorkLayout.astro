@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import Button from '@components/Button.astro'
+import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 
 export interface Props {
 	title: string
@@ -31,41 +32,44 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 				xyz="fade down duration-5 ease-out-back"
 				transition:name={`work-${title.toLowerCase().replace(/\s+/g, '-')}-hero`}
 			>
-				<div class="work-header-top">
-					<div class="work-title-wrap xyz-in" xyz="fade left delay-4 ease-out-back">
+				<PerspectiveScroll perspective="600px">
+					<div class="work-header-top">
+						<div class="work-title-wrap xyz-in" xyz="fade left delay-4 ease-out-back">
+							{
+								logoOpen ? (
+									<img class="work-logo" src={`/assets/logos/${logoOpen}`} alt={`${title} Logo`} />
+								) : logo ? (
+									<img class="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
+								) : (
+									<h1 class="work-title">{title}</h1>
+								)
+							}
+						</div>
 						{
-							logoOpen ? (
-								<img class="work-logo" src={`/assets/logos/${logoOpen}`} alt={`${title} Logo`} />
-							) : logo ? (
-								<img class="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
-							) : (
-								<h1 class="work-title">{title}</h1>
+							workUrl && (
+								<Button href={workUrl} class="work-link" target="_blank">
+									Visit
+								</Button>
 							)
 						}
 					</div>
-					{
-						workUrl && (
-							<Button href={workUrl} class="work-link" target="_blank">
-								Visit
-							</Button>
-						)
-					}
-				</div>
-				<div class="work-header-bottom" xyz="fade narrow stagger delay-8 origin-left">
-					<div class="work-detail xyz-in">
-						<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">{position} &ndash; {year}</span>
+
+					<div class="work-header-bottom" xyz="fade narrow stagger delay-8 origin-left">
+						<div class="work-detail xyz-in">
+							<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">{position} &ndash; {year}</span>
+						</div>
+						{
+							details &&
+								details.map((detail) => (
+									<div class="work-detail xyz-in">
+										<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">
+											{detail}
+										</span>
+									</div>
+								))
+						}
 					</div>
-					{
-						details &&
-							details.map((detail) => (
-								<div class="work-detail xyz-in">
-									<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">
-										{detail}
-									</span>
-								</div>
-							))
-					}
-				</div>
+				</PerspectiveScroll>
 			</header>
 		</div>
 
@@ -139,6 +143,7 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 	.work-header {
 		background-color: var(--bg-dark);
 		border: 1px solid var(--page-color);
+		transform-style: preserve-3d;
 	}
 
 	.work-header-top {
@@ -148,6 +153,7 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		gap: var(--spacing-8);
 		padding: var(--spacing-10);
 		border-bottom: 1px solid var(--page-color);
+		transform-style: preserve-3d;
 
 		@media (width < $breakpoint-sm) {
 			padding: var(--spacing-8);
@@ -164,6 +170,7 @@ const { title, year, position, logo, logoOpen, workUrl, color, description, deta
 		flex-wrap: wrap;
 		margin-bottom: -1px;
 		margin-right: -1px;
+		transform-style: preserve-3d;
 	}
 
 	.work-background {

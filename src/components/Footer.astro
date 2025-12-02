@@ -1,10 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components'
 import Button from '@components/Button.astro'
+import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <footer class="main-footer" transition:name="footer">
-	<Button href="mailto:mattaningram@gmail.com"> Say Hi </Button>
+	<PerspectiveScroll>
+		<Button href="mailto:mattaningram@gmail.com"> Say Hi </Button>
+	</PerspectiveScroll>
 
 	<div class="contact-links-wrap">
 		<a class="contact-link" href="https://github.com/mattaningram" aria-label="Github" target="_blank">

@@ -29,6 +29,7 @@ const Element = href ? 'a' : 'button'
 		margin: 0 auto;
 		padding: var(--spacing-4) var(--spacing-8);
 		background-color: var(--page-color);
+		perspective-origin: 50% 50%;
 		transform-style: preserve-3d;
 
 		&:hover,
@@ -36,25 +37,26 @@ const Element = href ? 'a' : 'button'
 			outline: 0;
 
 			[data-shadow='back'] {
-				inset: -16px;
-				transform: translate(0, 0);
+				scale: 1.2 2;
 			}
 
 			[data-shadow='front'] {
-				inset: -8px;
-				transform: translate(0, 0);
+				scale: 1.1 1.5;
 			}
+		}
+
+		&:hover {
+			perspective: 800px;
+			transform-style: flat;
 		}
 
 		&:active {
 			[data-shadow='back'] {
-				inset: -32px;
-				transform: translate(0, 0);
+				scale: 1.4 3;
 			}
 
 			[data-shadow='front'] {
-				inset: -16px;
-				transform: translate(0, 0);
+				scale: 1.2 2;
 			}
 		}
 	}
@@ -65,20 +67,17 @@ const Element = href ? 'a' : 'button'
 		position: absolute;
 		inset: 0;
 		transition: 0.25s var(--ease-out-back);
-		transition-property: top, left, right, bottom, opacity;
+		transition-property: translate, scale, opacity;
+		z-index: -1;
 	}
 
 	[data-shadow='back'] {
 		opacity: 0.15;
-		left: 16px;
-		right: 16px;
-		transform: translate(0, 10px);
+		translate: 0 0 -20px;
 	}
 
 	[data-shadow='front'] {
 		opacity: 0.35;
-		left: 8px;
-		right: 8px;
-		transform: translate(0, 5px);
+		translate: 0 0 -10px;
 	}
 </style>

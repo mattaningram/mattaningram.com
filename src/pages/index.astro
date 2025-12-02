@@ -3,6 +3,7 @@ import HomeLayout from '@layouts/HomeLayout.astro'
 import Logo from '@components/Logo.astro'
 import Beliefs from '@components/Beliefs.astro'
 import WorkList from '@components/WorkList.astro'
+import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <HomeLayout>
@@ -46,7 +47,7 @@ import WorkList from '@components/WorkList.astro'
 		<Beliefs />
 	</section> -->
 
-	<section class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
+	<PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
 		<div class="work-stack">
 			<h2 class="home-section-title xyz-nested xyz-in">Work</h2>
 			<WorkList folder="work" />
@@ -55,7 +56,7 @@ import WorkList from '@components/WorkList.astro'
 			<h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
 			<WorkList folder="projects" />
 		</div>
-	</section>
+	</PerspectiveScroll>
 </HomeLayout>
 
 <script is:inline>
@@ -75,64 +76,8 @@ import WorkList from '@components/WorkList.astro'
 		btn.dataset.logoClickBound = 'true'
 	}
 
-	const initWorkPerspective = () => {
-		const workSection = document.querySelector('.work-section')
-		if (!workSection) return
-
-		let ticking = false
-		let sectionTop = 0
-		let sectionLeft = 0
-
-		const updateMetrics = () => {
-			const rect = workSection.getBoundingClientRect()
-			sectionTop = rect.top + window.scrollY
-			sectionLeft = rect.left + window.scrollX
-			requestUpdate()
-		}
-
-		const update = () => {
-			const scrollY = window.scrollY
-			const scrollX = window.scrollX
-			const viewportCenterX = window.innerWidth / 2
-			const viewportCenterY = window.innerHeight / 2
-
-			const originX = viewportCenterX - (sectionLeft - scrollX)
-			const originY = viewportCenterY - (sectionTop - scrollY)
-
-			workSection.style.perspectiveOrigin = `${originX}px ${originY}px`
-			ticking = false
-		}
-
-		const requestUpdate = () => {
-			if (!ticking) {
-				window.requestAnimationFrame(update)
-				ticking = true
-			}
-		}
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						updateMetrics()
-						window.addEventListener('scroll', requestUpdate, { passive: true })
-						window.addEventListener('resize', updateMetrics, { passive: true })
-						requestUpdate()
-					} else {
-						window.removeEventListener('scroll', requestUpdate)
-						window.removeEventListener('resize', updateMetrics)
-					}
-				})
-			},
-			{ rootMargin: '100px' }
-		)
-
-		observer.observe(workSection)
-	}
-
 	document.addEventListener('astro:page-load', () => {
 		initLogoButton()
-		initWorkPerspective()
 	})
 </script>
 
@@ -256,8 +201,6 @@ import WorkList from '@components/WorkList.astro'
 		display: flex;
 		justify-content: center;
 		gap: var(--spacing-10);
-		perspective: 800px;
-		perspective-origin: 50% 50%;
 
 		@media (width < $breakpoint-lg) {
 			gap: var(--spacing-8);
