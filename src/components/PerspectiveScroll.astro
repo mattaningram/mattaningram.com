@@ -1,0 +1,107 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	perspective?: string | number
+	[key: string]: any
+}
+
+const { as: Tag = 'div', class: className, perspective = '800px', style, ...props } = Astro.props
+
+const cssVars = {
+	'--perspective': perspective,
+}
+
+let combinedStyle = cssVars
+if (style) {
+	if (typeof style === 'string') {
+		combinedStyle = `--perspective: ${perspective}; ${style}` as any
+	} else if (typeof style === 'object') {
+		combinedStyle = { ...cssVars, ...style }
+	}
+}
+---
+
+<Tag class:list={['perspective-scroll', className]} style={combinedStyle} {...props}>
+	<slot />
+</Tag>
+
+<style>
+	.perspective-scroll {
+		perspective: var(--perspective);
+		perspective-origin: 50% 50%;
+	}
+</style>
+
+<script>
+	const initPerspectiveScroll = () => {
+		const containers = document.querySelectorAll('.perspective-scroll')
+		if (!containers.length) return
+
+		containers.forEach((container) => {
+			// Check if already initialized to avoid duplicate observers
+			if (container instanceof HTMLElement && container.dataset.perspectiveInitialized === 'true') return
+
+			let ticking = false
+			let sectionTop = 0
+			let sectionLeft = 0
+
+			const updateMetrics = () => {
+				const rect = container.getBoundingClientRect()
+				sectionTop = rect.top + window.scrollY
+				sectionLeft = rect.left + window.scrollX
+				requestUpdate()
+			}
+
+			const update = () => {
+				const scrollY = window.scrollY
+				const scrollX = window.scrollX
+				const viewportCenterX = window.innerWidth / 2
+				const viewportCenterY = window.innerHeight / 2
+
+				const originX = viewportCenterX - (sectionLeft - scrollX)
+				const originY = viewportCenterY - (sectionTop - scrollY)
+
+				if (container instanceof HTMLElement) {
+					container.style.perspectiveOrigin = `${originX}px ${originY}px`
+				}
+				ticking = false
+			}
+
+			const requestUpdate = () => {
+				if (!ticking) {
+					window.requestAnimationFrame(update)
+					ticking = true
+				}
+			}
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							updateMetrics()
+							window.addEventListener('scroll', requestUpdate, { passive: true })
+							window.addEventListener('resize', updateMetrics, { passive: true })
+							requestUpdate()
+						} else {
+							window.removeEventListener('scroll', requestUpdate)
+							window.removeEventListener('resize', updateMetrics)
+						}
+					})
+				},
+				{ rootMargin: '100px' }
+			)
+
+			observer.observe(container)
+			if (container instanceof HTMLElement) {
+				container.dataset.perspectiveInitialized = 'true'
+			}
+		})
+	}
+
+	// Initialize on load and after Astro swaps pages
+	document.addEventListener('astro:page-load', initPerspectiveScroll)
+
+	// Also run immediately in case the script loads after the event
+	initPerspectiveScroll()
+</script>

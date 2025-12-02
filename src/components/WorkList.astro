@@ -27,17 +27,12 @@ const items = itemModules
 <div class="work-list-wrap" xyz="fade stagger-1 delay-10 down-2 small-2">
 	{
 		items.map((item) => (
-			<a
-				href={item.url}
-				class="work-item-wrap xyz-in"
-				style={`--page-color: ${item.color};`}
-				transition:name={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
-			>
+			<a href={item.url} class="work-item-wrap xyz-in" style={`--page-color: ${item.color};`}>
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />
 				<div class="work-item-stack" />
-				<div class="work-item">
+				<div class="work-item" transition:name={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}>
 					{item.logo ? (
 						<img
 							class="work-item-logo"
@@ -62,6 +57,7 @@ const items = itemModules
 		justify-content: center;
 		align-items: stretch;
 		gap: var(--spacing-11);
+		transform-style: preserve-3d;
 
 		@media (width < $breakpoint-md) {
 			gap: var(--spacing-10);
@@ -73,10 +69,8 @@ const items = itemModules
 	}
 
 	.work-item-wrap {
+		display: grid;
 		height: 11rem;
-		position: relative;
-		perspective: 600px;
-		perspective-origin: 50% 200%;
 		transform-style: preserve-3d;
 
 		@media (width < $breakpoint-sm) {
@@ -84,10 +78,18 @@ const items = itemModules
 		}
 
 		&:hover {
+			.work-item-stack,
+			.work-item {
+				transition-timing-function: var(--ease-out-back);
+			}
 			.work-item {
 				--work-item-stack-lightness: 60%;
 				translate: 0 0 25px;
 				border-width: 2px;
+
+				&:after {
+					opacity: 1;
+				}
 			}
 
 			.work-item-stack {
@@ -113,15 +115,13 @@ const items = itemModules
 	.work-item {
 		--work-item-stack-lightness: 50%;
 		border: 1px solid hsl(from var(--page-color) h s var(--work-item-stack-lightness));
-		position: absolute;
-		inset: 0;
-		transition: 0.3s var(--ease-out-back);
+		grid-area: 1 / 1;
+		transition: 0.3s var(--ease-out-quad);
 		transition-property: translate, background-color;
 	}
 
 	.work-item-stack {
 		background-color: var(--bg-color);
-		transform-origin: 50% 100%;
 
 		&:nth-child(1) {
 			translate: 0 0 -50px;
@@ -140,15 +140,11 @@ const items = itemModules
 	}
 
 	.work-item {
-		background-color: hsl(from var(--page-color) h s 7%);
-
-		display: block;
-		text-align: center;
-		text-decoration: none;
+		position: relative;
 		display: grid;
 		place-content: center;
+		background-color: hsl(from var(--page-color) h s 7%);
 		transform-style: preserve-3d;
-		overflow: hidden;
 
 		&:after {
 			content: '';
@@ -158,12 +154,6 @@ const items = itemModules
 			opacity: 0;
 			background: radial-gradient(at 15% 0%, hsl(from var(--page-color) h s l / 60%), transparent);
 			transition: opacity 0.5s var(--ease-out-quad);
-		}
-
-		&:hover {
-			&:after {
-				opacity: 1;
-			}
 		}
 	}
 

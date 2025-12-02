@@ -3,6 +3,7 @@ import HomeLayout from '@layouts/HomeLayout.astro'
 import Logo from '@components/Logo.astro'
 import Beliefs from '@components/Beliefs.astro'
 import WorkList from '@components/WorkList.astro'
+import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <HomeLayout>
@@ -46,7 +47,7 @@ import WorkList from '@components/WorkList.astro'
 		<Beliefs />
 	</section> -->
 
-	<section class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
+	<PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
 		<div class="work-stack">
 			<h2 class="home-section-title xyz-nested xyz-in">Work</h2>
 			<WorkList folder="work" />
@@ -55,7 +56,7 @@ import WorkList from '@components/WorkList.astro'
 			<h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
 			<WorkList folder="projects" />
 		</div>
-	</section>
+	</PerspectiveScroll>
 </HomeLayout>
 
 <script is:inline>
@@ -75,7 +76,9 @@ import WorkList from '@components/WorkList.astro'
 		btn.dataset.logoClickBound = 'true'
 	}
 
-	document.addEventListener('astro:page-load', initLogoButton)
+	document.addEventListener('astro:page-load', () => {
+		initLogoButton()
+	})
 </script>
 
 <style lang="scss">
@@ -213,5 +216,6 @@ import WorkList from '@components/WorkList.astro'
 		justify-items: start;
 		flex-grow: 1;
 		flex-basis: 0;
+		transform-style: preserve-3d;
 	}
 </style>
