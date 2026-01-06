@@ -86,9 +86,9 @@ a {
 		font-size: 1.125rem;
 	}
 
-	@media (width < $breakpoint-sm) {
-		font-size: 1rem;
-	}
+	// @media (width < $breakpoint-sm) {
+	// 	font-size: 1rem;
+	// }
 }
 
 .grab-copy-wrap {

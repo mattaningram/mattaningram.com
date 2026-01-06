@@ -9,11 +9,14 @@ import ApplicationSignup from '@media/revel/onboarding/application-signup.png'
 import MarketingSignup from '@media/revel/onboarding/marketing-signup.jpg'
 import OriginalOnboarding from '@media/revel/onboarding/driver-onboarding-incomplete.png'
 import SimplerOnboarding from '@media/revel/onboarding/driver-onboarding-improved.png'
-import ExampleLicenses from '@media/revel/onboarding/example-licenses.jpg'
-import ThanksHireMe from '@media/revel/onboarding/thanks-hire-me.png'
+import AddLicense from '@media/revel/onboarding/add-license.png'
+import ConfirmLicense from '@media/revel/onboarding/confirm-license.png'
+import TakePhoto from '@media/revel/onboarding/take-photo.png'
+import BringYourCar from '@media/revel/onboarding/bring-your-car.png'
+import ThanksSignUp from '@media/revel/onboarding/thanks-sign-up.png'
 
 export const frontmatter = {
-	title: 'Driver Onboarding',
+	title: 'Driver Onboarding Conversion',
 	logo: 'revel_logo_color.svg',
 	logoUrl: '/work/revel',
 	color: 'rgb(1, 185, 242)',
@@ -21,13 +24,13 @@ export const frontmatter = {
 ---
 
 <StudyLayout {...frontmatter}>
-	<div class="study-section">
+	<section class="study-section">
 		<div class="section-text">
 			<h2 class="section-header">Not enough drivers</h2>
 			<p class="section-copy">
 				We had thousands of people applying to drive with Revel, but only a small percentage of them were eligible to
-				drive or didn't fully complete the application process. Additionally once an applicant got initial approval, the
-				onboarding process was complex and confusing, leading to very long completion times.
+				drive, and many didn't fully complete the application process. Additionally once an applicant got initial
+				approval, the onboarding process was complex and confusing, leading to very long completion times.
 			</p>
 			<p class="section-copy">
 				We were trying to grow our driver supply rapidly, so tackling this bottleneck was critical. Addressing complex
@@ -53,9 +56,9 @@ export const frontmatter = {
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="study-section">
+	<section class="study-section">
 		<div class="section-text">
 			<h2 class="section-header">Discovery vs completion</h2>
 			<p class="section-copy">
@@ -87,9 +90,9 @@ export const frontmatter = {
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="study-section">
+	<section class="study-section">
 		<div class="section-text">
 			<h2 class="section-header">Automate, simplify, reduce</h2>
 			<p class="section-copy">
@@ -122,9 +125,9 @@ export const frontmatter = {
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="study-section">
+	<section class="study-section">
 		<div class="section-text">
 			<h2 class="section-header">Leading by example</h2>
 			<p class="section-copy">
@@ -135,24 +138,29 @@ export const frontmatter = {
 			<p class="section-copy">
 				To address this I provided examples of the correct licenses at the relevant steps, as well as clear instructions
 				on how to take a clean photo of them. Once a photo was taken, I simplified the process of reviewing the photo
-				and optionally taking a new one which previously was not as obvious. Finally we addressed "lost" applications by
-				saving their state and sending a link to applicants so they could pick it up from the same point later.
+				and optionally taking a new one which previously was not as obvious.
+			</p>
+			<p class="section-copy">
+				Finally we addressed "lost" applications by saving their state and sending a link to applicants so they could
+				pick it up from the same point later.
 			</p>
 		</div>
 		<div class="section-content">
 			<div class="image-scroll">
+				<Image src={AddLicense} width="320" alt="Revel Add License Screen" class="gallery-image" layout="constrained" />
+				<Image src={TakePhoto} width="320" alt="Revel Take Photo Screen" class="gallery-image" layout="constrained" />
 				<Image
-					src={ExampleLicenses}
-					width="600"
-					alt="Revel Original Driver Onboarding Screen"
+					src={ConfirmLicense}
+					width="320"
+					alt="Revel Confirm License Screen"
 					class="gallery-image"
 					layout="constrained"
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="study-section">
+	<section class="study-section">
 		<div class="section-text">
 			<h2 class="section-header">Results, results, results</h2>
 			<p class="section-copy">
@@ -170,7 +178,14 @@ export const frontmatter = {
 		<div class="section-content">
 			<div class="image-scroll">
 				<Image
-					src={ThanksHireMe}
+					src={BringYourCar}
+					width="320"
+					alt="Revel Bring Your Car Screen"
+					class="gallery-image"
+					layout="constrained"
+				/>
+				<Image
+					src={ThanksSignUp}
 					width="320"
 					alt="Revel Original Driver Onboarding Screen"
 					class="gallery-image"
@@ -178,64 +193,5 @@ export const frontmatter = {
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 </StudyLayout>
-
-<style lang="scss">
-	@use '../../../styles/_scssVariables' as *;
-
-	.study-section {
-		display: grid;
-		grid-template-columns: 2fr 3fr;
-		width: 100vw;
-		min-height: 100vh;
-
-		@media (width < $breakpoint-xl) {
-			grid-template-columns: 1fr;
-			min-height: auto;
-		}
-
-		& + & {
-			margin-top: var(--page-section-margin);
-		}
-	}
-
-	.section-text {
-		display: grid;
-		max-width: 48ch;
-		margin: auto;
-		text-wrap: balance;
-		padding: var(--spacing-12);
-	}
-
-	.section-content {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--spacing-12);
-
-		@media (width < $breakpoint-xl) {
-			align-items: flex-start;
-			padding: 0;
-			width: 100vw;
-		}
-
-		img {
-			min-width: 320px;
-		}
-	}
-
-	.image-scroll {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--spacing-8);
-
-		@media (width < $breakpoint-xl) {
-			justify-content: flex-start;
-			align-items: flex-start;
-			overflow-x: auto;
-			padding: 0 var(--spacing-8);
-		}
-	}
-</style>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
-import Header from '@components/Header.astro'
-import Footer from '@components/Footer.astro'
+import Logo from '@components/Logo.astro'
+import { Icon } from 'astro-icon/components'
 
 export interface Props {
 	title: string
@@ -16,20 +16,127 @@ const { title, logo, logoUrl, color } = Astro.props
 <BaseLayout title={title} pageColor={color} class={`study-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
 	<div class="study-background"></div>
 
-	<Header />
+	<nav class="study-header">
+		<a class="m-logo-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
+		<h1 class="study-title">{title}</h1>
+		<a href={logoUrl} class="study-logo-link">
+			<img class="study-logo" transition:name="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
+		</a>
+	</nav>
 
-	<main>
-		<div class="study-header-wrap">
-			<a href={logoUrl} class="study-logo-link">
-				<img class="study-logo" transition:name="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
-			</a>
-			<h1 class="study-title">{title}</h1>
-		</div>
+	<main class="slideshow-container">
+		<slot />
 	</main>
-	<slot />
+
+	<nav class="slideshow-nav" aria-label="Slide navigation">
+		<div class="slideshow-dots"></div>
+		<div class="slideshow-arrows">
+			<button class="slideshow-arrow slideshow-prev" aria-label="Previous slide">
+				<Icon name="arrow-left" size={20} />
+			</button>
+			<button class="slideshow-arrow slideshow-next" aria-label="Next slide">
+				<Icon name="arrow-right" size={20} />
+			</button>
+		</div>
+	</nav>
 </BaseLayout>
 
-<Footer />
+<script>
+	function initSlideshow() {
+		const container = document.querySelector('.slideshow-container') as HTMLElement
+		const dotsContainer = document.querySelector('.slideshow-dots') as HTMLElement
+		const prevBtn = document.querySelector('.slideshow-prev') as HTMLButtonElement
+		const nextBtn = document.querySelector('.slideshow-next') as HTMLButtonElement
+
+		if (!container || !dotsContainer) return
+
+		const slides = Array.from(container.querySelectorAll(':scope > section')) as HTMLElement[]
+		if (slides.length === 0) return
+
+		let currentSlide = 0
+
+		// Handle initial hash before creating dots
+		const hash = window.location.hash
+		if (hash.startsWith('#slide-')) {
+			const slideNum = parseInt(hash.replace('#slide-', ''), 10)
+			if (slideNum > 0 && slideNum <= slides.length) {
+				currentSlide = slideNum - 1
+			}
+		}
+
+		// Create dots
+		slides.forEach((_, index) => {
+			const dot = document.createElement('button')
+			dot.classList.add('slideshow-dot')
+			dot.setAttribute('aria-label', `Go to slide ${index + 1}`)
+			if (index === currentSlide) dot.classList.add('active')
+			dot.addEventListener('click', () => goToSlide(index))
+			dotsContainer.appendChild(dot)
+		})
+
+		const dots = dotsContainer.querySelectorAll('.slideshow-dot')
+
+		function updateSlides() {
+			slides.forEach((slide, index) => {
+				slide.classList.toggle('active', index === currentSlide)
+			})
+		}
+
+		function updateDots() {
+			dots.forEach((dot, index) => {
+				dot.classList.toggle('active', index === currentSlide)
+			})
+		}
+
+		function updateHash() {
+			const newHash = currentSlide === 0 ? '' : `#slide-${currentSlide + 1}`
+			history.replaceState(null, '', newHash || window.location.pathname)
+		}
+
+		function goToSlide(index: number) {
+			if (index < 0 || index >= slides.length) return
+			currentSlide = index
+			updateSlides()
+			updateDots()
+			updateHash()
+			window.scrollTo(0, 0)
+		}
+
+		function nextSlide() {
+			if (currentSlide < slides.length - 1) {
+				goToSlide(currentSlide + 1)
+			}
+		}
+
+		function prevSlide() {
+			if (currentSlide > 0) {
+				goToSlide(currentSlide - 1)
+			}
+		}
+
+		// Keyboard navigation
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+				e.preventDefault()
+				nextSlide()
+			} else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+				e.preventDefault()
+				prevSlide()
+			}
+		})
+
+		// Arrow button clicks
+		prevBtn?.addEventListener('click', prevSlide)
+		nextBtn?.addEventListener('click', nextSlide)
+
+		// Initialize slides
+		updateSlides()
+	}
+
+	// Initialize on page load and after Astro view transitions
+	initSlideshow()
+	document.addEventListener('astro:after-swap', initSlideshow)
+</script>
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;
@@ -44,14 +151,17 @@ const { title, logo, logoUrl, color } = Astro.props
 		background-position-y: 60%;
 	}
 
-	.study-header-wrap {
-		display: grid;
-		justify-items: center;
-		gap: var(--spacing-8);
-		width: var(--page-content-width);
-		max-width: 100%;
-		margin: 0 auto;
-		padding: 0 var(--page-gutter);
+	.study-header {
+		position: sticky;
+		top: 5px;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--spacing-6);
+		padding: var(--spacing-5);
+		z-index: 10;
 	}
 
 	.study-logo-link {
@@ -61,12 +171,167 @@ const { title, logo, logoUrl, color } = Astro.props
 	.study-logo {
 		display: block;
 		width: 100%;
-		max-width: 240px;
-		max-height: 48px;
+		max-width: 200px;
+		max-height: 20px;
+		margin-bottom: 4px;
 	}
 
 	.study-title {
-		font-size: 3rem;
-		text-align: center;
+		font-size: 1.25rem;
+		font-weight: 500;
+
+		@media (width < $breakpoint-lg) {
+			font-size: 1rem;
+		}
+	}
+
+	.slideshow-container {
+		display: flex;
+		flex-grow: 1;
+		flex-basis: 0;
+	}
+
+	.slideshow-nav {
+		background: hsl(from var(--gray-0) h s l / 50%);
+		backdrop-filter: blur(8px);
+		position: fixed;
+		bottom: var(--spacing-6);
+		left: var(--spacing-6);
+		right: var(--spacing-6);
+		display: flex;
+		flex-direction: row;
+		z-index: 10;
+		min-height: 40px;
+		border: 1px solid hsl(from white h s l / 25%);
+
+		@media (width < $breakpoint-sm) {
+			bottom: var(--spacing-2);
+		}
+	}
+
+	.slideshow-dots {
+		display: flex;
+		flex-grow: 1;
+	}
+
+	:global(.slideshow-dot) {
+		flex-grow: 1;
+		flex-basis: 0;
+		background: transparent;
+		padding: 0;
+		cursor: pointer;
+		transition:
+			opacity 0.2s,
+			background-color 0.2s;
+
+		& + & {
+			border-left: 1px solid hsl(from white h s l / 25%);
+		}
+
+		&:hover {
+			color: var(--page-color);
+			background: hsl(from var(--page-color) h s l / 0.1);
+		}
+
+		&.active {
+			background: var(--page-color);
+		}
+	}
+
+	.slideshow-arrows {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.slideshow-arrow {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-left: 1px solid hsl(from white h s l / 25%);
+		color: white;
+		cursor: pointer;
+		padding-inline: var(--spacing-6);
+		transition: opacity 0.2s;
+
+		&:hover {
+			color: var(--page-color);
+			background: hsl(from var(--page-color) h s l / 0.1);
+		}
+	}
+</style>
+
+<style lang="scss" is:global>
+	@use '../styles/scssVariables' as *;
+
+	.study-section {
+		display: none;
+		flex-grow: 1;
+		flex-basis: 0;
+		grid-template-columns: 2fr 3fr;
+		width: 100%;
+		padding-bottom: 4rem;
+
+		&.active {
+			display: grid;
+		}
+
+		@media (width < $breakpoint-lg) {
+			grid-template-columns: 1fr;
+			align-content: start;
+		}
+	}
+
+	.section-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		max-width: 48ch;
+		margin: auto;
+		text-wrap: balance;
+		padding: var(--spacing-12);
+
+		@media (width < $breakpoint-lg) {
+			padding-top: var(--spacing-10);
+		}
+	}
+
+	.section-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--spacing-12);
+
+		@media (width < $breakpoint-lg) {
+			align-items: flex-start;
+			padding: 0;
+			padding-bottom: var(--spacing-8);
+			width: 100%;
+		}
+
+		img {
+			flex-grow: 1;
+			flex-basis: 0;
+			width: 33%;
+
+			@media (width < $breakpoint-lg) {
+				max-height: 80svh;
+				width: 100%;
+				object-fit: contain;
+			}
+		}
+	}
+
+	.image-scroll {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-8);
+
+		@media (width < $breakpoint-lg) {
+			justify-content: flex-start;
+			align-items: flex-start;
+			padding: 0 var(--spacing-8);
+			overflow-x: auto;
+		}
 	}
 </style>

@@ -3,6 +3,10 @@ import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
 
 import { Image } from 'astro:assets'
+
+import ThanksSignUp from '@media/revel/onboarding/thanks-sign-up.png'
+import DriverMarketing from '@media/revel/onboarding/driver-marketing.png'
+
 import RevelTeslaSide from '@media/revel/revel-tesla-side.png'
 import RevelMoped from '@media/revel/revel-moped.png'
 import RevelCharger from '@media/revel/revel-charger.png'
@@ -31,6 +35,31 @@ export const frontmatter = {
 ---
 
 <WorkLayout {...frontmatter}>
+	<div class="page-section">
+		<a href="/work/revel/onboarding" class="case-study-link">
+			<div class="case-study-left">
+				<div class="case-study-pill">Case Study</div>
+				Increasing driver onboarding conversion by 15%
+			</div>
+			<div class="case-study-image">
+				<Image
+					class="driver-marketing"
+					src={DriverMarketing}
+					width="80"
+					alt="Revel driver onboarding marketing image"
+					layout="constrained"
+				/>
+				<Image
+					class="thanks-sign-up"
+					src={ThanksSignUp}
+					width="80"
+					alt="Revel driver onboarding thanks sign up image"
+					layout="constrained"
+				/>
+			</div>
+		</a>
+	</div>
+
 	<div id="revel-products" class="page-section page-section--row page-section--left xyz-in" xyz="fade down delay-10">
 		<div class="section-text-wrap">
 			<div class="section-text">
@@ -90,7 +119,6 @@ export const frontmatter = {
 					while on the road. Features like real-time demand maps and in-app support helped drivers maximize their
 					earnings and stay safe.
 				</p>
-				<!-- <a href="/work/revel/onboarding" class="link-hover">Learn how we increased onboarding conversion by 15%</a> -->
 			</div>
 		</div>
 		<div class="section-content-block">
@@ -220,13 +248,98 @@ export const frontmatter = {
 			</div>
 		</div>
 	</div>
-	<!-- 
-	<div class="image-carousel-wrap revel-images">
-		<ImageCarousel folder="revel/gallery" />
-	</div> -->
 
 	<style lang="scss">
 		@use '../../styles/_scssVariables' as *;
+
+		.case-study-link {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: var(--spacing-4);
+			color: var(--page-color);
+			background-color: hsl(from var(--page-color) h s l / 0.15);
+			width: 100%;
+			font-size: 1.375rem;
+			font-weight: 600;
+			text-decoration: none;
+			transition: background-color 0.2s ease-out;
+
+			@media (width < $breakpoint-md) {
+				font-size: 1.125rem;
+			}
+
+			.case-study-image {
+				display: flex;
+				justify-content: flex-end;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				padding-right: var(--spacing-6);
+				overflow: hidden;
+				width: 200px;
+
+				@media (width < $breakpoint-md) {
+					right: -2rem;
+				}
+			}
+
+			img {
+				position: relative;
+				border-radius: var(--spacing-3);
+				overflow: hidden;
+				rotate: 4deg;
+				transition: 0.3s var(--ease-out-back);
+				transition-property: translate, rotate;
+			}
+
+			.driver-marketing {
+				transform-origin: top left;
+				translate: -5% 25%;
+				rotate: -4deg;
+				z-index: 1;
+			}
+
+			.thanks-sign-up {
+				transform-origin: top right;
+				translate: 5% 25%;
+				rotate: 4deg;
+			}
+
+			&:hover {
+				background-color: hsl(from var(--page-color) h s l / 0.25);
+				.driver-marketing {
+					rotate: -8deg;
+					translate: -20% 10%;
+				}
+
+				.thanks-sign-up {
+					rotate: 8deg;
+					translate: 20% 10%;
+				}
+			}
+		}
+
+		.case-study-left {
+			display: grid;
+			gap: var(--spacing-4);
+			padding: var(--spacing-8);
+			padding-right: 200px;
+
+			@media (width < $breakpoint-md) {
+				padding-right: 160px;
+			}
+		}
+
+		.case-study-pill {
+			width: fit-content;
+			background-color: var(--bg-color);
+			padding: var(--spacing-2) var(--spacing-4);
+			border-radius: var(--spacing-2);
+			font-size: 0.75rem;
+			text-transform: uppercase;
+		}
 
 		@keyframes revelProductFade {
 			0% {
