@@ -16,7 +16,7 @@ const { title, logo, logoUrl, color } = Astro.props
 <BaseLayout title={title} pageColor={color} class={`study-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
 	<div class="study-background"></div>
 
-	<nav class="study-header">
+	<nav class="study-header xyz-in" xyz="fade up-100%">
 		<a class="m-logo-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
 		<h1 class="study-title">{title}</h1>
 		<a href={logoUrl} class="study-logo-link">
@@ -28,13 +28,13 @@ const { title, logo, logoUrl, color } = Astro.props
 		<slot />
 	</main>
 
-	<nav class="slideshow-nav" aria-label="Slide navigation">
+	<nav class="slideshow-nav xyz-in" xyz="fade down-100%" aria-label="Slide navigation">
 		<div class="slideshow-dots"></div>
 		<div class="slideshow-arrows">
-			<button class="slideshow-arrow slideshow-prev" aria-label="Previous slide">
+			<button class="slideshow-arrow slideshow-prev xyz-nested" aria-label="Previous slide">
 				<Icon name="arrow-left" size={20} />
 			</button>
-			<button class="slideshow-arrow slideshow-next" aria-label="Next slide">
+			<button class="slideshow-arrow slideshow-next xyz-nested" aria-label="Next slide">
 				<Icon name="arrow-right" size={20} />
 			</button>
 		</div>
@@ -67,7 +67,8 @@ const { title, logo, logoUrl, color } = Astro.props
 		// Create dots
 		slides.forEach((_, index) => {
 			const dot = document.createElement('button')
-			dot.classList.add('slideshow-dot')
+			dot.classList.add('slideshow-dot', 'xyz-nested')
+			dot.setAttribute('xyz', 'fade narrow-100% origin-left')
 			dot.setAttribute('aria-label', `Go to slide ${index + 1}`)
 			if (index === currentSlide) dot.classList.add('active')
 			dot.addEventListener('click', () => goToSlide(index))
@@ -181,7 +182,7 @@ const { title, logo, logoUrl, color } = Astro.props
 		font-weight: 500;
 
 		@media (width < $breakpoint-lg) {
-			font-size: 1rem;
+			display: none;
 		}
 	}
 
@@ -192,7 +193,7 @@ const { title, logo, logoUrl, color } = Astro.props
 	}
 
 	.slideshow-nav {
-		background: hsl(from var(--gray-0) h s l / 50%);
+		background: hsl(from var(--bg-dark) h s l / 50%);
 		backdrop-filter: blur(8px);
 		position: fixed;
 		bottom: var(--spacing-6);
@@ -203,6 +204,7 @@ const { title, logo, logoUrl, color } = Astro.props
 		z-index: 10;
 		min-height: 40px;
 		border: 1px solid hsl(from white h s l / 25%);
+		overflow: hidden;
 
 		@media (width < $breakpoint-sm) {
 			bottom: var(--spacing-2);
