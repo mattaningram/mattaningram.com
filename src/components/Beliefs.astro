@@ -5,44 +5,40 @@
 <div class="beliefs-wrap">
 	<div class="belief-item">
 		<h3 class="belief-item-title">Join Forces</h3>
-		<p class="belief-item-copy">
-			Design and development don't need to be awkward partners. I'll teach designers CSS and devs typography. Breaking
-			down silos breeds unicorns.
-		</p>
-	</div>
-	<div class="belief-item">
-		<h3 class="belief-item-title">Read the Manual</h3>
-		<p class="belief-item-copy">
-			Docs, docs, docs! Trial by fire is great, but a product team should know how something works before implementing
-			it.
-		</p>
-	</div>
-	<div class="belief-item">
-		<h3 class="belief-item-title">Best Practices</h3>
-		<p class="belief-item-copy">
-			Just about everything has been tried on the web. It's worth the time to look up how other people have done
-			something and learn from their successes and mistakes.
+		<p>
+			Design and development don't need to be awkward partners. I'll teach designers HTML and CSS, and developers taste
+			and typography.
 		</p>
 	</div>
 	<div class="belief-item">
 		<h3 class="belief-item-title">Be the User</h3>
-		<p class="belief-item-copy">
+		<p>
 			Empathy alone is not enough to improve user experience. I use the product I'm building, so my own enjoyment or
 			frustration drives the design forward.
 		</p>
 	</div>
 	<div class="belief-item">
 		<h3 class="belief-item-title">Why not Both?</h3>
-		<p class="belief-item-copy">
+		<p>
 			Functionality and aesthetics are not enemies. Let the pixels point the user the right way, and let the features
 			save them enough time to enjoy it.
 		</p>
 	</div>
 	<div class="belief-item">
 		<h3 class="belief-item-title">AI is a Wrench</h3>
-		<p class="belief-item-copy">
+		<p>
 			It's a powerful tool that can open up one problem while grinding the gears of another. Knowing when and where to
 			apply it is as powerful as the AI itself.
+		</p>
+	</div>
+	<div class="belief-item">
+		<h3 class="belief-item-title">Read the Manual</h3>
+		<p>Do a little reading first. Trial by fire is great, but even AI can miss useful details in implementation.</p>
+	</div>
+	<div class="belief-item">
+		<h3 class="belief-item-title">Best Practices</h3>
+		<p>
+			It's worth the time to look up how other people have done something and learn from their successes and mistakes.
 		</p>
 	</div>
 </div>
@@ -52,27 +48,10 @@
 
 	.beliefs-wrap {
 		margin: 0 auto;
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-12);
-
-		@media (width < $breakpoint-md) {
-			flex-wrap: nowrap;
-			overflow-x: scroll;
-			gap: var(--spacing-10);
-			padding: var(--page-gutter);
-			padding-top: 0;
-			margin: 0 calc(var(--page-gutter) * -1);
-		}
-	}
-
-	.belief-item {
-		width: 280px;
-		flex-grow: 1;
-
-		@media (width < $breakpoint-md) {
-			min-width: max(15rem, 50vw);
-		}
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		column-gap: var(--page-gutter);
+		row-gap: var(--spacing-12);
 	}
 
 	.belief-item-title {
@@ -80,10 +59,8 @@
 		margin-bottom: var(--spacing-6);
 	}
 
-	.belief-item-copy {
-		font-size: 1rem;
-		margin: 0;
-		opacity: 0.85;
+	p {
+		color: var(--gray-9);
 		text-wrap: balance;
 	}
 </style>

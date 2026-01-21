@@ -17,7 +17,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 
 	<section class="grab-copy-wrap home-section xyz-in" xyz="fade down duration-5 delay-8">
 		<p class="grab-copy">
-			NYC product designer and CSS nerd raised on the
+			Product designer pushing code, raised on the
 			<span class="gif-hover link-hover"
 				>1984 Mac,<span class="gif-video-wrap">
 					<video autoplay loop muted playsinline>
@@ -38,14 +38,9 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 						<source src="assets/videos/sesame.webm" type="video/webm" />
 					</video>
 				</span></span
-			> Making glowing rectangles do cool stuff.
+			> Making glowing rectangles do cool stuff with AI, design systems, and CSS.
 		</p>
 	</section>
-
-	<!-- <section class="home-section">
-		<h2 class="home-section-title">Beliefs</h2>
-		<Beliefs />
-	</section> -->
 
 	<PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
 		<div class="work-stack">
@@ -56,6 +51,11 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 			<h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
 			<WorkList folder="projects" />
 		</div>
+	</PerspectiveScroll>
+
+	<PerspectiveScroll as="section" class="beliefs-section home-section">
+		<h2 class="home-section-title">Beliefs</h2>
+		<Beliefs />
 	</PerspectiveScroll>
 </HomeLayout>
 
@@ -186,7 +186,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 	}
 
 	.home-section-title {
-		opacity: 0.6;
+		color: var(--gray-6);
 		font-size: 2.5rem;
 		font-weight: 400;
 		margin-bottom: var(--spacing-12);
