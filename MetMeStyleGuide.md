@@ -7,8 +7,7 @@ A visual style reference for the MetMe marketing website. Dark mode only. This f
 - `metme/` — A copy of the MetMe React Native app repo. Use this to understand the app's features, screens, components, and behavior.
 - `src/media/metme/` — App screenshots showing the input flow, timeline, map, and calendar views.
 - `.claude/skills/frontend-design/` — Skill for building distinctive, production-grade frontend interfaces. Use for layout, visual design, and creative direction.
-- `.claude/skills/astro/` — Skill for working with the Astro framework (the site's build tool).
-- `.claude/skills/astro-framework/` — Skill for working with the Astro framework (the site's build tool).
+- `.claude/skills/astro/` and `.claude/skills/astro-framework/`— Skillsfor working with the Astro framework (the site's build tool).
 - `.claude/skills/motion/` — Skill for the Motion animation library. Use `import { animate, stagger, inView } from 'motion'` for vanilla JS animations (not React).
 
 ---

@@ -35,7 +35,7 @@ import ss8 from '@media/metme/metme-8.png'
 		<!-- Hero -->
 		<section class="mm-hero">
 			<div class="mm-hero__icon">
-				<Image src={metmeIcon} alt="MetMe App Icon" width={120} height={120} />
+				<Image src={metmeIcon} alt="MetMe App Icon" width={120} height={120} layout="constrained" />
 			</div>
 			<h1 class="mm-hero__title">metme</h1>
 			<p class="mm-hero__sub">
@@ -43,13 +43,21 @@ import ss8 from '@media/metme/metme-8.png'
 				Type or speak naturally — AI handles the rest.
 			</p>
 			<p class="mm-hero__private">
-				<svg class="mm-lock-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2M3 7h10a1 1 0 0 1 1 1v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				<svg class="mm-lock-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+					><path
+						d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2M3 7h10a1 1 0 0 1 1 1v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path></svg
+				>
 				100% on-device. Powered by Apple Intelligence.
 			</p>
 			<a href="https://testflight.apple.com/join/EQErxJEX" class="mm-cta-btn">
 				<span class="mm-cta-btn__fill"></span>
 				<span class="mm-cta-btn__label">Join the Beta on TestFlight</span>
 			</a>
+			<p class="mm-requirements">Requires iOS 26+ and iPhone 15 Pro or newer models</p>
 		</section>
 
 		<MetMeDemo />
@@ -58,29 +66,53 @@ import ss8 from '@media/metme/metme-8.png'
 		<section class="mm-value">
 			<div class="mm-value__item">
 				<span class="mm-value__icon">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="currentColor"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="currentColor"></path><path
+							d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path></svg
+					>
 				</span>
 				<h3 class="mm-value__title">Speak or type naturally</h3>
 				<p class="mm-value__desc">
-					"Met Sarah at the coffee shop, she's a designer at Figma" — that's all you need. MetMe understands natural language and extracts names, roles, companies, and contact details automatically.
+					"Met Sarah at the coffee shop, she's a designer at Figma" — that's all you need. MetMe understands natural
+					language and extracts names, roles, companies, and contact details automatically.
 				</p>
 			</div>
 			<div class="mm-value__item">
 				<span class="mm-value__icon">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a4 4 0 0 0-4 4v4h8V6a4 4 0 0 0-4-4z" fill="currentColor" opacity=".3"/><rect x="2" y="10" width="20" height="12" rx="2" fill="currentColor"/><circle cx="12" cy="16" r="2" fill="var(--stone-900)"/></svg>
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path d="M12 2a4 4 0 0 0-4 4v4h8V6a4 4 0 0 0-4-4z" fill="currentColor" opacity=".3"></path><rect
+							x="2"
+							y="10"
+							width="20"
+							height="12"
+							rx="2"
+							fill="currentColor"></rect><circle cx="12" cy="16" r="2" fill="var(--stone-900)"></circle></svg
+					>
 				</span>
 				<h3 class="mm-value__title">Completely private</h3>
 				<p class="mm-value__desc">
-					All AI processing runs entirely on your iPhone using Apple Intelligence. Your contacts never leave your device — no cloud, no servers, no accounts. MetMe writes directly to your native iOS Contacts.
+					All AI processing runs entirely on your iPhone using Apple Intelligence. Your contacts never leave your device
+					— no cloud, no servers, no accounts. MetMe writes directly to your native iOS Contacts.
 				</p>
 			</div>
 			<div class="mm-value__item">
 				<span class="mm-value__icon">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle><path
+							d="M12 6v6l4 2"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"></path></svg
+					>
 				</span>
 				<h3 class="mm-value__title">Faster than native iOS</h3>
 				<p class="mm-value__desc">
-					Adding a contact in the Contacts app takes 30+ seconds of tapping through fields. With MetMe, one sentence does it all — in under 5 seconds.
+					Adding a contact in the Contacts app takes 30+ seconds of tapping through fields. With MetMe, one sentence
+					does it all — in under 5 seconds.
 				</p>
 			</div>
 		</section>
@@ -88,7 +120,9 @@ import ss8 from '@media/metme/metme-8.png'
 		<!-- Views Section -->
 		<section class="mm-views">
 			<h2 class="mm-views__heading">Three ways to remember</h2>
-			<p class="mm-views__sub">Every contact saves when and where you met. Browse your network across time, space, and calendar.</p>
+			<p class="mm-views__sub">
+				Every contact saves when and where you met. Browse your network across time, space, and calendar.
+			</p>
 
 			<div class="mm-views__grid">
 				<div class="mm-views__card">
@@ -96,21 +130,27 @@ import ss8 from '@media/metme/metme-8.png'
 						<Image src={ss6} alt="Timeline view showing contacts sorted chronologically" width={300} />
 					</div>
 					<h3 class="mm-views__card-title">Timeline</h3>
-					<p class="mm-views__card-desc">See everyone you've met in chronological order. Jog your memory by scrolling back through time.</p>
+					<p class="mm-views__card-desc">
+						See everyone you've met in chronological order. Jog your memory by scrolling back through time.
+					</p>
 				</div>
 				<div class="mm-views__card">
 					<div class="mm-views__card-img">
 						<Image src={ss7} alt="Map view showing contact locations" width={300} />
 					</div>
 					<h3 class="mm-views__card-title">Map</h3>
-					<p class="mm-views__card-desc">Visualize your network geographically. See exactly where each encounter happened.</p>
+					<p class="mm-views__card-desc">
+						Visualize your network geographically. See exactly where each encounter happened.
+					</p>
 				</div>
 				<div class="mm-views__card">
 					<div class="mm-views__card-img">
 						<Image src={ss8} alt="Calendar view showing contacts by date with birthdays" width={300} />
 					</div>
 					<h3 class="mm-views__card-title">Calendar</h3>
-					<p class="mm-views__card-desc">Track birthdays, anniversaries, and the dates you met. Never miss an important occasion.</p>
+					<p class="mm-views__card-desc">
+						Track birthdays, anniversaries, and the dates you met. Never miss an important occasion.
+					</p>
 				</div>
 			</div>
 		</section>
@@ -171,6 +211,7 @@ import ss8 from '@media/metme/metme-8.png'
 					<span class="mm-cta-btn__fill"></span>
 					<span class="mm-cta-btn__label">Get MetMe on TestFlight</span>
 				</a>
+				<p class="mm-requirements">Requires iOS 26+ and iPhone 15 Pro or iPhone 16 and newer models</p>
 			</div>
 		</section>
 
@@ -187,71 +228,91 @@ import ss8 from '@media/metme/metme-8.png'
 
 	function initAnimations() {
 		// Hero entrance
-		const heroEls = document.querySelectorAll('.mm-hero__icon, .mm-hero__title, .mm-hero__sub, .mm-hero__private, .mm-hero .mm-cta-btn')
+		const heroEls = document.querySelectorAll(
+			'.mm-hero__icon, .mm-hero__title, .mm-hero__sub, .mm-hero__private, .mm-hero .mm-cta-btn, .mm-hero .mm-requirements',
+		)
 		if (heroEls.length) {
 			animate(
 				heroEls,
 				{ opacity: [0, 1], y: [30, 0] },
-				{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] }
+				{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] },
 			)
 		}
 
 		// Value props
 		const valueItems = document.querySelectorAll('.mm-value__item')
 		if (valueItems.length) {
-			inView(document.querySelector('.mm-value')!, () => {
-				animate(
-					valueItems,
-					{ opacity: [0, 1], y: [40, 0] },
-					{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] }
-				)
-			}, { amount: 0.2 })
+			inView(
+				document.querySelector('.mm-value')!,
+				() => {
+					animate(
+						valueItems,
+						{ opacity: [0, 1], y: [40, 0] },
+						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] },
+					)
+				},
+				{ amount: 0.2 },
+			)
 		}
 
 		// Views cards
 		const viewCards = document.querySelectorAll('.mm-views__card')
 		if (viewCards.length) {
-			inView(document.querySelector('.mm-views')!, () => {
-				animate(
-					document.querySelectorAll('.mm-views__heading, .mm-views__sub'),
-					{ opacity: [0, 1], y: [30, 0] },
-					{ duration: 0.6, easing: [0.25, 1, 0.5, 1] }
-				)
-				animate(
-					viewCards,
-					{ opacity: [0, 1], y: [50, 0] },
-					{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] }
-				)
-			}, { amount: 0.15 })
+			inView(
+				document.querySelector('.mm-views')!,
+				() => {
+					animate(
+						document.querySelectorAll('.mm-views__heading, .mm-views__sub'),
+						{ opacity: [0, 1], y: [30, 0] },
+						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] },
+					)
+					animate(
+						viewCards,
+						{ opacity: [0, 1], y: [50, 0] },
+						{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] },
+					)
+				},
+				{ amount: 0.15 },
+			)
 		}
 
 		// Flow steps
 		const flowSteps = document.querySelectorAll('.mm-flow__step')
 		if (flowSteps.length) {
-			inView(document.querySelector('.mm-flow')!, () => {
-				animate(
-					document.querySelector('.mm-flow__heading')!,
-					{ opacity: [0, 1], y: [30, 0] },
-					{ duration: 0.6, easing: [0.25, 1, 0.5, 1] }
-				)
-				animate(
-					flowSteps,
-					{ opacity: [0, 1], y: [40, 0] },
-					{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] }
-				)
-			}, { amount: 0.15 })
+			inView(
+				document.querySelector('.mm-flow')!,
+				() => {
+					animate(
+						document.querySelector('.mm-flow__heading')!,
+						{ opacity: [0, 1], y: [30, 0] },
+						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] },
+					)
+					animate(
+						flowSteps,
+						{ opacity: [0, 1], y: [40, 0] },
+						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] },
+					)
+				},
+				{ amount: 0.15 },
+			)
 		}
 
 		// Bottom CTA
 		const bottomCTA = document.querySelector('.mm-bottom-cta')
 		if (bottomCTA) {
-			inView(bottomCTA, () => {
-				animate(
-					bottomCTA.querySelectorAll('.mm-bottom-cta__icon, .mm-bottom-cta__title, .mm-bottom-cta__desc, .mm-cta-btn'),
-					{ opacity: [0, 1], y: [30, 0] },
-					{ duration: 0.6, delay: stagger(0.1), easing: [0.25, 1, 0.5, 1] }
-				)
-			}, { amount: 0.3 })
+			inView(
+				bottomCTA,
+				() => {
+					animate(
+						bottomCTA.querySelectorAll(
+							'.mm-bottom-cta__icon, .mm-bottom-cta__title, .mm-bottom-cta__desc, .mm-cta-btn, .mm-requirements',
+						),
+						{ opacity: [0, 1], y: [30, 0] },
+						{ duration: 0.6, delay: stagger(0.1), easing: [0.25, 1, 0.5, 1] },
+					)
+				},
+				{ amount: 0.3 },
+			)
 		}
 	}
 
@@ -261,6 +322,11 @@ import ss8 from '@media/metme/metme-8.png'
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;
+
+	@function color-alpha($color, $opacity: 1) {
+		// Uses the P3 color space to prevent clipping of vibrant colors
+		@return unquote('color(from #{$color} display-p3 r g b / #{$opacity})');
+	}
 
 	/* ── Palette (from MetMe style guide, oklch) ── */
 	:global(.metme-page) {
@@ -295,7 +361,6 @@ import ss8 from '@media/metme/metme-8.png'
 		color: var(--stone-100);
 		font-family: 'Nunito Sans', 'Figtree', system-ui, sans-serif;
 	}
-
 
 	.mm {
 		overflow-x: hidden;
@@ -400,7 +465,9 @@ import ss8 from '@media/metme/metme-8.png'
 			border-radius: 12px;
 			padding: 1px;
 			background: linear-gradient(135deg, #fde68add, #fcd34d99, #fbbf2444, #f59e0b33);
-			-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			-webkit-mask:
+				linear-gradient(#fff 0 0) content-box,
+				linear-gradient(#fff 0 0);
 			-webkit-mask-composite: xor;
 			mask-composite: exclude;
 			pointer-events: none;
@@ -430,6 +497,13 @@ import ss8 from '@media/metme/metme-8.png'
 		.mm-cta-btn__label {
 			font-size: 1.15rem;
 		}
+	}
+
+	.mm-requirements {
+		font-size: 0.75rem;
+		color: var(--stone-500);
+		margin-top: 0.75rem;
+		line-height: 1.4;
 	}
 
 	/* ── Value Props ── */

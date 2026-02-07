@@ -17,3 +17,9 @@
 - Styling: SCSS
 - Fonts: Figtree
 - ClassNames: Astro's class:list syntax
+
+# Skills
+
+- `.claude/skills/frontend-design/` — Skill for building distinctive, production-grade frontend interfaces. Use for layout, visual design, and creative direction.
+- `.claude/skills/astro/` and `.claude/skills/astro-framework/`— Skillsfor working with the Astro framework (the site's build tool).
+- `.claude/skills/motion/` — Skill for the Motion animation library. Use `import { animate, stagger, inView } from 'motion'` for vanilla JS animations (not React).
