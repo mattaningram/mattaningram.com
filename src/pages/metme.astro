@@ -22,14 +22,11 @@ import ss8 from '@media/metme/metme-8.png'
 	<Header />
 
 	<!-- Load Nunito Sans for MetMe page -->
-	<script is:inline>
-		if (!document.querySelector('link[href*="Nunito+Sans"]')) {
-			const l = document.createElement('link')
-			l.rel = 'stylesheet'
-			l.href = 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap'
-			document.head.appendChild(l)
-		}
-	</script>
+	<link
+		slot="head"
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap"
+	/>
 
 	<main class="mm">
 		<!-- Hero -->
@@ -39,7 +36,7 @@ import ss8 from '@media/metme/metme-8.png'
 			</div>
 			<h1 class="mm-hero__title">metme</h1>
 			<p class="mm-hero__sub">
-				A better way to add contacts.<br />
+				A better way to add and remember contacts.<br />
 				Type or speak naturally — AI handles the rest.
 			</p>
 			<p class="mm-hero__private">
@@ -127,7 +124,12 @@ import ss8 from '@media/metme/metme-8.png'
 			<div class="mm-views__grid">
 				<div class="mm-views__card">
 					<div class="mm-views__card-img">
-						<Image src={ss6} alt="Timeline view showing contacts sorted chronologically" width={300} />
+						<Image
+							layout="constrained"
+							src={ss6}
+							alt="Timeline view showing contacts sorted chronologically"
+							width={300}
+						/>
 					</div>
 					<h3 class="mm-views__card-title">Timeline</h3>
 					<p class="mm-views__card-desc">
@@ -136,7 +138,7 @@ import ss8 from '@media/metme/metme-8.png'
 				</div>
 				<div class="mm-views__card">
 					<div class="mm-views__card-img">
-						<Image src={ss7} alt="Map view showing contact locations" width={300} />
+						<Image layout="constrained" src={ss7} alt="Map view showing contact locations" width={300} />
 					</div>
 					<h3 class="mm-views__card-title">Map</h3>
 					<p class="mm-views__card-desc">
@@ -145,7 +147,12 @@ import ss8 from '@media/metme/metme-8.png'
 				</div>
 				<div class="mm-views__card">
 					<div class="mm-views__card-img">
-						<Image src={ss8} alt="Calendar view showing contacts by date with birthdays" width={300} />
+						<Image
+							layout="constrained"
+							src={ss8}
+							alt="Calendar view showing contacts by date with birthdays"
+							width={300}
+						/>
 					</div>
 					<h3 class="mm-views__card-title">Calendar</h3>
 					<p class="mm-views__card-desc">
@@ -162,7 +169,7 @@ import ss8 from '@media/metme/metme-8.png'
 			<div class="mm-flow__steps">
 				<div class="mm-flow__step">
 					<div class="mm-flow__step-img">
-						<Image src={ss1} alt="MetMe ready for input" width={240} />
+						<Image layout="constrained" src={ss1} alt="MetMe ready for input" width={240} />
 					</div>
 					<div class="mm-flow__step-info">
 						<span class="mm-flow__step-num">1</span>
@@ -171,7 +178,7 @@ import ss8 from '@media/metme/metme-8.png'
 				</div>
 				<div class="mm-flow__step">
 					<div class="mm-flow__step-img">
-						<Image src={ss2} alt="Typing natural language contact info" width={240} />
+						<Image layout="constrained" src={ss2} alt="Typing natural language contact info" width={240} />
 					</div>
 					<div class="mm-flow__step-info">
 						<span class="mm-flow__step-num">2</span>
@@ -180,7 +187,7 @@ import ss8 from '@media/metme/metme-8.png'
 				</div>
 				<div class="mm-flow__step">
 					<div class="mm-flow__step-img">
-						<Image src={ss4} alt="AI parsing text into contact fields" width={240} />
+						<Image layout="constrained" src={ss4} alt="AI parsing text into contact fields" width={240} />
 					</div>
 					<div class="mm-flow__step-info">
 						<span class="mm-flow__step-num">3</span>
@@ -189,7 +196,7 @@ import ss8 from '@media/metme/metme-8.png'
 				</div>
 				<div class="mm-flow__step">
 					<div class="mm-flow__step-img">
-						<Image src={ss5} alt="Contact saved confirmation" width={240} />
+						<Image layout="constrained" src={ss5} alt="Contact saved confirmation" width={240} />
 					</div>
 					<div class="mm-flow__step-info">
 						<span class="mm-flow__step-num">4</span>
@@ -203,7 +210,7 @@ import ss8 from '@media/metme/metme-8.png'
 		<section class="mm-bottom-cta">
 			<div class="mm-bottom-cta__inner">
 				<div class="mm-bottom-cta__icon">
-					<Image src={metmeIcon} alt="MetMe" width={72} height={72} />
+					<Image layout="constrained" src={metmeIcon} alt="MetMe" width={72} height={72} />
 				</div>
 				<h2 class="mm-bottom-cta__title">Remember everyone you meet</h2>
 				<p class="mm-bottom-cta__desc">Free on TestFlight. iOS 18.1+ required.</p>
@@ -234,8 +241,8 @@ import ss8 from '@media/metme/metme-8.png'
 		if (heroEls.length) {
 			animate(
 				heroEls,
-				{ opacity: [0, 1], y: [30, 0] },
-				{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] },
+				{ opacity: [0, 1], y: [30, 0] } as any,
+				{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
 			)
 		}
 
@@ -247,8 +254,8 @@ import ss8 from '@media/metme/metme-8.png'
 				() => {
 					animate(
 						valueItems,
-						{ opacity: [0, 1], y: [40, 0] },
-						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [40, 0] } as any,
+						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] } as any,
 					)
 				},
 				{ amount: 0.2 },
@@ -263,13 +270,13 @@ import ss8 from '@media/metme/metme-8.png'
 				() => {
 					animate(
 						document.querySelectorAll('.mm-views__heading, .mm-views__sub'),
-						{ opacity: [0, 1], y: [30, 0] },
-						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [30, 0] } as any,
+						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] } as any,
 					)
 					animate(
 						viewCards,
-						{ opacity: [0, 1], y: [50, 0] },
-						{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [50, 0] } as any,
+						{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
 					)
 				},
 				{ amount: 0.15 },
@@ -284,13 +291,13 @@ import ss8 from '@media/metme/metme-8.png'
 				() => {
 					animate(
 						document.querySelector('.mm-flow__heading')!,
-						{ opacity: [0, 1], y: [30, 0] },
-						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [30, 0] } as any,
+						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] } as any,
 					)
 					animate(
 						flowSteps,
-						{ opacity: [0, 1], y: [40, 0] },
-						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [40, 0] } as any,
+						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] } as any,
 					)
 				},
 				{ amount: 0.15 },
@@ -307,8 +314,8 @@ import ss8 from '@media/metme/metme-8.png'
 						bottomCTA.querySelectorAll(
 							'.mm-bottom-cta__icon, .mm-bottom-cta__title, .mm-bottom-cta__desc, .mm-cta-btn, .mm-requirements',
 						),
-						{ opacity: [0, 1], y: [30, 0] },
-						{ duration: 0.6, delay: stagger(0.1), easing: [0.25, 1, 0.5, 1] },
+						{ opacity: [0, 1], y: [30, 0] } as any,
+						{ duration: 0.6, delay: stagger(0.1), easing: [0.25, 1, 0.5, 1] } as any,
 					)
 				},
 				{ amount: 0.3 },
