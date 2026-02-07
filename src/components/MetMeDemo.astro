@@ -1,0 +1,609 @@
+<!-- Demo Animation Section -->
+<section class="mm-demo" aria-label="How MetMe works">
+	<div class="mm-demo__phone">
+		<div class="mm-demo__island"></div>
+		<div class="mm-demo__screen">
+			<div class="mm-demo__prompt-container">
+				<!-- Step 1: Prompt -->
+				<p class="mm-demo__prompt">Who did you meet?</p>
+
+				<!-- Step 2: Text appears -->
+				<div class="mm-demo__text">
+					<span class="mm-demo__word" data-field="name">Michele Mouton</span>{' '}
+					<span class="mm-demo__word">is</span>{' '}
+					<span class="mm-demo__word">a</span>{' '}
+					<span class="mm-demo__word" data-field="title">driver</span>{' '}
+					<span class="mm-demo__word">at</span>{' '}
+					<span class="mm-demo__word" data-field="company">Group B Rally</span>{' '}
+					<span class="mm-demo__word" data-field="phone">415-555-9876</span>{' '}
+					<span class="mm-demo__word" data-field="email">michele@mouton.com</span>
+				</div>
+			</div>
+
+			<!-- Step 3: Parsed contact card -->
+			<div class="mm-demo__contact">
+				<div class="mm-demo__contact-row">
+					<span class="mm-demo__contact-label">Name</span>
+					<span class="mm-demo__contact-value">Michele Mouton</span>
+				</div>
+				<div class="mm-demo__contact-row">
+					<span class="mm-demo__contact-label">Company</span>
+					<span class="mm-demo__contact-value">Group B Rally</span>
+				</div>
+				<div class="mm-demo__contact-row">
+					<span class="mm-demo__contact-label">Title</span>
+					<span class="mm-demo__contact-value">Driver</span>
+				</div>
+				<div class="mm-demo__contact-row">
+					<span class="mm-demo__contact-label">Phone</span>
+					<span class="mm-demo__contact-value">415-555-9876</span>
+				</div>
+				<div class="mm-demo__contact-row">
+					<span class="mm-demo__contact-label">Email</span>
+					<span class="mm-demo__contact-value">michele@mouton.com</span>
+				</div>
+			</div>
+
+			<!-- Context pill and mic button container -->
+			<div class="mm-demo__input-container">
+				<!-- Context pill -->
+				<div class="mm-demo__context-pill">
+					<span class="mm-demo__context-item">
+						<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+							><rect x="1" y="3" width="14" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"></rect><path
+								d="M1 6.5h14M5 1v4M11 1v4"
+								stroke="currentColor"
+								stroke-width="1.2"
+								stroke-linecap="round"></path></svg
+						>
+						Today
+					</span>
+					<span class="mm-demo__context-divider"></span>
+					<span class="mm-demo__context-item">
+						<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+							><path
+								d="M10 1.5l-1.5 13M7.5 1.5L6 14.5M2.5 5.5h11M2 10.5h11"
+								stroke="currentColor"
+								stroke-width="1.2"
+								stroke-linecap="round"></path></svg
+						>
+						Here
+					</span>
+				</div>
+
+				<!-- Mic button -->
+				<div class="mm-demo__mic">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="currentColor"></path>
+						<path
+							d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button class="mm-demo__pause" aria-label="Pause animation">
+		<svg class="mm-demo__pause-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
+			<rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
+		</svg>
+		<svg
+			class="mm-demo__play-icon"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			style="display:none"
+		>
+			<path d="M6 4l14 8-14 8V4z" fill="currentColor"></path>
+		</svg>
+	</button>
+</section>
+
+<script>
+	import { animate, stagger, inView } from 'motion'
+
+	let paused = false
+	let abortController: AbortController | null = null
+
+	function delay(ms: number, signal: AbortSignal): Promise<void> {
+		return new Promise((resolve, reject) => {
+			const id = setTimeout(resolve, ms)
+			signal.addEventListener('abort', () => {
+				clearTimeout(id)
+				reject(new DOMException('Aborted', 'AbortError'))
+			})
+		})
+	}
+
+	function initDemoAnimation() {
+		const demoSection = document.querySelector('.mm-demo')
+		if (demoSection) {
+			inView(
+				demoSection,
+				() => {
+					startAnimation()
+				},
+				{ amount: 0.3 },
+			)
+		}
+
+		const pauseBtn = document.querySelector('.mm-demo__pause')
+		if (pauseBtn) {
+			pauseBtn.addEventListener('click', togglePause)
+		}
+	}
+
+	function startAnimation() {
+		if (abortController) abortController.abort()
+		abortController = new AbortController()
+		runDemoAnimation(abortController.signal)
+	}
+
+	function togglePause() {
+		const btn = document.querySelector('.mm-demo__pause') as HTMLElement
+		const pauseIcon = btn?.querySelector('.mm-demo__pause-icon') as HTMLElement
+		const playIcon = btn?.querySelector('.mm-demo__play-icon') as HTMLElement
+		if (!btn) return
+
+		paused = !paused
+		if (paused) {
+			// Stop the running animation
+			if (abortController) abortController.abort()
+			abortController = null
+			pauseIcon.style.display = 'none'
+			playIcon.style.display = ''
+		} else {
+			// Restart the animation
+			pauseIcon.style.display = ''
+			playIcon.style.display = 'none'
+			startAnimation()
+		}
+	}
+
+	async function runDemoAnimation(signal: AbortSignal) {
+		const phone = document.querySelector('.mm-demo__phone') as HTMLElement
+		const prompt = document.querySelector('.mm-demo__prompt') as HTMLElement
+		const mic = document.querySelector('.mm-demo__mic') as HTMLElement
+		const contextPill = document.querySelector('.mm-demo__context-pill') as HTMLElement
+		const textWrap = document.querySelector('.mm-demo__text') as HTMLElement
+		const words = document.querySelectorAll('.mm-demo__word')
+		const contact = document.querySelector('.mm-demo__contact') as HTMLElement
+		const contactRows = document.querySelectorAll('.mm-demo__contact-row')
+
+		if (!phone || !prompt || !mic || !contextPill || !textWrap || !contact) return
+
+		try {
+			// Phone enters (only on first run)
+			if (phone.style.opacity !== '1') {
+				await animate(
+					phone,
+					{ opacity: [0, 1], y: [60, 0], scale: [0.92, 1] },
+					{ duration: 0.8, easing: [0.25, 1, 0.5, 1] },
+				).finished
+				phone.style.opacity = '1'
+			}
+
+			// Prompt fades in
+			prompt.style.display = ''
+			await animate(prompt, { opacity: [0, 1] }, { duration: 0.5 }).finished
+			if (signal.aborted) return
+
+			// Mic pulses
+			mic.classList.add('mm-demo__mic--active')
+			await animate(mic, { opacity: [0, 1], scale: [0.8, 1] }, { duration: 0.4, easing: [0.25, 1, 0.5, 1] }).finished
+			if (signal.aborted) return
+
+			// Context pill fades in with delay
+			await animate(
+				contextPill,
+				{ opacity: [0, 1], scale: [0.95, 1] },
+				{ duration: 0.3, delay: 0.15, easing: [0.25, 1, 0.5, 1] },
+			).finished
+			if (signal.aborted) return
+
+			await delay(400, signal)
+
+			// Prompt fades out, text appears
+			await animate(prompt, { opacity: 0 }, { duration: 0.3 }).finished
+			prompt.style.display = 'none'
+			if (signal.aborted) return
+
+			textWrap.style.display = 'block'
+			await animate(
+				words,
+				{ opacity: [0, 1], y: [8, 0] },
+				{ duration: 0.3, delay: stagger(0.07), easing: [0.25, 1, 0.5, 1] },
+			).finished
+			if (signal.aborted) return
+
+			await delay(300, signal)
+
+			// Mic stops pulsing
+			mic.classList.remove('mm-demo__mic--active')
+
+			// Amber gradient scan across the text
+			textWrap.classList.add('mm-demo__text--scanning')
+			await delay(1200, signal)
+
+			// Highlight parsed fields
+			words.forEach((w) => {
+				if ((w as HTMLElement).dataset.field) {
+					;(w as HTMLElement).classList.add('mm-demo__word--highlighted')
+				}
+			})
+			await delay(500, signal)
+
+			// Contact card slides up
+			contact.style.display = 'block'
+			await animate(contact, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5, easing: [0.25, 1, 0.5, 1] }).finished
+			if (signal.aborted) return
+
+			await animate(
+				contactRows,
+				{ opacity: [0, 1], x: [-10, 0] },
+				{ duration: 0.35, delay: stagger(0.08), easing: [0.25, 1, 0.5, 1] },
+			).finished
+			if (signal.aborted) return
+
+			// Hold the completed state, then reset and loop
+			await delay(2500, signal)
+
+			// Fade out screen content
+			animate(contact, { opacity: 0 }, { duration: 0.4 })
+			animate(textWrap, { opacity: 0 }, { duration: 0.4 })
+			animate(contextPill, { opacity: 0 }, { duration: 0.4 })
+			await animate(mic, { opacity: 0 }, { duration: 0.4 }).finished
+			if (signal.aborted) return
+
+			// Reset all state for next loop
+			contact.style.display = 'none'
+			contact.style.opacity = ''
+			textWrap.style.display = 'none'
+			textWrap.style.opacity = ''
+			textWrap.classList.remove('mm-demo__text--scanning')
+			contextPill.style.opacity = ''
+			mic.style.opacity = ''
+			mic.classList.remove('mm-demo__mic--active')
+			words.forEach((w) => {
+				;(w as HTMLElement).style.opacity = '0'
+				;(w as HTMLElement).classList.remove('mm-demo__word--highlighted')
+			})
+			contactRows.forEach((r) => {
+				;(r as HTMLElement).style.opacity = '0'
+			})
+
+			await delay(600, signal)
+
+			// Loop
+			runDemoAnimation(signal)
+		} catch (e) {
+			if (e instanceof DOMException && e.name === 'AbortError') return
+			throw e
+		}
+	}
+
+	// Run on load and on Astro page transitions
+	document.addEventListener('astro:page-load', initDemoAnimation)
+</script>
+
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
+
+	/* ── Demo Animation Section ── */
+	.mm-demo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 4rem var(--page-gutter) 6rem;
+	}
+
+	.mm-demo__pause {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		margin-top: 1.25rem;
+		border: none;
+		border-radius: 50%;
+		background: transparent;
+		color: var(--stone-500);
+		cursor: pointer;
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: var(--stone-300);
+		}
+
+		svg {
+			width: 16px;
+			height: 16px;
+		}
+	}
+
+	.mm-demo__phone {
+		position: relative;
+		width: 300px;
+		background: var(--stone-900);
+		border: 1.5px solid var(--stone-700);
+		border-radius: 40px;
+		padding: 6px;
+		box-shadow:
+			0 25px 80px oklch(0% 0 0 / 0.6),
+			0 0 60px oklch(76.9% 0.188 70.08 / 0.08);
+		opacity: 0;
+
+		@media (width >= $breakpoint-sm) {
+			width: 340px;
+			border-radius: 46px;
+			padding: 7px;
+		}
+	}
+
+	.mm-demo__island {
+		position: absolute;
+		top: 16px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 72px;
+		height: 20px;
+		background: #000;
+		border-radius: 10px;
+		z-index: 10;
+
+		@media (width >= $breakpoint-sm) {
+			top: 18px;
+			width: 80px;
+			height: 22px;
+			border-radius: 11px;
+		}
+	}
+
+	.mm-demo__screen {
+		position: relative;
+		aspect-ratio: 9 / 19.5;
+		background: linear-gradient(180deg, var(--stone-900) 0%, var(--stone-950) 100%);
+		border-radius: 34px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 56px 0 22px;
+
+		@media (width >= $breakpoint-sm) {
+			border-radius: 39px;
+			padding: 64px 0 26px;
+		}
+	}
+
+	.mm-demo__prompt-container {
+		padding: 0 22px;
+
+		@media (width >= $breakpoint-sm) {
+			padding: 0 26px;
+		}
+	}
+
+	.mm-demo__prompt {
+		font-size: 1.15rem;
+		font-weight: 600;
+		color: var(--amber-500);
+		opacity: 0;
+		align-self: flex-start;
+
+		@media (width >= $breakpoint-sm) {
+			font-size: 1.3rem;
+		}
+	}
+
+	.mm-demo__text {
+		display: none;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--amber-400);
+		line-height: 1.5;
+		align-self: flex-start;
+		position: relative;
+
+		@media (width >= $breakpoint-sm) {
+			font-size: 1.2rem;
+		}
+	}
+
+	.mm-demo__word {
+		display: inline;
+		opacity: 0;
+		transition:
+			color 0.4s ease,
+			background-color 0.4s ease;
+	}
+
+	.mm-demo__word--highlighted {
+		&[data-field='name'] {
+			color: var(--stone-50);
+			background: oklch(76.9% 0.188 70.08 / 0.15);
+			border-radius: 3px;
+			padding: 0 2px;
+		}
+		&[data-field='company'] {
+			color: var(--amber-300);
+			background: oklch(76.9% 0.188 70.08 / 0.1);
+			border-radius: 3px;
+			padding: 0 2px;
+		}
+		&[data-field='title'] {
+			color: var(--amber-200);
+			background: oklch(76.9% 0.188 70.08 / 0.1);
+			border-radius: 3px;
+			padding: 0 2px;
+		}
+		&[data-field='phone'] {
+			color: var(--stone-50);
+			background: oklch(76.9% 0.188 70.08 / 0.12);
+			border-radius: 3px;
+			padding: 0 2px;
+		}
+		&[data-field='email'] {
+			color: var(--stone-50);
+			background: oklch(76.9% 0.188 70.08 / 0.12);
+			border-radius: 3px;
+			padding: 0 2px;
+		}
+	}
+
+	/* Scanning amber gradient sweep */
+	.mm-demo__text--scanning::after {
+		content: '';
+		position: absolute;
+		top: -4px;
+		bottom: -4px;
+		left: -20%;
+		width: 40%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			oklch(76.9% 0.188 70.08 / 0.25),
+			oklch(82.8% 0.189 84.429 / 0.4),
+			oklch(76.9% 0.188 70.08 / 0.25),
+			transparent
+		);
+		animation: text-scan 1.2s ease-in-out forwards;
+		pointer-events: none;
+		border-radius: 4px;
+	}
+
+	@keyframes text-scan {
+		0% {
+			left: -40%;
+		}
+		100% {
+			left: 120%;
+		}
+	}
+
+	.mm-demo__contact {
+		display: none;
+		width: 100%;
+		margin-top: auto;
+		margin-bottom: 104px;
+	}
+
+	.mm-demo__contact-row {
+		display: flex;
+		justify-content: start;
+		align-items: baseline;
+		gap: 12px;
+		padding: 8px 24px;
+		border-bottom: 1px dashed oklch(26.8% 0.007 34.298 / 0.5);
+		opacity: 0;
+	}
+
+	.mm-demo__contact-label {
+		font-size: 0.75rem;
+		width: 72px;
+		color: var(--stone-500);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.mm-demo__contact-value {
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--stone-100);
+	}
+
+	.mm-demo__input-container {
+		display: grid;
+		gap: 12px;
+		justify-items: center;
+		position: absolute;
+		left: 50%;
+		bottom: 24px;
+		transform: translateX(-50%);
+
+		@media (width >= $breakpoint-sm) {
+			bottom: 28px;
+		}
+	}
+
+	.mm-demo__context-pill {
+		display: flex;
+		gap: 0;
+		background: var(--stone-800);
+		border: 1px solid var(--stone-600);
+		border-radius: 20px;
+		white-space: nowrap;
+		opacity: 0;
+
+		@media (width >= $breakpoint-sm) {
+			bottom: 94px;
+		}
+	}
+
+	.mm-demo__context-item {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--stone-400);
+		letter-spacing: 0.01em;
+		padding: 4px 8px;
+
+		svg {
+			width: 14px;
+			height: 14px;
+			flex-shrink: 0;
+		}
+	}
+
+	.mm-demo__context-divider {
+		width: 0.5px;
+		border-style: dashed;
+		border-width: 1px;
+		border-color: var(--stone-700);
+	}
+
+	.mm-demo__mic {
+		width: 56px;
+		height: 56px;
+		background: var(--stone-800);
+		border: 1px solid var(--stone-600);
+		border-radius: 50%;
+		display: grid;
+		place-content: center;
+		color: var(--stone-300);
+		opacity: 0;
+
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		@media (width >= $breakpoint-sm) {
+			width: 52px;
+			height: 52px;
+		}
+	}
+
+	.mm-demo__mic--active {
+		animation: mic-pulse 1s ease-in-out infinite;
+		color: var(--amber-400);
+		border-color: var(--amber-500);
+		background: oklch(27.9% 0.077 45.635 / 0.8);
+	}
+
+	@keyframes mic-pulse {
+		0%,
+		100% {
+			box-shadow: 0 0 0 0 oklch(76.9% 0.188 70.08 / 0.3);
+		}
+		50% {
+			box-shadow: 0 0 0 10px oklch(76.9% 0.188 70.08 / 0);
+		}
+	}
+</style>

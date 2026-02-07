@@ -1,163 +1,268 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Header from '@components/Header.astro'
-import Footer from '@components/Footer.astro'
-import Button from '@components/Button.astro'
-import PerspectiveScroll from '@components/PerspectiveScroll.astro'
+import MetMeDemo from '@components/MetMeDemo.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
+import ss1 from '@media/metme/metme-1.png'
+import ss2 from '@media/metme/metme-2.png'
+import ss4 from '@media/metme/metme-4.png'
+import ss5 from '@media/metme/metme-5.png'
+import ss6 from '@media/metme/metme-6.png'
+import ss7 from '@media/metme/metme-7.png'
+import ss8 from '@media/metme/metme-8.png'
 ---
 
 <BaseLayout
-	title="MetMe - Smart Contact Management for iOS"
-	description="Add contacts naturally with AI-powered context. Fast, simple, and completely private."
+	title="MetMe — Remember Everyone You Meet"
+	description="Add contacts instantly with natural language. Voice or text, on-device AI parses everything. Fully private, powered by Apple Intelligence."
 	pageColor="oklch(76.9% 0.188 70.08)"
 	class="metme-page"
 >
 	<Header />
 
-	<main class="metme-main">
-		<!-- Hero Section -->
-		<section class="metme-hero">
-			<div class="hero-content xyz-in" xyz="fade up-2 duration-6 stagger">
-				<div class="hero-icon xyz-nested">
-					<Image src={metmeIcon} alt="MetMe App Icon" class="app-icon" width={200} height={200} layout="constrained" />
-				</div>
+	<!-- Load Nunito Sans for MetMe page -->
+	<script is:inline>
+		if (!document.querySelector('link[href*="Nunito+Sans"]')) {
+			const l = document.createElement('link')
+			l.rel = 'stylesheet'
+			l.href = 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap'
+			document.head.appendChild(l)
+		}
+	</script>
 
-				<h1 class="hero-title xyz-nested">metme</h1>
+	<main class="mm">
+		<!-- Hero -->
+		<section class="mm-hero">
+			<div class="mm-hero__icon">
+				<Image src={metmeIcon} alt="MetMe App Icon" width={120} height={120} />
+			</div>
+			<h1 class="mm-hero__title">metme</h1>
+			<p class="mm-hero__sub">
+				A better way to add contacts.<br />
+				Type or speak naturally — AI handles the rest.
+			</p>
+			<p class="mm-hero__private">
+				<svg class="mm-lock-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2M3 7h10a1 1 0 0 1 1 1v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				100% on-device. Powered by Apple Intelligence.
+			</p>
+			<a href="https://testflight.apple.com/join/EQErxJEX" class="mm-cta-btn">
+				<span class="mm-cta-btn__fill"></span>
+				<span class="mm-cta-btn__label">Join the Beta on TestFlight</span>
+			</a>
+		</section>
 
-				<p class="hero-tagline xyz-nested">
-					Remember everyone you meet. Add contacts <em>instantly</em> with text or voice. Faster than native iOS.
-					<strong>100% private</strong> — AI runs entirely on your device.
+		<MetMeDemo />
+
+		<!-- Value Props -->
+		<section class="mm-value">
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="currentColor"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<h3 class="mm-value__title">Speak or type naturally</h3>
+				<p class="mm-value__desc">
+					"Met Sarah at the coffee shop, she's a designer at Figma" — that's all you need. MetMe understands natural language and extracts names, roles, companies, and contact details automatically.
 				</p>
+			</div>
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a4 4 0 0 0-4 4v4h8V6a4 4 0 0 0-4-4z" fill="currentColor" opacity=".3"/><rect x="2" y="10" width="20" height="12" rx="2" fill="currentColor"/><circle cx="12" cy="16" r="2" fill="var(--stone-900)"/></svg>
+				</span>
+				<h3 class="mm-value__title">Completely private</h3>
+				<p class="mm-value__desc">
+					All AI processing runs entirely on your iPhone using Apple Intelligence. Your contacts never leave your device — no cloud, no servers, no accounts. MetMe writes directly to your native iOS Contacts.
+				</p>
+			</div>
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+				</span>
+				<h3 class="mm-value__title">Faster than native iOS</h3>
+				<p class="mm-value__desc">
+					Adding a contact in the Contacts app takes 30+ seconds of tapping through fields. With MetMe, one sentence does it all — in under 5 seconds.
+				</p>
+			</div>
+		</section>
 
-				<div class="hero-badges xyz-nested">
-					<span class="badge">iOS App</span>
-					<span class="badge">On-device AI</span>
-					<span class="badge">No cloud required</span>
+		<!-- Views Section -->
+		<section class="mm-views">
+			<h2 class="mm-views__heading">Three ways to remember</h2>
+			<p class="mm-views__sub">Every contact saves when and where you met. Browse your network across time, space, and calendar.</p>
+
+			<div class="mm-views__grid">
+				<div class="mm-views__card">
+					<div class="mm-views__card-img">
+						<Image src={ss6} alt="Timeline view showing contacts sorted chronologically" width={300} />
+					</div>
+					<h3 class="mm-views__card-title">Timeline</h3>
+					<p class="mm-views__card-desc">See everyone you've met in chronological order. Jog your memory by scrolling back through time.</p>
+				</div>
+				<div class="mm-views__card">
+					<div class="mm-views__card-img">
+						<Image src={ss7} alt="Map view showing contact locations" width={300} />
+					</div>
+					<h3 class="mm-views__card-title">Map</h3>
+					<p class="mm-views__card-desc">Visualize your network geographically. See exactly where each encounter happened.</p>
+				</div>
+				<div class="mm-views__card">
+					<div class="mm-views__card-img">
+						<Image src={ss8} alt="Calendar view showing contacts by date with birthdays" width={300} />
+					</div>
+					<h3 class="mm-views__card-title">Calendar</h3>
+					<p class="mm-views__card-desc">Track birthdays, anniversaries, and the dates you met. Never miss an important occasion.</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- iPhone Demo Section -->
-		<PerspectiveScroll as="section" class="metme-demo">
-			<div class="iphone-mockup xyz-in" xyz="fade small-3 duration-8 delay-3">
-				<div class="iphone-frame">
-					<div class="iphone-notch"></div>
-					<div class="iphone-screen">
-						<!-- Placeholder for demo video -->
-						<div class="demo-placeholder">
-							<div class="placeholder-content">
-								<span class="placeholder-icon">▶</span>
-								<span class="placeholder-text">Demo video</span>
-							</div>
-						</div>
-						<!-- When video is ready, replace with:
-						<video autoplay loop muted playsinline>
-							<source src="/assets/videos/metme/demo.webm" type="video/webm" />
-							<source src="/assets/videos/metme/demo.mp4" type="video/mp4" />
-						</video>
-						-->
+		<!-- How it works screenshots -->
+		<section class="mm-flow">
+			<h2 class="mm-flow__heading">From thought to contact in seconds</h2>
+
+			<div class="mm-flow__steps">
+				<div class="mm-flow__step">
+					<div class="mm-flow__step-img">
+						<Image src={ss1} alt="MetMe ready for input" width={240} />
+					</div>
+					<div class="mm-flow__step-info">
+						<span class="mm-flow__step-num">1</span>
+						<p class="mm-flow__step-text">Open MetMe — it's ready immediately</p>
 					</div>
 				</div>
-			</div>
-		</PerspectiveScroll>
-
-		<!-- TestFlight CTA Section -->
-		<section class="metme-cta xyz-in" xyz="fade up-2 duration-6">
-			<h2 class="cta-title">Join the Beta</h2>
-			<p class="cta-description">MetMe is currently in TestFlight beta. Try it free on your iPhone.</p>
-			<Button href="https://testflight.apple.com/join/EQErxJEX" class="cta-button"> Get it on TestFlight </Button>
-			<p class="cta-note">iOS only. Free during beta.</p>
-		</section>
-
-		<!-- Features Section -->
-		<section class="metme-features">
-			<h2 class="features-title xyz-in" xyz="fade duration-6">How it works</h2>
-
-			<div class="features-grid xyz-in" xyz="fade up-2 duration-6 stagger">
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">💬</span>
-						</div>
+				<div class="mm-flow__step">
+					<div class="mm-flow__step-img">
+						<Image src={ss2} alt="Typing natural language contact info" width={240} />
 					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">Type naturally</h3>
-						<p class="feature-description">"Met Sarah at the coffee shop, she's a designer at Google"</p>
+					<div class="mm-flow__step-info">
+						<span class="mm-flow__step-num">2</span>
+						<p class="mm-flow__step-text">Type or dictate who you just met</p>
 					</div>
 				</div>
-
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">🎤</span>
-						</div>
+				<div class="mm-flow__step">
+					<div class="mm-flow__step-img">
+						<Image src={ss4} alt="AI parsing text into contact fields" width={240} />
 					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">Or just speak</h3>
-						<p class="feature-description">Dictate new contacts hands-free while on the go</p>
+					<div class="mm-flow__step-info">
+						<span class="mm-flow__step-num">3</span>
+						<p class="mm-flow__step-text">AI parses everything into structured fields</p>
 					</div>
 				</div>
-
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">🗺️</span>
-						</div>
+				<div class="mm-flow__step">
+					<div class="mm-flow__step-img">
+						<Image src={ss5} alt="Contact saved confirmation" width={240} />
 					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">See where you met</h3>
-						<p class="feature-description">Map view shows the location of every encounter</p>
-					</div>
-				</div>
-
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">📅</span>
-						</div>
-					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">Timeline view</h3>
-						<p class="feature-description">Browse contacts chronologically to jog your memory</p>
-					</div>
-				</div>
-
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">✨</span>
-						</div>
-					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">Context added automatically</h3>
-						<p class="feature-description">AI extracts names, companies, and notes from your input</p>
-					</div>
-				</div>
-
-				<div class="feature-card xyz-nested">
-					<div class="feature-media">
-						<div class="media-placeholder">
-							<span class="media-icon">🔒</span>
-						</div>
-					</div>
-					<div class="feature-content">
-						<h3 class="feature-title">Completely private</h3>
-						<p class="feature-description">All processing happens on-device. Your data never leaves your phone.</p>
+					<div class="mm-flow__step-info">
+						<span class="mm-flow__step-num">4</span>
+						<p class="mm-flow__step-text">Saved to iOS Contacts — done</p>
 					</div>
 				</div>
 			</div>
 		</section>
+
+		<!-- Bottom CTA -->
+		<section class="mm-bottom-cta">
+			<div class="mm-bottom-cta__inner">
+				<div class="mm-bottom-cta__icon">
+					<Image src={metmeIcon} alt="MetMe" width={72} height={72} />
+				</div>
+				<h2 class="mm-bottom-cta__title">Remember everyone you meet</h2>
+				<p class="mm-bottom-cta__desc">Free on TestFlight. iOS 18.1+ required.</p>
+				<a href="https://testflight.apple.com/join/EQErxJEX" class="mm-cta-btn mm-cta-btn--lg">
+					<span class="mm-cta-btn__fill"></span>
+					<span class="mm-cta-btn__label">Get MetMe on TestFlight</span>
+				</a>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="mm-footer">
+			<p>Made by <a href="/">Mattan Ingram</a></p>
+		</footer>
 	</main>
-
-	<Footer />
 </BaseLayout>
+
+<!-- Motion animations -->
+<script>
+	import { animate, stagger, inView } from 'motion'
+
+	function initAnimations() {
+		// Hero entrance
+		const heroEls = document.querySelectorAll('.mm-hero__icon, .mm-hero__title, .mm-hero__sub, .mm-hero__private, .mm-hero .mm-cta-btn')
+		if (heroEls.length) {
+			animate(
+				heroEls,
+				{ opacity: [0, 1], y: [30, 0] },
+				{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] }
+			)
+		}
+
+		// Value props
+		const valueItems = document.querySelectorAll('.mm-value__item')
+		if (valueItems.length) {
+			inView(document.querySelector('.mm-value')!, () => {
+				animate(
+					valueItems,
+					{ opacity: [0, 1], y: [40, 0] },
+					{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] }
+				)
+			}, { amount: 0.2 })
+		}
+
+		// Views cards
+		const viewCards = document.querySelectorAll('.mm-views__card')
+		if (viewCards.length) {
+			inView(document.querySelector('.mm-views')!, () => {
+				animate(
+					document.querySelectorAll('.mm-views__heading, .mm-views__sub'),
+					{ opacity: [0, 1], y: [30, 0] },
+					{ duration: 0.6, easing: [0.25, 1, 0.5, 1] }
+				)
+				animate(
+					viewCards,
+					{ opacity: [0, 1], y: [50, 0] },
+					{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] }
+				)
+			}, { amount: 0.15 })
+		}
+
+		// Flow steps
+		const flowSteps = document.querySelectorAll('.mm-flow__step')
+		if (flowSteps.length) {
+			inView(document.querySelector('.mm-flow')!, () => {
+				animate(
+					document.querySelector('.mm-flow__heading')!,
+					{ opacity: [0, 1], y: [30, 0] },
+					{ duration: 0.6, easing: [0.25, 1, 0.5, 1] }
+				)
+				animate(
+					flowSteps,
+					{ opacity: [0, 1], y: [40, 0] },
+					{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] }
+				)
+			}, { amount: 0.15 })
+		}
+
+		// Bottom CTA
+		const bottomCTA = document.querySelector('.mm-bottom-cta')
+		if (bottomCTA) {
+			inView(bottomCTA, () => {
+				animate(
+					bottomCTA.querySelectorAll('.mm-bottom-cta__icon, .mm-bottom-cta__title, .mm-bottom-cta__desc, .mm-cta-btn'),
+					{ opacity: [0, 1], y: [30, 0] },
+					{ duration: 0.6, delay: stagger(0.1), easing: [0.25, 1, 0.5, 1] }
+				)
+			}, { amount: 0.3 })
+		}
+	}
+
+	// Run on load and on Astro page transitions
+	document.addEventListener('astro:page-load', initAnimations)
+</script>
 
 <style lang="scss">
 	@use '../styles/scssVariables' as *;
 
-	/* Amber palette */
+	/* ── Palette (from MetMe style guide, oklch) ── */
 	:global(.metme-page) {
 		--amber-50: oklch(98.7% 0.022 95.277);
 		--amber-100: oklch(96.2% 0.059 95.617);
@@ -171,7 +276,6 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
 		--amber-900: oklch(41.4% 0.112 45.904);
 		--amber-950: oklch(27.9% 0.077 45.635);
 
-		/* Stone palette */
 		--stone-50: oklch(98.5% 0.001 106.423);
 		--stone-100: oklch(97% 0.001 106.424);
 		--stone-200: oklch(92.3% 0.003 48.717);
@@ -184,300 +288,420 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
 		--stone-900: oklch(21.6% 0.006 56.043);
 		--stone-950: oklch(14.7% 0.004 49.25);
 
-		/* Override site variables */
 		--bg-color: var(--stone-950);
 		--page-color: var(--amber-500);
 
-		background: var(--bg-color);
+		background: linear-gradient(180deg, var(--stone-900) 0%, var(--stone-950) 40%);
 		color: var(--stone-100);
+		font-family: 'Nunito Sans', 'Figtree', system-ui, sans-serif;
 	}
 
-	.metme-main {
+
+	.mm {
 		overflow-x: hidden;
 	}
 
-	/* Hero Section */
-	.metme-hero {
+	/* ── Hero ── */
+	.mm-hero {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
 		text-align: center;
-		min-height: 60vh;
-		padding: var(--spacing-16) var(--page-gutter);
-		padding-top: 10vh;
+		padding: 8vh var(--page-gutter) 2rem;
+		max-width: 38rem;
+		margin: 0 auto;
 
 		@media (width >= $breakpoint-md) {
-			min-height: 50vh;
-			padding-top: 5vh;
+			padding-top: 10vh;
 		}
 	}
 
-	.hero-content {
-		max-width: 42rem;
+	.mm-hero__icon {
+		width: 100px;
+		height: 100px;
+		border-radius: 22px;
+		overflow: hidden;
+		margin-bottom: 1.5rem;
+		filter: drop-shadow(0 6px 30px oklch(76.9% 0.188 70.08 / 0.35));
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		@media (width >= $breakpoint-sm) {
+			width: 120px;
+			height: 120px;
+			border-radius: 26px;
+		}
 	}
 
-	.hero-icon {
-		margin: 0 auto var(--spacing-8);
+	.mm-hero__title {
+		font-size: clamp(2.5rem, 7vw, 4rem);
+		font-weight: 700;
+		line-height: 1;
+		color: var(--stone-50);
+		margin-bottom: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.mm-hero__sub {
+		font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+		line-height: 1.55;
+		color: var(--stone-300);
+		margin-bottom: 1.25rem;
+
+		br {
+			@media (width < $breakpoint-sm) {
+				display: none;
+			}
+		}
+	}
+
+	.mm-hero__private {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--amber-400);
+		margin-bottom: 2rem;
+		letter-spacing: 0.01em;
+	}
+
+	.mm-lock-icon {
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+	}
+
+	/* ── CTA Button (MetMe style gradient) ── */
+	.mm-cta-btn {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		border-radius: 12px;
+		padding: 14px 28px;
+		cursor: pointer;
+		overflow: hidden;
+		transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+
+		&:active {
+			transform: scale(1.05);
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border-radius: 12px;
+			padding: 1px;
+			background: linear-gradient(135deg, #fde68add, #fcd34d99, #fbbf2444, #f59e0b33);
+			-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+			-webkit-mask-composite: xor;
+			mask-composite: exclude;
+			pointer-events: none;
+		}
+	}
+
+	.mm-cta-btn__fill {
+		position: absolute;
+		inset: 1px;
+		border-radius: 11px;
+		background: linear-gradient(135deg, #fbbf24cc, #d9770622);
+		pointer-events: none;
+	}
+
+	.mm-cta-btn__label {
+		position: relative;
+		font-family: 'Nunito Sans', system-ui, sans-serif;
+		font-weight: 600;
+		font-size: 1.05rem;
+		color: #fff;
+		z-index: 1;
+	}
+
+	.mm-cta-btn--lg {
+		padding: 16px 36px;
+
+		.mm-cta-btn__label {
+			font-size: 1.15rem;
+		}
+	}
+
+	/* ── Value Props ── */
+	.mm-value {
+		display: grid;
+		gap: 2rem;
+		max-width: 54rem;
+		margin: 0 auto;
+		padding: 4rem var(--page-gutter) 6rem;
+
+		@media (width >= $breakpoint-md) {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2.5rem;
+		}
+	}
+
+	.mm-value__item {
+		opacity: 0;
+	}
+
+	.mm-value__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 10px;
+		background: oklch(27.9% 0.077 45.635 / 0.6);
+		color: var(--amber-400);
+		margin-bottom: 1rem;
+
+		svg {
+			width: 22px;
+			height: 22px;
+		}
+	}
+
+	.mm-value__title {
+		font-size: 1.15rem;
+		font-weight: 700;
+		color: var(--stone-50);
+		margin-bottom: 0.5rem;
+	}
+
+	.mm-value__desc {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--stone-400);
+	}
+
+	/* ── Views Section ── */
+	.mm-views {
+		padding: 4rem var(--page-gutter) 6rem;
+		max-width: 62rem;
+		margin: 0 auto;
+	}
+
+	.mm-views__heading {
+		font-size: clamp(1.75rem, 4vw, 2.25rem);
+		font-weight: 700;
+		color: var(--stone-50);
+		text-align: center;
+		margin-bottom: 0.75rem;
+		opacity: 0;
+	}
+
+	.mm-views__sub {
+		font-size: 1.05rem;
+		color: var(--stone-400);
+		text-align: center;
+		max-width: 34rem;
+		margin: 0 auto 3rem;
+		line-height: 1.55;
+		opacity: 0;
+	}
+
+	.mm-views__grid {
+		display: grid;
+		gap: 1.5rem;
+
+		@media (width >= $breakpoint-sm) {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.25rem;
+		}
+	}
+
+	.mm-views__card {
+		position: relative;
+		border-radius: 16px;
+		overflow: hidden;
+		background: var(--stone-900);
+		border: 1px solid var(--stone-800);
+		transition: border-color 0.25s ease;
+		opacity: 0;
+
+		&:hover {
+			border-color: oklch(76.9% 0.188 70.08 / 0.4);
+		}
+	}
+
+	.mm-views__card-img {
+		overflow: hidden;
+		background: var(--stone-950);
+
+		img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+
+	.mm-views__card-title {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--amber-400);
+		padding: 1.25rem 1.25rem 0.25rem;
+	}
+
+	.mm-views__card-desc {
+		font-size: 0.88rem;
+		color: var(--stone-400);
+		line-height: 1.5;
+		padding: 0 1.25rem 1.25rem;
+	}
+
+	/* ── Flow Steps ── */
+	.mm-flow {
+		padding: 4rem var(--page-gutter) 6rem;
+		max-width: 60rem;
+		margin: 0 auto;
+	}
+
+	.mm-flow__heading {
+		font-size: clamp(1.75rem, 4vw, 2.25rem);
+		font-weight: 700;
+		color: var(--stone-50);
+		text-align: center;
+		margin-bottom: 3rem;
+		opacity: 0;
+	}
+
+	.mm-flow__steps {
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: repeat(2, 1fr);
+
+		@media (width >= $breakpoint-md) {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.25rem;
+		}
+	}
+
+	.mm-flow__step {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		opacity: 0;
+	}
+
+	.mm-flow__step-img {
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid var(--stone-800);
+		background: var(--stone-950);
+
+		img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+
+	.mm-flow__step-info {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+	}
+
+	.mm-flow__step-num {
+		flex-shrink: 0;
 		display: grid;
 		place-content: center;
-		filter: drop-shadow(0 8px 48px oklch(76.9% 0.188 70.08 / 0.3)) drop-shadow(0 0 10px oklch(76.9% 0.188 70.08 / 0.5));
-	}
-
-	.icon-placeholder {
-		font-size: 3rem;
-		font-weight: 700;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: var(--amber-500);
 		color: var(--stone-950);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 3.5rem;
-		}
-	}
-
-	.hero-title {
-		font-size: clamp(2rem, 6vw, 3.5rem);
+		font-size: 0.75rem;
 		font-weight: 700;
-		line-height: 1.1;
-		color: var(--stone-50);
-		margin-bottom: var(--spacing-6);
 	}
 
-	.hero-tagline {
-		font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-		line-height: 1.6;
+	.mm-flow__step-text {
+		font-size: 0.88rem;
 		color: var(--stone-300);
-		margin-bottom: var(--spacing-8);
-
-		em {
-			color: var(--amber-400);
-			font-style: normal;
-			font-weight: 500;
-		}
-
-		strong {
-			color: var(--amber-300);
-			font-weight: 600;
-		}
+		line-height: 1.45;
 	}
 
-	.hero-badges {
+	/* ── Bottom CTA ── */
+	.mm-bottom-cta {
+		padding: 4rem var(--page-gutter) 6rem;
+	}
+
+	.mm-bottom-cta__inner {
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: var(--spacing-3);
-	}
-
-	.badge {
-		font-size: 0.8rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		padding: var(--spacing-2) var(--spacing-4);
-		background: var(--stone-800);
-		color: var(--stone-300);
-		border: 1px solid var(--stone-700);
-		border-radius: 100px;
-	}
-
-	/* iPhone Demo Section */
-	.metme-demo {
-		display: flex;
-		justify-content: center;
-		padding: var(--spacing-12) var(--page-gutter);
-	}
-
-	.iphone-mockup {
-		width: 280px;
-
-		@media (width >= $breakpoint-sm) {
-			width: 320px;
-		}
-
-		@media (width >= $breakpoint-md) {
-			width: 360px;
-		}
-	}
-
-	.iphone-frame {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		max-width: 28rem;
+		margin: 0 auto;
+		padding: 3rem 2rem;
+		border-radius: 20px;
 		position: relative;
-		background: var(--stone-900);
-		border: 3px solid var(--stone-700);
-		border-radius: 40px;
-		padding: 12px;
-		box-shadow:
-			0 0 0 1px var(--stone-800),
-			0 20px 60px oklch(0% 0 0 / 0.5);
-
-		@media (width >= $breakpoint-sm) {
-			border-radius: 48px;
-			padding: 14px;
-		}
-	}
-
-	.iphone-notch {
-		position: absolute;
-		top: 12px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 35%;
-		height: 28px;
-		background: var(--stone-900);
-		border-radius: 0 0 16px 16px;
-		z-index: 10;
-
-		@media (width >= $breakpoint-sm) {
-			top: 14px;
-			height: 32px;
-		}
-	}
-
-	.iphone-screen {
-		aspect-ratio: 9 / 19.5;
-		background: var(--stone-950);
-		border-radius: 28px;
 		overflow: hidden;
+		background: var(--stone-900);
+		border: 1px solid var(--stone-800);
 
-		@media (width >= $breakpoint-sm) {
-			border-radius: 34px;
+		/* Subtle gradient sheen at top */
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: linear-gradient(90deg, transparent, var(--amber-500), transparent);
+			opacity: 0.5;
 		}
+	}
 
-		video {
+	.mm-bottom-cta__icon {
+		width: 64px;
+		height: 64px;
+		border-radius: 14px;
+		overflow: hidden;
+		margin-bottom: 1.25rem;
+		filter: drop-shadow(0 4px 20px oklch(76.9% 0.188 70.08 / 0.25));
+
+		img {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 		}
 	}
 
-	.demo-placeholder {
-		width: 100%;
-		height: 100%;
-		display: grid;
-		place-content: center;
-		background: linear-gradient(180deg, var(--stone-900), var(--stone-950));
-	}
-
-	.placeholder-content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--spacing-4);
-		color: var(--stone-500);
-	}
-
-	.placeholder-icon {
-		font-size: 2.5rem;
-		opacity: 0.5;
-	}
-
-	.placeholder-text {
-		font-size: 0.875rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-	}
-
-	/* CTA Section */
-	.metme-cta {
-		text-align: center;
-		padding: var(--spacing-16) var(--page-gutter);
-		max-width: 32rem;
-		margin: 0 auto;
-	}
-
-	.cta-title {
-		font-size: clamp(1.75rem, 4vw, 2.5rem);
+	.mm-bottom-cta__title {
+		font-size: 1.5rem;
 		font-weight: 700;
 		color: var(--stone-50);
-		margin-bottom: var(--spacing-4);
+		margin-bottom: 0.5rem;
 	}
 
-	.cta-description {
-		font-size: 1.1rem;
+	.mm-bottom-cta__desc {
+		font-size: 0.9rem;
 		color: var(--stone-400);
-		margin-bottom: var(--spacing-8);
+		margin-bottom: 1.75rem;
 	}
 
-	.cta-note {
-		margin-top: var(--spacing-6);
-		font-size: 0.875rem;
-		color: var(--stone-500);
-	}
-
-	:global(.cta-button) {
-		font-size: 1.1rem;
-		padding: var(--spacing-5) var(--spacing-10);
-	}
-
-	/* Features Section */
-	.metme-features {
-		padding: var(--spacing-16) var(--page-gutter);
-		max-width: var(--page-content-width);
-		margin: 0 auto;
-	}
-
-	.features-title {
-		font-size: clamp(1.75rem, 4vw, 2.5rem);
-		font-weight: 700;
-		color: var(--stone-50);
+	/* ── Footer ── */
+	.mm-footer {
 		text-align: center;
-		margin-bottom: var(--spacing-12);
-	}
+		padding: 2rem var(--page-gutter) 3rem;
+		font-size: 0.85rem;
+		color: var(--stone-500);
 
-	.features-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--spacing-8);
+		a {
+			color: var(--stone-300);
+			text-decoration: none;
+			font-weight: 500;
 
-		@media (width >= $breakpoint-sm) {
-			grid-template-columns: repeat(2, 1fr);
+			&:hover {
+				color: var(--amber-400);
+			}
 		}
-
-		@media (width >= $breakpoint-lg) {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.feature-card {
-		background: var(--stone-900);
-		border: 1px solid var(--stone-800);
-		border-radius: 12px;
-		overflow: hidden;
-		transition: border-color 0.2s ease-out;
-
-		&:hover {
-			border-color: var(--amber-500);
-		}
-	}
-
-	.feature-media {
-		aspect-ratio: 4 / 3;
-		background: var(--stone-950);
-	}
-
-	.media-placeholder {
-		width: 100%;
-		height: 100%;
-		display: grid;
-		place-content: center;
-	}
-
-	.media-icon {
-		font-size: 3rem;
-	}
-
-	.feature-content {
-		padding: var(--spacing-6);
-	}
-
-	.feature-title {
-		font-size: 1.15rem;
-		font-weight: 600;
-		color: var(--amber-400);
-		margin-bottom: var(--spacing-2);
-	}
-
-	.feature-description {
-		font-size: 0.95rem;
-		color: var(--stone-400);
-		line-height: 1.5;
 	}
 </style>
