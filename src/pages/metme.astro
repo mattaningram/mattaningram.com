@@ -2,11 +2,9 @@
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Header from '@components/Header.astro'
 import MetMeDemo from '@components/MetMeDemo.astro'
+import MetMeViewsDemo from '@components/MetMeViewsDemo.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
-import ss6 from '@media/metme/metme-6.png'
-import ss7 from '@media/metme/metme-7.png'
-import ss8 from '@media/metme/metme-8.png'
 ---
 
 <BaseLayout
@@ -162,53 +160,7 @@ import ss8 from '@media/metme/metme-8.png'
 			</div>
 		</section>
 
-		<!-- Views Section -->
-		<section class="mm-views">
-			<h2 class="mm-views__heading">Three ways to remember</h2>
-			<p class="mm-views__sub">
-				Every contact saves when and where you met. Browse your network across time, space, and calendar.
-			</p>
-
-			<div class="mm-views__grid">
-				<div class="mm-views__card">
-					<div class="mm-views__card-img">
-						<Image
-							layout="constrained"
-							src={ss6}
-							alt="Timeline view showing contacts sorted chronologically"
-							width={300}
-						/>
-					</div>
-					<h3 class="mm-views__card-title">Timeline</h3>
-					<p class="mm-views__card-desc">
-						See everyone you've met in chronological order. Jog your memory by scrolling back through time.
-					</p>
-				</div>
-				<div class="mm-views__card">
-					<div class="mm-views__card-img">
-						<Image layout="constrained" src={ss7} alt="Map view showing contact locations" width={300} />
-					</div>
-					<h3 class="mm-views__card-title">Map</h3>
-					<p class="mm-views__card-desc">
-						Visualize your network geographically. See exactly where each encounter happened.
-					</p>
-				</div>
-				<div class="mm-views__card">
-					<div class="mm-views__card-img">
-						<Image
-							layout="constrained"
-							src={ss8}
-							alt="Calendar view showing contacts by date with birthdays"
-							width={300}
-						/>
-					</div>
-					<h3 class="mm-views__card-title">Calendar</h3>
-					<p class="mm-views__card-desc">
-						Track birthdays, anniversaries, and the dates you met. Never miss an important occasion.
-					</p>
-				</div>
-			</div>
-		</section>
+		<MetMeViewsDemo />
 
 		<!-- Bottom CTA -->
 		<section class="mm-bottom-cta">
@@ -263,27 +215,6 @@ import ss8 from '@media/metme/metme-8.png'
 					)
 				},
 				{ amount: 0.2 },
-			)
-		}
-
-		// Views cards
-		const viewCards = document.querySelectorAll('.mm-views__card')
-		if (viewCards.length) {
-			inView(
-				document.querySelector('.mm-views')!,
-				() => {
-					animate(
-						document.querySelectorAll('.mm-views__heading, .mm-views__sub'),
-						{ opacity: [0, 1], y: [30, 0] } as any,
-						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] } as any,
-					)
-					animate(
-						viewCards,
-						{ opacity: [0, 1], y: [50, 0] } as any,
-						{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
-					)
-				},
-				{ amount: 0.15 },
 			)
 		}
 
@@ -541,81 +472,6 @@ import ss8 from '@media/metme/metme-8.png'
 		font-size: 0.95rem;
 		line-height: 1.6;
 		color: var(--stone-400);
-	}
-
-	/* ── Views Section ── */
-	.mm-views {
-		padding: 4rem var(--page-gutter) 6rem;
-		max-width: 62rem;
-		margin: 0 auto;
-	}
-
-	.mm-views__heading {
-		font-size: clamp(1.75rem, 4vw, 2.25rem);
-		font-weight: 700;
-		color: var(--stone-50);
-		text-align: center;
-		margin-bottom: 0.75rem;
-		opacity: 0;
-	}
-
-	.mm-views__sub {
-		font-size: 1.05rem;
-		color: var(--stone-400);
-		text-align: center;
-		max-width: 34rem;
-		margin: 0 auto 3rem;
-		line-height: 1.55;
-		opacity: 0;
-	}
-
-	.mm-views__grid {
-		display: grid;
-		gap: 1.5rem;
-
-		@media (width >= $breakpoint-sm) {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 1.25rem;
-		}
-	}
-
-	.mm-views__card {
-		position: relative;
-		border-radius: 16px;
-		overflow: hidden;
-		background: var(--stone-900);
-		border: 1px solid var(--stone-800);
-		transition: border-color 0.25s ease;
-		opacity: 0;
-
-		&:hover {
-			border-color: color-alpha(var(--amber-500), 0.4);
-		}
-	}
-
-	.mm-views__card-img {
-		overflow: hidden;
-		background: var(--stone-950);
-
-		img {
-			width: 100%;
-			height: auto;
-			display: block;
-		}
-	}
-
-	.mm-views__card-title {
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: var(--amber-400);
-		padding: 1.25rem 1.25rem 0.25rem;
-	}
-
-	.mm-views__card-desc {
-		font-size: 0.88rem;
-		color: var(--stone-400);
-		line-height: 1.5;
-		padding: 0 1.25rem 1.25rem;
 	}
 
 	/* ── Bottom CTA ── */
