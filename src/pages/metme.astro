@@ -313,11 +313,6 @@ import ss8 from '@media/metme/metme-8.png'
 <style lang="scss">
 	@use '../styles/scssVariables' as *;
 
-	@function color-alpha($color, $opacity: 1) {
-		// Uses the P3 color space to prevent clipping of vibrant colors
-		@return unquote('color(from #{$color} display-p3 r g b / #{$opacity})');
-	}
-
 	/* ── Palette (from MetMe style guide, oklch) ── */
 	:global(.metme-page) {
 		--amber-50: oklch(98.7% 0.022 95.277);

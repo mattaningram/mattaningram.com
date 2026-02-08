@@ -4,3 +4,8 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
 $breakpoint-xxl: 1440px;
+
+@function color-alpha($color, $opacity: 1) {
+	// Uses the P3 color space to prevent clipping of vibrant colors
+	@return unquote('color(from #{$color} display-p3 r g b / #{$opacity})');
+}
