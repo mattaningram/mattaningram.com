@@ -4,10 +4,6 @@ import Header from '@components/Header.astro'
 import MetMeDemo from '@components/MetMeDemo.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
-import ss1 from '@media/metme/metme-1.png'
-import ss2 from '@media/metme/metme-2.png'
-import ss4 from '@media/metme/metme-4.png'
-import ss5 from '@media/metme/metme-5.png'
 import ss6 from '@media/metme/metme-6.png'
 import ss7 from '@media/metme/metme-7.png'
 import ss8 from '@media/metme/metme-8.png'
@@ -112,6 +108,67 @@ import ss8 from '@media/metme/metme-8.png'
 					does it all — in under 5 seconds.
 				</p>
 			</div>
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path
+							d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path><circle cx="12" cy="10" r="3" fill="currentColor"></circle></svg
+					>
+				</span>
+				<h3 class="mm-value__title">Remembers context</h3>
+				<p class="mm-value__desc">
+					Where you met, when you met, and personal notes are all captured automatically. Never wonder "where do I
+					know them from?" again.
+				</p>
+			</div>
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path
+							d="M12 1a3 3 0 0 0-3 3v4a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+							fill="currentColor"
+							opacity=".3"></path><path
+							d="M19 8v2a7 7 0 0 1-14 0V8"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"></path><path
+							d="M12 17v3m0 0c3 0 5.5.5 7 2M12 20c-3 0-5.5.5-7 2"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"></path></svg
+					>
+				</span>
+				<h3 class="mm-value__title">Works with Siri</h3>
+				<p class="mm-value__desc">
+					Add contacts completely hands-free with Siri. Just say what you remember and MetMe handles the rest — no
+					need to even open the app.
+				</p>
+			</div>
+			<div class="mm-value__item">
+				<span class="mm-value__icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path
+							d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"></path><path
+							d="M22 4 12 14.01l-3-3"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path></svg
+					>
+				</span>
+				<h3 class="mm-value__title">No account needed</h3>
+				<p class="mm-value__desc">
+					No sign-up, no login, no cloud sync. Just open the app and start adding contacts. Everything saves directly
+					to your native iOS Contacts.
+				</p>
+			</div>
 		</section>
 
 		<!-- Views Section -->
@@ -158,50 +215,6 @@ import ss8 from '@media/metme/metme-8.png'
 					<p class="mm-views__card-desc">
 						Track birthdays, anniversaries, and the dates you met. Never miss an important occasion.
 					</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- How it works screenshots -->
-		<section class="mm-flow">
-			<h2 class="mm-flow__heading">From thought to contact in seconds</h2>
-
-			<div class="mm-flow__steps">
-				<div class="mm-flow__step">
-					<div class="mm-flow__step-img">
-						<Image layout="constrained" src={ss1} alt="MetMe ready for input" width={240} />
-					</div>
-					<div class="mm-flow__step-info">
-						<span class="mm-flow__step-num">1</span>
-						<p class="mm-flow__step-text">Open MetMe — it's ready immediately</p>
-					</div>
-				</div>
-				<div class="mm-flow__step">
-					<div class="mm-flow__step-img">
-						<Image layout="constrained" src={ss2} alt="Typing natural language contact info" width={240} />
-					</div>
-					<div class="mm-flow__step-info">
-						<span class="mm-flow__step-num">2</span>
-						<p class="mm-flow__step-text">Type or dictate who you just met</p>
-					</div>
-				</div>
-				<div class="mm-flow__step">
-					<div class="mm-flow__step-img">
-						<Image layout="constrained" src={ss4} alt="AI parsing text into contact fields" width={240} />
-					</div>
-					<div class="mm-flow__step-info">
-						<span class="mm-flow__step-num">3</span>
-						<p class="mm-flow__step-text">AI parses everything into structured fields</p>
-					</div>
-				</div>
-				<div class="mm-flow__step">
-					<div class="mm-flow__step-img">
-						<Image layout="constrained" src={ss5} alt="Contact saved confirmation" width={240} />
-					</div>
-					<div class="mm-flow__step-info">
-						<span class="mm-flow__step-num">4</span>
-						<p class="mm-flow__step-text">Saved to iOS Contacts — done</p>
-					</div>
 				</div>
 			</div>
 		</section>
@@ -277,27 +290,6 @@ import ss8 from '@media/metme/metme-8.png'
 						viewCards,
 						{ opacity: [0, 1], y: [50, 0] } as any,
 						{ duration: 0.7, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
-					)
-				},
-				{ amount: 0.15 },
-			)
-		}
-
-		// Flow steps
-		const flowSteps = document.querySelectorAll('.mm-flow__step')
-		if (flowSteps.length) {
-			inView(
-				document.querySelector('.mm-flow')!,
-				() => {
-					animate(
-						document.querySelector('.mm-flow__heading')!,
-						{ opacity: [0, 1], y: [30, 0] } as any,
-						{ duration: 0.6, easing: [0.25, 1, 0.5, 1] } as any,
-					)
-					animate(
-						flowSteps,
-						{ opacity: [0, 1], y: [40, 0] } as any,
-						{ duration: 0.6, delay: stagger(0.15), easing: [0.25, 1, 0.5, 1] } as any,
 					)
 				},
 				{ amount: 0.15 },
@@ -521,6 +513,10 @@ import ss8 from '@media/metme/metme-8.png'
 		margin: 0 auto;
 		padding: 4rem var(--page-gutter) 6rem;
 
+		@media (width >= $breakpoint-sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
 		@media (width >= $breakpoint-md) {
 			grid-template-columns: repeat(3, 1fr);
 			gap: 2.5rem;
@@ -634,78 +630,6 @@ import ss8 from '@media/metme/metme-8.png'
 		color: var(--stone-400);
 		line-height: 1.5;
 		padding: 0 1.25rem 1.25rem;
-	}
-
-	/* ── Flow Steps ── */
-	.mm-flow {
-		padding: 4rem var(--page-gutter) 6rem;
-		max-width: 60rem;
-		margin: 0 auto;
-	}
-
-	.mm-flow__heading {
-		font-size: clamp(1.75rem, 4vw, 2.25rem);
-		font-weight: 700;
-		color: var(--stone-50);
-		text-align: center;
-		margin-bottom: 3rem;
-		opacity: 0;
-	}
-
-	.mm-flow__steps {
-		display: grid;
-		gap: 1.5rem;
-		grid-template-columns: repeat(2, 1fr);
-
-		@media (width >= $breakpoint-md) {
-			grid-template-columns: repeat(4, 1fr);
-			gap: 1.25rem;
-		}
-	}
-
-	.mm-flow__step {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		opacity: 0;
-	}
-
-	.mm-flow__step-img {
-		border-radius: 16px;
-		overflow: hidden;
-		border: 1px solid var(--stone-800);
-		background: var(--stone-950);
-
-		img {
-			width: 100%;
-			height: auto;
-			display: block;
-		}
-	}
-
-	.mm-flow__step-info {
-		display: flex;
-		align-items: flex-start;
-		gap: 0.65rem;
-	}
-
-	.mm-flow__step-num {
-		flex-shrink: 0;
-		display: grid;
-		place-content: center;
-		width: 24px;
-		height: 24px;
-		border-radius: 50%;
-		background: var(--amber-500);
-		color: var(--stone-950);
-		font-size: 0.75rem;
-		font-weight: 700;
-	}
-
-	.mm-flow__step-text {
-		font-size: 0.88rem;
-		color: var(--stone-300);
-		line-height: 1.45;
 	}
 
 	/* ── Bottom CTA ── */
