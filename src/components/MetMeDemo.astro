@@ -223,15 +223,15 @@
 		if (!phone || !prompt || !mic || !contextPill || !textWrap || !contact || !deleteBtn || !saveBtn || !saved) return
 
 		try {
-		// Phone enters (only on first run)
-		if (phone.style.opacity !== '1') {
-			await animate(
-				phone,
-				{ opacity: [0, 1], y: [60, 0], scale: [0.92, 1] } as any,
-				{ duration: 0.8, easing: [0.25, 1, 0.5, 1] } as any,
-			).finished
-			phone.style.opacity = '1'
-		}
+			// Phone enters (only on first run)
+			if (phone.style.opacity !== '1') {
+				await animate(
+					phone,
+					{ opacity: [0, 1], y: [60, 0], scale: [0.92, 1] } as any,
+					{ duration: 0.8, easing: [0.25, 1, 0.5, 1] } as any,
+				).finished
+				phone.style.opacity = '1'
+			}
 
 			// Prompt fades in
 			prompt.style.display = ''
@@ -248,12 +248,12 @@
 			prompt.style.display = 'none'
 			if (signal.aborted) return
 
-		textWrap.style.display = 'block'
-		await animate(
-			words,
-			{ opacity: [0, 1], y: [8, 0] } as any,
-			{ duration: 0.35, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
-		).finished
+			textWrap.style.display = 'block'
+			await animate(
+				words,
+				{ opacity: [0, 1], y: [8, 0] } as any,
+				{ duration: 0.35, delay: stagger(0.12), easing: [0.25, 1, 0.5, 1] } as any,
+			).finished
 			if (signal.aborted) return
 
 			await delay(500, signal)
@@ -274,55 +274,64 @@
 			})
 			await delay(500, signal)
 
-		// Contact card slides up
-		contact.style.display = 'block'
-		await animate(contact, { opacity: [0, 1], y: [20, 0] } as any, { duration: 0.5, easing: [0.25, 1, 0.5, 1] } as any).finished
-		if (signal.aborted) return
-
-		await animate(
-			contactRows,
-			{ opacity: [0, 1], x: [-10, 0] } as any,
-			{ duration: 0.35, delay: stagger(0.08), easing: [0.25, 1, 0.5, 1] } as any,
-		).finished
+			// Contact card slides up
+			contact.style.display = 'block'
+			await animate(
+				contact,
+				{ opacity: [0, 1], y: [20, 0] } as any,
+				{ duration: 0.5, easing: [0.25, 1, 0.5, 1] } as any,
+			).finished
 			if (signal.aborted) return
 
-		// Delete and save buttons animate in
-		animate(deleteBtn, { opacity: [0, 1], scale: [0.8, 1] } as any, { duration: 0.35, easing: [0.25, 1, 0.5, 1] } as any)
-		await animate(
-			saveBtn,
-			{ opacity: [0, 1], scale: [0.8, 1] } as any,
-			{ duration: 0.35, delay: 0.08, easing: [0.25, 1, 0.5, 1] } as any,
-		).finished
+			await animate(
+				contactRows,
+				{ opacity: [0, 1], x: [-10, 0] } as any,
+				{ duration: 0.35, delay: stagger(0.08), easing: [0.25, 1, 0.5, 1] } as any,
+			).finished
+			if (signal.aborted) return
+
+			// Delete and save buttons animate in
+			animate(
+				deleteBtn,
+				{ opacity: [0, 1], scale: [0.8, 1] } as any,
+				{ duration: 0.35, easing: [0.25, 1, 0.5, 1] } as any,
+			)
+			await animate(
+				saveBtn,
+				{ opacity: [0, 1], scale: [0.8, 1] } as any,
+				{ duration: 0.35, delay: 0.08, easing: [0.25, 1, 0.5, 1] } as any,
+			).finished
 			if (signal.aborted) return
 
 			// Hold the completed state
 			await delay(1800, signal)
 
-		// Save button "tapped"
-		await animate(
-			saveBtn,
-			{ scale: [1, 0.85], backgroundColor: ['oklch(35% 0.1 75)', 'oklch(65% 0.18 75)'] } as any,
-			{ duration: 0.1, easing: 'ease-in' } as any,
-		).finished
-		await animate(
-			saveBtn,
-			{ scale: [0.85, 1], backgroundColor: ['oklch(65% 0.18 75)', 'oklch(35% 0.1 75)'] } as any,
-			{ duration: 0.2, easing: [0.25, 1, 0.5, 1] } as any,
-		).finished
+			// Save button "tapped"
+			await animate(
+				saveBtn,
+				{ scale: [1, 0.85], backgroundColor: ['oklch(35% 0.1 75)', 'oklch(65% 0.18 75)'] } as any,
+				{ duration: 0.1, easing: 'ease-in' } as any,
+			).finished
+			await animate(
+				saveBtn,
+				{ scale: [0.85, 1], backgroundColor: ['oklch(65% 0.18 75)', 'oklch(35% 0.1 75)'] } as any,
+				{ duration: 0.2, easing: [0.25, 1, 0.5, 1] } as any,
+			).finished
 			if (signal.aborted) return
 
 			await delay(200, signal)
 
-		// Contact card slides down and out, text animates out upward
-		animate(contact, { opacity: 0, y: [0, '100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
-		animate(textWrap, { opacity: 0, y: [0, '-100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
-		// Fade out delete and save buttons
-		animate(deleteBtn, { opacity: 0 }, { duration: 0.3 })
-		await animate(saveBtn, { opacity: 0 }, { duration: 0.3 }).finished
+			// Contact card slides down and out, text animates out upward
+			animate(contact, { opacity: 0, y: [0, '100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
+			animate(textWrap, { opacity: 0, y: [0, '-100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
+			// Fade out delete and save buttons
+			animate(deleteBtn, { opacity: 0 }, { duration: 0.3 })
+			await animate(saveBtn, { opacity: 0 }, { duration: 0.3 }).finished
 			if (signal.aborted) return
 
-		// Saved popup slides up from bottom
-		await animate(saved, { opacity: [0, 1], y: [40, 0] } as any, { duration: 0.5, easing: [0.25, 1, 0.5, 1] } as any).finished
+			// Saved popup slides up from bottom
+			await animate(saved, { opacity: [0, 1], y: [40, 0] } as any, { duration: 0.5, easing: [0.25, 1, 0.5, 1] } as any)
+				.finished
 			if (signal.aborted) return
 
 			// Hold saved state
@@ -412,7 +421,7 @@
 		padding: 6px;
 		box-shadow:
 			0 25px 80px oklch(0% 0 0 / 0.6),
-			0 0 60px oklch(76.9% 0.188 70.08 / 0.08);
+			0 0 60px color-alpha(var(--amber-500), 0.08);
 		opacity: 0;
 
 		@media (width >= $breakpoint-sm) {
@@ -502,7 +511,7 @@
 
 	.mm-demo__word--highlighted {
 		color: var(--amber-100);
-		text-shadow: 0 0 12px oklch(76.9% 0.188 70.08 / 0.5);
+		text-shadow: 0 0 12px color-alpha(var(--amber-500), 0.5);
 	}
 
 	/* Scanning amber gradient sweep – masked to text */
@@ -544,7 +553,7 @@
 		align-items: baseline;
 		gap: 12px;
 		padding: 8px 24px;
-		border-bottom: 1px dashed oklch(26.8% 0.007 34.298 / 0.5);
+		border-bottom: 1px dashed color-alpha(var(--stone-800), 0.5);
 		opacity: 0;
 	}
 
@@ -607,8 +616,8 @@
 
 	.mm-demo__save {
 		right: 20px;
-		background: oklch(35% 0.1 75);
-		border: 1px solid oklch(55% 0.15 75);
+		background: color-alpha(var(--amber-500), 0.1);
+		border: 1px solid var(--amber-500);
 		color: var(--stone-50);
 
 		@media (width >= $breakpoint-sm) {
@@ -759,16 +768,16 @@
 		animation: mic-pulse 1s ease-in-out infinite;
 		color: var(--amber-400);
 		border-color: var(--amber-500);
-		background: oklch(27.9% 0.077 45.635);
+		background: var(--amber-950);
 	}
 
 	@keyframes mic-pulse {
 		0%,
 		100% {
-			box-shadow: 0 0 0 0 oklch(76.9% 0.188 70.08 / 0.3);
+			box-shadow: 0 0 0 0 color-alpha(var(--amber-500), 0.3);
 		}
 		50% {
-			box-shadow: 0 0 0 10px oklch(76.9% 0.188 70.08 / 0);
+			box-shadow: 0 0 0 10px color-alpha(var(--amber-500), 0);
 		}
 	}
 </style>
