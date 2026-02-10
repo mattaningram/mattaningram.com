@@ -1,0 +1,71 @@
+---
+interface Props {
+	class?: string
+}
+const { class: className } = Astro.props
+---
+
+<div class:list={['phone-frame', className]}>
+	<div class="phone-frame__phone">
+		<div class="phone-frame__island"></div>
+		<div class="phone-frame__screen">
+			<slot />
+		</div>
+	</div>
+	<slot name="after" />
+</div>
+
+<style lang="scss">
+	@use '../styles/scssVariables' as *;
+
+	.phone-frame__phone {
+		position: relative;
+		width: 300px;
+		background: var(--stone-950);
+		border: 1.5px solid var(--stone-800);
+		border-radius: 40px;
+		padding: 6px;
+		box-shadow:
+			0 25px 80px oklch(0% 0 0 / 0.6),
+			0 0 60px color-alpha(var(--amber-500), 0.08);
+		opacity: 0;
+
+		@media (width >= $breakpoint-sm) {
+			width: 340px;
+			border-radius: 46px;
+			padding: 7px;
+		}
+	}
+
+	.phone-frame__island {
+		position: absolute;
+		top: 16px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 72px;
+		height: 20px;
+		background: #000;
+		border-radius: 10px;
+		z-index: 10;
+
+		@media (width >= $breakpoint-sm) {
+			top: 18px;
+			width: 80px;
+			height: 22px;
+			border-radius: 11px;
+		}
+	}
+
+	.phone-frame__screen {
+		position: relative;
+		aspect-ratio: 9 / 19.5;
+		background: linear-gradient(180deg, var(--stone-900) 5%, var(--stone-950) 100%);
+		border-radius: 34px;
+		overflow: hidden;
+		pointer-events: none;
+
+		@media (width >= $breakpoint-sm) {
+			border-radius: 39px;
+		}
+	}
+</style>

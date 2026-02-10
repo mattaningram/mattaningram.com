@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 $breakpoint-xs: 375px;
 $breakpoint-sm: 560px;
 $breakpoint-md: 768px;
@@ -7,5 +9,5 @@ $breakpoint-xxl: 1440px;
 
 @function color-alpha($color, $opacity: 1) {
 	// Uses the P3 color space to prevent clipping of vibrant colors
-	@return unquote('color(from #{$color} display-p3 r g b / #{$opacity})');
+	@return string.unquote('color(from #{$color} display-p3 r g b / #{$opacity})');
 }

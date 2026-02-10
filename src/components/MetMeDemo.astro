@@ -1,8 +1,10 @@
+---
+import PhoneFrame from '@components/PhoneFrame.astro'
+---
+
 <!-- Demo Animation Section -->
 <section class="mm-demo" aria-label="How MetMe works">
-	<div class="mm-demo__phone">
-		<div class="mm-demo__island"></div>
-		<div class="mm-demo__screen">
+	<PhoneFrame>
 			<div class="mm-demo__prompt-container">
 				<!-- Step 1: Prompt -->
 				<p class="mm-demo__prompt">Who did you meet?</p>
@@ -84,16 +86,13 @@
 						Today
 					</span>
 					<span class="mm-demo__context-divider"></span>
-					<span class="mm-demo__context-item">
-						<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-							><path
-								d="M10 1.5l-1.5 13M7.5 1.5L6 14.5M2.5 5.5h11M2 10.5h11"
-								stroke="currentColor"
-								stroke-width="1.2"
-								stroke-linecap="round"></path></svg
-						>
-						Here
-					</span>
+				<span class="mm-demo__context-item">
+					<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+						><path d="M13 6.5c0 4.5-5 8-5 8s-5-3.5-5-8a5 5 0 0 1 10 0z" stroke="currentColor" stroke-width="1.2"
+						></path><circle cx="8" cy="6.5" r="1.5" stroke="currentColor" stroke-width="1.2"></circle></svg
+					>
+					Here
+				</span>
 				</div>
 
 				<!-- Mic button -->
@@ -127,8 +126,7 @@
 				<p class="mm-demo__saved-detail">415-555-9876</p>
 				<span class="mm-demo__saved-view">View contact</span>
 			</div>
-		</div>
-	</div>
+	</PhoneFrame>
 	<button class="mm-demo__pause" aria-label="Pause animation">
 		<svg class="mm-demo__pause-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
@@ -208,7 +206,7 @@
 	}
 
 	async function runDemoAnimation(signal: AbortSignal) {
-		const phone = document.querySelector('.mm-demo__phone') as HTMLElement
+		const phone = document.querySelector('.mm-demo .phone-frame__phone') as HTMLElement
 		const prompt = document.querySelector('.mm-demo__prompt') as HTMLElement
 		const mic = document.querySelector('.mm-demo__mic') as HTMLElement
 		const contextPill = document.querySelector('.mm-demo__context-pill') as HTMLElement
@@ -248,7 +246,16 @@
 			prompt.style.display = 'none'
 			if (signal.aborted) return
 
+			// Reset text wrap and words to initial state before animating in
 			textWrap.style.display = 'block'
+			textWrap.style.opacity = '1'
+			textWrap.style.transform = 'none'
+			words.forEach((w) => {
+				const el = w as HTMLElement
+				el.style.opacity = '0'
+				el.style.transform = 'none'
+			})
+			
 			await animate(
 				words,
 				{ opacity: [0, 1], y: [8, 0] } as any,
@@ -276,6 +283,14 @@
 
 			// Contact card slides up
 			contact.style.display = 'block'
+			contact.style.opacity = '0'
+			contact.style.transform = 'none'
+			contactRows.forEach((r) => {
+				const el = r as HTMLElement
+				el.style.opacity = '0'
+				el.style.transform = 'none'
+			})
+			
 			await animate(
 				contact,
 				{ opacity: [0, 1], y: [20, 0] } as any,
@@ -291,6 +306,11 @@
 			if (signal.aborted) return
 
 			// Delete and save buttons animate in
+			deleteBtn.style.opacity = '0'
+			deleteBtn.style.transform = 'none'
+			saveBtn.style.opacity = '0'
+			saveBtn.style.transform = 'none'
+			
 			animate(
 				deleteBtn,
 				{ opacity: [0, 1], scale: [0.8, 1] } as any,
@@ -321,15 +341,25 @@
 
 			await delay(200, signal)
 
+			// Ensure elements are visible before exit animations
+			textWrap.style.opacity = '1'
+			contact.style.opacity = '1'
+			
 			// Contact card slides down and out, text animates out upward
-			animate(contact, { opacity: 0, y: [0, '100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
-			animate(textWrap, { opacity: 0, y: [0, '-100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
+			const contactOut = animate(contact, { opacity: [1, 0], y: [0, '100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
+			const textOut = animate(textWrap, { opacity: [1, 0], y: [0, '-100%'] } as any, { duration: 0.4, easing: [0.5, 0, 0.75, 0] } as any)
 			// Fade out delete and save buttons
-			animate(deleteBtn, { opacity: 0 }, { duration: 0.3 })
-			await animate(saveBtn, { opacity: 0 }, { duration: 0.3 }).finished
+			const deleteOut = animate(deleteBtn, { opacity: [1, 0] } as any, { duration: 0.3 })
+			const saveOut = animate(saveBtn, { opacity: [1, 0] } as any, { duration: 0.3 })
+			
+			// Wait for all exit animations to complete
+			await Promise.all([contactOut.finished, textOut.finished, deleteOut.finished, saveOut.finished])
 			if (signal.aborted) return
 
 			// Saved popup slides up from bottom
+			saved.style.opacity = '0'
+			saved.style.transform = 'none'
+			
 			await animate(saved, { opacity: [0, 1], y: [40, 0] } as any, { duration: 0.5, easing: [0.25, 1, 0.5, 1] } as any)
 				.finished
 			if (signal.aborted) return
@@ -341,26 +371,21 @@
 			await animate(saved, { opacity: 0 }, { duration: 0.4 }).finished
 			if (signal.aborted) return
 
-			// Reset all state for next loop
-			contact.style.display = 'none'
-			contact.style.opacity = ''
-			contact.style.transform = ''
-			textWrap.style.display = 'none'
-			textWrap.style.opacity = ''
-			textWrap.style.transform = ''
+			// Reset all state for next loop - clear all inline styles completely
+			contact.style.cssText = 'display: none;'
+			textWrap.style.cssText = 'display: none;'
 			textWrap.classList.remove('mm-demo__text--scanning')
-			deleteBtn.style.opacity = ''
-			deleteBtn.style.transform = ''
-			saveBtn.style.opacity = ''
-			saveBtn.style.transform = ''
-			saved.style.opacity = ''
-			saved.style.transform = ''
+			deleteBtn.style.cssText = ''
+			saveBtn.style.cssText = ''
+			saved.style.cssText = ''
+			
 			words.forEach((w) => {
-				;(w as HTMLElement).style.opacity = '0'
-				;(w as HTMLElement).classList.remove('mm-demo__word--highlighted')
+				const el = w as HTMLElement
+				el.style.cssText = ''
+				el.classList.remove('mm-demo__word--highlighted')
 			})
 			contactRows.forEach((r) => {
-				;(r as HTMLElement).style.opacity = '0'
+				;(r as HTMLElement).style.cssText = ''
 			})
 
 			await delay(600, signal)
@@ -412,57 +437,13 @@
 		}
 	}
 
-	.mm-demo__phone {
-		position: relative;
-		width: 300px;
-		background: var(--stone-900);
-		border: 1.5px solid var(--stone-700);
-		border-radius: 40px;
-		padding: 6px;
-		box-shadow:
-			0 25px 80px oklch(0% 0 0 / 0.6),
-			0 0 60px color-alpha(var(--amber-500), 0.08);
-		opacity: 0;
-
-		@media (width >= $breakpoint-sm) {
-			width: 340px;
-			border-radius: 46px;
-			padding: 7px;
-		}
-	}
-
-	.mm-demo__island {
-		position: absolute;
-		top: 16px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 72px;
-		height: 20px;
-		background: #000;
-		border-radius: 10px;
-		z-index: 10;
-
-		@media (width >= $breakpoint-sm) {
-			top: 18px;
-			width: 80px;
-			height: 22px;
-			border-radius: 11px;
-		}
-	}
-
-	.mm-demo__screen {
-		position: relative;
-		aspect-ratio: 9 / 19.5;
-		background: linear-gradient(180deg, var(--stone-900) 0%, var(--stone-950) 100%);
-		border-radius: 34px;
-		overflow: hidden;
+	.mm-demo :global(.phone-frame__screen) {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		padding: 56px 0 22px;
 
 		@media (width >= $breakpoint-sm) {
-			border-radius: 39px;
 			padding: 64px 0 26px;
 		}
 	}
