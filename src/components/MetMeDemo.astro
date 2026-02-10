@@ -127,27 +127,11 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 				<span class="mm-demo__saved-view">View contact</span>
 			</div>
 	</PhoneFrame>
-	<button class="mm-demo__pause" aria-label="Pause animation">
-		<svg class="mm-demo__pause-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
-			<rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
-		</svg>
-		<svg
-			class="mm-demo__play-icon"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			style="display:none"
-		>
-			<path d="M6 4l14 8-14 8V4z" fill="currentColor"></path>
-		</svg>
-	</button>
 </section>
 
 <script>
 	import { animate, stagger, inView } from 'motion'
 
-	let paused = false
 	let abortController: AbortController | null = null
 
 	function delay(ms: number, signal: AbortSignal): Promise<void> {
@@ -172,37 +156,12 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 			)
 		}
 
-		const pauseBtn = document.querySelector('.mm-demo__pause')
-		if (pauseBtn) {
-			pauseBtn.addEventListener('click', togglePause)
-		}
 	}
 
 	function startAnimation() {
 		if (abortController) abortController.abort()
 		abortController = new AbortController()
 		runDemoAnimation(abortController.signal)
-	}
-
-	function togglePause() {
-		const btn = document.querySelector('.mm-demo__pause') as HTMLElement
-		const pauseIcon = btn?.querySelector('.mm-demo__pause-icon') as HTMLElement
-		const playIcon = btn?.querySelector('.mm-demo__play-icon') as HTMLElement
-		if (!btn) return
-
-		paused = !paused
-		if (paused) {
-			// Stop the running animation
-			if (abortController) abortController.abort()
-			abortController = null
-			pauseIcon.style.display = 'none'
-			playIcon.style.display = ''
-		} else {
-			// Restart the animation
-			pauseIcon.style.display = ''
-			playIcon.style.display = 'none'
-			startAnimation()
-		}
 	}
 
 	async function runDemoAnimation(signal: AbortSignal) {
@@ -411,30 +370,6 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 		flex-direction: column;
 		align-items: center;
 		padding: 4rem var(--page-gutter) 6rem;
-	}
-
-	.mm-demo__pause {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 36px;
-		height: 36px;
-		margin-top: 1.25rem;
-		border: none;
-		border-radius: 50%;
-		background: transparent;
-		color: var(--stone-500);
-		cursor: pointer;
-		transition: color 0.2s ease;
-
-		&:hover {
-			color: var(--stone-300);
-		}
-
-		svg {
-			width: 16px;
-			height: 16px;
-		}
 	}
 
 	.mm-demo :global(.phone-frame__screen) {

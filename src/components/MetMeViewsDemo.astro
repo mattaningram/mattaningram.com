@@ -2,1293 +2,1235 @@
 import PhoneFrame from '@components/PhoneFrame.astro'
 
 function formatRelativeDate(daysAgo: number): string {
-	if (daysAgo === 0) return 'TODAY'
-	if (daysAgo === 1) return 'YESTERDAY'
-	const date = new Date()
-	date.setDate(date.getDate() - daysAgo)
-	const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-	const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-	return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  if (daysAgo === 0) return 'TODAY'
+  if (daysAgo === 1) return 'YESTERDAY'
+  const date = new Date()
+  date.setDate(date.getDate() - daysAgo)
+  const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }
 
 const timelineGroups = [
-	{ label: formatRelativeDate(0), contacts: ['Michele Mouton', 'Sarah Chen'] },
-	{ label: formatRelativeDate(1), contacts: ['Priya Sharma', 'Marcus Rivera'] },
-	{ label: formatRelativeDate(3), contacts: ['Tina Park', 'Layla Okonkwo'] },
-	{ label: formatRelativeDate(5), contacts: ['James Nakamura'] },
-	{ label: formatRelativeDate(7), contacts: ['Carlos Mendez', 'Amara Diallo'] },
-	{ label: formatRelativeDate(10), contacts: ['David Kim'] },
-	{ label: formatRelativeDate(13), contacts: ['Sofia Petrov', 'Omar Hassan'] },
-	{ label: formatRelativeDate(16), contacts: ['Kenji Watanabe', 'Elena Vasquez'] },
+  { label: formatRelativeDate(0), contacts: ['Michele Mouton', 'Sarah Chen'] },
+  { label: formatRelativeDate(1), contacts: ['Priya Sharma', 'Marcus Rivera'] },
+  { label: formatRelativeDate(3), contacts: ['Tina Park', 'Layla Okonkwo'] },
+  { label: formatRelativeDate(5), contacts: ['James Nakamura'] },
+  { label: formatRelativeDate(7), contacts: ['Carlos Mendez', 'Amara Diallo'] },
+  { label: formatRelativeDate(10), contacts: ['David Kim'] },
+  { label: formatRelativeDate(13), contacts: ['Sofia Petrov', 'Omar Hassan'] },
+  { label: formatRelativeDate(16), contacts: ['Kenji Watanabe', 'Elena Vasquez'] },
 ]
 ---
 
 <!-- Views Demo Animation Section -->
 <section class="mmv" aria-label="Three ways to remember">
-	<div class="mmv__content">
-		<!-- Left: text + tab buttons -->
-		<div class="mmv__text">
-			<h2 class="mmv__heading">Three ways to remember</h2>
-			<p class="mmv__sub">Every contact saves when and where you met. Browse your network across time and space.</p>
-			<div class="mmv__tabs">
-				<button class="mmv__tab mmv__tab--active" data-view="timeline">Timeline</button>
-				<button class="mmv__tab" data-view="calendar">Calendar</button>
-				<button class="mmv__tab" data-view="map">Map</button>
-			</div>
-		</div>
+  <div class="mmv__content">
+    <!-- Left: text + feature cards -->
+    <div class="mmv__text">
+      <h2 class="mmv__heading">Three ways to remember</h2>
+      <p class="mmv__sub">Every contact saves when and where you met. Browse your network across time and space.</p>
+      <div class="mmv__features">
+        <div class="mmv__feature mmv__feature--active" data-view="timeline">
+          <span class="mmv__feature-title">Timeline</span>
+          <span class="mmv__feature-desc">Scroll through everyone you've met, organized by when you met them.</span>
+        </div>
+        <div class="mmv__feature" data-view="calendar">
+          <span class="mmv__feature-title">Calendar</span>
+          <span class="mmv__feature-desc"
+            >See which days you met new people. Tap any date for details and birthdays.</span
+          >
+        </div>
+        <div class="mmv__feature" data-view="map">
+          <span class="mmv__feature-title">Map</span>
+          <span class="mmv__feature-desc">See where you've met people pinned on a map. Tap to recall the context.</span>
+        </div>
+      </div>
+    </div>
 
-		<!-- Right: phone demo -->
-		<PhoneFrame>
-			<!-- ===== TIMELINE VIEW ===== -->
-			<div class="mmv__gate" data-gate="timeline" style="display:none">
-				<div class="mmv__view mmv__view--timeline" data-view="timeline">
-					<div class="mmv__tl-scroll-wrap">
-						<div class="mmv__tl-scroll">
-							{
-								timelineGroups.map((group) => (
-									<>
-										<div class="mmv__tl-header">{group.label}</div>
-										{group.contacts.map((name) => (
-											<div class="mmv__tl-row">
-												<span class="mmv__tl-avatar">{name[0]}</span>
-												<span class="mmv__tl-name">{name}</span>
-											</div>
-										))}
-									</>
-								))
-							}
-						</div>
-					</div>
-				</div>
-			</div>
+    <!-- Right: phone demo -->
+    <PhoneFrame>
+      <!-- ===== TIMELINE VIEW ===== -->
+      <div class="mmv__gate" data-gate="timeline" style="display:none">
+        <div class="mmv__view mmv__view--timeline" data-view="timeline">
+          <div class="mmv__tl-scroll-wrap">
+            <div class="mmv__tl-scroll">
+              {
+                timelineGroups.map((group) => (
+                  <>
+                    <div class="mmv__tl-header">{group.label}</div>
+                    {group.contacts.map((name) => (
+                      <div class="mmv__tl-row">
+                        <span class="mmv__tl-avatar">{name[0]}</span>
+                        <span class="mmv__tl-name">{name}</span>
+                      </div>
+                    ))}
+                  </>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<!-- ===== CALENDAR VIEW ===== -->
-			<div class="mmv__gate" data-gate="calendar" style="display:none">
-				<div class="mmv__view mmv__view--calendar" data-view="calendar">
-					<div class="mmv__cal-scroll-wrap">
-						<div class="mmv__cal-scroll">
-							<!-- February 2026 -->
-							<div class="mmv__cal-month">
-								<p class="mmv__cal-month-label">February 2026</p>
-								<div class="mmv__cal-weekdays">
-									<span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
-										>Sat</span
-									>
-								</div>
-								<div class="mmv__cal-grid">
-									<!-- Feb 2026: starts on Sunday -->
-									<span class="mmv__cal-day">1</span>
-									<span class="mmv__cal-day">2</span>
-									<span class="mmv__cal-day mmv__cal-day--event">3</span>
-									<span class="mmv__cal-day">4</span>
-									<span class="mmv__cal-day">5</span>
-									<span class="mmv__cal-day">6</span>
-									<span class="mmv__cal-day">7</span>
-									<span class="mmv__cal-day">8</span>
-									<span class="mmv__cal-day">9</span>
-									<span class="mmv__cal-day">10</span>
-									<span class="mmv__cal-day">11</span>
-									<span class="mmv__cal-day">12</span>
-									<span class="mmv__cal-day">13</span>
-									<span class="mmv__cal-day mmv__cal-day--event">14</span>
-									<span class="mmv__cal-day">15</span>
-									<span class="mmv__cal-day mmv__cal-day--event">16</span>
-									<span class="mmv__cal-day mmv__cal-day--event">17</span>
-									<span class="mmv__cal-day mmv__cal-day--event">18</span>
-									<span class="mmv__cal-day">19</span>
-									<span class="mmv__cal-day">20</span>
-									<span class="mmv__cal-day">21</span>
-									<span class="mmv__cal-day">22</span>
-									<span class="mmv__cal-day">23</span>
-									<span class="mmv__cal-day">24</span>
-									<span class="mmv__cal-day">25</span>
-									<span class="mmv__cal-day">26</span>
-									<span class="mmv__cal-day">27</span>
-									<span class="mmv__cal-day">28</span>
-								</div>
-							</div>
-							<!-- March 2026 -->
-							<div class="mmv__cal-month">
-								<p class="mmv__cal-month-label">March 2026</p>
-								<div class="mmv__cal-weekdays">
-									<span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
-										>Sat</span
-									>
-								</div>
-								<div class="mmv__cal-grid">
-									<!-- March 2026: starts on Sunday -->
-									<span class="mmv__cal-day">1</span>
-									<span class="mmv__cal-day mmv__cal-day--event">2</span>
-									<span class="mmv__cal-day">3</span>
-									<span class="mmv__cal-day">4</span>
-									<span class="mmv__cal-day mmv__cal-day--event">5</span>
-									<span class="mmv__cal-day">6</span>
-									<span class="mmv__cal-day">7</span>
-									<span class="mmv__cal-day">8</span>
-									<span class="mmv__cal-day">9</span>
-									<span class="mmv__cal-day">10</span>
-									<span class="mmv__cal-day">11</span>
-									<span class="mmv__cal-day">12</span>
-									<span class="mmv__cal-day">13</span>
-									<span class="mmv__cal-day mmv__cal-day--event">14</span>
-									<span class="mmv__cal-day">15</span>
-									<span class="mmv__cal-day mmv__cal-day--event" data-select="true">16</span>
-									<span class="mmv__cal-day">17</span>
-									<span class="mmv__cal-day">18</span>
-									<span class="mmv__cal-day">19</span>
-									<span class="mmv__cal-day">20</span>
-									<span class="mmv__cal-day">21</span>
-									<span class="mmv__cal-day">22</span>
-									<span class="mmv__cal-day">23</span>
-									<span class="mmv__cal-day">24</span>
-									<span class="mmv__cal-day">25</span>
-									<span class="mmv__cal-day">26</span>
-									<span class="mmv__cal-day">27</span>
-									<span class="mmv__cal-day">28</span>
-									<span class="mmv__cal-day">29</span>
-									<span class="mmv__cal-day">30</span>
-									<span class="mmv__cal-day">31</span>
-								</div>
-							</div>
-							<!-- April 2026 -->
-							<div class="mmv__cal-month">
-								<p class="mmv__cal-month-label">April 2026</p>
-								<div class="mmv__cal-weekdays">
-									<span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
-										>Sat</span
-									>
-								</div>
-								<div class="mmv__cal-grid">
-									<!-- April 2026: starts on Wednesday -->
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day">1</span>
-									<span class="mmv__cal-day">2</span>
-									<span class="mmv__cal-day mmv__cal-day--event">3</span>
-									<span class="mmv__cal-day">4</span>
-									<span class="mmv__cal-day">5</span>
-									<span class="mmv__cal-day">6</span>
-									<span class="mmv__cal-day">7</span>
-									<span class="mmv__cal-day">8</span>
-									<span class="mmv__cal-day mmv__cal-day--event">9</span>
-									<span class="mmv__cal-day">10</span>
-									<span class="mmv__cal-day">11</span>
-									<span class="mmv__cal-day">12</span>
-									<span class="mmv__cal-day">13</span>
-									<span class="mmv__cal-day">14</span>
-									<span class="mmv__cal-day">15</span>
-									<span class="mmv__cal-day">16</span>
-									<span class="mmv__cal-day">17</span>
-									<span class="mmv__cal-day mmv__cal-day--event">18</span>
-									<span class="mmv__cal-day">19</span>
-									<span class="mmv__cal-day">20</span>
-									<span class="mmv__cal-day">21</span>
-									<span class="mmv__cal-day mmv__cal-day--event">22</span>
-									<span class="mmv__cal-day">23</span>
-									<span class="mmv__cal-day">24</span>
-									<span class="mmv__cal-day">25</span>
-									<span class="mmv__cal-day">26</span>
-									<span class="mmv__cal-day">27</span>
-									<span class="mmv__cal-day">28</span>
-									<span class="mmv__cal-day">29</span>
-									<span class="mmv__cal-day">30</span>
-								</div>
-							</div>
-							<!-- May 2026 -->
-							<div class="mmv__cal-month">
-								<p class="mmv__cal-month-label">May 2026</p>
-								<div class="mmv__cal-weekdays">
-									<span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
-										>Sat</span
-									>
-								</div>
-								<div class="mmv__cal-grid">
-									<!-- May 2026: starts on Friday -->
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day mmv__cal-day--empty"></span>
-									<span class="mmv__cal-day">1</span>
-									<span class="mmv__cal-day">2</span>
-									<span class="mmv__cal-day">3</span>
-									<span class="mmv__cal-day mmv__cal-day--event">4</span>
-									<span class="mmv__cal-day">5</span>
-									<span class="mmv__cal-day">6</span>
-									<span class="mmv__cal-day">7</span>
-									<span class="mmv__cal-day">8</span>
-									<span class="mmv__cal-day">9</span>
-									<span class="mmv__cal-day">10</span>
-									<span class="mmv__cal-day">11</span>
-									<span class="mmv__cal-day">12</span>
-									<span class="mmv__cal-day mmv__cal-day--event">13</span>
-									<span class="mmv__cal-day">14</span>
-									<span class="mmv__cal-day">15</span>
-									<span class="mmv__cal-day">16</span>
-									<span class="mmv__cal-day">17</span>
-									<span class="mmv__cal-day">18</span>
-									<span class="mmv__cal-day">19</span>
-									<span class="mmv__cal-day mmv__cal-day--event">20</span>
-									<span class="mmv__cal-day">21</span>
-									<span class="mmv__cal-day">22</span>
-									<span class="mmv__cal-day">23</span>
-									<span class="mmv__cal-day">24</span>
-									<span class="mmv__cal-day">25</span>
-									<span class="mmv__cal-day">26</span>
-									<span class="mmv__cal-day">27</span>
-									<span class="mmv__cal-day">28</span>
-									<span class="mmv__cal-day mmv__cal-day--event">29</span>
-									<span class="mmv__cal-day">30</span>
-									<span class="mmv__cal-day">31</span>
-								</div>
-							</div>
-						</div>
-						<!-- Calendar popup -->
-						<div class="mmv__cal-popup">
-							<p class="mmv__cal-popup-date">Monday, March 16, 2026</p>
-							<p class="mmv__cal-popup-count">1 contact</p>
-							<div class="mmv__cal-popup-contact">
-								<span class="mmv__tl-avatar">J</span>
-								<div class="mmv__cal-popup-info">
-									<span class="mmv__cal-popup-name">Jane Smith</span>
-									<span class="mmv__cal-popup-detail">
-										<span class="mmv__cal-popup-dot mmv__cal-popup-dot--met"></span>
-										Met contact date
-									</span>
-									<span class="mmv__cal-popup-detail">
-										<span class="mmv__cal-popup-dot mmv__cal-popup-dot--bday"></span>
-										Birthday (turns 33)
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+      <!-- ===== CALENDAR VIEW ===== -->
+      <div class="mmv__gate" data-gate="calendar" style="display:none">
+        <div class="mmv__view mmv__view--calendar" data-view="calendar">
+          <div class="mmv__cal-scroll-wrap">
+            <div class="mmv__cal-scroll">
+              <!-- February 2026 -->
+              <div class="mmv__cal-month">
+                <p class="mmv__cal-month-label">February 2026</p>
+                <div class="mmv__cal-weekdays">
+                  <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
+                    >Sat</span
+                  >
+                </div>
+                <div class="mmv__cal-grid">
+                  <!-- Feb 2026: starts on Sunday -->
+                  <span class="mmv__cal-day">1</span>
+                  <span class="mmv__cal-day">2</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">3</span>
+                  <span class="mmv__cal-day">4</span>
+                  <span class="mmv__cal-day">5</span>
+                  <span class="mmv__cal-day">6</span>
+                  <span class="mmv__cal-day">7</span>
+                  <span class="mmv__cal-day">8</span>
+                  <span class="mmv__cal-day">9</span>
+                  <span class="mmv__cal-day">10</span>
+                  <span class="mmv__cal-day">11</span>
+                  <span class="mmv__cal-day">12</span>
+                  <span class="mmv__cal-day">13</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">14</span>
+                  <span class="mmv__cal-day">15</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">16</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">17</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">18</span>
+                  <span class="mmv__cal-day">19</span>
+                  <span class="mmv__cal-day">20</span>
+                  <span class="mmv__cal-day">21</span>
+                  <span class="mmv__cal-day">22</span>
+                  <span class="mmv__cal-day">23</span>
+                  <span class="mmv__cal-day">24</span>
+                  <span class="mmv__cal-day">25</span>
+                  <span class="mmv__cal-day">26</span>
+                  <span class="mmv__cal-day">27</span>
+                  <span class="mmv__cal-day">28</span>
+                </div>
+              </div>
+              <!-- March 2026 -->
+              <div class="mmv__cal-month">
+                <p class="mmv__cal-month-label">March 2026</p>
+                <div class="mmv__cal-weekdays">
+                  <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
+                    >Sat</span
+                  >
+                </div>
+                <div class="mmv__cal-grid">
+                  <!-- March 2026: starts on Sunday -->
+                  <span class="mmv__cal-day">1</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">2</span>
+                  <span class="mmv__cal-day">3</span>
+                  <span class="mmv__cal-day">4</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">5</span>
+                  <span class="mmv__cal-day">6</span>
+                  <span class="mmv__cal-day">7</span>
+                  <span class="mmv__cal-day">8</span>
+                  <span class="mmv__cal-day">9</span>
+                  <span class="mmv__cal-day">10</span>
+                  <span class="mmv__cal-day">11</span>
+                  <span class="mmv__cal-day">12</span>
+                  <span class="mmv__cal-day">13</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">14</span>
+                  <span class="mmv__cal-day">15</span>
+                  <span class="mmv__cal-day mmv__cal-day--event" data-select="true">16</span>
+                  <span class="mmv__cal-day">17</span>
+                  <span class="mmv__cal-day">18</span>
+                  <span class="mmv__cal-day">19</span>
+                  <span class="mmv__cal-day">20</span>
+                  <span class="mmv__cal-day">21</span>
+                  <span class="mmv__cal-day">22</span>
+                  <span class="mmv__cal-day">23</span>
+                  <span class="mmv__cal-day">24</span>
+                  <span class="mmv__cal-day">25</span>
+                  <span class="mmv__cal-day">26</span>
+                  <span class="mmv__cal-day">27</span>
+                  <span class="mmv__cal-day">28</span>
+                  <span class="mmv__cal-day">29</span>
+                  <span class="mmv__cal-day">30</span>
+                  <span class="mmv__cal-day">31</span>
+                </div>
+              </div>
+              <!-- April 2026 -->
+              <div class="mmv__cal-month">
+                <p class="mmv__cal-month-label">April 2026</p>
+                <div class="mmv__cal-weekdays">
+                  <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
+                    >Sat</span
+                  >
+                </div>
+                <div class="mmv__cal-grid">
+                  <!-- April 2026: starts on Wednesday -->
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day">1</span>
+                  <span class="mmv__cal-day">2</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">3</span>
+                  <span class="mmv__cal-day">4</span>
+                  <span class="mmv__cal-day">5</span>
+                  <span class="mmv__cal-day">6</span>
+                  <span class="mmv__cal-day">7</span>
+                  <span class="mmv__cal-day">8</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">9</span>
+                  <span class="mmv__cal-day">10</span>
+                  <span class="mmv__cal-day">11</span>
+                  <span class="mmv__cal-day">12</span>
+                  <span class="mmv__cal-day">13</span>
+                  <span class="mmv__cal-day">14</span>
+                  <span class="mmv__cal-day">15</span>
+                  <span class="mmv__cal-day">16</span>
+                  <span class="mmv__cal-day">17</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">18</span>
+                  <span class="mmv__cal-day">19</span>
+                  <span class="mmv__cal-day">20</span>
+                  <span class="mmv__cal-day">21</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">22</span>
+                  <span class="mmv__cal-day">23</span>
+                  <span class="mmv__cal-day">24</span>
+                  <span class="mmv__cal-day">25</span>
+                  <span class="mmv__cal-day">26</span>
+                  <span class="mmv__cal-day">27</span>
+                  <span class="mmv__cal-day">28</span>
+                  <span class="mmv__cal-day">29</span>
+                  <span class="mmv__cal-day">30</span>
+                </div>
+              </div>
+              <!-- May 2026 -->
+              <div class="mmv__cal-month">
+                <p class="mmv__cal-month-label">May 2026</p>
+                <div class="mmv__cal-weekdays">
+                  <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span
+                    >Sat</span
+                  >
+                </div>
+                <div class="mmv__cal-grid">
+                  <!-- May 2026: starts on Friday -->
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day mmv__cal-day--empty"></span>
+                  <span class="mmv__cal-day">1</span>
+                  <span class="mmv__cal-day">2</span>
+                  <span class="mmv__cal-day">3</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">4</span>
+                  <span class="mmv__cal-day">5</span>
+                  <span class="mmv__cal-day">6</span>
+                  <span class="mmv__cal-day">7</span>
+                  <span class="mmv__cal-day">8</span>
+                  <span class="mmv__cal-day">9</span>
+                  <span class="mmv__cal-day">10</span>
+                  <span class="mmv__cal-day">11</span>
+                  <span class="mmv__cal-day">12</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">13</span>
+                  <span class="mmv__cal-day">14</span>
+                  <span class="mmv__cal-day">15</span>
+                  <span class="mmv__cal-day">16</span>
+                  <span class="mmv__cal-day">17</span>
+                  <span class="mmv__cal-day">18</span>
+                  <span class="mmv__cal-day">19</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">20</span>
+                  <span class="mmv__cal-day">21</span>
+                  <span class="mmv__cal-day">22</span>
+                  <span class="mmv__cal-day">23</span>
+                  <span class="mmv__cal-day">24</span>
+                  <span class="mmv__cal-day">25</span>
+                  <span class="mmv__cal-day">26</span>
+                  <span class="mmv__cal-day">27</span>
+                  <span class="mmv__cal-day">28</span>
+                  <span class="mmv__cal-day mmv__cal-day--event">29</span>
+                  <span class="mmv__cal-day">30</span>
+                  <span class="mmv__cal-day">31</span>
+                </div>
+              </div>
+            </div>
+            <!-- Calendar popup -->
+            <div class="mmv__popup mmv__popup--cal">
+              <p class="mmv__popup-date">Monday, March 16, 2026</p>
+              <p class="mmv__popup-count">1 contact</p>
+              <div class="mmv__popup-contact">
+                <span class="mmv__tl-avatar">J</span>
+                <div class="mmv__popup-info">
+                  <span class="mmv__popup-name">Jane Smith</span>
+                  <span class="mmv__popup-detail">
+                    <span class="mmv__popup-dot mmv__popup-dot--met"></span>
+                    Met contact date
+                  </span>
+                  <span class="mmv__popup-detail">
+                    <span class="mmv__popup-dot mmv__popup-dot--bday"></span>
+                    Birthday (turns 33)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<!-- ===== MAP VIEW ===== -->
-			<div class="mmv__gate" data-gate="map" style="display:none">
-				<div class="mmv__view mmv__view--map" data-view="map">
-					<div class="mmv__map-container">
-						<svg class="mmv__map-svg" viewBox="0 0 500 900" xmlns="http://www.w3.org/2000/svg">
-							<!-- Water -->
-							<rect width="500" height="900" fill="oklch(18% 0.006 50)"></rect>
-							<path d="M0 0 L70 0 L55 200 L60 400 L45 600 L65 900 L0 900Z" fill="oklch(22% 0.03 240)"></path>
-							<path d="M410 350 L500 300 L500 900 L420 900 L435 650 L410 500Z" fill="oklch(22% 0.03 240)"></path>
+      <!-- ===== MAP VIEW ===== -->
+      <div class="mmv__gate" data-gate="map" style="display:none">
+        <div class="mmv__view mmv__view--map" data-view="map">
+          <div class="mmv__map-container">
+            <svg class="mmv__map-svg" viewBox="0 0 800 550" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <!-- Water -->
+              <rect width="800" height="550" fill="oklch(18% 0.006 50)"></rect>
+              <path d="M0 0 L100 0 L80 100 L90 220 L70 350 L85 550 L0 550Z" fill="oklch(22% 0.03 240)"></path>
+              <path d="M580 550 L610 470 L700 440 L800 460 L800 550Z" fill="oklch(22% 0.03 240)"></path>
+              <path d="M720 0 L800 0 L800 130 L740 110 L730 50Z" fill="oklch(22% 0.03 240)"></path>
 
-							<!-- City blocks -->
-							<g fill="oklch(22% 0.008 50)">
-								<rect x="85" y="30" width="55" height="80" rx="2"></rect>
-								<rect x="150" y="30" width="70" height="80" rx="2"></rect>
-								<rect x="230" y="30" width="60" height="80" rx="2"></rect>
-								<rect x="300" y="30" width="55" height="80" rx="2"></rect>
-								<rect x="365" y="30" width="40" height="80" rx="2"></rect>
+              <!-- City blocks -->
+              <g fill="oklch(22% 0.008 50)">
+                <rect x="120" y="25" width="70" height="55" rx="2"></rect>
+                <rect x="205" y="25" width="80" height="55" rx="2"></rect>
+                <rect x="300" y="25" width="65" height="55" rx="2"></rect>
+                <rect x="380" y="25" width="75" height="55" rx="2"></rect>
+                <rect x="470" y="25" width="70" height="55" rx="2"></rect>
+                <rect x="555" y="25" width="80" height="55" rx="2"></rect>
+                <rect x="650" y="25" width="55" height="55" rx="2"></rect>
 
-								<rect x="85" y="125" width="55" height="90" rx="2"></rect>
-								<rect x="150" y="125" width="70" height="90" rx="2"></rect>
-								<rect x="230" y="125" width="60" height="90" rx="2"></rect>
-								<rect x="300" y="125" width="55" height="90" rx="2"></rect>
-								<rect x="365" y="125" width="40" height="90" rx="2"></rect>
+                <rect x="120" y="100" width="70" height="60" rx="2"></rect>
+                <rect x="205" y="100" width="80" height="60" rx="2"></rect>
+                <rect x="300" y="100" width="65" height="60" rx="2"></rect>
+                <rect x="380" y="100" width="75" height="60" rx="2"></rect>
+                <rect x="470" y="100" width="70" height="60" rx="2"></rect>
+                <rect x="555" y="100" width="80" height="60" rx="2"></rect>
+                <rect x="650" y="100" width="55" height="60" rx="2"></rect>
 
-								<rect x="85" y="230" width="55" height="85" rx="2"></rect>
-								<rect x="150" y="230" width="70" height="85" rx="2"></rect>
-								<rect x="230" y="230" width="60" height="85" rx="2"></rect>
-								<rect x="300" y="230" width="55" height="85" rx="2"></rect>
-								<rect x="365" y="230" width="40" height="85" rx="2"></rect>
+                <rect x="120" y="180" width="70" height="55" rx="2"></rect>
+                <rect x="205" y="180" width="80" height="55" rx="2"></rect>
+                <rect x="300" y="180" width="65" height="55" rx="2"></rect>
+                <rect x="380" y="180" width="75" height="55" rx="2"></rect>
+                <rect x="470" y="180" width="70" height="55" rx="2"></rect>
+                <rect x="555" y="180" width="80" height="55" rx="2"></rect>
+                <rect x="650" y="180" width="55" height="55" rx="2"></rect>
 
-								<rect x="85" y="330" width="55" height="90" rx="2"></rect>
-								<rect x="150" y="330" width="70" height="90" rx="2"></rect>
-								<rect x="230" y="330" width="60" height="90" rx="2"></rect>
-								<rect x="300" y="330" width="55" height="90" rx="2"></rect>
+                <rect x="120" y="255" width="70" height="60" rx="2"></rect>
+                <rect x="205" y="255" width="80" height="60" rx="2"></rect>
+                <rect x="300" y="255" width="65" height="60" rx="2"></rect>
+                <rect x="380" y="255" width="75" height="60" rx="2"></rect>
+                <rect x="470" y="255" width="70" height="60" rx="2"></rect>
+                <rect x="555" y="255" width="80" height="60" rx="2"></rect>
 
-								<rect x="85" y="435" width="55" height="85" rx="2"></rect>
-								<rect x="150" y="435" width="70" height="85" rx="2"></rect>
-								<rect x="230" y="435" width="60" height="85" rx="2"></rect>
-								<rect x="300" y="435" width="55" height="85" rx="2"></rect>
+                <rect x="120" y="335" width="70" height="55" rx="2"></rect>
+                <rect x="205" y="335" width="80" height="55" rx="2"></rect>
+                <rect x="300" y="335" width="65" height="55" rx="2"></rect>
+                <rect x="380" y="335" width="75" height="55" rx="2"></rect>
+                <rect x="470" y="335" width="70" height="55" rx="2"></rect>
 
-								<rect x="85" y="535" width="55" height="90" rx="2"></rect>
-								<rect x="150" y="535" width="70" height="90" rx="2"></rect>
-								<rect x="230" y="535" width="60" height="90" rx="2"></rect>
-								<rect x="300" y="535" width="55" height="90" rx="2"></rect>
+                <rect x="120" y="410" width="70" height="60" rx="2"></rect>
+                <rect x="205" y="410" width="80" height="60" rx="2"></rect>
+                <rect x="300" y="410" width="65" height="60" rx="2"></rect>
+                <rect x="380" y="410" width="75" height="60" rx="2"></rect>
 
-								<rect x="85" y="640" width="55" height="85" rx="2"></rect>
-								<rect x="150" y="640" width="70" height="85" rx="2"></rect>
-								<rect x="230" y="640" width="60" height="85" rx="2"></rect>
+                <rect x="120" y="490" width="70" height="45" rx="2"></rect>
+                <rect x="205" y="490" width="80" height="45" rx="2"></rect>
+                <rect x="300" y="490" width="65" height="45" rx="2"></rect>
+              </g>
 
-								<rect x="85" y="740" width="55" height="80" rx="2"></rect>
-								<rect x="150" y="740" width="70" height="80" rx="2"></rect>
-								<rect x="230" y="740" width="60" height="80" rx="2"></rect>
-							</g>
+              <!-- Major roads -->
+              <g stroke="oklch(25% 0.008 50)" stroke-width="2" fill="none">
+                <line x1="115" y1="0" x2="115" y2="550"></line>
+                <line x1="195" y1="0" x2="195" y2="550"></line>
+                <line x1="290" y1="0" x2="290" y2="550"></line>
+                <line x1="370" y1="0" x2="370" y2="550"></line>
+                <line x1="460" y1="0" x2="460" y2="550"></line>
+                <line x1="545" y1="0" x2="545" y2="400"></line>
+                <line x1="640" y1="0" x2="640" y2="325"></line>
+                <line x1="710" y1="0" x2="710" y2="250"></line>
+                <line x1="100" y1="92" x2="720" y2="92"></line>
+                <line x1="100" y1="172" x2="720" y2="172"></line>
+                <line x1="100" y1="248" x2="710" y2="248"></line>
+                <line x1="100" y1="328" x2="640" y2="328"></line>
+                <line x1="100" y1="403" x2="550" y2="403"></line>
+                <line x1="100" y1="483" x2="460" y2="483"></line>
+              </g>
 
-							<!-- Major roads -->
-							<g stroke="oklch(25% 0.008 50)" stroke-width="2" fill="none">
-								<line x1="80" y1="0" x2="80" y2="900"></line>
-								<line x1="145" y1="0" x2="145" y2="900"></line>
-								<line x1="225" y1="0" x2="225" y2="900"></line>
-								<line x1="295" y1="0" x2="295" y2="900"></line>
-								<line x1="360" y1="0" x2="360" y2="900"></line>
-								<line x1="70" y1="120" x2="410" y2="120"></line>
-								<line x1="70" y1="225" x2="410" y2="225"></line>
-								<line x1="70" y1="325" x2="410" y2="325"></line>
-								<line x1="70" y1="430" x2="410" y2="430"></line>
-								<line x1="70" y1="530" x2="410" y2="530"></line>
-								<line x1="70" y1="635" x2="410" y2="635"></line>
-								<line x1="70" y1="735" x2="350" y2="735"></line>
-							</g>
+              <!-- Diagonal avenue -->
+              <line x1="110" y1="70" x2="630" y2="360" stroke="oklch(27% 0.008 50)" stroke-width="3"></line>
+            </svg>
 
-							<!-- Diagonal avenue -->
-							<line x1="70" y1="100" x2="400" y2="500" stroke="oklch(27% 0.008 50)" stroke-width="3"></line>
-						</svg>
+            <!-- Map markers -->
+            <div class="mmv__map-marker" style="top: 18%; left: 30%;" data-name="Michele Mouton">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+            <div class="mmv__map-marker" style="top: 32%; left: 55%;" data-name="Sarah Chen">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+            <div class="mmv__map-marker" style="top: 45%; left: 38%;" data-name="Priya Sharma">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+            <div class="mmv__map-marker mmv__map-marker--target" style="top: 55%; left: 48%;" data-name="Marcus Rivera">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+            <div class="mmv__map-marker" style="top: 28%; left: 70%;" data-name="Tina Park">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+            <div class="mmv__map-marker" style="top: 65%; left: 25%;" data-name="Layla Okonkwo">
+              <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                ><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
+                  d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
+                  fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
+                ></circle></svg
+              >
+            </div>
+          </div>
+          <!-- Map popup -->
+          <div class="mmv__popup mmv__popup--map">
+            <div class="mmv__popup-contact">
+              <span class="mmv__tl-avatar">M</span>
+              <div class="mmv__popup-info">
+                <span class="mmv__popup-name">Marcus Rivera</span>
+                <span class="mmv__popup-detail">Designer at Figma</span>
+                <span class="mmv__popup-location">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    ><path d="M13 6.5c0 4.5-5 8-5 8s-5-3.5-5-8a5 5 0 0 1 10 0z" stroke="currentColor" stroke-width="1.2"
+                    ></path><circle cx="8" cy="6.5" r="1.5" stroke="currentColor" stroke-width="1.2"></circle></svg
+                  >
+                  Met at Union Square
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-						<!-- Map markers -->
-						<div class="mmv__map-marker" style="top: 18%; left: 30%;" data-name="Michele Mouton">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-						<div class="mmv__map-marker" style="top: 32%; left: 55%;" data-name="Sarah Chen">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-						<div class="mmv__map-marker" style="top: 45%; left: 38%;" data-name="Priya Sharma">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-						<div class="mmv__map-marker mmv__map-marker--target" style="top: 55%; left: 48%;" data-name="Marcus Rivera">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-						<div class="mmv__map-marker" style="top: 28%; left: 70%;" data-name="Tina Park">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-						<div class="mmv__map-marker" style="top: 65%; left: 25%;" data-name="Layla Okonkwo">
-							<svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-								><ellipse cx="12" cy="30" rx="5" ry="2" fill="oklch(0% 0 0 / 0.3)"></ellipse><path
-									d="M12 0C6.48 0 2 4.48 2 10c0 7.5 10 20 10 20s10-12.5 10-20c0-5.52-4.48-10-10-10z"
-									fill="oklch(58% 0.22 20)"></path><circle cx="12" cy="10" r="4" fill="oklch(75% 0.15 20)"
-								></circle></svg
-							>
-						</div>
-					</div>
-					<!-- Map popup -->
-					<div class="mmv__map-popup">
-						<div class="mmv__map-popup-contact">
-							<span class="mmv__tl-avatar">M</span>
-							<div class="mmv__map-popup-info">
-								<span class="mmv__map-popup-name">Marcus Rivera</span>
-								<span class="mmv__map-popup-detail">Designer at Figma</span>
-								<span class="mmv__map-popup-location">
-									<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-										><path d="M13 6.5c0 4.5-5 8-5 8s-5-3.5-5-8a5 5 0 0 1 10 0z" stroke="currentColor" stroke-width="1.2"
-										></path><circle cx="8" cy="6.5" r="1.5" stroke="currentColor" stroke-width="1.2"></circle></svg
-									>
-									Met at Union Square
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- ===== TAB BAR ===== -->
-			<div class="mmv__tabbar">
-				<button class="mmv__tabbar-btn mmv__tabbar-btn--active" data-tab="timeline" aria-label="Timeline">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-						><path
-							d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"></path></svg
-					>
-				</button>
-				<button class="mmv__tabbar-btn" data-tab="calendar" aria-label="Calendar">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-						><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"></rect><path
-							d="M16 2v4M8 2v4M3 10h18"
-							stroke="currentColor"
-							stroke-width="1.5"
-							stroke-linecap="round"></path></svg
-					>
-				</button>
-				<button class="mmv__tabbar-btn" data-tab="map" aria-label="Map">
-					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-						><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="1.5"
-						></path><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"></circle></svg
-					>
-				</button>
-			</div>
-			<button slot="after" class="mmv__pause" aria-label="Pause animation">
-				<svg class="mmv__pause-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
-					<rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"></rect>
-				</svg>
-				<svg
-					class="mmv__play-icon"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-					style="display:none"
-				>
-					<path d="M6 4l14 8-14 8V4z" fill="currentColor"></path>
-				</svg>
-			</button>
-		</PhoneFrame>
-	</div>
+      <!-- ===== TAB BAR ===== -->
+      <div class="mmv__tabbar">
+        <button class="mmv__tabbar-btn mmv__tabbar-btn--active" data-tab="timeline" aria-label="Timeline">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            ><path
+              d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"></path></svg
+          >
+        </button>
+        <button class="mmv__tabbar-btn" data-tab="calendar" aria-label="Calendar">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            ><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"></rect><path
+              d="M16 2v4M8 2v4M3 10h18"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"></path></svg
+          >
+        </button>
+        <button class="mmv__tabbar-btn" data-tab="map" aria-label="Map">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            ><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="1.5"
+            ></path><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"></circle></svg
+          >
+        </button>
+      </div>
+    </PhoneFrame>
+  </div>
 </section>
 
 <script>
-	import { animate, stagger, inView } from 'motion'
+  import { animate, stagger, inView } from 'motion'
 
-	const EASE = [0.25, 1, 0.5, 1] as const
-	const EXIT_EASE = [0.5, 0, 0.75, 0] as const
+  const EASE = [0.25, 1, 0.5, 1] as const
+  const EXIT_EASE = [0.5, 0, 0.75, 0] as const
 
-	let paused = false
-	let abortController: AbortController | null = null
+  let abortController: AbortController | null = null
 
-	function delay(ms: number, signal: AbortSignal): Promise<void> {
-		return new Promise((resolve, reject) => {
-			const id = setTimeout(resolve, ms)
-			signal.addEventListener('abort', () => {
-				clearTimeout(id)
-				reject(new DOMException('Aborted', 'AbortError'))
-			})
-		})
-	}
+  function delay(ms: number, signal: AbortSignal): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const id = setTimeout(resolve, ms)
+      signal.addEventListener('abort', () => {
+        clearTimeout(id)
+        reject(new DOMException('Aborted', 'AbortError'))
+      })
+    })
+  }
 
-	function showGate(viewName: string) {
-		document.querySelectorAll('.mmv__gate').forEach((g) => {
-			;(g as HTMLElement).style.display = (g as HTMLElement).dataset.gate === viewName ? '' : 'none'
-		})
-	}
+  function showGate(viewName: string) {
+    document.querySelectorAll('.mmv__gate').forEach((g) => {
+      ;(g as HTMLElement).style.display = (g as HTMLElement).dataset.gate === viewName ? '' : 'none'
+    })
+  }
 
-	function hideAllGates() {
-		document.querySelectorAll('.mmv__gate').forEach((g) => {
-			;(g as HTMLElement).style.display = 'none'
-		})
-	}
+  function hideAllGates() {
+    document.querySelectorAll('.mmv__gate').forEach((g) => {
+      ;(g as HTMLElement).style.display = 'none'
+    })
+  }
 
-	function initViewsAnimation() {
-		const section = document.querySelector('.mmv')
-		if (!section) return
-		inView(
-			section,
-			() => {
-				startAnimation()
-			},
-			{ amount: 0.3 },
-		)
+  function initViewsAnimation() {
+    const section = document.querySelector('.mmv')
+    if (!section) return
+    inView(
+      section,
+      () => {
+        startAnimation()
+      },
+      { amount: 0.3 },
+    )
+  }
 
-		const pauseBtn = document.querySelector('.mmv__pause')
-		if (pauseBtn) {
-			pauseBtn.addEventListener('click', togglePause)
-		}
-	}
+  function startAnimation() {
+    if (abortController) abortController.abort()
+    abortController = new AbortController()
+    runViewsAnimation(abortController.signal)
+  }
 
-	function startAnimation() {
-		if (abortController) abortController.abort()
-		abortController = new AbortController()
-		runViewsAnimation(abortController.signal)
-	}
+  function setActiveView(viewName: string) {
+    // Update left-side feature cards
+    document.querySelectorAll('.mmv__feature').forEach((card) => {
+      card.classList.toggle('mmv__feature--active', (card as HTMLElement).dataset.view === viewName)
+    })
+    // Update tabbar buttons
+    document.querySelectorAll('.mmv__tabbar-btn').forEach((btn) => {
+      btn.classList.toggle('mmv__tabbar-btn--active', (btn as HTMLElement).dataset.tab === viewName)
+    })
+  }
 
-	function togglePause() {
-		const btn = document.querySelector('.mmv__pause') as HTMLElement
-		const pauseIcon = btn?.querySelector('.mmv__pause-icon') as HTMLElement
-		const playIcon = btn?.querySelector('.mmv__play-icon') as HTMLElement
-		if (!btn) return
+  async function runViewsAnimation(signal: AbortSignal) {
+    const phone = document.querySelector('.mmv .phone-frame__phone') as HTMLElement
 
-		paused = !paused
-		if (paused) {
-			if (abortController) abortController.abort()
-			abortController = null
-			pauseIcon.style.display = 'none'
-			playIcon.style.display = ''
-		} else {
-			pauseIcon.style.display = ''
-			playIcon.style.display = 'none'
-			startAnimation()
-		}
-	}
+    // Timeline elements
+    const tlView = document.querySelector('.mmv__view--timeline') as HTMLElement
+    const tlScroll = document.querySelector('.mmv__tl-scroll-wrap') as HTMLElement
+    const allTlElements = document.querySelectorAll('.mmv__tl-header, .mmv__tl-row')
 
-	function setActiveView(viewName: string) {
-		// Update left-side tab buttons
-		document.querySelectorAll('.mmv__tab').forEach((tab) => {
-			tab.classList.toggle('mmv__tab--active', (tab as HTMLElement).dataset.view === viewName)
-		})
-		// Update tabbar buttons
-		document.querySelectorAll('.mmv__tabbar-btn').forEach((btn) => {
-			btn.classList.toggle('mmv__tabbar-btn--active', (btn as HTMLElement).dataset.tab === viewName)
-		})
-	}
+    // Calendar elements
+    const calView = document.querySelector('.mmv__view--calendar') as HTMLElement
+    const calScroll = document.querySelector('.mmv__cal-scroll-wrap') as HTMLElement
+    const calPopup = document.querySelector('.mmv__popup--cal') as HTMLElement
+    const calSelectDay = document.querySelector('.mmv__cal-day[data-select]') as HTMLElement
 
-	async function runViewsAnimation(signal: AbortSignal) {
-		const phone = document.querySelector('.mmv .phone-frame__phone') as HTMLElement
+    // Map elements
+    const mapView = document.querySelector('.mmv__view--map') as HTMLElement
+    const mapContainer = document.querySelector('.mmv__map-container') as HTMLElement
+    const mapMarkers = document.querySelectorAll('.mmv__map-marker')
+    const mapTarget = document.querySelector('.mmv__map-marker--target') as HTMLElement
+    const mapPopup = document.querySelector('.mmv__popup--map') as HTMLElement
 
-		// Timeline elements
-		const tlView = document.querySelector('.mmv__view--timeline') as HTMLElement
-		const tlScroll = document.querySelector('.mmv__tl-scroll-wrap') as HTMLElement
-		const allTlElements = document.querySelectorAll('.mmv__tl-header, .mmv__tl-row')
+    if (!phone || !tlView || !calView || !mapView) return
 
-		// Calendar elements
-		const calView = document.querySelector('.mmv__view--calendar') as HTMLElement
-		const calScroll = document.querySelector('.mmv__cal-scroll-wrap') as HTMLElement
-		const calPopup = document.querySelector('.mmv__cal-popup') as HTMLElement
-		const calSelectDay = document.querySelector('.mmv__cal-day[data-select]') as HTMLElement
+    try {
+      // Hide all gates at the start of each cycle
+      hideAllGates()
 
-		// Map elements
-		const mapView = document.querySelector('.mmv__view--map') as HTMLElement
-		const mapContainer = document.querySelector('.mmv__map-container') as HTMLElement
-		const mapMarkers = document.querySelectorAll('.mmv__map-marker')
-		const mapTarget = document.querySelector('.mmv__map-marker--target') as HTMLElement
-		const mapPopup = document.querySelector('.mmv__map-popup') as HTMLElement
+      // Phone entrance (first run only)
+      if (phone.style.opacity !== '1') {
+        await animate(
+          phone,
+          { opacity: [0, 1], y: [60, 0], scale: [0.92, 1] } as any,
+          { duration: 0.8, easing: [...EASE] } as any,
+        ).finished
+        phone.style.opacity = '1'
+      }
 
-		if (!phone || !tlView || !calView || !mapView) return
+      // ===== TIMELINE =====
+      setActiveView('timeline')
+      showGate('timeline')
+      tlView.style.opacity = ''
+      tlScroll.scrollTop = 0
 
-		try {
-			// Hide all gates at the start of each cycle
-			hideAllGates()
+      // Stagger in rows and headers
+      allTlElements.forEach((el) => ((el as HTMLElement).style.opacity = '0'))
+      await animate(
+        allTlElements,
+        { opacity: [0, 1], x: [-10, 0] } as any,
+        { duration: 0.35, delay: stagger(0.06), easing: [...EASE] } as any,
+      ).finished
+      if (signal.aborted) return
 
-			// Phone entrance (first run only)
-			if (phone.style.opacity !== '1') {
-				await animate(
-					phone,
-					{ opacity: [0, 1], y: [60, 0], scale: [0.92, 1] } as any,
-					{ duration: 0.8, easing: [...EASE] } as any,
-				).finished
-				phone.style.opacity = '1'
-			}
+      await delay(800, signal)
 
-			// ===== TIMELINE =====
-			setActiveView('timeline')
-			showGate('timeline')
-			tlView.style.opacity = ''
-			tlScroll.scrollTop = 0
+      // Scroll using scrollTop
+      const tlScrollTarget = 420
+      console.log(tlScrollTarget)
+      await animate(0, tlScrollTarget, {
+        duration: 2,
+        easing: [0.4, 0, 0.2, 1] as any,
+        onUpdate: (v: number) => {
+          tlScroll.scrollTop = v
+        },
+      } as any).finished
+      if (signal.aborted) return
 
-			// Stagger in rows and headers
-			allTlElements.forEach((el) => ((el as HTMLElement).style.opacity = '0'))
-			await animate(
-				allTlElements,
-				{ opacity: [0, 1], x: [-10, 0] } as any,
-				{ duration: 0.35, delay: stagger(0.06), easing: [...EASE] } as any,
-			).finished
-			if (signal.aborted) return
+      await delay(1500, signal)
 
-			await delay(800, signal)
+      // Fade out timeline then hide gate
+      await animate(tlView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
+      if (signal.aborted) return
+      hideAllGates()
 
-			// Scroll using scrollTop
-			const tlScrollTarget = 420
-			console.log(tlScrollTarget)
-			await animate(0, tlScrollTarget, {
-				duration: 2,
-				easing: [0.4, 0, 0.2, 1] as any,
-				onUpdate: (v: number) => {
-					tlScroll.scrollTop = v
-				},
-			} as any).finished
-			if (signal.aborted) return
+      // ===== CALENDAR =====
+      setActiveView('calendar')
 
-			await delay(1500, signal)
+      // Reset calendar state before showing
+      calScroll.scrollTop = 0
+      calSelectDay?.classList.remove('mmv__cal-day--selected')
+      calPopup.style.opacity = '0'
+      calPopup.style.transform = 'translateY(100%)'
 
-			// Fade out timeline then hide gate
-			await animate(tlView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
-			if (signal.aborted) return
-			hideAllGates()
+      // Show calendar
+      showGate('calendar')
+      await animate(calView, { opacity: [0, 1] } as any, { duration: 0.4, easing: [...EASE] } as any).finished
+      if (signal.aborted) return
 
-			// ===== CALENDAR =====
-			setActiveView('calendar')
+      await delay(600, signal)
 
-			// Reset calendar state before showing
-			calScroll.scrollTop = 0
-			calSelectDay?.classList.remove('mmv__cal-day--selected')
-			calPopup.style.opacity = '0'
-			calPopup.style.transform = 'translateY(100%)'
+      // Scroll to reveal March using scrollTop
+      const calScrollTarget = 400
+      await animate(0, calScrollTarget, {
+        duration: 1.8,
+        easing: [0.4, 0, 0.2, 1] as any,
+        onUpdate: (v: number) => {
+          calScroll.scrollTop = v
+        },
+      } as any).finished
+      if (signal.aborted) return
 
-			// Show calendar
-			showGate('calendar')
-			await animate(calView, { opacity: [0, 1] } as any, { duration: 0.4, easing: [...EASE] } as any).finished
-			if (signal.aborted) return
+      await delay(500, signal)
 
-			await delay(600, signal)
+      // Select March 16
+      if (calSelectDay) {
+        calSelectDay.classList.add('mmv__cal-day--selected')
+      }
+      await delay(400, signal)
 
-			// Scroll to reveal March using scrollTop
-			const calScrollTarget = 400
-			await animate(0, calScrollTarget, {
-				duration: 1.8,
-				easing: [0.4, 0, 0.2, 1] as any,
-				onUpdate: (v: number) => {
-					calScroll.scrollTop = v
-				},
-			} as any).finished
-			if (signal.aborted) return
+      // Popup slides up
+      await animate(
+        calPopup,
+        { opacity: [0, 1], y: ['100%', '0%'] } as any,
+        { duration: 0.5, easing: [...EASE] } as any,
+      ).finished
+      if (signal.aborted) return
 
-			await delay(500, signal)
+      await delay(2000, signal)
 
-			// Select March 16
-			if (calSelectDay) {
-				calSelectDay.classList.add('mmv__cal-day--selected')
-			}
-			await delay(400, signal)
+      // Fade out calendar then hide gate
+      animate(calPopup, { opacity: 0, y: '100%' } as any, { duration: 0.35, easing: [...EXIT_EASE] } as any)
+      await animate(calView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
+      if (signal.aborted) return
+      hideAllGates()
 
-			// Popup slides up
-			await animate(
-				calPopup,
-				{ opacity: [0, 1], y: ['100%', '0%'] } as any,
-				{ duration: 0.5, easing: [...EASE] } as any,
-			).finished
-			if (signal.aborted) return
+      // ===== MAP =====
+      setActiveView('map')
 
-			await delay(2000, signal)
+      // Reset map state before showing
+      mapContainer.style.transform = ''
+      mapPopup.style.opacity = '0'
+      mapPopup.style.transform = 'translateY(100%)'
+      mapTarget?.classList.remove('mmv__map-marker--pulse')
+      mapMarkers.forEach((m) => ((m as HTMLElement).style.opacity = '0'))
 
-			// Fade out calendar then hide gate
-			animate(calPopup, { opacity: 0, y: '100%' } as any, { duration: 0.35, easing: [...EXIT_EASE] } as any)
-			await animate(calView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
-			if (signal.aborted) return
-			hideAllGates()
+      // Show map
+      showGate('map')
+      await animate(mapView, { opacity: [0, 1] } as any, { duration: 0.4, easing: [...EASE] } as any).finished
+      if (signal.aborted) return
 
-			// ===== MAP =====
-			setActiveView('map')
+      // Fade in markers
+      await animate(
+        mapMarkers,
+        { opacity: [0, 1], scale: [0.5, 1] } as any,
+        { duration: 0.3, delay: stagger(0.08), easing: [...EASE] } as any,
+      ).finished
+      if (signal.aborted) return
 
-			// Reset map state before showing
-			mapContainer.style.transform = ''
-			mapPopup.style.opacity = '0'
-			mapPopup.style.transform = 'translateY(100%)'
-			mapTarget?.classList.remove('mmv__map-marker--pulse')
-			mapMarkers.forEach((m) => ((m as HTMLElement).style.opacity = '0'))
+      // Map pan
+      animate(mapContainer, { x: [0, -45], y: [0, -35] } as any, { duration: 3.5, easing: [0.16, 1, 0.3, 1] } as any)
 
-			// Show map
-			showGate('map')
-			await animate(mapView, { opacity: [0, 1] } as any, { duration: 0.4, easing: [...EASE] } as any).finished
-			if (signal.aborted) return
+      await delay(1500, signal)
 
-			// Fade in markers
-			await animate(
-				mapMarkers,
-				{ opacity: [0, 1], scale: [0.5, 1] } as any,
-				{ duration: 0.3, delay: stagger(0.08), easing: [...EASE] } as any,
-			).finished
-			if (signal.aborted) return
+      // Pulse target marker
+      if (mapTarget) {
+        mapTarget.classList.add('mmv__map-marker--pulse')
+      }
+      await delay(800, signal)
 
-			// Map pan
-			animate(mapContainer, { x: [0, -20], y: [0, -25] } as any, { duration: 3, easing: [0.4, 0, 0.2, 1] } as any)
+      // Map popup slides up
+      await animate(
+        mapPopup,
+        { opacity: [0, 1], y: ['100%', '0%'] } as any,
+        { duration: 0.5, easing: [...EASE] } as any,
+      ).finished
+      if (signal.aborted) return
 
-			await delay(1500, signal)
+      await delay(2000, signal)
 
-			// Pulse target marker
-			if (mapTarget) {
-				mapTarget.classList.add('mmv__map-marker--pulse')
-			}
-			await delay(800, signal)
+      // Fade out map then hide gate
+      animate(mapPopup, { opacity: 0, y: '100%' } as any, { duration: 0.35, easing: [...EXIT_EASE] } as any)
+      await animate(mapView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
+      if (signal.aborted) return
+      hideAllGates()
 
-			// Map popup slides up
-			await animate(
-				mapPopup,
-				{ opacity: [0, 1], y: ['100%', '0%'] } as any,
-				{ duration: 0.5, easing: [...EASE] } as any,
-			).finished
-			if (signal.aborted) return
+      await delay(600, signal)
 
-			await delay(2000, signal)
+      // Loop
+      runViewsAnimation(signal)
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      throw e
+    }
+  }
 
-			// Fade out map then hide gate
-			animate(mapPopup, { opacity: 0, y: '100%' } as any, { duration: 0.35, easing: [...EXIT_EASE] } as any)
-			await animate(mapView, { opacity: 0 } as any, { duration: 0.4, easing: [...EXIT_EASE] } as any).finished
-			if (signal.aborted) return
-			hideAllGates()
-
-			await delay(600, signal)
-
-			// Loop
-			runViewsAnimation(signal)
-		} catch (e) {
-			if (e instanceof DOMException && e.name === 'AbortError') return
-			throw e
-		}
-	}
-
-	document.addEventListener('astro:page-load', initViewsAnimation)
+  document.addEventListener('astro:page-load', initViewsAnimation)
 </script>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
-
-	/* ── Layout ── */
-	.mmv {
-		padding: 4rem var(--page-gutter) 6rem;
-		max-width: 62rem;
-		margin: 0 auto;
-	}
-
-	.mmv__content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2.5rem;
-
-		@media (width >= $breakpoint-md) {
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-			gap: 4rem;
-		}
-	}
-
-	.mmv__text {
-		text-align: center;
-
-		@media (width >= $breakpoint-md) {
-			text-align: left;
-			max-width: 22rem;
-		}
-	}
-
-	.mmv__heading {
-		font-size: clamp(1.4rem, 3vw, 1.75rem);
-		font-weight: 700;
-		color: var(--stone-50);
-		margin-bottom: 0.75rem;
-	}
-
-	.mmv__sub {
-		font-size: 0.95rem;
-		color: var(--stone-400);
-		line-height: 1.55;
-		margin-bottom: 1.5rem;
-	}
-
-	.mmv__tabs {
-		display: flex;
-		gap: 0.5rem;
-		justify-content: center;
-
-		@media (width >= $breakpoint-md) {
-			justify-content: flex-start;
-		}
-	}
-
-	.mmv__tab {
-		font-family: 'Nunito Sans', system-ui, sans-serif;
-		font-size: 0.85rem;
-		font-weight: 600;
-		padding: 8px 16px;
-		border-radius: 10px;
-		border: 1px solid var(--stone-700);
-		background: transparent;
-		color: var(--stone-400);
-		cursor: pointer;
-		transition:
-			background 0.3s ease,
-			color 0.3s ease,
-			border-color 0.3s ease;
-
-		&--active {
-			background: color-alpha(var(--amber-500), 0.15);
-			color: var(--amber-400);
-			border-color: var(--amber-500);
-		}
-	}
-
-	/* ── Phone frame overrides ── */
-	.mmv__content :global(.phone-frame) {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.mmv__pause {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 36px;
-		height: 36px;
-		margin-top: 1.25rem;
-		border: none;
-		border-radius: 50%;
-		background: transparent;
-		color: var(--stone-500);
-		cursor: pointer;
-		transition: color 0.2s ease;
-
-		&:hover {
-			color: var(--stone-300);
-		}
-
-		svg {
-			width: 16px;
-			height: 16px;
-		}
-	}
-
-	/* ── Views (overlapping, absolute) ── */
-	.mmv__gate {
-		position: absolute;
-		inset: 0;
-	}
-
-	.mmv__view {
-		position: absolute;
-		inset: 0;
-		overflow: hidden;
-	}
-
-	/* ── Timeline ── */
-	.mmv__view--timeline {
-		padding-top: 48px;
-		display: grid;
-	}
-
-	.mmv__tl-scroll-wrap {
-		overflow-y: auto;
-		scrollbar-width: none;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
-	.mmv__tl-scroll {
-		padding-bottom: 48px;
-	}
-
-	.mmv__tl-header {
-		font-size: 0.55rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--stone-500);
-		padding: 8px 16px;
-		opacity: 0;
-		position: sticky;
-		top: 0;
-		z-index: 2;
-		background: var(--stone-900);
-		background: linear-gradient(90deg, var(--stone-900) 40%, color-alpha(var(--stone-900), 0) 100%);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.6rem;
-		}
-	}
-
-	.mmv__tl-row {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 8px 16px;
-		opacity: 0;
-
-		& + & {
-			border-top: 1px solid color-alpha(var(--stone-800), 0.4);
-		}
-	}
-
-	.mmv__tl-avatar {
-		width: 30px;
-		height: 30px;
-		border-radius: 50%;
-		background: color-alpha(var(--amber-500), 0.15);
-		color: var(--amber-400);
-		display: grid;
-		place-content: center;
-		font-size: 0.65rem;
-		font-weight: 700;
-		flex-shrink: 0;
-
-		@media (width >= $breakpoint-sm) {
-			width: 34px;
-			height: 34px;
-			font-size: 0.7rem;
-		}
-	}
-
-	.mmv__tl-name {
-		font-size: 0.78rem;
-		font-weight: 500;
-		color: var(--stone-200);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.85rem;
-		}
-	}
-
-	/* ── Calendar ── */
-	.mmv__view--calendar {
-		padding-top: 48px;
-		display: grid;
-	}
-
-	.mmv__cal-scroll-wrap {
-		overflow-y: auto;
-		scrollbar-width: none;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
-
-	.mmv__cal-scroll {
-		padding-bottom: 48px;
-	}
-
-	.mmv__cal-month {
-		margin-bottom: 8px;
-	}
-
-	.mmv__cal-month-label {
-		position: sticky;
-		top: 0;
-		z-index: 2;
-		background: var(--stone-900);
-		background: linear-gradient(90deg, var(--stone-900) 40%, color-alpha(var(--stone-900), 0) 100%);
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: var(--stone-300);
-		padding: 10px 12px 6px;
-	}
-
-	.mmv__cal-weekdays {
-		display: grid;
-		grid-template-columns: repeat(7, 1fr);
-		text-align: center;
-		margin-bottom: 2px;
-
-		span {
-			font-size: 0.48rem;
-			font-weight: 600;
-			color: var(--stone-500);
-			text-transform: uppercase;
-			padding: 2px 0;
-
-			@media (width >= $breakpoint-sm) {
-				font-size: 0.52rem;
-			}
-		}
-	}
-
-	.mmv__cal-grid {
-		display: grid;
-		grid-template-columns: repeat(7, 1fr);
-		text-align: center;
-	}
-
-	.mmv__cal-day {
-		font-size: 0.55rem;
-		color: var(--stone-300);
-		padding: 5px 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2px;
-		position: relative;
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.6rem;
-			padding: 6px 0;
-		}
-
-		&--empty {
-			visibility: hidden;
-		}
-
-		&--event::after {
-			content: '';
-			width: 3px;
-			height: 3px;
-			border-radius: 50%;
-			background: oklch(65% 0.2 15);
-		}
-
-		&--selected {
-			color: var(--stone-50);
-			font-weight: 700;
-
-			&::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -55%);
-				width: 20px;
-				height: 20px;
-				border-radius: 50%;
-				background: oklch(50% 0.15 260);
-				z-index: -1;
-
-				@media (width >= $breakpoint-sm) {
-					width: 22px;
-					height: 22px;
-				}
-			}
-		}
-	}
-
-	.mmv__cal-popup {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: linear-gradient(180deg, oklch(20% 0.02 50 / 0) 0%, var(--stone-900) 20%);
-		padding: 24px 18px 48px;
-		opacity: 0;
-		transform: translateY(100%);
-		z-index: 5;
-
-		@media (width >= $breakpoint-sm) {
-			padding: 28px 22px 56px;
-		}
-	}
-
-	.mmv__cal-popup-date {
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: var(--stone-100);
-		margin-bottom: 2px;
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.78rem;
-		}
-	}
-
-	.mmv__cal-popup-count {
-		font-size: 0.6rem;
-		color: var(--stone-400);
-		margin-bottom: 10px;
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.65rem;
-		}
-	}
-
-	.mmv__cal-popup-contact {
-		display: flex;
-		gap: 10px;
-		align-items: flex-start;
-	}
-
-	.mmv__cal-popup-info {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-	}
-
-	.mmv__cal-popup-name {
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: var(--stone-100);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.8rem;
-		}
-	}
-
-	.mmv__cal-popup-detail {
-		font-size: 0.6rem;
-		color: var(--stone-400);
-		display: flex;
-		align-items: center;
-		gap: 5px;
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.65rem;
-		}
-	}
-
-	.mmv__cal-popup-dot {
-		width: 5px;
-		height: 5px;
-		border-radius: 50%;
-		flex-shrink: 0;
-
-		&--met {
-			background: var(--amber-500);
-		}
-
-		&--bday {
-			background: oklch(65% 0.2 15);
-		}
-	}
-
-	/* ── Map ── */
-	.mmv__view--map {
-		background: oklch(18% 0.006 50);
-	}
-
-	.mmv__map-container {
-		position: absolute;
-		inset: -30px;
-		will-change: transform;
-	}
-
-	.mmv__map-svg {
-		width: 100%;
-		height: 100%;
-	}
-
-	.mmv__map-marker {
-		position: absolute;
-		width: 18px;
-		height: 24px;
-		opacity: 0;
-		will-change: transform;
-		filter: drop-shadow(0 2px 4px oklch(0% 0 0 / 0.4));
-
-		svg {
-			width: 100%;
-			height: 100%;
-		}
-
-		@media (width >= $breakpoint-sm) {
-			width: 20px;
-			height: 26px;
-		}
-	}
-
-	.mmv__map-marker--pulse {
-		animation: marker-pulse 0.6s ease-out;
-	}
-
-	@keyframes marker-pulse {
-		0% {
-			transform: scale(1);
-		}
-		30% {
-			transform: scale(1.4);
-		}
-		60% {
-			transform: scale(0.9);
-		}
-		100% {
-			transform: scale(1);
-		}
-	}
-
-	.mmv__map-popup {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: linear-gradient(180deg, oklch(20% 0.02 50 / 0) 0%, var(--stone-900) 20%);
-		border-radius: 0 0 34px 34px;
-		padding: 24px 18px 48px;
-		opacity: 0;
-		transform: translateY(100%);
-		z-index: 5;
-
-		@media (width >= $breakpoint-sm) {
-			border-radius: 0 0 39px 39px;
-			padding: 28px 22px 56px;
-		}
-	}
-
-	.mmv__map-popup-contact {
-		display: flex;
-		gap: 10px;
-		align-items: flex-start;
-	}
-
-	.mmv__map-popup-info {
-		display: flex;
-		flex-direction: column;
-		gap: 3px;
-	}
-
-	.mmv__map-popup-name {
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: var(--stone-100);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.8rem;
-		}
-	}
-
-	.mmv__map-popup-detail {
-		font-size: 0.6rem;
-		color: var(--stone-400);
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.65rem;
-		}
-	}
-
-	.mmv__map-popup-location {
-		font-size: 0.6rem;
-		color: var(--stone-500);
-		display: flex;
-		align-items: center;
-		gap: 4px;
-
-		svg {
-			width: 10px;
-			height: 10px;
-			flex-shrink: 0;
-		}
-
-		@media (width >= $breakpoint-sm) {
-			font-size: 0.65rem;
-
-			svg {
-				width: 12px;
-				height: 12px;
-			}
-		}
-	}
-
-	/* ── Tab Bar ── */
-	.mmv__tabbar {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		padding: 8px 0 16px;
-		background: linear-gradient(transparent, var(--stone-950) 100%);
-		z-index: 6;
-
-		@media (width >= $breakpoint-sm) {
-			padding: 10px 0 20px;
-		}
-	}
-
-	.mmv__tabbar-btn {
-		background: none;
-		border: none;
-		padding: 6px;
-		color: var(--stone-500);
-		cursor: pointer;
-		transition: color 0.3s ease;
-
-		svg {
-			width: 18px;
-			height: 18px;
-
-			@media (width >= $breakpoint-sm) {
-				width: 20px;
-				height: 20px;
-			}
-		}
-
-		&--active {
-			color: var(--amber-400);
-		}
-	}
+  @use '../styles/scssVariables' as *;
+
+  /* ── Layout ── */
+  .mmv {
+    padding: 4rem var(--page-gutter) 6rem;
+    max-width: 62rem;
+    margin: 0 auto;
+  }
+
+  .mmv__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+    @media (width >= $breakpoint-md) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+    }
+  }
+
+  .mmv__text {
+    text-align: center;
+
+    @media (width >= $breakpoint-md) {
+      text-align: left;
+      max-width: 22rem;
+    }
+  }
+
+  .mmv__heading {
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    font-weight: 700;
+    color: var(--stone-50);
+    margin-bottom: 0.75rem;
+  }
+
+  .mmv__sub {
+    font-size: 0.95rem;
+    color: var(--stone-400);
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .mmv__features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mmv__feature {
+    border-radius: 12px;
+    border: 1px solid var(--stone-700);
+    background: transparent;
+    padding: 14px 18px;
+    transition:
+      background 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .mmv__feature--active {
+    border-color: var(--amber-500);
+    background: linear-gradient(
+      135deg,
+      color-alpha(var(--amber-500), 0.12) 0%,
+      color-alpha(var(--amber-500), 0.04) 100%
+    );
+  }
+
+  .mmv__feature-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--stone-200);
+    margin-bottom: 0.25rem;
+    transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+    .mmv__feature--active & {
+      color: var(--amber-400);
+    }
+  }
+
+  .mmv__feature-desc {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--stone-500);
+    transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+    .mmv__feature--active & {
+      color: var(--stone-400);
+    }
+  }
+
+  /* ── Phone frame overrides ── */
+  .mmv__content :global(.phone-frame) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Views (overlapping, absolute) ── */
+  .mmv__gate {
+    position: absolute;
+    inset: 0;
+  }
+
+  .mmv__view {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* ── Timeline ── */
+  .mmv__view--timeline {
+    padding-top: 48px;
+    display: grid;
+  }
+
+  .mmv__tl-scroll-wrap {
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .mmv__tl-scroll {
+    padding-bottom: 48px;
+  }
+
+  .mmv__tl-header {
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--stone-500);
+    padding: 8px 16px;
+    opacity: 0;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--stone-900);
+    background: linear-gradient(90deg, var(--stone-900) 40%, color-alpha(var(--stone-900), 0) 100%);
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.6rem;
+    }
+  }
+
+  .mmv__tl-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    opacity: 0;
+
+    & + & {
+      border-top: 1px solid color-alpha(var(--stone-800), 0.4);
+    }
+  }
+
+  .mmv__tl-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: color-alpha(var(--amber-500), 0.15);
+    color: var(--amber-400);
+    display: grid;
+    place-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+
+    @media (width >= $breakpoint-sm) {
+      width: 34px;
+      height: 34px;
+      font-size: 0.7rem;
+    }
+  }
+
+  .mmv__tl-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--stone-200);
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* ── Calendar ── */
+  .mmv__view--calendar {
+    padding-top: 48px;
+    display: grid;
+  }
+
+  .mmv__cal-scroll-wrap {
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .mmv__cal-scroll {
+    padding-bottom: 48px;
+  }
+
+  .mmv__cal-month {
+    margin-bottom: 8px;
+  }
+
+  .mmv__cal-month-label {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--stone-900);
+    background: linear-gradient(90deg, var(--stone-900) 40%, color-alpha(var(--stone-900), 0) 100%);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--stone-300);
+    padding: 10px 12px 6px;
+  }
+
+  .mmv__cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 2px;
+
+    span {
+      font-size: 0.48rem;
+      font-weight: 600;
+      color: var(--stone-500);
+      text-transform: uppercase;
+      padding: 2px 0;
+
+      @media (width >= $breakpoint-sm) {
+        font-size: 0.52rem;
+      }
+    }
+  }
+
+  .mmv__cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+  }
+
+  .mmv__cal-day {
+    font-size: 0.55rem;
+    color: var(--stone-300);
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.6rem;
+      padding: 6px 0;
+    }
+
+    &--empty {
+      visibility: hidden;
+    }
+
+    &--event::after {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: oklch(65% 0.2 15);
+    }
+
+    &--selected {
+      color: var(--stone-50);
+      font-weight: 700;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: oklch(50% 0.15 260);
+        z-index: -1;
+
+        @media (width >= $breakpoint-sm) {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
+
+  /* ── Shared Popup ── */
+  .mmv__popup {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, oklch(20% 0.02 50 / 0) 0%, var(--stone-900) 20%);
+    padding: 24px 18px 64px;
+    opacity: 0;
+    transform: translateY(100%);
+    z-index: 5;
+
+    @media (width >= $breakpoint-sm) {
+      padding: 28px 22px 72px;
+    }
+  }
+
+  .mmv__popup--map {
+    border-radius: 0 0 34px 34px;
+    padding-bottom: 48px;
+
+    @media (width >= $breakpoint-sm) {
+      border-radius: 0 0 39px 39px;
+    }
+  }
+
+  .mmv__popup-contact {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .mmv__popup-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .mmv__popup--map & {
+      gap: 3px;
+    }
+  }
+
+  .mmv__popup-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--stone-100);
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.8rem;
+    }
+  }
+
+  .mmv__popup-detail {
+    font-size: 0.6rem;
+    color: var(--stone-400);
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.65rem;
+    }
+
+    .mmv__popup--cal & {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  .mmv__popup-date {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--stone-100);
+    margin-bottom: 2px;
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.78rem;
+    }
+  }
+
+  .mmv__popup-count {
+    font-size: 0.6rem;
+    color: var(--stone-400);
+    margin-bottom: 10px;
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.65rem;
+    }
+  }
+
+  .mmv__popup-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &--met {
+      background: var(--amber-500);
+    }
+
+    &--bday {
+      background: oklch(65% 0.2 15);
+    }
+  }
+
+  .mmv__popup-location {
+    font-size: 0.6rem;
+    color: var(--stone-500);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+    }
+
+    @media (width >= $breakpoint-sm) {
+      font-size: 0.65rem;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  /* ── Map ── */
+  .mmv__view--map {
+    background: oklch(18% 0.006 50);
+  }
+
+  .mmv__map-container {
+    position: absolute;
+    inset: -70px;
+    will-change: transform;
+  }
+
+  .mmv__map-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mmv__map-marker {
+    position: absolute;
+    width: 18px;
+    height: 24px;
+    opacity: 0;
+    will-change: transform;
+    filter: drop-shadow(0 2px 4px oklch(0% 0 0 / 0.4));
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (width >= $breakpoint-sm) {
+      width: 20px;
+      height: 26px;
+    }
+  }
+
+  .mmv__map-marker--pulse {
+    animation: marker-pulse 0.6s ease-out forwards;
+    transform-origin: center bottom;
+  }
+
+  @keyframes marker-pulse {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.6);
+    }
+    60% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1.4);
+    }
+  }
+
+  /* ── Tab Bar ── */
+  .mmv__tabbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0 16px;
+    background: linear-gradient(transparent, var(--stone-950) 100%);
+    z-index: 6;
+
+    @media (width >= $breakpoint-sm) {
+      padding: 10px 0 20px;
+    }
+  }
+
+  .mmv__tabbar-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    color: var(--stone-500);
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    svg {
+      width: 18px;
+      height: 18px;
+
+      @media (width >= $breakpoint-sm) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &--active {
+      color: var(--amber-400);
+    }
+  }
 </style>
