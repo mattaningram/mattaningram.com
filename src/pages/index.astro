@@ -49,12 +49,11 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     <h2 class="home-section-title">Latest</h2>
     <WorkItem href="https://metme.app" color="rgb(245 166 35)" external class="metme-item">
       <div class="metme-link-content">
-        <Image src={metmeIcon} alt="MetMe app icon" width={80} height={80} class="metme-icon" />
+        <Image src={metmeIcon} alt="MetMe app icon" width={88} height={88} class="metme-icon" layout="fixed" />
         <div class="metme-copy">
           <span class="metme-name">MetMe</span>
           <p class="metme-desc">
-            Remember everyone you meet, when, and where you met them. A personal CRM I designed, built, and now live on
-            TestFlight (AppStore soon)!
+            Remember everyone you meet. A personal CRM I designed, built, and launched on TestFlight.
           </p>
         </div>
       </div>
@@ -252,8 +251,8 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
   }
 
   .metme-icon {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 5.5rem;
+    height: 5.5rem;
     flex-shrink: 0;
 
     @media (width < $breakpoint-sm) {
@@ -269,14 +268,14 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
   }
 
   .metme-name {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--page-color);
   }
 
   .metme-desc {
-    font-size: 1rem;
-    color: transparentize(white, 0.25);
+    font-size: 1.125rem;
+    color: color-alpha(white, 0.75);
     line-height: 1.4;
   }
 </style>
