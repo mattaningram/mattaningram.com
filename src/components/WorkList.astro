@@ -1,190 +1,110 @@
 ---
+import WorkItem from '@components/WorkItem.astro'
+
 const { folder = 'work' } = Astro.props
 
 // Preload both collections; choose one based on the `folder` prop.
 const collections = {
-	work: import.meta.glob('/src/pages/work/*.astro'),
-	projects: import.meta.glob('/src/pages/projects/*.astro'),
+  work: import.meta.glob('/src/pages/work/*.astro'),
+  projects: import.meta.glob('/src/pages/projects/*.astro'),
 } as const
 
 const selected = collections[folder] ?? {}
 
 const itemPaths = Object.keys(selected).map(
-	(path) => `/${folder}/` + (path.match(new RegExp(`/${folder}/(.*)\\.astro$`))?.[1] ?? '')
+  (path) => `/${folder}/` + (path.match(new RegExp(`/${folder}/(.*)\\.astro$`))?.[1] ?? ''),
 )
 
 const itemModules = await Promise.all(Object.values(selected).map((loader) => loader()))
 
 const items = itemModules
-	.map((item, i) => ({
-		...item.frontmatter,
-		url: itemPaths[i],
-		component: item.default,
-	}))
-	.sort((a, b) => b.order - a.order)
+  .map((item, i) => ({
+    ...item.frontmatter,
+    url: itemPaths[i],
+    component: item.default,
+  }))
+  .sort((a, b) => b.order - a.order)
 ---
 
 <div class="work-list-wrap" xyz="fade stagger-1 delay-10 down-2 small-2">
-	{
-		items.map((item) => (
-			<a href={item.url} class="work-item-wrap xyz-in" style={`--page-color: ${item.color};`}>
-				<div class="work-item-stack" />
-				<div class="work-item-stack" />
-				<div class="work-item-stack" />
-				<div class="work-item-stack" />
-				<div class="work-item" transition:name={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}>
-					{item.logo ? (
-						<img
-							class="work-item-logo"
-							src={`/assets/logos/${item.logoOpen ?? item.logo}`}
-							title={`${item.title} Logo`}
-						/>
-					) : (
-						<h3 class="work-item-title">{item.title}</h3>
-					)}
-				</div>
-			</a>
-		))
-	}
+  {
+    items.map((item) => (
+      <WorkItem
+        href={item.url}
+        color={item.color}
+        class="work-list-item"
+        transitionName={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
+      >
+        {item.logo ? (
+          <img
+            class="work-item-logo"
+            src={`/assets/logos/${item.logoOpen ?? item.logo}`}
+            title={`${item.title} Logo`}
+          />
+        ) : (
+          <h3 class="work-item-title">{item.title}</h3>
+        )}
+      </WorkItem>
+    ))
+  }
 </div>
 
 <style lang="scss">
-	@use '../styles/_scssVariables' as *;
-	.work-list-wrap {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: stretch;
-		gap: var(--spacing-11);
-		transform-style: preserve-3d;
+  @use '../styles/_scssVariables' as *;
+  .work-list-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--spacing-11);
+    transform-style: preserve-3d;
 
-		@media (width < $breakpoint-md) {
-			gap: var(--spacing-10);
-		}
+    @media (width < $breakpoint-md) {
+      gap: var(--spacing-10);
+    }
 
-		@media (width < $breakpoint-sm) {
-			gap: var(--spacing-8);
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      gap: var(--spacing-8);
+    }
 
-	.work-item-wrap {
-		display: grid;
-		height: 11rem;
-		transform-style: preserve-3d;
+    :global(.work-item-wrap) {
+      height: 11rem;
 
-		@media (width < $breakpoint-sm) {
-			height: 7rem;
-		}
+      @media (width < $breakpoint-sm) {
+        height: 7rem;
+      }
+    }
+  }
 
-		&:hover {
-			.work-item-stack,
-			.work-item {
-				transition-timing-function: var(--ease-out-back);
-			}
-			.work-item {
-				--work-item-stack-lightness: 60%;
-				translate: 0 0 25px;
-				border-width: 2px;
+  .work-item-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 15rem;
+    max-height: 3rem;
+    margin: 0 auto;
 
-				&:after {
-					opacity: 1;
-				}
-			}
+    @media (width < $breakpoint-md) {
+      max-width: 12rem;
+      max-height: 2.5rem;
+    }
 
-			.work-item-stack {
-				&:nth-child(1) {
-					--work-item-stack-lightness: 10%;
-					translate: 0 0 -75px;
-				}
-				&:nth-child(2) {
-					--work-item-stack-lightness: 20%;
-					translate: 0 0 -50px;
-				}
-				&:nth-child(3) {
-					translate: 0 0 -25px;
-				}
-				&:nth-child(4) {
-					translate: 0 0 0;
-				}
-			}
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      max-width: 8rem;
+      max-height: 2rem;
+    }
+  }
 
-	.work-item-stack,
-	.work-item {
-		--work-item-stack-lightness: 50%;
-		border: 1px solid hsl(from var(--page-color) h s var(--work-item-stack-lightness));
-		grid-area: 1 / 1;
-		transition: 0.3s var(--ease-out-quad);
-		transition-property: translate, background-color;
-	}
+  .work-item-title {
+    display: block;
+    font-size: 1.6em;
+    font-weight: 300;
+    text-align: center;
+  }
 
-	.work-item-stack {
-		background-color: var(--bg-color);
-
-		&:nth-child(1) {
-			translate: 0 0 -50px;
-			--work-item-stack-lightness: 20%;
-		}
-		&:nth-child(2) {
-			translate: 0 0 -25px;
-			--work-item-stack-lightness: 30%;
-		}
-		&:nth-child(3) {
-			--work-item-stack-lightness: 40%;
-		}
-		&:nth-child(4) {
-			--work-item-stack-lightness: 45%;
-		}
-	}
-
-	.work-item {
-		position: relative;
-		display: grid;
-		place-content: center;
-		background-color: hsl(from var(--page-color) h s 7%);
-		transform-style: preserve-3d;
-
-		&:after {
-			content: '';
-			position: absolute;
-			inset: 0;
-			z-index: -1;
-			opacity: 0;
-			background: radial-gradient(at 15% 0%, hsl(from var(--page-color) h s l / 60%), transparent);
-			transition: opacity 0.5s var(--ease-out-quad);
-		}
-	}
-
-	.work-item-logo {
-		display: block;
-		width: 100%;
-		height: auto;
-		max-width: 15rem;
-		max-height: 3rem;
-		margin: 0 auto;
-
-		@media (width < $breakpoint-md) {
-			max-width: 12rem;
-			max-height: 2.5rem;
-		}
-
-		@media (width < $breakpoint-sm) {
-			max-width: 8rem;
-			max-height: 2rem;
-		}
-	}
-
-	.work-item-title {
-		display: block;
-		font-size: 1.6em;
-		font-weight: 300;
-		text-align: center;
-	}
-
-	.work-item-details {
-		display: block;
-		color: rgba(255, 255, 255, 0.75);
-	}
+  .work-item-details {
+    display: block;
+    color: rgba(255, 255, 255, 0.75);
+  }
 </style>

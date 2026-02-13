@@ -1,0 +1,122 @@
+---
+interface Props {
+  href: string
+  color: string
+  transitionName?: string
+  external?: boolean
+  class?: string
+}
+
+const { href, color, transitionName, external = false, class: className } = Astro.props
+---
+
+<a
+  href={href}
+  class:list={['work-item-wrap', 'xyz-in', className]}
+  style={`--page-color: ${color};`}
+  {...external && { target: '_blank', rel: 'noopener noreferrer' }}
+>
+  <div class="work-item-stack"></div>
+  <div class="work-item-stack"></div>
+  <div class="work-item-stack"></div>
+  <div class="work-item-stack"></div>
+  {
+    transitionName ? (
+      <div class="work-item" transition:name={transitionName}>
+        <slot />
+      </div>
+    ) : (
+      <div class="work-item">
+        <slot />
+      </div>
+    )
+  }
+</a>
+
+<style lang="scss">
+  @use '../styles/_scssVariables' as *;
+
+  .work-item-wrap {
+    display: grid;
+    transform-style: preserve-3d;
+
+    &:hover {
+      .work-item-stack,
+      .work-item {
+        transition-timing-function: var(--ease-out-back);
+      }
+      .work-item {
+        --work-item-stack-lightness: 60%;
+        translate: 0 0 25px;
+        border-width: 2px;
+
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      .work-item-stack {
+        &:nth-child(1) {
+          --work-item-stack-lightness: 10%;
+          translate: 0 0 -75px;
+        }
+        &:nth-child(2) {
+          --work-item-stack-lightness: 20%;
+          translate: 0 0 -50px;
+        }
+        &:nth-child(3) {
+          translate: 0 0 -25px;
+        }
+        &:nth-child(4) {
+          translate: 0 0 0;
+        }
+      }
+    }
+  }
+
+  .work-item-stack,
+  .work-item {
+    --work-item-stack-lightness: 50%;
+    border: 1px solid hsl(from var(--page-color) h s var(--work-item-stack-lightness));
+    grid-area: 1 / 1;
+    transition: 0.3s var(--ease-out-quad);
+    transition-property: translate, background-color;
+  }
+
+  .work-item-stack {
+    background-color: var(--bg-color);
+
+    &:nth-child(1) {
+      translate: 0 0 -50px;
+      --work-item-stack-lightness: 20%;
+    }
+    &:nth-child(2) {
+      translate: 0 0 -25px;
+      --work-item-stack-lightness: 30%;
+    }
+    &:nth-child(3) {
+      --work-item-stack-lightness: 40%;
+    }
+    &:nth-child(4) {
+      --work-item-stack-lightness: 45%;
+    }
+  }
+
+  .work-item {
+    position: relative;
+    display: grid;
+    place-content: center;
+    background-color: hsl(from var(--page-color) h s 7%);
+    transform-style: preserve-3d;
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0;
+      background: radial-gradient(at 15% 0%, hsl(from var(--page-color) h s l / 60%), transparent);
+      transition: opacity 0.5s var(--ease-out-quad);
+    }
+  }
+</style>
