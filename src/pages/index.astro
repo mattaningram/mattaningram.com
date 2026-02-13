@@ -4,6 +4,8 @@ import Logo from '@components/Logo.astro'
 import Beliefs from '@components/Beliefs.astro'
 import WorkList from '@components/WorkList.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
+import { Image } from 'astro:assets'
+import metmeIcon from '@media/metme/metme-ios-icon.png'
 ---
 
 <HomeLayout>
@@ -41,6 +43,14 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 			> Making glowing rectangles do cool stuff with AI, design systems, and CSS.
 		</p>
 	</section>
+
+	<a href="https://metme.app" target="_blank" rel="noopener noreferrer" class="metme-link home-section xyz-in" xyz="fade down duration-5 delay-9">
+		<Image src={metmeIcon} alt="MetMe app icon" width={80} height={80} class="metme-icon" />
+		<div class="metme-copy">
+			<span class="metme-name">MetMe</span>
+			<p class="metme-desc">A personal CRM I designed, built, and shipped to the App Store.</p>
+		</div>
+	</a>
 
 	<PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
 		<div class="work-stack">
@@ -217,5 +227,57 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 		flex-grow: 1;
 		flex-basis: 0;
 		transform-style: preserve-3d;
+	}
+
+	.metme-link {
+		--metme-color: rgb(245 166 35);
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-8);
+		padding: var(--spacing-8) var(--spacing-10);
+		border: 1px solid hsl(from var(--metme-color) h s 30%);
+		background: hsl(from var(--metme-color) h s 5%);
+		transition: 0.3s var(--ease-out-quad);
+		transition-property: border-color, background-color, box-shadow;
+
+		&:hover {
+			border-color: hsl(from var(--metme-color) h s 50%);
+			background: hsl(from var(--metme-color) h s 8%);
+			box-shadow: 0 0 30px hsl(from var(--metme-color) h s 20% / 0.3);
+		}
+
+		@media (width < $breakpoint-sm) {
+			padding: var(--spacing-7) var(--spacing-8);
+			gap: var(--spacing-7);
+		}
+	}
+
+	.metme-icon {
+		width: 4.5rem;
+		height: 4.5rem;
+		flex-shrink: 0;
+
+		@media (width < $breakpoint-sm) {
+			width: 3.5rem;
+			height: 3.5rem;
+		}
+	}
+
+	.metme-copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-3);
+	}
+
+	.metme-name {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--metme-color);
+	}
+
+	.metme-desc {
+		font-size: 1rem;
+		color: var(--gray-7);
+		line-height: 1.4;
 	}
 </style>
