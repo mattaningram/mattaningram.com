@@ -5,6 +5,7 @@ import Beliefs from '@components/Beliefs.astro'
 import WorkList from '@components/WorkList.astro'
 import WorkItem from '@components/WorkItem.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
+import MetMeDemo from '@components/MetMeDemo.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
 ---
@@ -52,15 +53,22 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
 
   <PerspectiveScroll as="section" class="home-section xyz-in" xyz="fade down duration-5 delay-9">
     <h2 class="home-section-title">Latest</h2>
-    <WorkItem href="https://metme.app" color="rgb(245 166 35)" external class="metme-item">
+    <WorkItem href="https://metme.app" color="rgb(245 166 35)" external class="metme-link">
       <div class="metme-link-content">
-        <Image src={metmeIcon} alt="MetMe app icon" width={88} height={88} class="metme-icon" layout="fixed" />
+        <div class="metme-icon-wrap">
+          <Image src={metmeIcon} alt="MetMe app icon" width={88} height={88} class="metme-icon" layout="fixed" />
+          <h3 class="metme-name">MetMe</h3>
+        </div>
         <div class="metme-copy">
-          <span class="metme-name">MetMe</span>
           <p class="metme-desc">
-            Remember everyone you meet. A personal CRM I designed, built, and launched on TestFlight.
+            Remember everyone you meet. I built this app to make adding contacts faster and easier with AI natural
+            language processing.
           </p>
         </div>
+      </div>
+
+      <div class="metme-demo-overlay" slot="after">
+        <MetMeDemo />
       </div>
     </WorkItem>
   </PerspectiveScroll>
@@ -242,22 +250,43 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     transform-style: preserve-3d;
   }
 
+  :global(.metme-link) {
+    min-height: 10rem;
+  }
+
   .metme-link-content {
     height: auto;
     display: flex;
     align-items: center;
-    gap: var(--spacing-8);
     padding: var(--spacing-8) var(--spacing-10);
+    padding-right: 13rem;
+    gap: var(--spacing-12);
+    text-wrap: balance;
 
     @media (width < $breakpoint-sm) {
+      align-items: flex-start;
+      flex-direction: column;
       padding: var(--spacing-7) var(--spacing-8);
+      padding-right: 10rem;
       gap: var(--spacing-7);
     }
   }
 
+  .metme-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: var(--spacing-4);
+
+    @media (width < $breakpoint-sm) {
+      flex-direction: row;
+      gap: var(--spacing-6);
+    }
+  }
+
   .metme-icon {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 4rem;
+    height: 4rem;
     flex-shrink: 0;
 
     @media (width < $breakpoint-sm) {
@@ -279,8 +308,45 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
   }
 
   .metme-desc {
+    text-align: center;
     font-size: 1.125rem;
-    color: color-alpha(white, 0.75);
+    color: white;
+    opacity: 0.75;
     line-height: 1.4;
+    transition: opacity 0.3s var(--ease-out-quad);
+
+    @media (width < $breakpoint-sm) {
+      text-align: left;
+      font-size: 1rem;
+    }
+  }
+
+  .metme-demo-overlay {
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.5);
+    transform-origin: center right;
+    transition: transform 0.3s var(--ease-out-quad);
+
+    @media (width < $breakpoint-sm) {
+      transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.45);
+    }
+  }
+
+  :global(.work-item-wrap:hover) {
+    .metme-desc {
+      opacity: 1;
+    }
+    .metme-demo-overlay {
+      transform: translateY(-50%) translateZ(80px) rotateY(-4deg) rotateZ(1deg) scale(0.6);
+
+      @media (width < $breakpoint-sm) {
+        transform: translateY(-50%) translateZ(80px) rotateY(-4deg) rotateZ(1deg) scale(0.5);
+      }
+    }
   }
 </style>

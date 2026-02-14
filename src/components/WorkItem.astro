@@ -16,10 +16,10 @@ const { href, color, transitionName, external = false, class: className } = Astr
   style={`--page-color: ${color};`}
   {...external && { target: '_blank', rel: 'noopener noreferrer' }}
 >
-  <div class="work-item-stack"></div>
-  <div class="work-item-stack"></div>
-  <div class="work-item-stack"></div>
-  <div class="work-item-stack"></div>
+  <div class="work-item-leaf"></div>
+  <div class="work-item-leaf"></div>
+  <div class="work-item-leaf"></div>
+  <div class="work-item-leaf"></div>
   {
     transitionName ? (
       <div class="work-item" transition:name={transitionName}>
@@ -31,6 +31,7 @@ const { href, color, transitionName, external = false, class: className } = Astr
       </div>
     )
   }
+  <slot name="after" />
 </a>
 
 <style lang="scss">
@@ -39,14 +40,15 @@ const { href, color, transitionName, external = false, class: className } = Astr
   .work-item-wrap {
     display: grid;
     transform-style: preserve-3d;
+    position: relative;
 
     &:hover {
-      .work-item-stack,
+      .work-item-leaf,
       .work-item {
         transition-timing-function: var(--ease-out-back);
       }
       .work-item {
-        --work-item-stack-lightness: 60%;
+        --work-item-leaf-lightness: 60%;
         translate: 0 0 25px;
         border-width: 2px;
 
@@ -55,13 +57,13 @@ const { href, color, transitionName, external = false, class: className } = Astr
         }
       }
 
-      .work-item-stack {
+      .work-item-leaf {
         &:nth-child(1) {
-          --work-item-stack-lightness: 10%;
+          --work-item-leaf-lightness: 10%;
           translate: 0 0 -75px;
         }
         &:nth-child(2) {
-          --work-item-stack-lightness: 20%;
+          --work-item-leaf-lightness: 20%;
           translate: 0 0 -50px;
         }
         &:nth-child(3) {
@@ -74,31 +76,31 @@ const { href, color, transitionName, external = false, class: className } = Astr
     }
   }
 
-  .work-item-stack,
+  .work-item-leaf,
   .work-item {
-    --work-item-stack-lightness: 50%;
-    border: 1px solid hsl(from var(--page-color) h s var(--work-item-stack-lightness));
+    --work-item-leaf-lightness: 50%;
+    border: 1px solid hsl(from var(--page-color) h s var(--work-item-leaf-lightness));
     grid-area: 1 / 1;
     transition: 0.3s var(--ease-out-quad);
     transition-property: translate, background-color;
   }
 
-  .work-item-stack {
+  .work-item-leaf {
     background-color: var(--bg-color);
 
     &:nth-child(1) {
       translate: 0 0 -50px;
-      --work-item-stack-lightness: 20%;
+      --work-item-leaf-lightness: 20%;
     }
     &:nth-child(2) {
       translate: 0 0 -25px;
-      --work-item-stack-lightness: 30%;
+      --work-item-leaf-lightness: 30%;
     }
     &:nth-child(3) {
-      --work-item-stack-lightness: 40%;
+      --work-item-leaf-lightness: 40%;
     }
     &:nth-child(4) {
-      --work-item-stack-lightness: 45%;
+      --work-item-leaf-lightness: 45%;
     }
   }
 
