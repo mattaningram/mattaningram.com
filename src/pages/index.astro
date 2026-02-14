@@ -3,224 +3,349 @@ import HomeLayout from '@layouts/HomeLayout.astro'
 import Logo from '@components/Logo.astro'
 import Beliefs from '@components/Beliefs.astro'
 import WorkList from '@components/WorkList.astro'
+import WorkItem from '@components/WorkItem.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
+import MetMeDemo from '@components/MetMeDemo.astro'
+import { Image } from 'astro:assets'
+import metmeIcon from '@media/metme/metme-ios-icon.png'
 ---
 
 <HomeLayout>
-	<section class="m-center-wrap">
-		<div class="m-logo-section" data-visitors-event="M Logo" data-visitors-source="Logo Click">
-			<Logo size="15rem" />
-		</div>
-		<h1 class="my-name xyz-in" xyz="fade small-2 duration-5 delay-7">Mattan Ingram</h1>
-		<button
-			class="m-logo-click-me xyz-in"
-			xyz="fade small-2 duration-5 delay-8"
-			data-visitors-event="M Logo"
-			data-visitors-source="Click Me">Click me</button
-		>
-	</section>
+  <section class="m-center-wrap">
+    <div class="m-logo-section" data-visitors-event="M Logo" data-visitors-source="Logo Click">
+      <Logo size="15rem" />
+    </div>
+    <h1 class="my-name xyz-in" xyz="fade small-2 duration-5 delay-7">Mattan Ingram</h1>
+    <button
+      class="m-logo-click-me xyz-in"
+      xyz="fade small-2 duration-5 delay-8"
+      data-visitors-event="M Logo"
+      data-visitors-source="Click Me">Click me</button
+    >
+  </section>
 
-	<section class="grab-copy-wrap home-section xyz-in" xyz="fade down duration-5 delay-8">
-		<p class="grab-copy">
-			NYC product designer and CSS nerd raised on the
-			<span class="gif-hover link-hover"
-				>1984 Mac,<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/1984mac.webm" type="video/webm" />
-					</video>
-				</span>
-			</span>
-			<span class="gif-hover link-hover"
-				>Top Gun,<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/topgun.webm" type="video/webm" />
-					</video>
-				</span></span
-			> and
-			<span class="gif-hover link-hover"
-				>Sesame Street.<span class="gif-video-wrap">
-					<video autoplay loop muted playsinline>
-						<source src="assets/videos/sesame.webm" type="video/webm" />
-					</video>
-				</span></span
-			> Making glowing rectangles do cool stuff.
-		</p>
-	</section>
+  <section class="grab-copy-wrap home-section xyz-in" xyz="fade down duration-5 delay-8">
+    <p class="grab-copy">
+      Product designer pushing code, raised on the
+      <span class="gif-hover link-hover"
+        >1984 Mac,<span class="gif-video-wrap">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/1984mac.webm" type="video/webm" />
+          </video>
+        </span>
+      </span>
+      <span class="gif-hover link-hover"
+        >Top Gun,<span class="gif-video-wrap">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/topgun.webm" type="video/webm" />
+          </video>
+        </span></span
+      > and
+      <span class="gif-hover link-hover"
+        >Sesame Street.<span class="gif-video-wrap">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/sesame.webm" type="video/webm" />
+          </video>
+        </span></span
+      > Making glowing rectangles do cool stuff with AI, design systems, and CSS.
+    </p>
+  </section>
 
-	<!-- <section class="home-section">
-		<h2 class="home-section-title">Beliefs</h2>
-		<Beliefs />
-	</section> -->
+  <PerspectiveScroll as="section" class="home-section xyz-in" xyz="fade down duration-5 delay-9">
+    <h2 class="home-section-title">Latest</h2>
+    <WorkItem href="https://metme.app" color="rgb(245 166 35)" external class="metme-link">
+      <div class="metme-link-content">
+        <div class="metme-icon-wrap">
+          <Image src={metmeIcon} alt="MetMe app icon" width={88} height={88} class="metme-icon" layout="fixed" />
+          <h3 class="metme-name">MetMe</h3>
+        </div>
+        <div class="metme-copy">
+          <p class="metme-desc">
+            My latest project to learn new AI design patterns and working with native AI models and frameworks.
+          </p>
+        </div>
+      </div>
 
-	<PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
-		<div class="work-stack">
-			<h2 class="home-section-title xyz-nested xyz-in">Work</h2>
-			<WorkList folder="work" />
-		</div>
-		<div class="work-stack">
-			<h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
-			<WorkList folder="projects" />
-		</div>
-	</PerspectiveScroll>
+      <div class="metme-demo-overlay" slot="after">
+        <MetMeDemo />
+      </div>
+    </WorkItem>
+  </PerspectiveScroll>
+
+  <PerspectiveScroll as="section" class="work-section home-section" xyz="fade small-2 duration-5 delay-9">
+    <div class="work-stack">
+      <h2 class="home-section-title xyz-nested xyz-in">Work</h2>
+      <WorkList folder="work" />
+    </div>
+    <div class="work-stack">
+      <h2 class="home-section-title xyz-nested xyz-in">Projects</h2>
+      <WorkList folder="projects" />
+    </div>
+  </PerspectiveScroll>
+
+  <PerspectiveScroll as="section" class="beliefs-section home-section">
+    <h2 class="home-section-title">Beliefs</h2>
+    <Beliefs />
+  </PerspectiveScroll>
 </HomeLayout>
 
 <script is:inline>
-	const initLogoButton = () => {
-		const btn = document.querySelector('.m-logo-click-me')
-		const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
+  const initLogoButton = () => {
+    const btn = document.querySelector('.m-logo-click-me')
+    const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
 
-		if (!btn || !logoWrap || btn.dataset.logoClickBound === 'true') {
-			return
-		}
+    if (!btn || !logoWrap || btn.dataset.logoClickBound === 'true') {
+      return
+    }
 
-		const handleClick = () => {
-			logoWrap.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
-		}
+    const handleClick = () => {
+      logoWrap.dispatchEvent(new CustomEvent('m-logo:next', { bubbles: true }))
+    }
 
-		btn.addEventListener('click', handleClick)
-		btn.dataset.logoClickBound = 'true'
-	}
+    btn.addEventListener('click', handleClick)
+    btn.dataset.logoClickBound = 'true'
+  }
 
-	document.addEventListener('astro:page-load', () => {
-		initLogoButton()
-	})
+  document.addEventListener('astro:page-load', () => {
+    initLogoButton()
+  })
 </script>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	.m-center-wrap {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		min-height: 26rem;
-		max-height: 48rem;
-		padding-top: 15svh;
-		padding-inline: var(--spacing-10);
-	}
+  .m-center-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 26rem;
+    max-height: 48rem;
+    padding-top: 15svh;
+    padding-inline: var(--spacing-10);
+  }
 
-	.m-logo-section {
-		position: relative;
-	}
+  .m-logo-section {
+    position: relative;
+  }
 
-	.my-name {
-		text-align: center;
-		letter-spacing: 0.03em;
-		margin-block: var(--spacing-8);
-	}
+  .my-name {
+    text-align: center;
+    letter-spacing: 0.03em;
+    margin-block: var(--spacing-8);
+  }
 
-	.m-logo-click-me {
-		color: white;
-		opacity: 0.75;
-		font-size: 0.75rem;
-		padding: var(--spacing-2);
-		text-transform: uppercase;
-		letter-spacing: 0.075rem;
-		cursor: pointer;
-		transition: 0.15s var(--ease-out);
-		transition-property: scale, opacity;
-		&:hover {
-			opacity: 0.85;
-			scale: 1.05;
-		}
-		&:active {
-			opacity: 1;
-			scale: 0.95;
-		}
-	}
-	.gif-hover {
-		--hover-color: var(--primary-red);
-		cursor: pointer;
-		position: relative;
-		white-space: nowrap;
-		font-weight: 500;
+  .m-logo-click-me {
+    color: white;
+    opacity: 0.75;
+    font-size: 0.75rem;
+    padding: var(--spacing-2);
+    text-transform: uppercase;
+    letter-spacing: 0.075rem;
+    cursor: pointer;
+    transition: 0.15s var(--ease-out);
+    transition-property: scale, opacity;
+    &:hover {
+      opacity: 0.85;
+      scale: 1.05;
+    }
+    &:active {
+      opacity: 1;
+      scale: 0.95;
+    }
+  }
+  .gif-hover {
+    --hover-color: var(--primary-red);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    font-weight: 500;
 
-		&:nth-child(2) {
-			--hover-color: var(--primary-blue);
-		}
+    &:nth-child(2) {
+      --hover-color: var(--primary-blue);
+    }
 
-		&:nth-child(3) {
-			--hover-color: var(--primary-yellow);
-		}
+    &:nth-child(3) {
+      --hover-color: var(--primary-yellow);
+    }
 
-		&:hover {
-			.gif-video-wrap {
-				opacity: 1;
-				transform: translate(-50%, -50%) scale(1, 1);
-				transition-duration: 0.2s;
-			}
-		}
-	}
+    &:hover {
+      .gif-video-wrap {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1, 1);
+        transition-duration: 0.2s;
+      }
+    }
+  }
 
-	.gif-video-wrap {
-		position: absolute;
-		display: block;
-		opacity: 0;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%) scale(1, 0);
-		border-radius: 20px;
-		overflow: hidden;
-		transition: all 0.35s var(--ease-out-back);
-		z-index: -2;
-		pointer-events: none;
+  .gif-video-wrap {
+    position: absolute;
+    display: block;
+    opacity: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1, 0);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.35s var(--ease-out-back);
+    z-index: -2;
+    pointer-events: none;
 
-		video {
-			display: block;
-		}
+    video {
+      display: block;
+    }
 
-		&:before {
-			content: '';
-			position: absolute;
-			inset: 0;
-			width: 100%;
-			height: 100%;
-			box-shadow: inset 0 0 50px 30px var(--bg-color);
-			z-index: 1;
-		}
-	}
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 50px 30px var(--bg-color);
+      z-index: 1;
+    }
+  }
 
-	.home-section {
-		width: var(--page-content-width);
-		max-width: 100%;
-		margin: 0 auto;
-		margin-top: var(--page-section-margin);
-		padding: var(--page-gutter);
-	}
+  .home-section {
+    width: var(--page-content-width);
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: var(--page-section-margin);
+    padding: var(--page-gutter);
+  }
 
-	.home-section-title {
-		opacity: 0.6;
-		font-size: 2.5rem;
-		font-weight: 400;
-		margin-bottom: var(--spacing-12);
+  .home-section-title {
+    color: var(--gray-6);
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-12);
 
-		@media (width < $breakpoint-sm) {
-			font-size: 2rem;
-			margin-bottom: var(--spacing-8);
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-8);
+    }
+  }
 
-	.work-section {
-		display: flex;
-		justify-content: center;
-		gap: var(--spacing-10);
+  .work-section {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-10);
 
-		@media (width < $breakpoint-lg) {
-			gap: var(--spacing-8);
-		}
+    @media (width < $breakpoint-lg) {
+      gap: var(--spacing-8);
+    }
 
-		@media (width < $breakpoint-sm) {
-			gap: var(--spacing-7);
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      gap: var(--spacing-7);
+    }
+  }
 
-	.work-stack {
-		display: grid;
-		justify-items: start;
-		flex-grow: 1;
-		flex-basis: 0;
-		transform-style: preserve-3d;
-	}
+  .work-stack {
+    display: grid;
+    justify-items: start;
+    flex-grow: 1;
+    flex-basis: 0;
+    transform-style: preserve-3d;
+  }
+
+  :global(.metme-link) {
+    min-height: 10rem;
+  }
+
+  .metme-link-content {
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-8) var(--spacing-10);
+    padding-right: 13rem;
+    gap: var(--spacing-12);
+    text-wrap: balance;
+
+    @media (width < $breakpoint-sm) {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: var(--spacing-7) var(--spacing-8);
+      padding-right: 10rem;
+      gap: var(--spacing-7);
+    }
+  }
+
+  .metme-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: var(--spacing-4);
+
+    @media (width < $breakpoint-sm) {
+      flex-direction: row;
+      gap: var(--spacing-6);
+    }
+  }
+
+  .metme-icon {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
+
+    @media (width < $breakpoint-sm) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+
+  .metme-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .metme-name {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--page-color);
+  }
+
+  .metme-desc {
+    text-align: center;
+    font-size: 1.125rem;
+    color: white;
+    opacity: 0.75;
+    line-height: 1.4;
+    transition: opacity 0.3s var(--ease-out-quad);
+
+    @media (width < $breakpoint-sm) {
+      text-align: left;
+      font-size: 1rem;
+    }
+  }
+
+  .metme-demo-overlay {
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.5);
+    transform-origin: center right;
+    transition: transform 0.3s var(--ease-out-quad);
+
+    @media (width < $breakpoint-sm) {
+      transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.45);
+    }
+  }
+
+  :global(.work-item-wrap:hover) {
+    .metme-desc {
+      opacity: 1;
+    }
+    .metme-demo-overlay {
+      transform: translateY(-50%) translateZ(80px) rotateY(-4deg) rotateZ(1deg) scale(0.6);
+
+      @media (width < $breakpoint-sm) {
+        transform: translateY(-50%) translateZ(80px) rotateY(-4deg) rotateZ(1deg) scale(0.5);
+      }
+    }
+  }
 </style>

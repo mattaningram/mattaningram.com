@@ -4,7 +4,6 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -12,10 +11,11 @@
   "dependencies": {
     "@animxyz/core": "^0.6.6",
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
-    "astro": "^5.16.5",
+    "astro": "^5.17.1",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
+    "motion": "^12.33.0",
     "photoswipe": "^5.4.4",
     "ress": "^5.0.2",
     "sass": "^1.90.0"
