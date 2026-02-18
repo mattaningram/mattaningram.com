@@ -13,3 +13,5 @@ package-lock.json
 
 # macOS-specific files
 .DS_Store
+# Nightshift plan artifacts (keep out of version control)
+.nightshift-plan
