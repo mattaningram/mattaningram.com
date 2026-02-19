@@ -6,231 +6,231 @@ import Button from '@components/Button.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 
 export interface Props {
-	title: string
-	year: string
-	position: string
-	logo?: string
-	logoOpen?: string
-	workUrl?: string
-	color: string
-	description: string
-	details?: string[]
+  title: string
+  year: string
+  position: string
+  logo?: string
+  logoOpen?: string
+  workUrl?: string
+  color: string
+  description: string
+  details?: string[]
 }
 
 const { title, year, position, logo, logoOpen, workUrl, color, description, details } = Astro.props
 ---
 
 <BaseLayout title={title} pageColor={color} class={`work-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
-	<div class="work-background"></div>
+  <div class="work-background"></div>
 
-	<Header />
+  <Header />
 
-	<main>
-		<div class="work-header-wrap">
-			<header
-				class="work-header xyz-in"
-				xyz="fade down duration-5 ease-out-back"
-				transition:name={`work-${title.toLowerCase().replace(/\s+/g, '-')}-hero`}
-			>
-				<PerspectiveScroll perspective="600px">
-					<div class="work-header-top">
-						<div class="work-title-wrap xyz-in" xyz="fade left delay-4 ease-out-back">
-							{
-								logoOpen ? (
-									<img class="work-logo" src={`/assets/logos/${logoOpen}`} alt={`${title} Logo`} />
-								) : logo ? (
-									<img class="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
-								) : (
-									<h1 class="work-title">{title}</h1>
-								)
-							}
-						</div>
-						{
-							workUrl && (
-								<Button href={workUrl} class="work-link" target="_blank">
-									Visit
-								</Button>
-							)
-						}
-					</div>
+  <main>
+    <div class="work-header-wrap">
+      <header
+        class="work-header xyz-in"
+        xyz="fade down duration-5 ease-out-back"
+        transition:name={`work-${title.toLowerCase().replace(/\s+/g, '-')}-hero`}
+      >
+        <PerspectiveScroll perspective="600px">
+          <div class="work-header-top">
+            <div class="work-title-wrap xyz-in" xyz="fade left delay-4 ease-out-back">
+              {
+                logoOpen ? (
+                  <img class="work-logo" src={`/assets/logos/${logoOpen}`} alt={`${title} Logo`} />
+                ) : logo ? (
+                  <img class="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
+                ) : (
+                  <h1 class="work-title">{title}</h1>
+                )
+              }
+            </div>
+            {
+              workUrl && (
+                <Button href={workUrl} class="work-link" target="_blank">
+                  Visit
+                </Button>
+              )
+            }
+          </div>
 
-					<div class="work-header-bottom" xyz="fade narrow stagger delay-8 origin-left">
-						<div class="work-detail xyz-in">
-							<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">{position} &ndash; {year}</span>
-						</div>
-						{
-							details &&
-								details.map((detail) => (
-									<div class="work-detail xyz-in">
-										<span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">
-											{detail}
-										</span>
-									</div>
-								))
-						}
-					</div>
-				</PerspectiveScroll>
-			</header>
-		</div>
+          <div class="work-header-bottom" xyz="fade narrow stagger delay-8 origin-left">
+            <div class="work-detail xyz-in">
+              <span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">{position} &ndash; {year}</span>
+            </div>
+            {
+              details &&
+                details.map((detail) => (
+                  <div class="work-detail xyz-in">
+                    <span class="xyz-nested" xyz="fade down-100% duration-8 delay-10">
+                      {detail}
+                    </span>
+                  </div>
+                ))
+            }
+          </div>
+        </PerspectiveScroll>
+      </header>
+    </div>
 
-		<div class="grab-copy-wrap xyz-in" xyz="fade down duration-4 delay-6 ease-out-back">
-			<p class="grab-copy" set:html={description} />
-		</div>
+    <div class="grab-copy-wrap xyz-in" xyz="fade down duration-4 delay-6 ease-out-back">
+      <p class="grab-copy" set:html={description} />
+    </div>
 
-		<slot />
-	</main>
+    <slot />
+  </main>
 
-	<Footer />
+  <Footer />
 </BaseLayout>
 
 <script>
-	import PhotoSwipeLightbox from 'photoswipe/lightbox'
-	import 'photoswipe/style.css'
+  import PhotoSwipeLightbox from 'photoswipe/lightbox'
+  import 'photoswipe/style.css'
 
-	let lightbox
+  let lightbox
 
-	const initLightbox = () => {
-		const galleries = document.querySelectorAll('.photoswipe-gallery')
+  const initLightbox = () => {
+    const galleries = document.querySelectorAll('.photoswipe-gallery')
 
-		// Clean up any previous instance before wiring up new DOM
-		lightbox?.destroy()
-		lightbox = undefined
+    // Clean up any previous instance before wiring up new DOM
+    lightbox?.destroy()
+    lightbox = undefined
 
-		if (!galleries.length) {
-			return
-		}
+    if (!galleries.length) {
+      return
+    }
 
-		lightbox = new PhotoSwipeLightbox({
-			gallery: '.photoswipe-gallery',
-			children: 'a',
-			pswpModule: () => import('photoswipe'),
-			zoom: false,
-			counter: false,
-			padding: { top: 24, bottom: 24, left: 24, right: 24 },
-		})
+    lightbox = new PhotoSwipeLightbox({
+      gallery: '.photoswipe-gallery',
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+      zoom: false,
+      counter: false,
+      padding: { top: 24, bottom: 24, left: 24, right: 24 },
+    })
 
-		lightbox.init()
-	}
+    lightbox.init()
+  }
 
-	const disableWorkHeaderTransition = () => {
-		const header = document.querySelector('.work-header')
-		if (!(header instanceof HTMLElement)) return
-		header.style.setProperty('view-transition-name', 'none')
-	}
+  const disableWorkHeaderTransition = () => {
+    const header = document.querySelector('.work-header')
+    if (!(header instanceof HTMLElement)) return
+    header.style.setProperty('view-transition-name', 'none')
+  }
 
-	document.addEventListener('astro:before-swap', () => {
-		lightbox?.destroy()
-		lightbox = undefined
-	})
+  document.addEventListener('astro:before-swap', () => {
+    lightbox?.destroy()
+    lightbox = undefined
+  })
 
-	document.addEventListener('astro:before-preparation', disableWorkHeaderTransition)
+  document.addEventListener('astro:before-preparation', disableWorkHeaderTransition)
 
-	document.addEventListener('astro:page-load', initLightbox)
+  document.addEventListener('astro:page-load', initLightbox)
 
-	initLightbox()
+  initLightbox()
 </script>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	.work-header-wrap {
-		width: var(--page-content-width);
-		max-width: 100%;
-		margin: 0 auto;
-		padding: 0 var(--page-gutter);
-	}
+  .work-header-wrap {
+    width: var(--page-content-width);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--page-gutter);
+  }
 
-	.work-header {
-		background-color: var(--bg-dark);
-		border: 1px solid var(--page-color);
-		transform-style: preserve-3d;
-	}
+  .work-header {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--page-color);
+    transform-style: preserve-3d;
+  }
 
-	.work-header-top {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--spacing-8);
-		padding: var(--spacing-10);
-		border-bottom: 1px solid var(--page-color);
-		transform-style: preserve-3d;
+  .work-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8);
+    padding: var(--spacing-10);
+    border-bottom: 1px solid var(--page-color);
+    transform-style: preserve-3d;
 
-		@media (width < $breakpoint-sm) {
-			padding: var(--spacing-8);
-		}
+    @media (width < $breakpoint-sm) {
+      padding: var(--spacing-8);
+    }
 
-		@media (width < $breakpoint-xs) {
-			flex-direction: column;
-		}
-	}
+    @media (width < $breakpoint-xs) {
+      flex-direction: column;
+    }
+  }
 
-	.work-header-bottom {
-		display: flex;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		margin-bottom: -1px;
-		margin-right: -1px;
-		transform-style: preserve-3d;
-	}
+  .work-header-bottom {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    transform-style: preserve-3d;
+  }
 
-	.work-background {
-		position: fixed;
-		inset: 0;
-		z-index: -1;
-		opacity: 0.25;
-		background-image: radial-gradient(circle at top, var(--page-color), var(--bg-color) 65%);
-		background-size: 100% 300%;
-		background-position-y: 60%;
-	}
+  .work-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.25;
+    background-image: radial-gradient(circle at top, var(--page-color), var(--bg-color) 65%);
+    background-size: 100% 300%;
+    background-position-y: 60%;
+  }
 
-	.work-title {
-		font-size: 2.2em;
-		text-align: center;
-	}
+  .work-title {
+    font-size: 2.2em;
+    text-align: center;
+  }
 
-	.work-logo {
-		display: block;
-		width: 100%;
+  .work-logo {
+    display: block;
+    width: 100%;
 
-		max-width: 240px;
-		max-height: 48px;
+    max-width: 240px;
+    max-height: 48px;
 
-		@media (width < $breakpoint-sm) {
-			max-width: 180px;
-			max-height: 36px;
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      max-width: 180px;
+      max-height: 36px;
+    }
+  }
 
-	.work-link {
-		height: 3rem;
-		width: 8rem;
-		margin: 0;
-		text-decoration: none;
+  a.work-link {
+    height: 3rem;
+    width: 8rem;
+    margin: 0;
+    text-decoration: none;
 
-		@media (width < $breakpoint-sm) {
-			height: 2.5rem;
-			width: 6rem;
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      height: 2.5rem;
+      width: 6rem;
+    }
+  }
 
-	.work-detail {
-		background-color: var(--bg-color);
-		height: 3rem;
-		display: flex;
-		justify-content: center;
-		width: fit-content;
-		align-items: center;
-		border-bottom: 1px solid var(--page-color);
-		border-right: 1px solid var(--page-color);
-		padding: 0 var(--spacing-8);
-		color: var(--page-color);
-		font-size: 0.875rem;
-		font-weight: 400;
-		text-align: center;
+  .work-detail {
+    background-color: var(--bg-color);
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    align-items: center;
+    border-bottom: 1px solid var(--page-color);
+    border-right: 1px solid var(--page-color);
+    padding: 0 var(--spacing-8);
+    color: var(--page-color);
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-align: center;
 
-		@media (width < $breakpoint-md) {
-			flex-grow: 1;
-			padding: 0 var(--spacing-5);
-		}
-	}
+    @media (width < $breakpoint-md) {
+      flex-grow: 1;
+      padding: 0 var(--spacing-5);
+    }
+  }
 </style>
