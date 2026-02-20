@@ -1,96 +1,95 @@
 ---
 import { ClientRouter } from 'astro:transitions'
 export interface Props {
-	title?: string
-	description?: string
-	pageColor?: string
-	class?: string
+  title?: string
+  description?: string
+  pageColor?: string
+  class?: string
 }
 
 const {
-	title = 'Mattan Ingram - Design Engineer',
-	description = 'I am a product designer with over a decade of experience building interfaces for tech startups.',
-	pageColor = 'white',
-	class: className,
+  title = 'Mattan Ingram - Design Engineer',
+  description = 'I am a product designer with over a decade of experience building interfaces for tech startups.',
+  pageColor = 'white',
+  class: className,
 } = Astro.props
 
-import 'ress/dist/ress.min.css'
 import '@animxyz/core/dist/animxyz.min.css'
 import '@styles/main.scss'
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<!-- Favicons -->
-		<link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon-180x180.png" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
 
-		<title>{title}</title>
-		<meta name="description" content={description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
-		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
-		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..700&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..700&display=swap" rel="stylesheet" />
 
-		<!-- Analytics -->
-		<script src="https://cdn.visitors.now/v.js" data-token="351977c6-0391-41af-84e6-b069adc47511"></script>
+    <!-- Analytics -->
+    <script src="https://cdn.visitors.now/v.js" data-token="351977c6-0391-41af-84e6-b069adc47511"></script>
 
-		<slot name="head" />
+    <slot name="head" />
 
-		<ClientRouter />
-	</head>
+    <ClientRouter />
+  </head>
 
-	<body class:list={className} style={`--page-color: ${pageColor}`}>
-		<slot />
+  <body class:list={className} style={`--page-color: ${pageColor}`}>
+    <slot />
 
-		<script src="@utils/xyzCleanup.js"></script>
+    <script src="@utils/xyzCleanup.js"></script>
 
-		<script is:inline data-astro-rerun>
-			;(() => {
-				const root = document.documentElement
-				let raf = 0
-				let x = window.innerWidth / 2
-				let y = window.innerHeight / 2
+    <script is:inline data-astro-rerun>
+      ;(() => {
+        const root = document.documentElement
+        let raf = 0
+        let x = window.innerWidth / 2
+        let y = window.innerHeight / 2
 
-				const update = () => {
-					raf = 0
-					const w = Math.max(window.innerWidth, 1)
-					const h = Math.max(window.innerHeight, 1)
-					// Normalize to -1..1 from center
-					const nx = (x / w) * 2 - 1
-					const ny = (y / h) * 2 - 1
-					root.style.setProperty('--mouse-x', nx.toFixed(5))
-					root.style.setProperty('--mouse-y', ny.toFixed(5))
-				}
+        const update = () => {
+          raf = 0
+          const w = Math.max(window.innerWidth, 1)
+          const h = Math.max(window.innerHeight, 1)
+          // Normalize to -1..1 from center
+          const nx = (x / w) * 2 - 1
+          const ny = (y / h) * 2 - 1
+          root.style.setProperty('--mouse-x', nx.toFixed(5))
+          root.style.setProperty('--mouse-y', ny.toFixed(5))
+        }
 
-				const onMove = (e) => {
-					x = e.clientX
-					y = e.clientY
-					if (!raf) raf = requestAnimationFrame(update)
-				}
+        const onMove = (e) => {
+          x = e.clientX
+          y = e.clientY
+          if (!raf) raf = requestAnimationFrame(update)
+        }
 
-				window.addEventListener('pointermove', onMove, { passive: true })
-				// Initialize once
-				update()
-			})()
-		</script>
-	</body>
+        window.addEventListener('pointermove', onMove, { passive: true })
+        // Initialize once
+        update()
+      })()
+    </script>
+  </body>
 </html>
 
 <style>
-	:root {
-		/* Global pointer variables for parallax (normalized -1..1) */
-		--mouse-x: 0;
-		--mouse-y: 0;
-	}
+  :root {
+    /* Global pointer variables for parallax (normalized -1..1) */
+    --mouse-x: 0;
+    --mouse-y: 0;
+  }
 </style>

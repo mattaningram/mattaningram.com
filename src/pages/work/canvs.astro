@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets'
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
+import SkillPanel from '@components/SkillPanel.astro'
 
 import canvsCodeSample from '@media/canvs/canvs-code-sample.jpg'
 import canvsSeriesPageBeta from '@media/canvs/canvs-series-page-beta.jpg'
@@ -124,51 +125,10 @@ export const frontmatter = {
 	</div>
 
 	<div class="page-section skill-section">
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Pixels</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Sketch</li>
-				<li class="skill-list-item">Adobe Illustrator</li>
-				<li class="skill-list-item">Adobe Photoshop</li>
-				<li class="skill-list-item">InVision</li>
-				<li class="skill-list-item">Keynote</li>
-				<li class="skill-list-item">Image Optimization</li>
-			</ul>
-		</div>
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Code</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">HTML</li>
-				<li class="skill-list-item">SASS/LESS/CSS</li>
-				<li class="skill-list-item">JavaScript</li>
-				<li class="skill-list-item">SVG</li>
-				<li class="skill-list-item">Angular/React</li>
-				<li class="skill-list-item">D3.js</li>
-				<li class="skill-list-item">GitHub</li>
-				<li class="skill-list-item">NPM/Bower</li>
-				<li class="skill-list-item">Grunt/Gulp</li>
-			</ul>
-		</div>
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Web</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Responsive Design</li>
-				<li class="skill-list-item">Animations</li>
-				<li class="skill-list-item">BEM + OOCSS</li>
-				<li class="skill-list-item">Flexbox</li>
-				<li class="skill-list-item">Bootstrap</li>
-			</ul>
-		</div>
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Analytics</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Segment</li>
-				<li class="skill-list-item">Google Analytics</li>
-				<li class="skill-list-item">Mixpanel</li>
-				<li class="skill-list-item">FullStory</li>
-				<li class="skill-list-item">Intercom</li>
-			</ul>
-		</div>
+		<SkillPanel title="Pixels" skills={['Sketch', 'Adobe Illustrator', 'Adobe Photoshop', 'InVision', 'Keynote', 'Image Optimization']} />
+		<SkillPanel title="Code" skills={['HTML', 'SASS/LESS/CSS', 'JavaScript', 'SVG', 'Angular/React', 'D3.js', 'GitHub', 'NPM/Bower', 'Grunt/Gulp']} />
+		<SkillPanel title="Web" skills={['Responsive Design', 'Animations', 'BEM + OOCSS', 'Flexbox', 'Bootstrap']} />
+		<SkillPanel title="Analytics" skills={['Segment', 'Google Analytics', 'Mixpanel', 'FullStory', 'Intercom']} />
 	</div>
 </WorkLayout>
 

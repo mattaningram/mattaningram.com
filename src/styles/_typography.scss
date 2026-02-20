@@ -1,114 +1,121 @@
 @use 'scssVariables' as *;
 
 :root {
-	--font-body: 'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
-		Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-	--font-head: 'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
-		Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  --font-body:
+    'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell,
+    Ubuntu, roboto, noto, arial, sans-serif;
+  --font-head:
+    'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell,
+    Ubuntu, roboto, noto, arial, sans-serif;
 }
 
-html,
-body {
-	color: var(--text-color);
-	font-family: var(--font-body);
-	font-weight: 300;
-	line-height: 1.5;
-}
+@layer base {
+  html,
+  body {
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.5;
+  }
 
-a {
-	font-weight: bolder;
-	text-decoration: none;
+  a {
+    font-weight: bolder;
+    text-decoration: none;
 
-	&:visited {
-		color: inherit;
-	}
-}
+    &:visited {
+      color: inherit;
+    }
+  }
 
-p > a {
-	font-size: inherit;
-}
+  p > a {
+    font-size: inherit;
+  }
 
-.link-hover {
-	display: inline-block;
-	color: var(--page-color);
-	position: relative;
+  .link-hover {
+    display: inline-block;
+    color: var(--page-color);
+    position: relative;
 
-	&:before {
-		content: '';
-		background-color: hsl(from var(--hover-color, var(--page-color)) h 90% 60% / 0.35);
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 0.15em;
-		z-index: -1;
-		transition: height 0.125s ease-out;
-	}
+    &:before {
+      content: '';
+      background-color: hsl(from var(--hover-color, var(--page-color)) h 90% 60% / 0.35);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0.15em;
+      z-index: -1;
+      transition: height 0.125s ease-out;
+    }
 
-	&:hover,
-	&:focus-visible {
-		&:before {
-			height: 1lh;
-		}
-	}
-}
+    &:hover,
+    &:focus-visible {
+      &:before {
+        height: 1lh;
+      }
+    }
+  }
 
-.text-white {
-	color: white;
-}
+  .text-white {
+    color: white;
+  }
 
-h1,
-h2,
-h3,
-h4 {
-	font-family: var(--font-head);
-	font-weight: 600;
-	line-height: 1.2;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-head);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
 
-h1 {
-	font-size: 2.5rem;
-}
+  h1 {
+    font-size: 2.5rem;
+  }
 
-h2 {
-	font-size: 2rem;
-}
+  h2 {
+    font-size: 2rem;
+  }
 
-h3 {
-	font-size: 1.5rem;
-}
+  h3 {
+    font-size: 1.5rem;
+  }
 
-p,
-a {
-	font-size: 1.25rem;
+  p,
+  a {
+    font-size: 1.25rem;
 
-	@media (width < $breakpoint-md) {
-		font-size: 1.125rem;
-	}
+    @media (width < $breakpoint-md) {
+      font-size: 1.125rem;
+    }
 
-	// @media (width < $breakpoint-sm) {
-	// 	font-size: 1rem;
-	// }
-}
+    // @media (width < $breakpoint-sm) {
+    // 	font-size: 1rem;
+    // }
+  }
 
-.grab-copy-wrap {
-	width: var(--page-content-width);
-	padding-inline: var(--page-gutter);
-	max-width: 100%;
-	margin: 0 auto;
-	margin-block: var(--page-section-margin);
-}
+  .grab-copy-wrap {
+    width: var(--page-content-width);
+    padding-inline: var(--page-gutter);
+    max-width: 100%;
+    margin: 0 auto;
+    margin-block: var(--page-section-margin);
+  }
 
-.grab-copy {
-	font-size: 2rem;
-	line-height: 1.5;
-	text-wrap: balance;
+  .grab-copy {
+    font-size: 2rem;
+    line-height: 1.5;
+    text-wrap: balance;
 
-	@media (width < $breakpoint-md) {
-		font-size: 1.75rem;
-	}
+    @media (width < $breakpoint-md) {
+      font-size: 1.75rem;
+    }
 
-	@media (width < $breakpoint-sm) {
-		font-size: 1.5rem;
-	}
+    @media (width < $breakpoint-sm) {
+      font-size: 1.5rem;
+    }
+  }
 }

@@ -5,78 +5,77 @@ const Element = href ? 'a' : 'button'
 ---
 
 <Element href={href} class:list={['button', className]} {...props}>
-	<div class="button__shadow" data-shadow="back"></div>
-	<div class="button__shadow" data-shadow="front"></div>
-	<slot />
+  <div class="button__shadow" data-shadow="back"></div>
+  <div class="button__shadow" data-shadow="front"></div>
+  <slot />
 </Element>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	.button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		z-index: 1;
-		text-align: center;
-		font-size: 1rem;
-		font-weight: 600;
-		color: var(--bg-color);
-		text-decoration: none;
-		min-height: 40px;
-		margin: 0 auto;
-		padding: var(--spacing-4) var(--spacing-8);
-		background-color: var(--page-color);
-		perspective-origin: 50% 50%;
-		transform-style: preserve-3d;
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg-color);
+    text-decoration: none;
+    min-height: 40px;
+    padding: var(--spacing-4) var(--spacing-8);
+    background-color: var(--page-color);
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
 
-		&:hover,
-		&:focus {
-			outline: 0;
+    &:hover,
+    &:focus {
+      outline: 0;
 
-			[data-shadow='back'] {
-				scale: 1.2 2;
-			}
+      [data-shadow='back'] {
+        scale: 1.2 2;
+      }
 
-			[data-shadow='front'] {
-				scale: 1.1 1.5;
-			}
-		}
+      [data-shadow='front'] {
+        scale: 1.1 1.5;
+      }
+    }
 
-		&:hover {
-			perspective: 800px;
-			transform-style: flat;
-		}
+    &:hover {
+      perspective: 800px;
+      transform-style: flat;
+    }
 
-		&:active {
-			[data-shadow='back'] {
-				scale: 1.4 3;
-			}
+    &:active {
+      [data-shadow='back'] {
+        scale: 1.4 3;
+      }
 
-			[data-shadow='front'] {
-				scale: 1.2 2;
-			}
-		}
-	}
+      [data-shadow='front'] {
+        scale: 1.2 2;
+      }
+    }
+  }
 
-	.button__shadow {
-		content: '';
-		background-color: var(--page-color);
-		position: absolute;
-		inset: 0;
-		transition: 0.25s var(--ease-out-back);
-		transition-property: translate, scale, opacity;
-		z-index: -1;
-	}
+  .button__shadow {
+    content: '';
+    background-color: var(--page-color);
+    position: absolute;
+    inset: 0;
+    transition: 0.25s var(--ease-out-back);
+    transition-property: translate, scale, opacity;
+    z-index: -1;
+  }
 
-	[data-shadow='back'] {
-		opacity: 0.15;
-		translate: 0 0 -20px;
-	}
+  [data-shadow='back'] {
+    opacity: 0.15;
+    translate: 0 0 -20px;
+  }
 
-	[data-shadow='front'] {
-		opacity: 0.35;
-		translate: 0 0 -10px;
-	}
+  [data-shadow='front'] {
+    opacity: 0.35;
+    translate: 0 0 -10px;
+  }
 </style>

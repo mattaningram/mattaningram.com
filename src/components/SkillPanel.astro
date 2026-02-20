@@ -1,0 +1,57 @@
+---
+export interface Props {
+  title: string
+  skills: string[]
+}
+
+const { title, skills } = Astro.props
+---
+
+<div class="skill-panel">
+  <h3 class="skill-list-header">{title}</h3>
+  <ul class="skill-list" role="list">
+    {skills.map((skill) => <li class="skill-list-item">{skill}</li>)}
+  </ul>
+</div>
+
+<style lang="scss">
+  @use '../styles/scssVariables' as *;
+
+  .skill-panel {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--page-color);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 20rem;
+  }
+
+  .skill-list-header {
+    padding: var(--spacing-8);
+    color: var(--page-color);
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100%;
+    list-style: none;
+    padding: 0;
+    margin-top: auto;
+  }
+
+  .skill-list-item {
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 var(--spacing-5);
+    border: 1px solid var(--page-color);
+    margin-left: -1px;
+    margin-bottom: -1px;
+    color: var(--page-color);
+    font-weight: 500;
+  }
+</style>

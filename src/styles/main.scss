@@ -1,8 +1,6 @@
 /* Base Styles */
+@use 'base';
 @use 'variables';
 @use 'typography';
 @use 'animations';
 @use 'structure';
-
-/* Component Styles */
-@use 'work';
