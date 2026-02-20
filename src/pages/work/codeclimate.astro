@@ -1,6 +1,7 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
+import SkillPanel from '@components/SkillPanel.astro'
 
 export const frontmatter = {
 	order: 2,
@@ -20,37 +21,8 @@ export const frontmatter = {
 	</div>
 
 	<div class="page-section skill-section">
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Pixels</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Sketch</li>
-				<li class="skill-list-item">Adobe Suite</li>
-				<li class="skill-list-item">InVision</li>
-			</ul>
-		</div>
-
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Analytics</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Google Analytics</li>
-				<li class="skill-list-item">Mixpanel</li>
-				<li class="skill-list-item">FullStory</li>
-				<li class="skill-list-item">Intercom</li>
-			</ul>
-		</div>
-
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Code</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">HTML</li>
-				<li class="skill-list-item">CSS</li>
-				<li class="skill-list-item">JavaScript</li>
-				<li class="skill-list-item">SVG</li>
-				<li class="skill-list-item">Ruby</li>
-				<li class="skill-list-item">HighCharts</li>
-				<li class="skill-list-item">GitHub</li>
-				<li class="skill-list-item">CircleCI</li>
-			</ul>
-		</div>
+		<SkillPanel title="Pixels" skills={['Sketch', 'Adobe Suite', 'InVision']} />
+		<SkillPanel title="Analytics" skills={['Google Analytics', 'Mixpanel', 'FullStory', 'Intercom']} />
+		<SkillPanel title="Code" skills={['HTML', 'CSS', 'JavaScript', 'SVG', 'Ruby', 'HighCharts', 'GitHub', 'CircleCI']} />
 	</div>
 </WorkLayout>

@@ -1,6 +1,7 @@
 ---
 import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
+import SkillPanel from '@components/SkillPanel.astro'
 import artemisSplashImage from '@media/artemis/artemis-splash-image.png'
 import taskCalendarImage from '@media/artemis/gallery/task-calendar.png'
 import templateEditImage from '@media/artemis/gallery/template-edit.png'
@@ -129,25 +130,8 @@ export const frontmatter = {
 	</div> -->
 
 	<div class="page-section skill-section">
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Pixels</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">Figma</li>
-				<li class="skill-list-item">Adobe Suite</li>
-				<li class="skill-list-item">Affinity Designer</li>
-			</ul>
-		</div>
-
-		<div class="skill-panel">
-			<h3 class="skill-list-header">Code</h3>
-			<ul class="skill-list">
-				<li class="skill-list-item">React</li>
-				<li class="skill-list-item">Ruby</li>
-				<li class="skill-list-item">SASS/CSS</li>
-				<li class="skill-list-item">SVG</li>
-				<li class="skill-list-item">GitHub</li>
-			</ul>
-		</div>
+		<SkillPanel title="Pixels" skills={['Figma', 'Adobe Suite', 'Affinity Designer']} />
+		<SkillPanel title="Code" skills={['React', 'Ruby', 'SASS/CSS', 'SVG', 'GitHub']} />
 	</div>
 </WorkLayout>
 
