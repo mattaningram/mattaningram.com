@@ -3,20 +3,20 @@ import WorkLayout from '@layouts/WorkLayout.astro'
 import ImageCarousel from '@components/ImageCarousel.astro'
 
 export const frontmatter = {
-	order: 3,
-	title: 'AnimXYZ',
-	year: '2020',
-	position: 'Co-Creator',
-	logo: 'animxyz_logo_color.svg',
-	workUrl: 'https://animxyz.com',
-	color: '#f2c94c',
-	description: `I worked closely with my brother <a class="link-hover" href="https://milesingram.me" target="_blank">Miles Ingram</a> to build the first fully composable and customizable CSS animation toolkit. AnimXYZ helps you create, customize, and compose animations for your website. Powered by CSS variables to allow a nearly limitless number of unique animations without writing a single keyframe.`,
-	details: ['Open Source', '2k Stars on GitHub', 'Featured on PodRocket'],
+  order: 3,
+  title: 'AnimXYZ',
+  year: '2020',
+  position: 'Co-Creator',
+  logo: 'animxyz_logo.svg',
+  workUrl: 'https://animxyz.com',
+  color: '#f2c94c',
+  description: `I worked closely with my brother <a class="link-hover" href="https://milesingram.me" target="_blank">Miles Ingram</a> to build the first fully composable and customizable CSS animation toolkit. AnimXYZ helps you create, customize, and compose animations for your website. Powered by CSS variables to allow a nearly limitless number of unique animations without writing a single keyframe.`,
+  details: ['Open Source', '2k Stars on GitHub', 'Featured on PodRocket'],
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="image-carousel-wrap">
-		<ImageCarousel folder="animxyz" />
-	</div>
+  <div class="image-carousel-wrap">
+    <ImageCarousel folder="animxyz" />
+  </div>
 </WorkLayout>

@@ -46,12 +46,11 @@ entries.sort(([a], [b]) => a.localeCompare(b))
           >
             <Image
               class="carousel-image"
-              layout="fixed"
+              layout="constrained"
               src={imageData}
               alt={altText}
               width={width}
-              fit="scale-down"
-              loading={index < 20 ? 'eager' : 'lazy'}
+              loading={index < 10 ? 'eager' : 'lazy'}
             />
           </a>
         </li>
@@ -76,6 +75,7 @@ entries.sort(([a], [b]) => a.localeCompare(b))
   .carousel-item {
     display: block;
     flex-shrink: 0;
+    width: 300px;
     height: auto;
     vertical-align: top;
     position: relative;
@@ -91,6 +91,7 @@ entries.sort(([a], [b]) => a.localeCompare(b))
   }
 
   .carousel-link {
+    width: 100%;
     display: block;
   }
 

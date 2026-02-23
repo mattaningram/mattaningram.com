@@ -4,25 +4,24 @@ import ImageCarousel from '@components/ImageCarousel.astro'
 import SkillPanel from '@components/SkillPanel.astro'
 
 export const frontmatter = {
-	order: 2,
-	title: 'YaHerd',
-	year: '2019',
-	position: 'Co-Creator',
-	logo: 'yaherd_logo_white.svg',
-	logoOpen: 'yaherd_logo_purple.svg',
-	workUrl: 'https://yaherd.co',
-	color: 'rgb(147, 38, 255)',
-	description: `YaHerd helps you share the when and where for any get together. Simple event invites, no accounts necessary. From a party to a protest, YaHerd makes getting people together as easy as pasting a link, with no ads, no tracking, and totally free.`,
+  order: 2,
+  title: 'YaHerd',
+  year: '2019',
+  position: 'Co-Creator',
+  logo: 'yaherd_logo.svg',
+  workUrl: 'https://yaherd.co',
+  color: 'rgb(147, 38, 255)',
+  description: `YaHerd helps you share the when and where for any get together. Simple event invites, no accounts necessary. From a party to a protest, YaHerd makes getting people together as easy as pasting a link, with no ads, no tracking, and totally free.`,
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="image-carousel-wrap">
-		<ImageCarousel folder="yaherd" width={300} />
-	</div>
+  <div class="image-carousel-wrap">
+    <ImageCarousel folder="yaherd" width={300} />
+  </div>
 
-	<div class="page-section skill-section">
-		<SkillPanel title="Pixels" skills={['Sketch', 'Figma', 'Adobe Illustrator']} />
-		<SkillPanel title="Code" skills={['Vue', 'HTML', 'SASS/CSS', 'JavaScript', 'SVG', 'AnimeJS', 'GitHub']} />
-	</div>
+  <div class="page-section skill-section">
+    <SkillPanel title="Pixels" skills={['Sketch', 'Figma', 'Adobe Illustrator']} />
+    <SkillPanel title="Code" skills={['Vue', 'HTML', 'SASS/CSS', 'JavaScript', 'SVG', 'AnimeJS', 'GitHub']} />
+  </div>
 </WorkLayout>

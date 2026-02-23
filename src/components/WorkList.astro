@@ -1,5 +1,9 @@
 ---
+import type { ImageMetadata } from 'astro'
 import WorkItem from '@components/WorkItem.astro'
+import { Image } from 'astro:assets'
+
+const logoModules = import.meta.glob<{ default: ImageMetadata }>('/src/logos/*.svg', { eager: true })
 
 const { folder = 'work' } = Astro.props
 
@@ -17,13 +21,23 @@ const itemPaths = Object.keys(selected).map(
 
 const itemModules = await Promise.all(Object.values(selected).map((loader) => loader()))
 
-const items = itemModules
-  .map((item, i) => ({
-    ...item.frontmatter,
-    url: itemPaths[i],
-    component: item.default,
-  }))
+const itemsUnsorted = itemModules.map((item, i) => ({
+  ...item.frontmatter,
+  url: itemPaths[i],
+  component: item.default,
+}))
+
+const items = itemsUnsorted
+  .map((item) => {
+    const logoFilename = item.logo
+    const logoKey = logoFilename
+      ? Object.keys(logoModules).find((k) => k.endsWith(`/${logoFilename}`))
+      : undefined
+    const logoSrc: ImageMetadata | undefined = logoKey ? logoModules[logoKey].default : undefined
+    return { ...item, logoSrc }
+  })
   .sort((a, b) => b.order - a.order)
+
 ---
 
 <div class="work-list-wrap" xyz="fade stagger-1 delay-10 down-2 small-2">
@@ -35,11 +49,11 @@ const items = itemModules
         class="work-list-item"
         transitionName={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
       >
-        {item.logo ? (
-          <img
+        {item.logoSrc ? (
+          <Image
             class="work-item-logo"
-            src={`/assets/logos/${item.logoOpen ?? item.logo}`}
-            title={`${item.title} Logo`}
+            src={item.logoSrc}
+            alt={`${item.title} Logo`}
           />
         ) : (
           <h3 class="work-item-title">{item.title}</h3>

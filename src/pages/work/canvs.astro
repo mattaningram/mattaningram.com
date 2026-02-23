@@ -18,273 +18,289 @@ import canvsSearch from '@media/canvs/canvs-search.gif'
 import canvsDateSelector from '@media/canvs/canvs-date-selector.gif'
 
 export const frontmatter = {
-	order: 1,
-	title: 'Canvs',
-	year: '2011 to 2016',
-	position: 'Lead Product Designer',
-	logo: 'canvs_logo_white.svg',
-	workUrl: 'https://canvs.ai',
-	color: 'rgb(48, 188, 174)',
-	description: `Canvs is an industry leading emotion measurement and analysis company used by top media and advertising brands such as HBO, NBC, Fox, and Sony. As one of Canvs' first employees I helped develop it from a scrappy startup into an acclaimed technology platform.`,
+  order: 1,
+  title: 'Canvs',
+  year: '2011 to 2016',
+  position: 'Lead Product Designer',
+  logo: 'canvs_logo.svg',
+  workUrl: 'https://canvs.ai',
+  color: 'rgb(48, 188, 174)',
+  description: `Canvs is an industry leading emotion measurement and analysis company used by top media and advertising brands such as HBO, NBC, Fox, and Sony. As one of Canvs' first employees I helped develop it from a scrappy startup into an acclaimed technology platform.`,
 }
 ---
 
 <WorkLayout {...frontmatter}>
-	<div class="image-carousel-wrap">
-		<ImageCarousel folder="canvs/gallery" />
-	</div>
+  <div class="image-carousel-wrap">
+    <ImageCarousel folder="canvs/gallery" />
+  </div>
 
-	<div class="page-section page-section--top canvs-building">
-		<div class="section-text-wrap">
-			<div class="section-text">
-				<h2 class="section-header">Building Insights</h2>
-				<p class="section-copy">
-					As Canvs grew from idea, to prototype, to a fully-fledged service, I made sure that every decision we made
-					maintained our vision of providing our users with useful insights from complex data. We built a team that was
-					dedicated to bringing the polish and elegance of consumer app experiences to the data-heavy and tedious
-					dashboards of analytics and marketing.
-				</p>
-			</div>
-		</div>
-		<div class="section-content-block">
-			<video
-				class="section-video"
-				width="1280"
-				height="720"
-				poster="/assets/images/canvs/canvs-video-poster.jpg"
-				autoplay
-				loop
-				muted
-				playsinline
-			>
-				<source src="/assets/videos/canvs/canvs-demo.mp4" type="video/mp4" />
-			</video>
-		</div>
-	</div>
+  <div class="page-section page-section--top canvs-building">
+    <div class="section-text-wrap">
+      <div class="section-text">
+        <h2 class="section-header">Building Insights</h2>
+        <p class="section-copy">
+          As Canvs grew from idea, to prototype, to a fully-fledged service, I made sure that every decision we made
+          maintained our vision of providing our users with useful insights from complex data. We built a team that was
+          dedicated to bringing the polish and elegance of consumer app experiences to the data-heavy and tedious
+          dashboards of analytics and marketing.
+        </p>
+      </div>
+    </div>
+    <div class="section-content-block">
+      <video
+        class="section-video"
+        width="1280"
+        height="720"
+        poster="/assets/images/canvs/canvs-video-poster.jpg"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src="/assets/videos/canvs/canvs-demo.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
 
-	<div class="page-section page-section--row page-section--left canvs-responsibilities">
-		<div class="section-text-wrap">
-			<div class="section-text">
-				<h2 class="section-header">Designing a Startup</h2>
-				<p class="section-copy">
-					The limited resources of a growing company meant my job covered more than just pushing pixels in Sketch. I
-					prototyped directly in the browser with production ready code, built out our user analytics services with the
-					customer success team, and debated data structures with the backend developers. This workflow was crucial in
-					designing the best possible experience for Canvs users.
-				</p>
-			</div>
-		</div>
-		<div class="section-content-block">
-			<Image class="section-image" src={canvsCodeSample} alt="Canvs Code Sample" layout="constrained" />
-			<Image class="section-image" src={canvsSeriesPageBeta} alt="Canvs Series Page" layout="constrained" />
-			<Image class="section-image" src={canvsOldTimeline} alt="Canvs Timeline" layout="constrained" />
-		</div>
-	</div>
+  <div class="page-section page-section--row page-section--left canvs-responsibilities">
+    <div class="section-text-wrap">
+      <div class="section-text">
+        <h2 class="section-header">Designing a Startup</h2>
+        <p class="section-copy">
+          The limited resources of a growing company meant my job covered more than just pushing pixels in Sketch. I
+          prototyped directly in the browser with production ready code, built out our user analytics services with the
+          customer success team, and debated data structures with the backend developers. This workflow was crucial in
+          designing the best possible experience for Canvs users.
+        </p>
+      </div>
+    </div>
+    <div class="section-content-block">
+      <Image class="section-image" src={canvsCodeSample} alt="Canvs Code Sample" layout="constrained" />
+      <Image class="section-image" src={canvsSeriesPageBeta} alt="Canvs Series Page" layout="constrained" />
+      <Image class="section-image" src={canvsOldTimeline} alt="Canvs Timeline" layout="constrained" />
+    </div>
+  </div>
 
-	<div class="page-section page-section--row page-section--right canvs-process">
-		<div class="section-text-wrap">
-			<div class="section-text">
-				<h2 class="section-header">Process and Progress</h2>
-				<p class="section-copy">
-					Creating a new feature, designing an interactive D3 chart, or improving the user flow always starts with a
-					sketch. On paper I can insure that everyone involved from designer, to developer, to sales understand the
-					problem we are trying to solve and how we would like to solve it. Making sure design and development happened
-					hand-in-hand, rather than passed back and forth between silos, allowed us to create and iterate on new
-					features quickly.
-				</p>
-			</div>
-		</div>
-		<div class="section-content-block">
-			<Image class="section-image" src={canvsSketch1} alt="Canvs Sketch 1" layout="constrained" />
-			<Image class="section-image" src={canvsSketch2} alt="Canvs Sketch 2" layout="constrained" />
-			<Image class="section-image" src={canvsSketch3} alt="Canvs Sketch 3" layout="constrained" />
-			<Image class="section-image" src={canvsSketch4} alt="Canvs Sketch 4" layout="constrained" />
-		</div>
-	</div>
+  <div class="page-section page-section--row page-section--right canvs-process">
+    <div class="section-text-wrap">
+      <div class="section-text">
+        <h2 class="section-header">Process and Progress</h2>
+        <p class="section-copy">
+          Creating a new feature, designing an interactive D3 chart, or improving the user flow always starts with a
+          sketch. On paper I can insure that everyone involved from designer, to developer, to sales understand the
+          problem we are trying to solve and how we would like to solve it. Making sure design and development happened
+          hand-in-hand, rather than passed back and forth between silos, allowed us to create and iterate on new
+          features quickly.
+        </p>
+      </div>
+    </div>
+    <div class="section-content-block">
+      <Image class="section-image" src={canvsSketch1} alt="Canvs Sketch 1" layout="constrained" />
+      <Image class="section-image" src={canvsSketch2} alt="Canvs Sketch 2" layout="constrained" />
+      <Image class="section-image" src={canvsSketch3} alt="Canvs Sketch 3" layout="constrained" />
+      <Image class="section-image" src={canvsSketch4} alt="Canvs Sketch 4" layout="constrained" />
+    </div>
+  </div>
 
-	<div class="page-section page-section--top canvs-polish">
-		<div class="section-text-wrap">
-			<div class="section-text">
-				<h2 class="section-header">Sweating the Details</h2>
-				<p class="section-copy">
-					I sit in that funny place between design and engineering which drives me to both find the little things that
-					can be improved, as well as figure out how to improve them myself. I encouraged this attention to detail and
-					DIY approach in my team, and helped them learn (or learned from them) new ways to interact with a web app and
-					its users. Whether it was refining the exact easing on a UI animation or figuring out the best copy for a
-					label, I wanted to insure using Canvs was an elegant and enjoyable experience.
-				</p>
-			</div>
-		</div>
-		<div class="image-grid section-content-block">
-			<Image class="image-grid-item" src={canvsDateSelector} alt="Canvs date selector design iterations" />
+  <div class="page-section page-section--top canvs-polish">
+    <div class="section-text-wrap">
+      <div class="section-text">
+        <h2 class="section-header">Sweating the Details</h2>
+        <p class="section-copy">
+          I sit in that funny place between design and engineering which drives me to both find the little things that
+          can be improved, as well as figure out how to improve them myself. I encouraged this attention to detail and
+          DIY approach in my team, and helped them learn (or learned from them) new ways to interact with a web app and
+          its users. Whether it was refining the exact easing on a UI animation or figuring out the best copy for a
+          label, I wanted to insure using Canvs was an elegant and enjoyable experience.
+        </p>
+      </div>
+    </div>
+    <div class="image-grid section-content-block">
+      <Image class="image-grid-item" src={canvsDateSelector} alt="Canvs date selector design iterations" />
 
-			<Image class="image-grid-item" src={canvsSearch} alt="Canvs search interaction" />
+      <Image class="image-grid-item" src={canvsSearch} alt="Canvs search interaction" />
 
-			<Image class="image-grid-item" src={canvsNewClusters} alt="Canvs emotion cluster visualization" />
-		</div>
-	</div>
+      <Image class="image-grid-item" src={canvsNewClusters} alt="Canvs emotion cluster visualization" />
+    </div>
+  </div>
 
-	<div class="page-section skill-section">
-		<SkillPanel title="Pixels" skills={['Sketch', 'Adobe Illustrator', 'Adobe Photoshop', 'InVision', 'Keynote', 'Image Optimization']} />
-		<SkillPanel title="Code" skills={['HTML', 'SASS/LESS/CSS', 'JavaScript', 'SVG', 'Angular/React', 'D3.js', 'GitHub', 'NPM/Bower', 'Grunt/Gulp']} />
-		<SkillPanel title="Web" skills={['Responsive Design', 'Animations', 'BEM + OOCSS', 'Flexbox', 'Bootstrap']} />
-		<SkillPanel title="Analytics" skills={['Segment', 'Google Analytics', 'Mixpanel', 'FullStory', 'Intercom']} />
-	</div>
+  <div class="page-section skill-section">
+    <SkillPanel
+      title="Pixels"
+      skills={['Sketch', 'Adobe Illustrator', 'Adobe Photoshop', 'InVision', 'Keynote', 'Image Optimization']}
+    />
+    <SkillPanel
+      title="Code"
+      skills={[
+        'HTML',
+        'SASS/LESS/CSS',
+        'JavaScript',
+        'SVG',
+        'Angular/React',
+        'D3.js',
+        'GitHub',
+        'NPM/Bower',
+        'Grunt/Gulp',
+      ]}
+    />
+    <SkillPanel title="Web" skills={['Responsive Design', 'Animations', 'BEM + OOCSS', 'Flexbox', 'Bootstrap']} />
+    <SkillPanel title="Analytics" skills={['Segment', 'Google Analytics', 'Mixpanel', 'FullStory', 'Intercom']} />
+  </div>
 </WorkLayout>
 
 <style lang="scss">
-	@use '../../styles/scssVariables' as *;
+  @use '../../styles/scssVariables' as *;
 
-	.page-section--row {
-		@media (width >= $breakpoint-md) {
-			justify-content: flex-start;
-			min-height: 100vh;
-		}
-	}
+  .page-section--row {
+    @media (width >= $breakpoint-md) {
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+  }
 
-	.section-image {
-		box-shadow: var(--shadow-md);
-	}
+  .section-image {
+    box-shadow: var(--shadow-md);
+  }
 
-	.canvs-responsibilities {
-		.section-image {
-			height: auto;
+  .canvs-responsibilities {
+    .section-image {
+      height: auto;
 
-			&:nth-child(1) {
-				top: 5%;
-				left: 50px;
-				width: 400px;
-			}
+      &:nth-child(1) {
+        top: 5%;
+        left: 50px;
+        width: 400px;
+      }
 
-			&:nth-child(2) {
-				top: 10%;
-				left: min(12vw, 200px);
-				height: 80%;
-				width: auto;
-				z-index: 1;
-			}
+      &:nth-child(2) {
+        top: 10%;
+        left: min(12vw, 200px);
+        height: 80%;
+        width: auto;
+        z-index: 1;
+      }
 
-			&:nth-child(3) {
-				bottom: 5%;
-				left: 20px;
-				height: 30%;
-				width: auto;
-			}
-		}
+      &:nth-child(3) {
+        bottom: 5%;
+        left: 20px;
+        height: 30%;
+        width: auto;
+      }
+    }
 
-		@media (width < $breakpoint-md) {
-			.section-image {
-				&:nth-child(1) {
-					top: 10px;
-					left: auto;
-					right: 50%;
-					width: 50%;
-				}
+    @media (width < $breakpoint-md) {
+      .section-image {
+        &:nth-child(1) {
+          top: 10px;
+          left: auto;
+          right: 50%;
+          width: 50%;
+        }
 
-				&:nth-child(2) {
-					position: relative;
-					left: 50%;
-					transform: translateX(-50%);
-					top: 0;
-					height: 24rem;
-				}
+        &:nth-child(2) {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 0;
+          height: 24rem;
+        }
 
-				&:nth-child(3) {
-					top: 10px;
-					bottom: auto;
-					left: auto;
-					right: 0;
-					width: 40%;
-					height: auto;
-				}
-			}
-		}
-	}
+        &:nth-child(3) {
+          top: 10px;
+          bottom: auto;
+          left: auto;
+          right: 0;
+          width: 40%;
+          height: auto;
+        }
+      }
+    }
+  }
 
-	.canvs-process {
-		.section-image {
-			height: auto;
+  .canvs-process {
+    .section-image {
+      height: auto;
 
-			&:nth-child(1) {
-				bottom: calc(50% + var(--page-section-margin));
-				right: 0;
-				width: 200px;
-			}
+      &:nth-child(1) {
+        bottom: calc(50% + var(--page-section-margin));
+        right: 0;
+        width: 200px;
+      }
 
-			&:nth-child(2) {
-				bottom: calc(50% - 10px);
-				right: 160px;
-				width: 300px;
-				z-index: 1;
-			}
+      &:nth-child(2) {
+        bottom: calc(50% - 10px);
+        right: 160px;
+        width: 300px;
+        z-index: 1;
+      }
 
-			&:nth-child(3) {
-				top: calc(50% - 5vh);
-				right: 50px;
-				max-height: 60vh;
-				max-width: 460px;
-			}
+      &:nth-child(3) {
+        top: calc(50% - 5vh);
+        right: 50px;
+        max-height: 60vh;
+        max-width: 460px;
+      }
 
-			&:nth-child(4) {
-				top: calc(50% + 15vh);
-				right: 200px;
-				width: 400px;
-			}
-		}
+      &:nth-child(4) {
+        top: calc(50% + 15vh);
+        right: 200px;
+        width: 400px;
+      }
+    }
 
-		@media (width < $breakpoint-md) {
-			.section-image {
-				&:nth-child(1) {
-					top: 10px;
-					right: auto;
-					left: -10px;
-					width: 30%;
-				}
+    @media (width < $breakpoint-md) {
+      .section-image {
+        &:nth-child(1) {
+          top: 10px;
+          right: auto;
+          left: -10px;
+          width: 30%;
+        }
 
-				&:nth-child(2) {
-					top: 15px;
-					right: -10px;
-					width: 35%;
-				}
+        &:nth-child(2) {
+          top: 15px;
+          right: -10px;
+          width: 35%;
+        }
 
-				&:nth-child(3) {
-					position: relative;
-					left: 50%;
-					transform: translateX(-50%);
-					width: auto;
-					max-width: 60%;
-					max-height: 24rem;
-					z-index: 1;
-				}
+        &:nth-child(3) {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          width: auto;
+          max-width: 60%;
+          max-height: 24rem;
+          z-index: 1;
+        }
 
-				&:nth-child(4) {
-					top: initial;
-					right: 5%;
-					bottom: 5%;
-					width: 45%;
-					z-index: 1;
-				}
-			}
-		}
-	}
+        &:nth-child(4) {
+          top: initial;
+          right: 5%;
+          bottom: 5%;
+          width: 45%;
+          z-index: 1;
+        }
+      }
+    }
+  }
 
-	.image-grid {
-		display: flex;
-		justify-content: center;
-		gap: var(--spacing-8);
-		flex-wrap: wrap;
+  .image-grid {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-8);
+    flex-wrap: wrap;
 
-		@media (width < $breakpoint-md) {
-			gap: var(--spacing-6);
-		}
-	}
+    @media (width < $breakpoint-md) {
+      gap: var(--spacing-6);
+    }
+  }
 
-	.image-grid-item {
-		display: block;
-		height: auto;
-		width: auto;
-		max-height: 200px;
-		max-width: 100%;
-		box-shadow: var(--shadow-md);
-	}
+  .image-grid-item {
+    display: block;
+    height: auto;
+    width: auto;
+    max-height: 200px;
+    max-width: 100%;
+    box-shadow: var(--shadow-md);
+  }
 </style>

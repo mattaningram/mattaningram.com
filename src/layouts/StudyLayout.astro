@@ -1,7 +1,11 @@
 ---
+import type { ImageMetadata } from 'astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Logo from '@components/Logo.astro'
+import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
+
+const logoModules = import.meta.glob<{ default: ImageMetadata }>('/src/logos/*.svg', { eager: true })
 
 export interface Props {
 	title: string
@@ -11,6 +15,8 @@ export interface Props {
 }
 
 const { title, logo, logoUrl, color } = Astro.props
+const logoKey = logo ? Object.keys(logoModules).find((k) => k.endsWith(`/${logo}`)) : undefined
+const logoSrc: ImageMetadata | undefined = logoKey ? logoModules[logoKey].default : undefined
 ---
 
 <BaseLayout title={title} pageColor={color} class={`study-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
@@ -19,9 +25,11 @@ const { title, logo, logoUrl, color } = Astro.props
 	<nav class="study-header xyz-in" xyz="fade up-100%">
 		<a class="m-logo-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
 		<h1 class="study-title">{title}</h1>
-		<a href={logoUrl} class="study-logo-link">
-			<img class="study-logo" transition:name="work-logo" src={`/assets/logos/${logo}`} alt={`${title} Logo`} />
-		</a>
+		{logoSrc && logoUrl ? (
+			<a href={logoUrl} class="study-logo-link">
+				<Image class="study-logo" src={logoSrc} alt={`${title} Logo`} transition:name="work-logo" />
+			</a>
+		) : null}
 	</nav>
 
 	<main class="slideshow-container">
