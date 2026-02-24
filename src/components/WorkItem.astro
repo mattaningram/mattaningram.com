@@ -8,15 +8,16 @@ interface Props {
   order?: number
 }
 
-const { href, color, transitionName, external = false, class: className, order } = Astro.props
+const { href, color, transitionName, external = false, class: className, order, ...rest } = Astro.props
 ---
 
 <a
   href={href}
-  class:list={['work-item-wrap', 'xyz-in', className]}
+  class:list={['work-item-wrap', className]}
   style={`--page-color: ${color};`}
   {...external && { target: '_blank', rel: 'noopener noreferrer' }}
   {...order !== undefined && { 'data-order': order }}
+  {...rest}
 >
   <div class="work-item-leaf"></div>
   <div class="work-item-leaf"></div>
@@ -43,12 +44,14 @@ const { href, color, transitionName, external = false, class: className, order }
     display: grid;
     transform-style: preserve-3d;
     position: relative;
+    cursor: pointer;
 
     &:hover {
       .work-item-leaf,
       .work-item {
         transition-timing-function: var(--ease-out-back);
       }
+
       .work-item {
         --work-item-leaf-lightness: 60%;
         translate: 0 0 25px;
@@ -84,25 +87,28 @@ const { href, color, transitionName, external = false, class: className, order }
     border: 1px solid hsl(from var(--page-color) h s var(--work-item-leaf-lightness));
     grid-area: 1 / 1;
     transition: 0.3s var(--ease-out-quad);
-    transition-property: translate, background-color;
+    transition-property: translate, background-color, border;
+    transform-style: preserve-3d;
   }
 
   .work-item-leaf {
     background-color: var(--bg-color);
 
-    &:nth-child(1) {
-      translate: 0 0 -50px;
-      --work-item-leaf-lightness: 20%;
-    }
-    &:nth-child(2) {
-      translate: 0 0 -25px;
-      --work-item-leaf-lightness: 30%;
-    }
-    &:nth-child(3) {
-      --work-item-leaf-lightness: 40%;
-    }
-    &:nth-child(4) {
-      --work-item-leaf-lightness: 45%;
+    .work-item-wrap:not(.xyz-in) & {
+      &:nth-child(1) {
+        translate: 0 0 -50px;
+        --work-item-leaf-lightness: 20%;
+      }
+      &:nth-child(2) {
+        translate: 0 0 -25px;
+        --work-item-leaf-lightness: 30%;
+      }
+      &:nth-child(3) {
+        --work-item-leaf-lightness: 40%;
+      }
+      &:nth-child(4) {
+        --work-item-leaf-lightness: 45%;
+      }
     }
   }
 
