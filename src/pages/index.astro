@@ -213,6 +213,8 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     margin: 0 auto;
     margin-top: var(--page-section-margin);
     padding: var(--page-gutter);
+    transform-style: preserve-3d;
+    --xyz-perspective: 1200px;
   }
 
   .home-section-title {
@@ -330,6 +332,7 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.5);
     transform-origin: center right;
     transition: transform 0.3s var(--ease-out-quad);
+    transform-style: preserve-3d;
 
     @media (width < $breakpoint-sm) {
       transform: translateY(-50%) translateZ(40px) rotateY(-12deg) rotateZ(3deg) scale(0.45);
