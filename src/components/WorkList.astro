@@ -46,6 +46,7 @@ const items = itemsUnsorted
       <WorkItem
         href={item.url}
         color={item.color}
+        order={item.order}
         class="work-list-item"
         transitionName={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
       >
@@ -62,6 +63,69 @@ const items = itemsUnsorted
     ))
   }
 </div>
+
+<script>
+  // A major pentatonic scale: A4, B4, C#5, E5, F#5
+  const NOTE_FREQS = [440, 493.88, 554.37, 659.25, 739.99]
+
+  let audioCtx: AudioContext | null = null
+
+  function getCtx(): AudioContext {
+    if (!audioCtx) {
+      audioCtx = new AudioContext()
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume()
+    }
+    return audioCtx
+  }
+
+  function playNote(order: number) {
+    const ctx = getCtx()
+    const freq = NOTE_FREQS[Math.min(order - 1, NOTE_FREQS.length - 1)]
+    const now = ctx.currentTime
+
+    const osc1 = ctx.createOscillator()
+    const osc2 = ctx.createOscillator()
+    const gainMain = ctx.createGain()
+    const gainHarm = ctx.createGain()
+
+    osc1.type = 'sine'
+    osc1.frequency.value = freq
+    osc2.type = 'sine'
+    osc2.frequency.value = freq * 2
+
+    gainHarm.gain.value = 0.3
+
+    osc1.connect(gainMain)
+    osc2.connect(gainHarm)
+    gainHarm.connect(gainMain)
+    gainMain.connect(ctx.destination)
+
+    gainMain.gain.setValueAtTime(0, now)
+    gainMain.gain.linearRampToValueAtTime(0.12, now + 0.01)
+    gainMain.gain.exponentialRampToValueAtTime(0.001, now + 0.35)
+
+    osc1.start(now)
+    osc1.stop(now + 0.35)
+    osc2.start(now)
+    osc2.stop(now + 0.35)
+  }
+
+  function initHoverSounds() {
+    const items = document.querySelectorAll<HTMLElement>('.work-item-wrap[data-order]')
+    items.forEach((item) => {
+      if (item.dataset.soundBound === 'true') return
+      item.dataset.soundBound = 'true'
+      item.addEventListener('mouseenter', () => {
+        const order = parseInt(item.dataset.order ?? '1', 10)
+        playNote(order)
+      })
+    })
+  }
+
+  document.addEventListener('astro:page-load', initHoverSounds)
+</script>
 
 <style lang="scss">
   @use '../styles/_scssVariables' as *;
