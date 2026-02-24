@@ -30,14 +30,11 @@ const itemsUnsorted = itemModules.map((item, i) => ({
 const items = itemsUnsorted
   .map((item) => {
     const logoFilename = item.logo
-    const logoKey = logoFilename
-      ? Object.keys(logoModules).find((k) => k.endsWith(`/${logoFilename}`))
-      : undefined
+    const logoKey = logoFilename ? Object.keys(logoModules).find((k) => k.endsWith(`/${logoFilename}`)) : undefined
     const logoSrc: ImageMetadata | undefined = logoKey ? logoModules[logoKey].default : undefined
     return { ...item, logoSrc }
   })
   .sort((a, b) => b.order - a.order)
-
 ---
 
 <div class="work-list-wrap" xyz="fade stagger-1 delay-10 down-2 small-2">
@@ -46,15 +43,11 @@ const items = itemsUnsorted
       <WorkItem
         href={item.url}
         color={item.color}
-        class="work-list-item"
+        class="work-list-item xyz-in"
         transitionName={`work-${item.title.toLowerCase().replace(/\s+/g, '-')}-hero`}
       >
         {item.logoSrc ? (
-          <Image
-            class="work-item-logo"
-            src={item.logoSrc}
-            alt={`${item.title} Logo`}
-          />
+          <Image class="work-item-logo" src={item.logoSrc} alt={`${item.title} Logo`} />
         ) : (
           <h3 class="work-item-title">{item.title}</h3>
         )}

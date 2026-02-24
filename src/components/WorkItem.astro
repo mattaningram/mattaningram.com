@@ -7,14 +7,15 @@ interface Props {
   class?: string
 }
 
-const { href, color, transitionName, external = false, class: className } = Astro.props
+const { href, color, transitionName, external = false, class: className, ...rest } = Astro.props
 ---
 
 <a
   href={href}
-  class:list={['work-item-wrap', 'xyz-in', className]}
+  class:list={['work-item-wrap', className]}
   style={`--page-color: ${color};`}
   {...external && { target: '_blank', rel: 'noopener noreferrer' }}
+  {...rest}
 >
   <div class="work-item-leaf"></div>
   <div class="work-item-leaf"></div>
@@ -85,12 +86,13 @@ const { href, color, transitionName, external = false, class: className } = Astr
     grid-area: 1 / 1;
     transition: 0.3s var(--ease-out-quad);
     transition-property: translate, background-color, border;
+    transform-style: preserve-3d;
   }
 
   .work-item-leaf {
     background-color: var(--bg-color);
 
-    :not(.xyz-in) & {
+    .work-item-wrap:not(.xyz-in) & {
       &:nth-child(1) {
         translate: 0 0 -50px;
         --work-item-leaf-lightness: 20%;
