@@ -1,0 +1,135 @@
+---
+
+---
+
+<button class="sound-toggle" aria-label="Toggle sound effects" data-sound-toggle>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- Speaker body -->
+    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+    <!-- Sound waves -->
+    <path class="sound-wave sound-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    <path class="sound-wave sound-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+    <!-- Mute slash -->
+    <line class="sound-slash" x1="3" y1="21" x2="21" y2="3"></line>
+  </svg>
+</button>
+
+<script>
+  function initSoundToggle() {
+    const btn = document.querySelector<HTMLButtonElement>('[data-sound-toggle]')
+    if (!btn || btn.dataset.bound === 'true') return
+    btn.dataset.bound = 'true'
+
+    // Restore saved preference
+    const saved = localStorage.getItem('soundMuted')
+    if (saved === 'true') {
+      document.documentElement.dataset.soundMuted = 'true'
+      btn.classList.add('is-muted')
+    }
+
+    btn.addEventListener('click', () => {
+      const muted = document.documentElement.dataset.soundMuted === 'true'
+      const newState = !muted
+      document.documentElement.dataset.soundMuted = String(newState)
+      localStorage.setItem('soundMuted', String(newState))
+      btn.classList.toggle('is-muted', newState)
+      if (!newState) playBoowop()
+    })
+  }
+
+  function playBoowop() {
+    const ctx = new AudioContext()
+    const now = ctx.currentTime
+
+    // "boo" — low tone sweeping up
+    const osc1 = ctx.createOscillator()
+    const gain1 = ctx.createGain()
+    osc1.type = 'sine'
+    osc1.frequency.setValueAtTime(280, now)
+    osc1.frequency.exponentialRampToValueAtTime(520, now + 0.12)
+    gain1.gain.setValueAtTime(0, now)
+    gain1.gain.linearRampToValueAtTime(0.15, now + 0.02)
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.2)
+    osc1.connect(gain1).connect(ctx.destination)
+    osc1.start(now)
+    osc1.stop(now + 0.2)
+
+    // "wop" — higher pop
+    const osc2 = ctx.createOscillator()
+    const gain2 = ctx.createGain()
+    osc2.type = 'sine'
+    osc2.frequency.setValueAtTime(660, now + 0.1)
+    osc2.frequency.exponentialRampToValueAtTime(880, now + 0.18)
+    osc2.frequency.exponentialRampToValueAtTime(780, now + 0.3)
+    gain2.gain.setValueAtTime(0, now + 0.1)
+    gain2.gain.linearRampToValueAtTime(0.12, now + 0.13)
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.35)
+    osc2.connect(gain2).connect(ctx.destination)
+    osc2.start(now + 0.1)
+    osc2.stop(now + 0.35)
+  }
+
+  document.addEventListener('astro:page-load', initSoundToggle)
+</script>
+
+<style lang="scss">
+  .sound-toggle {
+    position: fixed;
+    bottom: var(--spacing-8);
+    left: var(--spacing-8);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    color: var(--gray-6);
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    @media (pointer: coarse) {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--gray-8);
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .sound-wave {
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+    transform-origin: center;
+  }
+
+  .sound-slash {
+    stroke-dasharray: 28;
+    stroke-dashoffset: 28;
+    transition: stroke-dashoffset 0.3s ease;
+  }
+
+  .is-muted {
+    .sound-wave {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    .sound-slash {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

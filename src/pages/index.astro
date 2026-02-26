@@ -6,11 +6,13 @@ import WorkList from '@components/WorkList.astro'
 import WorkItem from '@components/WorkItem.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 import MetMeDemo from '@components/MetMeDemo.astro'
+import SoundToggle from '@components/SoundToggle.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
 ---
 
 <HomeLayout>
+  <SoundToggle />
   <section class="m-center-wrap">
     <div class="m-logo-section" data-visitors-event="M Logo" data-visitors-source="Logo Click">
       <Logo size="15rem" />
@@ -88,6 +90,57 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     <Beliefs />
   </PerspectiveScroll>
 </HomeLayout>
+
+<script>
+  import { Howl } from 'howler'
+
+  let gifHoverSound: Howl | null = null
+
+  function getGifHoverSound() {
+    if (!gifHoverSound) {
+      gifHoverSound = new Howl({
+        src: ['/assets/audio/gif-hover-audio.mp3'],
+        sprite: {
+          mac: [0, 2500],
+          topgun: [2500, 2500],
+          sesamestreet: [5000, 2500],
+        },
+      })
+    }
+    return gifHoverSound
+  }
+
+  const spriteNames = ['mac', 'topgun', 'sesamestreet'] as const
+
+  function isMuted(): boolean {
+    return document.documentElement.dataset.soundMuted === 'true'
+  }
+
+  function initGifHoverSounds() {
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    const gifHovers = document.querySelectorAll<HTMLElement>('.gif-hover')
+    gifHovers.forEach((el, i) => {
+      const sprite = spriteNames[i]
+      if (!sprite || el.dataset.hoverSoundBound === 'true') return
+
+      let soundId: number | undefined
+      el.addEventListener('mouseenter', () => {
+        if (isMuted()) return
+        soundId = getGifHoverSound().play(sprite)
+      })
+      el.addEventListener('mouseleave', () => {
+        if (soundId !== undefined) {
+          getGifHoverSound().stop(soundId)
+        }
+      })
+      el.dataset.hoverSoundBound = 'true'
+    })
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initGifHoverSounds()
+  })
+</script>
 
 <script is:inline>
   const initLogoButton = () => {

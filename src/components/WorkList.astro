@@ -62,6 +62,7 @@ const items = itemsUnsorted
   const NOTE_FREQS = [440, 493.88, 554.37, 659.25, 739.99]
 
   let audioCtx: AudioContext | null = null
+  let reverbNode: ConvolverNode | null = null
 
   function getCtx(): AudioContext {
     if (!audioCtx) {
@@ -73,39 +74,76 @@ const items = itemsUnsorted
     return audioCtx
   }
 
+  function ensureReverb(ctx: AudioContext): ConvolverNode {
+    if (reverbNode) return reverbNode
+    const rate = ctx.sampleRate
+    const length = rate * 1.5
+    const impulse = ctx.createBuffer(2, length, rate)
+    for (let ch = 0; ch < 2; ch++) {
+      const data = impulse.getChannelData(ch)
+      for (let i = 0; i < length; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5)
+      }
+    }
+    reverbNode = ctx.createConvolver()
+    reverbNode.buffer = impulse
+    reverbNode.connect(ctx.destination)
+    return reverbNode
+  }
+
+  function isMuted(): boolean {
+    return document.documentElement.dataset.soundMuted === 'true'
+  }
+
   function playNote(order: number) {
+    if (isMuted()) return
     const ctx = getCtx()
     const freq = NOTE_FREQS[Math.min(order - 1, NOTE_FREQS.length - 1)]
     const now = ctx.currentTime
+    const duration = 0.8
 
-    const osc1 = ctx.createOscillator()
-    const osc2 = ctx.createOscillator()
-    const gainMain = ctx.createGain()
-    const gainHarm = ctx.createGain()
+    const dry = ctx.createGain()
+    const wet = ctx.createGain()
+    dry.gain.value = 0.85
+    wet.gain.value = 0.3
 
-    osc1.type = 'sine'
-    osc1.frequency.value = freq
-    osc2.type = 'sine'
-    osc2.frequency.value = freq * 2
+    const reverb = ensureReverb(ctx)
+    dry.connect(ctx.destination)
+    wet.connect(reverb)
 
-    gainHarm.gain.value = 0.3
+    // Voice definitions: [freqMultiplier, detuneInCents, type, gainLevel]
+    const voices: [number, number, OscillatorType, number][] = [
+      [0.5, 0, 'sine', 0.06],       // sub octave for warmth
+      [1, 0, 'sine', 0.12],          // fundamental
+      [1, 6, 'sine', 0.08],          // slight detune for chorus
+      [1, -6, 'sine', 0.08],         // opposite detune for width
+      [2, 0, 'sine', 0.05],          // octave harmonic
+      [1.498, 0, 'sine', 0.03],      // fifth harmonic (soft shimmer)
+    ]
 
-    osc1.connect(gainMain)
-    osc2.connect(gainHarm)
-    gainHarm.connect(gainMain)
-    gainMain.connect(ctx.destination)
+    for (const [freqMult, detune, type, level] of voices) {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.type = type
+      osc.frequency.value = freq * freqMult
+      osc.detune.value = detune
 
-    gainMain.gain.setValueAtTime(0, now)
-    gainMain.gain.linearRampToValueAtTime(0.12, now + 0.01)
-    gainMain.gain.exponentialRampToValueAtTime(0.001, now + 0.35)
+      osc.connect(gain)
+      gain.connect(dry)
+      gain.connect(wet)
 
-    osc1.start(now)
-    osc1.stop(now + 0.35)
-    osc2.start(now)
-    osc2.stop(now + 0.35)
+      gain.gain.setValueAtTime(0, now)
+      gain.gain.linearRampToValueAtTime(level, now + 0.015)
+      gain.gain.exponentialRampToValueAtTime(level * 0.4, now + 0.15)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration)
+
+      osc.start(now)
+      osc.stop(now + duration)
+    }
   }
 
   function initHoverSounds() {
+    if (!window.matchMedia('(pointer: fine)').matches) return
     const items = document.querySelectorAll<HTMLElement>('.work-item-wrap[data-order]')
     items.forEach((item) => {
       if (item.dataset.soundBound === 'true') return

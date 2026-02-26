@@ -15,6 +15,7 @@
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
+    "howler": "^2.2.4",
     "motion": "^12.33.0",
     "photoswipe": "^5.4.4",
     "ress": "^5.0.2",
