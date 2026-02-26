@@ -60,7 +60,7 @@ const { href, color, transitionName, external = false, class: className, ...rest
         }
       }
 
-      .work-item-leaf {
+      &:not(.xyz-in) .work-item-leaf {
         &:nth-child(1) {
           --work-item-leaf-lightness: 10%;
           translate: 0 0 -75px;
