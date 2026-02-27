@@ -4,7 +4,7 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 
 <!-- Demo Animation Section -->
 <section class="mm-demo" aria-label="How MetMe works">
-  <PhoneFrame>
+  <PhoneFrame class="mm-demo__phone-frame">
     <div class="mm-demo__prompt-container">
       <!-- Step 1: Prompt -->
       <p class="mm-demo__prompt">Who did you meet?</p>
@@ -164,7 +164,7 @@ import PhoneFrame from '@components/PhoneFrame.astro'
   }
 
   async function runDemoAnimation(signal: AbortSignal) {
-    const phone = document.querySelector('.mm-demo .phone-frame__phone') as HTMLElement
+    const phone = document.querySelector('.mm-demo .phone-frame') as HTMLElement
     const prompt = document.querySelector('.mm-demo__prompt') as HTMLElement
     const mic = document.querySelector('.mm-demo__mic') as HTMLElement
     const contextPill = document.querySelector('.mm-demo__context-pill') as HTMLElement
@@ -359,7 +359,6 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 </script>
 
 <style lang="scss">
-  /* Demo uses amber (MetMe brand) + stone grays – map to local vars */
   .mm-demo {
     --color-amber-100: #fef3c7;
     --color-amber-400: #fbbf24;
@@ -375,6 +374,17 @@ import PhoneFrame from '@components/PhoneFrame.astro'
     --color-stone-800: #292524;
     --color-stone-900: #1c1917;
     --color-stone-950: #0c0a09;
+  }
+
+  .mm-demo__phone-frame {
+    transition: box-shadow 0.3s var(--ease-out-quad);
+    box-shadow: 0 8px 40px color-mix(in oklch, var(--bg-color-dark) 15%, transparent);
+
+    :global(.work-item-wrap:hover) & {
+      box-shadow:
+        0 0 24px oklch(from var(--page-color) calc(l * 0.95) c h / 0.1),
+        0 0 120px color-mix(in oklch, var(--page-color) 15%, transparent);
+    }
   }
 
   .mm-demo :global(.phone-frame__screen) {

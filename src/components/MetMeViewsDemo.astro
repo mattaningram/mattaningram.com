@@ -282,7 +282,12 @@ const timelineGroups = [
       <div class="mmv__gate" data-gate="map" style="display:none">
         <div class="mmv__view mmv__view--map" data-view="map">
           <div class="mmv__map-container">
-            <svg class="mmv__map-svg" viewBox="0 0 800 550" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="mmv__map-svg"
+              viewBox="0 0 800 550"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <!-- Water -->
               <rect width="800" height="550" fill="oklch(18% 0.006 50)"></rect>
               <path d="M0 0 L100 0 L80 100 L90 220 L70 350 L85 550 L0 550Z" fill="oklch(22% 0.03 240)"></path>
@@ -521,7 +526,7 @@ const timelineGroups = [
   }
 
   async function runViewsAnimation(signal: AbortSignal) {
-    const phone = document.querySelector('.mmv .phone-frame__phone') as HTMLElement
+    const phone = document.querySelector('.mmv .phone-frame') as HTMLElement
 
     // Timeline elements
     const tlView = document.querySelector('.mmv__view--timeline') as HTMLElement
