@@ -5,9 +5,10 @@ interface Props {
   transitionName?: string
   external?: boolean
   class?: string
+  order?: number
 }
 
-const { href, color, transitionName, external = false, class: className, ...rest } = Astro.props
+const { href, color, transitionName, external = false, class: className, order, ...rest } = Astro.props
 ---
 
 <a
@@ -15,6 +16,7 @@ const { href, color, transitionName, external = false, class: className, ...rest
   class:list={['work-item-wrap', className]}
   style={`--page-color: ${color};`}
   {...external && { target: '_blank', rel: 'noopener noreferrer' }}
+  {...order !== undefined && { 'data-order': order }}
   {...rest}
 >
   <div class="work-item-leaf"></div>

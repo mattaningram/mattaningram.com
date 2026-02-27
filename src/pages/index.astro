@@ -6,11 +6,13 @@ import WorkList from '@components/WorkList.astro'
 import WorkItem from '@components/WorkItem.astro'
 import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 import MetMeDemo from '@components/MetMeDemo.astro'
+import SoundToggle from '@components/SoundToggle.astro'
 import { Image } from 'astro:assets'
 import metmeIcon from '@media/metme/metme-ios-icon.png'
 ---
 
 <HomeLayout>
+  <SoundToggle />
   <section class="m-center-wrap">
     <div class="m-logo-section" data-visitors-event="M Logo" data-visitors-source="Logo Click">
       <Logo size="15rem" />
@@ -53,7 +55,7 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
 
   <PerspectiveScroll as="section" class="home-section xyz-in" xyz="fade down duration-5 delay-9">
     <h2 class="home-section-title">Latest</h2>
-    <WorkItem href="https://metme.app" color="rgb(245 166 35)" external class="metme-link">
+    <WorkItem href="https://metme.app" color="rgb(245 166 35)" external order={5} class="metme-link">
       <div class="metme-link-content">
         <div class="metme-icon-wrap">
           <Image src={metmeIcon} alt="MetMe app icon" width={88} height={88} class="metme-icon" layout="fixed" />
@@ -89,7 +91,138 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
   </PerspectiveScroll>
 </HomeLayout>
 
+<script>
+  import { Howl } from 'howler'
+
+  let gifHoverSound: Howl | null = null
+
+  function getGifHoverSound() {
+    if (!gifHoverSound) {
+      gifHoverSound = new Howl({
+        src: ['/assets/audio/gif-hover-audio.mp3'],
+        sprite: {
+          mac: [0, 2500],
+          topgun: [2500, 3000],
+          sesamestreet: [5500, 2500],
+        },
+      })
+    }
+    return gifHoverSound
+  }
+
+  const spriteNames = ['mac', 'topgun', 'sesamestreet'] as const
+
+  function isMuted(): boolean {
+    return document.documentElement.dataset.soundMuted === 'true'
+  }
+
+  function initGifHoverSounds() {
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    const gifHovers = document.querySelectorAll<HTMLElement>('.gif-hover')
+    gifHovers.forEach((el, i) => {
+      const sprite = spriteNames[i]
+      if (!sprite || el.dataset.hoverSoundBound === 'true') return
+
+      let soundId: number | undefined
+      el.addEventListener('mouseenter', () => {
+        window.visitors?.track('GIF Hover', { gif: sprite })
+        if (isMuted()) return
+        soundId = getGifHoverSound().play(sprite)
+      })
+      el.addEventListener('mouseleave', () => {
+        if (soundId !== undefined) {
+          getGifHoverSound().stop(soundId)
+        }
+      })
+      el.dataset.hoverSoundBound = 'true'
+    })
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initGifHoverSounds()
+  })
+</script>
+
 <script is:inline>
+  function playClickDown() {
+    if (document.documentElement.dataset.soundMuted === 'true') return
+    const ctx = new AudioContext()
+    const now = ctx.currentTime
+
+    // Noise burst — crisp attack
+    const bufLen = Math.floor(ctx.sampleRate * 0.05)
+    const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate)
+    const data = buf.getChannelData(0)
+    for (let i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1
+    const noise = ctx.createBufferSource()
+    noise.buffer = buf
+    const noiseFilter = ctx.createBiquadFilter()
+    noiseFilter.type = 'bandpass'
+    noiseFilter.frequency.value = 2000
+    noiseFilter.Q.value = 0.9
+    const noiseGain = ctx.createGain()
+    noiseGain.gain.setValueAtTime(0.18, now)
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04)
+    noise.connect(noiseFilter)
+    noiseFilter.connect(noiseGain)
+    noiseGain.connect(ctx.destination)
+    noise.start(now)
+    noise.stop(now + 0.05)
+
+    // Pitched transient — sharp downward sweep
+    const osc = ctx.createOscillator()
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(1300, now)
+    osc.frequency.exponentialRampToValueAtTime(650, now + 0.035)
+    const oscGain = ctx.createGain()
+    oscGain.gain.setValueAtTime(0.12, now)
+    oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05)
+    osc.connect(oscGain)
+    oscGain.connect(ctx.destination)
+    osc.start(now)
+    osc.stop(now + 0.055)
+  }
+
+  function playClackUp() {
+    if (document.documentElement.dataset.soundMuted === 'true') return
+    const ctx = new AudioContext()
+    const now = ctx.currentTime
+
+    // Noise burst — slightly softer, lower character
+    const bufLen = Math.floor(ctx.sampleRate * 0.06)
+    const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate)
+    const data = buf.getChannelData(0)
+    for (let i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1
+    const noise = ctx.createBufferSource()
+    noise.buffer = buf
+    const noiseFilter = ctx.createBiquadFilter()
+    noiseFilter.type = 'bandpass'
+    noiseFilter.frequency.value = 1200
+    noiseFilter.Q.value = 0.7
+    const noiseGain = ctx.createGain()
+    noiseGain.gain.setValueAtTime(0.13, now)
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.055)
+    noise.connect(noiseFilter)
+    noiseFilter.connect(noiseGain)
+    noiseGain.connect(ctx.destination)
+    noise.start(now)
+    noise.stop(now + 0.065)
+
+    // Pitched transient — lower, more resonant upward lilt
+    const osc = ctx.createOscillator()
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(700, now)
+    osc.frequency.exponentialRampToValueAtTime(900, now + 0.02)
+    osc.frequency.exponentialRampToValueAtTime(500, now + 0.06)
+    const oscGain = ctx.createGain()
+    oscGain.gain.setValueAtTime(0.09, now)
+    oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.07)
+    osc.connect(oscGain)
+    oscGain.connect(ctx.destination)
+    osc.start(now)
+    osc.stop(now + 0.075)
+  }
+
   const initLogoButton = () => {
     const btn = document.querySelector('.m-logo-click-me')
     const logoWrap = document.querySelector('.m-logo-section .m-logo-wrap')
@@ -103,6 +236,8 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
     }
 
     btn.addEventListener('click', handleClick)
+    btn.addEventListener('mousedown', playClickDown)
+    btn.addEventListener('mouseup', playClackUp)
     btn.dataset.logoClickBound = 'true'
   }
 
