@@ -5,76 +5,113 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <footer class="main-footer" transition:name="footer">
-	<PerspectiveScroll>
-		<Button href="mailto:mattaningram@gmail.com"> Say Hi </Button>
-	</PerspectiveScroll>
+  <PerspectiveScroll>
+    <Button href="mailto:mattaningram@gmail.com" data-visitors-event="Contact Link" data-visitors-type="Email">
+      Say Hi
+    </Button>
+  </PerspectiveScroll>
 
-	<div class="contact-links-wrap">
-		<a class="contact-link" href="https://github.com/mattaningram" aria-label="Github" target="_blank">
-			<Icon name="github-solid" />
-		</a>
+  <div class="contact-links-wrap">
+    <a
+      class="contact-link"
+      href="https://github.com/mattaningram"
+      aria-label="Github"
+      target="_blank"
+      data-visitors-event="Contact Link"
+      data-visitors-type="Github"
+    >
+      <Icon name="github-solid" />
+    </a>
 
-		<a class="contact-link" href="https://www.linkedin.com/in/mattaningram" aria-label="LinkedIn" target="_blank">
-			<Icon name="linkedin-solid" />
-		</a>
+    <a
+      class="contact-link"
+      href="https://www.linkedin.com/in/mattaningram"
+      aria-label="LinkedIn"
+      target="_blank"
+      data-visitors-event="Contact Link"
+      data-visitors-type="LinkedIn"
+    >
+      <Icon name="linkedin-solid" />
+    </a>
 
-		<a class="contact-link" href="https://x.com/mattaningram" aria-label="X" target="_blank">
-			<Icon name="x-solid" />
-		</a>
+    <a
+      class="contact-link"
+      href="https://x.com/mattaningram"
+      aria-label="X"
+      target="_blank"
+      data-visitors-event="Contact Link"
+      data-visitors-type="X"
+    >
+      <Icon name="x-solid" />
+    </a>
 
-		<a class="contact-link" href="https://instagram.com/mattaningram" aria-label="Instagram" target="_blank">
-			<Icon name="instagram-solid" />
-		</a>
+    <a
+      class="contact-link"
+      href="https://instagram.com/mattaningram"
+      aria-label="Instagram"
+      target="_blank"
+      data-visitors-event="Contact Link"
+      data-visitors-type="Instagram"
+    >
+      <Icon name="instagram-solid" />
+    </a>
 
-		<a class="contact-link" href="https://open.spotify.com/user/mattaningram" aria-label="Spotify" target="_blank">
-			<Icon name="spotify-solid" />
-		</a>
-	</div>
+    <a
+      class="contact-link"
+      href="https://open.spotify.com/user/mattaningram"
+      aria-label="Spotify"
+      target="_blank"
+      data-visitors-event="Contact Link"
+      data-visitors-type="Spotify"
+    >
+      <Icon name="spotify-solid" />
+    </a>
+  </div>
 </footer>
 
 <style lang="scss">
-	.main-footer {
-		display: grid;
-		gap: var(--spacing-4);
-		text-align: center;
-		position: relative;
-		margin: 0 auto;
-		margin-top: var(--page-section-margin);
-		perspective: 800px;
-		transform-style: preserve-3d;
-	}
+  .main-footer {
+    display: grid;
+    gap: var(--spacing-4);
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    margin-top: var(--page-section-margin);
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
 
-	.contact-links-wrap {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: var(--spacing-8) auto;
-	}
+  .contact-links-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--spacing-8) auto;
+  }
 
-	.contact-link {
-		width: 2.5rem;
-		height: 2rem;
-		font-size: 1.25rem;
-		display: grid;
-		place-content: center;
-		color: var(--page-color);
+  .contact-link {
+    width: 2.5rem;
+    height: 2rem;
+    font-size: 1.25rem;
+    display: grid;
+    place-content: center;
+    color: var(--page-color);
 
-		[data-icon] {
-			transition: scale 0.15s var(--ease-out-quad);
-		}
+    [data-icon] {
+      transition: scale 0.15s var(--ease-out-quad);
+    }
 
-		&:hover {
-			[data-icon] {
-				scale: 1.25;
-			}
-		}
+    &:hover {
+      [data-icon] {
+        scale: 1.25;
+      }
+    }
 
-		&:focus-visible {
-			[data-icon] {
-				scale: 1.25;
-				outline: 1px solid var(--page-color);
-				outline-offset: 2px;
-			}
-		}
-	}
+    &:focus-visible {
+      [data-icon] {
+        scale: 1.25;
+        outline: 1px solid var(--page-color);
+        outline-offset: 2px;
+      }
+    }
+  }
 </style>

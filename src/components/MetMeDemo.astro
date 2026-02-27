@@ -382,7 +382,7 @@ import PhoneFrame from '@components/PhoneFrame.astro'
 
     :global(.work-item-wrap:hover) & {
       box-shadow:
-        0 0 24px oklch(from var(--page-color) calc(l * 0.95) c h / 0.1),
+        0 0 24px oklch(from var(--page-color) 0.75 c h / 0.1),
         0 0 120px color-mix(in oklch, var(--page-color) 15%, transparent);
     }
   }
