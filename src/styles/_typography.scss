@@ -97,6 +97,10 @@
     // }
   }
 
+  p + p {
+    margin-top: 1.25em;
+  }
+
   .grab-copy-wrap {
     width: var(--page-content-width);
     padding-inline: var(--page-gutter);
