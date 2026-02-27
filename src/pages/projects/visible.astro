@@ -260,6 +260,8 @@ const visibleThemeColors = {
               class="color-block color-picker-button"
               data-selected={colorName === 'blue'}
               data-color={colorName}
+              data-visitors-event="Visible Color Picker"
+              data-visitors-color={colorName}
               style={`background-color: ${visibleThemeColors[colorName]['6']}; --visible-color-index: ${i}`}
             >
               <div class="color-name">{colorName}</div>
