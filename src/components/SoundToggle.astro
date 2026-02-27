@@ -16,8 +16,6 @@
     <!-- Sound waves -->
     <path class="sound-wave sound-wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
     <path class="sound-wave sound-wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-    <!-- Mute slash -->
-    <line class="sound-slash" x1="3" y1="21" x2="21" y2="3"></line>
   </svg>
 </button>
 
@@ -40,8 +38,27 @@
       document.documentElement.dataset.soundMuted = String(newState)
       localStorage.setItem('soundMuted', String(newState))
       btn.classList.toggle('is-muted', newState)
-      if (!newState) playBoowop()
+      if (newState) playByooo()
+      else playBoowop()
     })
+  }
+
+  function playByooo() {
+    const ctx = new AudioContext()
+    const now = ctx.currentTime
+    const duration = 0.4
+
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(720, now)
+    osc.frequency.exponentialRampToValueAtTime(180, now + duration)
+    gain.gain.setValueAtTime(0, now)
+    gain.gain.linearRampToValueAtTime(0.14, now + 0.02)
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration)
+    osc.connect(gain).connect(ctx.destination)
+    osc.start(now)
+    osc.stop(now + duration)
   }
 
   function playBoowop() {
@@ -82,14 +99,14 @@
 <style lang="scss">
   .sound-toggle {
     position: fixed;
-    bottom: var(--spacing-8);
-    left: var(--spacing-8);
+    top: var(--spacing-4);
+    right: var(--spacing-4);
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
     color: var(--gray-6);
     cursor: pointer;
@@ -104,8 +121,8 @@
     }
 
     svg {
-      width: 100%;
-      height: 100%;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
@@ -116,20 +133,10 @@
     transform-origin: center;
   }
 
-  .sound-slash {
-    stroke-dasharray: 28;
-    stroke-dashoffset: 28;
-    transition: stroke-dashoffset 0.3s ease;
-  }
-
   .is-muted {
     .sound-wave {
       opacity: 0;
       transform: scale(0.8);
-    }
-
-    .sound-slash {
-      stroke-dashoffset: 0;
     }
   }
 </style>

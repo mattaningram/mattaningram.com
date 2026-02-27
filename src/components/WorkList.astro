@@ -58,16 +58,24 @@ const items = itemsUnsorted
 </div>
 
 <script>
-  // A major pentatonic scale: A4, B4, C#5, E5, F#5
-  const NOTE_FREQS = [440, 493.88, 554.37, 659.25, 739.99]
+  // A major pentatonic spanning 2 octaves: A3→A4, so order 1 = bass, order 4 = soprano
+  const NOTE_FREQS = [220.0, 277.18, 329.63, 440.0, 554.37]
 
   let audioCtx: AudioContext | null = null
   let reverbNode: ConvolverNode | null = null
 
-  function getCtx(): AudioContext {
-    if (!audioCtx) {
-      audioCtx = new AudioContext()
-    }
+  function initAudioContext() {
+    if (audioCtx) return
+    audioCtx = new AudioContext()
+  }
+
+  // AudioContext can only be created after a real user gesture (click/keydown).
+  // mouseenter is not sufficient, so we initialize eagerly on first interaction.
+  document.addEventListener('pointerdown', initAudioContext, { once: true })
+  document.addEventListener('keydown', initAudioContext, { once: true })
+
+  function getCtx(): AudioContext | null {
+    if (!audioCtx) return null
     if (audioCtx.state === 'suspended') {
       audioCtx.resume()
     }
@@ -77,12 +85,12 @@ const items = itemsUnsorted
   function ensureReverb(ctx: AudioContext): ConvolverNode {
     if (reverbNode) return reverbNode
     const rate = ctx.sampleRate
-    const length = rate * 1.5
+    const length = rate * 2.0
     const impulse = ctx.createBuffer(2, length, rate)
     for (let ch = 0; ch < 2; ch++) {
       const data = impulse.getChannelData(ch)
       for (let i = 0; i < length; i++) {
-        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5)
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.0)
       }
     }
     reverbNode = ctx.createConvolver()
@@ -98,46 +106,64 @@ const items = itemsUnsorted
   function playNote(order: number) {
     if (isMuted()) return
     const ctx = getCtx()
+    if (!ctx) return
     const freq = NOTE_FREQS[Math.min(order - 1, NOTE_FREQS.length - 1)]
     const now = ctx.currentTime
-    const duration = 0.8
+    const duration = 1.4
 
     const dry = ctx.createGain()
     const wet = ctx.createGain()
-    dry.gain.value = 0.85
-    wet.gain.value = 0.3
+    dry.gain.value = 0.75
+    wet.gain.value = 0.5
 
     const reverb = ensureReverb(ctx)
     dry.connect(ctx.destination)
     wet.connect(reverb)
 
-    // Voice definitions: [freqMultiplier, detuneInCents, type, gainLevel]
-    const voices: [number, number, OscillatorType, number][] = [
-      [0.5, 0, 'sine', 0.06],       // sub octave for warmth
-      [1, 0, 'sine', 0.12],          // fundamental
-      [1, 6, 'sine', 0.08],          // slight detune for chorus
-      [1, -6, 'sine', 0.08],         // opposite detune for width
-      [2, 0, 'sine', 0.05],          // octave harmonic
-      [1.498, 0, 'sine', 0.03],      // fifth harmonic (soft shimmer)
+    // Chorus voices: [freqMult, detuneCents, gainLevel, attackDelay, vibratoRate, vibratoDepth]
+    const voices: [number, number, number, number, number, number][] = [
+      [0.5,   0, 0.05, 0.000, 0.0,  0],   // sub octave for body
+      [1,   -22, 0.09, 0.010, 5.1, 11],   // choir voice 1
+      [1,    -9, 0.10, 0.005, 5.6,  9],   // choir voice 2
+      [1,     0, 0.11, 0.000, 6.0, 10],   // fundamental
+      [1,     9, 0.10, 0.005, 5.3,  9],   // choir voice 3
+      [1,    22, 0.09, 0.010, 4.9, 11],   // choir voice 4
+      [2,    -9, 0.04, 0.003, 5.8,  8],   // octave up (detuned)
+      [2,     9, 0.04, 0.003, 5.2,  8],   // octave up (opposite)
+      [1.498, 0, 0.025, 0.000, 5.5, 7],   // fifth harmonic shimmer
     ]
 
-    for (const [freqMult, detune, type, level] of voices) {
+    for (const [freqMult, detune, level, atkDelay, lfoRate, lfoDepth] of voices) {
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
-      osc.type = type
+      osc.type = 'sine'
       osc.frequency.value = freq * freqMult
       osc.detune.value = detune
+
+      // Per-voice vibrato kicks in after a short delay for organic feel
+      if (lfoRate > 0) {
+        const lfo = ctx.createOscillator()
+        const lfoGain = ctx.createGain()
+        lfo.frequency.value = lfoRate
+        lfoGain.gain.setValueAtTime(0, now)
+        lfoGain.gain.linearRampToValueAtTime(lfoDepth, now + 0.18)
+        lfo.connect(lfoGain)
+        lfoGain.connect(osc.detune)
+        lfo.start(now + 0.06)
+        lfo.stop(now + duration)
+      }
 
       osc.connect(gain)
       gain.connect(dry)
       gain.connect(wet)
 
-      gain.gain.setValueAtTime(0, now)
-      gain.gain.linearRampToValueAtTime(level, now + 0.015)
-      gain.gain.exponentialRampToValueAtTime(level * 0.4, now + 0.15)
+      const start = now + atkDelay
+      gain.gain.setValueAtTime(0, start)
+      gain.gain.linearRampToValueAtTime(level, start + 0.02)
+      gain.gain.exponentialRampToValueAtTime(level * 0.55, start + 0.22)
       gain.gain.exponentialRampToValueAtTime(0.001, now + duration)
 
-      osc.start(now)
+      osc.start(start)
       osc.stop(now + duration)
     }
   }
