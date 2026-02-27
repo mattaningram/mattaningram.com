@@ -292,12 +292,26 @@ import metmeIcon from '@media/metme/metme-ios-icon.png'
       scale: 0.95;
     }
   }
+
+  .grab-copy {
+    transition: color 0.2s var(--ease-out);
+
+    &:has(.gif-hover:hover) {
+      color: color-mix(in srgb, var(--text-color) 30%, transparent);
+    }
+
+    &:has(.gif-hover:hover) .gif-hover:hover {
+      color: var(--text-color);
+    }
+  }
+
   .gif-hover {
     --hover-color: var(--primary-red);
     cursor: pointer;
     position: relative;
     white-space: nowrap;
     font-weight: 500;
+    transition: color 0.2s var(--ease-out);
 
     &:nth-child(2) {
       --hover-color: var(--primary-blue);
