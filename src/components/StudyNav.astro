@@ -1,0 +1,25 @@
+---
+export interface Props {
+	slides: Array<{ id: string; title: string }>
+}
+
+const { slides } = Astro.props
+---
+
+<nav class="study-nav" aria-label="Slide navigation">
+	<ol class="study-nav-list">
+		{slides.map((slide, index) => (
+			<li class="study-nav-item">
+				<a
+					href={`#${slide.id}`}
+					class:list={['study-nav-dot', { active: index === 0 }]}
+					aria-label={`Go to: ${slide.title}`}
+					data-slide-index={index}
+				>
+					<span class="study-nav-dot-indicator"></span>
+					<span class="study-nav-dot-label">{slide.title}</span>
+				</a>
+			</li>
+		))}
+	</ol>
+</nav>
