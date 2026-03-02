@@ -218,98 +218,18 @@ const { title, color, slides } = Astro.props
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 
-    @media (width < $breakpoint-md) {
+    @media (width <style $breakpoint-md) {
       height: auto;
       overflow-y: visible;
       scroll-snap-type: none;
     }
   }
+</style>
 
-  // --- StudyNav positioning (styles for the component, applied from layout) ---
+<style lang="scss" is:global>
+  @use '../styles/scssVariables' as *;
 
-  :global(.study-nav) {
-    position: fixed;
-    left: var(--spacing-7);
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
-
-    @media (width < $breakpoint-md) {
-      display: none;
-    }
-  }
-
-  :global(.study-nav-list) {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-  }
-
-  :global(.study-nav-item) {
-    display: flex;
-    align-items: center;
-  }
-
-  :global(.study-nav-dot) {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-3);
-    text-decoration: none;
-    color: var(--study-text-muted);
-    transition: color 0.2s ease;
-
-    &:hover,
-    &:global(.active) {
-      color: var(--study-color);
-    }
-  }
-
-  :global(.study-nav-dot-indicator) {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1.5px solid currentColor;
-    flex-shrink: 0;
-    transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      transform 0.3s ease;
-
-    :global(.study-nav-dot.active) & {
-      background-color: var(--study-color);
-      border-color: var(--study-color);
-      transform: scale(1.25);
-    }
-  }
-
-  :global(.study-nav-dot-label) {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition:
-      opacity 0.25s ease,
-      transform 0.25s ease;
-    pointer-events: none;
-
-    :global(.study-nav:hover) & {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    :global(.study-nav-dot.active) & {
-      color: var(--study-color);
-    }
-  }
-
-  // --- Global slide styles ---
-
-  :global(.study-slide) {
+  .study-slide {
     min-height: 100dvh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
@@ -337,10 +257,10 @@ const { title, color, slides } = Astro.props
 
   // --- Animation initial states (hidden until animated) ---
 
-  :global(.slide-heading),
-  :global(.slide-body),
-  :global(.slide-media),
-  :global(.slide-stagger-item) {
+  .slide-heading,
+  .slide-body,
+  .slide-media,
+  .slide-stagger-item {
     opacity: 0;
   }
 </style>

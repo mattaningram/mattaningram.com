@@ -6,29 +6,31 @@ export interface Props {
 const { slides, ...rest } = Astro.props
 ---
 
-<nav class="route-nav" aria-label="Slide navigation" {...rest}>
-  <div class="route-track">
-    <div class="route-track-fill"></div>
-  </div>
-  <ol class="route-stops">
-    {
-      slides.map((slide, index) => (
-        <li class:list={['route-stop', { 'is-current': index === 0 }]} data-stop-index={index}>
-          <a
-            href={`#${slide.id}`}
-            class:list={['study-nav-dot', 'route-stop-link', { active: index === 0 }]}
-            data-slide-index={index}
-          >
-            <span class="route-stop-dot">
-              <span class="route-stop-inner" />
-            </span>
-            <span class="route-stop-label">{slide.title}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ol>
-</nav>
+<div class="route-nav-wrap" {...rest}>
+  <nav class="route-nav" aria-label="Slide navigation">
+    <div class="route-track">
+      <div class="route-track-fill"></div>
+    </div>
+    <ol class="route-stops">
+      {
+        slides.map((slide, index) => (
+          <li class:list={['route-stop', { 'is-current': index === 0 }]} data-stop-index={index}>
+            <a
+              href={`#${slide.id}`}
+              class:list={['study-nav-dot', 'route-stop-link', { active: index === 0 }]}
+              data-slide-index={index}
+            >
+              <span class="route-stop-dot">
+                <span class="route-stop-inner" />
+              </span>
+              <span class="route-stop-label">{slide.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+</div>
 
 <script>
   function initRouteNav() {
@@ -95,10 +97,25 @@ const { slides, ...rest } = Astro.props
 </script>
 
 <style lang="scss">
-  $dot-size: 14px;
-  $dot-inner: 5px;
-  $track-width: 3px;
-  $stop-gap: 24px;
+  @use '../styles/scssVariables' as *;
+
+  .route-nav-wrap {
+    --route-stop-height: 2.5rem;
+    --dot-size: 14px;
+    --dot-inner: 5px;
+    --track-width: 3px;
+
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    padding-left: var(--spacing-7);
+
+    @media (width < $breakpoint-md) {
+      display: none;
+    }
+  }
 
   .route-nav {
     position: relative;
@@ -106,8 +123,12 @@ const { slides, ...rest } = Astro.props
     transform-origin: left center;
     transition: transform 0.3s ease;
 
-    &:hover {
+    .route-nav-wrap:hover & {
       transform: scale(1);
+
+      &::before {
+        opacity: 1;
+      }
     }
 
     &::before {
@@ -123,18 +144,14 @@ const { slides, ...rest } = Astro.props
       pointer-events: none;
       z-index: -1;
     }
-
-    &:hover::before {
-      opacity: 1;
-    }
   }
 
   .route-track {
     position: absolute;
-    left: calc(#{$dot-size} / 2 - #{$track-width} / 2);
-    top: calc(#{$dot-size} / 2);
-    bottom: calc(#{$dot-size} / 2);
-    width: #{$track-width};
+    left: calc(var(--dot-size) / 2 - var(--track-width) / 2);
+    top: calc(var(--route-stop-height) / 2);
+    bottom: calc(var(--route-stop-height) / 2);
+    width: var(--track-width);
     background: #d5d9e0;
     border-radius: 99px;
     overflow: hidden;
@@ -154,7 +171,6 @@ const { slides, ...rest } = Astro.props
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: #{$stop-gap};
     position: relative;
   }
 
@@ -169,13 +185,19 @@ const { slides, ...rest } = Astro.props
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
+
+    &:hover {
+      .route-stop-label {
+        color: var(--study-text);
+      }
+    }
   }
 
   .route-stop-dot {
-    width: #{$dot-size};
-    height: #{$dot-size};
+    width: var(--dot-size);
+    height: var(--dot-size);
     border-radius: 50%;
-    border: #{$track-width} solid #d5d9e0;
+    border: var(--track-width) solid #d5d9e0;
     background: white;
     display: flex;
     align-items: center;
@@ -197,8 +219,8 @@ const { slides, ...rest } = Astro.props
   }
 
   .route-stop-inner {
-    width: #{$dot-inner};
-    height: #{$dot-inner};
+    width: var(--dot-inner);
+    height: var(--dot-inner);
     border-radius: 50%;
     background: transparent;
     transition: background-color 0.3s ease;
@@ -209,7 +231,8 @@ const { slides, ...rest } = Astro.props
   }
 
   .route-stop-label {
-    font-size: 0.7rem;
+    font-size: 0.875rem;
+    line-height: var(--route-stop-height);
     font-weight: 500;
     letter-spacing: 0.02em;
     white-space: nowrap;
@@ -220,7 +243,7 @@ const { slides, ...rest } = Astro.props
       opacity 0.25s ease,
       transform 0.25s ease;
 
-    .route-nav:hover & {
+    .route-nav-wrap:hover & {
       opacity: 1;
       transform: translateX(0);
       transition-delay: 0.15s;

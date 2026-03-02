@@ -3,7 +3,8 @@ import StudyLayout from '@layouts/StudyLayout.astro'
 import RouteNav from '@components/RouteNav.astro'
 import GmapsImg from '@media/revel/mapping/gmaps-bg.png'
 import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
-import CarTopdown from '@media/revel/mapping/car-topdown.png'
+import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
+import { Image } from 'astro:assets'
 
 const slides = [
   { id: 'hero', title: 'Remapping Revel' },
@@ -20,9 +21,7 @@ const slides = [
 ---
 
 <StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" slides={slides}>
-  <div class="route-nav-wrap" slot="nav">
-    <RouteNav slides={slides} />
-  </div>
+  <RouteNav slides={slides} slot="nav" />
   <!-- Slide 1: Hero -->
   <section class="study-slide slide-hero" id="hero">
     <div class="hero-accent"></div>
@@ -46,15 +45,15 @@ const slides = [
 
   <!-- Slide 2: W2 to 1099 -->
   <section class="study-slide" id="w2-to-1099">
-    <div class="slide-inner slide-inner--w2-1099">
+    <div class="slide-inner slide-inner--centered">
       <div class="slide-text">
-        <div class="slide-header-group">
+        <div class="slide-header">
           <p class="slide-section-label slide-body">Context</p>
           <h2 class="slide-heading">Changing Contracts</h2>
+          <p class="slide-body slide-subtitle">
+            Revel pivoted from salaried drivers to independent contractors which significantly changed driver incentives
+          </p>
         </div>
-        <p class="slide-body slide-subtitle">
-          Revel pivoted from salaried drivers to independent contractors which significantly changed driver incentives
-        </p>
       </div>
       <div class="w2-1099-diagram">
         <div class="employment-card employment-card--w2">
@@ -124,13 +123,13 @@ const slides = [
         </div>
       </div>
       <div class="slide-text">
-        <div class="slide-header-group">
+        <div class="slide-header">
           <p class="slide-section-label slide-body">Infrastructure</p>
           <h2 class="slide-heading">Map Migration</h2>
+          <p class="slide-body slide-subtitle">
+            We decided to switch from Mapbox to Google Maps for map views and location search
+          </p>
         </div>
-        <p class="slide-body slide-subtitle">
-          We decided to switch from Mapbox to Google Maps for map views and location search
-        </p>
         <ul class="slide-body slide-list">
           <li>Mapbox was expensive and had outdated place data, causing poor search results for riders</li>
           <li>Google offered better pricing, traffic data, and more reliable search results</li>
@@ -144,9 +143,12 @@ const slides = [
   <!-- Slide: Map Design System -->
   <section class="study-slide slide-design-system" id="map-design-system">
     <div class="slide-inner slide-inner--centered">
-      <div class="slide-header-group">
+      <div class="slide-header">
         <p class="slide-section-label slide-body">Infrastructure</p>
         <h2 class="slide-heading">Map Design System</h2>
+        <p class="slide-body slide-subtitle">
+          Opportunity to consolidate map styles and components into a single system
+        </p>
       </div>
       <div class="route-designs">
         <!-- Operations -->
@@ -154,9 +156,9 @@ const slides = [
           <p class="route-design-label">Operations</p>
           <div class="route-line route-line--ops">
             <div class="route-track"></div>
-            <span class="route-el route-dot route-dot--gray" style="left: 2%"></span>
+            <span class="route-el route-dot route-dot--gray route-dot--lg" style="left: 2%"></span>
             <span class="route-el route-car" style="left: 22%">
-              <img src={CarTopdown.src} alt="" width="48" height="48" />
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
             </span>
             <span class="route-el route-dot route-dot--blue" style="left: 52%"></span>
             <span class="route-el route-dot route-dot--blue route-dot--lg" style="left: 98%"></span>
@@ -169,7 +171,7 @@ const slides = [
           <div class="route-line route-line--traffic">
             <div class="route-track"></div>
             <span class="route-el route-car" style="left: 3%">
-              <img src={CarTopdown.src} alt="" width="48" height="48" />
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
             </span>
             <span class="route-el route-action route-action--pickup" style="left: 32%">
               <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -202,15 +204,15 @@ const slides = [
         <div class="route-design">
           <p class="route-design-label">Driver / In-Ride</p>
           <div class="route-line route-line--inride">
-            <div class="route-track"></div>
+            <div class="route-track" style="left: 22%"></div>
             <span class="route-el route-car" style="left: 22%">
-              <img src={CarTopdown.src} alt="" width="48" height="48" />
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
             </span>
             <span class="route-pin" style="left: 47%">
               <span class="route-pin-head"></span>
               <span class="route-pin-stem"></span>
             </span>
-            <span class="route-el route-dot route-dot--blue" style="left: 52%"></span>
+            <span class="route-el route-dot route-dot--blue route-dot--lg" style="left: 52%"></span>
             <span class="route-profile" style="left: 52%">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="8" r="3.5" stroke="white" stroke-width="2"></circle>
@@ -222,7 +224,7 @@ const slides = [
               </svg>
             </span>
             <span class="route-el route-dot route-dot--gray" style="left: 78%"></span>
-            <span class="route-el route-dot route-dot--gray" style="left: 98%"></span>
+            <span class="route-el route-dot route-dot--gray route-dot--lg" style="left: 98%"></span>
           </div>
         </div>
       </div>
@@ -233,11 +235,11 @@ const slides = [
   <section class="study-slide slide-split" id="drivers">
     <div class="slide-inner slide-inner--split">
       <div class="slide-text">
-        <div class="slide-header-group">
+        <div class="slide-header">
           <p class="slide-section-label slide-body">Research</p>
           <h2 class="slide-heading">Drivers: Where & Why</h2>
+          <p class="slide-body slide-subtitle">Understanding how drivers actually make positioning decisions</p>
         </div>
-        <p class="slide-body slide-subtitle">Understanding how drivers actually make positioning decisions</p>
         <ul class="slide-body slide-list">
           <li>Conducted driver interviews across experience levels</li>
           <li>Visited the operations team on-site to observe how managers used existing map tools</li>
@@ -277,11 +279,11 @@ const slides = [
         </div>
       </div>
       <div class="slide-text">
-        <div class="slide-header-group">
+        <div class="slide-header">
           <p class="slide-section-label slide-body">Exploration</p>
           <h2 class="slide-heading">Demanding Visualizations</h2>
+          <p class="slide-body slide-subtitle">From H3 hexagons to human-readable neighborhood zones</p>
         </div>
-        <p class="slide-body slide-subtitle">From H3 hexagons to human-readable neighborhood zones</p>
         <ul class="slide-body slide-list">
           <li>The data team switched to Uber's open source H3 hexagonal spatial indexing for higher-fidelity data</li>
           <li>Direct hex-demand data added too much visual noise and made neighborhoods hard to read</li>
@@ -295,13 +297,13 @@ const slides = [
   <!-- Slide 6: Key Design Decisions -->
   <section class="study-slide slide-decisions" id="decisions">
     <div class="slide-inner slide-inner--centered">
-      <div class="slide-header-group">
+      <div class="slide-header">
         <p class="slide-section-label slide-body">Design</p>
         <h2 class="slide-heading">Key Design Decisions</h2>
+        <p class="slide-body slide-subtitle decisions-subtitle">
+          Three decisions that made the heatmap trustworthy and usable while driving
+        </p>
       </div>
-      <p class="slide-body slide-subtitle decisions-subtitle">
-        Three decisions that made the heatmap trustworthy and usable while driving
-      </p>
       <div class="decision-cards">
         <div class="slide-stagger-item decision-card">
           <div class="decision-card-number">01</div>
@@ -334,11 +336,11 @@ const slides = [
   <section class="study-slide slide-split slide-failure" id="failures">
     <div class="slide-inner slide-inner--split">
       <div class="slide-text">
-        <div class="slide-header-group">
+        <div class="slide-header">
           <p class="slide-section-label slide-body">Retrospective</p>
           <h2 class="slide-heading">What Didn't Work</h2>
+          <p class="slide-body slide-subtitle">The amenities map</p>
         </div>
-        <p class="slide-body slide-subtitle">The amenities map</p>
         <ul class="slide-body slide-list">
           <li>Driver interviews flagged a genuine pain: difficulty finding parking and restrooms during long shifts</li>
           <li>Built an amenities map layer surfacing rideshare-friendly parking and public restrooms</li>
@@ -357,11 +359,11 @@ const slides = [
   <!-- Slide 8: Results -->
   <section class="study-slide slide-results" id="results">
     <div class="slide-inner slide-inner--centered">
-      <div class="slide-header-group">
+      <div class="slide-header">
         <p class="slide-section-label slide-body">Outcomes</p>
         <h2 class="slide-heading">Results</h2>
+        <p class="slide-body slide-subtitle results-subtitle">More efficient drivers, happier passengers</p>
       </div>
-      <p class="slide-body slide-subtitle results-subtitle">More efficient drivers, happier passengers</p>
       <div class="stats-grid">
         <div class="slide-stagger-item stat-card">
           <span class="stat-number">+XX%</span>
@@ -382,11 +384,11 @@ const slides = [
   <!-- Slide 9: What Comes Next -->
   <section class="study-slide slide-next" id="next">
     <div class="slide-inner slide-inner--centered">
-      <div class="slide-header-group">
+      <div class="slide-header">
         <p class="slide-section-label slide-body">Future</p>
         <h2 class="slide-heading">What Comes Next</h2>
+        <p class="slide-body slide-subtitle">Taking advantage of other data to further enhance the map experience</p>
       </div>
-      <p class="slide-body slide-subtitle">Taking advantage of other data to further enhance the map experience</p>
       <div class="next-items">
         <div class="slide-stagger-item next-card">
           <span class="next-card-number">01</span>
@@ -429,22 +431,6 @@ const slides = [
   @use '../../../styles/scssVariables' as *;
 
   // ========================================
-  // Route nav positioning (specific to this page)
-  // ========================================
-
-  .route-nav-wrap {
-    position: fixed;
-    left: var(--spacing-7);
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
-
-    @media (width < $breakpoint-md) {
-      display: none;
-    }
-  }
-
-  // ========================================
   // Shared slide inner layouts
   // ========================================
 
@@ -459,6 +445,7 @@ const slides = [
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: var(--spacing-12);
   }
 
   .slide-inner--split {
@@ -507,7 +494,7 @@ const slides = [
     gap: var(--spacing-4);
   }
 
-  :global(.study-slide) .slide-heading {
+  .slide-heading {
     font-family: var(--font-serif);
     font-weight: 700;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -516,16 +503,15 @@ const slides = [
     color: var(--study-heading);
   }
 
-  .slide-header-group {
+  .slide-header {
     padding-left: var(--spacing-7);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-1);
   }
 
   .slide-section-label {
     font-family: var(--font-body);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -534,12 +520,12 @@ const slides = [
   }
 
   .slide-subtitle {
+    max-width: 52ch;
     font-size: clamp(1rem, 1.5vw, 1.15rem);
     line-height: 1.6;
     color: var(--study-text-muted);
     font-weight: 500;
-    margin-top: var(--spacing-5);
-    padding-left: var(--spacing-7);
+    margin-top: var(--spacing-8);
   }
 
   .slide-list {
@@ -603,12 +589,6 @@ const slides = [
   // ========================================
   // Slide 2: W2 to 1099 diagram
   // ========================================
-
-  .slide-inner--w2-1099 {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-12);
-  }
 
   .w2-1099-diagram {
     display: flex;
@@ -946,14 +926,11 @@ const slides = [
   }
 
   .route-car {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
 
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transform: rotate(-90deg);
+      transform: rotate(90deg);
     }
   }
 
