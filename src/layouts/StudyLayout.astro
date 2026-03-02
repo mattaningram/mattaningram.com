@@ -4,335 +4,343 @@ import Logo from '@components/Logo.astro'
 import StudyNav from '@components/StudyNav.astro'
 
 export interface Props {
-	title: string
-	color: string
-	slides: Array<{ id: string; title: string }>
+  title: string
+  color: string
+  slides: Array<{ id: string; title: string }>
 }
 
 const { title, color, slides } = Astro.props
 ---
 
 <BaseLayout title={title} pageColor={color} class="study-layout">
-	<nav class="study-header">
-		<a class="study-home-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
-	</nav>
+  <nav class="study-header">
+    <a class="study-home-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
+  </nav>
 
-	<slot name="nav"><StudyNav slides={slides} /></slot>
+  <slot name="nav"><StudyNav slides={slides} /></slot>
 
-	<main class="study-slides">
-		<slot />
-	</main>
+  <main class="study-slides">
+    <slot />
+  </main>
 </BaseLayout>
 
 <script>
-	import { animate, stagger, inView } from 'motion'
+  import { animate, stagger, inView } from 'motion'
 
-	const cleanups: (() => void)[] = []
-	const animated = new WeakSet<Element>()
-	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const cleanups: (() => void)[] = []
+  const animated = new WeakSet<Element>()
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-	function initStudy() {
-		cleanup()
+  function initStudy() {
+    cleanup()
 
-		const container = document.querySelector('.study-slides') as HTMLElement
-		if (!container) return
+    const container = document.querySelector('.study-slides') as HTMLElement
+    if (!container) return
 
-		const sections = Array.from(container.querySelectorAll(':scope > section')) as HTMLElement[]
-		const dots = document.querySelectorAll('.study-nav-dot')
+    const sections = Array.from(container.querySelectorAll(':scope > section')) as HTMLElement[]
+    const dots = document.querySelectorAll('.study-nav-dot')
 
-		// --- Active slide tracking via IntersectionObserver ---
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						const index = sections.indexOf(entry.target as HTMLElement)
-						dots.forEach((dot, i) => dot.classList.toggle('active', i === index))
+    // --- Active slide tracking via IntersectionObserver ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const index = sections.indexOf(entry.target as HTMLElement)
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index))
 
-						const id = (entry.target as HTMLElement).id
-						if (id) history.replaceState(null, '', `#${id}`)
-					}
-				}
-			},
-			{ root: container, threshold: 0.5 },
-		)
+            const id = (entry.target as HTMLElement).id
+            if (id) history.replaceState(null, '', `#${id}`)
+          }
+        }
+      },
+      { root: container, threshold: 0.5 },
+    )
 
-		sections.forEach((s) => observer.observe(s))
-		cleanups.push(() => observer.disconnect())
+    sections.forEach((s) => observer.observe(s))
+    cleanups.push(() => observer.disconnect())
 
-		// --- Dot nav click handling (smooth scroll within container) ---
-		dots.forEach((dot) => {
-			const handler = (e: Event) => {
-				e.preventDefault()
-				const href = (dot as HTMLAnchorElement).getAttribute('href')
-				if (!href) return
-				const target = document.querySelector(href) as HTMLElement
-				target?.scrollIntoView({ behavior: 'smooth' })
-			}
-			dot.addEventListener('click', handler)
-			cleanups.push(() => dot.removeEventListener('click', handler))
-		})
+    // --- Dot nav click handling (smooth scroll within container) ---
+    dots.forEach((dot) => {
+      const handler = (e: Event) => {
+        e.preventDefault()
+        const href = (dot as HTMLAnchorElement).getAttribute('href')
+        if (!href) return
+        const target = document.querySelector(href) as HTMLElement
+        target?.scrollIntoView({ behavior: 'smooth' })
+      }
+      dot.addEventListener('click', handler)
+      cleanups.push(() => dot.removeEventListener('click', handler))
+    })
 
-		// --- Per-slide entrance animations via inView ---
-		sections.forEach((section) => {
-			if (animated.has(section)) return
+    // --- Per-slide entrance animations via inView ---
+    sections.forEach((section) => {
+      if (animated.has(section)) return
 
-			if (reducedMotion) {
-				// Show everything immediately
-				section.querySelectorAll('.slide-heading, .slide-body, .slide-media, .slide-stagger-item').forEach((el) => {
-					;(el as HTMLElement).style.opacity = '1'
-				})
-				animated.add(section)
-				return
-			}
+      if (reducedMotion) {
+        // Show everything immediately
+        section.querySelectorAll('.slide-heading, .slide-body, .slide-media, .slide-stagger-item').forEach((el) => {
+          ;(el as HTMLElement).style.opacity = '1'
+        })
+        animated.add(section)
+        return
+      }
 
-			const stop = inView(
-				section,
-				() => {
-					if (animated.has(section)) return
-					animated.add(section)
-					animateSlide(section)
-				},
-				{ amount: 0.25 },
-			)
-			cleanups.push(stop)
-		})
+      const stop = inView(
+        section,
+        () => {
+          if (animated.has(section)) return
+          animated.add(section)
+          animateSlide(section)
+        },
+        { amount: 0.25 },
+      )
+      cleanups.push(stop)
+    })
 
-		// --- Keyboard navigation ---
-		const onKeyDown = (e: KeyboardEvent) => {
-			// Don't intercept if user is in an input or modifier keys are pressed
-			if (e.target !== document.body || e.metaKey || e.ctrlKey) return
+    // --- Keyboard navigation ---
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Don't intercept if user is in an input or modifier keys are pressed
+      if (e.target !== document.body || e.metaKey || e.ctrlKey) return
 
-			let currentIndex = 0
-			for (let i = 0; i < sections.length; i++) {
-				const rect = sections[i].getBoundingClientRect()
-				const containerRect = container.getBoundingClientRect()
-				if (rect.top >= containerRect.top - 10) {
-					currentIndex = i
-					break
-				}
-			}
+      let currentIndex = 0
+      for (let i = 0; i < sections.length; i++) {
+        const rect = sections[i].getBoundingClientRect()
+        const containerRect = container.getBoundingClientRect()
+        if (rect.top >= containerRect.top - 10) {
+          currentIndex = i
+          break
+        }
+      }
 
-			if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-				e.preventDefault()
-				const next = Math.min(currentIndex + 1, sections.length - 1)
-				sections[next]?.scrollIntoView({ behavior: 'smooth' })
-			} else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-				e.preventDefault()
-				const prev = Math.max(currentIndex - 1, 0)
-				sections[prev]?.scrollIntoView({ behavior: 'smooth' })
-			}
-		}
-		document.addEventListener('keydown', onKeyDown)
-		cleanups.push(() => document.removeEventListener('keydown', onKeyDown))
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        const next = Math.min(currentIndex + 1, sections.length - 1)
+        sections[next]?.scrollIntoView({ behavior: 'smooth' })
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault()
+        const prev = Math.max(currentIndex - 1, 0)
+        sections[prev]?.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    cleanups.push(() => document.removeEventListener('keydown', onKeyDown))
 
-		// --- Handle initial hash ---
-		const hash = window.location.hash
-		if (hash) {
-			const target = document.querySelector(hash) as HTMLElement
-			if (target && sections.includes(target)) {
-				requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }))
-			}
-		}
-	}
+    // --- Handle initial hash ---
+    const hash = window.location.hash
+    if (hash) {
+      const target = document.querySelector(hash) as HTMLElement
+      if (target && sections.includes(target)) {
+        requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }))
+      }
+    }
+  }
 
-	function animateSlide(section: HTMLElement) {
-		const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
+  function animateSlide(section: HTMLElement) {
+    const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-		const heading = section.querySelector('.slide-heading') as HTMLElement
-		const bodies = section.querySelectorAll('.slide-body')
-		const media = section.querySelector('.slide-media') as HTMLElement
-		const items = section.querySelectorAll('.slide-stagger-item')
+    const heading = section.querySelector('.slide-heading') as HTMLElement
+    const bodies = section.querySelectorAll('.slide-body')
+    const media = section.querySelector('.slide-media') as HTMLElement
+    const items = section.querySelectorAll('.slide-stagger-item')
 
-		if (heading) {
-			animate(heading, { opacity: [0, 1], y: [24, 0] } as any, { duration: 0.6, easing } as any)
-		}
+    if (heading) {
+      animate(heading, { opacity: [0, 1], y: [24, 0] } as any, { duration: 0.6, easing } as any)
+    }
 
-		if (bodies.length > 0) {
-			animate(bodies, { opacity: [0, 1], y: [16, 0] } as any, { duration: 0.6, delay: stagger(0.1, { start: 0.15 } as any), easing } as any)
-		}
+    if (bodies.length > 0) {
+      animate(
+        bodies,
+        { opacity: [0, 1], y: [16, 0] } as any,
+        { duration: 0.6, delay: stagger(0.1, { start: 0.15 } as any), easing } as any,
+      )
+    }
 
-		if (media) {
-			animate(media, { opacity: [0, 1], y: [20, 0], scale: [0.97, 1] } as any, { duration: 0.7, delay: 0.25, easing } as any)
-		}
+    if (media) {
+      animate(
+        media,
+        { opacity: [0, 1], y: [20, 0], scale: [0.97, 1] } as any,
+        { duration: 0.7, delay: 0.25, easing } as any,
+      )
+    }
 
-		if (items.length > 0) {
-			animate(
-				items,
-				{ opacity: [0, 1], y: [12, 0] } as any,
-				{ duration: 0.4, delay: stagger(0.1, { start: 0.2 } as any), easing } as any,
-			)
-		}
-	}
+    if (items.length > 0) {
+      animate(
+        items,
+        { opacity: [0, 1], y: [12, 0] } as any,
+        { duration: 0.4, delay: stagger(0.1, { start: 0.2 } as any), easing } as any,
+      )
+    }
+  }
 
-	function cleanup() {
-		cleanups.forEach((fn) => fn())
-		cleanups.length = 0
-	}
+  function cleanup() {
+    cleanups.forEach((fn) => fn())
+    cleanups.length = 0
+  }
 
-	// Init on load and Astro view transitions
-	initStudy()
-	document.addEventListener('astro:after-swap', initStudy)
-	document.addEventListener('astro:before-swap', cleanup)
+  // Init on load and Astro view transitions
+  initStudy()
+  document.addEventListener('astro:after-swap', initStudy)
+  document.addEventListener('astro:before-swap', cleanup)
 </script>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	:global(body.study-layout) {
-		--study-color: var(--page-color);
-		--study-bg: #fafafa;
-		--study-bg-alt: #f0f0f0;
-		--study-text: #1a1a2e;
-		--study-text-muted: #6b7280;
-		--study-heading: #0f172a;
-		--study-border: #e0e0e0;
+  :global(body.study-layout) {
+    --study-color: var(--page-color);
+    --study-bg: #fafafa;
+    --study-bg-alt: #f0f0f0;
+    --study-text: #1a1a2e;
+    --study-text-muted: #6b7280;
+    --study-heading: #0f172a;
+    --study-border: #e0e0e0;
 
-		background-color: var(--study-bg);
-		color: var(--study-text);
-	}
+    background-color: var(--study-bg);
+    color: var(--study-text);
+  }
 
-	.study-header {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 100;
-		padding: var(--spacing-7);
-		mix-blend-mode: difference;
-	}
+  .study-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: var(--spacing-7);
+    mix-blend-mode: difference;
+  }
 
-	.study-home-link {
-		display: block;
-		width: fit-content;
-	}
+  .study-home-link {
+    display: block;
+    width: fit-content;
+  }
 
-	.study-slides {
-		height: 100dvh;
-		overflow-y: auto;
-		scroll-snap-type: y mandatory;
+  .study-slides {
+    height: 100dvh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
 
-		@media (width < $breakpoint-md) {
-			height: auto;
-			overflow-y: visible;
-			scroll-snap-type: none;
-		}
-	}
+    @media (width < $breakpoint-md) {
+      height: auto;
+      overflow-y: visible;
+      scroll-snap-type: none;
+    }
+  }
 
-	// --- StudyNav positioning (styles for the component, applied from layout) ---
+  // --- StudyNav positioning (styles for the component, applied from layout) ---
 
-	:global(.study-nav) {
-		position: fixed;
-		left: var(--spacing-7);
-		top: 50%;
-		transform: translateY(-50%);
-		z-index: 50;
+  :global(.study-nav) {
+    position: fixed;
+    left: var(--spacing-7);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
 
-		@media (width < $breakpoint-md) {
-			display: none;
-		}
-	}
+    @media (width < $breakpoint-md) {
+      display: none;
+    }
+  }
 
-	:global(.study-nav-list) {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-4);
-	}
+  :global(.study-nav-list) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
 
-	:global(.study-nav-item) {
-		display: flex;
-		align-items: center;
-	}
+  :global(.study-nav-item) {
+    display: flex;
+    align-items: center;
+  }
 
-	:global(.study-nav-dot) {
-		display: flex;
-		align-items: center;
-		gap: var(--spacing-3);
-		text-decoration: none;
-		color: var(--study-text-muted);
-		transition: color 0.2s ease;
+  :global(.study-nav-dot) {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    text-decoration: none;
+    color: var(--study-text-muted);
+    transition: color 0.2s ease;
 
-		&:hover,
-		&:global(.active) {
-			color: var(--study-color);
-		}
-	}
+    &:hover,
+    &:global(.active) {
+      color: var(--study-color);
+    }
+  }
 
-	:global(.study-nav-dot-indicator) {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		border: 1.5px solid currentColor;
-		flex-shrink: 0;
-		transition:
-			background-color 0.3s ease,
-			border-color 0.3s ease,
-			transform 0.3s ease;
+  :global(.study-nav-dot-indicator) {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    flex-shrink: 0;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.3s ease;
 
-		:global(.study-nav-dot.active) & {
-			background-color: var(--study-color);
-			border-color: var(--study-color);
-			transform: scale(1.25);
-		}
-	}
+    :global(.study-nav-dot.active) & {
+      background-color: var(--study-color);
+      border-color: var(--study-color);
+      transform: scale(1.25);
+    }
+  }
 
-	:global(.study-nav-dot-label) {
-		font-size: 0.7rem;
-		font-weight: 500;
-		letter-spacing: 0.02em;
-		white-space: nowrap;
-		opacity: 0;
-		transform: translateX(-4px);
-		transition:
-			opacity 0.25s ease,
-			transform 0.25s ease;
-		pointer-events: none;
+  :global(.study-nav-dot-label) {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+    pointer-events: none;
 
-		:global(.study-nav:hover) & {
-			opacity: 1;
-			transform: translateX(0);
-		}
+    :global(.study-nav:hover) & {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
-		:global(.study-nav-dot.active) & {
-			color: var(--study-color);
-		}
-	}
+    :global(.study-nav-dot.active) & {
+      color: var(--study-color);
+    }
+  }
 
-	// --- Global slide styles ---
+  // --- Global slide styles ---
 
-	:global(.study-slide) {
-		min-height: 100dvh;
-		scroll-snap-align: start;
-		scroll-snap-stop: always;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--spacing-12) var(--spacing-16);
-		overflow: hidden;
-		position: relative;
+  :global(.study-slide) {
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12) var(--spacing-16);
+    overflow: hidden;
+    position: relative;
 
-		@media (width < $breakpoint-lg) {
-			padding: var(--spacing-10) var(--spacing-12);
-		}
+    @media (width < $breakpoint-lg) {
+      padding: var(--spacing-10) var(--spacing-12);
+    }
 
-		@media (width < $breakpoint-md) {
-			min-height: auto;
-			scroll-snap-align: none;
-			padding: var(--spacing-14) var(--spacing-8);
-		}
+    @media (width < $breakpoint-md) {
+      min-height: auto;
+      scroll-snap-align: none;
+      padding: var(--spacing-14) var(--spacing-8);
+    }
 
-		@media (width < $breakpoint-sm) {
-			padding: var(--spacing-12) var(--spacing-6);
-		}
-	}
+    @media (width < $breakpoint-sm) {
+      padding: var(--spacing-12) var(--spacing-6);
+    }
+  }
 
-	// --- Animation initial states (hidden until animated) ---
+  // --- Animation initial states (hidden until animated) ---
 
-	:global(.slide-heading),
-	:global(.slide-body),
-	:global(.slide-media),
-	:global(.slide-stagger-item) {
-		opacity: 0;
-	}
+  :global(.slide-heading),
+  :global(.slide-body),
+  :global(.slide-media),
+  :global(.slide-stagger-item) {
+    opacity: 0;
+  }
 </style>
