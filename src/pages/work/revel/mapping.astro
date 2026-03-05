@@ -276,84 +276,142 @@ const slides = [
         </div>
       </div>
       <div class="w2-1099-diagram">
-        <div class="diagram-row">
+        <div class="diagram-row diagram-row--subgrid">
           <div class="employment-card employment-card--w2">
             <div class="employment-card-header">
               <span class="employment-card-label">Interviews</span>
               <span class="employment-card-tag">Research</span>
-          </div>
-          <ul class="employment-card-list">
-            <li>
-              <span class="employment-card-category">Participants</span>
-              Drivers across novice to veteran experience levels
-            </li>
-            <li>
-              <span class="employment-card-category">Focus</span>
-              How and why drivers choose where to position between rides
-            </li>
-          </ul>
-          <div class="card-finding">
-            <p class="card-finding-quote">"On Lyft there's always a heat map telling you where to be. Coming here I was just parking wherever and hoping."</p>
-            <p class="card-finding-cite">Driver, 4+ years on competing platforms</p>
-          </div>
-        </div>
-        <div class="employment-card employment-card--w2">
-          <div class="employment-card-header">
-            <span class="employment-card-label">Operations</span>
-            <span class="employment-card-tag">Observation</span>
-          </div>
-          <ul class="employment-card-list">
-            <li>
-              <span class="employment-card-category">Setting</span>
-              On-site with the Revel operations team
-            </li>
-            <li>
-              <span class="employment-card-category">Focus</span>
-              How managers tracked and managed fleet distribution with existing tools
-            </li>
-          </ul>
-          <div class="card-finding card-finding--flush">
-            <Image src={OperationsMap} alt="Revel operations map showing fleet distribution across the service area" layout="full-width" />
-          </div>
-        </div>
-        <div class="employment-card employment-card--w2">
-          <div class="employment-card-header">
-            <span class="employment-card-label">Analytics</span>
-            <span class="employment-card-tag">Data</span>
-          </div>
-          <ul class="employment-card-list">
-            <li>
-              <span class="employment-card-category">Dataset</span>
-              Supply and demand distribution across service zones
-            </li>
-            <li>
-              <span class="employment-card-category">Focus</span>
-              Supply/demand distribution ratios and driver idle time across service zones
-            </li>
-          </ul>
-          <div class="card-finding card-finding--chart">
-            <p class="chart-title">Zone supply response time</p>
-            <svg class="chart-svg" viewBox="0 0 300 115" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <line x1="0" y1="98" x2="300" y2="98" stroke="var(--study-border)" stroke-width="1"/>
-              <line x1="0" y1="36" x2="300" y2="36" stroke="var(--study-border)" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.6"/>
-              <line x1="0" y1="67" x2="300" y2="67" stroke="var(--study-border)" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.6"/>
-              <path d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z" fill="var(--study-color)" opacity="0.07"/>
-              <path d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85" stroke="var(--study-color)" stroke-width="2" stroke-linecap="round"/>
-              <path d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 2"/>
-              <line x1="75" y1="31" x2="75" y2="98" stroke="var(--study-color)" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
-              <line x1="218" y1="17" x2="218" y2="98" stroke="var(--study-color)" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
-              <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="#94a3b8">7am</text>
-              <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">11am</text>
-              <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">3pm</text>
-              <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">7pm</text>
-              <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="#94a3b8">11pm</text>
-            </svg>
-            <div class="chart-legend">
-              <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
-              <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Participants</span>
+                Drivers across novice to veteran experience levels
+              </li>
+              <li>
+                <span class="employment-card-category">Focus</span>
+                How and why drivers choose where to position between rides
+              </li>
+            </ul>
+            <div class="card-finding">
+              <p class="card-finding-quote">
+                "On Lyft there's always a heat map telling you where to be. Coming here I was just parking wherever and
+                hoping."
+              </p>
+              <p class="card-finding-cite">Driver, 4+ years on competing platforms</p>
             </div>
           </div>
-        </div>
+          <div class="employment-card employment-card--w2">
+            <div class="employment-card-header">
+              <span class="employment-card-label">Operations</span>
+              <span class="employment-card-tag">Observation</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Setting</span>
+                On-site with the Revel operations team
+              </li>
+              <li>
+                <span class="employment-card-category">Focus</span>
+                How managers tracked and managed fleet distribution with existing tools
+              </li>
+            </ul>
+            <div class="card-finding card-finding--flush">
+              <Image
+                src={OperationsMap}
+                alt="Revel operations map showing fleet distribution across the service area"
+                layout="full-width"
+                fit="cover"
+              />
+            </div>
+          </div>
+          <div class="employment-card employment-card--w2">
+            <div class="employment-card-header">
+              <span class="employment-card-label">Analytics</span>
+              <span class="employment-card-tag">Data</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Dataset</span>
+                Supply and demand distribution across service zones
+              </li>
+              <li>
+                <span class="employment-card-category">Focus</span>
+                Supply/demand distribution ratios and driver idle time across service zones
+              </li>
+            </ul>
+            <div class="card-finding card-finding--chart">
+              <p class="chart-title">Zone supply response time</p>
+              <svg
+                class="chart-svg"
+                viewBox="0 0 300 115"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <line x1="0" y1="98" x2="300" y2="98" stroke="var(--study-border)" stroke-width="1"></line>
+                <line
+                  x1="0"
+                  y1="36"
+                  x2="300"
+                  y2="36"
+                  stroke="var(--study-border)"
+                  stroke-width="0.5"
+                  stroke-dasharray="3 3"
+                  opacity="0.6"></line>
+                <line
+                  x1="0"
+                  y1="67"
+                  x2="300"
+                  y2="67"
+                  stroke="var(--study-border)"
+                  stroke-width="0.5"
+                  stroke-dasharray="3 3"
+                  opacity="0.6"></line>
+                <path
+                  d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z"
+                  fill="var(--study-color)"
+                  opacity="0.07"></path>
+                <path
+                  d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85"
+                  stroke="var(--study-color)"
+                  stroke-width="2"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87"
+                  stroke="#94a3b8"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-dasharray="4 2"></path>
+                <line
+                  x1="75"
+                  y1="31"
+                  x2="75"
+                  y2="98"
+                  stroke="var(--study-color)"
+                  stroke-width="1"
+                  stroke-dasharray="2 2"
+                  opacity="0.4"></line>
+                <line
+                  x1="218"
+                  y1="17"
+                  x2="218"
+                  y2="98"
+                  stroke="var(--study-color)"
+                  stroke-width="1"
+                  stroke-dasharray="2 2"
+                  opacity="0.4"></line>
+                <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="#94a3b8">7am</text>
+                <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">11am</text>
+                <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">3pm</text>
+                <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">7pm</text>
+                <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="#94a3b8">11pm</text>
+              </svg>
+              <div class="chart-legend">
+                <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
+                <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -695,8 +753,34 @@ const slides = [
     align-items: stretch;
     gap: var(--spacing-10);
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       flex-direction: column;
+    }
+  }
+
+  .diagram-row--subgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 1fr;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: unset;
+    }
+
+    .employment-card {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      flex: unset;
+      gap: 0;
+
+      @media (width < $breakpoint-lg) {
+        grid-row: unset;
+        grid-template-rows: unset;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 
@@ -782,7 +866,7 @@ const slides = [
       gap: var(--spacing-6);
       align-items: baseline;
       border-top: 1px dashed var(--study-border);
-      padding: var(--spacing-4) var(--spacing-8);
+      padding: var(--spacing-6) var(--spacing-8);
 
       .employment-card--1099 &,
       .employment-card--gmaps & {
@@ -814,7 +898,7 @@ const slides = [
     padding: 0 var(--spacing-1);
     flex-shrink: 0;
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       padding: var(--spacing-1) 0;
     }
   }
@@ -824,7 +908,7 @@ const slides = [
     height: 32px;
     animation: arrow-bounce-h 1.6s ease-in-out infinite;
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       animation-name: arrow-bounce;
     }
   }
@@ -878,7 +962,7 @@ const slides = [
       z-index: 1;
     }
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       padding-bottom: var(--spacing-12);
     }
   }
@@ -942,7 +1026,7 @@ const slides = [
     opacity: 0;
     translate: 0 40px;
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       margin-top: var(--spacing-12);
       margin-bottom: 0;
     }
@@ -1205,7 +1289,7 @@ const slides = [
     gap: var(--spacing-6);
     width: 100%;
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       grid-template-columns: 1fr;
     }
   }
@@ -1262,7 +1346,7 @@ const slides = [
     gap: var(--spacing-6);
     width: 100%;
 
-    @media (width < $breakpoint-md) {
+    @media (width < $breakpoint-lg) {
       grid-template-columns: 1fr;
     }
   }
@@ -1348,7 +1432,7 @@ const slides = [
   // ========================================
 
   .card-finding {
-    padding: var(--spacing-4) var(--spacing-8) var(--spacing-5);
+    padding: var(--spacing-6) var(--spacing-8);
     border-top: 1px dashed var(--study-border);
     display: flex;
     flex-direction: column;
@@ -1361,13 +1445,15 @@ const slides = [
 
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
+      object-fit: cover;
     }
   }
 
   .card-finding-quote {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    font-weight: 500;
     line-height: 1.55;
     font-style: italic;
     font-family: Georgia, 'Times New Roman', serif;
@@ -1376,8 +1462,8 @@ const slides = [
   }
 
   .card-finding-cite {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--study-text-muted);
     margin: 0;
   }
@@ -1403,12 +1489,13 @@ const slides = [
 
   .chart-legend {
     display: flex;
-    gap: var(--spacing-4);
+    gap: var(--spacing-8);
     justify-content: center;
   }
 
   .chart-legend-item {
-    font-size: 0.7rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: #6b7280;
     display: flex;
     align-items: center;
@@ -1417,7 +1504,7 @@ const slides = [
     &::before {
       content: '';
       display: inline-block;
-      width: 16px;
+      width: 24px;
       height: 2px;
     }
 
@@ -1426,13 +1513,7 @@ const slides = [
     }
 
     &.chart-legend-item--supply::before {
-      background: repeating-linear-gradient(
-        to right,
-        #94a3b8 0,
-        #94a3b8 4px,
-        transparent 4px,
-        transparent 6px
-      );
+      background: repeating-linear-gradient(to right, #94a3b8 0, #94a3b8 4px, transparent 4px, transparent 6px);
     }
   }
 </style>
