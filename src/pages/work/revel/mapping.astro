@@ -5,11 +5,11 @@ import GmapsImg from '@media/revel/mapping/gmaps-bg.png'
 import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
 import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
 import { Image } from 'astro:assets'
+import OperationsMap from '@media/revel/mapping/operations-map.png'
 
 const slides = [
   { id: 'hero', title: 'Remapping Revel' },
   { id: 'w2-to-1099', title: 'Changing Contracts' },
-  { id: 'map-migration', title: 'Map Migration' },
   { id: 'map-design-system', title: 'Map Design System' },
   { id: 'drivers', title: 'Drivers: Where & Why' },
   { id: 'visualizations', title: 'Demanding Visualizations' },
@@ -21,7 +21,7 @@ const slides = [
 ---
 
 <StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" slides={slides}>
-  <RouteNav slides={slides} slot="nav" />
+  <RouteNav slides={slides} vehicleImage={CarTopdown} slot="nav" />
   <!-- Slide 1: Hero -->
   <section class="study-slide slide-hero" id="hero">
     <div class="hero-accent"></div>
@@ -56,86 +56,119 @@ const slides = [
         </div>
       </div>
       <div class="w2-1099-diagram">
-        <div class="employment-card employment-card--w2">
-          <div class="employment-card-header">
-            <span class="employment-card-label">W2</span>
-            <span class="employment-card-tag">Employee</span>
+        <div class="diagram-row">
+          <div class="employment-card employment-card--w2">
+            <div class="employment-card-header">
+              <span class="employment-card-label">W2</span>
+              <span class="employment-card-tag">Employee</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Pay</span>
+                Hourly salary with a predictable weekly paycheck
+              </li>
+              <li>
+                <span class="employment-card-category">Scheduling</span>
+                Fixed shifts assigned and managed by Revel
+              </li>
+              <li>
+                <span class="employment-card-category">Incentives</span>
+                No direct link between rides completed and take-home pay
+              </li>
+            </ul>
           </div>
-          <ul class="employment-card-list">
-            <li>
-              <span class="employment-card-category">Pay</span>
-              Hourly salary with a predictable weekly paycheck
-            </li>
-            <li>
-              <span class="employment-card-category">Scheduling</span>
-              Fixed shifts assigned and managed by Revel
-            </li>
-            <li>
-              <span class="employment-card-category">Incentives</span>
-              No direct link between rides completed and take-home pay
-            </li>
-          </ul>
-        </div>
 
-        <div class="employment-arrow" aria-hidden="true">
-          <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
-            <polyline
-              points="6,22 12,30 18,22"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              fill="none"></polyline>
-          </svg>
-        </div>
-
-        <div class="employment-card employment-card--1099">
-          <div class="employment-card-header">
-            <span class="employment-card-label">1099</span>
-            <span class="employment-card-tag">Contractor</span>
+          <div class="employment-arrow" aria-hidden="true">
+            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <polyline
+                points="6,22 12,30 18,22"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"></polyline>
+            </svg>
           </div>
-          <ul class="employment-card-list">
-            <li>
-              <span class="employment-card-category">Pay</span>
-              Per-ride earnings plus tips and completion bonuses
-            </li>
-            <li>
-              <span class="employment-card-category">Scheduling</span>
-              Self-selected hours with full flexibility over shift times
-            </li>
-            <li>
-              <span class="employment-card-category">Incentives</span>
-              More rides per hour directly increases earnings
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Slide 3: Map Migration -->
-  <section class="study-slide slide-split slide-split--reversed" id="map-migration">
-    <div class="slide-inner slide-inner--split">
-      <div class="slide-media">
-        <div class="media-placeholder">
-          <span class="media-placeholder-label">Map comparison</span>
+          <div class="employment-card employment-card--1099">
+            <div class="employment-card-header">
+              <span class="employment-card-label">1099</span>
+              <span class="employment-card-tag">Contractor</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Pay</span>
+                Per-ride earnings plus tips and completion bonuses
+              </li>
+              <li>
+                <span class="employment-card-category">Scheduling</span>
+                Self-selected hours with full flexibility over shift times
+              </li>
+              <li>
+                <span class="employment-card-category">Incentives</span>
+                More rides per hour directly increases earnings
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Infrastructure</p>
-          <h2 class="slide-heading">Map Migration</h2>
-          <p class="slide-body slide-subtitle">
-            We decided to switch from Mapbox to Google Maps for map views and location search
-          </p>
+
+        <div class="diagram-row">
+          <div class="employment-card employment-card--mapbox">
+            <div class="employment-card-header">
+              <span class="employment-card-label">Mapbox</span>
+              <span class="employment-card-tag">Before</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Cost</span>
+                Expensive per-load pricing with limited negotiating leverage
+              </li>
+              <li>
+                <span class="employment-card-category">Data</span>
+                Outdated place data and search results, frustrating riders trying to find their destination
+              </li>
+              <li>
+                <span class="employment-card-category">Support</span>
+                No existing vendor relationship to fall back on
+              </li>
+            </ul>
+          </div>
+
+          <div class="employment-arrow" aria-hidden="true">
+            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <polyline
+                points="6,22 12,30 18,22"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"></polyline>
+            </svg>
+          </div>
+
+          <div class="employment-card employment-card--gmaps">
+            <div class="employment-card-header">
+              <span class="employment-card-label">Google Maps</span>
+              <span class="employment-card-tag">After</span>
+            </div>
+            <ul class="employment-card-list">
+              <li>
+                <span class="employment-card-category">Cost</span>
+                Lower pricing via an existing Google relationship, unlocking maps in more parts of the UI
+              </li>
+              <li>
+                <span class="employment-card-category">Data</span>
+                Reliable search results and up-to-date place data for a better rider experience
+              </li>
+              <li>
+                <span class="employment-card-category">Support</span>
+                Better support through an established vendor agreement
+              </li>
+            </ul>
+          </div>
         </div>
-        <ul class="slide-body slide-list">
-          <li>Mapbox was expensive and had outdated place data, causing poor search results for riders</li>
-          <li>Google offered better pricing, traffic data, and more reliable search results</li>
-          <li>Created a shared map style and component system across all products</li>
-          <li>Lower cost per map load unlocked showing maps in more relevant parts of the UI</li>
-        </ul>
       </div>
     </div>
   </section>
@@ -147,7 +180,8 @@ const slides = [
         <p class="slide-section-label slide-body">Infrastructure</p>
         <h2 class="slide-heading">Map Design System</h2>
         <p class="slide-body slide-subtitle">
-          Opportunity to consolidate map styles and components into a single system
+          We now had an opportunity to consolidate map styles and components into a single system. Providing a
+          consistent experience for our users and scalable development for the team.
         </p>
       </div>
       <div class="route-designs">
@@ -232,39 +266,94 @@ const slides = [
   </section>
 
   <!-- Slide 4: Drivers: Where & Why -->
-  <section class="study-slide slide-split" id="drivers">
-    <div class="slide-inner slide-inner--split">
+  <section class="study-slide" id="drivers">
+    <div class="slide-inner slide-inner--centered">
       <div class="slide-text">
         <div class="slide-header">
           <p class="slide-section-label slide-body">Research</p>
           <h2 class="slide-heading">Drivers: Where & Why</h2>
           <p class="slide-body slide-subtitle">Understanding how drivers actually make positioning decisions</p>
         </div>
-        <ul class="slide-body slide-list">
-          <li>Conducted driver interviews across experience levels</li>
-          <li>Visited the operations team on-site to observe how managers used existing map tools</li>
-          <li>Analytics confirmed supply/demand distribution data showed systemic inefficiency</li>
-          <li>Pushed for investing extra dev time in the demand heatmap</li>
-        </ul>
       </div>
-      <div class="slide-media">
-        <div class="research-items">
-          <div class="slide-stagger-item research-card">
-            <span class="research-card-icon">01</span>
-            <span class="research-card-text">Driver interviews</span>
+      <div class="w2-1099-diagram">
+        <div class="diagram-row">
+          <div class="employment-card employment-card--w2">
+            <div class="employment-card-header">
+              <span class="employment-card-label">Interviews</span>
+              <span class="employment-card-tag">Research</span>
           </div>
-          <div class="slide-stagger-item research-card">
-            <span class="research-card-icon">02</span>
-            <span class="research-card-text">Ops ride-alongs</span>
+          <ul class="employment-card-list">
+            <li>
+              <span class="employment-card-category">Participants</span>
+              Drivers across novice to veteran experience levels
+            </li>
+            <li>
+              <span class="employment-card-category">Focus</span>
+              How and why drivers choose where to position between rides
+            </li>
+          </ul>
+          <div class="card-finding">
+            <p class="card-finding-quote">"On Lyft there's always a heat map telling you where to be. Coming here I was just parking wherever and hoping."</p>
+            <p class="card-finding-cite">Driver, 4+ years on competing platforms</p>
           </div>
-          <div class="slide-stagger-item research-card">
-            <span class="research-card-icon">03</span>
-            <span class="research-card-text">Analytics deep-dives</span>
+        </div>
+        <div class="employment-card employment-card--w2">
+          <div class="employment-card-header">
+            <span class="employment-card-label">Operations</span>
+            <span class="employment-card-tag">Observation</span>
           </div>
-          <div class="slide-stagger-item research-card">
-            <span class="research-card-icon">04</span>
-            <span class="research-card-text">Demand heatmap push</span>
+          <ul class="employment-card-list">
+            <li>
+              <span class="employment-card-category">Setting</span>
+              On-site with the Revel operations team
+            </li>
+            <li>
+              <span class="employment-card-category">Focus</span>
+              How managers tracked and managed fleet distribution with existing tools
+            </li>
+          </ul>
+          <div class="card-finding card-finding--flush">
+            <Image src={OperationsMap} alt="Revel operations map showing fleet distribution across the service area" layout="full-width" />
           </div>
+        </div>
+        <div class="employment-card employment-card--w2">
+          <div class="employment-card-header">
+            <span class="employment-card-label">Analytics</span>
+            <span class="employment-card-tag">Data</span>
+          </div>
+          <ul class="employment-card-list">
+            <li>
+              <span class="employment-card-category">Dataset</span>
+              Supply and demand distribution across service zones
+            </li>
+            <li>
+              <span class="employment-card-category">Focus</span>
+              Supply/demand distribution ratios and driver idle time across service zones
+            </li>
+          </ul>
+          <div class="card-finding card-finding--chart">
+            <p class="chart-title">Zone supply response time</p>
+            <svg class="chart-svg" viewBox="0 0 300 115" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="0" y1="98" x2="300" y2="98" stroke="var(--study-border)" stroke-width="1"/>
+              <line x1="0" y1="36" x2="300" y2="36" stroke="var(--study-border)" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.6"/>
+              <line x1="0" y1="67" x2="300" y2="67" stroke="var(--study-border)" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.6"/>
+              <path d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z" fill="var(--study-color)" opacity="0.07"/>
+              <path d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85" stroke="var(--study-color)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 2"/>
+              <line x1="75" y1="31" x2="75" y2="98" stroke="var(--study-color)" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+              <line x1="218" y1="17" x2="218" y2="98" stroke="var(--study-color)" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+              <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="#94a3b8">7am</text>
+              <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">11am</text>
+              <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">3pm</text>
+              <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">7pm</text>
+              <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="#94a3b8">11pm</text>
+            </svg>
+            <div class="chart-legend">
+              <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
+              <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -444,8 +533,11 @@ const slides = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: var(--spacing-12);
+
+    .slide-header {
+      text-align: center;
+    }
   }
 
   .slide-inner--split {
@@ -592,10 +684,16 @@ const slides = [
 
   .w2-1099-diagram {
     display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    width: 100%;
+  }
+
+  .diagram-row {
+    display: flex;
     flex-direction: row;
     align-items: stretch;
     gap: var(--spacing-10);
-    width: 100%;
 
     @media (width < $breakpoint-md) {
       flex-direction: column;
@@ -609,12 +707,21 @@ const slides = [
     overflow: hidden;
 
     &--w2 {
-      opacity: 0.75;
       border-style: dashed;
-      background-color: var(--study-bg-alt);
+      background-color: white;
     }
 
     &--1099 {
+      border-color: var(--study-color);
+      background-color: var(--study-color);
+    }
+
+    &--mapbox {
+      border-style: dashed;
+      background-color: white;
+    }
+
+    &--gmaps {
       border-color: var(--study-color);
       background-color: var(--study-color);
     }
@@ -635,7 +742,8 @@ const slides = [
     color: var(--study-heading);
     letter-spacing: -0.01em;
 
-    .employment-card--1099 & {
+    .employment-card--1099 &,
+    .employment-card--gmaps & {
       color: #fff;
     }
   }
@@ -650,7 +758,8 @@ const slides = [
     border-radius: 4px;
     padding: 2px 6px;
 
-    .employment-card--1099 & {
+    .employment-card--1099 &,
+    .employment-card--gmaps & {
       color: rgba(255, 255, 255, 0.85);
       border-color: rgba(255, 255, 255, 0.4);
       background-color: rgba(255, 255, 255, 0.15);
@@ -675,7 +784,8 @@ const slides = [
       border-top: 1px dashed var(--study-border);
       padding: var(--spacing-4) var(--spacing-8);
 
-      .employment-card--1099 & {
+      .employment-card--1099 &,
+      .employment-card--gmaps & {
         color: #fff;
         border-top-style: solid;
         border-top-color: rgba(255, 255, 255, 0.2);
@@ -690,7 +800,8 @@ const slides = [
     text-transform: uppercase;
     color: #666;
 
-    .employment-card--1099 & {
+    .employment-card--1099 &,
+    .employment-card--gmaps & {
       color: rgba(255, 255, 255, 0.7);
     }
   }
@@ -1230,6 +1341,99 @@ const slides = [
     font-size: 0.875rem;
     line-height: 1.5;
     color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Slide 4: Card findings (inside driver cards)
+  // ========================================
+
+  .card-finding {
+    padding: var(--spacing-4) var(--spacing-8) var(--spacing-5);
+    border-top: 1px dashed var(--study-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .card-finding--flush {
+    padding: 0;
+    border-top: 1px dashed var(--study-border);
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .card-finding-quote {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--study-text);
+    margin: 0;
+  }
+
+  .card-finding-cite {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--study-text-muted);
+    margin: 0;
+  }
+
+  .card-finding--chart {
+    gap: var(--spacing-3);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .chart-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--study-text);
+    margin: 0;
+    padding: 0 var(--spacing-8);
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+  }
+
+  .chart-legend-item {
+    font-size: 0.7rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 2px;
+    }
+
+    &.chart-legend-item--demand::before {
+      background: var(--study-color);
+    }
+
+    &.chart-legend-item--supply::before {
+      background: repeating-linear-gradient(
+        to right,
+        #94a3b8 0,
+        #94a3b8 4px,
+        transparent 4px,
+        transparent 6px
+      );
+    }
   }
 </style>
 

@@ -9,6 +9,7 @@
 - Keep reusable components simple and animation-free. Apply animations at the usage site, not inside the component itself. This allows the same component to be used with different animations in different contexts.
 - Do not add positioning styles (margin, padding, absolute/relative positioning) to reusable components. These should always be set where the component is used, since positioning requirements vary by context.
 - When creating Astro components that need to receive a `class` or styles from a parent, always accept `class` and spread `...rest` onto the root element: `const { class: className, ...rest } = Astro.props` then `class:list={[className]} {...rest}`. This lets the parent apply scoped styles without needing `:global()`.
+- Use existing components and patterns when possible, rather than creating new ones. For example use the `Image` component from Astro for images, rather than an `<img>` tag.
 
 # Tools
 

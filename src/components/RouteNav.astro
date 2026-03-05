@@ -1,9 +1,13 @@
 ---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
 export interface Props {
   slides: Array<{ id: string; title: string }>
+  vehicleImage?: ImageMetadata
 }
 
-const { slides, ...rest } = Astro.props
+const { slides, vehicleImage, ...rest } = Astro.props
 ---
 
 <div class="route-nav-wrap" {...rest}>
@@ -11,6 +15,19 @@ const { slides, ...rest } = Astro.props
     <div class="route-track">
       <div class="route-track-fill"></div>
     </div>
+    {
+      vehicleImage && (
+        <Image
+          class="route-vehicle"
+          width="48"
+          height="48"
+          layout="constrained"
+          src={vehicleImage}
+          alt=""
+          aria-hidden="true"
+        />
+      )
+    }
     <ol class="route-stops">
       {
         slides.map((slide, index) => (
@@ -41,6 +58,7 @@ const { slides, ...rest } = Astro.props
     const links = Array.from(nav.querySelectorAll('.route-stop-link')) as HTMLElement[]
     const trackFill = nav.querySelector('.route-track-fill') as HTMLElement
     const track = nav.querySelector('.route-track') as HTMLElement
+    const vehicle = nav.querySelector('.route-vehicle') as HTMLElement | null
 
     function positionTrack() {
       const firstDot = stops[0]?.querySelector('.route-stop-dot') as HTMLElement
@@ -68,6 +86,12 @@ const { slides, ...rest } = Astro.props
           const dotRect = activeDot.getBoundingClientRect()
           const fillHeight = (dotRect.top + dotRect.height / 2 - trackRect.top) / scale
           trackFill.style.height = `${Math.max(0, fillHeight)}px`
+
+          if (vehicle) {
+            const navRect = nav.getBoundingClientRect()
+            const vehicleTop = (dotRect.top + dotRect.height / 2 - navRect.top) / scale
+            vehicle.style.top = `${vehicleTop}px`
+          }
         }
       }
     }
@@ -165,6 +189,18 @@ const { slides, ...rest } = Astro.props
     transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .route-vehicle {
+    position: absolute;
+    left: calc(var(--dot-size) / 2);
+    top: 0;
+    width: 48px;
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+    pointer-events: none;
+    z-index: 2;
+    transition: top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
+  }
+
   .route-stops {
     list-style: none;
     padding: 0;
@@ -185,6 +221,7 @@ const { slides, ...rest } = Astro.props
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
+    gap: var(--spacing-6);
 
     &:hover {
       .route-stop-label {
