@@ -1,0 +1,170 @@
+---
+const { class: className, ...rest } = Astro.props
+---
+
+<div class:list={['viz-travel', className]} {...rest} aria-hidden="true">
+  <svg class="viz-svg" viewBox="0 0 280 130" fill="none">
+    <circle
+      class="viz-ref"
+      cx="140"
+      cy="60"
+      r="50"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-dasharray="4 3"
+      opacity="0.25"
+    />
+    <path
+      class="viz-ring"
+      d="M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z"
+      fill="currentColor"
+      fill-opacity="0.06"
+      stroke="currentColor"
+      stroke-width="1.5"
+    />
+    <g class="viz-traffic" opacity="0">
+      <line x1="178" y1="50" x2="188" y2="50" />
+      <line x1="178" y1="56" x2="186" y2="56" />
+      <line x1="178" y1="62" x2="190" y2="62" />
+      <line x1="178" y1="68" x2="184" y2="68" />
+    </g>
+    <circle cx="140" cy="60" r="4" fill="var(--study-heading)" />
+    <text class="viz-label viz-label--dist" x="140" y="122" text-anchor="middle">Distance</text>
+    <text class="viz-label viz-label--time" x="140" y="122" text-anchor="middle" opacity="0">Travel time</text>
+  </svg>
+</div>
+
+<style lang="scss">
+  .viz-travel {
+    width: 100%;
+    color: var(--study-color);
+  }
+
+  .viz-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .viz-ring {
+    animation: morph-ring 8s ease-in-out infinite;
+  }
+
+  .viz-traffic line {
+    stroke: var(--study-text-muted);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .viz-traffic {
+    animation: show-traffic 8s ease-in-out infinite;
+  }
+
+  .viz-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--study-text-muted);
+  }
+
+  .viz-label--dist {
+    animation: fade-dist 8s ease-in-out infinite;
+  }
+
+  .viz-label--time {
+    animation: fade-time 8s ease-in-out infinite;
+  }
+
+  @keyframes morph-ring {
+    0%,
+    22% {
+      d: path(
+        'M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z'
+      );
+    }
+    46%,
+    72% {
+      d: path(
+        'M178,56 C184,86 170,112 142,116 C108,122 74,94 78,58 C68,22 112,4 144,8 C180,4 194,30 178,56 Z'
+      );
+    }
+    100% {
+      d: path(
+        'M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z'
+      );
+    }
+  }
+
+  @keyframes fade-dist {
+    0%,
+    22% {
+      opacity: 1;
+    }
+    36%,
+    72% {
+      opacity: 0;
+    }
+    88%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-time {
+    0%,
+    22% {
+      opacity: 0;
+    }
+    36%,
+    72% {
+      opacity: 1;
+    }
+    88%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes show-traffic {
+    0%,
+    30% {
+      opacity: 0;
+    }
+    46%,
+    66% {
+      opacity: 0.5;
+    }
+    82%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-ring,
+    .viz-traffic,
+    .viz-label--dist,
+    .viz-label--time {
+      animation: none;
+    }
+
+    .viz-ring {
+      d: path(
+        'M178,56 C184,86 170,112 142,116 C108,122 74,94 78,58 C68,22 112,4 144,8 C180,4 194,30 178,56 Z'
+      );
+    }
+
+    .viz-traffic {
+      opacity: 0.5;
+    }
+
+    .viz-label--dist {
+      opacity: 0;
+    }
+
+    .viz-label--time {
+      opacity: 1;
+    }
+  }
+</style>

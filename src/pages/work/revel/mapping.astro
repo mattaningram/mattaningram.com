@@ -7,6 +7,9 @@ import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
 import { Image } from 'astro:assets'
 import OperationsMap from '@media/revel/mapping/operations-map.png'
 import StudyCarousel from '@components/StudyCarousel.astro'
+import DecisionAbsolute from '@media/revel/mapping/DecisionAbsolute.astro'
+import DecisionTravelTime from '@media/revel/mapping/DecisionTravelTime.astro'
+import DecisionCadence from '@media/revel/mapping/DecisionCadence.astro'
 
 const slides = [
   { id: 'hero', title: 'Remapping Revel' },
@@ -457,26 +460,36 @@ const slides = [
       </div>
       <div class="decision-cards">
         <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <DecisionAbsolute />
+          </div>
           <div class="decision-card-number">01</div>
           <h3 class="decision-card-title">Absolute Demand</h3>
           <p class="decision-card-body">
-            Absolute demand felt stable and trustworthy; relative demand felt unpredictable and was abandoned after
-            driver testing
+            Initially the team felt relative demand would be a smart way to show drivers where the most relevant demand
+            was, but it was abandoned after driver testing in favor of the more stable absolute demand approach.
           </p>
         </div>
         <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <DecisionTravelTime />
+          </div>
           <div class="decision-card-number">02</div>
           <h3 class="decision-card-title">Travel-Time Weighted</h3>
           <p class="decision-card-body">
-            Factored in real-time traffic so a nearby medium-demand zone could outrank a distant high-demand one
+            However sometimes a high demand zone relatively nearby has a longer travel time. So we factored in real-time
+            traffic to adjust the demand score so a nearby medium-demand zone could outrank a distant high-demand one.
           </p>
         </div>
         <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <DecisionCadence />
+          </div>
           <div class="decision-card-number">03</div>
           <h3 class="decision-card-title">Update Cadence</h3>
           <p class="decision-card-body">
-            Minute-by-minute updates were too distracting while driving; 10-minute refreshes balanced freshness with
-            calm
+            After some testing, we settled on a 10-minute update cadence with some averaging over time to provide data
+            that was up to date but not distractingly changing from minute to minute.
           </p>
         </div>
       </div>
@@ -1356,6 +1369,14 @@ const slides = [
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
+  }
+
+  .decision-card-viz {
+    margin: calc(-1 * var(--spacing-8)) calc(-1 * var(--spacing-8)) var(--spacing-3);
+    padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
   }
 
   .decision-card-number {

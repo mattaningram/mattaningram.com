@@ -1,0 +1,225 @@
+---
+const { class: className, ...rest } = Astro.props
+---
+
+<div class:list={['viz-cadence', className]} {...rest} aria-hidden="true">
+  <svg class="viz-svg" viewBox="0 0 280 130" fill="none">
+    <rect class="cad-zone" x="24" y="8" width="42" height="50" rx="5" />
+    <rect class="cad-zone" x="74" y="8" width="42" height="50" rx="5" />
+    <rect class="cad-zone" x="124" y="8" width="42" height="50" rx="5" />
+    <rect class="cad-zone" x="174" y="8" width="42" height="50" rx="5" />
+    <rect class="cad-zone" x="224" y="8" width="42" height="50" rx="5" />
+
+    <line class="cad-axis" x1="24" y1="82" x2="266" y2="82" />
+
+    <line class="cad-tick-fast" x1="24" y1="76" x2="24" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="58.6" y1="76" x2="58.6" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="93.1" y1="76" x2="93.1" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="127.7" y1="76" x2="127.7" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="162.3" y1="76" x2="162.3" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="196.9" y1="76" x2="196.9" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="231.4" y1="76" x2="231.4" y2="88" opacity="0" />
+    <line class="cad-tick-fast" x1="266" y1="76" x2="266" y2="88" opacity="0" />
+
+    <line class="cad-tick-slow" x1="24" y1="76" x2="24" y2="88" opacity="0" />
+    <line class="cad-tick-slow" x1="145" y1="76" x2="145" y2="88" opacity="0" />
+    <line class="cad-tick-slow" x1="266" y1="76" x2="266" y2="88" opacity="0" />
+
+    <line class="cad-sweep" x1="24" y1="5" x2="24" y2="90" opacity="0" />
+
+    <text class="cad-label cad-label--fast" x="140" y="118" text-anchor="middle">1s updates</text>
+    <text class="cad-label cad-label--slow" x="140" y="118" text-anchor="middle" opacity="0">10s updates</text>
+  </svg>
+</div>
+
+<style lang="scss">
+  .viz-cadence {
+    width: 100%;
+  }
+
+  .viz-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .cad-zone {
+    fill: var(--study-color);
+    opacity: 0.3;
+  }
+
+  .cad-axis {
+    stroke: var(--study-border);
+    stroke-width: 1;
+  }
+
+  .cad-tick-fast,
+  .cad-tick-slow {
+    stroke: var(--study-color);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .cad-sweep {
+    stroke: var(--study-color);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.5;
+  }
+
+  .cad-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--study-text-muted);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.viz-cadence').forEach((el) => {
+    const svg = el.querySelector('svg')
+    if (!svg) return
+
+    const zones = Array.from(svg.querySelectorAll('.cad-zone')) as SVGElement[]
+    const ticksFast = Array.from(svg.querySelectorAll('.cad-tick-fast')) as SVGElement[]
+    const ticksSlow = Array.from(svg.querySelectorAll('.cad-tick-slow')) as SVGElement[]
+    const sweep = svg.querySelector('.cad-sweep') as SVGLineElement
+    const labelFast = svg.querySelector('.cad-label--fast') as SVGTextElement
+    const labelSlow = svg.querySelector('.cad-label--slow') as SVGTextElement
+    if (!sweep || !labelFast || !labelSlow) return
+
+    const X0 = 24,
+      X1 = 266
+    const DUR = 14000
+    const N_FAST = 8,
+      N_SLOW = 3
+
+    const fastSeq = [
+      [0.3, 0.7, 0.5, 0.2, 0.6],
+      [0.8, 0.15, 0.9, 0.5, 0.1],
+      [0.1, 0.8, 0.2, 0.9, 0.4],
+      [0.7, 0.3, 0.6, 0.1, 0.85],
+      [0.15, 0.9, 0.3, 0.7, 0.2],
+      [0.85, 0.1, 0.7, 0.25, 0.9],
+      [0.2, 0.65, 0.1, 0.8, 0.3],
+      [0.6, 0.2, 0.85, 0.4, 0.15],
+    ]
+
+    const slowSeq = [
+      [0.5, 0.45, 0.65, 0.4, 0.55],
+      [0.55, 0.42, 0.6, 0.43, 0.5],
+      [0.52, 0.47, 0.62, 0.41, 0.53],
+    ]
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      zones.forEach((z, i) => z.setAttribute('opacity', String(slowSeq[0][i])))
+      labelFast.setAttribute('opacity', '0')
+      labelSlow.setAttribute('opacity', '1')
+      ticksSlow.forEach((t) => t.setAttribute('opacity', '0.4'))
+      return
+    }
+
+    let running = false
+    let t0: number | null = null
+    let prevFastTick = -1,
+      prevSlowTick = -1
+
+    const obs = new IntersectionObserver(([e]) => {
+      const was = running
+      running = e.isIntersecting
+      if (running && !was) requestAnimationFrame(frame)
+    })
+    obs.observe(el)
+
+    function frame(ts: number) {
+      if (!running || document.hidden) {
+        t0 = null
+        return
+      }
+      if (!t0) t0 = ts
+      const t = ((ts - t0) % DUR) / DUR
+
+      if (t < 0.4) {
+        const p = t / 0.4
+        const sweepX = X0 + (X1 - X0) * p
+        sweep.setAttribute('x1', String(sweepX))
+        sweep.setAttribute('x2', String(sweepX))
+        sweep.setAttribute('opacity', '0.5')
+
+        const tickIdx = Math.min(Math.floor(p * N_FAST), N_FAST - 1)
+        if (tickIdx !== prevFastTick) {
+          prevFastTick = tickIdx
+          ticksFast.forEach((tk, i) => tk.setAttribute('opacity', i <= tickIdx ? '0.5' : '0'))
+          const opacities = fastSeq[tickIdx]
+          zones.forEach((z, i) => {
+            ;(z as unknown as HTMLElement).style.transition = 'none'
+            z.setAttribute('opacity', String(opacities[i]))
+          })
+        }
+
+        ticksSlow.forEach((tk) => tk.setAttribute('opacity', '0'))
+        labelFast.setAttribute('opacity', '1')
+        labelSlow.setAttribute('opacity', '0')
+      } else if (t < 0.5) {
+        const p = (t - 0.4) / 0.1
+        sweep.setAttribute('opacity', String(Math.max(0, 1 - p * 4) * 0.5))
+
+        if (prevFastTick !== -1) {
+          ticksFast.forEach((tk) => tk.setAttribute('opacity', '0'))
+          prevFastTick = -1
+          prevSlowTick = -1
+          const target = slowSeq[0]
+          zones.forEach((z, i) => {
+            ;(z as unknown as HTMLElement).style.transition = 'opacity 0.6s ease'
+            z.setAttribute('opacity', String(target[i]))
+          })
+        }
+
+        labelFast.setAttribute('opacity', String(1 - p))
+        labelSlow.setAttribute('opacity', String(p))
+      } else if (t < 0.9) {
+        const p = (t - 0.5) / 0.4
+        const sweepX = X0 + (X1 - X0) * p
+        sweep.setAttribute('x1', String(sweepX))
+        sweep.setAttribute('x2', String(sweepX))
+        sweep.setAttribute('opacity', '0.5')
+
+        const tickIdx = Math.min(Math.floor(p * N_SLOW), N_SLOW - 1)
+        if (tickIdx !== prevSlowTick) {
+          prevSlowTick = tickIdx
+          ticksSlow.forEach((tk, i) => tk.setAttribute('opacity', i <= tickIdx ? '0.5' : '0'))
+          const opacities = slowSeq[tickIdx]
+          zones.forEach((z, i) => {
+            ;(z as unknown as HTMLElement).style.transition = 'opacity 0.8s ease'
+            z.setAttribute('opacity', String(opacities[i]))
+          })
+        }
+
+        ticksFast.forEach((tk) => tk.setAttribute('opacity', '0'))
+        labelFast.setAttribute('opacity', '0')
+        labelSlow.setAttribute('opacity', '1')
+      } else {
+        const p = (t - 0.9) / 0.1
+        sweep.setAttribute('opacity', String(Math.max(0, 1 - p * 4) * 0.5))
+
+        if (prevSlowTick !== -1) {
+          ticksSlow.forEach((tk) => tk.setAttribute('opacity', '0'))
+          prevSlowTick = -1
+          prevFastTick = -1
+          const target = fastSeq[0]
+          zones.forEach((z, i) => {
+            ;(z as unknown as HTMLElement).style.transition = 'opacity 0.4s ease'
+            z.setAttribute('opacity', String(target[i]))
+          })
+        }
+
+        labelFast.setAttribute('opacity', String(p))
+        labelSlow.setAttribute('opacity', String(1 - p))
+      }
+
+      requestAnimationFrame(frame)
+    }
+  })
+</script>

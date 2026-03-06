@@ -1,0 +1,166 @@
+---
+const { class: className, ...rest } = Astro.props
+---
+
+<div class:list={['viz-absolute', className]} {...rest} aria-hidden="true">
+  <svg class="viz-svg" viewBox="0 0 280 130" fill="none">
+    <rect class="viz-zone" x="12" y="10" width="48" height="36" rx="5" />
+    <rect class="viz-zone" x="68" y="18" width="42" height="46" rx="5" />
+    <rect class="viz-zone" x="118" y="8" width="48" height="50" rx="5" />
+    <rect class="viz-zone" x="176" y="16" width="50" height="40" rx="5" />
+    <rect class="viz-zone" x="236" y="12" width="34" height="42" rx="5" />
+    <line class="viz-trail" x1="15" y1="82" x2="15" y2="82" />
+    <circle class="viz-car" cx="15" cy="82" r="4.5" />
+    <text class="viz-mode viz-mode--rel" x="140" y="120" text-anchor="middle">Relative</text>
+    <text class="viz-mode viz-mode--abs" x="140" y="120" text-anchor="middle" opacity="0">Absolute</text>
+  </svg>
+</div>
+
+<style lang="scss">
+  .viz-absolute {
+    width: 100%;
+  }
+
+  .viz-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .viz-zone {
+    fill: var(--study-color);
+    opacity: 0.3;
+  }
+
+  .viz-car {
+    fill: var(--study-heading);
+  }
+
+  .viz-trail {
+    stroke: var(--study-heading);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 3 4;
+    opacity: 0.12;
+  }
+
+  .viz-mode {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--study-text-muted);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.viz-absolute').forEach((el) => {
+    const svg = el.querySelector('svg')
+    if (!svg) return
+
+    const zones = Array.from(svg.querySelectorAll('.viz-zone')) as SVGElement[]
+    const car = svg.querySelector('.viz-car') as SVGCircleElement
+    const trail = svg.querySelector('.viz-trail') as SVGLineElement
+    const labelRel = svg.querySelector('.viz-mode--rel') as SVGTextElement
+    const labelAbs = svg.querySelector('.viz-mode--abs') as SVGTextElement
+    if (!car || !trail || !labelRel || !labelAbs) return
+
+    const cx = [36, 89, 142, 201, 253]
+    const base = [0.25, 0.6, 0.8, 0.4, 0.55]
+    const X0 = 15,
+      X1 = 265
+    const DUR = 14000
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      zones.forEach((z, i) => z.setAttribute('opacity', String(base[i])))
+      labelRel.setAttribute('opacity', '0')
+      labelAbs.setAttribute('opacity', '1')
+      car.setAttribute('cx', '140')
+      return
+    }
+
+    const relEnd = cx.map((c) => 0.08 + Math.max(0, 1 - Math.abs(X1 - c) / 70) * 0.8)
+    const relStart = cx.map((c) => 0.08 + Math.max(0, 1 - Math.abs(X0 - c) / 70) * 0.8)
+
+    let running = false
+    let t0: number | null = null
+
+    const obs = new IntersectionObserver(([e]) => {
+      const was = running
+      running = e.isIntersecting
+      if (running && !was) requestAnimationFrame(frame)
+    })
+    obs.observe(el)
+
+    function frame(ts: number) {
+      if (!running || document.hidden) {
+        t0 = null
+        return
+      }
+      if (!t0) t0 = ts
+      const t = ((ts - t0) % DUR) / DUR
+
+      let carX: number,
+        carOp = 1
+
+      if (t < 0.4) {
+        const p = t / 0.4
+        carX = X0 + (X1 - X0) * p
+        zones.forEach((z, i) => {
+          const prox = Math.max(0, 1 - Math.abs(carX - cx[i]) / 70)
+          z.setAttribute('opacity', String(0.08 + prox * 0.8))
+        })
+        labelRel.setAttribute('opacity', '1')
+        labelAbs.setAttribute('opacity', '0')
+      } else if (t < 0.5) {
+        const p = (t - 0.4) / 0.1
+        if (p < 0.35) {
+          carOp = 1 - p / 0.35
+          carX = X1
+        } else if (p < 0.65) {
+          carOp = 0
+          carX = X0
+        } else {
+          carOp = (p - 0.65) / 0.35
+          carX = X0
+        }
+        zones.forEach((z, i) => {
+          z.setAttribute('opacity', String(relEnd[i] + (base[i] - relEnd[i]) * p))
+        })
+        labelRel.setAttribute('opacity', String(1 - p))
+        labelAbs.setAttribute('opacity', String(p))
+      } else if (t < 0.9) {
+        const p = (t - 0.5) / 0.4
+        carX = X0 + (X1 - X0) * p
+        zones.forEach((z, i) => z.setAttribute('opacity', String(base[i])))
+        labelRel.setAttribute('opacity', '0')
+        labelAbs.setAttribute('opacity', '1')
+      } else {
+        const p = (t - 0.9) / 0.1
+        if (p < 0.35) {
+          carOp = 1 - p / 0.35
+          carX = X1
+        } else if (p < 0.65) {
+          carOp = 0
+          carX = X0
+        } else {
+          carOp = (p - 0.65) / 0.35
+          carX = X0
+        }
+        zones.forEach((z, i) => {
+          z.setAttribute('opacity', String(base[i] + (relStart[i] - base[i]) * p))
+        })
+        labelRel.setAttribute('opacity', String(p))
+        labelAbs.setAttribute('opacity', String(1 - p))
+      }
+
+      car.setAttribute('cx', String(carX))
+      car.setAttribute('opacity', String(carOp))
+      trail.setAttribute('x2', carOp > 0.1 ? String(carX) : String(X0))
+      trail.setAttribute('opacity', String(carOp * 0.12))
+
+      requestAnimationFrame(frame)
+    }
+  })
+</script>
