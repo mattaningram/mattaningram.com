@@ -132,16 +132,33 @@ entries.sort(([a], [b]) => a.localeCompare(b))
     const original = Array.from(carousel.children) as HTMLElement[]
     if (original.length < 2) return
 
-    // Duplicate all items for seamless infinite loop
+    // Prepend clones for leftward scroll, append for rightward scroll
+    original
+      .slice()
+      .reverse()
+      .forEach((item) => carousel.insertBefore(item.cloneNode(true), carousel.firstChild))
     original.forEach((item) => carousel.appendChild(item.cloneNode(true)))
 
+    const n = original.length
     let setWidth = 0
+    let initialized = false
 
     const measure = () => {
-      const first = carousel.children[0] as HTMLElement
-      const firstClone = carousel.children[original.length] as HTMLElement
-      // setWidth = distance from first original to first clone (i.e. one full set of items + gaps)
-      setWidth = firstClone.offsetLeft - first.offsetLeft
+      const firstOriginal = carousel.children[n] as HTMLElement
+      const firstAfterClone = carousel.children[n * 2] as HTMLElement
+      const newSetWidth = firstAfterClone.offsetLeft - firstOriginal.offsetLeft
+      if (!newSetWidth) return
+
+      if (!initialized) {
+        setWidth = newSetWidth
+        carousel.scrollLeft = setWidth
+        initialized = true
+      } else {
+        // Preserve relative position within the originals section on remeasure
+        const relative = carousel.scrollLeft - setWidth
+        setWidth = newSetWidth
+        carousel.scrollLeft = setWidth + relative
+      }
     }
 
     requestAnimationFrame(measure)
@@ -154,9 +171,9 @@ entries.sort(([a], [b]) => a.localeCompare(b))
       'scroll',
       () => {
         if (!setWidth) return
-        if (carousel.scrollLeft >= setWidth) {
+        if (carousel.scrollLeft >= setWidth * 2) {
           carousel.scrollLeft -= setWidth
-        } else if (carousel.scrollLeft < 0) {
+        } else if (carousel.scrollLeft < setWidth) {
           carousel.scrollLeft += setWidth
         }
       },

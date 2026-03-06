@@ -430,7 +430,18 @@ const slides = [
           <p class="slide-body slide-subtitle">From H3 hexagons to human-readable neighborhood zones</p>
         </div>
       </div>
-      <StudyCarousel folder="revel/mapping/exploration" />
+      <div class="carousel-tabs-wrap">
+        <div class="carousel-tabs">
+          <button class="carousel-tab carousel-tab--active" data-target="carousel-mobile">Mobile</button>
+          <button class="carousel-tab" data-target="carousel-desktop">Desktop</button>
+        </div>
+        <div id="carousel-mobile" class="carousel-panel">
+          <StudyCarousel folder="revel/mapping/exploration/mobile" />
+        </div>
+        <div id="carousel-desktop" class="carousel-panel carousel-panel--hidden">
+          <StudyCarousel folder="revel/mapping/exploration/desktop" width={600} />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -438,10 +449,10 @@ const slides = [
   <section class="study-slide slide-decisions" id="decisions">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
-        <p class="slide-section-label slide-body">Design</p>
+        <p class="slide-section-label slide-body">Execution</p>
         <h2 class="slide-heading">Key Design Decisions</h2>
         <p class="slide-body slide-subtitle decisions-subtitle">
-          Three decisions that made the heatmap trustworthy and usable while driving
+          Making the heatmap trustworthy and usable while driving involved more than visual design.
         </p>
       </div>
       <div class="decision-cards">
@@ -588,6 +599,7 @@ const slides = [
 
     .slide-header {
       text-align: center;
+      padding-inline: var(--spacing-8);
     }
   }
 
@@ -659,6 +671,7 @@ const slides = [
     text-transform: uppercase;
     color: var(--study-color);
     line-height: 1.4;
+    margin-bottom: var(--spacing-4);
   }
 
   .slide-subtitle {
@@ -1274,6 +1287,47 @@ const slides = [
     }
   }
 
+  .carousel-tabs-wrap {
+    width: 100%;
+  }
+
+  .carousel-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-3);
+    padding-inline: var(--page-gutter);
+    padding-bottom: var(--spacing-4);
+  }
+
+  .carousel-tab {
+    background: none;
+    border: 1.5px solid var(--study-border);
+    border-radius: 999px;
+    padding: var(--spacing-4) var(--spacing-10);
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    cursor: pointer;
+    transition: 0.15s ease;
+    transition-property: background, color, border-color;
+
+    &:not(&--active):hover {
+      border-color: var(--study-color);
+      color: var(--study-heading);
+    }
+
+    &--active {
+      background: hsl(from var(--study-color) h s l / 0.18);
+      border-color: var(--study-color);
+      color: hsl(from var(--study-color) h s calc(l * 0.75));
+    }
+  }
+
+  .carousel-panel--hidden {
+    display: none;
+  }
+
   // ========================================
   // Slide 6: Decision cards
   // ========================================
@@ -1516,6 +1570,21 @@ const slides = [
     }
   }
 </style>
+
+<script>
+  // Carousel tabs
+  document.querySelectorAll<HTMLElement>('.carousel-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const wrap = tab.closest('.carousel-tabs-wrap')
+      if (!wrap) return
+      const targetId = tab.dataset.target
+      wrap.querySelectorAll<HTMLElement>('.carousel-tab').forEach((t) => t.classList.remove('carousel-tab--active'))
+      wrap.querySelectorAll<HTMLElement>('.carousel-panel').forEach((p) => p.classList.add('carousel-panel--hidden'))
+      tab.classList.add('carousel-tab--active')
+      wrap.querySelector<HTMLElement>(`#${targetId}`)?.classList.remove('carousel-panel--hidden')
+    })
+  })
+</script>
 
 <script>
   import { animate, stagger, inView } from 'motion'
