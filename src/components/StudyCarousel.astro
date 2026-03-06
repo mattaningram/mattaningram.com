@@ -1,0 +1,166 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface Props {
+  folder?: string
+  width?: number
+  class?: string
+  [key: string]: unknown
+}
+
+const images = import.meta.glob<{ default: ImageMetadata }>('@media/**/*.{jpg,jpeg,png,webp,gif}')
+
+const { folder: folderProp, width = 300, class: className, ...rest } = Astro.props as Props
+
+const folder = folderProp?.replace(/^\/+|\/+$/g, '')
+
+let entries = Object.entries(images)
+if (folder) {
+  const segment = `/${folder}/`
+  entries = entries.filter(([p]) => p.includes(segment))
+}
+entries.sort(([a], [b]) => a.localeCompare(b))
+---
+
+<div class:list={['study-carousel-wrap', className]} {...rest}>
+  <ul class="study-carousel photoswipe-gallery" role="list">
+    {
+      entries.map(async ([_path, image], index) => {
+        const { default: imageData } = await image()
+        const altText =
+          _path
+            .split('/')
+            .pop()
+            ?.replace(/\.[^.]+$/, '')
+            ?.replace(/^\d+\./, '')
+            ?.replace(/-/g, ' ')
+            ?.trim() ?? ''
+        return (
+          <li class="study-carousel-item">
+            <a
+              class="study-carousel-link no-outline"
+              href={imageData.src}
+              data-pswp-width={imageData.width}
+              data-pswp-height={imageData.height}
+            >
+              <Image
+                class="study-carousel-image"
+                src={imageData}
+                alt={altText}
+                width={width}
+                layout="constrained"
+                loading={index < 6 ? 'eager' : 'lazy'}
+              />
+            </a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</div>
+
+<style lang="scss">
+  .study-carousel-wrap {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .study-carousel {
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-10);
+    padding: var(--spacing-16) var(--page-gutter);
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .study-carousel-item {
+    flex-shrink: 0;
+    border-radius: var(--spacing-6);
+    overflow: hidden;
+    box-shadow: 0 0 48px rgba(0, 0, 0, 0.15);
+    transition: 0.2s var(--ease-out-quad);
+    transition-property: transform, box-shadow;
+
+    &:hover,
+    &:focus-within {
+      transform: translate3d(0, -16px, 0);
+      box-shadow: 0 0 0 4px var(--page-color);
+    }
+  }
+
+  .study-carousel-link {
+    display: block;
+    width: 100%;
+  }
+
+  .study-carousel-image {
+    display: block;
+    width: 100%;
+  }
+</style>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox'
+  import 'photoswipe/style.css'
+
+  const initLightbox = () => {
+    const galleries = document.querySelectorAll('.study-carousel.photoswipe-gallery')
+    if (!galleries.length) return
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '.study-carousel.photoswipe-gallery',
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+      zoom: false,
+      counter: false,
+      padding: { top: 24, bottom: 24, left: 24, right: 24 },
+    })
+    lightbox.init()
+  }
+
+  document.addEventListener('astro:page-load', initLightbox)
+  initLightbox()
+
+  document.querySelectorAll<HTMLElement>('.study-carousel').forEach((carousel) => {
+    const original = Array.from(carousel.children) as HTMLElement[]
+    if (original.length < 2) return
+
+    // Duplicate all items for seamless infinite loop
+    original.forEach((item) => carousel.appendChild(item.cloneNode(true)))
+
+    let setWidth = 0
+
+    const measure = () => {
+      const first = carousel.children[0] as HTMLElement
+      const firstClone = carousel.children[original.length] as HTMLElement
+      // setWidth = distance from first original to first clone (i.e. one full set of items + gaps)
+      setWidth = firstClone.offsetLeft - first.offsetLeft
+    }
+
+    requestAnimationFrame(measure)
+    window.addEventListener('load', measure, { once: true })
+
+    const ro = new ResizeObserver(measure)
+    original.forEach((item) => ro.observe(item))
+
+    carousel.addEventListener(
+      'scroll',
+      () => {
+        if (!setWidth) return
+        if (carousel.scrollLeft >= setWidth) {
+          carousel.scrollLeft -= setWidth
+        } else if (carousel.scrollLeft < 0) {
+          carousel.scrollLeft += setWidth
+        }
+      },
+      { passive: true },
+    )
+  })
+</script>

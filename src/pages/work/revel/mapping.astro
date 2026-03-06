@@ -6,6 +6,7 @@ import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
 import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
 import { Image } from 'astro:assets'
 import OperationsMap from '@media/revel/mapping/operations-map.png'
+import StudyCarousel from '@components/StudyCarousel.astro'
 
 const slides = [
   { id: 'hero', title: 'Remapping Revel' },
@@ -26,16 +27,18 @@ const slides = [
   <section class="study-slide slide-hero" id="hero">
     <div class="hero-accent"></div>
     <div class="slide-inner slide-inner--centered">
-      <h1 class="slide-body hero-title">Remapping Revel</h1>
-      <div class="slide-body hero-meta">
-        <span class="hero-role">Lead Product Designer</span>
-        <span class="hero-divider"></span>
-        <span class="hero-period">2022 &ndash; 2025</span>
+      <div class="slide-header">
+        <h1 class="slide-body hero-title">Remapping Revel</h1>
+        <div class="slide-body hero-meta">
+          <span class="hero-role">Lead Product Designer</span>
+          <span class="hero-divider"></span>
+          <span class="hero-period">2022 &ndash; 2025</span>
+        </div>
+        <p class="slide-media hero-summary">
+          I led design on creating a new mapping system across all of Revel's products and spearheaded demand heatmaps
+          that helped drivers improve their earnings.
+        </p>
       </div>
-      <p class="slide-media hero-summary">
-        I led design on creating a new mapping system across all of Revel's products and spearheaded demand heatmaps
-        that helped drivers improve their earnings.
-      </p>
       <div class="hero-visual">
         <img src={GmapsImg.src} alt="" class="hero-map-img" width={GmapsImg.width} height={GmapsImg.height} />
         <HeroHeatmap class="hero-heatmap" />
@@ -57,7 +60,7 @@ const slides = [
       </div>
       <div class="w2-1099-diagram">
         <div class="diagram-row">
-          <div class="employment-card employment-card--w2">
+          <div class="slide-stagger-item employment-card employment-card--w2">
             <div class="employment-card-header">
               <span class="employment-card-label">W2</span>
               <span class="employment-card-tag">Employee</span>
@@ -91,7 +94,7 @@ const slides = [
             </svg>
           </div>
 
-          <div class="employment-card employment-card--1099">
+          <div class="slide-stagger-item employment-card employment-card--1099">
             <div class="employment-card-header">
               <span class="employment-card-label">1099</span>
               <span class="employment-card-tag">Contractor</span>
@@ -114,7 +117,7 @@ const slides = [
         </div>
 
         <div class="diagram-row">
-          <div class="employment-card employment-card--mapbox">
+          <div class="slide-stagger-item employment-card employment-card--mapbox">
             <div class="employment-card-header">
               <span class="employment-card-label">Mapbox</span>
               <span class="employment-card-tag">Before</span>
@@ -148,7 +151,7 @@ const slides = [
             </svg>
           </div>
 
-          <div class="employment-card employment-card--gmaps">
+          <div class="slide-stagger-item employment-card employment-card--gmaps">
             <div class="employment-card-header">
               <span class="employment-card-label">Google Maps</span>
               <span class="employment-card-tag">After</span>
@@ -277,7 +280,7 @@ const slides = [
       </div>
       <div class="w2-1099-diagram">
         <div class="diagram-row diagram-row--subgrid">
-          <div class="employment-card employment-card--w2">
+          <div class="slide-stagger-item employment-card employment-card--w2">
             <div class="employment-card-header">
               <span class="employment-card-label">Interviews</span>
               <span class="employment-card-tag">Research</span>
@@ -300,7 +303,7 @@ const slides = [
               <p class="card-finding-cite">Driver, 4+ years on competing platforms</p>
             </div>
           </div>
-          <div class="employment-card employment-card--w2">
+          <div class="slide-stagger-item employment-card employment-card--w2">
             <div class="employment-card-header">
               <span class="employment-card-label">Operations</span>
               <span class="employment-card-tag">Observation</span>
@@ -324,7 +327,7 @@ const slides = [
               />
             </div>
           </div>
-          <div class="employment-card employment-card--w2">
+          <div class="slide-stagger-item employment-card employment-card--w2">
             <div class="employment-card-header">
               <span class="employment-card-label">Analytics</span>
               <span class="employment-card-tag">Data</span>
@@ -419,25 +422,15 @@ const slides = [
 
   <!-- Slide 5: Demanding Visualizations -->
   <section class="study-slide slide-media-heavy" id="visualizations">
-    <div class="slide-inner slide-inner--media-heavy">
-      <div class="slide-media">
-        <div class="media-placeholder media-placeholder--wide">
-          <span class="media-placeholder-label">H3 hexagons vs neighborhood zones</span>
-        </div>
-      </div>
+    <div class="slide-inner slide-inner--centered">
       <div class="slide-text">
         <div class="slide-header">
           <p class="slide-section-label slide-body">Exploration</p>
           <h2 class="slide-heading">Demanding Visualizations</h2>
           <p class="slide-body slide-subtitle">From H3 hexagons to human-readable neighborhood zones</p>
         </div>
-        <ul class="slide-body slide-list">
-          <li>The data team switched to Uber's open source H3 hexagonal spatial indexing for higher-fidelity data</li>
-          <li>Direct hex-demand data added too much visual noise and made neighborhoods hard to read</li>
-          <li>Translated H3 data back to familiar neighborhood zones colored at different intensities</li>
-          <li>Experiment: adjusting demand relative to driver zone was perceived as confusing</li>
-        </ul>
       </div>
+      <StudyCarousel folder="revel/mapping/exploration" />
     </div>
   </section>
 
@@ -654,7 +647,6 @@ const slides = [
   }
 
   .slide-header {
-    padding-left: var(--spacing-7);
     display: flex;
     flex-direction: column;
   }
@@ -942,24 +934,17 @@ const slides = [
   // ========================================
 
   .slide-hero {
-    align-items: flex-end;
+    padding-top: var(--spacing-16);
     padding-bottom: 0;
-
-    .hero-accent {
-      position: absolute;
-      width: 50vmin;
-      height: 50vmin;
-      border-radius: 50%;
-      background: radial-gradient(circle, hsl(from var(--study-color) h s l / 0.07) 0%, transparent 70%);
-      pointer-events: none;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
 
     .slide-inner {
       position: relative;
       z-index: 1;
+      gap: 0;
+    }
+
+    .slide-header {
+      text-align: center;
     }
 
     @media (width < $breakpoint-lg) {
@@ -987,6 +972,7 @@ const slides = [
 
   .hero-meta {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: var(--spacing-4);
     margin-top: var(--spacing-6);
@@ -1025,6 +1011,7 @@ const slides = [
     margin-bottom: -10%;
     opacity: 0;
     translate: 0 40px;
+    box-shadow: 0 0 48px hsl(from var(--study-color) h s l / 0.25);
 
     @media (width < $breakpoint-lg) {
       margin-top: var(--spacing-12);
@@ -1273,6 +1260,18 @@ const slides = [
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--study-text);
+  }
+
+  // ========================================
+  // Slide 5: Demanding Visualizations
+  // ========================================
+
+  #visualizations {
+    padding-inline: 0;
+
+    .slide-inner {
+      max-width: none;
+    }
   }
 
   // ========================================
