@@ -1,0 +1,260 @@
+---
+const { class: className, ...rest } = Astro.props
+
+// Chart dimensions
+const w = 240
+const h = 130
+const padL = 0
+const padR = 50
+const padT = 10
+const padB = 20
+const plotW = w - padL - padR
+const plotH = h - padT - padB
+
+// Adoption curves over ~6 months (normalized 0-1 on x axis)
+// New drivers: steep rise to 70%, levels off
+// Experienced: gradual rise to 40%, levels off
+const steps = 20
+
+function logisticCurve(maxVal: number, steepness: number, midpoint: number) {
+  const pts: { x: number; y: number }[] = []
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps
+    const val = maxVal / (1 + Math.exp(-steepness * (t - midpoint)))
+    const x = padL + t * plotW
+    const y = padT + plotH - (val / 100) * plotH
+    pts.push({ x, y })
+  }
+  return pts
+}
+
+const newDriverPts = logisticCurve(70, 12, 0.25)
+const expDriverPts = logisticCurve(40, 8, 0.35)
+
+function toPath(pts: { x: number; y: number }[]) {
+  return pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')
+}
+
+const newPath = toPath(newDriverPts)
+const expPath = toPath(expDriverPts)
+
+const newEnd = newDriverPts[newDriverPts.length - 1]
+const expEnd = expDriverPts[expDriverPts.length - 1]
+
+// Axis
+const axisY = padT + plotH
+---
+
+<div class:list={['viz-adoption', className]} {...rest} aria-hidden="true">
+  <svg class="viz-svg" viewBox={`0 0 ${w} ${h}`} fill="none">
+    <!-- X axis -->
+    <line
+      x1={padL}
+      y1={axisY}
+      x2={padL + plotW}
+      y2={axisY}
+      stroke="currentColor"
+      stroke-width="0.5"
+      opacity="0.15"
+    />
+
+    <!-- Y gridlines at 20%, 40%, 60%, 80% -->
+    {[20, 40, 60, 80].map((pct) => {
+      const y = padT + plotH - (pct / 100) * plotH
+      return (
+        <line
+          x1={padL}
+          y1={y}
+          x2={padL + plotW}
+          y2={y}
+          stroke="currentColor"
+          stroke-width="0.5"
+          opacity="0.08"
+        />
+      )
+    })}
+
+    <!-- New drivers curve -->
+    <path
+      class="viz-curve viz-curve--new"
+      d={newPath}
+      stroke="var(--study-color)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Experienced drivers curve -->
+    <path
+      class="viz-curve viz-curve--exp"
+      d={expPath}
+      stroke="#6b7280"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-dasharray="6 3"
+    />
+
+    <!-- End dots -->
+    <circle
+      class="viz-dot viz-dot--new"
+      cx={newEnd.x}
+      cy={newEnd.y}
+      r="3"
+      fill="var(--study-color)"
+    />
+    <circle
+      class="viz-dot viz-dot--exp"
+      cx={expEnd.x}
+      cy={expEnd.y}
+      r="3"
+      fill="#6b7280"
+    />
+
+    <!-- End labels -->
+    <text
+      class="viz-end-label viz-end-label--new"
+      x={newEnd.x + 8}
+      y={newEnd.y + 1}
+      fill="var(--study-color)"
+      font-size="9"
+      font-weight="700"
+      dominant-baseline="middle"
+    >70%</text>
+    <text
+      class="viz-end-sublabel viz-end-sublabel--new"
+      x={newEnd.x + 8}
+      y={newEnd.y + 12}
+      fill="var(--study-text-muted)"
+      font-size="7"
+      font-weight="600"
+      dominant-baseline="middle"
+    >New</text>
+
+    <text
+      class="viz-end-label viz-end-label--exp"
+      x={expEnd.x + 8}
+      y={expEnd.y + 1}
+      fill="#6b7280"
+      font-size="9"
+      font-weight="700"
+      dominant-baseline="middle"
+    >40%</text>
+    <text
+      class="viz-end-sublabel viz-end-sublabel--exp"
+      x={expEnd.x + 8}
+      y={expEnd.y + 12}
+      fill="#6b7280"
+      font-size="7"
+      font-weight="600"
+      dominant-baseline="middle"
+    >Experienced</text>
+  </svg>
+</div>
+
+<style lang="scss">
+  .viz-adoption {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--study-color);
+  }
+
+  .viz-svg {
+    width: 80%;
+    height: auto;
+    display: block;
+  }
+
+  .viz-curve {
+    fill: none;
+  }
+
+  .viz-curve--new {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw-line 1.5s ease-out forwards;
+  }
+
+  .viz-curve--exp {
+    opacity: 0;
+    animation: fade-in 0.8s ease-out 0.3s forwards;
+  }
+
+  .viz-dot,
+  .viz-end-label,
+  .viz-end-sublabel {
+    animation: fade-in 0.3s ease-out 1.5s backwards;
+  }
+
+  .viz-dot--exp,
+  .viz-end-label--exp,
+  .viz-end-sublabel--exp {
+    animation-delay: 1.8s;
+  }
+
+  @keyframes draw-line {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-curve--new,
+    .viz-curve--exp,
+    .viz-dot,
+    .viz-end-label,
+    .viz-end-sublabel {
+      animation: none;
+    }
+
+    .viz-curve--new {
+      stroke-dashoffset: 0;
+    }
+
+    .viz-curve--exp {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.viz-adoption').forEach((el) => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+
+    const curves = Array.from(el.querySelectorAll('.viz-curve')) as SVGElement[]
+    const dots = Array.from(el.querySelectorAll('.viz-dot, .viz-end-label, .viz-end-sublabel')) as SVGElement[]
+
+    // Reset all to initial state
+    function resetAll() {
+      curves.forEach((c) => {
+        c.style.animation = 'none'
+        void (c as unknown as HTMLElement).offsetWidth
+      })
+      dots.forEach((d) => {
+        d.style.animation = 'none'
+        void (d as unknown as HTMLElement).offsetWidth
+      })
+    }
+
+    let hasPlayed = false
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !hasPlayed) {
+        hasPlayed = true
+        resetAll()
+        curves.forEach((c) => (c.style.animation = ''))
+        dots.forEach((d) => (d.style.animation = ''))
+      }
+    }, { threshold: 0.5 })
+    obs.observe(el)
+  })
+</script>

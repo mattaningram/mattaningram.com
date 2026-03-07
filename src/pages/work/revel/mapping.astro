@@ -10,6 +10,9 @@ import StudyCarousel from '@components/StudyCarousel.astro'
 import DecisionAbsolute from '@media/revel/mapping/DecisionAbsolute.astro'
 import DecisionTravelTime from '@media/revel/mapping/DecisionTravelTime.astro'
 import DecisionCadence from '@media/revel/mapping/DecisionCadence.astro'
+import ResultsRevenue from '@media/revel/mapping/ResultsRevenue.astro'
+import ResultsWaitTime from '@media/revel/mapping/ResultsWaitTime.astro'
+import ResultsAdoption from '@media/revel/mapping/ResultsAdoption.astro'
 
 const slides = [
   { id: 'hero', title: 'Remapping Revel' },
@@ -511,20 +514,54 @@ const slides = [
         <h2 class="slide-heading">Results</h2>
         <p class="slide-body slide-subtitle results-subtitle">More efficient drivers, happier passengers</p>
       </div>
-      <div class="stats-grid">
-        <div class="slide-stagger-item stat-card">
-          <span class="stat-number">+XX%</span>
-          <span class="stat-label">Driver revenue per hour increase, strongest gains among newer drivers</span>
+      <div class="results-cards">
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <ResultsRevenue />
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">01</div>
+            <h3 class="result-card-title">Revenue Per Hour</h3>
+            <p class="result-card-body">
+              Average driver revenue per hour increased 7% after heatmap release, with newer drivers seeing gains up to
+              10% as the map closed the knowledge gap with veteran drivers.
+            </p>
+          </div>
         </div>
-        <div class="slide-stagger-item stat-card">
-          <span class="stat-number">&minus;XX min</span>
-          <span class="stat-label">Passenger wait time decrease as driver distribution improved</span>
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <ResultsWaitTime />
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">02</div>
+            <h3 class="result-card-title">Passenger Wait Time</h3>
+            <p class="result-card-body">
+              Average passenger wait time dropped 3 minutes as drivers spread more evenly across demand zones instead of
+              clustering in familiar areas.
+            </p>
+          </div>
         </div>
-        <div class="slide-stagger-item stat-card">
-          <span class="stat-number">High</span>
-          <span class="stat-label">Heatmap adoption among new drivers, tapered as they learned patterns</span>
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <ResultsAdoption />
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">03</div>
+            <h3 class="result-card-title">Heatmap Adoption</h3>
+            <p class="result-card-body">
+              70% of new drivers used the heatmap regularly after discovering it. Experienced drivers adopted at 40%,
+              tapering as they internalized demand patterns.
+            </p>
+          </div>
         </div>
       </div>
+      <blockquote class="result-quote slide-stagger-item">
+        <p>
+          &ldquo;I used to just drive around the airport hoping for a ride. Now I check the map and head to where people
+          actually need cars. My dead miles are way down.&rdquo;
+        </p>
+        <cite>&mdash; Driver, follow-up research interview</cite>
+      </blockquote>
     </div>
   </section>
 
@@ -1166,7 +1203,7 @@ const slides = [
   }
 
   .route-line--inride .route-track {
-    background: linear-gradient(to right, #2874f0 52%, #c4c9d1 52%);
+    background: linear-gradient(to right, #2874f0 40%, #c4c9d1 40%);
   }
 
   .route-pin {
@@ -1401,7 +1438,7 @@ const slides = [
     margin-bottom: var(--spacing-8);
   }
 
-  .stats-grid {
+  .results-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-6);
@@ -1412,28 +1449,77 @@ const slides = [
     }
   }
 
-  .stat-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-    padding: var(--spacing-8);
+  .result-card {
+    text-align: left;
     background: white;
     border: 1px solid var(--study-border);
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .stat-number {
-    font-size: clamp(2rem, 3.5vw, 2.75rem);
+  .result-card-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: var(--spacing-6);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
+  }
+
+  .result-card-content {
+    padding: var(--spacing-8);
+  }
+
+  .result-card-number {
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--study-color);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-2);
   }
 
-  .stat-label {
-    font-size: 0.85rem;
-    line-height: 1.5;
+  .result-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .result-card-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--study-text-muted);
+  }
+
+  .result-quote {
+    max-width: 640px;
+    text-align: center;
+    padding: var(--spacing-8) var(--spacing-10);
+    margin: 0;
+    border-left: none;
+    border-top: 2px solid var(--study-color);
+
+    p {
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      line-height: 1.7;
+      color: var(--study-heading);
+      font-style: italic;
+      margin: 0;
+    }
+
+    cite {
+      display: block;
+      margin-top: var(--spacing-4);
+      font-size: 0.8rem;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--study-text-muted);
+    }
   }
 
   // ========================================
