@@ -1,37 +1,100 @@
 ---
 const { class: className, ...rest } = Astro.props
+
+const cx = 140
+const cy = 82
+const distR = 58
+const N = 16
+const step = 360 / N
+
+// Travel time radii — alternating spikes out (>distR) and dips in (<distR)
+const travelRadii = [70, 50, 63, 40, 73, 46, 30, 60, 33, 54, 36, 66, 76, 44, 60, 52]
+
+function toXY(angleDeg: number, r: number) {
+  const a = (angleDeg * Math.PI) / 180
+  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) }
+}
+
+// Catmull-Rom spline through radial points → SVG cubic bezier path
+function buildPath(radii: number[]): string {
+  const pts = radii.map((r, i) => toXY(i * step, r))
+  const n = pts.length
+  let d = `M ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n]
+    const p1 = pts[i]
+    const p2 = pts[(i + 1) % n]
+    const p3 = pts[(i + 2) % n]
+    const cp1x = p1.x + (p2.x - p0.x) / 6
+    const cp1y = p1.y + (p2.y - p0.y) / 6
+    const cp2x = p2.x - (p3.x - p1.x) / 6
+    const cp2y = p2.y - (p3.y - p1.y) / 6
+    d += ` C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`
+  }
+  return d + ' Z'
+}
+
+const circleRadii = Array(N).fill(distR)
+const circlePath = buildPath(circleRadii)
+const travelPath = buildPath(travelRadii)
+
+// Radial lines: from distance circle → travel time ring point
+interface LineData {
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  isOut: boolean
+}
+const lines: LineData[] = travelRadii.map((r, i) => {
+  const dp = toXY(i * step, distR)
+  const tp = toXY(i * step, r)
+  return { x1: dp.x, y1: dp.y, x2: tp.x, y2: tp.y, isOut: r > distR }
+})
+
+// Injected into SVG <style> so we can use dynamic path strings in @keyframes
+const morphKeyframes = `@keyframes morph-ring{0%,22%{d:path('${circlePath}')}46%,72%{d:path('${travelPath}')}100%{d:path('${circlePath}')}}`
 ---
 
 <div class:list={['viz-travel', className]} {...rest} aria-hidden="true">
-  <svg class="viz-svg" viewBox="0 0 280 130" fill="none">
+  <svg class="viz-svg" viewBox="0 0 280 164" fill="none">
+    <Fragment set:html={`<style>${morphKeyframes}</style>`} />
+    <g class="viz-radial">
+      {
+        lines.map((l) => (
+          <path
+            class="viz-ray"
+            d={`M ${l.x1.toFixed(1)},${l.y1.toFixed(1)} L ${l.x2.toFixed(1)},${l.y2.toFixed(1)}`}
+            pathLength="1"
+            stroke={l.isOut ? '#f87171' : '#4ade80'}
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        ))
+      }
+    </g>
     <circle
       class="viz-ref"
-      cx="140"
-      cy="60"
-      r="50"
+      cx={cx}
+      cy={cy}
+      r={distR}
       stroke="currentColor"
       stroke-width="1"
       stroke-dasharray="4 3"
-      opacity="0.25"
-    />
+      opacity="0.25"></circle>
+    <!-- initial d = travelPath so reduced-motion shows the morphed state -->
     <path
       class="viz-ring"
-      d="M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z"
+      d={travelPath}
       fill="currentColor"
       fill-opacity="0.06"
       stroke="currentColor"
-      stroke-width="1.5"
-    />
-    <g class="viz-traffic" opacity="0">
-      <line x1="178" y1="50" x2="188" y2="50" />
-      <line x1="178" y1="56" x2="186" y2="56" />
-      <line x1="178" y1="62" x2="190" y2="62" />
-      <line x1="178" y1="68" x2="184" y2="68" />
-    </g>
-    <circle cx="140" cy="60" r="4" fill="var(--study-heading)" />
-    <text class="viz-label viz-label--dist" x="140" y="122" text-anchor="middle">Distance</text>
-    <text class="viz-label viz-label--time" x="140" y="122" text-anchor="middle" opacity="0">Travel time</text>
+      stroke-width="1.5"></path>
+
+    <circle cx={cx} cy={cy} r="4" fill="var(--study-heading)"></circle>
   </svg>
+  <span class="viz-label viz-label--dist">Distance</span>
+  <span class="viz-label viz-label--time">Travel time</span>
 </div>
 
 <style lang="scss">
@@ -46,26 +109,26 @@ const { class: className, ...rest } = Astro.props
     display: block;
   }
 
+  .viz-label {
+    position: absolute;
+    bottom: var(--spacing-6);
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
+  }
+
   .viz-ring {
     animation: morph-ring 8s ease-in-out infinite;
   }
 
-  .viz-traffic line {
-    stroke: var(--study-text-muted);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-  }
-
-  .viz-traffic {
-    animation: show-traffic 8s ease-in-out infinite;
-  }
-
-  .viz-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    fill: var(--study-text-muted);
+  .viz-ray {
+    stroke-dasharray: 1;
+    animation: grow-ray 8s ease-in-out infinite;
   }
 
   .viz-label--dist {
@@ -74,26 +137,6 @@ const { class: className, ...rest } = Astro.props
 
   .viz-label--time {
     animation: fade-time 8s ease-in-out infinite;
-  }
-
-  @keyframes morph-ring {
-    0%,
-    22% {
-      d: path(
-        'M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z'
-      );
-    }
-    46%,
-    72% {
-      d: path(
-        'M178,56 C184,86 170,112 142,116 C108,122 74,94 78,58 C68,22 112,4 144,8 C180,4 194,30 178,56 Z'
-      );
-    }
-    100% {
-      d: path(
-        'M190,60 C190,87.6 167.6,110 140,110 C112.4,110 90,87.6 90,60 C90,32.4 112.4,10 140,10 C167.6,10 190,32.4 190,60 Z'
-      );
-    }
   }
 
   @keyframes fade-dist {
@@ -126,37 +169,30 @@ const { class: className, ...rest } = Astro.props
     }
   }
 
-  @keyframes show-traffic {
+  @keyframes grow-ray {
     0%,
-    30% {
-      opacity: 0;
+    22% {
+      stroke-dashoffset: 1;
     }
     46%,
-    66% {
-      opacity: 0.5;
+    72% {
+      stroke-dashoffset: 0;
     }
-    82%,
     100% {
-      opacity: 0;
+      stroke-dashoffset: 1;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-ring,
-    .viz-traffic,
+    .viz-ray,
     .viz-label--dist,
     .viz-label--time {
       animation: none;
     }
 
-    .viz-ring {
-      d: path(
-        'M178,56 C184,86 170,112 142,116 C108,122 74,94 78,58 C68,22 112,4 144,8 C180,4 194,30 178,56 Z'
-      );
-    }
-
-    .viz-traffic {
-      opacity: 0.5;
+    .viz-ray {
+      stroke-dashoffset: 0;
     }
 
     .viz-label--dist {

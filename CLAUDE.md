@@ -10,6 +10,12 @@
 - Do not add positioning styles (margin, padding, absolute/relative positioning) to reusable components. These should always be set where the component is used, since positioning requirements vary by context.
 - When creating Astro components that need to receive a `class` or styles from a parent, always accept `class` and spread `...rest` onto the root element: `const { class: className, ...rest } = Astro.props` then `class:list={[className]} {...rest}`. This lets the parent apply scoped styles without needing `:global()`.
 - Use existing components and patterns when possible, rather than creating new ones. For example use the `Image` component from Astro for images, rather than an `<img>` tag.
+- Never duplicate an animated property's initial/final state outside the animation. Use `animation-fill-mode` instead:
+  - **Infinite loops**: The keyframes control the value at all times. Do not set a base value for the animated property anywhere (not inline, not in CSS).
+  - **Entrance (play once, start hidden)**: Use `animation-fill-mode: backwards` — this applies the 0% keyframe before the animation starts, so the element is hidden without needing a separate `opacity: 0`.
+  - **Exit (play once, end hidden)**: Use `animation-fill-mode: forwards` — this holds the 100% keyframe after the animation ends.
+  - **Both**: Use `animation-fill-mode: both` when you need backwards + forwards behavior.
+  - The shorthand `animation` accepts fill-mode as the last value, e.g. `animation: fade-in 0.3s ease-out backwards`.
 
 # Tools
 

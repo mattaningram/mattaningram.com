@@ -18,7 +18,6 @@ const slides = [
   { id: 'drivers', title: 'Drivers: Where & Why' },
   { id: 'visualizations', title: 'Demanding Visualizations' },
   { id: 'decisions', title: 'Key Design Decisions' },
-  { id: 'failures', title: "What Didn't Work" },
   { id: 'results', title: 'Results' },
   { id: 'next', title: 'What Comes Next' },
 ]
@@ -463,64 +462,48 @@ const slides = [
           <div class="decision-card-viz">
             <DecisionAbsolute />
           </div>
-          <div class="decision-card-number">01</div>
-          <h3 class="decision-card-title">Absolute Demand</h3>
-          <p class="decision-card-body">
-            Initially the team felt relative demand would be a smart way to show drivers where the most relevant demand
-            was, but it was abandoned after driver testing in favor of the more stable absolute demand approach.
-          </p>
+          <div class="decision-card-content">
+            <div class="decision-card-number">01</div>
+            <h3 class="decision-card-title">Absolute Demand</h3>
+            <p class="decision-card-body">
+              Initially the team felt relative demand would be a smart way to show drivers where the most relevant
+              demand was, but it was abandoned after driver testing in favor of the more stable absolute demand
+              approach.
+            </p>
+          </div>
         </div>
         <div class="slide-stagger-item decision-card">
           <div class="decision-card-viz">
             <DecisionTravelTime />
           </div>
-          <div class="decision-card-number">02</div>
-          <h3 class="decision-card-title">Travel-Time Weighted</h3>
-          <p class="decision-card-body">
-            However sometimes a high demand zone relatively nearby has a longer travel time. So we factored in real-time
-            traffic to adjust the demand score so a nearby medium-demand zone could outrank a distant high-demand one.
-          </p>
+          <div class="decision-card-content">
+            <div class="decision-card-number">02</div>
+            <h3 class="decision-card-title">Travel-Time Weighted</h3>
+            <p class="decision-card-body">
+              However sometimes a high demand zone relatively nearby has a longer travel time. So we factored in
+              real-time traffic to adjust the demand score so a nearby medium-demand zone could outrank a distant
+              high-demand one.
+            </p>
+          </div>
         </div>
         <div class="slide-stagger-item decision-card">
           <div class="decision-card-viz">
             <DecisionCadence />
           </div>
-          <div class="decision-card-number">03</div>
-          <h3 class="decision-card-title">Update Cadence</h3>
-          <p class="decision-card-body">
-            After some testing, we settled on a 10-minute update cadence with some averaging over time to provide data
-            that was up to date but not distractingly changing from minute to minute.
-          </p>
+          <div class="decision-card-content">
+            <div class="decision-card-number">03</div>
+            <h3 class="decision-card-title">Update Cadence</h3>
+            <p class="decision-card-body">
+              After some testing, we settled on a 10-minute update cadence with some averaging over time to provide data
+              that was up to date but not distractingly changing from minute to minute.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Slide 7: What Didn't Work -->
-  <section class="study-slide slide-split slide-failure" id="failures">
-    <div class="slide-inner slide-inner--split">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Retrospective</p>
-          <h2 class="slide-heading">What Didn't Work</h2>
-          <p class="slide-body slide-subtitle">The amenities map</p>
-        </div>
-        <ul class="slide-body slide-list">
-          <li>Driver interviews flagged a genuine pain: difficulty finding parking and restrooms during long shifts</li>
-          <li>Built an amenities map layer surfacing rideshare-friendly parking and public restrooms</li>
-          <li>Analytics showed the layer was barely used; data didn't reflect real-time availability</li>
-          <li>Takeaway: a feature solving a real problem still fails without reliable underlying data</li>
-        </ul>
-      </div>
-      <div class="slide-media">
-        <div class="media-placeholder media-placeholder--muted">
-          <span class="media-placeholder-label">Amenities map</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 8: Results -->
+  <!-- Slide 7: Results -->
   <section class="study-slide slide-results" id="results">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
@@ -1345,10 +1328,6 @@ const slides = [
   // Slide 6: Decision cards
   // ========================================
 
-  .decisions-subtitle {
-    margin-bottom: var(--spacing-8);
-  }
-
   .decision-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1362,21 +1341,27 @@ const slides = [
 
   .decision-card {
     text-align: left;
-    padding: var(--spacing-8);
     background: white;
     border: 1px solid var(--study-border);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-3);
   }
 
   .decision-card-viz {
-    margin: calc(-1 * var(--spacing-8)) calc(-1 * var(--spacing-8)) var(--spacing-3);
-    padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    padding: var(--spacing-6);
     background: hsl(from var(--study-color) h s l / 0.03);
     border-bottom: 1px solid var(--study-border);
     border-radius: 11px 11px 0 0;
+  }
+
+  .decision-card-content {
+    padding: var(--spacing-8);
   }
 
   .decision-card-number {
@@ -1384,12 +1369,14 @@ const slides = [
     font-weight: 700;
     color: var(--study-color);
     letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-2);
   }
 
   .decision-card-title {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
   }
 
   .decision-card-body {
