@@ -1,0 +1,1240 @@
+---
+import StudyLayout from '@layouts/StudyLayout.astro'
+import StudyNav from '@components/StudyNav.astro'
+
+const slides = [
+  { id: 'hero', title: 'Finding Anything' },
+  { id: 'scaling', title: 'Small to Big Farm' },
+  { id: 'research', title: 'Understanding the Problem' },
+  { id: 'design', title: 'Designing for Density' },
+  { id: 'mvp', title: 'Scoping the MVP' },
+  { id: 'decisions', title: 'Key Design Decisions' },
+  { id: 'tradeoffs', title: "What Didn't Make It" },
+  { id: 'results', title: 'Results' },
+  { id: 'next', title: 'What Comes Next' },
+]
+---
+
+<StudyLayout title="Artemis Search" color="rgb(255, 64, 22)" slides={slides}>
+  <StudyNav slides={slides} slot="nav" />
+
+  <!-- Slide 1: Hero -->
+  <section class="study-slide slide-hero" id="hero">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <h1 class="slide-body hero-title">Finding Anything on the Farm</h1>
+        <div class="slide-body hero-meta">
+          <span class="hero-role">Lead Product Designer</span>
+          <span class="hero-divider"></span>
+          <span class="hero-period">2018 &ndash; 2021</span>
+        </div>
+        <p class="slide-media hero-summary">
+          I led the redesign of search across Artemis's platform as we scaled from small indoor farms to enterprise
+          operations nationwide. The new contextual search experience became the most used feature in the app within
+          weeks of shipping.
+        </p>
+      </div>
+      <div class="hero-visual slide-media">
+        <div class="media-placeholder media-placeholder--wide">
+          <span class="media-placeholder-label">Search modal hero illustration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Small Farm to Big Farm -->
+  <section class="study-slide" id="scaling">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Context</p>
+          <h2 class="slide-heading">Small Farm to Big Farm</h2>
+          <p class="slide-body slide-subtitle">
+            Artemis scaled from local indoor farms to massive enterprise operations
+          </p>
+        </div>
+      </div>
+      <div class="scaling-cards">
+        <div class="slide-stagger-item scaling-card scaling-card--before">
+          <div class="scaling-card-header">
+            <span class="scaling-card-label">Before</span>
+            <span class="scaling-card-tag">Small farms</span>
+          </div>
+          <ul class="scaling-card-list">
+            <li>
+              <span class="scaling-card-category">Scope</span>
+              Simple enough setups that search was rarely needed
+            </li>
+            <li>
+              <span class="scaling-card-category">Search</span>
+              A leftover from prototype days: a plain text box that navigated away to a slow, separate results page
+            </li>
+          </ul>
+        </div>
+
+        <div class="scaling-arrow" aria-hidden="true">
+          <svg class="scaling-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+            <polyline
+              points="6,22 12,30 18,22"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"></polyline>
+          </svg>
+        </div>
+
+        <div class="slide-stagger-item scaling-card scaling-card--after">
+          <div class="scaling-card-header">
+            <span class="scaling-card-label">After</span>
+            <span class="scaling-card-tag">Enterprise</span>
+          </div>
+          <ul class="scaling-card-list">
+            <li>
+              <span class="scaling-card-category">Scope</span>
+              Large enterprise clients with labor, inventory, crop management, sensors, processes, and more
+            </li>
+            <li>
+              <span class="scaling-card-category">Search</span>
+              A contextual modal experience that became the most used feature in the app
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Understanding the Problem -->
+  <section class="study-slide" id="research">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Research</p>
+          <h2 class="slide-heading">Understanding the Problem</h2>
+          <p class="slide-body slide-subtitle">
+            Combining field research, sales feedback, and analytics to validate what we suspected
+          </p>
+        </div>
+      </div>
+      <div class="research-grid">
+        <div class="slide-stagger-item research-method-card">
+          <div class="research-method-header">
+            <span class="research-method-label">Farm Visits</span>
+            <span class="research-method-tag">Field Research</span>
+          </div>
+          <ul class="research-method-list">
+            <li>
+              <span class="research-method-category">Setting</span>
+              On-site with owners, managers, and team leaders using the product in context
+            </li>
+            <li>
+              <span class="research-method-category">Focus</span>
+              How users navigated the platform to find the content they needed
+            </li>
+          </ul>
+          <div class="research-method-finding">
+            <div class="media-placeholder media-placeholder--muted">
+              <span class="media-placeholder-label">Farm visit photo</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-stagger-item research-method-card">
+          <div class="research-method-header">
+            <span class="research-method-label">Sales Meetings</span>
+            <span class="research-method-tag">Feedback</span>
+          </div>
+          <ul class="research-method-list">
+            <li>
+              <span class="research-method-category">Channel</span>
+              Weekly sales meetings surfacing client feedback and feature requests
+            </li>
+            <li>
+              <span class="research-method-category">Signal</span>
+              Search came up constantly as a pain point across client types
+            </li>
+          </ul>
+        </div>
+        <div class="slide-stagger-item research-method-card">
+          <div class="research-method-header">
+            <span class="research-method-label">Analytics</span>
+            <span class="research-method-tag">Data</span>
+          </div>
+          <ul class="research-method-list">
+            <li>
+              <span class="research-method-category">Metric</span>
+              Clicks from app open to desired page, with and without search
+            </li>
+            <li>
+              <span class="research-method-category">Finding</span>
+              Too many clicks to reach content, search rarely used due to poor experience
+            </li>
+          </ul>
+          <div class="research-method-finding research-method-finding--chart">
+            <p class="chart-title">Clicks to destination</p>
+            <svg
+              class="chart-svg"
+              viewBox="0 0 300 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <line x1="0" y1="88" x2="300" y2="88" stroke="var(--study-border)" stroke-width="1"></line>
+              <!-- Without search bars -->
+              <rect x="20" y="18" width="32" height="70" rx="4" fill="var(--study-color)" opacity="0.2"></rect>
+              <rect x="72" y="28" width="32" height="60" rx="4" fill="var(--study-color)" opacity="0.2"></rect>
+              <rect x="124" y="38" width="32" height="50" rx="4" fill="var(--study-color)" opacity="0.2"></rect>
+              <rect x="176" y="8" width="32" height="80" rx="4" fill="var(--study-color)" opacity="0.2"></rect>
+              <!-- With search bars -->
+              <rect x="20" y="58" width="32" height="30" rx="4" fill="var(--study-color)" opacity="0.7"></rect>
+              <rect x="72" y="63" width="32" height="25" rx="4" fill="var(--study-color)" opacity="0.7"></rect>
+              <rect x="124" y="68" width="32" height="20" rx="4" fill="var(--study-color)" opacity="0.7"></rect>
+              <rect x="176" y="53" width="32" height="35" rx="4" fill="var(--study-color)" opacity="0.7"></rect>
+              <text x="36" y="98" text-anchor="middle" font-size="7" font-family="inherit" fill="#94a3b8">Tasks</text>
+              <text x="88" y="98" text-anchor="middle" font-size="7" font-family="inherit" fill="#94a3b8">Crops</text>
+              <text x="140" y="98" text-anchor="middle" font-size="7" font-family="inherit" fill="#94a3b8">Sensors</text>
+              <text x="192" y="98" text-anchor="middle" font-size="7" font-family="inherit" fill="#94a3b8">Reports</text>
+            </svg>
+            <div class="chart-legend">
+              <span class="chart-legend-item chart-legend-item--without">Without search</span>
+              <span class="chart-legend-item chart-legend-item--with">With search</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Designing for Density -->
+  <section class="study-slide" id="design">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Exploration</p>
+          <h2 class="slide-heading">Designing for Density</h2>
+          <p class="slide-body slide-subtitle">
+            Surfacing the right result across a complex, permission-layered data model
+          </p>
+        </div>
+      </div>
+      <ul class="slide-body slide-list">
+        <li>The platform had grown to include dozens of data types across labor, inventory, sensors, crop batches, processes, and documents</li>
+        <li>How do you filter all of that down to what is relevant to the current user's permission, context, and role?</li>
+        <li>All layout explorations converged on a modal approach keeping users in context</li>
+        <li>We considered shareable search URLs for bookmarking results</li>
+        <li>Should a sensor result show its live readout, or just its name and location in the app?</li>
+      </ul>
+      <div class="design-explorations slide-media">
+        <div class="media-placeholder media-placeholder--wide">
+          <span class="media-placeholder-label">Search modal exploration mockups</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Scoping the MVP -->
+  <section class="study-slide" id="mvp">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Strategy</p>
+          <h2 class="slide-heading">Scoping the MVP</h2>
+          <p class="slide-body slide-subtitle">
+            Using strong SaaS search precedents to ship fast without cutting corners on the core experience
+          </p>
+        </div>
+      </div>
+      <div class="mvp-cards">
+        <div class="slide-stagger-item mvp-card">
+          <div class="mvp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mvp-card-title">Elasticsearch</h3>
+            <p class="mvp-card-body">
+              Fast, configurable full-text search across all data types without building something custom
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item mvp-card">
+          <div class="mvp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"></rect>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mvp-card-title">Strong Precedents</h3>
+            <p class="mvp-card-body">
+              Existing SaaS models for this pattern let us move quickly and avoid reinventing the wheel
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item mvp-card">
+          <div class="mvp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mvp-card-title">Phased Previews</h3>
+            <p class="mvp-card-body">
+              Deferring live data previews as a future enhancement kept the project on track with a small team
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Key Design Decisions -->
+  <section class="study-slide slide-decisions" id="decisions">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Execution</p>
+        <h2 class="slide-heading">Key Design Decisions</h2>
+        <p class="slide-body slide-subtitle decisions-subtitle">
+          Three choices that defined the experience &mdash; each came from constraints and research, not assumption
+        </p>
+      </div>
+      <div class="decision-cards">
+        <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Modal vs. navigation illustration</span>
+            </div>
+          </div>
+          <div class="decision-card-content">
+            <div class="decision-card-number">01</div>
+            <h3 class="decision-card-title">Modal Over Navigation</h3>
+            <p class="decision-card-body">
+              Keeping search in-context rather than routing to a separate page was the single biggest UX improvement
+              over the original experience &mdash; users stayed oriented in the app.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Permission filtering illustration</span>
+            </div>
+          </div>
+          <div class="decision-card-content">
+            <div class="decision-card-number">02</div>
+            <h3 class="decision-card-title">Relevance by Role</h3>
+            <p class="decision-card-body">
+              Results were scoped to what a given user could actually access and act on, reducing noise for field
+              workers while giving managers fuller visibility.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item decision-card">
+          <div class="decision-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Results as links illustration</span>
+            </div>
+          </div>
+          <div class="decision-card-content">
+            <div class="decision-card-number">03</div>
+            <h3 class="decision-card-title">Results as Links</h3>
+            <p class="decision-card-body">
+              Showing rich live data in results was tempting but would have added significant backend complexity and
+              delayed shipping &mdash; we deferred it and shipped something immediately useful.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: What Didn't Make It -->
+  <section class="study-slide slide-tradeoffs" id="tradeoffs">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Tradeoffs</p>
+          <h2 class="slide-heading">What Didn't Make It</h2>
+          <p class="slide-body slide-subtitle">
+            Live data previews: the right idea for the wrong moment
+          </p>
+        </div>
+      </div>
+      <ul class="slide-body slide-list">
+        <li>Showing actual sensor values, inventory counts, or crop metrics inline in search results would have made results significantly more powerful</li>
+        <li>The engineering cost was too high for an MVP with a two-person dev team</li>
+        <li>Fuzzy search tuning was also left partially unfinished at launch &mdash; client naming conventions were more varied than expected</li>
+        <li>Defining a clear MVP scope with a small team is what made it shippable &mdash; the features left behind became a well-defined v2 roadmap</li>
+      </ul>
+      <div class="tradeoffs-visual slide-media">
+        <div class="media-placeholder media-placeholder--wide">
+          <span class="media-placeholder-label">Live data preview concept mockup</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Results -->
+  <section class="study-slide slide-results" id="results">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Outcomes</p>
+        <h2 class="slide-heading">Results</h2>
+        <p class="slide-body slide-subtitle results-subtitle">Search became the front door to the entire platform</p>
+      </div>
+      <div class="results-cards">
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Usage metrics illustration</span>
+            </div>
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">01</div>
+            <h3 class="result-card-title">Most Used Feature</h3>
+            <p class="result-card-body">
+              Within weeks of launch it was one of the most frequently used features &mdash; often the first thing
+              users clicked when opening the app.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Click reduction chart</span>
+            </div>
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">02</div>
+            <h3 class="result-card-title">Fewer Clicks</h3>
+            <p class="result-card-body">
+              Analytics showed a significant reduction in clicks required to reach a desired page. Elasticsearch's
+              performance held up even as client data volumes grew.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item result-card">
+          <div class="result-card-viz">
+            <div class="media-placeholder">
+              <span class="media-placeholder-label">Client feedback illustration</span>
+            </div>
+          </div>
+          <div class="result-card-content">
+            <div class="result-card-number">03</div>
+            <h3 class="result-card-title">Client Satisfaction</h3>
+            <p class="result-card-body">
+              Client complaints about navigation difficulty dropped noticeably. Early feedback centered on fuzzy
+              search tuning, which we addressed in follow-up releases.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: What Comes Next -->
+  <section class="study-slide slide-next" id="next">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Future</p>
+        <h2 class="slide-heading">What Comes Next</h2>
+        <p class="slide-body slide-subtitle">Search data as a signal for smarter first-run experiences</p>
+      </div>
+      <div class="next-items">
+        <div class="slide-stagger-item next-card">
+          <span class="next-card-number">01</span>
+          <div>
+            <h3 class="next-card-title">Predicted Results</h3>
+            <p class="next-card-body">
+              Pre-loading the search window with predicted results based on a user's recent history and usage patterns
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="next-card-number">02</span>
+          <div>
+            <h3 class="next-card-title">Personalized Home View</h3>
+            <p class="next-card-body">
+              Using search patterns to rethink the default app home view &mdash; surfacing the most relevant farm
+              data for each user role before they even search
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="next-card-number">03</span>
+          <div>
+            <h3 class="next-card-title">Live Data Previews</h3>
+            <p class="next-card-body">
+              Sensor readings, inventory status, and crop metrics shown inline in search results as the logical next step
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="next-card-number">04</span>
+          <div>
+            <h3 class="next-card-title">Fuzzy Search Refinement</h3>
+            <p class="next-card-body">
+              Continued tuning for complex client naming conventions &mdash; IDs, batch codes, and zone names that
+              require forgiving search behavior
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudyLayout>
+
+<style lang="scss">
+  @use '../../../styles/scssVariables' as *;
+
+  // ========================================
+  // Shared slide inner layouts
+  // ========================================
+
+  .slide-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .slide-inner--centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-12);
+
+    .slide-header {
+      text-align: center;
+      padding-inline: var(--spacing-8);
+    }
+  }
+
+  // ========================================
+  // Typography
+  // ========================================
+
+  .slide-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .slide-heading {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--study-heading);
+  }
+
+  .slide-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-section-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--study-color);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .slide-subtitle {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    margin-top: var(--spacing-8);
+  }
+
+  .slide-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-5);
+
+    li {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      line-height: 1.6;
+      color: var(--study-text);
+      padding-left: var(--spacing-7);
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.65em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--study-color);
+        opacity: 0.75;
+      }
+    }
+  }
+
+  // ========================================
+  // Media placeholders
+  // ========================================
+
+  .media-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: var(--study-bg-alt);
+    border: 1.5px dashed var(--study-border);
+    border-radius: 12px;
+    display: grid;
+    place-content: center;
+
+    &--wide {
+      aspect-ratio: 16 / 9;
+    }
+
+    &--muted {
+      opacity: 0.5;
+    }
+  }
+
+  .media-placeholder-label {
+    font-size: 0.8rem;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  // ========================================
+  // Slide 1: Hero
+  // ========================================
+
+  .slide-hero {
+    padding-top: var(--spacing-16);
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide-header {
+      text-align: center;
+    }
+
+    @media (width < $breakpoint-lg) {
+      padding-bottom: var(--spacing-12);
+    }
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--study-heading);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+    font-size: 1rem;
+    color: var(--study-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-divider {
+    width: 24px;
+    height: 1.5px;
+    background: var(--study-border);
+  }
+
+  .hero-summary {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--study-text);
+    margin-top: var(--spacing-12);
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  // ========================================
+  // Slide 2: Scaling cards
+  // ========================================
+
+  .scaling-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--spacing-10);
+
+    @media (width < $breakpoint-lg) {
+      flex-direction: column;
+    }
+  }
+
+  .scaling-card {
+    flex: 1;
+    border: 1.5px solid var(--study-border);
+    border-radius: 12px;
+    overflow: hidden;
+
+    &--before {
+      border-style: dashed;
+      background-color: white;
+    }
+
+    &--after {
+      border-color: var(--study-color);
+      background-color: var(--study-color);
+    }
+  }
+
+  .scaling-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-3);
+    padding: var(--spacing-7) var(--spacing-8) var(--spacing-6);
+  }
+
+  .scaling-card-label {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--study-heading);
+    letter-spacing: -0.01em;
+
+    .scaling-card--after & {
+      color: #fff;
+    }
+  }
+
+  .scaling-card-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 2px 6px;
+
+    .scaling-card--after & {
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .scaling-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--study-heading);
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: var(--spacing-6);
+      align-items: baseline;
+      border-top: 1px dashed var(--study-border);
+      padding: var(--spacing-6) var(--spacing-8);
+
+      .scaling-card--after & {
+        color: #fff;
+        border-top-style: solid;
+        border-top-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .scaling-card-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+
+    .scaling-card--after & {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .scaling-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--study-color);
+    padding: 0 var(--spacing-1);
+    flex-shrink: 0;
+
+    @media (width < $breakpoint-lg) {
+      padding: var(--spacing-1) 0;
+    }
+  }
+
+  .scaling-arrow-svg {
+    width: 20px;
+    height: 32px;
+    animation: arrow-bounce-h 1.6s ease-in-out infinite;
+
+    @media (width < $breakpoint-lg) {
+      animation-name: arrow-bounce;
+    }
+  }
+
+  @keyframes arrow-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes arrow-bounce-h {
+    0%,
+    100% {
+      transform: rotate(-90deg) translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: rotate(-90deg) translateY(4px);
+      opacity: 1;
+    }
+  }
+
+  // ========================================
+  // Slide 3: Research method cards
+  // ========================================
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 1fr;
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: unset;
+    }
+  }
+
+  .research-method-card {
+    border: 1.5px dashed var(--study-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    gap: 0;
+
+    @media (width < $breakpoint-lg) {
+      grid-row: unset;
+      grid-template-rows: unset;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .research-method-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-3);
+    padding: var(--spacing-7) var(--spacing-8) var(--spacing-6);
+  }
+
+  .research-method-label {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--study-heading);
+    letter-spacing: -0.01em;
+  }
+
+  .research-method-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  .research-method-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--study-heading);
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: var(--spacing-6);
+      align-items: baseline;
+      border-top: 1px dashed var(--study-border);
+      padding: var(--spacing-6) var(--spacing-8);
+    }
+  }
+
+  .research-method-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .research-method-finding {
+    padding: 0;
+    border-top: 1px dashed var(--study-border);
+
+    .media-placeholder {
+      border: none;
+      border-radius: 0;
+    }
+  }
+
+  .research-method-finding--chart {
+    padding: var(--spacing-6) var(--spacing-8);
+  }
+
+  .chart-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: var(--spacing-3);
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: var(--spacing-5);
+    margin-top: var(--spacing-3);
+  }
+
+  .chart-legend-item {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    &--without::before {
+      background: hsl(from var(--study-color) h s l / 0.2);
+    }
+
+    &--with::before {
+      background: hsl(from var(--study-color) h s l / 0.7);
+    }
+  }
+
+  // ========================================
+  // Slide 4: Design explorations
+  // ========================================
+
+  .design-explorations {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  // ========================================
+  // Slide 5: MVP cards
+  // ========================================
+
+  .mvp-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .mvp-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-5);
+    text-align: left;
+    padding: var(--spacing-5) var(--spacing-6);
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 10px;
+  }
+
+  .mvp-card-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: hsl(from var(--study-color) h s l / 0.1);
+    color: var(--study-color);
+    margin-top: 2px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .mvp-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-1);
+  }
+
+  .mvp-card-body {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Slide 6: Decision cards
+  // ========================================
+
+  .decisions-subtitle {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .decision-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .decision-card {
+    text-align: left;
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .decision-card-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: var(--spacing-6);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
+
+    .media-placeholder {
+      border: none;
+      background: none;
+    }
+  }
+
+  .decision-card-content {
+    padding: var(--spacing-8);
+  }
+
+  .decision-card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .decision-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .decision-card-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Slide 7: Tradeoffs
+  // ========================================
+
+  .tradeoffs-visual {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  // ========================================
+  // Slide 8: Results
+  // ========================================
+
+  .results-subtitle {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .results-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .result-card {
+    text-align: left;
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .result-card-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: var(--spacing-6);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
+
+    .media-placeholder {
+      border: none;
+      background: none;
+    }
+  }
+
+  .result-card-content {
+    padding: var(--spacing-8);
+  }
+
+  .result-card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .result-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .result-card-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Slide 9: What Comes Next
+  // ========================================
+
+  .next-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    width: 100%;
+    max-width: 640px;
+    margin-top: var(--spacing-6);
+  }
+
+  .next-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-5);
+    text-align: left;
+    padding: var(--spacing-5) var(--spacing-6);
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 10px;
+  }
+
+  .next-card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: hsl(from var(--study-color) h s l / 0.1);
+    margin-top: 2px;
+  }
+
+  .next-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-1);
+  }
+
+  .next-card-body {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--study-text-muted);
+  }
+</style>
