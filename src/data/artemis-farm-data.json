@@ -1,0 +1,82 @@
+{
+  "zones": [
+    { "id": "zone-001", "name": "Block A - North", "farm": "Willow Creek Organics", "region": "Central Coast", "acreage": 320, "crop": "Romaine Lettuce", "status": "growing", "irrigationType": "drip" },
+    { "id": "zone-002", "name": "Block B - East", "farm": "Willow Creek Organics", "region": "Central Coast", "acreage": 280, "crop": "Baby Spinach", "status": "growing", "irrigationType": "drip" },
+    { "id": "zone-003", "name": "Tomato Flats", "farm": "Riverbend Agricultural", "region": "Sacramento Valley", "acreage": 800, "crop": "Roma Tomatoes", "status": "harvested", "irrigationType": "furrow" },
+    { "id": "zone-004", "name": "Orchard West", "farm": "Riverbend Agricultural", "region": "Sacramento Valley", "acreage": 1200, "crop": "Nonpareil Almonds", "status": "dormant", "irrigationType": "micro-sprinkler" },
+    { "id": "zone-005", "name": "Berry Rows 1-40", "farm": "Sunnyside Produce Co.", "region": "South Bay", "acreage": 180, "crop": "Albion Strawberries", "status": "harvesting", "irrigationType": "drip" },
+    { "id": "zone-006", "name": "Citrus Grove - Section 1", "farm": "Valley Harvest Growers", "region": "San Joaquin Valley", "acreage": 1500, "crop": "Washington Navel Oranges", "status": "fruiting", "irrigationType": "micro-sprinkler" },
+    { "id": "zone-007", "name": "Corn South", "farm": "Blackrock Dairy & Crops", "region": "San Joaquin Valley", "acreage": 900, "crop": "Yellow Dent Corn", "status": "harvested", "irrigationType": "center pivot" },
+    { "id": "zone-008", "name": "Pinot Block - Hillside", "farm": "Pacific Ridge Vineyards", "region": "Sonoma County", "acreage": 150, "crop": "Pinot Noir", "status": "harvested", "irrigationType": "drip" },
+    { "id": "zone-009", "name": "Brassica Field 2", "farm": "Mendoza Family Farms", "region": "Central Coast", "acreage": 240, "crop": "Marathon Broccoli", "status": "growing", "irrigationType": "sprinkler" },
+    { "id": "zone-010", "name": "Hemp Parcel A", "farm": "Sunrise Hemp & Botanicals", "region": "Sacramento Valley", "acreage": 200, "crop": "Cherry Wine Hemp", "status": "harvested", "irrigationType": "drip" },
+    { "id": "zone-011", "name": "Alfalfa Pivot 3", "farm": "Blackrock Dairy & Crops", "region": "San Joaquin Valley", "acreage": 600, "crop": "Alfalfa", "status": "growing", "irrigationType": "center pivot" },
+    { "id": "zone-012", "name": "Chardonnay Terrace", "farm": "Pacific Ridge Vineyards", "region": "Sonoma County", "acreage": 120, "crop": "Chardonnay", "status": "dormant", "irrigationType": "drip" }
+  ],
+  "cropBatches": [
+    { "id": "batch-001", "zoneId": "zone-001", "crop": "Romaine Lettuce", "variety": "Coastal Star", "plantDate": "2025-09-15", "expectedHarvest": "2025-12-20", "status": "growing", "lotNumber": "WCO-ROM-2025-0915" },
+    { "id": "batch-002", "zoneId": "zone-002", "crop": "Baby Spinach", "variety": "Seaside", "plantDate": "2025-10-01", "expectedHarvest": "2025-12-15", "status": "growing", "lotNumber": "WCO-SPN-2025-1001" },
+    { "id": "batch-003", "zoneId": "zone-003", "crop": "Roma Tomatoes", "variety": "Plum Regal", "plantDate": "2025-04-10", "expectedHarvest": "2025-09-30", "status": "shipped", "lotNumber": "RBA-TOM-2025-0410" },
+    { "id": "batch-004", "zoneId": "zone-005", "crop": "Albion Strawberries", "variety": "Albion", "plantDate": "2025-03-20", "expectedHarvest": "2025-11-30", "status": "harvesting", "lotNumber": "SPC-STR-2025-0320" },
+    { "id": "batch-005", "zoneId": "zone-006", "crop": "Washington Navel Oranges", "variety": "Washington", "plantDate": "2015-03-01", "expectedHarvest": "2026-01-15", "status": "fruiting", "lotNumber": "VHG-NAV-2025-PERM" },
+    { "id": "batch-006", "zoneId": "zone-007", "crop": "Yellow Dent Corn", "variety": "DeKalb DKC64-69", "plantDate": "2025-04-25", "expectedHarvest": "2025-10-10", "status": "shipped", "lotNumber": "BDC-CRN-2025-0425" },
+    { "id": "batch-007", "zoneId": "zone-008", "crop": "Pinot Noir", "variety": "Pommard Clone", "plantDate": "2012-04-01", "expectedHarvest": "2025-09-20", "status": "shipped", "lotNumber": "PRV-PN-2025-PERM" },
+    { "id": "batch-008", "zoneId": "zone-009", "crop": "Marathon Broccoli", "variety": "Marathon", "plantDate": "2025-08-10", "expectedHarvest": "2025-12-25", "status": "growing", "lotNumber": "MFF-BRC-2025-0810" },
+    { "id": "batch-009", "zoneId": "zone-010", "crop": "Cherry Wine Hemp", "variety": "Cherry Wine", "plantDate": "2025-05-01", "expectedHarvest": "2025-10-15", "status": "processing", "lotNumber": "SHB-HMP-2025-0501" },
+    { "id": "batch-010", "zoneId": "zone-011", "crop": "Alfalfa", "variety": "CUF 101", "plantDate": "2025-03-01", "expectedHarvest": "2025-12-30", "status": "growing", "lotNumber": "BDC-ALF-2025-0301" }
+  ],
+  "shipments": [
+    { "id": "ship-001", "batchId": "batch-001", "destination": "Whole Foods Distribution - Oakland", "quantity": "12,400 lbs", "shipDate": "2025-12-18", "status": "scheduled", "carrier": "Central Coast Cold Freight", "lotNumber": "WCO-ROM-2025-0915" },
+    { "id": "ship-002", "batchId": "batch-004", "destination": "Driscoll's Processing - Watsonville", "quantity": "8,200 lbs", "shipDate": "2025-11-28", "status": "delivered", "carrier": "Bay Area Produce Haulers", "lotNumber": "SPC-STR-2025-0320" },
+    { "id": "ship-003", "batchId": "batch-005", "destination": "Sunkist Packing House - Lindsay", "quantity": "42,000 lbs", "shipDate": "2026-01-20", "status": "pending-docs", "carrier": "Valley Ag Transport", "lotNumber": "VHG-NAV-2025-PERM" },
+    { "id": "ship-004", "batchId": "batch-003", "destination": "Del Monte Processing - Modesto", "quantity": "68,500 lbs", "shipDate": "2025-09-25", "status": "delivered", "carrier": "San Joaquin Freight Co.", "lotNumber": "RBA-TOM-2025-0410" },
+    { "id": "ship-005", "batchId": "batch-007", "destination": "Williams Selyem Winery - Healdsburg", "quantity": "18,900 lbs", "shipDate": "2025-09-22", "status": "delivered", "carrier": "Sonoma Vineyard Services", "lotNumber": "PRV-PN-2025-PERM" },
+    { "id": "ship-006", "batchId": "batch-008", "destination": "Costco Distribution - Tracy", "quantity": "22,100 lbs", "shipDate": "2025-12-28", "status": "scheduled", "carrier": "Central Coast Cold Freight", "lotNumber": "MFF-BRC-2025-0810" },
+    { "id": "ship-007", "batchId": "batch-006", "destination": "Cargill Grain Elevator - Stockton", "quantity": "156,000 lbs", "shipDate": "2025-10-08", "status": "flagged", "carrier": "Delta Bulk Hauling", "lotNumber": "BDC-CRN-2025-0425" }
+  ],
+  "complianceRecords": [
+    { "id": "comp-001", "farm": "Willow Creek Organics", "type": "GAP Audit", "date": "2025-11-14", "auditor": "NSF International", "result": "pass", "score": 97, "nextDue": "2026-11-14" },
+    { "id": "comp-002", "farm": "Riverbend Agricultural", "type": "GAP Audit", "date": "2025-09-28", "auditor": "Primus GFS", "result": "conditional-pass", "score": 84, "nextDue": "2026-03-28" },
+    { "id": "comp-003", "farm": "Blackrock Dairy & Crops", "type": "GAP Audit", "date": "2025-08-03", "auditor": "SCS Global Services", "result": "fail", "score": 68, "nextDue": "2025-12-03" },
+    { "id": "comp-004", "farm": "Sunnyside Produce Co.", "type": "Organic Certification Renewal", "date": "2025-12-02", "auditor": "CCOF", "result": "pass", "score": 92, "nextDue": "2026-12-02" },
+    { "id": "comp-005", "farm": "Pacific Ridge Vineyards", "type": "Biodynamic Certification", "date": "2025-11-30", "auditor": "Demeter USA", "result": "pass", "score": 99, "nextDue": "2026-11-30" },
+    { "id": "comp-006", "farm": "Sunrise Hemp & Botanicals", "type": "CDFA Hemp Compliance", "date": "2025-12-10", "auditor": "CDFA Inspector", "result": "pass", "score": 94, "nextDue": "2026-06-10" },
+    { "id": "comp-007", "farm": "Delta Grain & Seed", "type": "GAP Audit", "date": "2025-06-14", "auditor": "Primus GFS", "result": "conditional-pass", "score": 72, "nextDue": "2025-12-14" }
+  ],
+  "reports": [
+    { "id": "rpt-001", "title": "Q3 2025 Harvest Summary", "farm": "Riverbend Agricultural", "type": "harvest", "date": "2025-10-15", "author": "Lisa Thornton" },
+    { "id": "rpt-002", "title": "Organic Certification Prep - 2025", "farm": "Sunnyside Produce Co.", "type": "compliance", "date": "2025-11-10", "author": "Sarah Kim" },
+    { "id": "rpt-003", "title": "Blackrock Corrective Action Plan", "farm": "Blackrock Dairy & Crops", "type": "compliance", "date": "2025-08-20", "author": "Tom Bradley" },
+    { "id": "rpt-004", "title": "Water Usage Analysis - Summer 2025", "farm": "Valley Harvest Growers", "type": "resource", "date": "2025-09-30", "author": "Jorge Ramirez" },
+    { "id": "rpt-005", "title": "Pest Pressure Report - Central Coast", "region": "Central Coast", "type": "pest", "date": "2025-11-05", "author": "Rosa Delgado" },
+    { "id": "rpt-006", "title": "Annual Yield Comparison 2024 vs 2025", "farm": "Willow Creek Organics", "type": "harvest", "date": "2025-12-01", "author": "Miguel Santos" },
+    { "id": "rpt-007", "title": "THC Compliance Lab Results - Fall 2025", "farm": "Sunrise Hemp & Botanicals", "type": "compliance", "date": "2025-10-20", "author": "Alex Rivera" },
+    { "id": "rpt-008", "title": "Sonoma County Frost Risk Assessment", "region": "Sonoma County", "type": "weather", "date": "2025-11-18", "author": "Yuki Tanaka" }
+  ],
+  "metrics": [
+    { "id": "met-001", "zoneId": "zone-001", "type": "yield", "label": "Yield per Acre", "value": 38.75, "unit": "lbs/acre", "date": "2025-12-01" },
+    { "id": "met-002", "zoneId": "zone-003", "type": "yield", "label": "Yield per Acre", "value": 85.6, "unit": "lbs/acre", "date": "2025-10-01" },
+    { "id": "met-003", "zoneId": "zone-005", "type": "yield", "label": "Yield per Acre", "value": 45.5, "unit": "lbs/acre", "date": "2025-11-15" },
+    { "id": "met-004", "zoneId": "zone-001", "type": "water", "label": "Water Usage", "value": 2.1, "unit": "acre-ft", "date": "2025-12-01" },
+    { "id": "met-005", "zoneId": "zone-006", "type": "water", "label": "Water Usage", "value": 3.8, "unit": "acre-ft", "date": "2025-12-01" },
+    { "id": "met-006", "zoneId": "zone-007", "type": "water", "label": "Water Usage", "value": 4.2, "unit": "acre-ft", "date": "2025-10-01" },
+    { "id": "met-007", "zoneId": "zone-005", "type": "soil", "label": "Soil pH", "value": 6.4, "unit": "pH", "date": "2025-11-01" },
+    { "id": "met-008", "zoneId": "zone-008", "type": "soil", "label": "Soil pH", "value": 5.8, "unit": "pH", "date": "2025-09-01" },
+    { "id": "met-009", "zoneId": "zone-009", "type": "soil", "label": "Soil Nitrogen", "value": 42, "unit": "ppm", "date": "2025-11-15" },
+    { "id": "met-010", "zoneId": "zone-003", "type": "pest", "label": "Pest Pressure Index", "value": 3.2, "unit": "index (1-10)", "date": "2025-08-15" },
+    { "id": "met-011", "zoneId": "zone-011", "type": "yield", "label": "Yield per Acre", "value": 7.2, "unit": "tons/acre", "date": "2025-11-01" },
+    { "id": "met-012", "zoneId": "zone-010", "type": "compliance", "label": "THC Content", "value": 0.18, "unit": "%", "date": "2025-10-10" }
+  ],
+  "workers": [
+    { "id": "worker-001", "name": "Miguel Santos", "email": "m.santos@willowcreek.com", "farm": "Willow Creek Organics", "role": "Field Supervisor", "status": "active" },
+    { "id": "worker-002", "name": "Sarah Kim", "email": "s.kim@willowcreek.com", "farm": "Willow Creek Organics", "role": "Compliance Manager", "status": "active" },
+    { "id": "worker-003", "name": "Jorge Ramirez", "email": "j.ramirez@riverbend-ag.com", "farm": "Riverbend Agricultural", "role": "Irrigation Technician", "status": "active" },
+    { "id": "worker-004", "name": "Lisa Thornton", "email": "l.thornton@riverbend-ag.com", "farm": "Riverbend Agricultural", "role": "Operations Manager", "status": "active" },
+    { "id": "worker-005", "name": "Kevin Tran", "email": "k.tran@sunnyside.com", "farm": "Sunnyside Produce Co.", "role": "Pack House Lead", "status": "active" },
+    { "id": "worker-006", "name": "Ana Morales", "email": "a.morales@valleyharvest.com", "farm": "Valley Harvest Growers", "role": "Quality Control", "status": "active" },
+    { "id": "worker-007", "name": "Tom Bradley", "email": "t.bradley@blackrockdairy.com", "farm": "Blackrock Dairy & Crops", "role": "Farm Manager", "status": "suspended" },
+    { "id": "worker-008", "name": "Yuki Tanaka", "email": "y.tanaka@pacificridge.com", "farm": "Pacific Ridge Vineyards", "role": "Vineyard Manager", "status": "active" },
+    { "id": "worker-009", "name": "Rosa Delgado", "email": "r.delgado@mendozafarms.com", "farm": "Mendoza Family Farms", "role": "Field Supervisor", "status": "active" },
+    { "id": "worker-010", "name": "Derek Washington", "email": "d.washington@goldenplains.coop", "farm": "Golden Plains Cooperative", "role": "Co-op Coordinator", "status": "active" }
+  ]
+}
