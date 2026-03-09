@@ -263,4 +263,164 @@ const { title, color, slides } = Astro.props
   .slide-stagger-item {
     opacity: 0;
   }
+
+  // ========================================
+  // Shared study card styles
+  // ========================================
+
+  .study-card {
+    border: 1.5px solid var(--study-border);
+    border-radius: 12px;
+    overflow: hidden;
+
+    &--dashed {
+      border-style: dashed;
+      background-color: white;
+    }
+
+    &--filled {
+      border-color: var(--study-color);
+      background-color: var(--study-color);
+    }
+  }
+
+  .study-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-3);
+    padding: var(--spacing-7) var(--spacing-8) var(--spacing-6);
+  }
+
+  .study-card-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 2px 6px;
+
+    .study-card--filled & {
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .study-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--study-heading);
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: var(--spacing-6);
+      align-items: baseline;
+      border-top: 1px dashed var(--study-border);
+      padding: var(--spacing-6) var(--spacing-8);
+
+      .study-card--filled & {
+        color: #fff;
+        border-top-style: solid;
+        border-top-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .study-card-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+
+    .study-card--filled & {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // ========================================
+  // Shared viz card styles (result / decision cards)
+  // ========================================
+
+  .study-viz-card {
+    text-align: left;
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .study-viz-card-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-6);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
+  }
+
+  .study-viz-card-content {
+    padding: var(--spacing-8);
+  }
+
+  .study-viz-card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: hsl(from var(--study-color) h s l / 0.1);
+    flex-shrink: 0;
+    margin-bottom: var(--spacing-3);
+  }
+
+  .study-viz-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .study-viz-card-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Shared quote styles
+  // ========================================
+
+  .study-quote {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.55;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--study-text);
+    margin: 0;
+  }
+
+  .study-cite {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    margin: 0;
+  }
 </style>
