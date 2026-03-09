@@ -1,6 +1,6 @@
 ---
 import StudyLayout from '@layouts/StudyLayout.astro'
-import RouteNav from '@components/RouteNav.astro'
+import StudyNav from '@components/StudyNav.astro'
 import GmapsImg from '@media/revel/mapping/gmaps-bg.png'
 import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
 import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
@@ -27,7 +27,7 @@ const slides = [
 ---
 
 <StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" slides={slides}>
-  <RouteNav slides={slides} vehicleImage={CarTopdown} slot="nav" />
+  <StudyNav slides={slides} vehicleImage={CarTopdown} slot="nav" />
   <!-- Slide 1: Hero -->
   <section class="study-slide slide-hero" id="hero">
     <div class="hero-accent"></div>

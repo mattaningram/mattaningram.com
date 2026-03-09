@@ -1,110 +1,293 @@
 ---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
 export interface Props {
   slides: Array<{ id: string; title: string }>
+  vehicleImage?: ImageMetadata
 }
 
-const { slides } = Astro.props
+const { slides, vehicleImage, ...rest } = Astro.props
 ---
 
-<nav class="study-nav" aria-label="Slide navigation">
-  <ol class="study-nav-list">
+<div class="route-nav-wrap" {...rest}>
+  <nav class="route-nav" aria-label="Slide navigation">
+    <div class="route-track">
+      <div class="route-track-fill"></div>
+    </div>
     {
-      slides.map((slide, index) => (
-        <li class="study-nav-item">
-          <a
-            href={`#${slide.id}`}
-            class:list={['study-nav-dot', { active: index === 0 }]}
-            aria-label={`Go to: ${slide.title}`}
-            data-slide-index={index}
-          >
-            <span class="study-nav-dot-indicator" />
-            <span class="study-nav-dot-label">{slide.title}</span>
-          </a>
-        </li>
-      ))
+      vehicleImage && (
+        <Image
+          class="route-vehicle"
+          width="48"
+          height="48"
+          layout="constrained"
+          src={vehicleImage}
+          alt=""
+          aria-hidden="true"
+        />
+      )
     }
-  </ol>
-</nav>
+    <ol class="route-stops">
+      {
+        slides.map((slide, index) => (
+          <li class:list={['route-stop', { 'is-current': index === 0 }]} data-stop-index={index}>
+            <a
+              href={`#${slide.id}`}
+              class:list={['study-nav-dot', 'route-stop-link', { active: index === 0 }]}
+              data-slide-index={index}
+            >
+              <span class="route-stop-dot">
+                <span class="route-stop-inner" />
+              </span>
+              <span class="route-stop-label">{slide.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+</div>
+
+<script>
+  function initRouteNav() {
+    const nav = document.querySelector('.route-nav') as HTMLElement
+    if (!nav) return
+
+    const stops = Array.from(nav.querySelectorAll('.route-stop')) as HTMLElement[]
+    const links = Array.from(nav.querySelectorAll('.route-stop-link')) as HTMLElement[]
+    const trackFill = nav.querySelector('.route-track-fill') as HTMLElement
+    const track = nav.querySelector('.route-track') as HTMLElement
+    const vehicle = nav.querySelector('.route-vehicle') as HTMLElement | null
+
+    function positionTrack() {
+      const firstDot = stops[0]?.querySelector('.route-stop-dot') as HTMLElement
+      const lastDot = stops[stops.length - 1]?.querySelector('.route-stop-dot') as HTMLElement
+      if (!firstDot || !lastDot || !track) return
+
+      const navRect = nav.getBoundingClientRect()
+      const firstRect = firstDot.getBoundingClientRect()
+      const lastRect = lastDot.getBoundingClientRect()
+    }
+
+    function update() {
+      const activeIndex = links.findIndex((l) => l.classList.contains('active'))
+
+      stops.forEach((stop, i) => {
+        stop.classList.toggle('is-past', i < activeIndex)
+        stop.classList.toggle('is-current', i === activeIndex)
+      })
+
+      if (activeIndex >= 0 && trackFill && track) {
+        const activeDot = stops[activeIndex]?.querySelector('.route-stop-dot') as HTMLElement
+        if (activeDot) {
+          const scale = nav.getBoundingClientRect().width / nav.offsetWidth
+          const trackRect = track.getBoundingClientRect()
+          const dotRect = activeDot.getBoundingClientRect()
+          const fillHeight = (dotRect.top + dotRect.height / 2 - trackRect.top) / scale
+          trackFill.style.height = `${Math.max(0, fillHeight)}px`
+
+          if (vehicle) {
+            const navRect = nav.getBoundingClientRect()
+            const vehicleTop = (dotRect.top + dotRect.height / 2 - navRect.top) / scale
+            vehicle.style.top = `${vehicleTop}px`
+          }
+        }
+      }
+    }
+
+    positionTrack()
+    update()
+
+    const observer = new MutationObserver(update)
+    links.forEach((link) => observer.observe(link, { attributes: true, attributeFilter: ['class'] }))
+
+    return () => observer.disconnect()
+  }
+
+  let cleanup: (() => void) | undefined
+
+  function init() {
+    cleanup?.()
+    cleanup = initRouteNav() ?? undefined
+  }
+
+  init()
+  document.addEventListener('astro:after-swap', init)
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.()
+    cleanup = undefined
+  })
+</script>
 
 <style lang="scss">
   @use '../styles/scssVariables' as *;
 
-  .study-nav {
+  .route-nav-wrap {
+    --route-stop-height: 2.5rem;
+    --dot-size: 14px;
+    --dot-inner: 5px;
+    --track-width: 3px;
+
     position: fixed;
-    left: var(--spacing-7);
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     z-index: 50;
+    padding-left: var(--spacing-7);
 
     @media (width < $breakpoint-md) {
       display: none;
     }
   }
 
-  .study-nav-list {
+  .route-nav {
+    position: relative;
+    transform: scale(0.65);
+    transform-origin: left center;
+    transition: transform 0.3s ease;
+
+    .route-nav-wrap:hover & {
+      transform: scale(1);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -48px;
+      border-top-right-radius: 72px;
+      border-bottom-right-radius: 72px;
+      background: var(--study-bg);
+      filter: blur(16px);
+      -webkit-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+
+  .route-track {
+    position: absolute;
+    left: calc(var(--dot-size) / 2 - var(--track-width) / 2);
+    top: calc(var(--route-stop-height) / 2);
+    bottom: calc(var(--route-stop-height) / 2);
+    width: var(--track-width);
+    background: #d5d9e0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .route-track-fill {
+    width: 100%;
+    height: 0;
+    background: var(--study-color);
+    border-radius: 99px;
+    transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .route-vehicle {
+    position: absolute;
+    left: calc(var(--dot-size) / 2);
+    top: 0;
+    width: 48px;
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+    pointer-events: none;
+    z-index: 2;
+    transition: top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
+  }
+
+  .route-stops {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4);
+    position: relative;
   }
 
-  .study-nav-item {
+  .route-stop {
     display: flex;
     align-items: center;
+    gap: 10px;
   }
 
-  .study-nav-dot {
+  .route-stop-link {
     display: flex;
     align-items: center;
-    gap: var(--spacing-3);
     text-decoration: none;
-    color: var(--study-text-muted);
-    transition: color 0.2s ease;
-
-    &:hover,
-    &.active {
-      color: var(--study-color);
-    }
-  }
-
-  .study-nav-dot-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1.5px solid currentColor;
     flex-shrink: 0;
-    transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      transform 0.3s ease;
+    gap: var(--spacing-6);
 
-    .study-nav-dot.active & {
-      background-color: var(--study-color);
-      border-color: var(--study-color);
-      transform: scale(1.25);
+    &:hover {
+      .route-stop-label {
+        color: var(--study-text);
+      }
     }
   }
 
-  .study-nav-dot-label {
-    font-size: 0.7rem;
+  .route-stop-dot {
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    border: var(--track-width) solid #d5d9e0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition:
+      border-color 0.3s ease,
+      border-width 0.3s ease;
+
+    .is-past & {
+      border-color: var(--study-color);
+    }
+
+    .is-current & {
+      border-color: var(--study-color);
+      border-width: 2.5px;
+    }
+  }
+
+  .route-stop-inner {
+    width: var(--dot-inner);
+    height: var(--dot-inner);
+    border-radius: 50%;
+    background: transparent;
+    transition: background-color 0.3s ease;
+
+    .is-current & {
+      background: var(--study-color);
+    }
+  }
+
+  .route-stop-label {
+    font-size: 0.875rem;
+    line-height: var(--route-stop-height);
     font-weight: 500;
     letter-spacing: 0.02em;
     white-space: nowrap;
+    color: var(--study-text-muted);
     opacity: 0;
     transform: translateX(-4px);
     transition:
       opacity 0.25s ease,
       transform 0.25s ease;
-    pointer-events: none;
 
-    .study-nav:hover & {
+    .route-nav-wrap:hover & {
       opacity: 1;
       transform: translateX(0);
+      transition-delay: 0.15s;
     }
 
-    .study-nav-dot.active & {
+    .is-current & {
       color: var(--study-color);
     }
   }
