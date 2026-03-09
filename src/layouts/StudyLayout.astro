@@ -326,6 +326,7 @@ const { title, color, slides } = Astro.props
       align-items: baseline;
       border-top: 1px dashed var(--study-border);
       padding: var(--spacing-6) var(--spacing-8);
+      text-wrap: balance;
 
       .study-card--filled & {
         color: #fff;
@@ -345,6 +346,16 @@ const { title, color, slides } = Astro.props
     .study-card--filled & {
       color: rgba(255, 255, 255, 0.7);
     }
+  }
+
+  .slide-subtitle {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    margin-top: var(--spacing-8);
+    text-wrap: balance;
   }
 
   // ========================================

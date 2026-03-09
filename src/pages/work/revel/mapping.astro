@@ -40,8 +40,8 @@ const slides = [
           <span class="hero-period">2022 &ndash; 2025</span>
         </div>
         <p class="slide-media hero-summary">
-          I led design on creating a new mapping system across all of Revel's products and spearheaded demand heatmaps
-          that helped drivers improve their earnings.
+          I led design on creating a new mapping system used across all of Revel's products, and spearheaded demand
+          heatmaps that helped drivers find more rides and improve their earnings.
         </p>
       </div>
       <div class="hero-visual">
@@ -59,7 +59,8 @@ const slides = [
           <p class="slide-section-label slide-body">Context</p>
           <h2 class="slide-heading">Changing Contracts</h2>
           <p class="slide-body slide-subtitle">
-            Revel pivoted from salaried drivers to independent contractors which significantly changed driver incentives
+            Revel Rideshare changed from salaried drivers to independent contractors, significantly changing driver
+            incentives and limiting operation's ability to control driver distribution.
           </p>
         </div>
       </div>
@@ -81,7 +82,7 @@ const slides = [
               </li>
               <li>
                 <span class="study-card-category">Incentives</span>
-                No direct link between rides completed and take-home pay
+                Rides per shift only impacted bonuses
               </li>
             </ul>
           </div>
@@ -111,7 +112,7 @@ const slides = [
               </li>
               <li>
                 <span class="study-card-category">Scheduling</span>
-                Self-selected hours with full flexibility over shift times
+                Self-selected hours with high flexibility over shift times
               </li>
               <li>
                 <span class="study-card-category">Incentives</span>
@@ -130,11 +131,11 @@ const slides = [
             <ul class="study-card-list">
               <li>
                 <span class="study-card-category">Cost</span>
-                Expensive per-load pricing with limited negotiating leverage
+                Expensive per-load pricing with limited scalability
               </li>
               <li>
                 <span class="study-card-category">Data</span>
-                Outdated place data and search results, frustrating riders trying to find their destination
+                Outdated place data and missing search results
               </li>
               <li>
                 <span class="study-card-category">Support</span>
@@ -164,11 +165,11 @@ const slides = [
             <ul class="study-card-list">
               <li>
                 <span class="study-card-category">Cost</span>
-                Lower pricing via an existing Google relationship, unlocking maps in more parts of the UI
+                Lower pricing via an existing Google relationship
               </li>
               <li>
                 <span class="study-card-category">Data</span>
-                Reliable search results and up-to-date place data for a better rider experience
+                Smarter search and up-to-date place data
               </li>
               <li>
                 <span class="study-card-category">Support</span>
@@ -185,11 +186,12 @@ const slides = [
   <section class="study-slide slide-design-system" id="map-design-system">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
-        <p class="slide-section-label slide-body">Infrastructure</p>
+        <p class="slide-section-label slide-body">Scalability</p>
         <h2 class="slide-heading">Map Design System</h2>
         <p class="slide-body slide-subtitle">
-          We now had an opportunity to consolidate map styles and components into a single system. Providing a
-          consistent experience for our users and scalable development for the team.
+          Existing Mapbox implementations were custom for each Revel app. Consolidating shared concepts and components
+          into a new map design system would reduce refactoring time, accelerate future development, and make the user
+          experience more consistent.
         </p>
       </div>
       <div class="route-designs">
@@ -280,7 +282,11 @@ const slides = [
         <div class="slide-header">
           <p class="slide-section-label slide-body">Research</p>
           <h2 class="slide-heading">Drivers: Where & Why</h2>
-          <p class="slide-body slide-subtitle">Understanding how drivers actually make positioning decisions</p>
+          <p class="slide-body slide-subtitle">
+            Driver distribution is a complex problem space involving experience, financial incentives, traffic, weather,
+            and more. Along with my PM, I worked closely with drivers, operations, and analytics to better understand
+            where drivers were going.
+          </p>
         </div>
       </div>
       <div class="w2-1099-diagram">
@@ -292,20 +298,19 @@ const slides = [
             </div>
             <ul class="study-card-list">
               <li>
-                <span class="study-card-category">Participants</span>
-                Drivers across novice to veteran experience levels
+                <span class="study-card-category">Drivers</span>
+                New and experienced Revel drivers, some who had driven for competing platforms
               </li>
               <li>
                 <span class="study-card-category">Focus</span>
-                How and why drivers choose where to position between rides
+                What were the most important factors in where drivers chose to position between rides
               </li>
             </ul>
             <div class="card-finding">
               <p class="study-quote">
-                "On Lyft there's always a heat map telling you where to be. Coming here I was just parking wherever and
-                hoping."
+                "We had bonuses on the map where you got more rides, I followed sometimes, but I know the city"
               </p>
-              <p class="study-cite">Driver, 4+ years on competing platforms</p>
+              <p class="study-cite">New Revel driver, 4 years at Uber</p>
             </div>
           </div>
           <div class="slide-stagger-item study-card study-card--dashed">
@@ -316,11 +321,11 @@ const slides = [
             <ul class="study-card-list">
               <li>
                 <span class="study-card-category">Setting</span>
-                On-site with the Revel operations team
+                On-site sitting with operations team and maintenance teams
               </li>
               <li>
                 <span class="study-card-category">Focus</span>
-                How managers tracked and managed fleet distribution with existing tools
+                Nuances of how operations used existing map and distribution tools so nothing would be lost in transition
               </li>
             </ul>
             <div class="card-finding card-finding--flush">
@@ -339,12 +344,12 @@ const slides = [
             </div>
             <ul class="study-card-list">
               <li>
-                <span class="study-card-category">Dataset</span>
-                Supply and demand distribution across service zones
+                <span class="study-card-category">Data</span>
+                Supply and demand distribution, zone supply response time, driver idle time
               </li>
               <li>
                 <span class="study-card-category">Focus</span>
-                Supply/demand distribution ratios and driver idle time across service zones
+                What metrics were suffering from the new contractor model and which we should prioritize
               </li>
             </ul>
             <div class="card-finding card-finding--chart">
@@ -697,15 +702,6 @@ const slides = [
     color: var(--study-color);
     line-height: 1.4;
     margin-bottom: var(--spacing-4);
-  }
-
-  .slide-subtitle {
-    max-width: 52ch;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--study-text-muted);
-    font-weight: 500;
-    margin-top: var(--spacing-8);
   }
 
   .slide-list {
@@ -1380,7 +1376,6 @@ const slides = [
       object-fit: cover;
     }
   }
-
 
   .card-finding--chart {
     gap: var(--spacing-3);

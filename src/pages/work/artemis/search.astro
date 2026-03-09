@@ -63,16 +63,8 @@ const slides = [
               class="hero-orbit-icon"
               style="--ring-x: 300px; --ring-y: 60px; --delay: 7s"
             />
-            <Icon
-              name="artemis/chart"
-              class="hero-orbit-icon"
-              style="--ring-x: -310px; --ring-y: 80px; --delay: 2s"
-            />
-            <Icon
-              name="artemis/task"
-              class="hero-orbit-icon"
-              style="--ring-x: 160px; --ring-y: 170px; --delay: 5s"
-            />
+            <Icon name="artemis/chart" class="hero-orbit-icon" style="--ring-x: -310px; --ring-y: 80px; --delay: 2s" />
+            <Icon name="artemis/task" class="hero-orbit-icon" style="--ring-x: 160px; --ring-y: 170px; --delay: 5s" />
             <Icon name="artemis/split" class="hero-orbit-icon" style="--ring-x: -60px; --ring-y: -180px; --delay: 1s" />
             <Icon
               name="artemis/nutrients"
@@ -807,15 +799,6 @@ const slides = [
     margin-bottom: var(--spacing-4);
   }
 
-  .slide-subtitle {
-    max-width: 52ch;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--study-text-muted);
-    font-weight: 500;
-    margin-top: var(--spacing-8);
-  }
-
   .slide-list {
     list-style: none;
     padding: 0;
@@ -958,7 +941,6 @@ const slides = [
       0 1px 3px rgba(0, 0, 0, 0.08),
       0 8px 24px rgba(0, 0, 0, 0.06),
       0 24px 48px rgba(0, 0, 0, 0.04);
-
   }
 
   .hero-search-icon {
@@ -984,7 +966,6 @@ const slides = [
     height: 28px;
     color: var(--study-text-muted);
     animation: orbit-fall 6s ease-in-out var(--delay) infinite backwards;
-
   }
 
   @keyframes orbit-fall {
@@ -1005,7 +986,6 @@ const slides = [
       opacity: 0;
     }
   }
-
 
   // ========================================
   // Slide 2: Scaling cards
@@ -1885,7 +1865,6 @@ const slides = [
     padding: 2px 7px;
   }
 </style>
-
 
 <script>
   const slider = document.querySelector('[data-comparison-slider]') as HTMLElement | null
