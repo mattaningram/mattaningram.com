@@ -7,6 +7,7 @@ import smallFarm from '../../../media/artemis/search/artemis-small-farm.jpg'
 import enterpriseFarm from '../../../media/artemis/search/artemis-enterprise-farm.jpg'
 import farmVisit from '../../../media/artemis/search/artemis-farm-visit.jpeg'
 import artemisPages from '../../../media/artemis/search/artemis-pages.png'
+import searchWidgets from '../../../media/artemis/search/artemis-search-widgets.png'
 const farmData = await import('../../../data/artemis-farm-data.json')
 
 function highlightJson(obj: unknown): string {
@@ -36,8 +37,7 @@ const slides = [
   { id: 'design', title: 'The Old Search' },
   { id: 'research', title: 'Understanding the Problem' },
   { id: 'data', title: 'Scoping the Data' },
-  { id: 'decisions', title: 'Key Design Decisions' },
-  { id: 'tradeoffs', title: "What Didn't Make It" },
+  { id: 'exploration', title: 'Design Exploration' },
   { id: 'results', title: 'Results' },
   { id: 'next', title: 'What Comes Next' },
 ]
@@ -308,7 +308,7 @@ const slides = [
                 <div class="chart-x-labels">
                   <span>Tasks</span>
                   <span>Crops</span>
-                  <span>Sensors</span>
+                  <span>Metrics</span>
                   <span>Reports</span>
                 </div>
               </div>
@@ -390,12 +390,16 @@ const slides = [
         <div class="comparison-side comparison-side--json">
           <div class="comparison-label">Data Model</div>
           <div class="comparison-columns">
-            {dataColumns.map((col) => (
-              <div class="comparison-column">
-                <div class="comparison-column-label">{col.label}</div>
-                <pre class="comparison-code"><code set:html={highlightJson(col.data)} /></pre>
-              </div>
-            ))}
+            {
+              dataColumns.map((col) => (
+                <div class="comparison-column">
+                  <div class="comparison-column-label">{col.label}</div>
+                  <pre class="comparison-code">
+                    <code set:html={highlightJson(col.data)} />
+                  </pre>
+                </div>
+              ))
+            }
           </div>
         </div>
         <div class="comparison-side comparison-side--ui" style="--clip-position: 50%">
@@ -425,100 +429,134 @@ const slides = [
     </div>
   </section>
 
-  <!-- Slide 6: Key Design Decisions -->
-  <section class="study-slide slide-decisions" id="decisions">
+  <!-- Slide 6: Design Exploration -->
+  <section class="study-slide slide-exploration" id="exploration">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Execution</p>
-        <h2 class="slide-heading">Key Design Decisions</h2>
-        <p class="slide-body slide-subtitle decisions-subtitle">
-          Three choices that defined the experience &mdash; each came from constraints and research, not assumption
+        <h2 class="slide-heading">Design Exploration</h2>
+        <p class="slide-body slide-subtitle">
+          Early explorations tested different approaches to layout, result types, and interaction patterns before
+          converging on a direction
         </p>
       </div>
-      <div class="decision-cards">
-        <div class="slide-stagger-item decision-card">
-          <div class="decision-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Modal vs. navigation illustration</span>
+      <div class="exploration-scroll">
+        <div class="exploration-row">
+          <div class="exploration-item">
+            <div class="exploration-media">
+              <video autoplay loop muted playsinline>
+                <source src="/assets/videos/artemis/artemis-farm-page-search.webm" type="video/webm" />
+              </video>
+            </div>
+            <div class="exploration-content">
+              <span class="exploration-kept exploration-kept--no">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+                >
+                Cut
+              </span>
+              <h3 class="exploration-title">Page vs Farm Search</h3>
+              <p class="exploration-description">
+                Users would often get confused between in-page search and searching the whole farm, I experimented with
+                only having one search that could toggle between searching the page or everything.
+              </p>
             </div>
           </div>
-          <div class="decision-card-content">
-            <div class="decision-card-number">01</div>
-            <h3 class="decision-card-title">Modal Over Navigation</h3>
-            <p class="decision-card-body">
-              Keeping search in-context rather than routing to a separate page was the single biggest UX improvement
-              over the original experience &mdash; users stayed oriented in the app.
-            </p>
-          </div>
-        </div>
-        <div class="slide-stagger-item decision-card">
-          <div class="decision-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Permission filtering illustration</span>
+
+          <div class="exploration-item">
+            <div class="exploration-media">
+              <video autoplay loop muted playsinline>
+                <source src="/assets/videos/artemis/artemis-full-page-search.webm" type="video/webm" />
+              </video>
+            </div>
+            <div class="exploration-content">
+              <span class="exploration-kept exploration-kept--no">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+                >
+                Cut
+              </span>
+              <h3 class="exploration-title">Full Page Modal</h3>
+              <p class="exploration-description">
+                Since we were sticking with searching the whole farm, I tried sticking with the existing full-page
+                experience but with benefits of modal behavior.
+              </p>
             </div>
           </div>
-          <div class="decision-card-content">
-            <div class="decision-card-number">02</div>
-            <h3 class="decision-card-title">Relevance by Role</h3>
-            <p class="decision-card-body">
-              Results were scoped to what a given user could actually access and act on, reducing noise for field
-              workers while giving managers fuller visibility.
-            </p>
-          </div>
-        </div>
-        <div class="slide-stagger-item decision-card">
-          <div class="decision-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Results as links illustration</span>
+
+          <div class="exploration-item">
+            <div class="exploration-media">
+              <Image src={searchWidgets} width={480} alt="Search widgets concept" layout="constrained" fit="cover" />
+            </div>
+            <div class="exploration-content">
+              <span class="exploration-kept exploration-kept--no">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+                >
+                Cut
+              </span>
+              <h3 class="exploration-title">Search Widgets</h3>
+              <p class="exploration-description">
+                What if a user just wanted a quick glance at one metric? Inline data components could save the user from
+                having to leave the page at all.
+              </p>
             </div>
           </div>
-          <div class="decision-card-content">
-            <div class="decision-card-number">03</div>
-            <h3 class="decision-card-title">Results as Links</h3>
-            <p class="decision-card-body">
-              Showing rich live data in results was tempting but would have added significant backend complexity and
-              delayed shipping &mdash; we deferred it and shipped something immediately useful.
-            </p>
+
+          <div class="exploration-item">
+            <div class="exploration-media">
+              <video autoplay loop muted playsinline>
+                <source src="/assets/videos/artemis/artemis-tab-search.webm" type="video/webm" />
+              </video>
+            </div>
+            <div class="exploration-content">
+              <span class="exploration-kept exploration-kept--yes">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg
+                >
+                Kept
+              </span>
+              <h3 class="exploration-title">Tabbed Search</h3>
+              <p class="exploration-description">
+                With the multitude of different data types that could potentially appear for a given search input, I had
+                to come up with ways to help the user narrow down the results.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Slide 7: What Didn't Make It -->
-  <section class="study-slide slide-tradeoffs" id="tradeoffs">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Tradeoffs</p>
-          <h2 class="slide-heading">What Didn't Make It</h2>
-          <p class="slide-body slide-subtitle">Live data previews: the right idea for the wrong moment</p>
-        </div>
-      </div>
-      <ul class="slide-body slide-list">
-        <li>
-          Showing actual sensor values, inventory counts, or crop metrics inline in search results would have made
-          results significantly more powerful
-        </li>
-        <li>The engineering cost was too high for an MVP with a two-person dev team</li>
-        <li>
-          Fuzzy search tuning was also left partially unfinished at launch &mdash; client naming conventions were more
-          varied than expected
-        </li>
-        <li>
-          Defining a clear MVP scope with a small team is what made it shippable &mdash; the features left behind became
-          a well-defined v2 roadmap
-        </li>
-      </ul>
-      <div class="tradeoffs-visual slide-media">
-        <div class="media-placeholder media-placeholder--wide">
-          <span class="media-placeholder-label">Live data preview concept mockup</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 8: Results -->
+  <!-- Slide 7: Results -->
   <section class="study-slide slide-results" id="results">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
@@ -529,8 +567,13 @@ const slides = [
       <div class="results-cards">
         <div class="slide-stagger-item result-card">
           <div class="result-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Usage metrics illustration</span>
+            <div class="cursor-click-scene">
+              <div class="cursor-click-btn">
+                <svg class="cursor-click-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+              </div>
+              <svg class="cursor-click-cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 3l14 10.5-6.5 1.5-3.5 6z" fill="var(--study-heading)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
             </div>
           </div>
           <div class="result-card-content">
@@ -544,8 +587,50 @@ const slides = [
         </div>
         <div class="slide-stagger-item result-card">
           <div class="result-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Click reduction chart</span>
+            <div class="fewer-clicks-chart" data-fewer-clicks-chart>
+              <div class="chart-wrap">
+                <div class="chart-area">
+                  <div class="chart-grid">
+                    <div class="chart-grid-line"><span class="chart-grid-line-label">6</span></div>
+                    <div class="chart-grid-line"><span class="chart-grid-line-label">4</span></div>
+                    <div class="chart-grid-line"><span class="chart-grid-line-label">2</span></div>
+                    <div class="chart-grid-line"><span class="chart-grid-line-label">0</span></div>
+                  </div>
+                  <div class="chart-bars">
+                    <div class="chart-bar-group">
+                      <div class="chart-bar chart-bar--without" data-from="70%" data-to="53%" style="--h: 70%;">
+                        <div class="chart-bar-inner chart-bar--with" data-from="85.71%" data-to="69.8%" style="--inner-h: 85.71%;"></div>
+                      </div>
+                    </div>
+                    <div class="chart-bar-group">
+                      <div class="chart-bar chart-bar--without" data-from="60%" data-to="43%" style="--h: 60%;">
+                        <div class="chart-bar-inner chart-bar--with" data-from="83.33%" data-to="76.7%" style="--inner-h: 83.33%;"></div>
+                      </div>
+                    </div>
+                    <div class="chart-bar-group">
+                      <div class="chart-bar chart-bar--without" data-from="50%" data-to="37%" style="--h: 50%;">
+                        <div class="chart-bar-inner chart-bar--with" data-from="80%" data-to="89.2%" style="--inner-h: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="chart-bar-group">
+                      <div class="chart-bar chart-bar--without" data-from="100%" data-to="80%" style="--h: 100%;">
+                        <div class="chart-bar-inner chart-bar--with" data-from="75%" data-to="52.5%" style="--inner-h: 75%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chart-x-labels">
+                    <span>Tasks</span>
+                    <span>Crops</span>
+                    <span>Metrics</span>
+                    <span>Reports</span>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-legend">
+                <span class="chart-legend-item chart-legend-item--without">Without search</span>
+                <span class="chart-legend-item chart-legend-item--with">With search</span>
+              </div>
+              <p class="chart-title">Clicks to destination</p>
             </div>
           </div>
           <div class="result-card-content">
@@ -558,9 +643,12 @@ const slides = [
           </div>
         </div>
         <div class="slide-stagger-item result-card">
-          <div class="result-card-viz">
-            <div class="media-placeholder">
-              <span class="media-placeholder-label">Client feedback illustration</span>
+          <div class="result-card-viz result-card-viz--quote">
+            <div class="result-quote-wrap">
+              <p class="finding-quote">
+                &ldquo;Search has been a game changer, but now every client I talk to is asking about FarmWorks integration.&rdquo;
+              </p>
+              <p class="finding-cite">Sales rep, quarterly review</p>
             </div>
           </div>
           <div class="result-card-content">
@@ -576,7 +664,7 @@ const slides = [
     </div>
   </section>
 
-  <!-- Slide 9: What Comes Next -->
+  <!-- Slide 8: What Comes Next -->
   <section class="study-slide slide-next" id="next">
     <div class="slide-inner slide-inner--centered">
       <div class="slide-header">
@@ -896,27 +984,25 @@ const slides = [
 
   @keyframes search-bar-pulse {
     0% {
-      border-color: var(--study-border);
-      box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 24px 48px rgba(0, 0, 0, 0.04);
-    }
-    25% {
-      border-color: rgb(255, 64, 22);
       box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.08),
         0 8px 24px rgba(0, 0, 0, 0.06),
         0 24px 48px rgba(0, 0, 0, 0.04),
-        0 0 0 3px rgba(255, 64, 22, 0.2),
-        0 0 28px rgba(255, 64, 22, 0.45);
+        0 0 0 0 rgba(255, 64, 22, 0.55);
     }
-    100% {
-      border-color: var(--study-border);
+    35% {
       box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.08),
         0 8px 24px rgba(0, 0, 0, 0.06),
-        0 24px 48px rgba(0, 0, 0, 0.04);
+        0 24px 48px rgba(0, 0, 0, 0.04),
+        0 0 0 18px rgba(255, 64, 22, 0);
+    }
+    100% {
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        0 24px 48px rgba(0, 0, 0, 0.04),
+        0 0 0 0 rgba(255, 64, 22, 0);
     }
   }
 
@@ -1202,6 +1288,7 @@ const slides = [
   .research-method-finding {
     padding: 0;
     border-top: 1px dashed var(--study-border);
+    background: hsl(from var(--study-color) h s l / 0.03);
 
     .media-placeholder {
       border: none;
@@ -1592,73 +1679,131 @@ const slides = [
   }
 
   // ========================================
-  // Slide 6: Decision cards
+  // Slide 6: Design Exploration
   // ========================================
 
-  .decisions-subtitle {
-    margin-bottom: var(--spacing-8);
-  }
+  #exploration {
+    padding-inline: 0;
 
-  .decision-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-    width: 100%;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
+    .slide-inner {
+      max-width: none;
     }
   }
 
-  .decision-card {
-    text-align: left;
+  .exploration-scroll {
+    width: 100%;
+    overflow-x: auto;
+    padding-block: var(--spacing-6);
+  }
+
+  .exploration-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-8);
+    padding: 0 var(--spacing-12);
+    width: max-content;
+
+    @media (width < $breakpoint-lg) {
+      padding-inline: var(--spacing-6);
+    }
+  }
+
+  .exploration-item {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
+    position: relative;
+
+    @media (width < $breakpoint-lg) {
+      max-width: calc(100vw - calc(2 * var(--spacing-6)));
+    }
+  }
+
+  .exploration-media {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--study-border);
+    background: var(--color-surface-muted, #f4f4f5);
+    max-height: 480px;
+
+    video,
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .exploration-content {
+    position: relative;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: calc(-1 * var(--spacing-8));
+    padding: var(--spacing-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    justify-content: center;
     background: white;
     border: 1px solid var(--study-border);
     border-radius: 12px;
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+    width: min(100%, 400px);
+    z-index: 1;
   }
 
-  .decision-card-viz {
-    position: relative;
+  .exploration-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .exploration-kept {
+    width: 4.5rem;
+    height: 4.5rem;
+    position: absolute;
+    top: -1.25rem;
+    right: -1.25rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 280px;
-    padding: var(--spacing-6);
-    background: hsl(from var(--study-color) h s l / 0.03);
-    border-bottom: 1px solid var(--study-border);
-    border-radius: 11px 11px 0 0;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 2.5px solid currentColor;
+    border-radius: 50%;
+    transform: rotate(-8deg);
+    flex-shrink: 0;
+    line-height: 1;
 
-    .media-placeholder {
-      border: none;
-      background: none;
+    svg {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
-  .decision-card-content {
-    padding: var(--spacing-8);
+  .exploration-kept--yes {
+    color: #15803d;
+    background: #bbf7d0;
   }
 
-  .decision-card-number {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--study-color);
-    letter-spacing: 0.05em;
-    margin-bottom: var(--spacing-2);
+  .exploration-kept--no {
+    color: #b91c1c;
+    background: #fecaca;
+    border-style: dashed;
   }
 
-  .decision-card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--study-heading);
-    margin-bottom: var(--spacing-6);
-  }
-
-  .decision-card-body {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--study-text-muted);
+  .exploration-description {
+    font-size: var(--font-size-sm);
+    color: var(--study-text-secondary);
+    line-height: 1.5;
+    margin: 0;
   }
 
   // ========================================
@@ -1738,6 +1883,123 @@ const slides = [
     font-size: 0.9rem;
     line-height: 1.6;
     color: var(--study-text-muted);
+  }
+
+  // Cursor click illustration
+  .cursor-click-scene {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cursor-click-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 50%;
+    color: var(--study-heading);
+    animation: btn-click 3s ease-in-out infinite both;
+  }
+
+  .cursor-click-btn-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--study-color);
+  }
+
+  .cursor-click-cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    animation: cursor-enter 3s ease-in-out infinite both;
+  }
+
+  @keyframes cursor-enter {
+    0% {
+      transform: translate(80px, 80px);
+      opacity: 0;
+    }
+    30% {
+      transform: translate(80px, 80px);
+      opacity: 0;
+    }
+    60% {
+      transform: translate(14px, 14px);
+      opacity: 1;
+    }
+    68% {
+      transform: translate(14px, 14px) scale(0.9);
+    }
+    74% {
+      transform: translate(14px, 14px) scale(1);
+    }
+    90% {
+      transform: translate(14px, 14px);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(14px, 14px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes btn-click {
+    0%, 65% {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 0 hsl(from var(--study-color) h s l / 0.6);
+    }
+    68% {
+      transform: translateY(2px);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.06), 0 0 0 3px hsl(from var(--study-color) h s l / 0.5);
+    }
+    74% {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 10px hsl(from var(--study-color) h s l / 0.2);
+    }
+    90% {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 22px hsl(from var(--study-color) h s l / 0);
+    }
+    100% {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 0 hsl(from var(--study-color) h s l / 0);
+    }
+  }
+
+  // Fewer clicks chart
+  .fewer-clicks-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-4) var(--spacing-6) var(--spacing-2);
+  }
+
+  .fewer-clicks-chart .chart-wrap {
+    flex: 1;
+    min-height: 0;
+  }
+
+  // Quote viz
+  .result-card-viz--quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .result-quote-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    padding: 0 var(--spacing-4);
   }
 
   // ========================================
@@ -1872,5 +2134,37 @@ const slides = [
     slider.addEventListener('pointercancel', () => {
       isDragging = false
     })
+  }
+</script>
+
+<script>
+  // Fewer clicks chart: animate between before/after states
+  const fewerClicksChart = document.querySelector('[data-fewer-clicks-chart]')
+  if (fewerClicksChart) {
+    const bars = fewerClicksChart.querySelectorAll<HTMLElement>('.chart-bar[data-from]')
+    const inners = fewerClicksChart.querySelectorAll<HTMLElement>('.chart-bar-inner[data-from]')
+    let showingAfter = false
+
+    function toggleState() {
+      showingAfter = !showingAfter
+      bars.forEach((bar) => {
+        const val = showingAfter ? bar.dataset.to : bar.dataset.from
+        bar.style.setProperty('--h', val!)
+      })
+      inners.forEach((inner) => {
+        const val = showingAfter ? inner.dataset.to : inner.dataset.from
+        inner.style.setProperty('--inner-h', val!)
+      })
+    }
+
+    // Add transition to bars
+    bars.forEach((bar) => {
+      bar.style.transition = 'height 1s ease-in-out'
+    })
+    inners.forEach((inner) => {
+      inner.style.transition = 'height 1s ease-in-out'
+    })
+
+    setInterval(toggleState, 2500)
   }
 </script>
