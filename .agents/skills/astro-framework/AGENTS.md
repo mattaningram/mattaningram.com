@@ -23,6 +23,21 @@
 
 **Applies to:** `**/*.astro`
 
+### Accepting Class and Props from Parent
+
+When a component needs to receive a `class` or other HTML attributes from its parent (so the parent can style it with scoped CSS without needing `:global()`), always destructure `class` and spread `...rest` onto the root element:
+
+```astro
+---
+const { class: className, ...rest } = Astro.props
+---
+<div class:list={[className]} {...rest}>
+  <!-- content -->
+</div>
+```
+
+This pattern lets the parent apply scoped styles directly (`<MyComponent class="foo" />` → `.foo { ... }`) without resorting to `:global()`. It also forwards any other HTML attributes (id, aria-*, data-*, style, etc.) automatically.
+
 ### Component Structure
 
 Always use the frontmatter pattern with proper separation:

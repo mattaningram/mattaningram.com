@@ -1,347 +1,426 @@
 ---
-import type { ImageMetadata } from 'astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Logo from '@components/Logo.astro'
-import { Image } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
-
-const logoModules = import.meta.glob<{ default: ImageMetadata }>('/src/logos/*.svg', { eager: true })
+import StudyNav from '@components/StudyNav.astro'
 
 export interface Props {
-	title: string
-	logo?: string
-	logoUrl?: string
-	color: string
+  title: string
+  color: string
+  slides: Array<{ id: string; title: string }>
 }
 
-const { title, logo, logoUrl, color } = Astro.props
-const logoKey = logo ? Object.keys(logoModules).find((k) => k.endsWith(`/${logo}`)) : undefined
-const logoSrc: ImageMetadata | undefined = logoKey ? logoModules[logoKey].default : undefined
+const { title, color, slides } = Astro.props
 ---
 
-<BaseLayout title={title} pageColor={color} class={`study-layout ${title.toLowerCase().replace(/\s+/g, '-')}-wrap`}>
-	<div class="study-background"></div>
+<BaseLayout title={title} pageColor={color} class="study-layout">
+  <nav class="study-header">
+    <a class="study-home-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
+  </nav>
 
-	<nav class="study-header xyz-in" xyz="fade up-100%">
-		<a class="m-logo-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
-		<h1 class="study-title">{title}</h1>
-		{logoSrc && logoUrl ? (
-			<a href={logoUrl} class="study-logo-link">
-				<Image class="study-logo" src={logoSrc} alt={`${title} Logo`} transition:name="work-logo" />
-			</a>
-		) : null}
-	</nav>
+  <slot name="nav"><StudyNav slides={slides} /></slot>
 
-	<main class="slideshow-container">
-		<slot />
-	</main>
-
-	<nav class="slideshow-nav xyz-in" xyz="fade down-100%" aria-label="Slide navigation">
-		<div class="slideshow-dots"></div>
-		<div class="slideshow-arrows">
-			<button class="slideshow-arrow slideshow-prev xyz-nested" aria-label="Previous slide">
-				<Icon name="arrow-left" size={20} />
-			</button>
-			<button class="slideshow-arrow slideshow-next xyz-nested" aria-label="Next slide">
-				<Icon name="arrow-right" size={20} />
-			</button>
-		</div>
-	</nav>
+  <main class="study-slides">
+    <slot />
+  </main>
 </BaseLayout>
 
 <script>
-	function initSlideshow() {
-		const container = document.querySelector('.slideshow-container') as HTMLElement
-		const dotsContainer = document.querySelector('.slideshow-dots') as HTMLElement
-		const prevBtn = document.querySelector('.slideshow-prev') as HTMLButtonElement
-		const nextBtn = document.querySelector('.slideshow-next') as HTMLButtonElement
+  import { animate, stagger, inView } from 'motion'
 
-		if (!container || !dotsContainer) return
+  const cleanups: (() => void)[] = []
+  const animated = new WeakSet<Element>()
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-		const slides = Array.from(container.querySelectorAll(':scope > section')) as HTMLElement[]
-		if (slides.length === 0) return
+  function initStudy() {
+    cleanup()
 
-		let currentSlide = 0
+    const container = document.querySelector('.study-slides') as HTMLElement
+    if (!container) return
 
-		// Handle initial hash before creating dots
-		const hash = window.location.hash
-		if (hash.startsWith('#slide-')) {
-			const slideNum = parseInt(hash.replace('#slide-', ''), 10)
-			if (slideNum > 0 && slideNum <= slides.length) {
-				currentSlide = slideNum - 1
-			}
-		}
+    const sections = Array.from(container.querySelectorAll(':scope > section')) as HTMLElement[]
+    const dots = document.querySelectorAll('.study-nav-dot')
 
-		// Create dots
-		slides.forEach((_, index) => {
-			const dot = document.createElement('button')
-			dot.classList.add('slideshow-dot', 'xyz-nested')
-			dot.setAttribute('xyz', 'fade narrow-100% origin-left')
-			dot.setAttribute('aria-label', `Go to slide ${index + 1}`)
-			if (index === currentSlide) dot.classList.add('active')
-			dot.addEventListener('click', () => goToSlide(index))
-			dotsContainer.appendChild(dot)
-		})
+    // --- Active slide tracking via IntersectionObserver ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const index = sections.indexOf(entry.target as HTMLElement)
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index))
 
-		const dots = dotsContainer.querySelectorAll('.slideshow-dot')
+            const id = (entry.target as HTMLElement).id
+            if (id) history.replaceState(null, '', `#${id}`)
+          }
+        }
+      },
+      { root: container, threshold: 0.5 },
+    )
 
-		function updateSlides() {
-			slides.forEach((slide, index) => {
-				slide.classList.toggle('active', index === currentSlide)
-			})
-		}
+    sections.forEach((s) => observer.observe(s))
+    cleanups.push(() => observer.disconnect())
 
-		function updateDots() {
-			dots.forEach((dot, index) => {
-				dot.classList.toggle('active', index === currentSlide)
-			})
-		}
+    // --- Dot nav click handling (smooth scroll within container) ---
+    dots.forEach((dot) => {
+      const handler = (e: Event) => {
+        e.preventDefault()
+        const href = (dot as HTMLAnchorElement).getAttribute('href')
+        if (!href) return
+        const target = document.querySelector(href) as HTMLElement
+        target?.scrollIntoView({ behavior: 'smooth' })
+      }
+      dot.addEventListener('click', handler)
+      cleanups.push(() => dot.removeEventListener('click', handler))
+    })
 
-		function updateHash() {
-			const newHash = currentSlide === 0 ? '' : `#slide-${currentSlide + 1}`
-			history.replaceState(null, '', newHash || window.location.pathname)
-		}
+    // --- Per-slide entrance animations via inView ---
+    sections.forEach((section) => {
+      if (animated.has(section)) return
 
-		function goToSlide(index: number) {
-			if (index < 0 || index >= slides.length) return
-			currentSlide = index
-			updateSlides()
-			updateDots()
-			updateHash()
-			window.scrollTo(0, 0)
-		}
+      if (reducedMotion) {
+        // Show everything immediately
+        section.querySelectorAll('.slide-heading, .slide-body, .slide-media, .slide-stagger-item').forEach((el) => {
+          ;(el as HTMLElement).style.opacity = '1'
+        })
+        animated.add(section)
+        return
+      }
 
-		function nextSlide() {
-			if (currentSlide < slides.length - 1) {
-				goToSlide(currentSlide + 1)
-			}
-		}
+      const stop = inView(
+        section,
+        () => {
+          if (animated.has(section)) return
+          animated.add(section)
+          animateSlide(section)
+        },
+        { amount: 0.25 },
+      )
+      cleanups.push(stop)
+    })
 
-		function prevSlide() {
-			if (currentSlide > 0) {
-				goToSlide(currentSlide - 1)
-			}
-		}
+    // --- Keyboard navigation ---
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Don't intercept if user is in an input or modifier keys are pressed
+      if (e.target !== document.body || e.metaKey || e.ctrlKey) return
 
-		// Keyboard navigation
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-				e.preventDefault()
-				nextSlide()
-			} else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-				e.preventDefault()
-				prevSlide()
-			}
-		})
+      let currentIndex = 0
+      for (let i = 0; i < sections.length; i++) {
+        const rect = sections[i].getBoundingClientRect()
+        const containerRect = container.getBoundingClientRect()
+        if (rect.top >= containerRect.top - 10) {
+          currentIndex = i
+          break
+        }
+      }
 
-		// Arrow button clicks
-		prevBtn?.addEventListener('click', prevSlide)
-		nextBtn?.addEventListener('click', nextSlide)
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        const next = Math.min(currentIndex + 1, sections.length - 1)
+        sections[next]?.scrollIntoView({ behavior: 'smooth' })
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault()
+        const prev = Math.max(currentIndex - 1, 0)
+        sections[prev]?.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    cleanups.push(() => document.removeEventListener('keydown', onKeyDown))
 
-		// Initialize slides
-		updateSlides()
-	}
+    // --- Handle initial hash ---
+    const hash = window.location.hash
+    if (hash) {
+      const target = document.querySelector(hash) as HTMLElement
+      if (target && sections.includes(target)) {
+        requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }))
+      }
+    }
+  }
 
-	// Initialize on page load and after Astro view transitions
-	initSlideshow()
-	document.addEventListener('astro:after-swap', initSlideshow)
+  function animateSlide(section: HTMLElement) {
+    const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
+
+    const heading = section.querySelector('.slide-heading') as HTMLElement
+    const bodies = section.querySelectorAll('.slide-body')
+    const media = section.querySelector('.slide-media') as HTMLElement
+    const items = section.querySelectorAll('.slide-stagger-item')
+
+    if (heading) {
+      animate(heading, { opacity: [0, 1], y: [24, 0] } as any, { duration: 0.6, easing } as any)
+    }
+
+    if (bodies.length > 0) {
+      animate(
+        bodies,
+        { opacity: [0, 1], y: [16, 0] } as any,
+        { duration: 0.6, delay: stagger(0.1, { start: 0.15 } as any), easing } as any,
+      )
+    }
+
+    if (media) {
+      animate(
+        media,
+        { opacity: [0, 1], y: [20, 0], scale: [0.97, 1] } as any,
+        { duration: 0.7, delay: 0.25, easing } as any,
+      )
+    }
+
+    if (items.length > 0) {
+      animate(
+        items,
+        { opacity: [0, 1], y: [12, 0] } as any,
+        { duration: 0.4, delay: stagger(0.1, { start: 0.2 } as any), easing } as any,
+      )
+    }
+  }
+
+  function cleanup() {
+    cleanups.forEach((fn) => fn())
+    cleanups.length = 0
+  }
+
+  // Init on load and Astro view transitions
+  initStudy()
+  document.addEventListener('astro:after-swap', initStudy)
+  document.addEventListener('astro:before-swap', cleanup)
 </script>
 
 <style lang="scss">
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	.study-background {
-		position: fixed;
-		inset: 0;
-		z-index: -1;
-		opacity: 0.25;
-		background-image: radial-gradient(circle at top, var(--page-color), var(--bg-color) 65%);
-		background-size: 100% 300%;
-		background-position-y: 60%;
-	}
+  :global(body.study-layout) {
+    --study-color: var(--page-color);
+    --study-bg: #fafafa;
+    --study-bg-alt: #f0f0f0;
+    --study-text: #1a1a2e;
+    --study-text-muted: #6b7280;
+    --study-heading: #0f172a;
+    --study-border: #e0e0e0;
 
-	.study-header {
-		position: sticky;
-		top: 5px;
-		left: 0;
-		right: 0;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--spacing-6);
-		padding: var(--spacing-5);
-		z-index: 10;
-	}
+    background-color: var(--study-bg);
+    color: var(--study-text);
+  }
 
-	.study-logo-link {
-		display: block;
-	}
+  .study-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: var(--spacing-7);
+    mix-blend-mode: difference;
+  }
 
-	.study-logo {
-		display: block;
-		width: 100%;
-		max-width: 200px;
-		max-height: 20px;
-		margin-bottom: 4px;
-	}
+  .study-home-link {
+    display: block;
+    width: fit-content;
+  }
 
-	.study-title {
-		font-size: 1.25rem;
-		font-weight: 500;
+  .study-slides {
+    height: 100dvh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
 
-		@media (width < $breakpoint-lg) {
-			display: none;
-		}
-	}
-
-	.slideshow-container {
-		display: flex;
-		flex-grow: 1;
-		flex-basis: 0;
-	}
-
-	.slideshow-nav {
-		background: hsl(from var(--bg-dark) h s l / 70%);
-		backdrop-filter: blur(8px);
-		position: fixed;
-		bottom: var(--spacing-6);
-		left: var(--spacing-6);
-		right: var(--spacing-6);
-		display: flex;
-		flex-direction: row;
-		z-index: 10;
-		min-height: 40px;
-		border: 1px solid hsl(from white h s l / 25%);
-		overflow: hidden;
-
-		@media (width < $breakpoint-sm) {
-			bottom: var(--spacing-2);
-		}
-	}
-
-	.slideshow-dots {
-		display: flex;
-		flex-grow: 1;
-	}
-
-	:global(.slideshow-dot) {
-		flex-grow: 1;
-		flex-basis: 0;
-		background: transparent;
-		padding: 0;
-		cursor: pointer;
-		transition:
-			opacity 0.2s,
-			background-color 0.2s;
-
-		& + & {
-			border-left: 1px solid hsl(from white h s l / 25%);
-		}
-
-		&:hover {
-			color: var(--page-color);
-			background: hsl(from var(--page-color) h s l / 0.1);
-		}
-
-		&.active {
-			background: var(--page-color);
-		}
-	}
-
-	.slideshow-arrows {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.slideshow-arrow {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-left: 1px solid hsl(from white h s l / 25%);
-		color: white;
-		cursor: pointer;
-		padding-inline: var(--spacing-6);
-		transition: opacity 0.2s;
-
-		&:hover {
-			color: var(--page-color);
-			background: hsl(from var(--page-color) h s l / 0.1);
-		}
-	}
+    @media (width <style $breakpoint-md) {
+      height: auto;
+      overflow-y: visible;
+      scroll-snap-type: none;
+    }
+  }
 </style>
 
 <style lang="scss" is:global>
-	@use '../styles/scssVariables' as *;
+  @use '../styles/scssVariables' as *;
 
-	.study-section {
-		display: none;
-		flex-grow: 1;
-		flex-basis: 0;
-		grid-template-columns: 2fr 3fr;
-		width: 100%;
-		padding-bottom: 4rem;
+  .study-slide {
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12);
+    overflow: hidden;
+    position: relative;
 
-		&.active {
-			display: grid;
-		}
+    @media (width < $breakpoint-lg) {
+      padding: var(--spacing-10) var(--spacing-12);
+    }
 
-		@media (width < $breakpoint-lg) {
-			grid-template-columns: 1fr;
-			align-content: start;
-		}
-	}
+    @media (width < $breakpoint-md) {
+      min-height: auto;
+      scroll-snap-align: none;
+      padding: var(--spacing-14) var(--spacing-8);
+    }
 
-	.section-text {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		max-width: 48ch;
-		margin: auto;
-		text-wrap: balance;
-		padding: var(--spacing-12);
+    @media (width < $breakpoint-sm) {
+      padding: var(--spacing-12) var(--spacing-6);
+    }
+  }
 
-		@media (width < $breakpoint-lg) {
-			padding-top: var(--spacing-10);
-		}
-	}
+  // --- Animation initial states (hidden until animated) ---
 
-	.section-content {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--spacing-12);
+  .slide-heading,
+  .slide-body,
+  .slide-media,
+  .slide-stagger-item {
+    opacity: 0;
+  }
 
-		@media (width < $breakpoint-lg) {
-			align-items: flex-start;
-			padding: 0;
-			padding-bottom: var(--spacing-8);
-			width: 100%;
-		}
+  // ========================================
+  // Shared study card styles
+  // ========================================
 
-		img {
-			flex-grow: 1;
-			flex-basis: 0;
-			width: 33%;
+  .study-card {
+    border: 1.5px solid var(--study-border);
+    border-radius: 12px;
+    overflow: hidden;
 
-			@media (width < $breakpoint-lg) {
-				max-height: 80svh;
-				width: 100%;
-				object-fit: contain;
-			}
-		}
-	}
+    &--dashed {
+      border-style: dashed;
+      background-color: white;
+    }
 
-	.image-scroll {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--spacing-8);
+    &--filled {
+      border-color: var(--study-color);
+      background-color: var(--study-color);
+    }
+  }
 
-		@media (width < $breakpoint-lg) {
-			justify-content: flex-start;
-			align-items: flex-start;
-			padding: 0 var(--spacing-8);
-			overflow-x: auto;
-		}
-	}
+  .study-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-3);
+    padding: var(--spacing-7) var(--spacing-8) var(--spacing-6);
+  }
+
+  .study-card-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 2px 6px;
+
+    .study-card--filled & {
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .study-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--study-heading);
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: var(--spacing-6);
+      align-items: baseline;
+      border-top: 1px dashed var(--study-border);
+      padding: var(--spacing-6) var(--spacing-8);
+
+      .study-card--filled & {
+        color: #fff;
+        border-top-style: solid;
+        border-top-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .study-card-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #666;
+
+    .study-card--filled & {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // ========================================
+  // Shared viz card styles (result / decision cards)
+  // ========================================
+
+  .study-viz-card {
+    text-align: left;
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .study-viz-card-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-6);
+    background: hsl(from var(--study-color) h s l / 0.03);
+    border-bottom: 1px solid var(--study-border);
+    border-radius: 11px 11px 0 0;
+  }
+
+  .study-viz-card-content {
+    padding: var(--spacing-8);
+  }
+
+  .study-viz-card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: hsl(from var(--study-color) h s l / 0.1);
+    flex-shrink: 0;
+    margin-bottom: var(--spacing-3);
+  }
+
+  .study-viz-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .study-viz-card-body {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--study-text-muted);
+  }
+
+  // ========================================
+  // Shared quote styles
+  // ========================================
+
+  .study-quote {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.55;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--study-text);
+    margin: 0;
+  }
+
+  .study-cite {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    margin: 0;
+  }
 </style>

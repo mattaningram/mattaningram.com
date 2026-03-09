@@ -1,0 +1,1677 @@
+---
+import StudyLayout from '@layouts/StudyLayout.astro'
+import StudyNav from '@components/StudyNav.astro'
+import GmapsImg from '@media/revel/mapping/gmaps-bg.png'
+import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
+import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
+import { Image } from 'astro:assets'
+import OperationsMap from '@media/revel/mapping/operations-map.png'
+import StudyCarousel from '@components/StudyCarousel.astro'
+import DecisionAbsolute from '@media/revel/mapping/DecisionAbsolute.astro'
+import DecisionTravelTime from '@media/revel/mapping/DecisionTravelTime.astro'
+import DecisionCadence from '@media/revel/mapping/DecisionCadence.astro'
+import ResultsRevenue from '@media/revel/mapping/ResultsRevenue.astro'
+import ResultsWaitTime from '@media/revel/mapping/ResultsWaitTime.astro'
+import ResultsAdoption from '@media/revel/mapping/ResultsAdoption.astro'
+
+const slides = [
+  { id: 'hero', title: 'Remapping Revel' },
+  { id: 'w2-to-1099', title: 'Changing Contracts' },
+  { id: 'map-design-system', title: 'Map Design System' },
+  { id: 'drivers', title: 'Drivers: Where & Why' },
+  { id: 'visualizations', title: 'Demanding Visualizations' },
+  { id: 'decisions', title: 'Key Design Decisions' },
+  { id: 'results', title: 'Results' },
+  { id: 'next', title: 'What Comes Next' },
+]
+---
+
+<StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" slides={slides}>
+  <StudyNav slides={slides} vehicleImage={CarTopdown} slot="nav" />
+  <!-- Slide 1: Hero -->
+  <section class="study-slide slide-hero" id="hero">
+    <div class="hero-accent"></div>
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <h1 class="slide-body hero-title">Remapping Revel</h1>
+        <div class="slide-body hero-meta">
+          <span class="hero-role">Lead Product Designer</span>
+          <span class="hero-divider"></span>
+          <span class="hero-period">2022 &ndash; 2025</span>
+        </div>
+        <p class="slide-media hero-summary">
+          I led design on creating a new mapping system across all of Revel's products and spearheaded demand heatmaps
+          that helped drivers improve their earnings.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <img src={GmapsImg.src} alt="" class="hero-map-img" width={GmapsImg.width} height={GmapsImg.height} />
+        <HeroHeatmap class="hero-heatmap" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: W2 to 1099 -->
+  <section class="study-slide" id="w2-to-1099">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Context</p>
+          <h2 class="slide-heading">Changing Contracts</h2>
+          <p class="slide-body slide-subtitle">
+            Revel pivoted from salaried drivers to independent contractors which significantly changed driver incentives
+          </p>
+        </div>
+      </div>
+      <div class="w2-1099-diagram">
+        <div class="diagram-row">
+          <div class="slide-stagger-item study-card study-card--dashed">
+            <div class="study-card-header">
+              <span class="employment-card-label">W2</span>
+              <span class="study-card-tag">Employee</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Pay</span>
+                Hourly salary with a predictable weekly paycheck
+              </li>
+              <li>
+                <span class="study-card-category">Scheduling</span>
+                Fixed shifts assigned and managed by Revel
+              </li>
+              <li>
+                <span class="study-card-category">Incentives</span>
+                No direct link between rides completed and take-home pay
+              </li>
+            </ul>
+          </div>
+
+          <div class="employment-arrow" aria-hidden="true">
+            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <polyline
+                points="6,22 12,30 18,22"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"></polyline>
+            </svg>
+          </div>
+
+          <div class="slide-stagger-item study-card study-card--filled">
+            <div class="study-card-header">
+              <span class="employment-card-label">1099</span>
+              <span class="study-card-tag">Contractor</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Pay</span>
+                Per-ride earnings plus tips and completion bonuses
+              </li>
+              <li>
+                <span class="study-card-category">Scheduling</span>
+                Self-selected hours with full flexibility over shift times
+              </li>
+              <li>
+                <span class="study-card-category">Incentives</span>
+                More rides per hour directly increases earnings
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="diagram-row">
+          <div class="slide-stagger-item study-card study-card--dashed">
+            <div class="study-card-header">
+              <span class="employment-card-label">Mapbox</span>
+              <span class="study-card-tag">Before</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Cost</span>
+                Expensive per-load pricing with limited negotiating leverage
+              </li>
+              <li>
+                <span class="study-card-category">Data</span>
+                Outdated place data and search results, frustrating riders trying to find their destination
+              </li>
+              <li>
+                <span class="study-card-category">Support</span>
+                No existing vendor relationship to fall back on
+              </li>
+            </ul>
+          </div>
+
+          <div class="employment-arrow" aria-hidden="true">
+            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
+              <polyline
+                points="6,22 12,30 18,22"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"></polyline>
+            </svg>
+          </div>
+
+          <div class="slide-stagger-item study-card study-card--filled">
+            <div class="study-card-header">
+              <span class="employment-card-label">Google Maps</span>
+              <span class="study-card-tag">After</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Cost</span>
+                Lower pricing via an existing Google relationship, unlocking maps in more parts of the UI
+              </li>
+              <li>
+                <span class="study-card-category">Data</span>
+                Reliable search results and up-to-date place data for a better rider experience
+              </li>
+              <li>
+                <span class="study-card-category">Support</span>
+                Better support through an established vendor agreement
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide: Map Design System -->
+  <section class="study-slide slide-design-system" id="map-design-system">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Infrastructure</p>
+        <h2 class="slide-heading">Map Design System</h2>
+        <p class="slide-body slide-subtitle">
+          We now had an opportunity to consolidate map styles and components into a single system. Providing a
+          consistent experience for our users and scalable development for the team.
+        </p>
+      </div>
+      <div class="route-designs">
+        <!-- Operations -->
+        <div class="route-design">
+          <p class="route-design-label">Operations</p>
+          <div class="route-line route-line--ops">
+            <div class="route-track"></div>
+            <span class="route-el route-dot route-dot--gray route-dot--lg" style="left: 2%"></span>
+            <span class="route-el route-car" style="left: 22%">
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
+            </span>
+            <span class="route-el route-dot route-dot--blue" style="left: 52%"></span>
+            <span class="route-el route-dot route-dot--blue route-dot--lg" style="left: 98%"></span>
+          </div>
+        </div>
+
+        <!-- Driver / Ride Request + Traffic -->
+        <div class="route-design">
+          <p class="route-design-label">Driver / Ride Request + Traffic</p>
+          <div class="route-line route-line--traffic">
+            <div class="route-track"></div>
+            <span class="route-el route-car" style="left: 3%">
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
+            </span>
+            <span class="route-el route-action route-action--pickup" style="left: 32%">
+              <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 12V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"
+                ></path>
+                <path
+                  d="M3.5 7.5L7 3.5L10.5 7.5"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span class="route-el route-dot route-dot--blue" style="left: 65%"></span>
+            <span class="route-el route-action route-action--dropoff" style="left: 98%">
+              <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 2V9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"></path>
+                <path
+                  d="M3.5 6.5L7 10.5L10.5 6.5"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Driver / In-Ride -->
+        <div class="route-design">
+          <p class="route-design-label">Driver / In-Ride</p>
+          <div class="route-line route-line--inride">
+            <div class="route-track" style="left: 22%"></div>
+            <span class="route-el route-car" style="left: 22%">
+              <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
+            </span>
+            <span class="route-pin" style="left: 47%">
+              <span class="route-pin-head"></span>
+              <span class="route-pin-stem"></span>
+            </span>
+            <span class="route-el route-dot route-dot--blue route-dot--lg" style="left: 52%"></span>
+            <span class="route-profile" style="left: 52%">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5" stroke="white" stroke-width="2"></circle>
+                <path
+                  d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <span class="route-el route-dot route-dot--gray" style="left: 78%"></span>
+            <span class="route-el route-dot route-dot--gray route-dot--lg" style="left: 98%"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Drivers: Where & Why -->
+  <section class="study-slide" id="drivers">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Research</p>
+          <h2 class="slide-heading">Drivers: Where & Why</h2>
+          <p class="slide-body slide-subtitle">Understanding how drivers actually make positioning decisions</p>
+        </div>
+      </div>
+      <div class="w2-1099-diagram">
+        <div class="diagram-row diagram-row--subgrid">
+          <div class="slide-stagger-item study-card study-card--dashed">
+            <div class="study-card-header">
+              <span class="employment-card-label">Interviews</span>
+              <span class="study-card-tag">Research</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Participants</span>
+                Drivers across novice to veteran experience levels
+              </li>
+              <li>
+                <span class="study-card-category">Focus</span>
+                How and why drivers choose where to position between rides
+              </li>
+            </ul>
+            <div class="card-finding">
+              <p class="study-quote">
+                "On Lyft there's always a heat map telling you where to be. Coming here I was just parking wherever and
+                hoping."
+              </p>
+              <p class="study-cite">Driver, 4+ years on competing platforms</p>
+            </div>
+          </div>
+          <div class="slide-stagger-item study-card study-card--dashed">
+            <div class="study-card-header">
+              <span class="employment-card-label">Operations</span>
+              <span class="study-card-tag">Observation</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Setting</span>
+                On-site with the Revel operations team
+              </li>
+              <li>
+                <span class="study-card-category">Focus</span>
+                How managers tracked and managed fleet distribution with existing tools
+              </li>
+            </ul>
+            <div class="card-finding card-finding--flush">
+              <Image
+                src={OperationsMap}
+                alt="Revel operations map showing fleet distribution across the service area"
+                layout="full-width"
+                fit="cover"
+              />
+            </div>
+          </div>
+          <div class="slide-stagger-item study-card study-card--dashed">
+            <div class="study-card-header">
+              <span class="employment-card-label">Analytics</span>
+              <span class="study-card-tag">Data</span>
+            </div>
+            <ul class="study-card-list">
+              <li>
+                <span class="study-card-category">Dataset</span>
+                Supply and demand distribution across service zones
+              </li>
+              <li>
+                <span class="study-card-category">Focus</span>
+                Supply/demand distribution ratios and driver idle time across service zones
+              </li>
+            </ul>
+            <div class="card-finding card-finding--chart">
+              <p class="chart-title">Zone supply response time</p>
+              <svg
+                class="chart-svg"
+                viewBox="0 0 300 115"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <line x1="0" y1="98" x2="300" y2="98" stroke="var(--study-border)" stroke-width="1"></line>
+                <line
+                  x1="0"
+                  y1="36"
+                  x2="300"
+                  y2="36"
+                  stroke="var(--study-border)"
+                  stroke-width="0.5"
+                  stroke-dasharray="3 3"
+                  opacity="0.6"></line>
+                <line
+                  x1="0"
+                  y1="67"
+                  x2="300"
+                  y2="67"
+                  stroke="var(--study-border)"
+                  stroke-width="0.5"
+                  stroke-dasharray="3 3"
+                  opacity="0.6"></line>
+                <path
+                  d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z"
+                  fill="var(--study-color)"
+                  opacity="0.07"></path>
+                <path
+                  d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85"
+                  stroke="var(--study-color)"
+                  stroke-width="2"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87"
+                  stroke="#94a3b8"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-dasharray="4 2"></path>
+                <line
+                  x1="75"
+                  y1="31"
+                  x2="75"
+                  y2="98"
+                  stroke="var(--study-color)"
+                  stroke-width="1"
+                  stroke-dasharray="2 2"
+                  opacity="0.4"></line>
+                <line
+                  x1="218"
+                  y1="17"
+                  x2="218"
+                  y2="98"
+                  stroke="var(--study-color)"
+                  stroke-width="1"
+                  stroke-dasharray="2 2"
+                  opacity="0.4"></line>
+                <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="#94a3b8">7am</text>
+                <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">11am</text>
+                <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">3pm</text>
+                <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">7pm</text>
+                <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="#94a3b8">11pm</text>
+              </svg>
+              <div class="chart-legend">
+                <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
+                <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Demanding Visualizations -->
+  <section class="study-slide slide-media-heavy" id="visualizations">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-text">
+        <div class="slide-header">
+          <p class="slide-section-label slide-body">Exploration</p>
+          <h2 class="slide-heading">Demanding Visualizations</h2>
+          <p class="slide-body slide-subtitle">From H3 hexagons to human-readable neighborhood zones</p>
+        </div>
+      </div>
+      <div class="carousel-tabs-wrap">
+        <div class="carousel-tabs">
+          <button class="carousel-tab carousel-tab--active" data-target="carousel-mobile">Mobile</button>
+          <button class="carousel-tab" data-target="carousel-desktop">Desktop</button>
+        </div>
+        <div id="carousel-mobile" class="carousel-panel">
+          <StudyCarousel folder="revel/mapping/exploration/mobile" />
+        </div>
+        <div id="carousel-desktop" class="carousel-panel carousel-panel--hidden">
+          <StudyCarousel folder="revel/mapping/exploration/desktop" width={600} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Key Design Decisions -->
+  <section class="study-slide slide-decisions" id="decisions">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Execution</p>
+        <h2 class="slide-heading">Key Design Decisions</h2>
+        <p class="slide-body slide-subtitle decisions-subtitle">
+          Making the heatmap trustworthy and usable while driving involved more than visual design.
+        </p>
+      </div>
+      <div class="decision-cards">
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz decision-card-viz">
+            <DecisionAbsolute />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">01</div>
+            <h3 class="study-viz-card-title">Absolute Demand</h3>
+            <p class="study-viz-card-body">
+              Initially the team felt relative demand would be a smart way to show drivers where the most relevant
+              demand was, but it was abandoned after driver testing in favor of the more stable absolute demand
+              approach.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz decision-card-viz">
+            <DecisionTravelTime />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">02</div>
+            <h3 class="study-viz-card-title">Travel-Time Weighted</h3>
+            <p class="study-viz-card-body">
+              However sometimes a high demand zone relatively nearby has a longer travel time. So we factored in
+              real-time traffic to adjust the demand score so a nearby medium-demand zone could outrank a distant
+              high-demand one.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz decision-card-viz">
+            <DecisionCadence />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">03</div>
+            <h3 class="study-viz-card-title">Update Cadence</h3>
+            <p class="study-viz-card-body">
+              After some testing, we settled on a 10-minute update cadence with some averaging over time to provide data
+              that was up to date but not distractingly changing from minute to minute.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Results -->
+  <section class="study-slide slide-results" id="results">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Outcomes</p>
+        <h2 class="slide-heading">Results</h2>
+        <p class="slide-body slide-subtitle results-subtitle">More efficient drivers, happier passengers</p>
+      </div>
+      <div class="results-cards">
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz result-card-viz">
+            <ResultsRevenue />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">01</div>
+            <h3 class="study-viz-card-title">Revenue Per Hour</h3>
+            <p class="study-viz-card-body">
+              Average driver revenue per hour increased 7% after heatmap release, with newer drivers seeing gains up to
+              10% as the map closed the knowledge gap with veteran drivers.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz result-card-viz">
+            <ResultsWaitTime />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">02</div>
+            <h3 class="study-viz-card-title">Passenger Wait Time</h3>
+            <p class="study-viz-card-body">
+              Average passenger wait time dropped 3 minutes as drivers spread more evenly across demand zones instead of
+              clustering in familiar areas.
+            </p>
+          </div>
+        </div>
+        <div class="slide-stagger-item study-viz-card">
+          <div class="study-viz-card-viz result-card-viz">
+            <ResultsAdoption />
+          </div>
+          <div class="study-viz-card-content">
+            <div class="study-viz-card-number">03</div>
+            <h3 class="study-viz-card-title">Heatmap Adoption</h3>
+            <p class="study-viz-card-body">
+              70% of new drivers used the heatmap regularly after discovering it. Experienced drivers adopted at 40%,
+              tapering as they internalized demand patterns.
+            </p>
+          </div>
+        </div>
+      </div>
+      <blockquote class="result-blockquote slide-stagger-item">
+        <p class="study-quote">
+          &ldquo;I used to just drive around the airport hoping for a ride. Now I check the map and head to where people
+          actually need cars. My dead miles are way down.&rdquo;
+        </p>
+        <cite class="study-cite">Driver, follow-up research interview</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Slide 9: What Comes Next -->
+  <section class="study-slide slide-next" id="next">
+    <div class="slide-inner slide-inner--centered">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Future</p>
+        <h2 class="slide-heading">What Comes Next</h2>
+        <p class="slide-body slide-subtitle">Taking advantage of other data to further enhance the map experience</p>
+      </div>
+      <div class="next-items">
+        <div class="slide-stagger-item next-card">
+          <span class="study-viz-card-number">01</span>
+          <h3 class="study-viz-card-title">Event Demand Alerts</h3>
+          <p class="study-viz-card-body">
+            Integrate public event schedules to surface upcoming demand spikes before they happen
+          </p>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="study-viz-card-number">02</span>
+          <h3 class="study-viz-card-title">Street View Preview</h3>
+          <p class="study-viz-card-body">
+            Drivers and riders approaching a drop-off can preview the location to confirm they're in the right place
+          </p>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="study-viz-card-number">03</span>
+          <h3 class="study-viz-card-title">Calendar Integration</h3>
+          <p class="study-viz-card-body">Suggest upcoming appointments as destinations via Google Calendar</p>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <span class="study-viz-card-number">04</span>
+          <h3 class="study-viz-card-title">Advanced Data Tools</h3>
+          <p class="study-viz-card-body">Enhance the data team's visualization and prediction capabilities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</StudyLayout>
+
+<style lang="scss">
+  @use '../../../styles/scssVariables' as *;
+
+  // ========================================
+  // Shared slide inner layouts
+  // ========================================
+
+  .slide-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .slide-inner--centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-12);
+
+    .slide-header {
+      text-align: center;
+      padding-inline: var(--spacing-8);
+    }
+  }
+
+  .slide-inner--split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-14);
+    align-items: center;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-8);
+    }
+  }
+
+  .slide-inner--media-heavy {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--spacing-14);
+    align-items: center;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-8);
+    }
+  }
+
+  .slide-split--reversed .slide-inner--split {
+    direction: rtl;
+
+    > * {
+      direction: ltr;
+    }
+
+    @media (width < $breakpoint-lg) {
+      direction: ltr;
+    }
+  }
+
+  // ========================================
+  // Typography
+  // ========================================
+
+  .slide-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .slide-heading {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--study-heading);
+  }
+
+  .slide-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-section-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--study-color);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .slide-subtitle {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    margin-top: var(--spacing-8);
+  }
+
+  .slide-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-5);
+
+    li {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      line-height: 1.6;
+      color: var(--study-text);
+      padding-left: var(--spacing-7);
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.65em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--study-color);
+        opacity: 0.75;
+      }
+    }
+  }
+
+  // ========================================
+  // Media placeholders
+  // ========================================
+
+  .media-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: var(--study-bg-alt);
+    border: 1.5px dashed var(--study-border);
+    border-radius: 12px;
+    display: grid;
+    place-content: center;
+
+    &--wide {
+      aspect-ratio: 16 / 9;
+    }
+
+    &--muted {
+      opacity: 0.5;
+    }
+  }
+
+  .media-placeholder-label {
+    font-size: 0.8rem;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  // ========================================
+  // Slide 2: W2 to 1099 diagram
+  // ========================================
+
+  .w2-1099-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    width: 100%;
+  }
+
+  .diagram-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--spacing-10);
+
+    @media (width < $breakpoint-lg) {
+      flex-direction: column;
+    }
+  }
+
+  .diagram-row--subgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 1fr;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: unset;
+    }
+
+    .study-card {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      flex: unset;
+      gap: 0;
+
+      @media (width < $breakpoint-lg) {
+        grid-row: unset;
+        grid-template-rows: unset;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .study-card {
+    flex: 1;
+  }
+
+  .employment-card-label {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--study-heading);
+    letter-spacing: -0.01em;
+
+    .study-card--filled & {
+      color: #fff;
+    }
+  }
+
+  .employment-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--study-color);
+    padding: 0 var(--spacing-1);
+    flex-shrink: 0;
+
+    @media (width < $breakpoint-lg) {
+      padding: var(--spacing-1) 0;
+    }
+  }
+
+  .employment-arrow-svg {
+    width: 20px;
+    height: 32px;
+    animation: arrow-bounce-h 1.6s ease-in-out infinite;
+
+    @media (width < $breakpoint-lg) {
+      animation-name: arrow-bounce;
+    }
+  }
+
+  @keyframes arrow-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes arrow-bounce-h {
+    0%,
+    100% {
+      transform: rotate(-90deg) translateY(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: rotate(-90deg) translateY(4px);
+      opacity: 1;
+    }
+  }
+
+  // ========================================
+  // Slide 1: Hero
+  // ========================================
+
+  .slide-hero {
+    padding-top: var(--spacing-16);
+    padding-bottom: 0;
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      gap: 0;
+    }
+
+    .slide-header {
+      text-align: center;
+    }
+
+    @media (width < $breakpoint-lg) {
+      padding-bottom: var(--spacing-12);
+    }
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-color);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--study-heading);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-6);
+    font-size: 1rem;
+    color: var(--study-text-muted);
+    font-weight: 400;
+  }
+
+  .hero-divider {
+    width: 24px;
+    height: 1.5px;
+    background: var(--study-border);
+  }
+
+  .hero-summary {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--study-text-muted);
+    font-weight: 500;
+    margin-top: var(--spacing-12);
+  }
+
+  // ========================================
+  // Slide 1: Hero visual
+  // ========================================
+
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    margin-top: var(--spacing-20);
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 1118 / 778;
+    flex-shrink: 1;
+    min-height: 0;
+    margin-bottom: -10%;
+    opacity: 0;
+    translate: 0 40px;
+    box-shadow: 0 0 48px hsl(from var(--study-color) h s l / 0.25);
+
+    @media (width < $breakpoint-lg) {
+      margin-top: var(--spacing-12);
+      margin-bottom: 0;
+    }
+  }
+
+  .hero-map-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+  }
+
+  .hero-heatmap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  // ========================================
+  // Slide: Map Design System - Route Lines
+  // ========================================
+
+  .route-designs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
+    width: 100%;
+    max-width: 700px;
+    margin-top: var(--spacing-10);
+    padding-bottom: var(--spacing-8);
+  }
+
+  .route-design-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--study-heading);
+    text-align: left;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .route-line {
+    position: relative;
+    height: 72px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .route-track {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    right: 14px;
+    height: 6px;
+    transform: translateY(-50%);
+    border-radius: 3px;
+  }
+
+  .route-el {
+    position: absolute;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: 1;
+  }
+
+  .route-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &--gray {
+      background: white;
+      border: 6px solid #c4c9d1;
+    }
+
+    &--blue {
+      background: white;
+      border: 6px solid #2874f0;
+    }
+
+    &--lg {
+      width: 28px;
+      height: 28px;
+    }
+
+    &--sm {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .route-car {
+    width: 64px;
+    height: 64px;
+
+    img {
+      transform: rotate(90deg);
+    }
+  }
+
+  .route-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &--pickup {
+      background: #10b981;
+    }
+
+    &--dropoff {
+      background: #f97316;
+    }
+  }
+
+  .route-line--ops .route-track {
+    background: linear-gradient(to right, #c4c9d1 22%, #2874f0 22%, #2874f0 52%, #8fb8f8 52%);
+  }
+
+  .route-line--traffic .route-track {
+    background: linear-gradient(
+      to right,
+      #2874f0 0%,
+      #2874f0 12%,
+      #db2777 18%,
+      #db2777 22%,
+      #2874f0 28%,
+      #2874f0 52%,
+      #f59e0b 58%,
+      #f59e0b 78%,
+      #2874f0 84%
+    );
+  }
+
+  .route-line--inride .route-track {
+    background: linear-gradient(to right, #2874f0 40%, #c4c9d1 40%);
+  }
+
+  .route-pin {
+    position: absolute;
+    bottom: 64%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .route-pin-head {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+
+  .route-pin-stem {
+    width: 2px;
+    height: 14px;
+    background: #10b981;
+  }
+
+  .route-profile {
+    position: absolute;
+    top: 50%;
+    translate: -50% 0;
+    margin-top: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #104f91;
+    box-shadow: 0 0 0 18px rgba(79, 155, 248, 0.15);
+    display: grid;
+    place-content: center;
+    z-index: 1;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  // Animation initial states
+  .slide-design-system .route-design-label {
+    opacity: 0;
+  }
+
+  .slide-design-system .route-track {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .slide-design-system .route-el,
+  .slide-design-system .route-pin,
+  .slide-design-system .route-profile {
+    opacity: 0;
+  }
+
+  // ========================================
+  // Slide 4: Research cards
+  // ========================================
+
+  .research-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .research-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-5);
+    padding: var(--spacing-5) var(--spacing-6);
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 10px;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--study-color);
+    }
+  }
+
+  .research-card-icon {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--study-color);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: hsl(from var(--study-color) h s l / 0.1);
+  }
+
+  .research-card-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--study-text);
+  }
+
+  // ========================================
+  // Slide 5: Demanding Visualizations
+  // ========================================
+
+  #visualizations {
+    padding-inline: 0;
+
+    .slide-inner {
+      max-width: none;
+    }
+  }
+
+  .carousel-tabs-wrap {
+    width: 100%;
+  }
+
+  .carousel-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-3);
+    padding-inline: var(--page-gutter);
+    padding-bottom: var(--spacing-4);
+  }
+
+  .carousel-tab {
+    background: none;
+    border: 1.5px solid var(--study-border);
+    border-radius: 999px;
+    padding: var(--spacing-4) var(--spacing-10);
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    cursor: pointer;
+    transition: 0.15s ease;
+    transition-property: background, color, border-color;
+
+    &:not(&--active):hover {
+      border-color: var(--study-color);
+      color: var(--study-heading);
+    }
+
+    &--active {
+      background: hsl(from var(--study-color) h s l / 0.18);
+      border-color: var(--study-color);
+      color: hsl(from var(--study-color) h s calc(l * 0.75));
+    }
+  }
+
+  .carousel-panel--hidden {
+    display: none;
+  }
+
+  // ========================================
+  // Slide 6: Decision cards
+  // ========================================
+
+  .decision-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .decision-card-viz {
+    height: 400px;
+  }
+
+  // ========================================
+  // Slide 8: Results / Stats
+  // ========================================
+
+  .results-subtitle {
+    margin-bottom: var(--spacing-8);
+  }
+
+  .results-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .result-card-viz {
+    height: 280px;
+  }
+
+  .result-blockquote {
+    max-width: 640px;
+    text-align: center;
+    padding: var(--spacing-8) var(--spacing-10);
+    margin: 0;
+    border-left: none;
+    border-top: 2px solid var(--study-color);
+
+    .study-quote {
+      font-size: clamp(1rem, 1.3vw, 1.1rem);
+      line-height: 1.7;
+      color: var(--study-heading);
+    }
+
+    .study-cite {
+      display: block;
+      margin-top: var(--spacing-4);
+      font-size: 0.8rem;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  // ========================================
+  // Slide 9: What Comes Next
+  // ========================================
+
+  .next-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-6);
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--spacing-6);
+
+    @media (width < $breakpoint-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .next-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: var(--spacing-8);
+    background: white;
+    border: 1px solid var(--study-border);
+    border-radius: 10px;
+  }
+
+  // ========================================
+  // Slide 4: Card findings (inside driver cards)
+  // ========================================
+
+  .card-finding {
+    padding: var(--spacing-6) var(--spacing-8);
+    border-top: 1px dashed var(--study-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .card-finding--flush {
+    padding: 0;
+    border-top: 1px dashed var(--study-border);
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+
+  .card-finding--chart {
+    gap: var(--spacing-3);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .chart-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--study-text);
+    margin: 0;
+    padding: 0 var(--spacing-8);
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: var(--spacing-8);
+    justify-content: center;
+  }
+
+  .chart-legend-item {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+    }
+
+    &.chart-legend-item--demand::before {
+      background: var(--study-color);
+    }
+
+    &.chart-legend-item--supply::before {
+      background: repeating-linear-gradient(to right, #94a3b8 0, #94a3b8 4px, transparent 4px, transparent 6px);
+    }
+  }
+</style>
+
+<script>
+  // Carousel tabs
+  document.querySelectorAll<HTMLElement>('.carousel-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const wrap = tab.closest('.carousel-tabs-wrap')
+      if (!wrap) return
+      const targetId = tab.dataset.target
+      wrap.querySelectorAll<HTMLElement>('.carousel-tab').forEach((t) => t.classList.remove('carousel-tab--active'))
+      wrap.querySelectorAll<HTMLElement>('.carousel-panel').forEach((p) => p.classList.add('carousel-panel--hidden'))
+      tab.classList.add('carousel-tab--active')
+      wrap.querySelector<HTMLElement>(`#${targetId}`)?.classList.remove('carousel-panel--hidden')
+    })
+  })
+</script>
+
+<script>
+  import { animate, stagger, inView } from 'motion'
+
+  const heroSection = document.getElementById('hero')
+  if (heroSection) {
+    let fired = false
+
+    inView(
+      heroSection,
+      () => {
+        if (fired) return
+        fired = true
+
+        const mapImg = heroSection.querySelector('.hero-map-img') as HTMLElement
+        const zones = heroSection.querySelectorAll('.hero-heatmap-zones path')
+        const dots = heroSection.querySelectorAll('.hero-route-dot')
+        const mainRoute = heroSection.querySelector('.hero-route-main') as SVGPathElement
+        const progressRoute = heroSection.querySelector('.hero-route-progress') as SVGPathElement
+
+        if (!mapImg || !mainRoute || !progressRoute) return
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+        if (reducedMotion) {
+          const heroVisual = heroSection.querySelector('.hero-visual') as HTMLElement
+          if (heroVisual) {
+            heroVisual.style.opacity = '1'
+            heroVisual.style.translate = 'none'
+          }
+          ;(mapImg as HTMLElement).style.opacity = '1'
+          zones.forEach((z) => ((z as HTMLElement).style.opacity = '1'))
+          dots.forEach((d) => {
+            ;(d as HTMLElement).style.opacity = '1'
+            ;(d as HTMLElement).style.scale = '1'
+          })
+          mainRoute.style.strokeDashoffset = '0'
+          progressRoute.style.strokeDashoffset = '0'
+          const lb = 'color(display-p3 0.2314 0.7843 0.9882)'
+          const ds = heroSection.querySelector('.hero-route-dot-progress-start') as SVGCircleElement | null
+          const de = heroSection.querySelector('.hero-route-dot-progress-end') as SVGCircleElement | null
+          if (ds) ds.style.stroke = lb
+          if (de) de.style.stroke = lb
+          return
+        }
+
+        // Measure actual path lengths and set initial hidden state
+        const mainLength = mainRoute.getTotalLength()
+        mainRoute.style.strokeDasharray = `${mainLength}`
+        mainRoute.style.strokeDashoffset = `${mainLength}`
+
+        const progressLength = progressRoute.getTotalLength()
+        progressRoute.style.strokeDasharray = `${progressLength}`
+        progressRoute.style.strokeDashoffset = `${progressLength}`
+
+        const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
+
+        // 0. Hero visual slides up and fades in
+        const heroVisual = heroSection.querySelector('.hero-visual') as HTMLElement
+        if (heroVisual) {
+          animate(
+            heroVisual,
+            { opacity: [0, 1], translate: ['0 40px', '0 0px'] },
+            { duration: 0.7, easing: [0.22, 1, 0.36, 1] },
+          )
+        }
+
+        // 1. Map image fades in
+        animate(mapImg, { opacity: [0, 1] }, { duration: 0.7, delay: 0.2, easing: 'ease-out' })
+
+        // 2. Heatmap zones staggered in reverse - set style.opacity directly since Motion
+        // animates SVG opacity as a presentation attribute, not a CSS property
+        const zoneArray = Array.from(zones).reverse()
+        zoneArray.forEach((z, i) => {
+          setTimeout(
+            () => {
+              ;(z as HTMLElement).style.opacity = '1'
+            },
+            500 + i * 100,
+          )
+        })
+
+        const dotProgressStart = heroSection.querySelector('.hero-route-dot-progress-start') as SVGCircleElement | null
+        const dotProgressEnd = heroSection.querySelector('.hero-route-dot-progress-end') as SVGCircleElement | null
+        const lightBlue = 'color(display-p3 0.2314 0.7843 0.9882)'
+
+        const showDot = (d: Element) => {
+          ;(d as HTMLElement).style.opacity = '1'
+          ;(d as HTMLElement).style.scale = '1'
+        }
+
+        // 3. Route dots pop in as the main route line reaches each position.
+        // dot[0] (start, cx=420): route begins here at 2150ms
+        // dot[2] (cx=278): route reaches ~32% spatially; with ease-out that's ~15% temporally → ~2350ms
+        // dot[1] (route end, cx=701): route nearly arrives at ~3300ms
+        setTimeout(() => showDot(dots[0]), 2150)
+        setTimeout(() => showDot(dots[2]), 2350)
+        setTimeout(() => showDot(dots[1]), 3300)
+
+        // 4 & 5. Add transitions after initial values are committed so the browser
+        // doesn't animate the CSS→inline value change. Then draw in via setTimeout.
+        requestAnimationFrame(() => {
+          mainRoute.style.transition = `stroke-dashoffset 1.3s cubic-bezier(0.22, 1, 0.36, 1)`
+          progressRoute.style.transition = `stroke-dashoffset 0.65s cubic-bezier(0.22, 1, 0.36, 1)`
+
+          setTimeout(() => {
+            mainRoute.style.strokeDashoffset = '0'
+          }, 2150)
+
+          // Progress line starts at 3450ms; turn start dot light blue 250ms early
+          setTimeout(() => {
+            if (dotProgressStart) dotProgressStart.style.stroke = lightBlue
+          }, 3200)
+
+          setTimeout(() => {
+            progressRoute.style.strokeDashoffset = '0'
+          }, 3450)
+
+          // Progress line ends at 4100ms; turn end dot light blue 200ms early
+          setTimeout(() => {
+            if (dotProgressEnd) dotProgressEnd.style.stroke = lightBlue
+          }, 3900)
+        })
+      },
+      { amount: 0.25 },
+    )
+  }
+
+  // ==========================================
+  // Map Design System – route line animations
+  // ==========================================
+  const dsSection = document.getElementById('map-design-system')
+  if (dsSection) {
+    let dsFired = false
+
+    inView(
+      dsSection,
+      () => {
+        if (dsFired) return
+        dsFired = true
+
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        const designs = dsSection.querySelectorAll('.route-design')
+
+        if (reducedMotion) {
+          dsSection
+            .querySelectorAll('.route-design-label, .route-el, .route-track, .route-pin, .route-profile')
+            .forEach((el) => {
+              ;(el as HTMLElement).style.opacity = '1'
+              ;(el as HTMLElement).style.scale = '1'
+            })
+          dsSection.querySelectorAll('.route-track').forEach((el) => {
+            ;(el as HTMLElement).style.clipPath = 'inset(0 0% 0 0)'
+          })
+          return
+        }
+
+        const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
+        const trackDuration = 0.7
+        const rowStagger = 0.45
+
+        designs.forEach((design, i) => {
+          const base = i * rowStagger
+
+          // Label fades in
+          const label = design.querySelector('.route-design-label') as HTMLElement
+          if (label) {
+            animate(
+              label,
+              { opacity: [0, 1], y: [8, 0] } as any,
+              {
+                duration: 0.3,
+                delay: base,
+                easing,
+              } as any,
+            )
+          }
+
+          // Track draws in left → right via clip-path
+          const track = design.querySelector('.route-track') as HTMLElement
+          if (track) {
+            animate(
+              track,
+              { clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'] },
+              { duration: trackDuration, delay: base + 0.1, easing },
+            )
+          }
+
+          // Cars slide in from left
+          const cars = design.querySelectorAll('.route-car')
+          cars.forEach((car) => {
+            const htmlEl = car as HTMLElement
+            const leftPct = htmlEl.style.left ? parseFloat(htmlEl.style.left) / 100 : 0.5
+            const elementDelay = base + 0.1 + leftPct * trackDuration
+
+            animate(
+              htmlEl,
+              { opacity: [0, 1], x: [-20, 0] } as any,
+              {
+                duration: 0.4,
+                delay: elementDelay,
+                easing,
+              } as any,
+            )
+          })
+
+          // Other elements scale + fade
+          const elements = design.querySelectorAll('.route-el:not(.route-car), .route-pin, .route-profile')
+          elements.forEach((el) => {
+            const htmlEl = el as HTMLElement
+            const leftPct = htmlEl.style.left ? parseFloat(htmlEl.style.left) / 100 : 0.5
+            const elementDelay = base + 0.1 + leftPct * trackDuration
+
+            animate(
+              htmlEl,
+              { opacity: [0, 1], scale: [0, 1] } as any,
+              {
+                duration: 0.35,
+                delay: elementDelay,
+                easing,
+              } as any,
+            )
+          })
+        })
+      },
+      { amount: 0.25 },
+    )
+  }
+</script>

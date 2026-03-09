@@ -1,0 +1,196 @@
+---
+const { class: className, ...rest } = Astro.props
+
+// 4 weeks before release, 8 weeks after
+// Before: slightly variable around baseline (~100%)
+// After: steadily increasing from ~100% to ~107%
+const beforeBars = [99, 101, 98, 100]
+const afterBars = [100, 101, 102, 103, 104, 105, 106, 107]
+const allBars = [...beforeBars, ...afterBars]
+
+const chartW = 240
+const chartH = 120
+const barGap = 4
+const barW = (chartW - barGap * (allBars.length - 1)) / allBars.length
+const minVal = 94
+const maxVal = 112
+const range = maxVal - minVal
+
+function barHeight(val: number) {
+  return ((val - minVal) / range) * chartH
+}
+
+const baselineY = chartH - barHeight(100)
+---
+
+<div class:list={['viz-revenue', className]} {...rest} aria-hidden="true">
+  <svg class="viz-svg" viewBox={`0 0 ${chartW} ${chartH + 24}`} fill="none">
+    <!-- Baseline at 100% -->
+    <line
+      x1="0"
+      y1={baselineY}
+      x2={chartW}
+      y2={baselineY}
+      stroke="currentColor"
+      stroke-width="0.5"
+      stroke-dasharray="3 2"
+      opacity="0.2"
+    />
+
+    <!-- Release line -->
+    <line
+      class="viz-release-line"
+      x1={beforeBars.length * (barW + barGap) - barGap / 2}
+      y1="0"
+      x2={beforeBars.length * (barW + barGap) - barGap / 2}
+      y2={chartH}
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-dasharray="3 2"
+      opacity="0.3"
+    />
+
+    <!-- Release label -->
+    <text
+      class="viz-release-label"
+      x={beforeBars.length * (barW + barGap) - barGap / 2}
+      y={chartH + 14}
+      text-anchor="middle"
+      fill="currentColor"
+      font-size="7"
+      font-weight="600"
+      letter-spacing="0.08em"
+      opacity="0.4"
+    >RELEASE</text>
+
+    <!-- Bars -->
+    {allBars.map((val, i) => {
+      const x = i * (barW + barGap)
+      const h = barHeight(val)
+      const y = chartH - h
+      const isBefore = i < beforeBars.length
+      return (
+        <rect
+          class:list={['viz-bar', { 'viz-bar--before': isBefore, 'viz-bar--after': !isBefore }]}
+          x={x}
+          y={y}
+          width={barW}
+          height={h}
+          rx="2"
+          style={`--bar-delay: ${i * 0.06}s; --bar-height: ${h}`}
+        />
+      )
+    })}
+
+    <!-- +7% label at the end -->
+    <text
+      class="viz-gain-label"
+      x={chartW}
+      y={chartH - barHeight(107) - 6}
+      text-anchor="end"
+      fill="var(--study-color)"
+      font-size="9"
+      font-weight="700"
+    >+7%</text>
+  </svg>
+</div>
+
+<style lang="scss">
+  .viz-revenue {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--study-color);
+  }
+
+  .viz-svg {
+    width: 75%;
+    height: auto;
+    display: block;
+  }
+
+  .viz-bar--before {
+    fill: var(--study-text-muted);
+    opacity: 0.2;
+  }
+
+  .viz-bar--after {
+    fill: var(--study-color);
+    opacity: 0.7;
+  }
+
+  .viz-bar {
+    clip-path: inset(100% 0 0 0);
+    animation: bar-reveal 0.5s ease-out forwards;
+    animation-delay: var(--bar-delay);
+  }
+
+  .viz-gain-label {
+    animation: fade-in 0.4s ease-out 0.8s backwards;
+  }
+
+  .viz-release-line {
+    animation: fade-in 0.4s ease-out 0.2s backwards;
+  }
+
+  .viz-release-label {
+    animation: fade-in 0.4s ease-out 0.3s backwards;
+  }
+
+  @keyframes bar-reveal {
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-bar,
+    .viz-gain-label,
+    .viz-release-line,
+    .viz-release-label {
+      animation: none;
+    }
+
+    .viz-bar {
+      clip-path: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.viz-revenue').forEach((el) => {
+    const bars = Array.from(el.querySelectorAll('.viz-bar')) as SVGElement[]
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+
+    // Trigger animations when scrolled into view
+    let hasPlayed = false
+    const allAnimated = Array.from(el.querySelectorAll('.viz-bar, .viz-gain-label, .viz-release-line, .viz-release-label')) as SVGElement[]
+
+    // Pause all animations initially
+    allAnimated.forEach((node) => {
+      node.style.animationPlayState = 'paused'
+    })
+
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !hasPlayed) {
+        hasPlayed = true
+        allAnimated.forEach((node) => {
+          node.style.animation = 'none'
+          void node.offsetWidth
+          node.style.animation = ''
+          node.style.animationPlayState = 'running'
+        })
+      }
+    }, { threshold: 0.5 })
+    obs.observe(el)
+  })
+</script>
