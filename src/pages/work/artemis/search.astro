@@ -65,25 +65,25 @@ const slides = [
             />
             <Icon
               name="artemis/chart"
-              class="hero-orbit-icon hero-orbit-icon--orange"
+              class="hero-orbit-icon"
               style="--ring-x: -310px; --ring-y: 80px; --delay: 2s"
             />
             <Icon
               name="artemis/task"
-              class="hero-orbit-icon hero-orbit-icon--orange"
+              class="hero-orbit-icon"
               style="--ring-x: 160px; --ring-y: 170px; --delay: 5s"
             />
             <Icon name="artemis/split" class="hero-orbit-icon" style="--ring-x: -60px; --ring-y: -180px; --delay: 1s" />
             <Icon
               name="artemis/nutrients"
-              class="hero-orbit-icon hero-orbit-icon--orange"
+              class="hero-orbit-icon"
               style="--ring-x: 320px; --ring-y: -80px; --delay: 8s"
             />
             <Icon name="artemis/mail" class="hero-orbit-icon" style="--ring-x: -190px; --ring-y: 150px; --delay: 3s" />
             <Icon name="artemis/image" class="hero-orbit-icon" style="--ring-x: 100px; --ring-y: -180px; --delay: 6s" />
             <Icon
               name="artemis/harvest"
-              class="hero-orbit-icon hero-orbit-icon--orange"
+              class="hero-orbit-icon"
               style="--ring-x: -320px; --ring-y: -60px; --delay: 9s"
             />
             <Icon
@@ -959,9 +959,6 @@ const slides = [
       0 8px 24px rgba(0, 0, 0, 0.06),
       0 24px 48px rgba(0, 0, 0, 0.04);
 
-    &--pulse {
-      animation: search-bar-pulse 0.7s ease-out forwards;
-    }
   }
 
   .hero-search-icon {
@@ -988,10 +985,6 @@ const slides = [
     color: var(--study-text-muted);
     animation: orbit-fall 6s ease-in-out var(--delay) infinite backwards;
 
-    &--orange {
-      color: rgb(255, 64, 22);
-      filter: drop-shadow(0 0 8px rgba(255, 64, 22, 0.4));
-    }
   }
 
   @keyframes orbit-fall {
@@ -1013,29 +1006,6 @@ const slides = [
     }
   }
 
-  @keyframes search-bar-pulse {
-    0% {
-      box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 24px 48px rgba(0, 0, 0, 0.04),
-        0 0 0 0 rgba(255, 64, 22, 0.55);
-    }
-    35% {
-      box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 24px 48px rgba(0, 0, 0, 0.04),
-        0 0 0 18px rgba(255, 64, 22, 0);
-    }
-    100% {
-      box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        0 8px 24px rgba(0, 0, 0, 0.06),
-        0 24px 48px rgba(0, 0, 0, 0.04),
-        0 0 0 0 rgba(255, 64, 22, 0);
-    }
-  }
 
   // ========================================
   // Slide 2: Scaling cards
@@ -1916,51 +1886,6 @@ const slides = [
   }
 </style>
 
-<script>
-  // Pulse search bar when an orange icon reaches center
-  // Orange icon delays (must match --delay values in HTML): 2s, 5s, 8s, 9s
-  const searchBar = document.querySelector('.hero-search-bar') as HTMLElement | null
-  if (searchBar) {
-    const animDuration = 6000
-    const orangeDelays = [2, 5, 8, 9]
-    const centerPercent = 0.35
-    const startTime = performance.now()
-
-    function pulse() {
-      searchBar.classList.remove('hero-search-bar--pulse')
-      void searchBar.offsetWidth
-      searchBar.classList.add('hero-search-bar--pulse')
-    }
-
-    searchBar.addEventListener('animationend', (e) => {
-      if ((e as AnimationEvent).animationName === 'search-bar-pulse') {
-        searchBar.classList.remove('hero-search-bar--pulse')
-      }
-    })
-
-    orangeDelays.forEach((delaySeconds) => {
-      const firstHit = delaySeconds * 1000 + animDuration * centerPercent
-
-      function scheduleNext(targetMs: number) {
-        const elapsed = performance.now() - startTime
-        const wait = targetMs - elapsed
-        if (wait > -200) {
-          setTimeout(
-            () => {
-              pulse()
-              scheduleNext(targetMs + animDuration)
-            },
-            Math.max(0, wait),
-          )
-        } else {
-          scheduleNext(targetMs + animDuration)
-        }
-      }
-
-      scheduleNext(firstHit)
-    })
-  }
-</script>
 
 <script>
   const slider = document.querySelector('[data-comparison-slider]') as HTMLElement | null
