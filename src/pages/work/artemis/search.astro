@@ -109,9 +109,8 @@ const slides = [
           <span class="hero-period">2018 &ndash; 2021</span>
         </div>
         <p class="slide-media hero-summary">
-          I led the redesign of search across Artemis's platform as we scaled from small indoor farms to enterprise
-          operations nationwide. The new contextual search experience became the most used feature in the app within
-          weeks of shipping.
+          I led the redesign of search in the Artemis web platform as we scaled from small indoor farms to enterprise
+          operations nationwide. The new contextual search experience became the most used feature in the app.
         </p>
       </div>
     </div>
@@ -125,8 +124,8 @@ const slides = [
           <p class="slide-section-label slide-body">Context</p>
           <h2 class="slide-heading">Small Farm to Big Farm</h2>
           <p class="slide-body slide-subtitle">
-            Artemis scaled from local indoor farms to massive enterprise operations around the world, changing the scope
-            of features, data, and users we needed to address.
+            Artemis' client-base grew from local indoor farms to massive enterprise operations around the world,
+            changing the scope of features, data, and users we needed to address
           </p>
         </div>
       </div>
@@ -373,8 +372,9 @@ const slides = [
           <p class="slide-section-label slide-body">Strategy</p>
           <h2 class="slide-heading">Scoping the Data</h2>
           <p class="slide-body slide-subtitle">
-            To better inform design exploration, I worked with a backend engineer to create example JSON payloads for
-            our system's data types
+            To better inform design exploration, I worked with a backend engineer to create example JSON payloads of our
+            system's data types. This transformed an intimidating variety of information into something I could
+            experiment with.
           </p>
         </div>
       </div>
@@ -428,8 +428,9 @@ const slides = [
         <p class="slide-section-label slide-body">Execution</p>
         <h2 class="slide-heading">Design Exploration</h2>
         <p class="slide-body slide-subtitle">
-          Early explorations tested different approaches to layout, result types, and interaction patterns before
-          converging on a direction
+          Code and Figma prototypes using our existing design system allowed me to rapidly test different approaches to
+          search. However with only two devs and a tight timeline, we had to pare designs down to what would solve the
+          core problem our clients were facing.
         </p>
       </div>
       <div class="exploration-scroll">
@@ -554,7 +555,10 @@ const slides = [
       <div class="slide-header">
         <p class="slide-section-label slide-body">Outcomes</p>
         <h2 class="slide-heading">Results</h2>
-        <p class="slide-body slide-subtitle results-subtitle">Search became the front door to the entire platform</p>
+        <p class="slide-body slide-subtitle results-subtitle">
+          Search became the front door to the entire platform, the first clicked and most used feature across almost all
+          user types.
+        </p>
       </div>
       <div class="results-cards">
         <div class="slide-stagger-item study-viz-card">
@@ -701,12 +705,26 @@ const slides = [
       <div class="slide-header">
         <p class="slide-section-label slide-body">Future</p>
         <h2 class="slide-heading">What Comes Next</h2>
-        <p class="slide-body slide-subtitle">Search data as a signal for smarter first-run experiences</p>
+        <p class="slide-body slide-subtitle">
+          The popularity of the search feature creates a whole new set of data we can use as a signal for smarter
+          first-run experiences
+        </p>
       </div>
       <div class="next-items">
         <div class="slide-stagger-item next-card">
           <div class="next-card-header">
             <span class="study-viz-card-number">01</span>
+            <span class="next-card-tag">Ticketed</span>
+          </div>
+          <h3 class="study-viz-card-title">Fuzzy Search Refinement</h3>
+          <p class="study-viz-card-body">
+            Continued tuning for complex client naming conventions, IDs, batch codes, and zone names that require
+            forgiving search behavior
+          </p>
+        </div>
+        <div class="slide-stagger-item next-card">
+          <div class="next-card-header">
+            <span class="study-viz-card-number">02</span>
             <span class="next-card-tag">Enough Usage</span>
           </div>
           <h3 class="study-viz-card-title">Predicted Results</h3>
@@ -716,23 +734,12 @@ const slides = [
         </div>
         <div class="slide-stagger-item next-card">
           <div class="next-card-header">
-            <span class="study-viz-card-number">02</span>
+            <span class="study-viz-card-number">03</span>
             <span class="next-card-tag">Backend Rework</span>
           </div>
           <h3 class="study-viz-card-title">Live Data Previews</h3>
           <p class="study-viz-card-body">
-            Sensor readings, inventory status, and crop metrics shown inline in search results as the logical next step
-          </p>
-        </div>
-        <div class="slide-stagger-item next-card">
-          <div class="next-card-header">
-            <span class="study-viz-card-number">03</span>
-            <span class="next-card-tag">Ticketed</span>
-          </div>
-          <h3 class="study-viz-card-title">Fuzzy Search Refinement</h3>
-          <p class="study-viz-card-body">
-            Continued tuning for complex client naming conventions, IDs, batch codes, and zone names that require
-            forgiving search behavior
+            Sensor readings, inventory status, and crop metrics shown inline in search results
           </p>
         </div>
       </div>
@@ -911,6 +918,7 @@ const slides = [
     color: var(--study-text-muted);
     font-weight: 500;
     margin-top: var(--spacing-12);
+    text-wrap: balance;
   }
 
   .hero-visual {
