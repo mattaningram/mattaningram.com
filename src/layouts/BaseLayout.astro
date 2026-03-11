@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions'
+import { Font } from 'astro:assets'
 export interface Props {
   title?: string
   description?: string
@@ -44,9 +45,8 @@ import '@styles/main.scss'
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..700&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
+    <Font cssVariable="--font-figtree" preload />
+    <Font cssVariable="--font-lora" />
 
     <slot name="head" />
 

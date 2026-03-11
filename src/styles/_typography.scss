@@ -1,13 +1,9 @@
 @use 'scssVariables' as *;
 
 :root {
-  --font-body:
-    'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell,
-    Ubuntu, roboto, noto, arial, sans-serif;
-  --font-head:
-    'Figtree', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell,
-    Ubuntu, roboto, noto, arial, sans-serif;
-  --font-serif: 'Lora', Georgia, serif;
+  --font-body: var(--font-figtree);
+  --font-head: var(--font-figtree);
+  --font-serif: var(--font-lora);
 }
 
 @layer base {
