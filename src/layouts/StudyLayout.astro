@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Logo from '@components/Logo.astro'
 import StudyNav from '@components/StudyNav.astro'
+import { Font } from 'astro:assets'
 
 export interface Props {
   title: string
@@ -13,6 +14,7 @@ const { title, color, slides } = Astro.props
 ---
 
 <BaseLayout title={title} pageColor={color} class="study-layout">
+  <Font slot="head" cssVariable="--font-lora" />
   <nav class="study-header">
     <a class="study-home-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
   </nav>
