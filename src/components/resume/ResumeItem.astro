@@ -58,6 +58,12 @@ const isProject = !!color
     aspect-ratio: 1 / 1;
     object-fit: contain;
     flex-shrink: 0;
+
+    @media (width < $breakpoint-md) {
+      top: var(--spacing-6);
+      right: var(--spacing-6);
+      margin-right: 0;
+    }
   }
 
   .resume-item__name {
