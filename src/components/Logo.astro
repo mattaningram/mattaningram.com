@@ -1,8 +1,12 @@
 ---
 //M Logo Component
+interface Props {
+  size?: string
+}
+
 const files = import.meta.glob('/public/assets/mLogos/**/*.{svg,html}', {
-	eager: true,
-	as: 'url',
+  eager: true,
+  as: 'url',
 })
 const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 
@@ -12,100 +16,100 @@ const { size } = Astro.props
 <div class="m-logo-wrap" transition:name="logo"></div>
 
 <style lang="scss" define:vars={{ size }}>
-	.m-logo-wrap {
-		width: var(--m-logo-size, var(--size));
-		height: var(--m-logo-size, var(--size));
-		cursor: pointer;
-		margin: 0 auto;
-		position: relative;
-	}
+  .m-logo-wrap {
+    width: var(--m-logo-size, var(--size));
+    height: var(--m-logo-size, var(--size));
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+  }
 </style>
 
 <script is:inline define:vars={{ urls }} data-astro-rerun>
-	// Scope to this component instance by using the adjacent wrapper element
-	const logoWrap = document.currentScript?.previousElementSibling
-	if (!(logoWrap instanceof HTMLElement)) {
-		console.warn('[Logo] Wrapper element not found; skipping init')
-		return
-	}
-	let logoList = shuffle([...urls])
-	let currentIndex = 0
+  // Scope to this component instance by using the adjacent wrapper element
+  const logoWrap = document.currentScript?.previousElementSibling
+  if (!(logoWrap instanceof HTMLElement)) {
+    console.warn('[Logo] Wrapper element not found; skipping init')
+    return
+  }
+  let logoList = shuffle([...urls])
+  let currentIndex = 0
 
-	function shuffle(array) {
-		let m = array.length,
-			t,
-			i
-		while (m) {
-			i = Math.floor(Math.random() * m--)
-			t = array[m]
-			array[m] = array[i]
-			array[i] = t
-		}
-		return array
-	}
+  function shuffle(array) {
+    let m = array.length,
+      t,
+      i
+    while (m) {
+      i = Math.floor(Math.random() * m--)
+      t = array[m]
+      array[m] = array[i]
+      array[i] = t
+    }
+    return array
+  }
 
-	//SPIDER LINES FUNCTION
-	function runSpiderLines() {
-		var numLines = 40
-		var radius = 75
-		var lineWrap = document.querySelector('.m-logo-random-lines')
-		if (!lineWrap) return
+  //SPIDER LINES FUNCTION
+  function runSpiderLines() {
+    var numLines = 40
+    var radius = 75
+    var lineWrap = document.querySelector('.m-logo-random-lines')
+    if (!lineWrap) return
 
-		var lines = document.createDocumentFragment()
-		var svgNS = 'http://www.w3.org/2000/svg'
-		var colorClasses = ['random-line--red', 'random-line--green', 'random-line--blue']
+    var lines = document.createDocumentFragment()
+    var svgNS = 'http://www.w3.org/2000/svg'
+    var colorClasses = ['random-line--red', 'random-line--green', 'random-line--blue']
 
-		for (var i = 0; i < numLines; i++) {
-			var rand1 = -Math.PI + Math.random() * Math.PI * 2
-			var rand2 = -Math.PI + Math.random() * Math.PI * 2
+    for (var i = 0; i < numLines; i++) {
+      var rand1 = -Math.PI + Math.random() * Math.PI * 2
+      var rand2 = -Math.PI + Math.random() * Math.PI * 2
 
-			// Evenly distribute color classes across generated lines
-			var colorIndex = Math.floor((i * colorClasses.length) / numLines)
-			var line = document.createElementNS(svgNS, 'line')
-			line.setAttribute('class', colorClasses[colorIndex])
-			line.setAttribute('x1', 50 + radius * Math.cos(rand1))
-			line.setAttribute('y1', 50 + radius * Math.sin(rand1))
-			line.setAttribute('x2', 50 + radius * Math.cos(rand2))
-			line.setAttribute('y2', 50 + radius * Math.sin(rand2))
-			line.setAttribute('vector-effect', 'non-scaling-stroke')
-			line.setAttribute(
-				'style',
-				'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.2 + Math.random() * 0.8) + ';'
-			)
+      // Evenly distribute color classes across generated lines
+      var colorIndex = Math.floor((i * colorClasses.length) / numLines)
+      var line = document.createElementNS(svgNS, 'line')
+      line.setAttribute('class', colorClasses[colorIndex])
+      line.setAttribute('x1', 50 + radius * Math.cos(rand1))
+      line.setAttribute('y1', 50 + radius * Math.sin(rand1))
+      line.setAttribute('x2', 50 + radius * Math.cos(rand2))
+      line.setAttribute('y2', 50 + radius * Math.sin(rand2))
+      line.setAttribute('vector-effect', 'non-scaling-stroke')
+      line.setAttribute(
+        'style',
+        'animation-delay: ' + Math.random() * 1.5 + 's; opacity: ' + (0.2 + Math.random() * 0.8) + ';',
+      )
 
-			lines.appendChild(line)
-		}
-		lineWrap.appendChild(lines)
-	}
+      lines.appendChild(line)
+    }
+    lineWrap.appendChild(lines)
+  }
 
-	async function renderLogo(index) {
-		const url = logoList[index]
-		const res = await fetch(url)
-		const html = await res.text()
-		logoWrap.innerHTML = html
-		if (url.includes('mSpiderLines')) {
-			runSpiderLines()
-		}
+  async function renderLogo(index) {
+    const url = logoList[index]
+    const res = await fetch(url)
+    const html = await res.text()
+    logoWrap.innerHTML = html
+    if (url.includes('mSpiderLines')) {
+      runSpiderLines()
+    }
 
-		if (url.includes('parallaxM')) {
-			// After injecting the logo HTML, remove `xyz-in` once its intro animation finishes
-			window?.MI?.xyzCleanup?.(logoWrap)
-		}
-	}
+    if (url.includes('parallaxM')) {
+      // After injecting the logo HTML, remove `xyz-in` once its intro animation finishes
+      window?.MI?.xyzCleanup?.(logoWrap)
+    }
+  }
 
-	logoWrap.addEventListener('click', () => {
-		currentIndex = (currentIndex + 1) % logoList.length
-		renderLogo(currentIndex)
-	})
+  logoWrap.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % logoList.length
+    renderLogo(currentIndex)
+  })
 
-	// Allow external triggers via CustomEvent on this instance
-	logoWrap.addEventListener('m-logo:next', (ev) => {
-		const detail = /** @type {CustomEvent | undefined} */ (ev)?.detail
-		const nextIndex = typeof detail?.index === 'number' ? detail.index : currentIndex + 1
-		currentIndex = ((nextIndex % logoList.length) + logoList.length) % logoList.length
-		renderLogo(currentIndex)
-	})
+  // Allow external triggers via CustomEvent on this instance
+  logoWrap.addEventListener('m-logo:next', (ev) => {
+    const detail = /** @type {CustomEvent | undefined} */ (ev)?.detail
+    const nextIndex = typeof detail?.index === 'number' ? detail.index : currentIndex + 1
+    currentIndex = ((nextIndex % logoList.length) + logoList.length) % logoList.length
+    renderLogo(currentIndex)
+  })
 
-	// Initial render
-	renderLogo(currentIndex)
+  // Initial render
+  renderLogo(currentIndex)
 </script>
