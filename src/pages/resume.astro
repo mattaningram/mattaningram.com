@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import Header from '@components/Header.astro'
 import ResumeItem from '@components/resume/ResumeItem.astro'
 import { getCollection, render } from 'astro:content'
+import { Icon } from 'astro-icon/components'
 
 const entries = await getCollection('resume')
 const sorted = entries.sort((a, b) => a.data.order - b.data.order)
@@ -30,7 +31,7 @@ const rendered = await Promise.all(
         </div>
       </header>
 
-      <a href="/assets/resume.pdf" class="resume-pdf-btn" download>Download PDF</a>
+      <a href="/assets/resume.pdf" class="resume-pdf-btn" download><Icon name="document" />Download PDF</a>
 
       <section class="resume-experience">
         {
@@ -164,16 +165,39 @@ const rendered = await Promise.all(
   }
 
   .resume-pdf-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
     color: var(--gray-5);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     position: fixed;
-    top: var(--spacing-10);
-    right: var(--spacing-10);
-
+    top: var(--page-gutter);
+    right: var(--page-gutter);
     z-index: 10;
+    padding: var(--spacing-4);
+    border-radius: var(--spacing-2);
+    min-height: 40px;
+    backdrop-filter: blur(8px) brightness(1.15);
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+
+    svg {
+      font-size: 1.125rem;
+    }
 
     @media print {
       display: none;
+    }
+
+    &:hover {
+      background-color: white;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 
