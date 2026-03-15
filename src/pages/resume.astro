@@ -31,7 +31,10 @@ const rendered = await Promise.all(
         </div>
       </header>
 
-      <a href="/assets/resume.pdf" class="resume-pdf-btn" download><Icon name="document" />Download PDF</a>
+      <a href="/assets/resume/Mattan Ingram Resume 2026.pdf" class="resume-pdf-btn" download>
+        <Icon name="document" />
+        Download PDF
+      </a>
 
       <section class="resume-experience">
         {
@@ -179,12 +182,11 @@ const rendered = await Promise.all(
     border-radius: var(--spacing-2);
     min-height: 40px;
     backdrop-filter: blur(8px) brightness(1.15);
-    transition:
-      background-color 0.2s ease,
-      transform 0.2s ease;
+    transition: 0.2s ease-out;
+    transition-property: color, background-color, transform;
 
     svg {
-      font-size: 1.125rem;
+      font-size: 1.25rem;
     }
 
     @media print {
@@ -192,6 +194,7 @@ const rendered = await Promise.all(
     }
 
     &:hover {
+      color: var(--gray-1);
       background-color: white;
       transform: scale(1.05);
     }
