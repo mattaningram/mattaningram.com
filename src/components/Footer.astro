@@ -5,113 +5,154 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <footer class="main-footer" transition:name="footer">
-  <PerspectiveScroll>
-    <Button href="mailto:mattaningram@gmail.com" data-visitors-event="Contact Link" data-visitors-type="Email">
-      Say Hi
-    </Button>
+  <PerspectiveScroll class="footer-content">
+    <div class="footer-links-wrap">
+      <a
+        href="mailto:mattaningram@gmail.com"
+        class="footer-link email-link"
+        data-visitors-event="Contact Link"
+        data-visitors-type="Email"
+      >
+        <div class="link-content">
+          <Icon name="email" />
+          Email
+        </div>
+      </a>
+      <a href="/resume" class="footer-link resume-link">
+        <div class="link-content">
+          <Icon name="document" />
+          Resume
+        </div>
+      </a>
+    </div>
+
+    <div class="footer-links-wrap">
+      <a
+        class="footer-link social-link"
+        href="https://github.com/mattaningram"
+        aria-label="Github"
+        target="_blank"
+        data-visitors-event="Contact Link"
+        data-visitors-type="Github"
+      >
+        <Icon name="github-solid" class="link-content" />
+      </a>
+
+      <a
+        class="footer-link social-link"
+        href="https://www.linkedin.com/in/mattaningram"
+        aria-label="LinkedIn"
+        target="_blank"
+        data-visitors-event="Contact Link"
+        data-visitors-type="LinkedIn"
+      >
+        <Icon name="linkedin-solid" class="link-content" />
+      </a>
+
+      <a
+        class="footer-link social-link"
+        href="https://x.com/mattaningram"
+        aria-label="X"
+        target="_blank"
+        data-visitors-event="Contact Link"
+        data-visitors-type="X"
+      >
+        <Icon name="x-solid" class="link-content" />
+      </a>
+
+      <a
+        class="footer-link social-link"
+        href="https://instagram.com/mattaningram"
+        aria-label="Instagram"
+        target="_blank"
+        data-visitors-event="Contact Link"
+        data-visitors-type="Instagram"
+      >
+        <Icon name="instagram-solid" class="link-content" />
+      </a>
+
+      <a
+        class="footer-link social-link"
+        href="https://open.spotify.com/user/mattaningram"
+        aria-label="Spotify"
+        target="_blank"
+        data-visitors-event="Contact Link"
+        data-visitors-type="Spotify"
+      >
+        <Icon name="spotify-solid" class="link-content" />
+      </a>
+    </div>
   </PerspectiveScroll>
-
-  <div class="contact-links-wrap">
-    <a
-      class="contact-link"
-      href="https://github.com/mattaningram"
-      aria-label="Github"
-      target="_blank"
-      data-visitors-event="Contact Link"
-      data-visitors-type="Github"
-    >
-      <Icon name="github-solid" />
-    </a>
-
-    <a
-      class="contact-link"
-      href="https://www.linkedin.com/in/mattaningram"
-      aria-label="LinkedIn"
-      target="_blank"
-      data-visitors-event="Contact Link"
-      data-visitors-type="LinkedIn"
-    >
-      <Icon name="linkedin-solid" />
-    </a>
-
-    <a
-      class="contact-link"
-      href="https://x.com/mattaningram"
-      aria-label="X"
-      target="_blank"
-      data-visitors-event="Contact Link"
-      data-visitors-type="X"
-    >
-      <Icon name="x-solid" />
-    </a>
-
-    <a
-      class="contact-link"
-      href="https://instagram.com/mattaningram"
-      aria-label="Instagram"
-      target="_blank"
-      data-visitors-event="Contact Link"
-      data-visitors-type="Instagram"
-    >
-      <Icon name="instagram-solid" />
-    </a>
-
-    <a
-      class="contact-link"
-      href="https://open.spotify.com/user/mattaningram"
-      aria-label="Spotify"
-      target="_blank"
-      data-visitors-event="Contact Link"
-      data-visitors-type="Spotify"
-    >
-      <Icon name="spotify-solid" />
-    </a>
-  </div>
 </footer>
 
 <style lang="scss">
   .main-footer {
-    display: grid;
-    gap: var(--spacing-4);
     text-align: center;
     position: relative;
     margin: 0 auto;
     margin-top: var(--page-section-margin);
-    perspective: 800px;
-    transform-style: preserve-3d;
+    margin-bottom: var(--spacing-8);
+    width: 100%;
+    max-width: var(--page-content-width);
+    padding: 0 var(--page-gutter);
   }
 
-  .contact-links-wrap {
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-4);
+    gap: 1px;
+    transform-style: preserve-3d;
+    margin-inline: calc(var(--spacing-5) * -1);
+  }
+
+  .footer-links-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: var(--spacing-8) auto;
+    transform-style: preserve-3d;
   }
 
-  .contact-link {
-    width: 2.5rem;
-    height: 2rem;
-    font-size: 1.25rem;
-    display: grid;
-    place-content: center;
-    color: var(--page-color);
-
-    [data-icon] {
-      transition: scale 0.15s var(--ease-out-quad);
-    }
+  .footer-link {
+    height: 2.5rem;
+    display: flex;
+    padding: 0 var(--spacing-5);
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-4);
+    color: hsl(from var(--page-color) h s l / 0.5);
+    flex: 1;
+    font-size: 0.875rem;
+    transform-style: preserve-3d;
 
     &:hover {
-      [data-icon] {
-        scale: 1.25;
+      .link-content {
+        color: var(--page-color);
       }
     }
 
-    &:focus-visible {
-      [data-icon] {
-        scale: 1.25;
-        outline: 1px solid var(--page-color);
-        outline-offset: 2px;
-      }
+    .link-content {
+      transition: 0.15s var(--ease-out-quad);
+      transition-property: color, scale;
+      transform-style: preserve-3d;
     }
+
+    [data-icon] {
+      font-size: 1.375rem;
+    }
+  }
+
+  .social-link {
+    [data-icon] {
+      font-size: 1.125rem;
+    }
+  }
+
+  .link-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-4);
+    transform-style: preserve-3d;
   }
 </style>
