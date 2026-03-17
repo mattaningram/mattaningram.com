@@ -5,7 +5,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
 ---
 
 <footer class="main-footer" transition:name="footer">
-  <PerspectiveScroll class="footer-content">
+  <div class="footer-content">
     <div class="footer-links-wrap">
       <a
         href="mailto:mattaningram@gmail.com"
@@ -13,16 +13,12 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="Email"
       >
-        <div class="link-content">
-          <Icon name="email" />
-          Email
-        </div>
+        <Icon name="email" />
+        Email
       </a>
       <a href="/resume" class="footer-link resume-link">
-        <div class="link-content">
-          <Icon name="document" />
-          Resume
-        </div>
+        <Icon name="document" />
+        Resume
       </a>
     </div>
 
@@ -35,7 +31,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="Github"
       >
-        <Icon name="github-solid" class="link-content" />
+        <Icon name="github-solid" />
       </a>
 
       <a
@@ -46,7 +42,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="LinkedIn"
       >
-        <Icon name="linkedin-solid" class="link-content" />
+        <Icon name="linkedin-solid" />
       </a>
 
       <a
@@ -57,7 +53,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="X"
       >
-        <Icon name="x-solid" class="link-content" />
+        <Icon name="x-solid" />
       </a>
 
       <a
@@ -68,7 +64,7 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="Instagram"
       >
-        <Icon name="instagram-solid" class="link-content" />
+        <Icon name="instagram-solid" />
       </a>
 
       <a
@@ -79,13 +75,15 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
         data-visitors-event="Contact Link"
         data-visitors-type="Spotify"
       >
-        <Icon name="spotify-solid" class="link-content" />
+        <Icon name="spotify-solid" />
       </a>
     </div>
-  </PerspectiveScroll>
+  </div>
 </footer>
 
 <style lang="scss">
+  @use '../styles/scssVariables' as *;
+
   .main-footer {
     text-align: center;
     position: relative;
@@ -100,17 +98,18 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
   .footer-content {
     display: flex;
     justify-content: space-between;
-    gap: var(--spacing-4);
-    gap: 1px;
-    transform-style: preserve-3d;
     margin-inline: calc(var(--spacing-5) * -1);
+
+    @media (width < $breakpoint-md) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .footer-links-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform-style: preserve-3d;
   }
 
   .footer-link {
@@ -123,18 +122,11 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
     color: hsl(from var(--page-color) h s l / 0.5);
     flex: 1;
     font-size: 0.875rem;
-    transform-style: preserve-3d;
+    transition: 0.15s var(--ease-out-quad);
+    transition-property: color;
 
     &:hover {
-      .link-content {
-        color: var(--page-color);
-      }
-    }
-
-    .link-content {
-      transition: 0.15s var(--ease-out-quad);
-      transition-property: color, scale;
-      transform-style: preserve-3d;
+      color: var(--page-color);
     }
 
     [data-icon] {
@@ -146,13 +138,5 @@ import PerspectiveScroll from '@components/PerspectiveScroll.astro'
     [data-icon] {
       font-size: 1.125rem;
     }
-  }
-
-  .link-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-4);
-    transform-style: preserve-3d;
   }
 </style>
