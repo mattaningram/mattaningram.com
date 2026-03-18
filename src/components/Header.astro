@@ -1,36 +1,42 @@
 ---
 import Logo from '@components/Logo.astro'
+
+interface Props {
+  logoSize?: string
+}
+
+const { logoSize = '2.5rem' } = Astro.props
 ---
 
 <nav class="site-header">
-	<a class="m-logo-link" href="/" aria-label="Home"><Logo size="3rem" /></a>
+  <a class="m-logo-link" href="/" aria-label="Home"><Logo size={logoSize} /></a>
 </nav>
 
 <style lang="scss">
-	@use '../styles/_scssVariables' as *;
+  @use '../styles/_scssVariables' as *;
 
-	.site-header {
-		position: sticky;
-		z-index: 100;
-		width: fit-content;
-		top: 0;
-		left: 0;
-		padding: var(--page-gutter);
-		transition: all 0.15s var(--ease-out-quad);
+  .site-header {
+    position: sticky;
+    z-index: 100;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    padding: var(--page-gutter);
+    transition: all 0.15s var(--ease-out-quad);
 
-		@media (width < $breakpoint-sm) {
-			padding: var(--page-gutter);
-			:global(.m-logo-wrap) {
-				--m-logo-size: 2.5rem;
-			}
-		}
-	}
-	.m-logo-link {
-		display: block;
-		width: fit-content;
+    @media (width < $breakpoint-sm) {
+      padding: var(--page-gutter);
+      :global(.m-logo-wrap) {
+        --m-logo-size: 2rem;
+      }
+    }
+  }
+  .m-logo-link {
+    display: block;
+    width: fit-content;
 
-		&:focus-visible {
-		outline: 2px solid var(--page-color);
-	}
-	}
+    &:focus-visible {
+      outline: 2px solid var(--page-color);
+    }
+  }
 </style>
