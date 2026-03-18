@@ -11,7 +11,7 @@
   "dependencies": {
     "@animxyz/core": "^0.6.6",
     "@vovayatsyuk/photoswipe-object-position": "^1.0.0",
-    "astro": "^6.0.2",
+    "astro": "^6.0.6",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
