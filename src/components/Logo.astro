@@ -6,7 +6,8 @@ interface Props {
 
 const files = import.meta.glob('/public/assets/mLogos/**/*.{svg,html}', {
   eager: true,
-  as: 'url',
+  query: '?url',
+  import: 'default',
 })
 const urls = Object.values(files).map((url) => url.replace(/^\/public/, ''))
 
@@ -26,6 +27,7 @@ const { size } = Astro.props
 </style>
 
 <script is:inline define:vars={{ urls }} data-astro-rerun>
+  ;(function () {
   // Scope to this component instance by using the adjacent wrapper element
   const logoWrap = document.currentScript?.previousElementSibling
   if (!(logoWrap instanceof HTMLElement)) {
@@ -112,4 +114,5 @@ const { size } = Astro.props
 
   // Initial render
   renderLogo(currentIndex)
+  })()
 </script>
