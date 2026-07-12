@@ -220,7 +220,7 @@ const { title, color, slides } = Astro.props
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 
-    @media (width <style $breakpoint-md) {
+    @media (width < $breakpoint-md) {
       height: auto;
       overflow-y: visible;
       scroll-snap-type: none;
