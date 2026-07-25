@@ -1,27 +1,32 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Logo from '@components/Logo.astro'
-import StudyNav from '@components/StudyNav.astro'
+import RoadBackdrop from '@components/study/RoadBackdrop.astro'
+import FieldBackdrop from '@components/study/FieldBackdrop.astro'
 import { Font } from 'astro:assets'
 
 export interface Props {
   title: string
   color: string
+  theme: 'road' | 'field'
   slides: Array<{ id: string; title: string }>
 }
 
-const { title, color, slides } = Astro.props
+const { title, color, theme, slides } = Astro.props
 ---
 
-<BaseLayout title={title} pageColor={color} class="study-layout">
+<BaseLayout title={title} pageColor={color} class={`study-layout study-theme--${theme}`}>
   <Font slot="head" cssVariable="--font-lora" />
+
+  {theme === 'road' ? <RoadBackdrop /> : <FieldBackdrop />}
+
   <nav class="study-header">
     <a class="study-home-link" href="/" aria-label="Home"><Logo size="1.5rem" /></a>
   </nav>
 
-  <slot name="nav"><StudyNav slides={slides} /></slot>
+  <slot name="nav" />
 
-  <main class="study-slides">
+  <main class="study-slides" data-slide-count={slides.length}>
     <slot />
   </main>
 </BaseLayout>
@@ -43,19 +48,31 @@ const { title, color, slides } = Astro.props
     const dots = document.querySelectorAll('.study-nav-dot')
 
     // --- Active slide tracking via IntersectionObserver ---
+    // Below the md breakpoint the container is not a scroller, so the viewport
+    // has to be the root instead of the (full page height) container.
+    const isPaged = window.matchMedia('(min-width: 768px)').matches
+
+    let activeIndex = -1
+    const setActive = (index: number) => {
+      if (index === activeIndex || index < 0) return
+      activeIndex = index
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index))
+      document.dispatchEvent(
+        new CustomEvent('study:slide', { detail: { index, total: sections.length, id: sections[index]?.id } }),
+      )
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            const index = sections.indexOf(entry.target as HTMLElement)
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === index))
-
+            setActive(sections.indexOf(entry.target as HTMLElement))
             const id = (entry.target as HTMLElement).id
             if (id) history.replaceState(null, '', `#${id}`)
           }
         }
       },
-      { root: container, threshold: 0.5 },
+      { root: isPaged ? container : null, threshold: 0.5 },
     )
 
     sections.forEach((s) => observer.observe(s))
@@ -188,19 +205,6 @@ const { title, color, slides } = Astro.props
 <style lang="scss">
   @use '../styles/scssVariables' as *;
 
-  :global(body.study-layout) {
-    --study-color: var(--page-color);
-    --study-bg: #fafafa;
-    --study-bg-alt: #f0f0f0;
-    --study-text: #1a1a2e;
-    --study-text-muted: #6b7280;
-    --study-heading: #0f172a;
-    --study-border: #e0e0e0;
-
-    background-color: var(--study-bg);
-    color: var(--study-text);
-  }
-
   .study-header {
     position: fixed;
     top: 0;
@@ -216,6 +220,8 @@ const { title, color, slides } = Astro.props
   }
 
   .study-slides {
+    position: relative;
+    z-index: 1;
     height: 100dvh;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
@@ -230,6 +236,59 @@ const { title, color, slides } = Astro.props
 
 <style lang="scss" is:global>
   @use '../styles/scssVariables' as *;
+
+  // ========================================
+  // Theme tokens
+  // ========================================
+
+  body.study-layout {
+    --study-color: var(--page-color);
+
+    background-color: var(--study-bg);
+    color: var(--study-text);
+  }
+
+  // Revel — night navigation: dark map canvas, cyan routing accents
+  body.study-theme--road {
+    --study-bg: #060a12;
+    --study-bg-alt: #0b1220;
+    --study-surface: #0f1725;
+    --study-surface-glass: rgba(160, 200, 245, 0.045);
+    --study-text: #b3c2d8;
+    --study-text-muted: #7285a1;
+    --study-heading: #f2f7ff;
+    --study-border: rgba(150, 185, 230, 0.16);
+    --study-border-strong: rgba(150, 185, 230, 0.34);
+    --study-road: #1d283d;
+    --study-lane: rgba(214, 232, 255, 0.5);
+    --study-heading-font: var(--font-body);
+    --study-heading-weight: 700;
+    --study-heading-tracking: -0.03em;
+    --study-radius: 14px;
+  }
+
+  // Artemis — field guide: warm paper canvas, leaf and soil accents
+  body.study-theme--field {
+    --study-bg: #f7f3e9;
+    --study-bg-alt: #efe7d6;
+    --study-surface: #fffdf7;
+    --study-surface-glass: rgba(255, 253, 247, 0.72);
+    --study-text: #4b4034;
+    --study-text-muted: #8b7e6c;
+    --study-heading: #29211a;
+    --study-border: #ded1ba;
+    --study-border-strong: #c8b696;
+    --study-leaf: #4d8a4f;
+    --study-soil: #6f553a;
+    --study-heading-font: var(--font-serif);
+    --study-heading-weight: 600;
+    --study-heading-tracking: -0.01em;
+    --study-radius: 10px;
+  }
+
+  // ========================================
+  // Slide shell
+  // ========================================
 
   .study-slide {
     min-height: 100dvh;
@@ -257,6 +316,16 @@ const { title, color, slides } = Astro.props
     }
   }
 
+  .slide-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-12);
+  }
+
   // --- Animation initial states (hidden until animated) ---
 
   .slide-heading,
@@ -267,22 +336,112 @@ const { title, color, slides } = Astro.props
   }
 
   // ========================================
+  // Slide typography
+  // ========================================
+
+  .slide-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-inline: var(--spacing-8);
+  }
+
+  .slide-heading {
+    font-family: var(--study-heading-font);
+    font-weight: var(--study-heading-weight);
+    letter-spacing: var(--study-heading-tracking);
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    line-height: 1.15;
+    color: var(--study-heading);
+  }
+
+  .slide-section-label {
+    font-family: var(--font-body);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--study-color);
+    line-height: 1;
+    margin-bottom: var(--spacing-6);
+
+    &::before,
+    &::after {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .study-theme--road & {
+      padding: var(--spacing-4) var(--spacing-7);
+      border: 1px solid var(--study-border-strong);
+      border-radius: 99px;
+      background: var(--study-surface-glass);
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .slide-subtitle {
+    max-width: 56ch;
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    line-height: 1.65;
+    color: var(--study-text-muted);
+    font-weight: 400;
+    margin-top: var(--spacing-7);
+    text-wrap: balance;
+  }
+
+  // ========================================
   // Shared study card styles
   // ========================================
 
   .study-card {
-    border: 1.5px solid var(--study-border);
-    border-radius: 12px;
+    border: 1px solid var(--study-border);
+    border-radius: var(--study-radius);
     overflow: hidden;
+    flex: 1;
+
+    .study-theme--road & {
+      background: var(--study-surface-glass);
+      backdrop-filter: blur(6px);
+    }
+
+    .study-theme--field & {
+      background: var(--study-surface);
+      box-shadow: 0 1px 0 var(--study-border-strong);
+    }
 
     &--dashed {
       border-style: dashed;
-      background-color: white;
+
+      .study-theme--road & {
+        background: rgba(160, 200, 245, 0.02);
+      }
     }
 
     &--filled {
-      border-color: var(--study-color);
-      background-color: var(--study-color);
+      .study-theme--road & {
+        border-color: hsl(from var(--study-color) h s l / 0.55);
+        background: hsl(from var(--study-color) h s l / 0.09);
+        box-shadow: inset 0 0 40px hsl(from var(--study-color) h s l / 0.07);
+      }
+
+      .study-theme--field & {
+        border-color: hsl(from var(--study-color) h s l / 0.5);
+        border-style: solid;
+        background: color-mix(in srgb, var(--study-color) 5%, var(--study-surface));
+        box-shadow: inset 0 3px 0 var(--study-color);
+      }
     }
   }
 
@@ -294,20 +453,32 @@ const { title, color, slides } = Astro.props
     padding: var(--spacing-7) var(--spacing-8) var(--spacing-6);
   }
 
-  .study-card-tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #555;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: 2px 6px;
+  .study-card-label {
+    font-family: var(--study-heading-font);
+    font-size: 1.35rem;
+    font-weight: var(--study-heading-weight);
+    color: var(--study-heading);
+    letter-spacing: -0.01em;
 
     .study-card--filled & {
-      color: rgba(255, 255, 255, 0.85);
-      border-color: rgba(255, 255, 255, 0.4);
-      background-color: rgba(255, 255, 255, 0.15);
+      color: var(--study-color);
+    }
+  }
+
+  .study-card-tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
+    border: 1px solid var(--study-border);
+    border-radius: 99px;
+    padding: 4px 9px;
+    white-space: nowrap;
+
+    .study-card--filled & {
+      color: var(--study-color);
+      border-color: hsl(from var(--study-color) h s l / 0.4);
     }
   }
 
@@ -319,45 +490,34 @@ const { title, color, slides } = Astro.props
     flex-direction: column;
 
     li {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--study-heading);
+      font-size: 0.925rem;
+      line-height: 1.55;
+      color: var(--study-text);
       display: grid;
       grid-template-columns: 5.5rem 1fr;
       gap: var(--spacing-6);
       align-items: baseline;
       border-top: 1px dashed var(--study-border);
       padding: var(--spacing-6) var(--spacing-8);
-      text-wrap: balance;
+      text-wrap: pretty;
 
       .study-card--filled & {
-        color: #fff;
-        border-top-style: solid;
-        border-top-color: rgba(255, 255, 255, 0.2);
+        color: var(--study-heading);
+        border-top-color: hsl(from var(--study-color) h s l / 0.28);
       }
     }
   }
 
   .study-card-category {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.11em;
     text-transform: uppercase;
-    color: #666;
+    color: var(--study-text-muted);
 
     .study-card--filled & {
-      color: rgba(255, 255, 255, 0.7);
+      color: hsl(from var(--study-color) h s calc(l * 0.85));
     }
-  }
-
-  .slide-subtitle {
-    max-width: 52ch;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--study-text-muted);
-    font-weight: 500;
-    margin-top: var(--spacing-8);
-    text-wrap: balance;
   }
 
   // ========================================
@@ -366,11 +526,21 @@ const { title, color, slides } = Astro.props
 
   .study-viz-card {
     text-align: left;
-    background: white;
     border: 1px solid var(--study-border);
-    border-radius: 12px;
+    border-radius: var(--study-radius);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+
+    .study-theme--road & {
+      background: var(--study-surface-glass);
+      backdrop-filter: blur(6px);
+    }
+
+    .study-theme--field & {
+      background: var(--study-surface);
+      box-shadow: 0 1px 0 var(--study-border-strong);
+    }
   }
 
   .study-viz-card-viz {
@@ -379,9 +549,18 @@ const { title, color, slides } = Astro.props
     align-items: center;
     justify-content: center;
     padding: var(--spacing-6);
-    background: hsl(from var(--study-color) h s l / 0.03);
     border-bottom: 1px solid var(--study-border);
-    border-radius: 11px 11px 0 0;
+
+    .study-theme--road & {
+      background:
+        radial-gradient(ellipse at 50% 120%, hsl(from var(--study-color) h s l / 0.12), transparent 70%),
+        var(--study-bg-alt);
+    }
+
+    .study-theme--field & {
+      background: var(--study-bg-alt);
+      border-bottom-style: dashed;
+    }
   }
 
   .study-viz-card-content {
@@ -389,32 +568,33 @@ const { title, color, slides } = Astro.props
   }
 
   .study-viz-card-number {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: var(--study-color);
-    letter-spacing: 0.05em;
-    width: 28px;
-    height: 28px;
+    letter-spacing: 0.06em;
+    width: 26px;
+    height: 26px;
     display: grid;
     place-content: center;
     border-radius: 50%;
-    background: hsl(from var(--study-color) h s l / 0.1);
+    background: hsl(from var(--study-color) h s l / 0.12);
     flex-shrink: 0;
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
   }
 
   .study-viz-card-title {
+    font-family: var(--study-heading-font);
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: var(--study-heading-weight);
     color: var(--study-heading);
-    margin-bottom: var(--spacing-6);
+    margin-bottom: var(--spacing-5);
   }
 
   .study-viz-card-body {
     font-size: 0.9rem;
     line-height: 1.6;
     color: var(--study-text-muted);
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   // ========================================
@@ -422,19 +602,34 @@ const { title, color, slides } = Astro.props
   // ========================================
 
   .study-quote {
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.55;
-    font-style: italic;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.6;
     color: var(--study-text);
     margin: 0;
+
+    .study-theme--field & {
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+
+    .study-theme--road & {
+      padding-left: var(--spacing-7);
+      border-left: 2px solid hsl(from var(--study-color) h s l / 0.5);
+    }
   }
 
   .study-cite {
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--study-text-muted);
     margin: 0;
+
+    .study-theme--road & {
+      padding-left: var(--spacing-7);
+    }
   }
 </style>

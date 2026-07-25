@@ -1,0 +1,146 @@
+---
+const { class: className, ...rest } = Astro.props
+
+// Irregular street grid, drawn once and reused for both the map lines and the
+// faint block fills underneath them.
+const avenues = [90, 210, 300, 445, 560, 700, 815, 960, 1075, 1220, 1350, 1490]
+const streets = [70, 145, 235, 310, 400, 480, 555, 645, 720, 810, 890, 960]
+---
+
+<div class:list={['road-backdrop', className]} aria-hidden="true" {...rest}>
+  <svg class="road-grid" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="road-fade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="white" stop-opacity="0.9"></stop>
+        <stop offset="0.55" stop-color="white" stop-opacity="0.35"></stop>
+        <stop offset="1" stop-color="white" stop-opacity="0.08"></stop>
+      </linearGradient>
+      <mask id="road-mask">
+        <rect width="1600" height="1000" fill="url(#road-fade)"></rect>
+      </mask>
+    </defs>
+
+    <g mask="url(#road-mask)">
+      <g class="road-streets">
+        {avenues.map((x) => <line x1={x} y1="0" x2={x - 40} y2="1000" />)}
+        {streets.map((y) => <line x1="0" y1={y} x2="1600" y2={y + 26} />)}
+      </g>
+
+      <g class="road-arterials">
+        <path id="road-artery-1" d="M-40 300 C 320 268, 620 356, 900 330 S 1400 246, 1660 286"></path>
+        <path id="road-artery-2" d="M300 -40 C 344 300, 268 560, 372 1040"></path>
+        <path id="road-artery-3" d="M-40 760 C 380 742, 700 812, 1080 730 S 1480 640, 1660 668"></path>
+        <path id="road-artery-4" d="M1180 -40 C 1140 280, 1246 520, 1160 1040"></path>
+      </g>
+
+      <g class="road-water">
+        <path d="M-40 520 C 300 470, 480 610, 760 566 S 1180 430, 1660 468 L1660 560 C 1180 522, 1020 646, 760 660 S 300 566, -40 610 Z"></path>
+      </g>
+    </g>
+
+    <g class="road-traffic">
+      <circle r="3" class="road-car road-car--1"></circle>
+      <circle r="3" class="road-car road-car--2"></circle>
+      <circle r="2.5" class="road-car road-car--3"></circle>
+      <circle r="2.5" class="road-car road-car--4"></circle>
+    </g>
+  </svg>
+</div>
+
+<style lang="scss">
+  .road-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -10%, hsl(from var(--study-color) h s l / 0.16), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 90% 105%, hsl(from var(--study-color) h s l / 0.08), transparent 70%),
+      var(--study-bg);
+  }
+
+  .road-grid {
+    width: 100%;
+    height: 100%;
+    animation: road-drift 90s ease-in-out infinite alternate;
+  }
+
+  .road-streets line {
+    stroke: rgba(150, 185, 230, 0.07);
+    stroke-width: 1;
+  }
+
+  .road-arterials path {
+    fill: none;
+    stroke: rgba(150, 185, 230, 0.13);
+    stroke-width: 2.5;
+  }
+
+  .road-water path {
+    fill: hsl(from var(--study-color) h s l / 0.05);
+  }
+
+  .road-car {
+    fill: var(--study-color);
+    filter: drop-shadow(0 0 6px hsl(from var(--study-color) h s l / 0.9));
+    offset-rotate: 0deg;
+    animation: road-run 26s linear infinite;
+  }
+
+  .road-car--1 {
+    offset-path: path('M-40 300 C 320 268, 620 356, 900 330 S 1400 246, 1660 286');
+  }
+
+  .road-car--2 {
+    offset-path: path('M300 -40 C 344 300, 268 560, 372 1040');
+    animation-duration: 34s;
+    animation-delay: -8s;
+  }
+
+  .road-car--3 {
+    offset-path: path('M-40 760 C 380 742, 700 812, 1080 730 S 1480 640, 1660 668');
+    animation-duration: 30s;
+    animation-delay: -18s;
+  }
+
+  .road-car--4 {
+    offset-path: path('M1180 -40 C 1140 280, 1246 520, 1160 1040');
+    animation-duration: 40s;
+    animation-delay: -4s;
+  }
+
+  @keyframes road-run {
+    from {
+      offset-distance: 0%;
+      opacity: 0;
+    }
+    8%,
+    92% {
+      opacity: 0.85;
+    }
+    to {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes road-drift {
+    from {
+      transform: translate3d(-1.5%, -1%, 0) scale(1.06);
+    }
+    to {
+      transform: translate3d(1.5%, 1%, 0) scale(1.06);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .road-grid {
+      animation: none;
+    }
+
+    .road-traffic {
+      display: none;
+    }
+  }
+</style>

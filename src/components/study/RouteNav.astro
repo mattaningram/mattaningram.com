@@ -1,0 +1,369 @@
+---
+export interface Props {
+  slides: Array<{ id: string; title: string }>
+}
+
+const { slides, ...rest } = Astro.props
+const total = String(slides.length).padStart(2, '0')
+---
+
+<div class="route-nav-wrap" {...rest}>
+  <nav class="route-nav" aria-label="Slide navigation">
+    <p class="route-count"><span class="route-count-current">01</span><span class="route-count-total">/{total}</span></p>
+
+    <div class="route-map">
+      <div class="route-road">
+        <div class="route-lane"></div>
+        <div class="route-road-travelled"><div class="route-lane route-lane--lit"></div></div>
+      </div>
+
+      <span class="route-puck">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3.5 19 20l-7-4-7 4z"></path>
+        </svg>
+      </span>
+
+      <ol class="route-stops">
+        {
+          slides.map((slide, index) => (
+            <li class:list={['route-stop', { 'is-current': index === 0 }]}>
+              <a
+                href={`#${slide.id}`}
+                class:list={['study-nav-dot', 'route-stop-link', { active: index === 0 }]}
+                data-slide-index={index}
+              >
+                <span class="route-stop-node" />
+                <span class="route-stop-label">{slide.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+</div>
+
+<div class="route-bar" aria-hidden="true">
+  <div class="route-bar-track"><div class="route-bar-fill"></div></div>
+  <p class="route-bar-label"><span class="route-bar-title">{slides[0]?.title}</span> <span class="route-count-current">01</span>/{total}</p>
+</div>
+
+<script>
+  function initRouteNav() {
+    const nav = document.querySelector('.route-nav') as HTMLElement | null
+    if (!nav) return
+
+    const stops = Array.from(nav.querySelectorAll('.route-stop')) as HTMLElement[]
+    const travelled = nav.querySelector('.route-road-travelled') as HTMLElement
+    const road = nav.querySelector('.route-road') as HTMLElement
+    const puck = nav.querySelector('.route-puck') as HTMLElement
+    const barFill = document.querySelector('.route-bar-fill') as HTMLElement | null
+    const barTitle = document.querySelector('.route-bar-title') as HTMLElement | null
+    const counters = Array.from(document.querySelectorAll('.route-count-current')) as HTMLElement[]
+
+    const onSlide = (event: Event) => {
+      const { index, total, id } = (event as CustomEvent).detail as { index: number; total: number; id: string }
+
+      stops.forEach((stop, i) => {
+        stop.classList.toggle('is-past', i < index)
+        stop.classList.toggle('is-current', i === index)
+      })
+
+      counters.forEach((el) => (el.textContent = String(index + 1).padStart(2, '0')))
+
+      const node = stops[index]?.querySelector('.route-stop-node') as HTMLElement
+      if (node && road && travelled && puck) {
+        const roadRect = road.getBoundingClientRect()
+        const nodeRect = node.getBoundingClientRect()
+        const scale = roadRect.height / road.offsetHeight || 1
+        const offset = (nodeRect.top + nodeRect.height / 2 - roadRect.top) / scale
+        travelled.style.height = `${Math.max(0, offset)}px`
+        puck.style.transform = `translate(-50%, -50%) translateY(${offset}px)`
+      }
+
+      if (barFill) barFill.style.width = `${((index + 1) / total) * 100}%`
+      if (barTitle) {
+        const heading = document.querySelector(`#${id} .slide-heading, #${id} .hero-title`)
+        if (heading?.textContent) barTitle.textContent = heading.textContent.trim()
+      }
+    }
+
+    document.addEventListener('study:slide', onSlide)
+    return () => document.removeEventListener('study:slide', onSlide)
+  }
+
+  let cleanup: (() => void) | undefined
+
+  function init() {
+    cleanup?.()
+    cleanup = initRouteNav() ?? undefined
+  }
+
+  init()
+  document.addEventListener('astro:after-swap', init)
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.()
+    cleanup = undefined
+  })
+</script>
+
+<style lang="scss">
+  @use '../../styles/scssVariables' as *;
+
+  .route-nav-wrap {
+    --stop-height: 2.75rem;
+    --road-width: 12px;
+    --node-size: 11px;
+
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    padding-left: var(--spacing-8);
+
+    @media (width < $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  .route-nav {
+    position: relative;
+    transform: scale(0.78);
+    transform-origin: left center;
+    transition: transform 0.35s var(--ease-out-quart);
+
+    .route-nav-wrap:hover & {
+      transform: scale(1);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -40px -64px;
+      border-radius: 80px;
+      background: radial-gradient(ellipse at left center, var(--study-bg) 40%, transparent 75%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: -1;
+    }
+
+    .route-nav-wrap:hover &::before {
+      opacity: 1;
+    }
+  }
+
+  .route-count {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--study-text-muted);
+    margin-bottom: var(--spacing-6);
+    padding-left: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .route-count-current {
+    color: var(--study-color);
+  }
+
+  .route-map {
+    position: relative;
+  }
+
+  .route-road {
+    position: absolute;
+    left: calc(var(--road-width) / 2);
+    top: calc(var(--stop-height) / 2);
+    bottom: calc(var(--stop-height) / 2);
+    width: var(--road-width);
+    transform: translateX(-50%);
+    border-radius: 99px;
+    background: var(--study-road);
+    box-shadow: inset 0 0 0 1px var(--study-border);
+    overflow: hidden;
+  }
+
+  .route-lane {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--study-lane) 0 7px,
+      transparent 7px 15px
+    );
+    background-position: center;
+    background-size: 2px 100%;
+    background-repeat: repeat-y;
+    opacity: 0.4;
+  }
+
+  .route-road-travelled {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 0;
+    background: linear-gradient(
+      to bottom,
+      hsl(from var(--study-color) h s calc(l * 0.55)),
+      hsl(from var(--study-color) h s l)
+    );
+    box-shadow: 0 0 14px hsl(from var(--study-color) h s l / 0.65);
+    transition: height 0.5s var(--ease-out-quart);
+    overflow: hidden;
+  }
+
+  .route-lane--lit {
+    opacity: 0.75;
+    background: repeating-linear-gradient(to bottom, #fff 0 7px, transparent 7px 15px);
+    background-size: 2px 100%;
+    background-position: center;
+    background-repeat: repeat-y;
+  }
+
+  .route-puck {
+    position: absolute;
+    left: calc(var(--road-width) / 2);
+    top: calc(var(--stop-height) / 2);
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    background: var(--study-color);
+    box-shadow:
+      0 0 0 4px hsl(from var(--study-color) h s l / 0.18),
+      0 2px 10px hsl(from var(--study-color) h s l / 0.6);
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s var(--ease-out-quart);
+    z-index: 2;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--study-bg);
+    }
+  }
+
+  .route-stops {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .route-stop-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-7);
+    height: var(--stop-height);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .route-stop-node {
+    width: var(--node-size);
+    height: var(--node-size);
+    border-radius: 50%;
+    background: var(--study-bg-alt);
+    box-shadow: 0 0 0 2px var(--study-border-strong);
+    flex-shrink: 0;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s var(--ease-out-back);
+
+    .is-past & {
+      background: var(--study-color);
+      box-shadow: 0 0 0 2px hsl(from var(--study-color) h s l / 0.35);
+    }
+
+    .is-current & {
+      transform: scale(0);
+    }
+
+    .route-stop-link:hover & {
+      box-shadow: 0 0 0 2px var(--study-color);
+    }
+  }
+
+  .route-stop-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    color: var(--study-text-muted);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      color 0.25s ease;
+
+    .route-nav-wrap:hover & {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: 0.12s;
+    }
+
+    .is-current & {
+      color: var(--study-heading);
+    }
+
+    .route-stop-link:hover & {
+      color: var(--study-color);
+    }
+  }
+
+  // ========================================
+  // Mobile trip bar
+  // ========================================
+
+  .route-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column-reverse;
+    gap: var(--spacing-3);
+    padding: var(--spacing-8) var(--spacing-8) calc(var(--spacing-5) + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--study-bg) 60%, transparent);
+
+    @media (width < $breakpoint-md) {
+      display: flex;
+    }
+  }
+
+  .route-bar-track {
+    height: 4px;
+    border-radius: 99px;
+    background: var(--study-road);
+    overflow: hidden;
+  }
+
+  .route-bar-fill {
+    height: 100%;
+    width: 12.5%;
+    border-radius: 99px;
+    background: var(--study-color);
+    box-shadow: 0 0 10px hsl(from var(--study-color) h s l / 0.7);
+    transition: width 0.5s var(--ease-out-quart);
+  }
+
+  .route-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .route-bar-title {
+    color: var(--study-heading);
+  }
+</style>

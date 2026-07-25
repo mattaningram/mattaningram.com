@@ -1,6 +1,6 @@
 ---
 import StudyLayout from '@layouts/StudyLayout.astro'
-import StudyNav from '@components/StudyNav.astro'
+import RouteNav from '@components/study/RouteNav.astro'
 import GmapsImg from '@media/revel/mapping/gmaps-bg.png'
 import HeroHeatmap from '@media/revel/mapping/HeroHeatmap.astro'
 import CarTopdown from '@media/revel/mapping/revel-tesla-top.png'
@@ -24,20 +24,46 @@ const slides = [
   { id: 'results', title: 'Results' },
   { id: 'next', title: 'What Comes Next' },
 ]
+
+// H3-style hex field used behind the exploration carousel
+const hexRadius = 21
+const hexWidth = Math.sqrt(3) * hexRadius
+const hexPoints = [
+  [0, -hexRadius],
+  [hexWidth / 2, -hexRadius / 2],
+  [hexWidth / 2, hexRadius / 2],
+  [0, hexRadius],
+  [-hexWidth / 2, hexRadius / 2],
+  [-hexWidth / 2, -hexRadius / 2],
+]
+  .map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`)
+  .join(' ')
+
+const hexes = Array.from({ length: 15 }, (_, row) =>
+  Array.from({ length: 46 }, (_, col) => {
+    const x = col * hexWidth + (row % 2 ? hexWidth / 2 : 0)
+    const y = row * hexRadius * 1.5
+    // Deterministic pseudo-random weight so the field reads like demand data
+    const weight = (Math.sin(row * 12.9898 + col * 78.233) * 43758.5453) % 1
+    return { x, y, weight: Math.abs(weight) }
+  }),
+).flat()
 ---
 
-<StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" slides={slides}>
-  <StudyNav slides={slides} vehicleImage={CarTopdown} slot="nav" />
+<StudyLayout title="Remapping Revel" color="rgb(1, 185, 242)" theme="road" slides={slides}>
+  <RouteNav slides={slides} slot="nav" />
+
   <!-- Slide 1: Hero -->
   <section class="study-slide slide-hero" id="hero">
-    <div class="hero-accent"></div>
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
+        <p class="slide-body hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>Revel Rideshare &middot; New York City
+        </p>
         <h1 class="slide-body hero-title">Remapping Revel</h1>
         <div class="slide-body hero-meta">
-          <span class="hero-role">Lead Product Designer</span>
-          <span class="hero-divider"></span>
-          <span class="hero-period">2022 &ndash; 2025</span>
+          <span class="hero-chip">Lead Product Designer</span>
+          <span class="hero-chip">2022 &ndash; 2025</span>
         </div>
         <p class="slide-media hero-summary">
           I led design on creating a new mapping system used across all of Revel's products, and spearheaded demand
@@ -45,30 +71,35 @@ const slides = [
         </p>
       </div>
       <div class="hero-visual">
-        <img src={GmapsImg.src} alt="" class="hero-map-img" width={GmapsImg.width} height={GmapsImg.height} />
-        <HeroHeatmap class="hero-heatmap" />
+        <div class="hero-frame">
+          <div class="hero-screen">
+            <img src={GmapsImg.src} alt="" class="hero-map-img" width={GmapsImg.width} height={GmapsImg.height} />
+            <HeroHeatmap class="hero-heatmap" />
+            <div class="hero-sweep"></div>
+          </div>
+          <div class="hero-scrim"></div>
+        </div>
+        <p class="hero-caption"><span class="hero-caption-pulse"></span>Driver demand heatmap &middot; Manhattan &amp; Queens</p>
       </div>
     </div>
   </section>
 
   <!-- Slide 2: W2 to 1099 -->
   <section class="study-slide" id="w2-to-1099">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Context</p>
-          <h2 class="slide-heading">Changing Contracts</h2>
-          <p class="slide-body slide-subtitle">
-            Revel Rideshare changed from salaried drivers to independent contractors, significantly changing driver
-            incentives and limiting operation's ability to control driver distribution.
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Context</p>
+        <h2 class="slide-heading">Changing Contracts</h2>
+        <p class="slide-body slide-subtitle">
+          Revel Rideshare changed from salaried drivers to independent contractors, significantly changing driver
+          incentives and limiting operation's ability to control driver distribution.
+        </p>
       </div>
-      <div class="w2-1099-diagram">
-        <div class="diagram-row">
+      <div class="lane-rows">
+        <div class="lane-row">
           <div class="slide-stagger-item study-card study-card--dashed">
             <div class="study-card-header">
-              <span class="employment-card-label">W2</span>
+              <span class="study-card-label">W2</span>
               <span class="study-card-tag">Employee</span>
             </div>
             <ul class="study-card-list">
@@ -87,22 +118,16 @@ const slides = [
             </ul>
           </div>
 
-          <div class="employment-arrow" aria-hidden="true">
-            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
-              <polyline
-                points="6,22 12,30 18,22"
-                stroke="currentColor"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="none"></polyline>
+          <div class="lane-switch" aria-hidden="true">
+            <span class="lane-switch-dashes"></span>
+            <svg class="lane-switch-chevron" viewBox="0 0 16 16" fill="none">
+              <path d="m5 3 5 5-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </div>
 
           <div class="slide-stagger-item study-card study-card--filled">
             <div class="study-card-header">
-              <span class="employment-card-label">1099</span>
+              <span class="study-card-label">1099</span>
               <span class="study-card-tag">Contractor</span>
             </div>
             <ul class="study-card-list">
@@ -122,10 +147,10 @@ const slides = [
           </div>
         </div>
 
-        <div class="diagram-row">
+        <div class="lane-row">
           <div class="slide-stagger-item study-card study-card--dashed">
             <div class="study-card-header">
-              <span class="employment-card-label">Mapbox</span>
+              <span class="study-card-label">Mapbox</span>
               <span class="study-card-tag">Before</span>
             </div>
             <ul class="study-card-list">
@@ -144,22 +169,16 @@ const slides = [
             </ul>
           </div>
 
-          <div class="employment-arrow" aria-hidden="true">
-            <svg class="employment-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
-              <polyline
-                points="6,22 12,30 18,22"
-                stroke="currentColor"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                fill="none"></polyline>
+          <div class="lane-switch" aria-hidden="true">
+            <span class="lane-switch-dashes"></span>
+            <svg class="lane-switch-chevron" viewBox="0 0 16 16" fill="none">
+              <path d="m5 3 5 5-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </div>
 
           <div class="slide-stagger-item study-card study-card--filled">
             <div class="study-card-header">
-              <span class="employment-card-label">Google Maps</span>
+              <span class="study-card-label">Google Maps</span>
               <span class="study-card-tag">After</span>
             </div>
             <ul class="study-card-list">
@@ -182,154 +201,120 @@ const slides = [
     </div>
   </section>
 
-  <!-- Slide 4: Drivers: Where & Why -->
+  <!-- Slide 3: Drivers: Where & Why -->
   <section class="study-slide" id="drivers">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Research</p>
-          <h2 class="slide-heading">Drivers: Where & Why</h2>
-          <p class="slide-body slide-subtitle">
-            Driver distribution is a complex problem space involving experience, financial incentives, traffic, weather,
-            and more. Along with my PM, I worked closely with drivers, operations, and analytics to better understand
-            where drivers were going.
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Research</p>
+        <h2 class="slide-heading">Drivers: Where &amp; Why</h2>
+        <p class="slide-body slide-subtitle">
+          Driver distribution is a complex problem space involving experience, financial incentives, traffic, weather,
+          and more. Along with my PM, I worked closely with drivers, operations, and analytics to better understand
+          where drivers were going.
+        </p>
       </div>
-      <div class="w2-1099-diagram">
-        <div class="diagram-row diagram-row--subgrid">
-          <div class="slide-stagger-item study-card study-card--dashed">
-            <div class="study-card-header">
-              <span class="employment-card-label">Interviews</span>
-              <span class="study-card-tag">Research</span>
-            </div>
-            <ul class="study-card-list">
-              <li>
-                <span class="study-card-category">Drivers</span>
-                New and experienced Revel drivers, some who had driven for competing platforms
-              </li>
-              <li>
-                <span class="study-card-category">Focus</span>
-                What were the most important factors in where drivers chose to position between rides
-              </li>
-            </ul>
-            <div class="card-finding">
-              <p class="study-quote">
-                "We had bonuses on the map where you got more rides, I followed sometimes, but I know the city"
-              </p>
-              <p class="study-cite">New Revel driver, 4 years at Uber</p>
-            </div>
+      <div class="research-grid">
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
+          <div class="study-card-header">
+            <span class="study-card-label"><span class="research-pin"></span>Interviews</span>
+            <span class="study-card-tag">Research</span>
           </div>
-          <div class="slide-stagger-item study-card study-card--dashed">
-            <div class="study-card-header">
-              <span class="employment-card-label">Operations</span>
-              <span class="study-card-tag">Observation</span>
-            </div>
-            <ul class="study-card-list">
-              <li>
-                <span class="study-card-category">Setting</span>
-                On-site sitting with operations team and maintenance teams
-              </li>
-              <li>
-                <span class="study-card-category">Focus</span>
-                Nuances of how operations used existing map and distribution tools so nothing would be lost in transition
-              </li>
-            </ul>
-            <div class="card-finding card-finding--flush">
-              <Image
-                src={OperationsMap}
-                alt="Revel operations map showing fleet distribution across the service area"
-                layout="full-width"
-                fit="cover"
-              />
-            </div>
+          <ul class="study-card-list">
+            <li>
+              <span class="study-card-category">Drivers</span>
+              New and experienced Revel drivers, some who had driven for competing platforms
+            </li>
+            <li>
+              <span class="study-card-category">Focus</span>
+              What were the most important factors in where drivers chose to position between rides
+            </li>
+          </ul>
+          <div class="card-finding">
+            <p class="study-quote">
+              "We had bonuses on the map where you got more rides, I followed sometimes, but I know the city"
+            </p>
+            <p class="study-cite">New Revel driver, 4 years at Uber</p>
           </div>
-          <div class="slide-stagger-item study-card study-card--dashed">
-            <div class="study-card-header">
-              <span class="employment-card-label">Analytics</span>
-              <span class="study-card-tag">Data</span>
-            </div>
-            <ul class="study-card-list">
-              <li>
-                <span class="study-card-category">Data</span>
-                Supply and demand distribution, zone supply response time, driver idle time
-              </li>
-              <li>
-                <span class="study-card-category">Focus</span>
-                What metrics were suffering from the new contractor model and which we should prioritize
-              </li>
-            </ul>
-            <div class="card-finding card-finding--chart">
-              <p class="chart-title">Zone supply response time</p>
-              <svg
-                class="chart-svg"
-                viewBox="0 0 300 115"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <line x1="0" y1="98" x2="300" y2="98" stroke="var(--study-border)" stroke-width="1"></line>
-                <line
-                  x1="0"
-                  y1="36"
-                  x2="300"
-                  y2="36"
-                  stroke="var(--study-border)"
-                  stroke-width="0.5"
-                  stroke-dasharray="3 3"
-                  opacity="0.6"></line>
-                <line
-                  x1="0"
-                  y1="67"
-                  x2="300"
-                  y2="67"
-                  stroke="var(--study-border)"
-                  stroke-width="0.5"
-                  stroke-dasharray="3 3"
-                  opacity="0.6"></line>
-                <path
-                  d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z"
-                  fill="var(--study-color)"
-                  opacity="0.07"></path>
-                <path
-                  d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85"
-                  stroke="var(--study-color)"
-                  stroke-width="2"
-                  stroke-linecap="round"></path>
-                <path
-                  d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87"
-                  stroke="#94a3b8"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-dasharray="4 2"></path>
-                <line
-                  x1="75"
-                  y1="31"
-                  x2="75"
-                  y2="98"
-                  stroke="var(--study-color)"
-                  stroke-width="1"
-                  stroke-dasharray="2 2"
-                  opacity="0.4"></line>
-                <line
-                  x1="218"
-                  y1="17"
-                  x2="218"
-                  y2="98"
-                  stroke="var(--study-color)"
-                  stroke-width="1"
-                  stroke-dasharray="2 2"
-                  opacity="0.4"></line>
-                <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="#94a3b8">7am</text>
-                <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">11am</text>
-                <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">3pm</text>
-                <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="#94a3b8">7pm</text>
-                <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="#94a3b8">11pm</text>
-              </svg>
-              <div class="chart-legend">
-                <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
-                <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
-              </div>
+        </div>
+
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
+          <div class="study-card-header">
+            <span class="study-card-label"><span class="research-pin"></span>Operations</span>
+            <span class="study-card-tag">Observation</span>
+          </div>
+          <ul class="study-card-list">
+            <li>
+              <span class="study-card-category">Setting</span>
+              On-site sitting with operations team and maintenance teams
+            </li>
+            <li>
+              <span class="study-card-category">Focus</span>
+              Nuances of how operations used existing map and distribution tools so nothing would be lost in transition
+            </li>
+          </ul>
+          <div class="card-finding card-finding--flush">
+            <Image
+              src={OperationsMap}
+              alt="Revel operations map showing fleet distribution across the service area"
+              layout="full-width"
+              fit="cover"
+            />
+          </div>
+        </div>
+
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
+          <div class="study-card-header">
+            <span class="study-card-label"><span class="research-pin"></span>Analytics</span>
+            <span class="study-card-tag">Data</span>
+          </div>
+          <ul class="study-card-list">
+            <li>
+              <span class="study-card-category">Data</span>
+              Supply and demand distribution, zone supply response time, driver idle time
+            </li>
+            <li>
+              <span class="study-card-category">Focus</span>
+              What metrics were suffering from the new contractor model and which we should prioritize
+            </li>
+          </ul>
+          <div class="card-finding card-finding--chart">
+            <p class="chart-title">Zone supply response time</p>
+            <svg class="chart-svg" viewBox="0 0 300 115" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="demand-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="var(--study-color)" stop-opacity="0.35"></stop>
+                  <stop offset="1" stop-color="var(--study-color)" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="98" x2="300" y2="98" stroke="currentColor" stroke-width="1" opacity="0.35"></line>
+              <line x1="0" y1="36" x2="300" y2="36" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.2"></line>
+              <line x1="0" y1="67" x2="300" y2="67" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.2"></line>
+              <path
+                d="M0,98 L0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85 L300,98 Z"
+                fill="url(#demand-fill)"></path>
+              <path
+                class="chart-line chart-line--demand"
+                d="M0,80 Q75,31 100,45 Q116,58 133,56 Q150,54 167,61 Q183,68 200,43 Q218,17 233,29 Q250,41 267,52 Q283,63 300,85"
+                stroke="var(--study-color)"
+                stroke-width="2"
+                stroke-linecap="round"></path>
+              <path
+                class="chart-line chart-line--supply"
+                d="M0,84 Q93,45 113,52 Q130,60 148,58 Q165,57 183,64 Q200,70 220,46 Q240,35 255,44 Q270,53 284,64 Q293,72 300,87"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-dasharray="4 2"
+                opacity="0.7"></path>
+              <text x="10" y="110" text-anchor="start" font-size="8" font-family="inherit" fill="currentColor" opacity="0.7">7am</text>
+              <text x="75" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="currentColor" opacity="0.7">11am</text>
+              <text x="150" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="currentColor" opacity="0.7">3pm</text>
+              <text x="225" y="110" text-anchor="middle" font-size="8" font-family="inherit" fill="currentColor" opacity="0.7">7pm</text>
+              <text x="290" y="110" text-anchor="end" font-size="8" font-family="inherit" fill="currentColor" opacity="0.7">11pm</text>
+            </svg>
+            <div class="chart-legend">
+              <span class="chart-legend-item chart-legend-item--demand">Rider demand</span>
+              <span class="chart-legend-item chart-legend-item--supply">Driver supply</span>
             </div>
           </div>
         </div>
@@ -337,9 +322,9 @@ const slides = [
     </div>
   </section>
 
-  <!-- Slide: Map Design System -->
+  <!-- Slide 4: Map Design System -->
   <section class="study-slide slide-design-system" id="map-design-system">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Scalability</p>
         <h2 class="slide-heading">Map Design System</h2>
@@ -354,7 +339,7 @@ const slides = [
         <div class="route-design">
           <p class="route-design-label">Operations</p>
           <div class="route-line route-line--ops">
-            <div class="route-track"></div>
+            <div class="route-track"><span class="route-sweep"></span></div>
             <span class="route-el route-dot route-dot--gray route-dot--lg" style="left: 2%"></span>
             <span class="route-el route-car" style="left: 22%">
               <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
@@ -368,32 +353,21 @@ const slides = [
         <div class="route-design">
           <p class="route-design-label">Driver / Ride Request + Traffic</p>
           <div class="route-line route-line--traffic">
-            <div class="route-track"></div>
+            <div class="route-track"><span class="route-sweep"></span></div>
             <span class="route-el route-car" style="left: 3%">
               <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
             </span>
             <span class="route-el route-action route-action--pickup" style="left: 32%">
               <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M7 12V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"
-                ></path>
-                <path
-                  d="M3.5 7.5L7 3.5L10.5 7.5"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
+                <path d="M7 12V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"></path>
+                <path d="M3.5 7.5L7 3.5L10.5 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </span>
             <span class="route-el route-dot route-dot--blue" style="left: 65%"></span>
             <span class="route-el route-action route-action--dropoff" style="left: 98%">
               <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M7 2V9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2.5"></path>
-                <path
-                  d="M3.5 6.5L7 10.5L10.5 6.5"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
+                <path d="M3.5 6.5L7 10.5L10.5 6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </span>
           </div>
@@ -403,7 +377,7 @@ const slides = [
         <div class="route-design">
           <p class="route-design-label">Driver / In-Ride</p>
           <div class="route-line route-line--inride">
-            <div class="route-track" style="left: 22%"></div>
+            <div class="route-track" style="left: 22%"><span class="route-sweep"></span></div>
             <span class="route-el route-car" style="left: 22%">
               <Image src={CarTopdown} alt="" width="64" height="64" layout="constrained" />
             </span>
@@ -415,11 +389,7 @@ const slides = [
             <span class="route-profile" style="left: 52%">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="8" r="3.5" stroke="white" stroke-width="2"></circle>
-                <path
-                  d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"></path>
+                <path d="M6 21C6 17.134 8.68629 14 12 14C15.3137 14 18 17.134 18 21" stroke="white" stroke-width="2" stroke-linecap="round"></path>
               </svg>
             </span>
             <span class="route-el route-dot route-dot--gray" style="left: 78%"></span>
@@ -431,20 +401,33 @@ const slides = [
   </section>
 
   <!-- Slide 5: Demanding Visualizations -->
-  <section class="study-slide slide-media-heavy" id="visualizations">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Exploration</p>
-          <h2 class="slide-heading">Demanding Visualizations</h2>
-          <p class="slide-body slide-subtitle">
-            Revel's data team had been using Uber's H3 hexagon spatial indexing to map supply/demand data. I was able to
-            take a snapshot of that data and translate it into vectors I could experiment with in Figma.
-          </p>
-        </div>
+  <section class="study-slide slide-visualizations" id="visualizations">
+    <svg class="hex-field" viewBox="0 0 1600 470" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><polygon id="demand-hex" points={hexPoints}></polygon></defs>
+      {
+        hexes.map((hex, i) => (
+          <use
+            href="#demand-hex"
+            x={hex.x}
+            y={hex.y}
+            class:list={['hex', { 'hex--hot': hex.weight > 0.82 }]}
+            style={`--hex-opacity: ${(0.02 + hex.weight * 0.1).toFixed(3)}; --hex-delay: ${((i % 17) * 0.42).toFixed(2)}s`}
+          />
+        ))
+      }
+    </svg>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Exploration</p>
+        <h2 class="slide-heading">Demanding Visualizations</h2>
+        <p class="slide-body slide-subtitle">
+          Revel's data team had been using Uber's H3 hexagon spatial indexing to map supply/demand data. I was able to
+          take a snapshot of that data and translate it into vectors I could experiment with in Figma.
+        </p>
       </div>
       <div class="carousel-tabs-wrap">
-        <div class="carousel-tabs">
+        <div class="carousel-tabs" style="--tab-index: 0">
+          <span class="carousel-tab-indicator" aria-hidden="true"></span>
           <button class="carousel-tab carousel-tab--active" data-target="carousel-mobile">Driver</button>
           <button class="carousel-tab" data-target="carousel-desktop">Operations</button>
         </div>
@@ -460,11 +443,11 @@ const slides = [
 
   <!-- Slide 6: Key Design Decisions -->
   <section class="study-slide slide-decisions" id="decisions">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Execution</p>
         <h2 class="slide-heading">Key Design Decisions</h2>
-        <p class="slide-body slide-subtitle decisions-subtitle">
+        <p class="slide-body slide-subtitle">
           Making the heatmap trustworthy and usable while driving involved more than visual design. Deciding which data
           levers would impact demand representation had a significant impact on how the map felt.
         </p>
@@ -518,11 +501,11 @@ const slides = [
 
   <!-- Slide 7: Results -->
   <section class="study-slide slide-results" id="results">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Outcomes</p>
         <h2 class="slide-heading">Results</h2>
-        <p class="slide-body slide-subtitle results-subtitle">
+        <p class="slide-body slide-subtitle">
           Reworking maps across Revel saw impacts in numerous areas of the business, but the most significant were in
           driver revenue and passenger wait times that soon recovered and exceeded pre-heatmap levels.
         </p>
@@ -577,9 +560,9 @@ const slides = [
     </div>
   </section>
 
-  <!-- Slide 9: What Comes Next -->
+  <!-- Slide 8: What Comes Next -->
   <section class="study-slide slide-next" id="next">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Future</p>
         <h2 class="slide-heading">What Comes Next</h2>
@@ -590,7 +573,7 @@ const slides = [
       </div>
       <div class="next-items">
         <div class="slide-stagger-item next-card">
-          <span class="study-viz-card-number">01</span>
+          <span class="next-card-pin">01</span>
           <h3 class="study-viz-card-title">Event Demand Alerts</h3>
           <p class="study-viz-card-body">
             Integrate public event schedules to surface upcoming demand spikes before they happen, suggest peak pickup
@@ -598,14 +581,14 @@ const slides = [
           </p>
         </div>
         <div class="slide-stagger-item next-card">
-          <span class="study-viz-card-number">02</span>
+          <span class="next-card-pin">02</span>
           <h3 class="study-viz-card-title">Street View Preview</h3>
           <p class="study-viz-card-body">
             Drivers and riders approaching a drop-off can preview the location to confirm they're in the right place
           </p>
         </div>
         <div class="slide-stagger-item next-card">
-          <span class="study-viz-card-number">03</span>
+          <span class="next-card-pin">03</span>
           <h3 class="study-viz-card-title">More Data Integration</h3>
           <p class="study-viz-card-body">
             Suggest upcoming appointments as destinations via Google Calendar, sync home and work addresses from Google
@@ -613,7 +596,7 @@ const slides = [
           </p>
         </div>
         <div class="slide-stagger-item next-card">
-          <span class="study-viz-card-number">04</span>
+          <span class="next-card-pin">04</span>
           <h3 class="study-viz-card-title">Advanced Data Tools</h3>
           <p class="study-viz-card-body">
             Build custom maps to surface new data insights and enhance the data team's visualization and prediction
@@ -629,268 +612,6 @@ const slides = [
   @use '../../../styles/scssVariables' as *;
 
   // ========================================
-  // Shared slide inner layouts
-  // ========================================
-
-  .slide-inner {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .slide-inner--centered {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-12);
-
-    .slide-header {
-      text-align: center;
-      padding-inline: var(--spacing-8);
-    }
-  }
-
-  .slide-inner--split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-14);
-    align-items: center;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-8);
-    }
-  }
-
-  .slide-inner--media-heavy {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--spacing-14);
-    align-items: center;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-8);
-    }
-  }
-
-  .slide-split--reversed .slide-inner--split {
-    direction: rtl;
-
-    > * {
-      direction: ltr;
-    }
-
-    @media (width < $breakpoint-lg) {
-      direction: ltr;
-    }
-  }
-
-  // ========================================
-  // Typography
-  // ========================================
-
-  .slide-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-  }
-
-  .slide-heading {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--study-heading);
-  }
-
-  .slide-header {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .slide-section-label {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--study-color);
-    line-height: 1.4;
-    margin-bottom: var(--spacing-4);
-  }
-
-  .slide-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-    margin-top: var(--spacing-5);
-
-    li {
-      font-size: clamp(0.9rem, 1.2vw, 1rem);
-      line-height: 1.6;
-      color: var(--study-text);
-      padding-left: var(--spacing-7);
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.65em;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--study-color);
-        opacity: 0.75;
-      }
-    }
-  }
-
-  // ========================================
-  // Media placeholders
-  // ========================================
-
-  .media-placeholder {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background-color: var(--study-bg-alt);
-    border: 1.5px dashed var(--study-border);
-    border-radius: 12px;
-    display: grid;
-    place-content: center;
-
-    &--wide {
-      aspect-ratio: 16 / 9;
-    }
-
-    &--muted {
-      opacity: 0.5;
-    }
-  }
-
-  .media-placeholder-label {
-    font-size: 0.8rem;
-    color: var(--study-text-muted);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-
-  // ========================================
-  // Slide 2: W2 to 1099 diagram
-  // ========================================
-
-  .w2-1099-diagram {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-6);
-    width: 100%;
-  }
-
-  .diagram-row {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    gap: var(--spacing-10);
-
-    @media (width < $breakpoint-lg) {
-      flex-direction: column;
-    }
-  }
-
-  .diagram-row--subgrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto 1fr;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
-      grid-template-rows: unset;
-    }
-
-    .study-card {
-      display: grid;
-      grid-row: span 3;
-      grid-template-rows: subgrid;
-      flex: unset;
-      gap: 0;
-
-      @media (width < $breakpoint-lg) {
-        grid-row: unset;
-        grid-template-rows: unset;
-        display: flex;
-        flex-direction: column;
-      }
-    }
-  }
-
-  .study-card {
-    flex: 1;
-  }
-
-  .employment-card-label {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--study-heading);
-    letter-spacing: -0.01em;
-
-    .study-card--filled & {
-      color: #fff;
-    }
-  }
-
-  .employment-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--study-color);
-    padding: 0 var(--spacing-1);
-    flex-shrink: 0;
-
-    @media (width < $breakpoint-lg) {
-      padding: var(--spacing-1) 0;
-    }
-  }
-
-  .employment-arrow-svg {
-    width: 20px;
-    height: 32px;
-    animation: arrow-bounce-h 1.6s ease-in-out infinite;
-
-    @media (width < $breakpoint-lg) {
-      animation-name: arrow-bounce;
-    }
-  }
-
-  @keyframes arrow-bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateY(4px);
-      opacity: 1;
-    }
-  }
-
-  @keyframes arrow-bounce-h {
-    0%,
-    100% {
-      transform: rotate(-90deg) translateY(0);
-      opacity: 0.6;
-    }
-    50% {
-      transform: rotate(-90deg) translateY(4px);
-      opacity: 1;
-    }
-  }
-
-  // ========================================
   // Slide 1: Hero
   // ========================================
 
@@ -899,13 +620,7 @@ const slides = [
     padding-bottom: 0;
 
     .slide-inner {
-      position: relative;
-      z-index: 1;
       gap: 0;
-    }
-
-    .slide-header {
-      text-align: center;
     }
 
     @media (width < $breakpoint-lg) {
@@ -913,72 +628,114 @@ const slides = [
     }
   }
 
-  .hero-label {
-    font-size: 0.75rem;
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--study-color);
-    margin-bottom: var(--spacing-4);
+    color: var(--study-text-muted);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .hero-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--study-color);
+    box-shadow: 0 0 10px hsl(from var(--study-color) h s l / 0.9);
+    animation: hero-blink 2.4s ease-in-out infinite;
+  }
+
+  @keyframes hero-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
   }
 
   .hero-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 6vw, 5rem);
-    font-weight: 500;
-    line-height: 1.05;
+    font-family: var(--font-body);
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1;
     color: var(--study-heading);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
   }
 
   .hero-meta {
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
     gap: var(--spacing-4);
-    margin-top: var(--spacing-6);
-    font-size: 1rem;
-    color: var(--study-text-muted);
-    font-weight: 400;
+    margin-top: var(--spacing-8);
   }
 
-  .hero-divider {
-    width: 24px;
-    height: 1.5px;
-    background: var(--study-border);
+  .hero-chip {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--study-text);
+    border: 1px solid var(--study-border);
+    background: var(--study-surface-glass);
+    border-radius: 99px;
+    padding: var(--spacing-3) var(--spacing-7);
   }
 
   .hero-summary {
-    max-width: 52ch;
+    max-width: 54ch;
     font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--study-text-muted);
-    font-weight: 500;
-    margin-top: var(--spacing-12);
+    margin-top: var(--spacing-10);
+    text-wrap: balance;
   }
-
-  // ========================================
-  // Slide 1: Hero visual
-  // ========================================
 
   .hero-visual {
     position: relative;
     width: 100%;
-    margin-top: var(--spacing-20);
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 1118 / 778;
+    max-width: 1100px;
+    margin-top: var(--spacing-12);
+    margin-bottom: -12%;
     flex-shrink: 1;
     min-height: 0;
-    margin-bottom: -10%;
     opacity: 0;
     translate: 0 40px;
-    box-shadow: 0 0 48px hsl(from var(--study-color) h s l / 0.25);
 
     @media (width < $breakpoint-lg) {
-      margin-top: var(--spacing-12);
       margin-bottom: 0;
     }
+  }
+
+  .hero-frame {
+    position: relative;
+    padding: 9px 9px 0;
+    border-radius: 22px 22px 0 0;
+    background: linear-gradient(to bottom, var(--study-bg-alt), transparent);
+    border: 1px solid var(--study-border);
+    border-bottom: none;
+    box-shadow:
+      0 0 0 1px hsl(from var(--study-color) h s l / 0.1),
+      0 -12px 90px hsl(from var(--study-color) h s l / 0.18);
+  }
+
+  .hero-screen {
+    position: relative;
+    border-radius: 14px 14px 0 0;
+    overflow: hidden;
+    aspect-ratio: 1118 / 778;
+  }
+
+  // Fades the map into the page instead of ending on a hard edge
+  .hero-scrim {
+    position: absolute;
+    inset: 45% 9px 0;
+    background: linear-gradient(to bottom, transparent, var(--study-bg) 92%);
+    pointer-events: none;
   }
 
   .hero-map-img {
@@ -987,6 +744,7 @@ const slides = [
     object-fit: cover;
     display: block;
     opacity: 0;
+    filter: saturate(0.75) brightness(0.8);
   }
 
   .hero-heatmap {
@@ -996,8 +754,284 @@ const slides = [
     height: 100%;
   }
 
+  .hero-sweep {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 40%,
+      hsl(from var(--study-color) h s l / 0.14) 50%,
+      transparent 60%
+    );
+    animation: hero-sweep 7s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes hero-sweep {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  .hero-caption {
+    position: absolute;
+    top: var(--spacing-6);
+    left: var(--spacing-6);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--study-heading);
+    background: rgba(6, 10, 18, 0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--study-border);
+    border-radius: 99px;
+    padding: var(--spacing-3) var(--spacing-6);
+  }
+
+  .hero-caption-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--study-color);
+    animation: hero-blink 2.4s ease-in-out infinite;
+  }
+
   // ========================================
-  // Slide: Map Design System - Route Lines
+  // Slide 2: Lane switch diagram
+  // ========================================
+
+  .lane-rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+    width: 100%;
+  }
+
+  .lane-row {
+    display: flex;
+    align-items: stretch;
+    gap: var(--spacing-8);
+
+    @media (width < $breakpoint-lg) {
+      flex-direction: column;
+    }
+  }
+
+  .lane-switch {
+    position: relative;
+    align-self: center;
+    flex-shrink: 0;
+    width: 88px;
+    height: 26px;
+    border-radius: 99px;
+    background: var(--study-road);
+    border: 1px solid var(--study-border);
+    overflow: hidden;
+    color: var(--study-color);
+
+    @media (width < $breakpoint-lg) {
+      rotate: 90deg;
+    }
+  }
+
+  .lane-switch-dashes {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(to right, var(--study-lane) 0 10px, transparent 10px 24px);
+    background-size: 24px 2px;
+    background-position: 0 center;
+    background-repeat: repeat-x;
+    opacity: 0.45;
+    animation: lane-flow 0.85s linear infinite;
+  }
+
+  @keyframes lane-flow {
+    to {
+      background-position: 24px center;
+    }
+  }
+
+  .lane-switch-chevron {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    translate: 0 -50%;
+    width: 14px;
+    height: 14px;
+    animation: lane-chevron 1.6s ease-in-out infinite;
+  }
+
+  @keyframes lane-chevron {
+    0%,
+    100% {
+      opacity: 0.45;
+      translate: -4px -50%;
+    }
+    50% {
+      opacity: 1;
+      translate: 0 -50%;
+    }
+  }
+
+  // ========================================
+  // Slide 3: Research cards
+  // ========================================
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 1fr;
+    gap: var(--spacing-6);
+    width: 100%;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+      grid-template-rows: unset;
+    }
+  }
+
+  .research-card {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    gap: 0;
+
+    @media (width < $breakpoint-lg) {
+      grid-row: unset;
+      grid-template-rows: unset;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .research-pin {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: var(--spacing-5);
+    border-radius: 50% 50% 50% 0;
+    rotate: -45deg;
+    background: var(--study-color);
+    box-shadow: 0 0 0 3px hsl(from var(--study-color) h s l / 0.18);
+    vertical-align: middle;
+  }
+
+  .card-finding {
+    padding: var(--spacing-7) var(--spacing-8);
+    border-top: 1px dashed var(--study-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .card-finding--flush {
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      filter: brightness(0.85) saturate(0.9);
+    }
+  }
+
+  .card-finding--chart {
+    gap: var(--spacing-4);
+    padding-inline: 0;
+    color: var(--study-text-muted);
+  }
+
+  .chart-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
+    padding: 0 var(--spacing-8);
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .chart-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: chart-draw 1.6s var(--ease-out-quart) forwards;
+  }
+
+  .chart-line--demand {
+    filter: drop-shadow(0 0 6px hsl(from var(--study-color) h s l / 0.5));
+  }
+
+  .chart-line--supply {
+    animation-delay: 0.25s;
+    stroke-dasharray: 4 2;
+    stroke-dashoffset: 0;
+    animation-name: chart-fade;
+  }
+
+  @keyframes chart-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes chart-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.7;
+    }
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: var(--spacing-8);
+    justify-content: center;
+  }
+
+  .chart-legend-item {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--study-text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+    }
+
+    &--demand::before {
+      background: var(--study-color);
+    }
+
+    &--supply::before {
+      background: repeating-linear-gradient(
+        to right,
+        var(--study-text-muted) 0 4px,
+        transparent 4px 6px
+      );
+    }
+  }
+
+  // ========================================
+  // Slide 4: Map design system route specimens
   // ========================================
 
   .route-designs {
@@ -1005,25 +1039,33 @@ const slides = [
     flex-direction: column;
     gap: var(--spacing-10);
     width: 100%;
-    max-width: 700px;
-    margin-top: var(--spacing-10);
-    padding-bottom: var(--spacing-8);
+    max-width: 760px;
+    padding: var(--spacing-12) var(--spacing-12) var(--spacing-14);
+    border: 1px solid var(--study-border);
+    border-radius: var(--study-radius);
+    background:
+      radial-gradient(ellipse at 50% 0%, hsl(from var(--study-color) h s l / 0.07), transparent 70%),
+      var(--study-surface-glass);
+
+    @media (width < $breakpoint-sm) {
+      padding-inline: var(--spacing-8);
+    }
   }
 
   .route-design-label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--study-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
     text-align: left;
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
   }
 
   .route-line {
     position: relative;
-    height: 72px;
+    height: 64px;
     width: 100%;
-    overflow: visible;
   }
 
   .route-track {
@@ -1031,9 +1073,38 @@ const slides = [
     top: 50%;
     left: 14px;
     right: 14px;
-    height: 6px;
+    height: 7px;
     transform: translateY(-50%);
-    border-radius: 3px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 4px var(--study-road);
+    overflow: hidden;
+  }
+
+  .route-sweep {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.55), transparent);
+    width: 22%;
+    translate: -120% 0;
+    animation: route-sweep 4.5s ease-in-out infinite;
+  }
+
+  .route-line--traffic .route-sweep {
+    animation-delay: 0.7s;
+  }
+
+  .route-line--inride .route-sweep {
+    animation-delay: 1.4s;
+  }
+
+  @keyframes route-sweep {
+    0% {
+      translate: -120% 0;
+    }
+    60%,
+    100% {
+      translate: 560% 0;
+    }
   }
 
   .route-el {
@@ -1044,34 +1115,31 @@ const slides = [
   }
 
   .route-dot {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
 
     &--gray {
-      background: white;
-      border: 6px solid #c4c9d1;
+      background: var(--study-bg-alt);
+      border: 5px solid #8b98ad;
     }
 
     &--blue {
-      background: white;
-      border: 6px solid #2874f0;
+      background: var(--study-bg-alt);
+      border: 5px solid var(--study-color);
+      box-shadow: 0 0 12px hsl(from var(--study-color) h s l / 0.5);
     }
 
     &--lg {
-      width: 28px;
-      height: 28px;
-    }
-
-    &--sm {
-      width: 20px;
-      height: 20px;
+      width: 26px;
+      height: 26px;
     }
   }
 
   .route-car {
     width: 64px;
     height: 64px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
 
     img {
       transform: rotate(90deg);
@@ -1079,8 +1147,8 @@ const slides = [
   }
 
   .route-action {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: grid;
     place-content: center;
@@ -1092,34 +1160,36 @@ const slides = [
 
     &--pickup {
       background: #10b981;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.45);
     }
 
     &--dropoff {
       background: #f97316;
+      box-shadow: 0 0 14px rgba(249, 115, 22, 0.45);
     }
   }
 
   .route-line--ops .route-track {
-    background: linear-gradient(to right, #c4c9d1 22%, #2874f0 22%, #2874f0 52%, #8fb8f8 52%);
+    background: linear-gradient(to right, #6b7688 22%, var(--study-color) 22%, var(--study-color) 52%, #1c6ea8 52%);
   }
 
   .route-line--traffic .route-track {
     background: linear-gradient(
       to right,
-      #2874f0 0%,
-      #2874f0 12%,
-      #db2777 18%,
-      #db2777 22%,
-      #2874f0 28%,
-      #2874f0 52%,
+      var(--study-color) 0%,
+      var(--study-color) 12%,
+      #f43f5e 18%,
+      #f43f5e 22%,
+      var(--study-color) 28%,
+      var(--study-color) 52%,
       #f59e0b 58%,
       #f59e0b 78%,
-      #2874f0 84%
+      var(--study-color) 84%
     );
   }
 
   .route-line--inride .route-track {
-    background: linear-gradient(to right, #2874f0 40%, #c4c9d1 40%);
+    background: linear-gradient(to right, var(--study-color) 40%, #6b7688 40%);
   }
 
   .route-pin {
@@ -1132,15 +1202,15 @@ const slides = [
   }
 
   .route-pin-head {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #10b981;
   }
 
   .route-pin-stem {
     width: 2px;
-    height: 14px;
+    height: 13px;
     background: #10b981;
   }
 
@@ -1152,8 +1222,8 @@ const slides = [
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: #104f91;
-    box-shadow: 0 0 0 18px rgba(79, 155, 248, 0.15);
+    background: hsl(from var(--study-color) h s calc(l * 0.45));
+    box-shadow: 0 0 0 16px hsl(from var(--study-color) h s l / 0.12);
     display: grid;
     place-content: center;
     z-index: 1;
@@ -1180,55 +1250,10 @@ const slides = [
   }
 
   // ========================================
-  // Slide 4: Research cards
+  // Slide 5: Demanding visualizations
   // ========================================
 
-  .research-items {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-  }
-
-  .research-card {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-5);
-    padding: var(--spacing-5) var(--spacing-6);
-    background: white;
-    border: 1px solid var(--study-border);
-    border-radius: 10px;
-    transition: border-color 0.2s ease;
-
-    &:hover {
-      border-color: var(--study-color);
-    }
-  }
-
-  .research-card-icon {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--study-color);
-    letter-spacing: 0.05em;
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    display: grid;
-    place-content: center;
-    border-radius: 50%;
-    background: hsl(from var(--study-color) h s l / 0.1);
-  }
-
-  .research-card-text {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--study-text);
-  }
-
-  // ========================================
-  // Slide 5: Demanding Visualizations
-  // ========================================
-
-  #visualizations {
+  .slide-visualizations {
     padding-inline: 0;
 
     .slide-inner {
@@ -1236,40 +1261,88 @@ const slides = [
     }
   }
 
+  .hex-field {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 55%;
+    width: 100%;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, #000 20%, transparent);
+  }
+
+  .hex {
+    fill: var(--study-color);
+    opacity: var(--hex-opacity);
+    stroke: var(--study-color);
+    stroke-width: 0.5;
+    stroke-opacity: 0.12;
+  }
+
+  .hex--hot {
+    animation: hex-pulse 5s ease-in-out infinite;
+    animation-delay: var(--hex-delay);
+  }
+
+  @keyframes hex-pulse {
+    0%,
+    100% {
+      opacity: var(--hex-opacity);
+    }
+    50% {
+      opacity: calc(var(--hex-opacity) + 0.22);
+    }
+  }
+
   .carousel-tabs-wrap {
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .carousel-tabs {
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 160px));
     justify-content: center;
-    gap: var(--spacing-3);
-    padding-inline: var(--page-gutter);
-    padding-bottom: var(--spacing-4);
+    margin-inline: auto;
+    width: fit-content;
+    padding: 4px;
+    border: 1px solid var(--study-border);
+    border-radius: 99px;
+    background: var(--study-surface-glass);
+    backdrop-filter: blur(8px);
+  }
+
+  .carousel-tab-indicator {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc((100% - 8px) / 2);
+    border-radius: 99px;
+    background: hsl(from var(--study-color) h s l / 0.18);
+    border: 1px solid hsl(from var(--study-color) h s l / 0.5);
+    translate: calc(var(--tab-index) * 100%) 0;
+    transition: translate 0.35s var(--ease-out-quart);
   }
 
   .carousel-tab {
-    background: none;
-    border: 1.5px solid var(--study-border);
-    border-radius: 999px;
-    padding: var(--spacing-4) var(--spacing-10);
+    position: relative;
+    padding: var(--spacing-5) var(--spacing-8);
     font-family: inherit;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--study-text-muted);
     cursor: pointer;
-    transition: 0.15s ease;
-    transition-property: background, color, border-color;
+    border-radius: 99px;
+    transition: color 0.2s ease;
 
-    &:not(&--active):hover {
-      border-color: var(--study-color);
-      color: var(--study-heading);
+    &:hover {
+      color: var(--study-text);
     }
 
     &--active {
-      background: hsl(from var(--study-color) h s l / 0.18);
-      border-color: var(--study-color);
-      color: hsl(from var(--study-color) h s calc(l * 0.75));
+      color: var(--study-heading);
     }
   }
 
@@ -1277,33 +1350,25 @@ const slides = [
     display: none;
   }
 
-  // ========================================
-  // Slide 6: Decision cards
-  // ========================================
-
-  .decision-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-    width: 100%;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
-    }
+  // Keep the exploration screens inside the slide no matter the viewport height
+  .carousel-panel :global(.study-carousel) {
+    padding-block: var(--spacing-10);
   }
 
-  .decision-card-viz {
-    height: 400px;
+  .carousel-panel :global(.study-carousel-image) {
+    height: clamp(220px, 42vh, 520px);
+    width: auto;
+  }
+
+  .carousel-panel :global(.study-carousel-item) {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   }
 
   // ========================================
-  // Slide 8: Results / Stats
+  // Slide 6 + 7: Decision and result cards
   // ========================================
 
-  .results-subtitle {
-    margin-bottom: var(--spacing-8);
-  }
-
+  .decision-cards,
   .results-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1315,151 +1380,143 @@ const slides = [
     }
   }
 
+  .decision-card-viz {
+    height: clamp(220px, 32vh, 360px);
+
+    > :global(*) {
+      height: 100%;
+      min-height: 0;
+    }
+  }
+
   .result-card-viz {
-    height: 280px;
+    height: clamp(160px, 24vh, 250px);
+  }
+
+  .slide-results .slide-inner {
+    gap: var(--spacing-10);
   }
 
   .result-blockquote {
     max-width: 640px;
-    text-align: center;
-    padding: var(--spacing-8) var(--spacing-10);
+    text-align: left;
     margin: 0;
 
     .study-quote {
-      font-size: 1.25rem;
-      line-height: 1.7;
-      color: var(--study-heading);
+      font-size: 1.15rem;
       text-wrap: balance;
     }
 
     .study-cite {
       display: block;
       margin-top: var(--spacing-4);
-      font-size: 0.8rem;
-      font-style: normal;
-      font-weight: 600;
-      letter-spacing: 0.04em;
     }
   }
 
   // ========================================
-  // Slide 9: What Comes Next
+  // Slide 8: What comes next
   // ========================================
 
   .next-items {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-6);
     width: 100%;
-    max-width: 800px;
-    margin-top: var(--spacing-6);
+    margin-top: var(--spacing-8);
 
-    @media (width < $breakpoint-md) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 12.5%;
+      right: 12.5%;
+      border-top: 2px dashed var(--study-border-strong);
+    }
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-10) var(--spacing-6);
+
+      &::before {
+        display: none;
+      }
+    }
+
+    @media (width < $breakpoint-sm) {
       grid-template-columns: 1fr;
     }
   }
 
   .next-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: var(--spacing-8);
-    background: white;
+    padding: var(--spacing-11) var(--spacing-7) var(--spacing-8);
     border: 1px solid var(--study-border);
-    border-radius: 10px;
+    border-radius: var(--study-radius);
+    background: var(--study-surface-glass);
+    backdrop-filter: blur(6px);
   }
 
-  // ========================================
-  // Slide 4: Card findings (inside driver cards)
-  // ========================================
-
-  .card-finding {
-    padding: var(--spacing-6) var(--spacing-8);
-    border-top: 1px dashed var(--study-border);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
+  .next-card-pin {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% -50%;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--study-color);
+    background: var(--study-bg-alt);
+    border: 1px solid hsl(from var(--study-color) h s l / 0.45);
+    box-shadow: 0 0 16px hsl(from var(--study-color) h s l / 0.25);
   }
 
-  .card-finding--flush {
-    padding: 0;
-    border-top: 1px dashed var(--study-border);
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-  }
-
-  .card-finding--chart {
-    gap: var(--spacing-3);
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .chart-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--study-text);
-    margin: 0;
-    padding: 0 var(--spacing-8);
-  }
-
-  .chart-svg {
-    width: 100%;
-    height: auto;
-  }
-
-  .chart-legend {
-    display: flex;
-    gap: var(--spacing-8);
-    justify-content: center;
-  }
-
-  .chart-legend-item {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #6b7280;
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2);
-
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 2px;
+  @media (prefers-reduced-motion: reduce) {
+    .hero-sweep,
+    .hex--hot,
+    .route-sweep,
+    .lane-switch-dashes,
+    .lane-switch-chevron,
+    .hero-eyebrow-dot,
+    .hero-caption-pulse {
+      animation: none;
     }
 
-    &.chart-legend-item--demand::before {
-      background: var(--study-color);
-    }
-
-    &.chart-legend-item--supply::before {
-      background: repeating-linear-gradient(to right, #94a3b8 0, #94a3b8 4px, transparent 4px, transparent 6px);
+    .chart-line {
+      stroke-dashoffset: 0;
+      animation: none;
     }
   }
 </style>
 
 <script>
   // Carousel tabs
-  document.querySelectorAll<HTMLElement>('.carousel-tab').forEach((tab) => {
+  document.querySelectorAll<HTMLElement>('.carousel-tab').forEach((tab, index) => {
     tab.addEventListener('click', () => {
       const wrap = tab.closest('.carousel-tabs-wrap')
-      if (!wrap) return
+      const tabs = tab.closest('.carousel-tabs') as HTMLElement | null
+      if (!wrap || !tabs) return
       const targetId = tab.dataset.target
+      const tabIndex = Array.from(tabs.querySelectorAll('.carousel-tab')).indexOf(tab)
       wrap.querySelectorAll<HTMLElement>('.carousel-tab').forEach((t) => t.classList.remove('carousel-tab--active'))
       wrap.querySelectorAll<HTMLElement>('.carousel-panel').forEach((p) => p.classList.add('carousel-panel--hidden'))
       tab.classList.add('carousel-tab--active')
+      tabs.style.setProperty('--tab-index', String(tabIndex))
       wrap.querySelector<HTMLElement>(`#${targetId}`)?.classList.remove('carousel-panel--hidden')
     })
   })
 </script>
 
 <script>
-  import { animate, stagger, inView } from 'motion'
+  import { animate, inView } from 'motion'
 
   const heroSection = document.getElementById('hero')
   if (heroSection) {
@@ -1511,8 +1568,6 @@ const slides = [
         const progressLength = progressRoute.getTotalLength()
         progressRoute.style.strokeDasharray = `${progressLength}`
         progressRoute.style.strokeDashoffset = `${progressLength}`
-
-        const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
         // 0. Hero visual slides up and fades in
         const heroVisual = heroSection.querySelector('.hero-visual') as HTMLElement

@@ -1,0 +1,408 @@
+---
+import { Icon } from 'astro-icon/components'
+
+const { class: className, ...rest } = Astro.props
+
+// Three searches the hero types through, drawn from the same shape of farm
+// records the real platform indexes: zones, batches, shipments, tasks, reports.
+const searches = [
+  {
+    query: 'roma',
+    results: [
+      { icon: 'artemis/zone', title: 'Tomato Flats', meta: 'Riverbend Agricultural · 800 acres', type: 'Zone' },
+      { icon: 'artemis/harvest', title: 'Roma Tomatoes — Plum Regal', meta: 'batch-003 · harvested', type: 'Batch' },
+      { icon: 'artemis/document', title: 'RBA-TOM-2025-0410', meta: 'Del Monte Processing · delivered', type: 'Shipment' },
+    ],
+  },
+  {
+    query: 'block a',
+    results: [
+      { icon: 'artemis/zone', title: 'Block A — North', meta: 'Willow Creek Organics · 320 acres', type: 'Zone' },
+      { icon: 'artemis/task', title: 'Irrigation check — Block A', meta: 'Due Dec 12 · drip lines', type: 'Task' },
+      { icon: 'artemis/chart', title: 'Yield per plant — Block A', meta: 'Last 90 days', type: 'Report' },
+    ],
+  },
+  {
+    query: 'berry',
+    results: [
+      { icon: 'artemis/zone', title: 'Berry Rows 1–40', meta: 'Sunnyside Produce Co. · 180 acres', type: 'Zone' },
+      { icon: 'artemis/harvest', title: 'Albion Strawberries', meta: 'batch-004 · harvesting', type: 'Batch' },
+      { icon: 'artemis/calendar', title: 'Pick crew schedule', meta: 'Week of Nov 24 · 12 workers', type: 'Task' },
+    ],
+  },
+]
+
+// Field of plots behind the search bar
+const plotCols = 14
+const plotRows = 6
+const plots = Array.from({ length: plotRows }, (_, row) =>
+  Array.from({ length: plotCols }, (_, col) => {
+    const weight = Math.abs((Math.sin(row * 27.13 + col * 91.7) * 9871.23) % 1)
+    return { x: col * 76, y: row * 56, weight, delay: ((row * plotCols + col) % 11) * 0.7 }
+  }),
+).flat()
+---
+
+<div class:list={['search-hero', className]} data-searches={JSON.stringify(searches)} {...rest}>
+  <svg class="search-field" viewBox="0 0 1050 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    {
+      plots.map((plot) => (
+        <rect
+          class:list={['search-plot', { 'search-plot--lush': plot.weight > 0.75 }]}
+          x={plot.x}
+          y={plot.y}
+          width="64"
+          height="44"
+          rx="4"
+          style={`--plot-opacity: ${(0.07 + plot.weight * 0.28).toFixed(3)}; --plot-delay: ${plot.delay}s`}
+        />
+      ))
+    }
+  </svg>
+
+  <div class="search-stage">
+    <div class="search-bar">
+      <svg class="search-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
+      </svg>
+      <span class="search-typed" data-search-typed></span>
+      <span class="search-caret" aria-hidden="true"></span>
+      <span class="search-hint">Search this farm</span>
+    </div>
+
+    <ul class="search-results" role="list">
+      {
+        searches[0].results.map((_, row) => (
+          <li class="search-result">
+            <span class="search-result-icon">
+              {searches.map((search, index) => (
+                <Icon
+                  name={search.results[row].icon}
+                  class:list={['search-result-glyph', { 'is-active': index === 0 }]}
+                  data-glyph-for={index}
+                />
+              ))}
+            </span>
+            <span class="search-result-text">
+              <span class="search-result-title" data-result-title />
+              <span class="search-result-meta" data-result-meta />
+            </span>
+            <span class="search-result-type" data-result-type />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  type Result = { icon: string; title: string; meta: string; type: string }
+
+  function initSearchHero() {
+    const hero = document.querySelector('.search-hero') as HTMLElement | null
+    if (!hero) return
+
+    const searches: { query: string; results: Result[] }[] = JSON.parse(hero.dataset.searches ?? '[]')
+    if (!searches.length) return
+
+    const typed = hero.querySelector('[data-search-typed]') as HTMLElement
+    const rows = Array.from(hero.querySelectorAll('.search-result')) as HTMLElement[]
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const paint = (searchIndex: number) => {
+      const results = searches[searchIndex].results
+      rows.forEach((row, i) => {
+        const result = results[i]
+        if (!result) return
+        row.querySelectorAll<HTMLElement>('.search-result-glyph').forEach((glyph) => {
+          glyph.classList.toggle('is-active', glyph.dataset.glyphFor === String(searchIndex))
+        })
+        ;(row.querySelector('[data-result-title]') as HTMLElement).textContent = result.title
+        ;(row.querySelector('[data-result-meta]') as HTMLElement).textContent = result.meta
+        ;(row.querySelector('[data-result-type]') as HTMLElement).textContent = result.type
+      })
+    }
+
+    if (reduced) {
+      typed.textContent = searches[0].query
+      paint(0)
+      rows.forEach((row) => row.classList.add('is-visible'))
+      return
+    }
+
+    let cancelled = false
+    const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    async function run() {
+      let index = 0
+      while (!cancelled) {
+        const searchIndex = index % searches.length
+        const search = searches[searchIndex]
+
+        // Type the query one character at a time
+        for (let i = 1; i <= search.query.length; i++) {
+          if (cancelled) return
+          typed.textContent = search.query.slice(0, i)
+          await wait(105)
+        }
+
+        await wait(260)
+        if (cancelled) return
+
+        // Results sprout in
+        paint(searchIndex)
+        for (const row of rows) {
+          if (cancelled) return
+          row.classList.add('is-visible')
+          await wait(110)
+        }
+
+        await wait(2400)
+        if (cancelled) return
+
+        // Results retract, then the query is deleted
+        for (let i = rows.length - 1; i >= 0; i--) {
+          rows[i].classList.remove('is-visible')
+          await wait(70)
+        }
+        await wait(220)
+
+        for (let i = search.query.length; i >= 0; i--) {
+          if (cancelled) return
+          typed.textContent = search.query.slice(0, i)
+          await wait(45)
+        }
+
+        await wait(500)
+        index++
+      }
+    }
+
+    let running = false
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !running) {
+        running = true
+        run()
+      }
+    })
+    observer.observe(hero)
+
+    return () => {
+      cancelled = true
+      observer.disconnect()
+    }
+  }
+
+  let cleanup: (() => void) | undefined
+
+  function init() {
+    cleanup?.()
+    cleanup = initSearchHero() ?? undefined
+  }
+
+  init()
+  document.addEventListener('astro:after-swap', init)
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.()
+    cleanup = undefined
+  })
+</script>
+
+<style lang="scss">
+  @use '../../../styles/scssVariables' as *;
+
+  .search-hero {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-field {
+    position: absolute;
+    inset: -80px -220px -40px;
+    width: auto;
+    height: auto;
+    mask-image: radial-gradient(ellipse 55% 60% at 50% 45%, #000 20%, transparent 75%);
+  }
+
+  .search-plot {
+    fill: var(--study-leaf);
+    opacity: var(--plot-opacity);
+  }
+
+  .search-plot--lush {
+    animation: plot-breathe 6s ease-in-out infinite;
+    animation-delay: var(--plot-delay);
+  }
+
+  @keyframes plot-breathe {
+    0%,
+    100% {
+      opacity: var(--plot-opacity);
+    }
+    50% {
+      opacity: calc(var(--plot-opacity) + 0.22);
+    }
+  }
+
+  .search-stage {
+    position: relative;
+    width: 100%;
+  }
+
+  .search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-5);
+    padding: var(--spacing-6) var(--spacing-8);
+    background: var(--study-surface);
+    border: 1px solid var(--study-border-strong);
+    border-radius: 99px;
+    box-shadow:
+      0 1px 0 var(--study-border-strong),
+      0 12px 30px rgba(60, 45, 25, 0.08);
+  }
+
+  .search-bar-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--study-color);
+  }
+
+  .search-typed {
+    font-size: 1.05rem;
+    color: var(--study-heading);
+    white-space: pre;
+  }
+
+  .search-caret {
+    width: 1.5px;
+    height: 1.15rem;
+    background: var(--study-color);
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+
+  @keyframes caret-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .search-hint {
+    font-size: 1.05rem;
+    color: var(--study-text-muted);
+    margin-left: var(--spacing-3);
+
+    .search-typed:not(:empty) ~ & {
+      display: none;
+    }
+  }
+
+  // Height is reserved so the layout doesn't shift as results come and go
+  .search-results {
+    list-style: none;
+    margin: var(--spacing-5) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    min-height: 186px;
+  }
+
+  .search-result {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    padding: var(--spacing-5) var(--spacing-7);
+    background: var(--study-surface);
+    border: 1px solid var(--study-border);
+    border-radius: var(--study-radius);
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.9);
+    transform-origin: top center;
+    transition:
+      opacity 0.28s ease,
+      transform 0.35s var(--ease-out-back);
+
+    &.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .search-result-icon {
+    display: grid;
+    place-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    color: var(--study-leaf);
+    background: color-mix(in srgb, var(--study-leaf) 12%, transparent);
+  }
+
+  .search-result-glyph {
+    grid-area: 1 / 1;
+    width: 17px;
+    height: 17px;
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  .search-result-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    flex: 1;
+    text-align: left;
+  }
+
+  .search-result-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--study-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-meta {
+    font-size: 0.75rem;
+    color: var(--study-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-type {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-color);
+    border: 1px solid hsl(from var(--study-color) h s l / 0.35);
+    border-radius: 99px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search-caret,
+    .search-plot--lush {
+      animation: none;
+    }
+  }
+</style>

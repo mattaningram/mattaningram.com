@@ -1,0 +1,357 @@
+---
+export interface Props {
+  slides: Array<{ id: string; title: string }>
+}
+
+const { slides, ...rest } = Astro.props
+const total = String(slides.length).padStart(2, '0')
+---
+
+<div class="field-nav-wrap" {...rest}>
+  <nav class="field-nav" aria-label="Slide navigation">
+    <p class="field-count"><span class="field-count-current">01</span><span>/{total}</span></p>
+
+    <div class="field-plot">
+      <div class="field-stem">
+        <div class="field-stem-grown"></div>
+      </div>
+
+      <ol class="field-stops">
+        {
+          slides.map((slide, index) => (
+            <li class:list={['field-stop', { 'is-current': index === 0 }]}>
+              <a
+                href={`#${slide.id}`}
+                class:list={['study-nav-dot', 'field-stop-link', { active: index === 0 }]}
+                data-slide-index={index}
+              >
+                <span class="field-node">
+                  <svg class="field-sprout" viewBox="0 0 24 16" aria-hidden="true">
+                    <path class="field-leaf field-leaf--left" d="M11 14C11 8 7 3 1 3c0 6 4 11 10 11Z" />
+                    <path class="field-leaf field-leaf--right" d="M13 14c0-6 4-11 10-11 0 6-4 11-10 11Z" />
+                  </svg>
+                  <span class="field-seed" />
+                </span>
+                <span class="field-stop-label">{slide.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+</div>
+
+<div class="field-row" aria-hidden="true">
+  <div class="field-row-track"><div class="field-row-fill"></div></div>
+  <p class="field-row-label">
+    <span class="field-row-title">{slides[0]?.title}</span>
+    <span><span class="field-count-current">01</span>/{total}</span>
+  </p>
+</div>
+
+<script>
+  function initFieldNav() {
+    const nav = document.querySelector('.field-nav') as HTMLElement | null
+    if (!nav) return
+
+    const stops = Array.from(nav.querySelectorAll('.field-stop')) as HTMLElement[]
+    const stem = nav.querySelector('.field-stem') as HTMLElement
+    const grown = nav.querySelector('.field-stem-grown') as HTMLElement
+    const rowFill = document.querySelector('.field-row-fill') as HTMLElement | null
+    const rowTitle = document.querySelector('.field-row-title') as HTMLElement | null
+    const counters = Array.from(document.querySelectorAll('.field-count-current')) as HTMLElement[]
+
+    const onSlide = (event: Event) => {
+      const { index, total, id } = (event as CustomEvent).detail as { index: number; total: number; id: string }
+
+      stops.forEach((stop, i) => {
+        stop.classList.toggle('is-past', i < index)
+        stop.classList.toggle('is-current', i === index)
+      })
+
+      counters.forEach((el) => (el.textContent = String(index + 1).padStart(2, '0')))
+
+      const node = stops[index]?.querySelector('.field-node') as HTMLElement
+      if (node && stem && grown) {
+        const stemRect = stem.getBoundingClientRect()
+        const nodeRect = node.getBoundingClientRect()
+        const scale = stemRect.height / stem.offsetHeight || 1
+        const offset = (nodeRect.top + nodeRect.height / 2 - stemRect.top) / scale
+        grown.style.height = `${Math.max(0, offset)}px`
+      }
+
+      if (rowFill) rowFill.style.width = `${((index + 1) / total) * 100}%`
+      if (rowTitle) {
+        const heading = document.querySelector(`#${id} .slide-heading, #${id} .hero-title`)
+        if (heading?.textContent) rowTitle.textContent = heading.textContent.trim()
+      }
+    }
+
+    document.addEventListener('study:slide', onSlide)
+    return () => document.removeEventListener('study:slide', onSlide)
+  }
+
+  let cleanup: (() => void) | undefined
+
+  function init() {
+    cleanup?.()
+    cleanup = initFieldNav() ?? undefined
+  }
+
+  init()
+  document.addEventListener('astro:after-swap', init)
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.()
+    cleanup = undefined
+  })
+</script>
+
+<style lang="scss">
+  @use '../../styles/scssVariables' as *;
+
+  .field-nav-wrap {
+    --stop-height: 2.75rem;
+    --stem-width: 2px;
+    --node-size: 24px;
+
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    padding-left: var(--spacing-9);
+
+    @media (width < $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  .field-nav {
+    position: relative;
+    transform: scale(0.8);
+    transform-origin: left center;
+    transition: transform 0.35s var(--ease-out-quart);
+
+    .field-nav-wrap:hover & {
+      transform: scale(1);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -40px -64px;
+      border-radius: 80px;
+      background: radial-gradient(ellipse at left center, var(--study-bg) 45%, transparent 75%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: -1;
+    }
+
+    .field-nav-wrap:hover &::before {
+      opacity: 1;
+    }
+  }
+
+  .field-count {
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--study-text-muted);
+    margin-bottom: var(--spacing-6);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .field-count-current {
+    color: var(--study-color);
+    font-weight: 600;
+  }
+
+  .field-plot {
+    position: relative;
+  }
+
+  .field-stem {
+    position: absolute;
+    left: calc(var(--node-size) / 2);
+    top: calc(var(--stop-height) / 2);
+    bottom: calc(var(--stop-height) / 2);
+    width: var(--stem-width);
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--study-soil) 40%, transparent) 0 4px,
+      transparent 4px 9px
+    );
+  }
+
+  .field-stem-grown {
+    width: 100%;
+    height: 0;
+    border-radius: 99px;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--study-leaf) 55%, transparent), var(--study-leaf));
+    transition: height 0.55s var(--ease-out-quart);
+  }
+
+  .field-stops {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+
+  .field-stop-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    height: var(--stop-height);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .field-node {
+    position: relative;
+    width: var(--node-size);
+    height: var(--node-size);
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+  }
+
+  .field-seed {
+    width: 7px;
+    height: 7px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--study-bg);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--study-soil) 45%, transparent);
+    transform: rotate(-45deg);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.4s var(--ease-out-back);
+
+    .is-past &,
+    .is-current & {
+      background: var(--study-leaf);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--study-leaf) 30%, transparent);
+    }
+
+    .is-current & {
+      background: var(--study-color);
+      box-shadow: 0 0 0 3px hsl(from var(--study-color) h s l / 0.25);
+      transform: rotate(-45deg) scale(1.15);
+    }
+
+    .field-stop-link:hover & {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--study-leaf) 45%, transparent);
+    }
+  }
+
+  .field-sprout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .field-leaf {
+    fill: var(--study-leaf);
+    transform-origin: 12px 14px;
+    scale: 0;
+    opacity: 0;
+    transition:
+      scale 0.45s var(--ease-out-back),
+      opacity 0.3s ease;
+
+    .is-past &,
+    .is-current & {
+      scale: 1;
+      opacity: 0.85;
+    }
+
+    &--right {
+      transition-delay: 0.08s;
+    }
+  }
+
+  .field-stop-label {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    color: var(--study-text-muted);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      color 0.25s ease;
+
+    .field-nav-wrap:hover & {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: 0.12s;
+    }
+
+    .is-current & {
+      color: var(--study-heading);
+    }
+
+    .field-stop-link:hover & {
+      color: var(--study-color);
+    }
+  }
+
+  // ========================================
+  // Mobile planting row
+  // ========================================
+
+  .field-row {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column-reverse;
+    gap: var(--spacing-3);
+    padding: var(--spacing-8) var(--spacing-8) calc(var(--spacing-5) + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--study-bg) 60%, transparent);
+
+    @media (width < $breakpoint-md) {
+      display: flex;
+    }
+  }
+
+  .field-row-track {
+    height: 3px;
+    background: repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--study-soil) 35%, transparent) 0 5px,
+      transparent 5px 11px
+    );
+  }
+
+  .field-row-fill {
+    height: 100%;
+    width: 12.5%;
+    border-radius: 99px;
+    background: var(--study-leaf);
+    transition: width 0.55s var(--ease-out-quart);
+  }
+
+  .field-row-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--study-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .field-row-title {
+    color: var(--study-heading);
+  }
+</style>

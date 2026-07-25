@@ -1,0 +1,121 @@
+---
+const { class: className, ...rest } = Astro.props
+---
+
+<div class:list={['field-backdrop', className]} aria-hidden="true" {...rest}>
+  <div class="field-grain"></div>
+  <svg
+    class="field-contours"
+    viewBox="0 0 1600 1000"
+    preserveAspectRatio="xMidYMid slice"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g class="field-contour-lines">
+      <path d="M-40 210 C 260 130, 520 250, 820 186 S 1360 60, 1660 130"></path>
+      <path d="M-40 280 C 260 204, 520 320, 820 258 S 1360 138, 1660 204"></path>
+      <path d="M-40 352 C 260 280, 520 392, 820 332 S 1360 216, 1660 280"></path>
+      <path d="M-40 700 C 300 780, 600 660, 900 726 S 1380 850, 1660 780"></path>
+      <path d="M-40 772 C 300 848, 600 732, 900 796 S 1380 916, 1660 850"></path>
+      <path d="M-40 846 C 300 918, 600 806, 900 868 S 1380 984, 1660 922"></path>
+    </g>
+    <g class="field-motes">
+      <circle cx="180" cy="880" r="3"></circle>
+      <circle cx="520" cy="940" r="2.5"></circle>
+      <circle cx="960" cy="900" r="3.5"></circle>
+      <circle cx="1310" cy="960" r="2.5"></circle>
+      <circle cx="1480" cy="880" r="3"></circle>
+    </g>
+  </svg>
+</div>
+
+<style lang="scss">
+  .field-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 13px,
+        color-mix(in srgb, var(--study-soil) 6%, transparent) 13px 14px
+      ),
+      radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, var(--study-leaf) 10%, transparent), transparent 70%),
+      radial-gradient(
+        ellipse 70% 45% at 50% 110%,
+        hsl(from var(--study-color) h s l / 0.07),
+        transparent 70%
+      ),
+      var(--study-bg);
+  }
+
+  .field-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23g)' opacity='0.42'/></svg>");
+  }
+
+  .field-contours {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .field-contour-lines path {
+    fill: none;
+    stroke: var(--study-soil);
+    stroke-width: 1.5;
+    opacity: 0.09;
+  }
+
+  .field-motes circle {
+    fill: var(--study-leaf);
+    opacity: 0.22;
+    animation: field-float 22s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-duration: 30s;
+      animation-delay: -6s;
+    }
+
+    &:nth-child(3) {
+      animation-duration: 26s;
+      animation-delay: -14s;
+    }
+
+    &:nth-child(4) {
+      animation-duration: 34s;
+      animation-delay: -3s;
+    }
+
+    &:nth-child(5) {
+      animation-duration: 28s;
+      animation-delay: -20s;
+    }
+  }
+
+  @keyframes field-float {
+    from {
+      transform: translate3d(0, 40px, 0);
+      opacity: 0;
+    }
+    20%,
+    75% {
+      opacity: 0.22;
+    }
+    to {
+      transform: translate3d(60px, -900px, 0);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .field-motes {
+      display: none;
+    }
+  }
+</style>

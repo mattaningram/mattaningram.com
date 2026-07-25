@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
 import StudyLayout from '@layouts/StudyLayout.astro'
-import StudyNav from '@components/StudyNav.astro'
+import FieldNav from '@components/study/FieldNav.astro'
+import SearchHero from '@media/artemis/search/SearchHero.astro'
 import smallFarm from '../../../media/artemis/search/artemis-small-farm.jpg'
 import enterpriseFarm from '../../../media/artemis/search/artemis-enterprise-farm.jpg'
 import farmVisit from '../../../media/artemis/search/artemis-farm-visit.jpeg'
@@ -43,96 +43,46 @@ const slides = [
 ]
 ---
 
-<StudyLayout title="Artemis Search" color="rgb(255, 64, 22)" slides={slides}>
-  <StudyNav slides={slides} slot="nav" />
+<StudyLayout title="Artemis Search" color="rgb(255, 64, 22)" theme="field" slides={slides}>
+  <FieldNav slides={slides} slot="nav" />
 
   <!-- Slide 1: Hero -->
   <section class="study-slide slide-hero" id="hero">
-    <div class="slide-inner slide-inner--centered">
-      <div class="hero-visual">
-        <div class="hero-search-wrapper">
-          <div class="hero-search-icons">
-            <Icon name="artemis/zone" class="hero-orbit-icon" style="--ring-x: -280px; --ring-y: -130px; --delay: 4s" />
-            <Icon
-              name="artemis/profile"
-              class="hero-orbit-icon"
-              style="--ring-x: 240px; --ring-y: -160px; --delay: 0s"
-            />
-            <Icon
-              name="artemis/document"
-              class="hero-orbit-icon"
-              style="--ring-x: 300px; --ring-y: 60px; --delay: 7s"
-            />
-            <Icon name="artemis/chart" class="hero-orbit-icon" style="--ring-x: -310px; --ring-y: 80px; --delay: 2s" />
-            <Icon name="artemis/task" class="hero-orbit-icon" style="--ring-x: 160px; --ring-y: 170px; --delay: 5s" />
-            <Icon name="artemis/split" class="hero-orbit-icon" style="--ring-x: -60px; --ring-y: -180px; --delay: 1s" />
-            <Icon
-              name="artemis/nutrients"
-              class="hero-orbit-icon"
-              style="--ring-x: 320px; --ring-y: -80px; --delay: 8s"
-            />
-            <Icon name="artemis/mail" class="hero-orbit-icon" style="--ring-x: -190px; --ring-y: 150px; --delay: 3s" />
-            <Icon name="artemis/image" class="hero-orbit-icon" style="--ring-x: 100px; --ring-y: -180px; --delay: 6s" />
-            <Icon
-              name="artemis/harvest"
-              class="hero-orbit-icon"
-              style="--ring-x: -320px; --ring-y: -60px; --delay: 9s"
-            />
-            <Icon
-              name="artemis/calendar"
-              class="hero-orbit-icon"
-              style="--ring-x: 250px; --ring-y: 130px; --delay: 10s"
-            />
-          </div>
-          <div class="hero-search-bar">
-            <svg
-              class="hero-search-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
+    <div class="slide-inner">
       <div class="slide-header">
+        <p class="slide-body hero-eyebrow">Artemis &middot; Farm Management Platform</p>
         <h1 class="slide-body hero-title">Farm Finding</h1>
         <div class="slide-body hero-meta">
-          <span class="hero-role">Lead Product Designer</span>
+          <span>Lead Product Designer</span>
           <span class="hero-divider"></span>
-          <span class="hero-period">2018 &ndash; 2021</span>
+          <span>2018 &ndash; 2021</span>
         </div>
-        <p class="slide-media hero-summary">
+        <p class="slide-body hero-summary">
           I led the redesign of search in the Artemis web platform as we scaled from small indoor farms to enterprise
           operations nationwide. The new contextual search experience became the most used feature in the app.
         </p>
+      </div>
+      <div class="hero-visual slide-media">
+        <SearchHero />
       </div>
     </div>
   </section>
 
   <!-- Slide 2: Small Farm to Big Farm -->
   <section class="study-slide" id="scaling">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Context</p>
-          <h2 class="slide-heading">Small Farm to Big Farm</h2>
-          <p class="slide-body slide-subtitle">
-            Artemis' client-base grew from local indoor farms to massive enterprise operations around the world,
-            changing the scope of features, data, and users we needed to address
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Context</p>
+        <h2 class="slide-heading">Small Farm to Big Farm</h2>
+        <p class="slide-body slide-subtitle">
+          Artemis' client-base grew from local indoor farms to massive enterprise operations around the world, changing
+          the scope of features, data, and users we needed to address
+        </p>
       </div>
       <div class="scaling-cards">
         <div class="slide-stagger-item study-card study-card--dashed scaling-card scaling-card--before">
           <div class="study-card-header">
-            <span class="scaling-card-label">Before</span>
+            <span class="study-card-label">Before</span>
             <span class="study-card-tag">Small farms</span>
           </div>
           <ul class="study-card-list">
@@ -154,22 +104,18 @@ const slides = [
           </div>
         </div>
 
-        <div class="scaling-arrow" aria-hidden="true">
-          <svg class="scaling-arrow-svg" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="12" y1="0" x2="12" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round"></line>
-            <polyline
-              points="6,22 12,30 18,22"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              fill="none"></polyline>
+        <div class="growth-link" aria-hidden="true">
+          <span class="growth-furrow"></span>
+          <span class="growth-seed"></span>
+          <svg class="growth-sprout" viewBox="0 0 24 18">
+            <path class="growth-leaf growth-leaf--left" d="M11 16C11 10 7 5 1 5c0 6 4 11 10 11Z"></path>
+            <path class="growth-leaf growth-leaf--right" d="M13 16c0-6 4-11 10-11 0 6-4 11-10 11Z"></path>
           </svg>
         </div>
 
         <div class="slide-stagger-item study-card study-card--filled scaling-card scaling-card--after">
           <div class="study-card-header">
-            <span class="scaling-card-label">After</span>
+            <span class="study-card-label">After</span>
             <span class="study-card-tag">Enterprise</span>
           </div>
           <ul class="study-card-list">
@@ -196,21 +142,19 @@ const slides = [
 
   <!-- Slide 3: The Old Search -->
   <section class="study-slide" id="design">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Before</p>
-          <h2 class="slide-heading">The Old Search</h2>
-          <p class="slide-body slide-subtitle">
-            A hold over from the early days of the product that was no longer appropiate for our new scale of data and
-            client needs
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Before</p>
+        <h2 class="slide-heading">The Old Search</h2>
+        <p class="slide-body slide-subtitle">
+          A hold over from the early days of the product that was no longer appropiate for our new scale of data and
+          client needs
+        </p>
       </div>
       <div class="old-search-layout">
         <div class="slide-stagger-item study-card study-card--dashed old-search-card">
           <div class="study-card-header">
-            <span class="research-method-label">Search v1</span>
+            <span class="study-card-label">Search v1</span>
             <span class="study-card-tag">Existing</span>
           </div>
           <ul class="study-card-list">
@@ -224,35 +168,35 @@ const slides = [
             </li>
             <li>
               <span class="study-card-category">Problem</span>
-              As the platform grew, results became a wall of undifferentiated links with no way to tell what type of thing
-              you were looking at
+              As the platform grew, results became a wall of undifferentiated links with no way to tell what type of
+              thing you were looking at
             </li>
           </ul>
         </div>
-        <video class="old-search-video" autoplay loop muted playsinline>
-          <source src="/assets/videos/artemis/artemis-old-search.webm" type="video/webm" />
-        </video>
+        <div class="slide-stagger-item old-search-screen">
+          <video class="old-search-video" autoplay loop muted playsinline>
+            <source src="/assets/videos/artemis/artemis-old-search.webm" type="video/webm" />
+          </video>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Slide 4: Understanding the Problem -->
   <section class="study-slide" id="research">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Research</p>
-          <h2 class="slide-heading">Understanding the Problem</h2>
-          <p class="slide-body slide-subtitle">
-            Field research, sales feedback, and analytics made it clear search and navigation would have to be
-            redesigned to address this new scale
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Research</p>
+        <h2 class="slide-heading">Understanding the Problem</h2>
+        <p class="slide-body slide-subtitle">
+          Field research, sales feedback, and analytics made it clear search and navigation would have to be redesigned
+          to address this new scale
+        </p>
       </div>
       <div class="research-grid">
-        <div class="slide-stagger-item study-card study-card--dashed research-method-card">
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
           <div class="study-card-header">
-            <span class="research-method-label">Analytics</span>
+            <span class="study-card-label">Analytics</span>
             <span class="study-card-tag">Data</span>
           </div>
           <ul class="study-card-list">
@@ -265,7 +209,7 @@ const slides = [
               Too many clicks to reach content, search rarely used due to poor experience
             </li>
           </ul>
-          <div class="research-method-finding research-method-finding--chart">
+          <div class="research-finding research-finding--chart">
             <div class="chart-wrap">
               <div class="chart-area">
                 <div class="chart-grid">
@@ -311,9 +255,10 @@ const slides = [
             <p class="chart-title">Clicks to destination</p>
           </div>
         </div>
-        <div class="slide-stagger-item study-card study-card--dashed research-method-card">
+
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
           <div class="study-card-header">
-            <span class="research-method-label">Sales Meetings</span>
+            <span class="study-card-label">Sales Meetings</span>
             <span class="study-card-tag">Feedback</span>
           </div>
           <ul class="study-card-list">
@@ -326,7 +271,7 @@ const slides = [
               Search came up constantly as a pain point across client types
             </li>
           </ul>
-          <div class="research-method-finding research-method-finding--quote">
+          <div class="research-finding research-finding--quote">
             <p class="study-quote">
               &ldquo;Every account I'm talking to has brought up how many things they need to track, but they can't
               figure out how to find them.&rdquo;
@@ -335,9 +280,9 @@ const slides = [
           </div>
         </div>
 
-        <div class="slide-stagger-item study-card study-card--dashed research-method-card">
+        <div class="slide-stagger-item study-card study-card--dashed research-card">
           <div class="study-card-header">
-            <span class="research-method-label">Farm Visits</span>
+            <span class="study-card-label">Farm Visits</span>
             <span class="study-card-tag">Interviews</span>
           </div>
           <ul class="study-card-list">
@@ -350,7 +295,7 @@ const slides = [
               How users navigated the platform to find the content they needed
             </li>
           </ul>
-          <div class="research-method-finding">
+          <div class="research-finding research-finding--photo">
             <Image
               src={farmVisit}
               width={600}
@@ -366,19 +311,17 @@ const slides = [
 
   <!-- Slide 5: Scoping the Data -->
   <section class="study-slide slide-data" id="data">
-    <div class="slide-inner slide-inner--centered">
-      <div class="slide-text">
-        <div class="slide-header">
-          <p class="slide-section-label slide-body">Strategy</p>
-          <h2 class="slide-heading">Scoping the Data</h2>
-          <p class="slide-body slide-subtitle">
-            To better inform design exploration, I worked with a backend engineer to create example JSON payloads of our
-            system's data types. This transformed an intimidating variety of information into something I could
-            experiment with.
-          </p>
-        </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <p class="slide-section-label slide-body">Strategy</p>
+        <h2 class="slide-heading">Scoping the Data</h2>
+        <p class="slide-body slide-subtitle">
+          To better inform design exploration, I worked with a backend engineer to create example JSON payloads of our
+          system's data types. This transformed an intimidating variety of information into something I could experiment
+          with.
+        </p>
       </div>
-      <div class="comparison-slider" data-comparison-slider>
+      <div class="comparison-slider slide-media" data-comparison-slider>
         <div class="comparison-side comparison-side--json">
           <div class="comparison-label">Data Model</div>
           <div class="comparison-columns">
@@ -423,7 +366,7 @@ const slides = [
 
   <!-- Slide 6: Design Exploration -->
   <section class="study-slide slide-exploration" id="exploration">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Execution</p>
         <h2 class="slide-heading">Design Exploration</h2>
@@ -442,19 +385,7 @@ const slides = [
               </video>
             </div>
             <div class="exploration-content">
-              <span class="exploration-kept exploration-kept--no">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-                >
-                Cut
-              </span>
+              <span class="exploration-stamp exploration-stamp--cut">Cut</span>
               <h3 class="exploration-title">Page vs Farm Search</h3>
               <p class="exploration-description">
                 Users would often get confused between in-page search and searching the whole farm, I experimented with
@@ -470,19 +401,7 @@ const slides = [
               </video>
             </div>
             <div class="exploration-content">
-              <span class="exploration-kept exploration-kept--no">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-                >
-                Cut
-              </span>
+              <span class="exploration-stamp exploration-stamp--cut">Cut</span>
               <h3 class="exploration-title">Full Page Modal</h3>
               <p class="exploration-description">
                 Since we were sticking with searching the whole farm, I tried sticking with the existing full-page
@@ -491,24 +410,12 @@ const slides = [
             </div>
           </div>
 
-          <div class="exploration-item">
+          <div class="exploration-item exploration-item--narrow">
             <div class="exploration-media">
               <Image src={searchWidgets} width={480} alt="Search widgets concept" layout="constrained" fit="cover" />
             </div>
             <div class="exploration-content">
-              <span class="exploration-kept exploration-kept--no">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
-                >
-                Cut
-              </span>
+              <span class="exploration-stamp exploration-stamp--cut">Cut</span>
               <h3 class="exploration-title">Search Widgets</h3>
               <p class="exploration-description">
                 What if a user just wanted a quick glance at one metric? Inline data components could save the user from
@@ -517,26 +424,14 @@ const slides = [
             </div>
           </div>
 
-          <div class="exploration-item">
+          <div class="exploration-item exploration-item--narrow">
             <div class="exploration-media">
               <video autoplay loop muted playsinline>
                 <source src="/assets/videos/artemis/artemis-tab-search.webm" type="video/webm" />
               </video>
             </div>
             <div class="exploration-content">
-              <span class="exploration-kept exploration-kept--yes">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg
-                >
-                Kept
-              </span>
+              <span class="exploration-stamp exploration-stamp--kept">Kept</span>
               <h3 class="exploration-title">Tabbed Search</h3>
               <p class="exploration-description">
                 With the multitude of different data types that could potentially appear for a given search input, I had
@@ -551,11 +446,11 @@ const slides = [
 
   <!-- Slide 7: Results -->
   <section class="study-slide slide-results" id="results">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Outcomes</p>
         <h2 class="slide-heading">Results</h2>
-        <p class="slide-body slide-subtitle results-subtitle">
+        <p class="slide-body slide-subtitle">
           Search became the front door to the entire platform, the first clicked and most used feature across almost all
           user types.
         </p>
@@ -580,7 +475,7 @@ const slides = [
                 <path
                   d="M5 3l14 10.5-6.5 1.5-3.5 6z"
                   fill="var(--study-heading)"
-                  stroke="white"
+                  stroke="var(--study-surface)"
                   stroke-width="1.5"
                   stroke-linejoin="round"></path>
               </svg>
@@ -701,7 +596,7 @@ const slides = [
 
   <!-- Slide 8: What Comes Next -->
   <section class="study-slide slide-next" id="next">
-    <div class="slide-inner slide-inner--centered">
+    <div class="slide-inner">
       <div class="slide-header">
         <p class="slide-section-label slide-body">Future</p>
         <h2 class="slide-heading">What Comes Next</h2>
@@ -712,6 +607,12 @@ const slides = [
       </div>
       <div class="next-items">
         <div class="slide-stagger-item next-card">
+          <span class="next-card-seed" aria-hidden="true">
+            <svg viewBox="0 0 24 18">
+              <path d="M11 16C11 10 7 5 1 5c0 6 4 11 10 11Z"></path>
+              <path d="M13 16c0-6 4-11 10-11 0 6-4 11-10 11Z"></path>
+            </svg>
+          </span>
           <div class="next-card-header">
             <span class="study-viz-card-number">01</span>
             <span class="next-card-tag">Ticketed</span>
@@ -723,6 +624,12 @@ const slides = [
           </p>
         </div>
         <div class="slide-stagger-item next-card">
+          <span class="next-card-seed" aria-hidden="true">
+            <svg viewBox="0 0 24 18">
+              <path d="M11 16C11 10 7 5 1 5c0 6 4 11 10 11Z"></path>
+              <path d="M13 16c0-6 4-11 10-11 0 6-4 11-10 11Z"></path>
+            </svg>
+          </span>
           <div class="next-card-header">
             <span class="study-viz-card-number">02</span>
             <span class="next-card-tag">Enough Usage</span>
@@ -733,6 +640,12 @@ const slides = [
           </p>
         </div>
         <div class="slide-stagger-item next-card">
+          <span class="next-card-seed" aria-hidden="true">
+            <svg viewBox="0 0 24 18">
+              <path d="M11 16C11 10 7 5 1 5c0 6 4 11 10 11Z"></path>
+              <path d="M13 16c0-6 4-11 10-11 0 6-4 11-10 11Z"></path>
+            </svg>
+          </span>
           <div class="next-card-header">
             <span class="study-viz-card-number">03</span>
             <span class="next-card-tag">Backend Rework</span>
@@ -751,120 +664,6 @@ const slides = [
   @use '../../../styles/scssVariables' as *;
 
   // ========================================
-  // Shared slide inner layouts
-  // ========================================
-
-  .slide-inner {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .slide-inner--centered {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-12);
-
-    .slide-header {
-      text-align: center;
-      padding-inline: var(--spacing-8);
-    }
-  }
-
-  // ========================================
-  // Typography
-  // ========================================
-
-  .slide-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-  }
-
-  .slide-heading {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    line-height: 1.2;
-    color: var(--study-heading);
-  }
-
-  .slide-header {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .slide-section-label {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--study-color);
-    line-height: 1.4;
-    margin-bottom: var(--spacing-4);
-  }
-
-  .slide-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-    margin-top: var(--spacing-5);
-
-    li {
-      font-size: clamp(0.9rem, 1.2vw, 1rem);
-      line-height: 1.6;
-      color: var(--study-text);
-      padding-left: var(--spacing-7);
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.65em;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--study-color);
-        opacity: 0.75;
-      }
-    }
-  }
-
-  // ========================================
-  // Media placeholders
-  // ========================================
-
-  .media-placeholder {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background-color: var(--study-bg-alt);
-    border: 1.5px dashed var(--study-border);
-    border-radius: 12px;
-    display: grid;
-    place-content: center;
-
-    &--wide {
-      aspect-ratio: 16 / 9;
-    }
-
-    &--muted {
-      opacity: 0.5;
-    }
-  }
-
-  .media-placeholder-label {
-    font-size: 0.8rem;
-    color: var(--study-text-muted);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-
-  // ========================================
   // Slide 1: Hero
   // ========================================
 
@@ -872,22 +671,28 @@ const slides = [
     padding-top: var(--spacing-16);
 
     .slide-inner {
-      position: relative;
-      z-index: 1;
+      gap: var(--spacing-10);
     }
+  }
 
-    .slide-header {
-      text-align: center;
-    }
+  .hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
-    @media (width < $breakpoint-lg) {
-      padding-bottom: var(--spacing-12);
-    }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--study-leaf);
+    margin-bottom: var(--spacing-6);
   }
 
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-size: clamp(2.75rem, 6.5vw, 5rem);
     font-weight: 500;
     line-height: 1.05;
     color: var(--study-heading);
@@ -898,105 +703,29 @@ const slides = [
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--spacing-4);
+    gap: var(--spacing-6);
     margin-top: var(--spacing-6);
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--study-text-muted);
-    font-weight: 400;
   }
 
   .hero-divider {
-    width: 24px;
-    height: 1.5px;
-    background: var(--study-border);
+    width: 22px;
+    height: 1px;
+    background: var(--study-border-strong);
   }
 
   .hero-summary {
-    max-width: 52ch;
+    max-width: 54ch;
     font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--study-text-muted);
-    font-weight: 500;
-    margin-top: var(--spacing-12);
+    margin-top: var(--spacing-10);
     text-wrap: balance;
   }
 
-  .hero-visual {
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .hero-search-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .hero-search-bar {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    background: var(--study-surface);
-    border: 1px solid var(--study-border);
-    border-radius: 50%;
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 8px 24px rgba(0, 0, 0, 0.06),
-      0 24px 48px rgba(0, 0, 0, 0.04);
-  }
-
-  .hero-search-icon {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    color: var(--study-text-muted);
-  }
-
-  .hero-search-icons {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-  }
-
-  .hero-orbit-icon {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    color: var(--study-text-muted);
-    animation: orbit-fall 6s ease-in-out var(--delay) infinite backwards;
-  }
-
-  @keyframes orbit-fall {
-    0% {
-      transform: translate(var(--ring-x), var(--ring-y)) scale(0);
-      opacity: 0;
-    }
-    6% {
-      transform: translate(var(--ring-x), var(--ring-y)) scale(1);
-      opacity: 0.8;
-    }
-    35% {
-      transform: translate(0, 0) scale(0.3);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(0, 0) scale(0);
-      opacity: 0;
-    }
-  }
-
   // ========================================
-  // Slide 2: Scaling cards
+  // Slide 2: Scaling cards + growth link
   // ========================================
 
   .scaling-cards {
@@ -1004,10 +733,12 @@ const slides = [
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: auto auto auto;
     gap: 0 var(--spacing-10);
+    width: 100%;
 
     @media (width < $breakpoint-lg) {
       grid-template-columns: 1fr;
       grid-template-rows: unset;
+      gap: var(--spacing-8);
     }
   }
 
@@ -1034,26 +765,13 @@ const slides = [
     }
   }
 
-  .scaling-card-label {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--study-heading);
-    letter-spacing: -0.01em;
-
-    .study-card--filled & {
-      color: #fff;
-    }
-  }
-
   .scaling-card-image {
-    height: 240px;
+    height: clamp(140px, 22vh, 240px);
     overflow: hidden;
     border-top: 1px dashed var(--study-border);
 
     .study-card--filled & {
-      border-top-style: solid;
-      border-top-color: rgba(255, 255, 255, 0.2);
+      border-top-color: hsl(from var(--study-color) h s l / 0.28);
     }
 
     img {
@@ -1064,58 +782,145 @@ const slides = [
     }
   }
 
-  .scaling-arrow {
+  .growth-link {
+    position: relative;
     grid-column: 2;
     grid-row: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--study-color);
-    padding: 0 var(--spacing-1);
+    align-self: center;
+    width: 96px;
+    height: 40px;
 
     @media (width < $breakpoint-lg) {
       grid-column: unset;
       grid-row: unset;
-      padding: var(--spacing-1) 0;
+      justify-self: center;
+      rotate: 90deg;
     }
   }
 
-  .scaling-arrow-svg {
-    width: 20px;
-    height: 32px;
-    animation: arrow-bounce-h 1.6s ease-in-out infinite;
-
-    @media (width < $breakpoint-lg) {
-      animation-name: arrow-bounce;
-    }
+  .growth-furrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    translate: 0 -50%;
+    background: repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--study-soil) 45%, transparent) 0 5px,
+      transparent 5px 11px
+    );
   }
 
-  @keyframes arrow-bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.6;
+  .growth-seed {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--study-soil);
+    animation: seed-travel 3.4s var(--ease-in-out-quad) infinite;
+  }
+
+  @keyframes seed-travel {
+    0% {
+      translate: 0 -50%;
+      rotate: -45deg;
+      opacity: 0;
     }
-    50% {
-      transform: translateY(4px);
+    12% {
       opacity: 1;
     }
+    45% {
+      translate: 86px -50%;
+      rotate: -45deg;
+      opacity: 1;
+    }
+    55%,
+    100% {
+      translate: 86px -50%;
+      rotate: -45deg;
+      opacity: 0;
+    }
   }
 
-  @keyframes arrow-bounce-h {
-    0%,
-    100% {
-      transform: rotate(-90deg) translateY(0);
-      opacity: 0.6;
+  .growth-sprout {
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    width: 26px;
+    height: 20px;
+    translate: 0 -50%;
+    overflow: visible;
+  }
+
+  .growth-leaf {
+    fill: var(--study-leaf);
+    transform-origin: 12px 16px;
+    animation: leaf-grow 3.4s ease-out infinite;
+
+    &--right {
+      animation-delay: 0.12s;
     }
-    50% {
-      transform: rotate(-90deg) translateY(4px);
-      opacity: 1;
+  }
+
+  @keyframes leaf-grow {
+    0%,
+    48% {
+      scale: 0;
+      opacity: 0;
+    }
+    62%,
+    88% {
+      scale: 1;
+      opacity: 0.9;
+    }
+    100% {
+      scale: 1;
+      opacity: 0;
     }
   }
 
   // ========================================
-  // Slide 3: Research method cards
+  // Slide 3: The old search
+  // ========================================
+
+  .old-search-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-8);
+    width: 100%;
+    align-items: start;
+
+    @media (width < $breakpoint-lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .old-search-card {
+    grid-template-rows: unset;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .old-search-screen {
+    position: relative;
+    padding: 8px;
+    border-radius: 14px;
+    background: var(--study-bg-alt);
+    border: 1px solid var(--study-border);
+    box-shadow: 0 18px 40px rgba(60, 45, 25, 0.12);
+  }
+
+  .old-search-video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+
+  // ========================================
+  // Slide 4: Research cards
   // ========================================
 
   .research-grid {
@@ -1131,7 +936,7 @@ const slides = [
     }
   }
 
-  .research-method-card {
+  .research-card {
     display: grid;
     grid-row: span 3;
     grid-template-rows: subgrid;
@@ -1145,47 +950,48 @@ const slides = [
     }
   }
 
-  .research-method-label {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--study-heading);
-    letter-spacing: -0.01em;
-  }
-
-  .research-method-finding {
-    padding: 0;
+  .research-finding {
     border-top: 1px dashed var(--study-border);
-    background: hsl(from var(--study-color) h s l / 0.03);
-
-    .media-placeholder {
-      border: none;
-      border-radius: 0;
-    }
+    background: color-mix(in srgb, var(--study-leaf) 4%, transparent);
   }
 
-  .research-method-finding--quote {
-    padding: var(--spacing-6) var(--spacing-8);
+  .research-finding--quote {
+    padding: var(--spacing-7) var(--spacing-8);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--spacing-2);
+    gap: var(--spacing-4);
   }
 
-  .research-method-finding--chart {
-    padding: var(--spacing-6) var(--spacing-8);
+  .research-finding--photo {
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .research-finding--chart {
+    padding: var(--spacing-7) var(--spacing-8);
     display: flex;
     flex-direction: column;
     flex: 1;
     min-height: 0;
   }
 
+  // ========================================
+  // Shared bar chart
+  // ========================================
+
   .chart-title {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.11em;
     text-transform: uppercase;
-    color: #666;
+    color: var(--study-text-muted);
     margin-top: var(--spacing-3);
     text-align: center;
   }
@@ -1221,7 +1027,12 @@ const slides = [
     position: relative;
     display: block;
     height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px dashed var(--study-border);
+
+    &:last-child {
+      border-top-style: solid;
+      border-top-color: var(--study-border-strong);
+    }
   }
 
   .chart-grid-line-label {
@@ -1232,7 +1043,7 @@ const slides = [
     display: block;
     font-size: 0.65rem;
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--study-text-muted);
     padding-right: var(--spacing-2);
   }
 
@@ -1257,8 +1068,8 @@ const slides = [
 
   .chart-bar {
     width: 70%;
-    max-width: 48px;
-    border-radius: 4px;
+    max-width: 44px;
+    border-radius: 5px 5px 0 0;
     height: var(--h, 0);
     align-self: flex-end;
     flex-shrink: 0;
@@ -1266,7 +1077,7 @@ const slides = [
   }
 
   .chart-bar--without {
-    background: hsl(from var(--study-color) h s l / 0.2);
+    background: hsl(from var(--study-color) h s l / 0.18);
   }
 
   .chart-bar-inner {
@@ -1275,22 +1086,22 @@ const slides = [
     right: 0;
     bottom: 0;
     height: var(--inner-h, 0);
-    border-radius: 0 0 4px 4px;
+    border-radius: 5px 5px 0 0;
   }
 
   .chart-bar--with {
-    background: hsl(from var(--study-color) h s l / 0.7);
+    background: var(--study-color);
   }
 
   .chart-x-labels {
     grid-row: 2;
     display: flex;
     gap: var(--spacing-4);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     line-height: 1;
-    color: #94a3b8;
-    padding-top: var(--spacing-2);
+    color: var(--study-text-muted);
+    padding-top: var(--spacing-3);
     padding-bottom: 0.25rem;
     flex-shrink: 0;
   }
@@ -1323,50 +1134,16 @@ const slides = [
     }
 
     &--without::before {
-      background: hsl(from var(--study-color) h s l / 0.2);
+      background: hsl(from var(--study-color) h s l / 0.18);
     }
 
     &--with::before {
-      background: hsl(from var(--study-color) h s l / 0.7);
+      background: var(--study-color);
     }
   }
 
   // ========================================
-  // Slide 4: Design explorations
-  // ========================================
-
-  .design-explorations {
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .old-search-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: var(--spacing-8);
-    width: 100%;
-    align-items: start;
-
-    @media (width < $breakpoint-lg) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .old-search-card {
-    grid-template-rows: unset;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .old-search-video {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-    box-shadow: 0 0 48px rgba(0, 0, 0, 0.15);
-  }
-
-  // ========================================
-  // Slide 5: MVP cards
+  // Slide 5: Data model / application slider
   // ========================================
 
   .comparison-slider {
@@ -1374,9 +1151,11 @@ const slides = [
     width: 100%;
     max-width: 1200px;
     aspect-ratio: 16 / 10;
-    border-radius: 12px;
+    max-height: clamp(300px, 54vh, 700px);
+    border-radius: var(--study-radius);
     overflow: hidden;
-    border: 1px solid var(--study-border);
+    border: 1px solid var(--study-border-strong);
+    box-shadow: 0 18px 40px rgba(60, 45, 25, 0.12);
     cursor: ew-resize;
     user-select: none;
     -webkit-user-select: none;
@@ -1388,7 +1167,7 @@ const slides = [
   }
 
   .comparison-side--json {
-    background: #1e1e2e;
+    background: #241d15;
     overflow: hidden;
   }
 
@@ -1398,7 +1177,7 @@ const slides = [
     gap: 1px;
     height: 100%;
     padding-top: var(--spacing-10);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 245, 225, 0.07);
 
     @media (width < $breakpoint-md) {
       grid-template-columns: repeat(2, 1fr);
@@ -1407,7 +1186,7 @@ const slides = [
   }
 
   .comparison-column {
-    background: #1e1e2e;
+    background: #241d15;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1420,8 +1199,8 @@ const slides = [
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #7f849c;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: #a3936f;
+    border-bottom: 1px solid rgba(255, 245, 225, 0.08);
     flex-shrink: 0;
   }
 
@@ -1431,7 +1210,7 @@ const slides = [
     font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
     font-size: 0.6rem;
     line-height: 1.6;
-    color: #cdd6f4;
+    color: #e6dcc6;
     white-space: pre;
     overflow: hidden;
     flex: 1;
@@ -1443,19 +1222,19 @@ const slides = [
   }
 
   :global(.json-key) {
-    color: #89b4fa;
+    color: #e0b485;
   }
 
   :global(.json-string) {
-    color: #a6e3a1;
+    color: #a8c37d;
   }
 
   :global(.json-number) {
-    color: #fab387;
+    color: #e89b5b;
   }
 
   :global(.json-bool) {
-    color: #cba6f7;
+    color: #c9a2d8;
   }
 
   .comparison-side--ui {
@@ -1472,23 +1251,23 @@ const slides = [
     position: absolute;
     top: var(--spacing-3);
     z-index: 2;
-    font-size: 0.6875rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: 6px;
+    letter-spacing: 0.12em;
+    padding: var(--spacing-2) var(--spacing-5);
+    border-radius: 99px;
 
     .comparison-side--json & {
-      left: var(--spacing-3);
-      background: hsl(0 0% 100% / 0.1);
-      color: #cdd6f4;
+      left: var(--spacing-4);
+      background: rgba(255, 245, 225, 0.1);
+      color: #e6dcc6;
     }
 
     .comparison-side--ui & {
-      right: var(--spacing-3);
-      background: hsl(0 0% 0% / 0.5);
-      color: white;
+      right: var(--spacing-4);
+      background: var(--study-heading);
+      color: var(--study-bg);
     }
   }
 
@@ -1509,16 +1288,17 @@ const slides = [
   .comparison-handle-line {
     flex: 1;
     width: 2px;
-    background: white;
-    box-shadow: 0 0 4px hsl(0 0% 0% / 0.3);
+    background: var(--study-surface);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
   }
 
   .comparison-handle-grip {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: white;
-    box-shadow: 0 2px 8px hsl(0 0% 0% / 0.25);
+    background: var(--study-surface);
+    border: 1px solid var(--study-border-strong);
+    box-shadow: 0 2px 10px rgba(60, 45, 25, 0.3);
     display: grid;
     place-content: center;
     flex-shrink: 0;
@@ -1526,15 +1306,15 @@ const slides = [
     svg {
       width: 18px;
       height: 18px;
-      color: var(--study-text-muted);
+      color: var(--study-color);
     }
   }
 
   // ========================================
-  // Slide 6: Design Exploration
+  // Slide 6: Design exploration
   // ========================================
 
-  #exploration {
+  .slide-exploration {
     padding-inline: 0;
 
     .slide-inner {
@@ -1551,7 +1331,7 @@ const slides = [
   .exploration-row {
     display: flex;
     align-items: flex-start;
-    gap: var(--spacing-8);
+    gap: var(--spacing-10);
     padding: 0 var(--spacing-12);
     width: max-content;
 
@@ -1564,27 +1344,30 @@ const slides = [
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    max-width: 720px;
+    width: min(60vw, 640px);
     position: relative;
     opacity: 0;
 
-    &:nth-child(3),
-    &:nth-child(4) {
-      max-width: 48w0px;
+    &--narrow {
+      width: min(42vw, 420px);
     }
 
     @media (width < $breakpoint-lg) {
-      max-width: calc(100vw - calc(2 * var(--spacing-6)));
+      width: calc(100vw - calc(2 * var(--spacing-6)));
+
+      &--narrow {
+        width: calc(100vw - calc(2 * var(--spacing-6)));
+      }
     }
   }
 
   .exploration-media {
     position: relative;
-    border-radius: 12px;
+    border-radius: var(--study-radius);
     overflow: hidden;
     border: 1px solid var(--study-border);
-    background: var(--color-surface-muted, #f4f4f5);
-    max-height: 480px;
+    background: var(--study-bg-alt);
+    height: clamp(200px, 38vh, 440px);
 
     video,
     img {
@@ -1605,80 +1388,69 @@ const slides = [
     flex-direction: column;
     gap: var(--spacing-4);
     justify-content: center;
-    background: white;
+    background: var(--study-surface);
     border: 1px solid var(--study-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+    border-radius: var(--study-radius);
+    box-shadow: 0 10px 30px rgba(60, 45, 25, 0.1);
     width: min(100%, 400px);
     z-index: 1;
   }
 
   .exploration-title {
-    font-size: 1.125rem;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
     font-weight: 600;
+    color: var(--study-heading);
     margin: 0;
   }
 
-  .exploration-kept {
-    width: 4.5rem;
-    height: 4.5rem;
-    position: absolute;
-    top: -1.25rem;
-    right: -1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 2.5px solid currentColor;
-    border-radius: 50%;
-    transform: rotate(-8deg);
-    flex-shrink: 0;
-    line-height: 1;
-
-    svg {
-      width: 2rem;
-      height: 2rem;
-    }
-  }
-
-  .exploration-kept--yes {
-    color: #15803d;
-    background: #bbf7d0;
-  }
-
-  .exploration-kept--no {
-    color: #b91c1c;
-    background: #fecaca;
-    border-style: dashed;
-  }
-
   .exploration-description {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.6;
     color: var(--study-text-muted);
   }
 
-  // ========================================
-  // Slide 7: Tradeoffs
-  // ========================================
+  .exploration-stamp {
+    position: absolute;
+    top: -1.15rem;
+    right: -1.15rem;
+    width: 4.25rem;
+    height: 4.25rem;
+    display: grid;
+    place-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 2.5px solid currentColor;
+    border-radius: 50%;
+    rotate: -12deg;
+    opacity: 0.85;
 
-  .tradeoffs-visual {
-    width: 100%;
-    max-width: 800px;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+  }
+
+  .exploration-stamp--kept {
+    color: #3f7d4e;
+    background: #e7f0e2;
+  }
+
+  .exploration-stamp--cut {
+    color: #a53a26;
+    background: #f7e4dc;
+    border-style: dashed;
   }
 
   // ========================================
-  // Slide 8: Results
+  // Slide 7: Results
   // ========================================
-
-  .results-subtitle {
-    margin-bottom: var(--spacing-8);
-  }
 
   .results-cards {
     display: grid;
@@ -1692,15 +1464,9 @@ const slides = [
   }
 
   .result-card-viz {
-    height: 280px;
-
-    .media-placeholder {
-      border: none;
-      background: none;
-    }
+    height: clamp(170px, 26vh, 280px);
   }
 
-  // Cursor click illustration
   .cursor-click-scene {
     position: relative;
     display: flex;
@@ -1716,9 +1482,8 @@ const slides = [
     justify-content: center;
     width: 56px;
     height: 56px;
-    padding: 0;
-    background: white;
-    border: 1px solid var(--study-border);
+    background: var(--study-surface);
+    border: 1px solid var(--study-border-strong);
     border-radius: 50%;
     color: var(--study-heading);
     animation: btn-click 3s ease-in-out infinite both;
@@ -1738,10 +1503,7 @@ const slides = [
   }
 
   @keyframes cursor-enter {
-    0% {
-      transform: translate(80px, 80px);
-      opacity: 0;
-    }
+    0%,
     30% {
       transform: translate(80px, 80px);
       opacity: 0;
@@ -1753,11 +1515,9 @@ const slides = [
     68% {
       transform: translate(14px, 14px) scale(0.9);
     }
-    74% {
-      transform: translate(14px, 14px) scale(1);
-    }
+    74%,
     90% {
-      transform: translate(14px, 14px);
+      transform: translate(14px, 14px) scale(1);
       opacity: 1;
     }
     100% {
@@ -1771,36 +1531,30 @@ const slides = [
     65% {
       transform: translateY(0);
       box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(60, 45, 25, 0.08),
         0 0 0 0 hsl(from var(--study-color) h s l / 0.6);
     }
     68% {
       transform: translateY(2px);
       box-shadow:
-        0 0 1px rgba(0, 0, 0, 0.06),
+        0 0 1px rgba(60, 45, 25, 0.06),
         0 0 0 3px hsl(from var(--study-color) h s l / 0.5);
     }
     74% {
       transform: translateY(0);
       box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 10px hsl(from var(--study-color) h s l / 0.2);
+        0 2px 4px rgba(60, 45, 25, 0.08),
+        0 0 0 10px hsl(from var(--study-color) h s l / 0.18);
     }
-    90% {
-      transform: translateY(0);
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 22px hsl(from var(--study-color) h s l / 0);
-    }
+    90%,
     100% {
       transform: translateY(0);
       box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0 0 0 hsl(from var(--study-color) h s l / 0);
+        0 2px 4px rgba(60, 45, 25, 0.08),
+        0 0 0 22px hsl(from var(--study-color) h s l / 0);
     }
   }
 
-  // Fewer clicks chart
   .fewer-clicks-chart {
     width: 100%;
     height: 100%;
@@ -1814,7 +1568,6 @@ const slides = [
     min-height: 0;
   }
 
-  // Quote viz
   .result-card-viz--quote {
     display: flex;
     align-items: center;
@@ -1824,20 +1577,20 @@ const slides = [
   .result-quote-wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
-    padding: 0 var(--spacing-4);
+    gap: var(--spacing-4);
+    padding: 0 var(--spacing-6);
   }
 
   // ========================================
-  // Slide 9: What Comes Next
+  // Slide 8: What comes next
   // ========================================
 
   .next-items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
+    gap: var(--spacing-8);
     width: 100%;
-    margin-top: var(--spacing-6);
+    margin-top: var(--spacing-8);
 
     @media (width < $breakpoint-lg) {
       grid-template-columns: 1fr;
@@ -1845,32 +1598,61 @@ const slides = [
   }
 
   .next-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: var(--spacing-8);
-    background: white;
+    padding: var(--spacing-9) var(--spacing-8) var(--spacing-8);
+    background: var(--study-surface);
     border: 1px solid var(--study-border);
-    border-radius: 10px;
+    border-top: 3px solid color-mix(in srgb, var(--study-leaf) 55%, transparent);
+    border-radius: var(--study-radius);
+    box-shadow: 0 1px 0 var(--study-border-strong);
+  }
+
+  .next-card-seed {
+    position: absolute;
+    top: 0;
+    right: var(--spacing-8);
+    width: 26px;
+    height: 20px;
+    translate: 0 -55%;
+    color: var(--study-leaf);
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      opacity: 0.85;
+    }
   }
 
   .next-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
   }
 
   .next-card-tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--study-text-muted);
-    background: var(--study-bg);
+    background: var(--study-bg-alt);
     border: 1px solid var(--study-border);
-    border-radius: 4px;
-    padding: 2px 7px;
+    border-radius: 99px;
+    padding: 3px 9px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .growth-seed,
+    .growth-leaf,
+    .cursor-click-btn,
+    .cursor-click-cursor {
+      animation: none;
+    }
   }
 </style>
 
